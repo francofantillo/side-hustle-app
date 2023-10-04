@@ -7,7 +7,7 @@ import 'package:side_hustle/utils/app_utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // AppUtils.configEasyLoading();
+  AppUtils.configEasyLoading();
   HttpOverrides.global = MyHttpOverrides();
 
   await AppUtils.getSmallestHeight();

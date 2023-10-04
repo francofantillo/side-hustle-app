@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -68,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     name: AppStrings.login,
                     onPressed: () {
                       print('Button Pressed');
+                      EasyLoading.show();
                     }),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 
 class AppUtils {
   // static final window = WidgetsBinding.instance!.window;
@@ -42,5 +44,21 @@ class AppUtils {
     sh = smallestH;
 
     return smallestH;
+  }
+
+  static configEasyLoading() {
+    EasyLoading.instance
+      ..indicatorType = EasyLoadingIndicatorType.ring
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..backgroundColor = Colors.transparent
+      ..indicatorColor = AppColors.primaryColor
+      ..textColor = Colors.white
+      ..indicatorSize = 35.0
+      ..radius = 10.0
+      ..boxShadow = <BoxShadow>[]
+    ..maskColor = Colors.black.withOpacity(0.6)
+      ..maskColor = Colors.transparent
+      ..userInteractions = false
+      ..dismissOnTap = false;
   }
 }
