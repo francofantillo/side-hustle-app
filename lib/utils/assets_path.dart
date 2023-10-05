@@ -36,8 +36,7 @@ class AssetsPath {
 
   /// Images
   static const continueWith = "${imagePath}continue_with.png";
-  static const profileImage = "${imagePath}profile_image.png";
-  static const profileImageJpeg = "${imagePath}profile_image.jpeg";
+  static const placeHolderProfileImage = "${imagePath}profile_image.jpeg";
   static const drawerBg = "${imagePath}drawer_bg.png";
 
 

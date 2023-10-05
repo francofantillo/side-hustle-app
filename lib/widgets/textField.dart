@@ -12,6 +12,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool? isPasswordField, isSuffixIcon, isReadonly;
   final bool isPrefixIcon;
   final String? prefixIconPath;
+  final Color? prefixIconColor;
   final String? hintText;
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
@@ -41,6 +42,7 @@ class CustomTextFormField extends StatefulWidget {
     this.isPasswordField = false,
     this.focusNode,
     this.prefixIconPath,
+    this.prefixIconColor,
     this.keyboardType = TextInputType.text,
     this.isSuffixIcon = false,
     this.suffixIcon,
@@ -113,7 +115,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 BorderRadius.circular(AppDimensions.textFieldBorderRadius),
           ),
           child: Container(
-            // padding: EdgeInsets.only(top: 10.h),
+            padding: EdgeInsets.only(top: 4.h),
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius:
@@ -123,9 +125,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               color: widget.fillColor ?? AppColors.whiteColor,
             ),
             height: widget.height ?? AppDimensions.textFieldHeight,
+            child: textFormField() ,
           ),
         ),
-        textFormField(),
+        // textFormField(),
       ],
     );
   }
@@ -183,7 +186,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       scale: 0.5,
       child: ImageIcon(
         AssetImage(widget.prefixIconPath!),
-        color: AppColors.primaryColor,
+        color: widget.prefixIconColor ?? AppColors.primaryColor,
       ),
     );
   }
@@ -223,7 +226,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   GestureDetector _passwordSuffixIconWidget() {
     return GestureDetector(
       child: Padding(
-        padding: EdgeInsets.only(top: 2.h),
+        padding: EdgeInsets.only(top: 0.h),
         child: Transform.scale(
           scale: 0.3,
           // child: Icon(

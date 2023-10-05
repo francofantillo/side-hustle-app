@@ -52,8 +52,8 @@ class BaseWidget extends StatelessWidget {
               }),
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
-              initialRoute: AppRoutes.splashScreenRoute,
-              // initialRoute: AppRoutes.otpVerificationScreenRoute,
+              // initialRoute: AppRoutes.splashScreenRoute,
+              initialRoute: AppRoutes.homeScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

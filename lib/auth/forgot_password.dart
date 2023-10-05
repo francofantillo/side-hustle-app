@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/auth/otp_verification.dart';
-import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/assets_path.dart';
-import 'package:side_hustle/widgets/app_drawer.dart';
 import 'package:side_hustle/widgets/back_button.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
-import 'package:side_hustle/widgets/circular_icon_button.dart';
 import 'package:side_hustle/widgets/custom_material_button.dart';
 import 'package:side_hustle/widgets/height_widget.dart';
 import 'package:side_hustle/widgets/phone_textField.dart';

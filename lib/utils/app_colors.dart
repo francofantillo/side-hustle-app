@@ -6,6 +6,7 @@ class AppColors {
   static const greyColor = Color(0xFF929292);
   static final textGreyColor = Color(0xFF565656).withOpacity(.85);
   static final backIconBackgroundColor = Color(0xFF565656).withOpacity(.10);
+  static final searchIconColor = Color(0xFF565656).withOpacity(.55);
   static const textBlackColor = Color(0xFF323232);
   static const textWhiteColor = Color(0xFFFCFCFC);
   // static const backgroundColor = Color(0xFFEEEEF0);

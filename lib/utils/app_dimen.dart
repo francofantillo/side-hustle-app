@@ -9,7 +9,8 @@ class AppDimensions {
   static const double buttonDefaultHeight = 12;
 
   /// Text Size
-  static double textSmallSize = 14.sp;
+  static double textSizeSmall = 14.sp;
+  static double textSizeNormal = 16.sp;
   static double textSizeTermsAndConditions = 14.sp;
   static double textHeadingSize = 26.sp;
 
@@ -28,7 +29,7 @@ class AppDimensions {
   static double fieldsVerticalSpacingBetween = .02.sh;
   static double forgotPasswordSpacingBetween = .01.sh;
   static double loginButtonVerticalSpacingBetween = .04.sh;
-  static double rootPadding = 16;
+  static double rootPadding = 10.w;
   static double orContinueWithPadding = 24;
   static double defaultRoundedImageWidth = .3.sw;
   static double defaultRoundedImageHeight = .3.sw;
@@ -44,6 +45,7 @@ class AppDimensions {
   /// Elevation
   static double defaultUnFocusedTextFieldElevation = 0.02.sw;
   static double defaultFocusedTextFieldElevation = 0.02.sw;
+  static double defaultSearchTextFieldElevation = 0.01.sw;
   static double defaultButtonElevation = 0.02.sw;
 
   /// Drawer
@@ -55,6 +57,15 @@ class AppDimensions {
   static double drawerItemsVerticalSpacing = .04.sh;
   static double drawerBGCurve = 25.h;
 
+  /// Home
+  static double drawerIconSizeHome = 40.h;
+  static double profileUserNameTextSize = 12.sp;
+  static double profileEmailTextSize = 14.sp;
+  static double topIconsSpacing = 0.05.sw;
+  static double homeSearchSpacingTop = 0.03.sh;
+  static double homeSearchSpacingBelow = 0.015.sh;
+  static double itemsArrowForwardIconSize = 12.h;
+  static double homeFirstHorizontalListSize = 0.1.sh;
 
   static const double defaultHorizontalPadding = 16;
   static const double defaultButtonHorizontalPadding = 54;

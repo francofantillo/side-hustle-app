@@ -13,7 +13,7 @@ Widget textWidget(
     overflow: TextOverflow.ellipsis,
     style: TextStyle(
       fontFamily: fontFamily ?? AppFont.gilroy,
-      fontSize: fontSize ?? AppDimensions.textSmallSize,
+      fontSize: fontSize ?? AppDimensions.textSizeSmall,
       color: color ?? AppColors.textGreyColor,
       fontWeight: fontWeight
     ),
