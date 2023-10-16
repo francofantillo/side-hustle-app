@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/widgets/custom_material_button.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

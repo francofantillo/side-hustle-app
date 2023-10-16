@@ -2,20 +2,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 
-class CircularCacheImageWidget extends StatelessWidget {
-  final String? image;
-  final double? imageSize, loadingWidgetSize;
+class RoundedCornersImage extends StatelessWidget {
+  final String? image, assetImage;
+  final double? imageHeight, imageWidth, loadingWidgetSize;
   final Color? boarderColor;
 
-  const CircularCacheImageWidget(
-      {Key? key,
+  const RoundedCornersImage(
+      {super.key,
       this.image,
-      this.imageSize,
+      this.assetImage,
+      this.imageHeight,
+      this.imageWidth,
       this.loadingWidgetSize,
-      this.boarderColor})
-      : super(key: key);
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +26,16 @@ class CircularCacheImageWidget extends StatelessWidget {
           // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg', // Testing Url
           image == null ? "" : image!,
       imageBuilder: (context, imageProvider) => Container(
-        width: imageSize ?? 60.h, // Set your desired width
-        height: imageSize ?? 60.h, // Set your desired height
+        width: imageWidth ?? 0.18.sw, // Set your desired width
+        height: imageHeight ?? 0.18.sw, // Set your desired height
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
+          // shape: BoxShape.circle,
+          borderRadius: BorderRadius.all(
+              Radius.circular(AppDimensions.homeFirstItemWidgetCurve)),
           border: Border.all(
             color: boarderColor ?? AppColors.whiteColor,
             // Change the border color as needed
-            width: 2.h, // Use the provided border width
+            width: 1.8.h, // Use the provided border width
           ),
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
@@ -46,17 +50,18 @@ class CircularCacheImageWidget extends StatelessWidget {
             color: AppColors.whiteColor,
           )),
       errorWidget: (context, url, error) => Container(
-        width: imageSize ?? 60.h, // Set your desired width
-        height: imageSize ?? 60.h, // Set your desired height
+        width: imageWidth ?? 0.18.sw, // Set your desired width
+        height: imageHeight ?? 0.18.sw, // Set your desired height
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.all(
+                Radius.circular(AppDimensions.homeFirstItemWidgetCurve)),
             border: Border.all(
               color: boarderColor ?? AppColors.whiteColor,
               // Change the border color as needed
-              width: 2.h, // Use the provided border width
+              width: 0.h, // Use the provided border width
             ),
-            image: const DecorationImage(
-                image: AssetImage(AssetsPath.placeHolderProfileImage),
+            image: DecorationImage(
+                image: AssetImage(assetImage ?? AssetsPath.homeR1),
                 fit: BoxFit.cover)),
       ),
     );

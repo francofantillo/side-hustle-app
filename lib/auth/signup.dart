@@ -5,13 +5,13 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
-import 'package:side_hustle/widgets/checkbox.dart';
-import 'package:side_hustle/widgets/custom_material_button.dart';
-import 'package:side_hustle/widgets/phone_textField.dart';
-import 'package:side_hustle/widgets/textField.dart';
-import 'package:side_hustle/widgets/text_widget.dart';
+import 'package:side_hustle/widgets/text/checkbox.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/text_field/phone_textField.dart';
+import 'package:side_hustle/widgets/text_field/textField.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
-import '../widgets/height_widget.dart';
+import '../widgets/size_widget.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

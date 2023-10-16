@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +14,24 @@ void main() async {
   await AppUtils.getSmallestHeight();
   await AppUtils.getSmallestWidth();
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(
-            const BaseWidget(),
-          ));
+  FlutterView? flutterView = PlatformDispatcher.instance.views.firstOrNull;
+  if (flutterView == null || flutterView.physicalSize.isEmpty) {
+    PlatformDispatcher.instance.onMetricsChanged = () {
+      flutterView = PlatformDispatcher.instance.views.firstOrNull;
+      if (flutterView != null && !flutterView!.physicalSize.isEmpty) {
+        print("called flutterView not null");
+        PlatformDispatcher.instance.onMetricsChanged = null;
+        runApp(
+          const BaseWidget(),
+        );
+      }
+    };
+  } else {
+    print("called flutterView null");
+    runApp(
+      const BaseWidget(),
+    );
+  }
 }
 
 class MyHttpOverrides extends HttpOverrides {

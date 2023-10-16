@@ -1,30 +1,33 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:side_hustle/home/widgets/home_first_item_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/home/widgets/items_widget.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class FirstHomeListItemWidget extends StatelessWidget {
+class JobsHorizontalListWidget extends StatelessWidget {
   final String? title;
-  final List<HomeFirstList>? itemsList;
+  final List<ItemList>? itemsList;
   final double horizontalListSize;
   final Function()? onTapLabel;
 
-  const FirstHomeListItemWidget(
+  const JobsHorizontalListWidget(
       {super.key,
-      this.title,
-      this.itemsList,
-      this.onTapLabel,
-      required this.horizontalListSize});
+        this.title,
+        this.itemsList,
+        this.onTapLabel,
+        required this.horizontalListSize});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
+          padding: const EdgeInsets.only(left: 8.0, top: 4, right: 8, bottom: 8),
           child: InkWell(
             onTap: onTapLabel,
             child: Row(
@@ -43,6 +46,7 @@ class FirstHomeListItemWidget extends StatelessWidget {
             ),
           ),
         ),
+        // Horizontal ListView
         SizedBox(
           height: horizontalListSize, // Set the desired height
           child: ListView.builder(
@@ -51,11 +55,19 @@ class FirstHomeListItemWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               // Replace with your horizontal list item
               return Padding(
-                padding: const EdgeInsets.only(right: 2.0, left: 8.0, top: 8),
-                child: HomeFirstItemWidget(
-                  title: itemsList?[index].name,
-                  assetImage: itemsList?[index].imagePath,
-                  boarderColor: AppColors.homeFirstItemOutlineColor,
+                padding: const EdgeInsets.only(right: 2.0, left: 8.0),
+                child: ItemsWidget(
+                  imageWidth: 1.sw,
+                  imageHeight: horizontalListSize,
+                  boarderColor: AppColors.itemBGColor,
+
+                  title: itemsList?[index].title,
+                  subTitle: itemsList?[index].subTitle,
+                  imagePath: itemsList?[index].imagePath,
+                  price: itemsList?[index].price,
+                  userName: itemsList?[index].userName,
+                  userRating: itemsList?[index].userRating,
+                  userProfile: itemsList?[index].userProfile,
                 ),
               );
             },

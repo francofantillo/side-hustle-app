@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 
 class AppUtils {
   // static final window = WidgetsBinding.instance!.window;
@@ -13,6 +15,11 @@ class AppUtils {
 
   // static Size size = WidgetsBinding.instance!.window.physicalSize;
   static Size size = PlatformDispatcher.instance.views.first.physicalSize;
+
+  // First get the FlutterView.
+  static FlutterView view = WidgetsBinding.instance.platformDispatcher.views.first;
+
+  // static Size size = view.physicalSize / view.devicePixelRatio;
 
   static double sh = 0;
   static double sw = 0;
@@ -56,7 +63,7 @@ class AppUtils {
       ..indicatorSize = 35.0
       ..radius = 10.0
       ..boxShadow = <BoxShadow>[]
-    ..maskColor = Colors.black.withOpacity(0.6)
+      ..maskColor = Colors.black.withOpacity(0.6)
       ..maskColor = Colors.transparent
       ..userInteractions = false
       ..dismissOnTap = false;

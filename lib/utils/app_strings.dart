@@ -72,5 +72,12 @@ class AppStrings {
   static const String jobsAroundYou = "Jobs around you";
   static const String eventsAroundYou = "Events around you";
   static const String welcomeHome = "Welcome here!";
+  static const String postASideHustle = "Post a Side Hustle";
 
+  /// Bottom Nav Items
+  static const String home = "Home";
+  static const String wantedJobs = "Wanted Job";
+  static const String events = "Events";
+  static const String sideHustle = "Side Hustle";
+  static const String profile = "Profile";
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/widgets/text_widget.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class BulletedListItem extends StatelessWidget {
   final String text;
@@ -17,7 +17,7 @@ class BulletedListItem extends StatelessWidget {
         child: const Icon(
           Icons.brightness_1,
           size: 12.0,
-          color: AppColors.blackColor,
+          color: AppColors.textBlackColor,
         ), // Bullet point
       ),
       title: textWidget(

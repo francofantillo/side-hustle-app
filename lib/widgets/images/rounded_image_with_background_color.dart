@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 
-class RoundedImageView extends StatelessWidget {
+class RoundedImageWithBackgroundColor extends StatelessWidget {
   final String? imageUrl;
   final String? assetPath;
   final Color? backgroundColor;
   final double? imageHeight;
   final double? imageWidth;
+  final double? borderRadius;
   final double? socialButtonSize;
 
-  RoundedImageView({
+  const RoundedImageWithBackgroundColor({super.key,
     this.imageUrl,
     this.assetPath,
     this.imageHeight,
     this.imageWidth,
+    this.borderRadius,
     this.socialButtonSize,
     this.backgroundColor,
   });
@@ -30,10 +32,10 @@ class RoundedImageView extends StatelessWidget {
         padding: EdgeInsets.all(socialButtonSize ?? 0),
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(AppDimensions.roundedImageViewBorderRadius),
+          borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(AppDimensions.roundedImageViewBorderRadius),
+          borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
           child: imageUrl != null
               ? Image.network(
                   imageUrl!,

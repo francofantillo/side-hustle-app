@@ -5,7 +5,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/assets_path.dart';
-import 'package:side_hustle/widgets/text_widget.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String? label;

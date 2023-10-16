@@ -62,10 +62,16 @@ class AppDimensions {
   static double profileUserNameTextSize = 12.sp;
   static double profileEmailTextSize = 14.sp;
   static double topIconsSpacing = 0.05.sw;
-  static double homeSearchSpacingTop = 0.03.sh;
+  static double homeSearchSpacingTop = 0.01.sh;
   static double homeSearchSpacingBelow = 0.015.sh;
   static double itemsArrowForwardIconSize = 12.h;
-  static double homeFirstHorizontalListSize = 0.1.sh;
+  static double homeFirstHorizontalListSize = 0.3.sw;
+  static double homeFirstItemWidgetCurve = 15.h;
+  // static double bottomButtonBGCurve = 30.h;
+  static double bottomButtonBGCurve = 0.05.sh;
+
+  /// Bottom Nav
+  static double bottomNavBGCurve = 0.04.sh;
 
   static const double defaultHorizontalPadding = 16;
   static const double defaultButtonHorizontalPadding = 54;
@@ -83,4 +89,11 @@ class AppDimensions {
   static const double constantButtonHeight = 55;
   static const double fullScreenHeight = 812;
   static const double fullScreenWidth = 375;
+
+  /// Event and Job Item
+  static double listItemHeight = 0.43.sw;
+  static double listItemWidth = 0.21.sw;
+  static double listItemElevation = 0.02.sh;
+  static double listItemImageRoundedBorder = 15.h;
+
 }

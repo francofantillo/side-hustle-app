@@ -13,15 +13,27 @@ import 'package:side_hustle/utils/my_behaviour.dart';
 import '../utils/app_font.dart';
 import '../utils/app_size.dart';
 
-class BaseWidget extends StatelessWidget {
+class BaseWidget extends StatefulWidget {
   static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
 
   const BaseWidget({super.key});
 
   @override
+  State<BaseWidget> createState() => _BaseWidgetState();
+}
+
+class _BaseWidgetState extends State<BaseWidget> {
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-
     // Hide the status bar
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return DevicePreview(
@@ -32,7 +44,7 @@ class BaseWidget extends StatelessWidget {
           designSize: Size(AppUtils.sw, AppUtils.sh),
           builder: (context, child) {
             return MaterialApp(
-              navigatorKey: globalKey,
+              navigatorKey: BaseWidget.globalKey,
               theme: ThemeData(
                 fontFamily: AppFont.jostRegular,
                 colorScheme: ThemeData()
@@ -52,8 +64,8 @@ class BaseWidget extends StatelessWidget {
               }),
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
-              // initialRoute: AppRoutes.splashScreenRoute,
-              initialRoute: AppRoutes.homeScreenRoute,
+              initialRoute: AppRoutes.splashScreenRoute,
+              // initialRoute: AppRoutes.homeScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

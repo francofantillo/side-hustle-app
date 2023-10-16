@@ -25,6 +25,7 @@ class AssetsPath {
   static const profile = "${iconsPath}profile.png";
   static const sideHustle = "${iconsPath}side_hustle.png";
   static const star = "${iconsPath}star.png";
+  static const eventsBottomNav = "${iconsPath}star_bottom_nav.png";
   static const job = "${iconsPath}job.png";
   static const home = "${iconsPath}home.png";
   static const drawer = "${iconsPath}drawer.png";
@@ -43,5 +44,12 @@ class AssetsPath {
   /// Alpha Images
   static const carpenter = "${alphaPath}carpenter.png";
   static const social = "${alphaPath}social.png";
+  static const homeR1 = "${alphaPath}home_r_1.png";
+  static const homeR2 = "${alphaPath}home_r_2.png";
+  static const homeR3 = "${alphaPath}home_r_3.png";
+  static const homeR4 = "${alphaPath}home_r_4.png";
+  static const homeR5 = "${alphaPath}home_r_5.png";
+  static const userProfileJob = "${alphaPath}user_profile_jobs.png";
+  static const userProfileEvents = "${alphaPath}events_profile.png";
 
 }

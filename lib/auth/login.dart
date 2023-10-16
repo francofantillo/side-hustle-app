@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/services.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -8,12 +8,12 @@ import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
-import 'package:side_hustle/widgets/custom_material_button.dart';
-import 'package:side_hustle/widgets/rounded_image_view.dart';
-import 'package:side_hustle/widgets/textField.dart';
-import 'package:side_hustle/widgets/text_widget.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
+import 'package:side_hustle/widgets/text_field/textField.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
-import '../widgets/height_widget.dart';
+import '../widgets/size_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,6 +23,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,7 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     name: AppStrings.login,
                     onPressed: () {
                       print('Button Pressed');
-                      EasyLoading.show();
+                      // EasyLoading.show();
+                      Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
                     }),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(
@@ -81,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    RoundedImageView(
+                    RoundedImageWithBackgroundColor(
                       assetPath: AssetsPath.google,
                       backgroundColor: AppColors.whiteColor,
                       socialButtonSize:
@@ -89,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       imageHeight: AppDimensions.socialButtonImageGoogleSize,
                       imageWidth: AppDimensions.socialButtonImageGoogleSize,
                     ),
-                    RoundedImageView(
+                    RoundedImageWithBackgroundColor(
                       assetPath: AssetsPath.apple,
                       backgroundColor: AppColors.whiteColor,
                       socialButtonSize:
@@ -97,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       imageHeight: AppDimensions.socialButtonImageSize,
                       imageWidth: AppDimensions.socialButtonImageSize,
                     ),
-                    RoundedImageView(
+                    RoundedImageWithBackgroundColor(
                       assetPath: AssetsPath.fb,
                       backgroundColor: AppColors.whiteColor,
                       socialButtonSize:

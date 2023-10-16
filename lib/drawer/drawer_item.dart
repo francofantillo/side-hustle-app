@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/widgets/height_widget.dart';
-import 'package:side_hustle/widgets/text_widget.dart';
+import 'package:side_hustle/widgets/size_widget.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class DrawerItemListTile extends StatelessWidget {
   final String iconPath;

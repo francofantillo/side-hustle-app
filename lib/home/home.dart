@@ -1,18 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/bottom_navigation/bottom_nav.dart';
 import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_widgets.dart';
-import 'package:side_hustle/home/widgets/jobs_item.dart';
+import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
-import 'package:side_hustle/widgets/height_widget.dart';
-import 'package:side_hustle/widgets/search_text_field.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/buttons/primary_button.dart';
+import 'package:side_hustle/widgets/size_widget.dart';
+import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class CurvedEdgeClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path()
+      ..lineTo(0, size.height) // Start from the bottom-left corner
+      ..lineTo(size.width, size.height) // Line to the bottom-right corner
+      ..lineTo(size.width, 0) // Line to the top-right corner
+      ..quadraticBezierTo(
+        size.width / 2, // Control point x-coordinate (center)
+        size.height * 0.5, // Control point y-coordinate (adjust as needed)
+        0, // End point x-coordinate (top-left corner)
+        0, // End point y-coordinate (top-left corner)
+      )
+      ..close(); // Close the path to form a closed shape
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return false;
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -22,33 +53,49 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       drawer: const AppDrawer(),
+      bottomNavBar: BottomNav(onTap: (index) {
+      },),
       body: Builder(builder: (contextBuilder) {
-        return Padding(
-          padding: EdgeInsets.all(AppDimensions.rootPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HomeTopWidgets(contextBuilder: contextBuilder),
-              height(AppDimensions.homeSearchSpacingTop),
-              SearchTextField(onChanged: (search) {}),
-              height(
-                AppDimensions.homeSearchSpacingBelow,
-              ),
-              HorizontalItemHomeWidget(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  left: AppDimensions.rootPadding,
+                  right: AppDimensions.rootPadding,
+                  top: AppDimensions.rootPadding),
+              child: HomeTopWidgets(contextBuilder: contextBuilder),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: AppDimensions.rootPadding,
+                  right: AppDimensions.rootPadding,
+                  top: AppDimensions.rootPadding),
+              child: SearchTextField(onChanged: (search) {}),
+            ),
+            // Horizontal ListView
+            Padding(
+              padding: EdgeInsets.only(
+                  left: AppDimensions.rootPadding,
+                  right: AppDimensions.rootPadding,
+                  ),
+              child: FirstHomeListItemWidget(
                 horizontalListSize: AppDimensions.homeFirstHorizontalListSize,
+                itemsList: AlphaAppData.homeFirstList,
                 onTapLabel: () {
                   print("Clicked");
                 },
               ),
-              // Vertical ListView
-              const JobsItem(),
-              height(20),
-              Container(
-                height: 20,
-                color: Colors.red,
-              )
-            ],
-          ),
+            ),
+            // Vertical ListView
+            JobsAndEventsList(
+                rightPadding: AppDimensions.rootPadding,
+                leftPadding: AppDimensions.rootPadding,
+                jobsAndEventsList: AlphaAppData.jobsAndEventsList),
+            height(20),
+            PrimaryPostButton(
+                title: AppStrings.postASideHustle, onPressed: () {})
+          ],
         );
       }),
     );
