@@ -7,6 +7,7 @@ import 'package:side_hustle/auth/signup.dart';
 import 'package:side_hustle/home/home.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/splash/splash.dart';
 
 class AppRouter {
@@ -40,6 +41,9 @@ class AppRouter {
 
           case AppRoutes.postProductScreenRoute:
             return const PostProduct();
+
+          case AppRoutes.postServiceScreenRoute:
+            return const PostService();
 
           default:
             return Container();

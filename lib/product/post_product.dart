@@ -58,7 +58,7 @@ class _PostProductState extends State<PostProduct> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                  text: AppStrings.uploadImagesBody,
+                  text: AppStrings.uploadImagesBodyProduct,
                   maxLines: 2,
                 ),
               ),

@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -33,7 +32,7 @@ class _PostServiceState extends State<PostService> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.postYourSideHustle,
+      appBarTitle: AppStrings.postYourSideHustleService,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child: backButton(onPressed: () => () {}, iconSize: 16),
@@ -58,15 +57,15 @@ class _PostServiceState extends State<PostService> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                  text: AppStrings.uploadImagesBody,
-                  maxLines: 2,
+                  text: AppStrings.uploadImagesBodyService,
+                  maxLines: 3,
                 ),
               ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                    text: AppStrings.productName,
+                    text: AppStrings.serviceName,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
@@ -76,7 +75,7 @@ class _PostServiceState extends State<PostService> {
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
                   height: 45.h,
-                  hintText: AppStrings.enterTheProductName,
+                  hintText: AppStrings.enterTheServiceName,
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
@@ -118,7 +117,7 @@ class _PostServiceState extends State<PostService> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                    text: AppStrings.productDescription,
+                    text: AppStrings.serviceDescription,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
@@ -128,75 +127,50 @@ class _PostServiceState extends State<PostService> {
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
                   height: 45.h,
-                  hintText: AppStrings.enterTheProductDescription,
-                  // fillColor: AppColors.productTextFieldColor,
+                  hintText: AppStrings.enterServiceDescription,
                 ),
               ),
               height(0.02.sh),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: textWidget(
+                    text: AppStrings.howWouldYouLikeToSellService,
+                    maxLines: 1,
+                    color: AppColors.textBlackColor,
+                    fontWeight: FontWeight.bold),
+              ),
               Row(
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.productPricing,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sh),
-                        CustomTextFormField(
-                          height: 45.h,
-                          hintText: "\$\$\$",
-                          // fillColor: AppColors.productTextFieldColor,
-                        ),
-                      ],
-                    ),
+                  CheckboxWidget(
+                    onChanged: (newValue) {
+                      print('Checkbox value changed: $newValue');
+                    },
                   ),
-                  width(0.01.sw),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.zipCode,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sh),
-                        CustomTextFormField(
-                          height: 45.h,
-                          hintText: "00000",
-                          // fillColor: AppColors.productTextFieldColor,
-                        ),
-                      ],
-                    ),
+                      child: textWidget(text: AppStrings.hourlyRate)),
+                  CheckboxWidget(
+                    onChanged: (newValue) {
+                      print('Checkbox value changed: $newValue');
+                    },
                   ),
+                  Expanded(
+                      child: textWidget(text: AppStrings.fixedRate)),
                 ],
               ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                    text: AppStrings.deliveryOptions,
+                    text: AppStrings.serviceHourlyRate,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
-                width: 1.sw,
-                child: CustomDropDown(
-                  items: items,
-                  selectedValue: (v) {
-                    print("selectedValue: $v");
-                  },
-                ),
+              height(0.01.sh),
+              CustomTextFormField(
+                height: 45.h,
+                hintText: "\$\$\$",
+                // fillColor: AppColors.productTextFieldColor,
               ),
               height(0.02.sh),
               Padding(
@@ -211,8 +185,9 @@ class _PostServiceState extends State<PostService> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.enterTheAdditionalInformation,
+                  height: 65.h,
+                  hintText: AppStrings.pleaseEnterAdditionalInformation,
+                  maxLines: 2,
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
@@ -222,7 +197,7 @@ class _PostServiceState extends State<PostService> {
                 child: customMaterialButton(
                     onPressed: () {},
                     color: AppColors.primaryColor,
-                    name: AppStrings.addProduct),
+                    name: AppStrings.addService),
               )
             ],
           ),

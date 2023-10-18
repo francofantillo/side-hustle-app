@@ -100,8 +100,22 @@ class AppStrings {
   static const String enterTheLocation = "Enter the location";
   static const String useYourShopLocation = "Use your Shop Location";
   static const String uploadImages = "Upload Images";
-  static const String uploadImagesBody = "Upload 2-3 relevant images of your product, so anyone can understand about your product";
+  static const String uploadImagesBodyProduct = "Upload 2-3 relevant images of your product, so anyone can understand about your product";
   static const String enterTheProductName = "Enter the product name";
   static const String addProduct = "Add Product";
+
+  /// Post Service
+  static const String postYourSideHustleService = "Post your Side Hustle Service";
+  static const String serviceName = "Service Name";
+  static const String uploadImagesBodyService = "Upload 2-3 relevant images of your service, so anyone can understand about your service";
+  static const String enterTheServiceName = "Enter the service name";
+  static const String serviceDescription = "Service Description";
+  static const String enterServiceDescription = "Enter the service description";
+  static const String howWouldYouLikeToSellService = "How would you like to sell this service as:";
+  static const String hourlyRate = "Hourly Rate";
+  static const String fixedRate = "Fixed Rate";
+  static const String serviceHourlyRate = "Service Hourly Rate";
+  static const String pleaseEnterAdditionalInformation = "Please enter additional Information about your service";
+  static const String addService = "Add Service";
 
 }
