@@ -31,6 +31,7 @@ class AssetsPath {
   static const drawer = "${iconsPath}drawer.png";
   static const notificationBell = "${iconsPath}notification_bell.png";
   static const search = "${iconsPath}search.png";
+  static const camera = "${iconsPath}camera.png";
   static const arrowRight = "${iconsPath}arrow_right.png";
   static const comment = "${iconsPath}comment.png";
   static const favUnfilled = "${iconsPath}fav_unfilled.png";

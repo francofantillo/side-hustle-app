@@ -34,7 +34,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              backButton(() {
+              backButton(onPressed: () {
                 Navigator.pop(context);
               }),
               height(AppDimensions.fieldsVerticalSpacingBetween),

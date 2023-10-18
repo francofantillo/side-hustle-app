@@ -33,7 +33,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                backButton(() {
+                backButton(onPressed: () {
                   Navigator.pop(builderContext);
                 }),
                 height(AppDimensions.fieldsVerticalSpacingBetween),

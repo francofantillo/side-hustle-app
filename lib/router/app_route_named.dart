@@ -10,4 +10,5 @@ class AppRoutes {
   static const String resetPasswordScreenRoute = "/resetPassword";
   static const String otpVerificationScreenRoute = "/otpVerification";
   static const String homeScreenRoute = "/home";
+  static const String postProductScreenRoute = "/postProduct";
 }

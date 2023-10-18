@@ -170,6 +170,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintStyle: const TextStyle(
           color: AppColors.textFieldColor,
           fontSize: 15,
+          height: 2
         ),
         errorMaxLines: 3,
         suffixIcon: widget.isPasswordField!

@@ -64,8 +64,8 @@ class _BaseWidgetState extends State<BaseWidget> {
               }),
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
-              initialRoute: AppRoutes.splashScreenRoute,
-              // initialRoute: AppRoutes.homeScreenRoute,
+              // initialRoute: AppRoutes.splashScreenRoute,
+              initialRoute: AppRoutes.postProductScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

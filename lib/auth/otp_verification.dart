@@ -73,7 +73,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            backButton(() {
+            backButton(onPressed: () {
               Navigator.pop(context);
             }),
             height(AppDimensions.fieldsVerticalSpacingBetween),

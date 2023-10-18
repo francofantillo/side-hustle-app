@@ -7,7 +7,7 @@ Widget customMaterialButton({String? name,
   Color? color,
   double? width,
   double? height,
-  Function()? onPressed}) {
+  required Function() onPressed}) {
   return CustomMaterialButton(
     name: name,
     color: color,

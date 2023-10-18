@@ -12,6 +12,7 @@ class AppColors {
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);
   static const textWhiteColor = Color(0xFFFCFCFC);
+  static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
   static const backgroundColor = Color(0xFFF5F5F5);
   static const whiteColor = Colors.white;

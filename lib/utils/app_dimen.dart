@@ -14,6 +14,10 @@ class AppDimensions {
   static double textSizeTermsAndConditions = 14.sp;
   static double textHeadingSize = 26.sp;
 
+  /// Dialogue Text Size
+  static double dialogueTextHeadingSize = 18.sp;
+  static double dialogueTextBodyHeadingSize = 16.sp;
+
   /// Text Field
   static double textFieldHeight = 55.h;
   static double textFieldBorderRadius = 15;
@@ -95,5 +99,9 @@ class AppDimensions {
   static double listItemWidth = 0.21.sw;
   static double listItemElevation = 0.02.sh;
   static double listItemImageRoundedBorder = 15.h;
+
+  /// Product Image Slider
+  static double productImageSliderHeight = 0.50.sw;
+  static double productImageSliderWidth = 1.sw;
 
 }

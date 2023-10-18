@@ -5,6 +5,7 @@ import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/auth/reset_password.dart';
 import 'package:side_hustle/auth/signup.dart';
 import 'package:side_hustle/home/home.dart';
+import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/splash/splash.dart';
 
@@ -36,6 +37,9 @@ class AppRouter {
 
           case AppRoutes.homeScreenRoute:
             return const HomeScreen();
+
+          case AppRoutes.postProductScreenRoute:
+            return const PostProduct();
 
           default:
             return Container();

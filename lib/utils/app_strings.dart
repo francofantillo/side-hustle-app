@@ -80,4 +80,28 @@ class AppStrings {
   static const String events = "Events";
   static const String sideHustle = "Side Hustle";
   static const String profile = "Profile";
+
+  /// Dialogue
+  static const String product = "Product";
+  static const String service = "Service";
+  static const String productDesc = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+
+  /// Post Product
+  static const String postYourSideHustle = "Post Your Side Hustle Product";
+  static const String productName = "Product Name";
+  static const String productDescription = "Product Description";
+  static const String enterTheProductDescription = "Enter the product description";
+  static const String productPricing = "Product Pricing";
+  static const String deliveryOptions = "Delivery Options";
+  static const String pickUp = "Pickup";
+  static const String additionalInformation = "Additional Information";
+  static const String enterTheAdditionalInformation = "Enter the additional information";
+  static const String location = "Location";
+  static const String enterTheLocation = "Enter the location";
+  static const String useYourShopLocation = "Use your Shop Location";
+  static const String uploadImages = "Upload Images";
+  static const String uploadImagesBody = "Upload 2-3 relevant images of your product, so anyone can understand about your product";
+  static const String enterTheProductName = "Enter the product name";
+  static const String addProduct = "Add Product";
+
 }

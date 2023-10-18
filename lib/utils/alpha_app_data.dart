@@ -30,10 +30,10 @@ class AlphaAppData {
   /// Jobs Around You
   static List<ItemList> eventsAroundYou = [
     ItemList(
-        title: "Carpenter",
+        title: "Social Event",
         subTitle:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        userName: "Leo Lubin",
+        userName: "Phillip Press",
         userRating: "5.0 ratings",
         price: "\$24.56",
         imagePath: AssetsPath.social,

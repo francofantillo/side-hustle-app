@@ -3,8 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/assets_path.dart';
 
 class AppUtils {
   // static final window = WidgetsBinding.instance!.window;
