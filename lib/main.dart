@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:side_hustle/base_widget/base_widget.dart';
@@ -10,27 +9,9 @@ void main() async {
   AppUtils.configEasyLoading();
   HttpOverrides.global = MyHttpOverrides();
 
-  await AppUtils.getSmallestHeight();
-  await AppUtils.getSmallestWidth();
-
-  FlutterView? flutterView = PlatformDispatcher.instance.views.firstOrNull;
-  if (flutterView == null || flutterView.physicalSize.isEmpty) {
-    PlatformDispatcher.instance.onMetricsChanged = () {
-      flutterView = PlatformDispatcher.instance.views.firstOrNull;
-      if (flutterView != null && !flutterView!.physicalSize.isEmpty) {
-        print("called flutterView not null");
-        PlatformDispatcher.instance.onMetricsChanged = null;
-        runApp(
-          const BaseWidget(),
-        );
-      }
-    };
-  } else {
-    print("called flutterView null");
-    runApp(
-      const BaseWidget(),
-    );
-  }
+  runApp(
+    const BaseWidget(),
+  );
 }
 
 class MyHttpOverrides extends HttpOverrides {

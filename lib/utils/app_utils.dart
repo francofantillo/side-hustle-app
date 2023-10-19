@@ -5,28 +5,13 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 
 class AppUtils {
-  // static final window = WidgetsBinding.instance!.window;
-  /// Without context
-  /// views can be [single, first, last, firstOrNull]
-  static final MediaQueryData window = MediaQueryData.fromView(
-      WidgetsBinding.instance.platformDispatcher.views.single);
-
-  // static Size size = WidgetsBinding.instance!.window.physicalSize;
-  static Size size = PlatformDispatcher.instance.views.first.physicalSize;
-
-  // First get the FlutterView.
-  static FlutterView view = WidgetsBinding.instance.platformDispatcher.views.first;
-
-  // static Size size = view.physicalSize / view.devicePixelRatio;
 
   static double sh = 0;
   static double sw = 0;
 
-  static Future<double> getSmallestWidth() async {
+  static Future<double> getSmallestWidth(
+      {required double screenWidth, required double screenHeight, required double dpi}) async {
     sw = 0;
-    final double screenWidth = size.width;
-    final double screenHeight = size.height;
-    final double dpi = window.devicePixelRatio * 160;
     final double smallestW = (screenWidth / dpi) * 160;
     print(
         "screenWidth: $screenWidth x screenHeight: $screenHeight dpi: $dpi\nsw: $smallestW");
@@ -36,11 +21,9 @@ class AppUtils {
     return smallestW;
   }
 
-  static Future<double> getSmallestHeight() async {
+  static Future<double> getSmallestHeight(
+      {required double screenWidth, required double screenHeight, required double dpi}) async {
     sh = 0;
-    final double screenWidth = size.width;
-    final double screenHeight = size.height;
-    final double dpi = window.devicePixelRatio * 160;
     final double smallestH = (screenHeight / dpi) * 160;
 
     print(

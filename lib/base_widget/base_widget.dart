@@ -23,13 +23,52 @@ class BaseWidget extends StatefulWidget {
 }
 
 class _BaseWidgetState extends State<BaseWidget> {
+  late final screenSize, screenWidth, screenHeight, devicePixelRatio;
+
+  // static double sh = 533.3333333333334; // Default Nexus S value
+  // static double sw = 320; // Default Nexus S value
+
+  static double sh = 0;
+  static double sw = 0;
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp
-    ]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
+  setDesignSize(
+      {required double screenWidth,
+      required double screenHeight,
+      required double dpi}) async {
+    sh = await AppUtils.getSmallestHeight(
+        screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
+    sw = await AppUtils.getSmallestWidth(
+        screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
+    print("sh: $sh, sw: $sw");
+    ScreenUtil.configure(designSize: Size(sw, sh));
+    // ScreenUtil.
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final mediaQueryData = MediaQuery.of(context);
+    final screenWidthInPixels =
+        mediaQueryData.size.width * mediaQueryData.devicePixelRatio;
+    final screenHeightInPixels =
+        mediaQueryData.size.height * mediaQueryData.devicePixelRatio;
+    final dpi = mediaQueryData.devicePixelRatio *
+        160.0; // 160 is the default logical DPI
+
+    print(
+        "screenWidthInPixels: $screenWidthInPixels, screenHeightInPixels: $screenHeightInPixels, dpi: $dpi");
+
+    setDesignSize(
+        screenHeight: screenHeightInPixels,
+        screenWidth: screenWidthInPixels,
+        dpi: dpi);
   }
 
   @override
@@ -41,7 +80,7 @@ class _BaseWidgetState extends State<BaseWidget> {
       builder: (context) {
         return ScreenUtilInit(
           // designSize: const Size(AppSize.fullScreenWidth, AppSize.fullScreenHeight),
-          designSize: Size(AppUtils.sw, AppUtils.sh),
+          designSize: Size(sw, sh),
           builder: (context, child) {
             return MaterialApp(
               navigatorKey: BaseWidget.globalKey,
@@ -64,8 +103,8 @@ class _BaseWidgetState extends State<BaseWidget> {
               }),
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
-              // initialRoute: AppRoutes.splashScreenRoute,
-              initialRoute: AppRoutes.postProductScreenRoute,
+              initialRoute: AppRoutes.splashScreenRoute,
+              // initialRoute: AppRoutes.postProductScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

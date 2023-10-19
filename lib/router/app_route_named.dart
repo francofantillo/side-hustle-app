@@ -12,4 +12,5 @@ class AppRoutes {
   static const String homeScreenRoute = "/home";
   static const String postProductScreenRoute = "/postProduct";
   static const String postServiceScreenRoute = "/postService";
+  static const String postJobScreenRoute = "/postJob";
 }

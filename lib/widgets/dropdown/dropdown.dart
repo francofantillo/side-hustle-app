@@ -20,6 +20,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: AppDimensions.defaultFocusedTextFieldElevation,
       shape: RoundedRectangleBorder(
         borderRadius:
             BorderRadius.circular(AppDimensions.textFieldBorderRadius),

@@ -6,6 +6,7 @@ import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_widgets.dart';
 import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
@@ -29,6 +30,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var index = 0;
+  bool isProductSelected = true;
+
+  @override
+  void initState() {
+    isProductSelected = true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +89,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   AppDialogues.postSideHustleDialogue(
                           context: contextBuilder,
                           body: PostYourSideHustle(
+                            isProductSelected: (v) {
+                              isProductSelected = v;
+                              print("prodcut: $isProductSelected");
+                            },
                             onPressed: () {
                               print("pressed Dialogue");
+                              if(isProductSelected) {
+                                /// reset to Default Value
+                                isProductSelected = true;
+                                // Navigator.pop(contextBuilder);
+                                AppDialogues.postSideHustleDialogue(context: contextBuilder).dismiss();
+                                Navigator.pushNamed(contextBuilder, AppRoutes.postProductScreenRoute);
+                              } else {
+                                /// reset to Default Value
+                                isProductSelected = true;
+                                AppDialogues.postSideHustleDialogue(context: contextBuilder).dismiss();
+                                // Navigator.pop(contextBuilder);
+                                Navigator.pushNamed(contextBuilder, AppRoutes.postServiceScreenRoute);
+                              }
                             },
                             onTapClose: () {
                               Navigator.pop(contextBuilder);

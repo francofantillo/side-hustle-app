@@ -10,8 +10,13 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 class PostYourSideHustle extends StatefulWidget {
   final Function()? onTapClose;
   final Function() onPressed;
+  final ValueChanged<bool> isProductSelected;
 
-  const PostYourSideHustle({super.key, required this.onPressed, this.onTapClose});
+  const PostYourSideHustle(
+      {super.key,
+      required this.onPressed,
+      this.onTapClose,
+      required this.isProductSelected});
 
   @override
   State<PostYourSideHustle> createState() => _PostYourSideHustleState();
@@ -58,6 +63,7 @@ class _PostYourSideHustleState extends State<PostYourSideHustle> {
             height(.02.sh),
             InkWell(
               onTap: () {
+                widget.isProductSelected(true);
                 setState(() {
                   isItemOneSelected = true;
                 });
@@ -97,6 +103,7 @@ class _PostYourSideHustleState extends State<PostYourSideHustle> {
             height(.02.sh),
             InkWell(
               onTap: () {
+                widget.isProductSelected(false);
                 setState(() {
                   isItemOneSelected = false;
                 });

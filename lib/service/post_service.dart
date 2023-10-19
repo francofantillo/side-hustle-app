@@ -35,9 +35,12 @@ class _PostServiceState extends State<PostService> {
       appBarTitle: AppStrings.postYourSideHustleService,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
-        child: backButton(onPressed: () => () {}, iconSize: 16),
+        child: backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         child: Padding(
           padding: EdgeInsets.all(AppDimensions.rootPadding),
           child: Column(
