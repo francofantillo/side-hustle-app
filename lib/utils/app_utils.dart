@@ -1,39 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:intl/intl.dart';
 
 class AppUtils {
-
-  static double sh = 0;
-  static double sw = 0;
-
-  static Future<double> getSmallestWidth(
-      {required double screenWidth, required double screenHeight, required double dpi}) async {
-    sw = 0;
-    final double smallestW = (screenWidth / dpi) * 160;
-    print(
-        "screenWidth: $screenWidth x screenHeight: $screenHeight dpi: $dpi\nsw: $smallestW");
-
-    sw = smallestW;
-
-    return smallestW;
-  }
-
-  static Future<double> getSmallestHeight(
-      {required double screenWidth, required double screenHeight, required double dpi}) async {
-    sh = 0;
-    final double smallestH = (screenHeight / dpi) * 160;
-
-    print(
-        "screenWidth: $screenWidth x screenHeight: $screenHeight dpi: $dpi\nsh: $smallestH");
-
-    sh = smallestH;
-
-    return smallestH;
-  }
-
+  /// Easy Loading Config
   static configEasyLoading() {
     EasyLoading.instance
       ..indicatorType = EasyLoadingIndicatorType.ring
@@ -48,5 +19,77 @@ class AppUtils {
       ..maskColor = Colors.transparent
       ..userInteractions = false
       ..dismissOnTap = false;
+  }
+
+  /// Date Picker
+  static Future<String?> selectDate(
+      {required BuildContext context, required DateTime initialDate}) async {
+    String? date;
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      print("selectedDate: $picked");
+      date = await formatDate(selectedDate: picked);
+    }
+    return date;
+  }
+
+  /// Format Date
+  static Future<String> formatDate({required DateTime selectedDate}) async {
+    String formattedDate = DateFormat('MM/dd/yyyy').format(selectedDate);
+    return formattedDate;
+  }
+
+  /// Time Picker
+  static TimeOfDay? firstSelectedTime;
+  static TimeOfDay? secondSelectedTime;
+  static String timeDifference = '';
+
+  static Future<void> selectTime(BuildContext context, bool isFirst) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: isFirst
+          ? firstSelectedTime ?? TimeOfDay.now()
+          : secondSelectedTime ?? TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      if (isFirst) {
+        firstSelectedTime = picked;
+        secondSelectedTime =
+            null; // Reset second time when selecting the first time
+      } else {
+        if (picked.hour > (firstSelectedTime?.hour ?? 0) ||
+            (picked.hour == (firstSelectedTime?.hour ?? 0) &&
+                picked.minute > (firstSelectedTime?.minute ?? 0))) {
+          secondSelectedTime = picked;
+          timeDifference =
+              calculateTimeDifference(firstSelectedTime!, secondSelectedTime!);
+        } else {
+          // Display an error or handle validation in your app
+          // For this example, we reset the second time to null
+          secondSelectedTime = null;
+        }
+      }
+    }
+  }
+
+  static String calculateTimeDifference(
+      TimeOfDay startTime, TimeOfDay endTime) {
+    final int startMinutes = startTime.hour * 60 + startTime.minute;
+    final int endMinutes = endTime.hour * 60 + endTime.minute;
+    final int differenceMinutes = endMinutes - startMinutes;
+    final int hours = differenceMinutes ~/ 60;
+    final int minutes = differenceMinutes % 60;
+    return '$hours hours and $minutes minutes';
   }
 }

@@ -118,4 +118,21 @@ class AppStrings {
   static const String pleaseEnterAdditionalInformation = "Please enter additional Information about your service";
   static const String addService = "Add Service";
 
+  /// Post Job
+  static const String postJob = "Post a Job";
+  static const String postJobTitle = "Job Title";
+  static const String enterTheJobTitle = "Enter the Job title";
+  static const String jobLocation = "Job Location";
+  static const String enterJobLocation = "Enter the Job Location";
+  static const String jobDesc = "Job Description";
+  static const String enterTheJobDesc = "Enter the Job description";
+  static const String jobBudget = "Job Budget";
+  static const String areaCode = "Area Code";
+  static const String jobDate = "Job Date";
+  static const String selectTheDate = "Select the date";
+  static const String jobTime = "Job Time";
+  static const String jobTimeHint = "10:00am";
+  static const String totalHoursHint = "1:00pm";
+  static const String totalHours = "Total Hours: 3 Hours";
+
 }

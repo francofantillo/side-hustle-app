@@ -9,6 +9,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/my_behaviour.dart';
+import 'package:side_hustle/utils/screen_design_size.dart';
 
 import '../utils/app_font.dart';
 import '../utils/app_size.dart';
@@ -25,11 +26,11 @@ class BaseWidget extends StatefulWidget {
 class _BaseWidgetState extends State<BaseWidget> {
   late final screenSize, screenWidth, screenHeight, devicePixelRatio;
 
-  // static double sh = 533.3333333333334; // Default Nexus S value
-  // static double sw = 320; // Default Nexus S value
+  static double sh = 533.3333333333334; // Default Nexus S value
+  static double sw = 320; // Default Nexus S value
 
-  static double sh = 0;
-  static double sw = 0;
+  // static double sh = 0;
+  // static double sw = 0;
 
   @override
   void initState() {
@@ -41,13 +42,12 @@ class _BaseWidgetState extends State<BaseWidget> {
       {required double screenWidth,
       required double screenHeight,
       required double dpi}) async {
-    sh = await AppUtils.getSmallestHeight(
+    sh = await ScreenDesignSize.getSmallestHeight(
         screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
-    sw = await AppUtils.getSmallestWidth(
+    sw = await ScreenDesignSize.getSmallestWidth(
         screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
     print("sh: $sh, sw: $sw");
     ScreenUtil.configure(designSize: Size(sw, sh));
-    // ScreenUtil.
   }
 
   @override
@@ -103,8 +103,8 @@ class _BaseWidgetState extends State<BaseWidget> {
               }),
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
-              initialRoute: AppRoutes.splashScreenRoute,
-              // initialRoute: AppRoutes.postProductScreenRoute,
+              // initialRoute: AppRoutes.splashScreenRoute,
+              initialRoute: AppRoutes.postJobScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

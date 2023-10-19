@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -20,15 +22,28 @@ class PostJob extends StatefulWidget {
 }
 
 class _PostJobState extends State<PostJob> {
+  TextEditingController dateTextController = TextEditingController();
+  TextEditingController firstTimeTextController = TextEditingController();
+  TextEditingController secondTimeTextController = TextEditingController();
+  String? formattedDate;
 
   @override
   Widget build(BuildContext context) {
+    dateTextController.text = formattedDate ?? "";
+    firstTimeTextController.text = AppUtils.firstSelectedTime != null
+        ? AppUtils.firstSelectedTime!.format(context)
+        : "";
+    secondTimeTextController.text = AppUtils.secondSelectedTime != null
+        ? AppUtils.secondSelectedTime!.format(context)
+        : "";
+
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.postYourSideHustleService,
+      appBarTitle: AppStrings.postJob,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
-        child: backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+        child:
+            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -58,7 +73,7 @@ class _PostJobState extends State<PostJob> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                    text: AppStrings.serviceName,
+                    text: AppStrings.postJobTitle,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
@@ -68,7 +83,7 @@ class _PostJobState extends State<PostJob> {
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
                   height: 45.h,
-                  hintText: AppStrings.enterTheServiceName,
+                  hintText: AppStrings.enterTheJobTitle,
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
@@ -76,7 +91,7 @@ class _PostJobState extends State<PostJob> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                    text: AppStrings.location,
+                    text: AppStrings.jobLocation,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
@@ -86,31 +101,19 @@ class _PostJobState extends State<PostJob> {
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
                   height: 45.h,
-                  hintText: AppStrings.enterTheLocation,
+                  hintText: AppStrings.enterJobLocation,
                   suffixIcon: const Icon(
                     Icons.my_location,
                     color: Colors.black,
                   ),
                   isSuffixIcon: true,
-                  // fillColor: AppColors.productTextFieldColor,
                 ),
-              ),
-              Row(
-                children: [
-                  CheckboxWidget(
-                    onChanged: (newValue) {
-                      print('Checkbox value changed: $newValue');
-                    },
-                  ),
-                  Expanded(
-                      child: textWidget(text: AppStrings.useYourShopLocation)),
-                ],
               ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                    text: AppStrings.serviceDescription,
+                    text: AppStrings.jobDesc,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
@@ -119,51 +122,145 @@ class _PostJobState extends State<PostJob> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.enterServiceDescription,
+                  height: 75.h,
+                  hintText: AppStrings.enterTheJobDesc,
+                  maxLines: 2,
                 ),
               ),
               height(0.02.sh),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.howWouldYouLikeToSellService,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontWeight: FontWeight.bold),
-              ),
               Row(
                 children: [
-                  CheckboxWidget(
-                    onChanged: (newValue) {
-                      print('Checkbox value changed: $newValue');
-                    },
-                  ),
                   Expanded(
-                      child: textWidget(text: AppStrings.hourlyRate)),
-                  CheckboxWidget(
-                    onChanged: (newValue) {
-                      print('Checkbox value changed: $newValue');
-                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: textWidget(
+                              text: AppStrings.jobBudget,
+                              maxLines: 1,
+                              color: AppColors.textBlackColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        height(0.01.sh),
+                        CustomTextFormField(
+                          height: 45.h,
+                          hintText: "\$\$\$",
+                          // fillColor: AppColors.productTextFieldColor,
+                        ),
+                      ],
+                    ),
                   ),
+                  width(0.01.sw),
                   Expanded(
-                      child: textWidget(text: AppStrings.fixedRate)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: textWidget(
+                              text: AppStrings.areaCode,
+                              maxLines: 1,
+                              color: AppColors.textBlackColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        height(0.01.sh),
+                        CustomTextFormField(
+                          height: 45.h,
+                          hintText: "00000",
+                          keyboardType: TextInputType.number,
+                          // fillColor: AppColors.productTextFieldColor,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
-                    text: AppStrings.serviceHourlyRate,
+                    text: AppStrings.jobDate,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
               ),
               height(0.01.sh),
-              CustomTextFormField(
-                height: 45.h,
-                hintText: "\$\$\$",
-                // fillColor: AppColors.productTextFieldColor,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                child: CustomTextFormField(
+                  controller: dateTextController,
+                  height: 45.h,
+                  hintText: AppStrings.selectTheDate,
+                  isReadonly: true,
+                  suffixIcon: const ImageIcon(AssetImage(AssetsPath.calender),
+                      color: Colors.black),
+                  isSuffixIcon: true,
+                  onTap: () async {
+                    formattedDate = await AppUtils.selectDate(
+                        context: context, initialDate: DateTime.now());
+                    setState(() {});
+                  },
+                ),
+              ),
+              height(0.02.sh),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: textWidget(
+                              text: AppStrings.jobTime,
+                              maxLines: 1,
+                              color: AppColors.textBlackColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        height(0.01.sh),
+                        CustomTextFormField(
+                          controller: firstTimeTextController,
+                          height: 45.h,
+                          hintText: AppStrings.jobTimeHint,
+                          isReadonly: true,
+                          onTap: () async {
+                            await AppUtils.selectTime(context, true);
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  width(0.01.sw),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: textWidget(
+                              text: AppStrings.totalHours,
+                              maxLines: 1,
+                              color: AppColors.textBlackColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        height(0.01.sh),
+                        CustomTextFormField(
+                          controller: secondTimeTextController,
+                          height: 45.h,
+                          hintText: AppStrings.totalHoursHint,
+                          isReadonly: true,
+                          onTap: () async {
+                            await AppUtils.selectTime(context, false);
+                            setState(() {});
+                          },
+                          // fillColor: AppColors.productTextFieldColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               height(0.02.sh),
               Padding(
@@ -179,7 +276,7 @@ class _PostJobState extends State<PostJob> {
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
                   height: 65.h,
-                  hintText: AppStrings.pleaseEnterAdditionalInformation,
+                  hintText: AppStrings.enterTheAdditionalInformation,
                   maxLines: 2,
                   // fillColor: AppColors.productTextFieldColor,
                 ),
@@ -190,7 +287,7 @@ class _PostJobState extends State<PostJob> {
                 child: customMaterialButton(
                     onPressed: () {},
                     color: AppColors.primaryColor,
-                    name: AppStrings.addService),
+                    name: AppStrings.postJob),
               )
             ],
           ),
