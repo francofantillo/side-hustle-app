@@ -123,6 +123,8 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics()),
               child: Scrollbar(
                 child: Container(
                   margin: const EdgeInsets.only(left: 16, top: 6),

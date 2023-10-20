@@ -10,9 +10,11 @@ class AppDimensions {
 
   /// Text Size
   static double textSizeSmall = 14.sp;
+  static double textSizeVerySmall = 12.sp;
   static double textSizeNormal = 16.sp;
   static double textSizeTermsAndConditions = 14.sp;
   static double textHeadingSize = 26.sp;
+  static double textHeadingSizeHome = 22.sp;
 
   /// Dialogue Text Size
   static double dialogueTextHeadingSize = 18.sp;
@@ -111,5 +113,8 @@ class AppDimensions {
   /// Applied Job
   static double appliedJobRoundedBorder = 10.h;
   static double bookedJobRoundedBorder = 10.h;
+
+  /// Apply For a Jo
+  static double applyForJobIconSize = 0.03.sh;
 
 }

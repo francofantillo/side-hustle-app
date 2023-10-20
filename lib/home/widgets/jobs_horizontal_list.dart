@@ -50,6 +50,7 @@ class JobsHorizontalListWidget extends StatelessWidget {
         SizedBox(
           height: horizontalListSize, // Set the desired height
           child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
             scrollDirection: Axis.horizontal,
             itemCount: itemsList?.length ?? 0, // Replace with your item count
             itemBuilder: (context, index) {

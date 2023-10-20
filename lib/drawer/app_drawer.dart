@@ -34,6 +34,8 @@ class _AppDrawerState extends State<AppDrawer> {
           child: Padding(
             padding: EdgeInsets.all(AppDimensions.rootPadding),
             child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

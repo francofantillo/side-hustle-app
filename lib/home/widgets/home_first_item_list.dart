@@ -47,6 +47,7 @@ class FirstHomeListItemWidget extends StatelessWidget {
           height: horizontalListSize, // Set the desired height
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
+            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
             itemCount: itemsList?.length ?? 0, // Replace with your item count
             itemBuilder: (context, index) {
               // Replace with your horizontal list item

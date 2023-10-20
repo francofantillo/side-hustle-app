@@ -25,8 +25,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       body: Builder(builder: (builderContext) {
         return SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           child: Padding(
             padding: EdgeInsets.all(AppDimensions.rootPadding),
             child: Column(

@@ -13,6 +13,8 @@ class JobsAndEventsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+
         itemCount: jobsAndEventsList?.length ?? 0,
         // Replace with your item count
         itemBuilder: (context, index) {

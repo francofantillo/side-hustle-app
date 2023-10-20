@@ -19,7 +19,7 @@ class _WantedTabListState extends State<WantedTabList> {
       child: Padding(
         padding: EdgeInsets.only(bottom: 0.14.sh),
         child: ListView.builder(
-          // physics: const NeverScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count

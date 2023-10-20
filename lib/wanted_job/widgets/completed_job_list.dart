@@ -19,7 +19,8 @@ class _CompletedTabListState extends State<CompletedTabList> {
       child: Padding(
         padding: EdgeInsets.only(bottom: 0.14.sh),
         child: ListView.builder(
-          // physics: const NeverScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
@@ -35,16 +36,16 @@ class _CompletedTabListState extends State<CompletedTabList> {
                 boarderColor: AppColors.itemBGColor,
                 title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
                 subTitle:
-                AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-                imagePath: AlphaAppData
-                    .jobsAndEventsList[0].itemList?[0].imagePath,
+                    AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+                imagePath:
+                    AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
                 price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
                 userName:
-                AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
-                userRating: AlphaAppData
-                    .jobsAndEventsList[0].itemList?[0].userRating,
-                userProfile: AlphaAppData
-                    .jobsAndEventsList[0].itemList?[0].userProfile,
+                    AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
+                userRating:
+                    AlphaAppData.jobsAndEventsList[0].itemList?[0].userRating,
+                userProfile:
+                    AlphaAppData.jobsAndEventsList[0].itemList?[0].userProfile,
               ),
             );
           },

@@ -6,6 +6,7 @@ import 'package:side_hustle/auth/reset_password.dart';
 import 'package:side_hustle/auth/signup.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/home/home.dart';
+import 'package:side_hustle/job/apply_job.dart';
 import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
@@ -54,6 +55,9 @@ class AppRouter {
 
           case AppRoutes.postJobScreenRoute:
             return const PostJob();
+
+          case AppRoutes.applyForJobScreenRoute:
+            return const ApplyForJob();
 
           case AppRoutes.wantedJobScreenRoute:
             return const WantedJobScreen();

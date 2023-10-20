@@ -39,6 +39,7 @@ class AssetsPath {
   static const calender = "${iconsPath}calender.png";
   static const time = "${iconsPath}time.png";
   static const searchFilter = "${iconsPath}search_filter.png";
+  static const location = "${iconsPath}location.png";
 
   /// Images
   static const continueWith = "${imagePath}continue_with.png";

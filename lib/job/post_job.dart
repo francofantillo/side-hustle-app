@@ -45,6 +45,8 @@ class _PostJobState extends State<PostJob> {
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         child: Padding(
           padding: EdgeInsets.all(AppDimensions.rootPadding),
           child: Column(

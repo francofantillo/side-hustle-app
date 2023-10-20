@@ -27,8 +27,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return BackgroundWidget(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         child: Padding(
           padding: EdgeInsets.all(AppDimensions.rootPadding),
           child: Column(

@@ -68,6 +68,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   Widget _formArea(BuildContext context) {
     return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
       child: Padding(
         padding: EdgeInsets.all(AppDimensions.rootPadding),
         child: Column(

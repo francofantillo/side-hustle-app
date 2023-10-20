@@ -92,6 +92,7 @@ class AppStrings {
   static const String productDescription = "Product Description";
   static const String enterTheProductDescription = "Enter the product description";
   static const String productPricing = "Product Pricing";
+  static const String productPricingNumeric = "\$24.56";
   static const String deliveryOptions = "Delivery Options";
   static const String pickUp = "Pickup";
   static const String additionalInformation = "Additional Information";
@@ -143,5 +144,16 @@ class AppStrings {
   static const String completed = "Completed";
   static const String jobApplied = "Job Applied";
   static const String startJob = "Start Job";
+
+  /// Apply Job
+  static const String applyForJob = "Apply for Job";
+  static const String userNameJob = "Emerson Aminoff";
+  static const String carpenter = "Carpenter";
+  static const String locationText = "5251 2nd Street, Belmont Shore, Long Beach, California, 90803";
+  static const String jobDateText = "25 September, 2023";
+  static const String jobTimeText = "Start at 10:00am to 2:00pm (4 Hours)";
+  static const String jobPostBy = "Job Post by";
+  static const String jobDescText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
+  static const String additionalTextDesc = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
 
 }
