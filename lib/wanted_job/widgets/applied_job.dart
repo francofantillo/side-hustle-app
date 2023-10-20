@@ -58,7 +58,7 @@ class AppliedJobsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textWidget(text: title),
+                          Expanded(child: textWidget(text: title)),
                           textWidget(text: price),
                         ],
                       ),

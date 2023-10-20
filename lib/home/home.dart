@@ -32,9 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      body: Builder(builder: (contextBuilder) {
-        return Column(
+    return Builder(builder: (contextBuilder) {
+      return SafeArea(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -107,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       .show();
                 }),
           ],
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

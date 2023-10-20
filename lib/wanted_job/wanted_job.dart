@@ -27,7 +27,6 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
   bool isProductSelected = true;
 
   final ValueNotifier<int> _tabIndexBasicToggle = ValueNotifier(0);
-  int _switchTabTextIndexSelected = 0;
 
   @override
   void initState() {

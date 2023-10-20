@@ -60,18 +60,11 @@ class BookedJobsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textWidget(text: title),
-                          Column(
-                            children: [
-                              textWidget(text: price),
-                              textWidget(
-                                  text: "per head",
-                                  textAlign: TextAlign.end,
-                                  fontSize: 8),
-                            ],
-                          ),
+                          Expanded(child: textWidget(text: title)),
+                          textWidget(text: price),
                         ],
                       ),
+                      height(0.01.sw),
                       SizedBox(
                         width: .5.sw,
                         child: textWidget(text: subTitle, maxLines: 2),

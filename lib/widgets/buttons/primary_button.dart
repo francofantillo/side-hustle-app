@@ -11,7 +11,8 @@ class PrimaryPostButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: .14.sh,
+      height: .13.sh,
+      // height: 95.h,
       width: 1.sw,
       padding: EdgeInsets.only(
           top: 0.03.sh, bottom: 0.03.sh, right: 0.06.sw, left: 0.06.sw),
