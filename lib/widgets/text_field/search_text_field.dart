@@ -4,12 +4,20 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 
 class SearchTextField extends StatelessWidget {
   final ValueChanged<String?> onChanged;
   final double? searchFieldSize;
+  final Widget? suffixIcon;
+  final String hintText;
 
-  const SearchTextField({super.key, required this.onChanged, this.searchFieldSize});
+  const SearchTextField(
+      {super.key,
+      required this.onChanged,
+      this.searchFieldSize,
+      required this.hintText,
+      this.suffixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +46,21 @@ class SearchTextField extends StatelessWidget {
                 left: AppDimensions.textFieldHorizontalPadding,
                 right: 6.w,
               ),
-              prefixIcon: Icon(
-                Icons.search,
-                size: 34,
-                color: AppColors.searchIconColor,
+              prefixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ImageIcon(AssetImage(AssetsPath.search)),
               ),
+              prefixIconConstraints:
+                  BoxConstraints.loose(const Size.fromRadius(76)),
+              suffixIcon: suffixIcon,
+              suffixIconConstraints:
+                  BoxConstraints.loose(const Size.fromRadius(8)),
               // border: InputBorder.none,
               floatingLabelBehavior: FloatingLabelBehavior.auto,
               labelStyle: TextStyle(
                 fontSize: 12.sp,
               ),
-              hintText: AppStrings.searchHintText,
+              hintText: hintText,
               // labelText: AppStrings.searchHintText,
               hintStyle: const TextStyle(
                 color: AppColors.textFieldColor,

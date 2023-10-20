@@ -35,8 +35,10 @@ class AssetsPath {
   static const arrowRight = "${iconsPath}arrow_right.png";
   static const comment = "${iconsPath}comment.png";
   static const favUnfilled = "${iconsPath}fav_unfilled.png";
+  static const message = "${iconsPath}message.png";
   static const calender = "${iconsPath}calender.png";
   static const time = "${iconsPath}time.png";
+  static const searchFilter = "${iconsPath}search_filter.png";
 
   /// Images
   static const continueWith = "${imagePath}continue_with.png";

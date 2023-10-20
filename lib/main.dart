@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:side_hustle/base_widget/base_widget.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 
@@ -12,6 +14,13 @@ void main() async {
   runApp(
     const BaseWidget(),
   );
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
 class MyHttpOverrides extends HttpOverrides {

@@ -48,6 +48,7 @@ class AppDimensions {
 
   /// Elevation
   static double defaultUnFocusedTextFieldElevation = 0.02.sw;
+  static double defaultCardElevation = 0.02.sw;
   static double defaultFocusedTextFieldElevation = 0.02.sw;
   static double defaultSearchTextFieldElevation = 0.01.sw;
   static double defaultButtonElevation = 0.02.sw;
@@ -103,5 +104,12 @@ class AppDimensions {
   /// Product Image Slider
   static double productImageSliderHeight = 0.50.sw;
   static double productImageSliderWidth = 1.sw;
+
+  /// Custom AppBar
+  static double customAppBarTitleTextSize = 14.sp;
+
+  /// Applied Job
+  static double appliedJobRoundedBorder = 10.h;
+  static double bookedJobRoundedBorder = 10.h;
 
 }

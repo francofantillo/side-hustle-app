@@ -2,8 +2,11 @@
 
 class ScreenDesignSize {
 
-  static double sh = 0;
-  static double sw = 0;
+  // static double sh = 0;
+  // static double sw = 0;
+
+  static double sh = 533.3333333333334;
+  static double sw = 320.0;
 
   static Future<double> getSmallestWidth(
       {required double screenWidth, required double screenHeight, required double dpi}) async {

@@ -24,10 +24,9 @@ class BaseWidget extends StatefulWidget {
 }
 
 class _BaseWidgetState extends State<BaseWidget> {
-  late final screenSize, screenWidth, screenHeight, devicePixelRatio;
 
-  static double sh = 533.3333333333334; // Default Nexus S value
-  static double sw = 320; // Default Nexus S value
+  // static double sh = 533.3333333333334; // Default Nexus S value
+  // static double sw = 320; // Default Nexus S value
 
   // static double sh = 0;
   // static double sw = 0;
@@ -35,19 +34,18 @@ class _BaseWidgetState extends State<BaseWidget> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   setDesignSize(
       {required double screenWidth,
       required double screenHeight,
       required double dpi}) async {
-    sh = await ScreenDesignSize.getSmallestHeight(
+    final double sw = await ScreenDesignSize.getSmallestWidth(
         screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
-    sw = await ScreenDesignSize.getSmallestWidth(
+    final double sh = await ScreenDesignSize.getSmallestHeight(
         screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
-    print("sh: $sh, sw: $sw");
     ScreenUtil.configure(designSize: Size(sw, sh));
+    print("sh: ${ScreenDesignSize.sh} : $sh, sw: ${ScreenDesignSize.sw} : $sw");
   }
 
   @override
@@ -80,7 +78,7 @@ class _BaseWidgetState extends State<BaseWidget> {
       builder: (context) {
         return ScreenUtilInit(
           // designSize: const Size(AppSize.fullScreenWidth, AppSize.fullScreenHeight),
-          designSize: Size(sw, sh),
+          designSize: Size(ScreenDesignSize.sw, ScreenDesignSize.sh),
           builder: (context, child) {
             return MaterialApp(
               navigatorKey: BaseWidget.globalKey,
@@ -90,6 +88,10 @@ class _BaseWidgetState extends State<BaseWidget> {
                     .colorScheme
                     .copyWith(primary: AppColors.primaryColor)
                     .copyWith(background: AppColors.backgroundColor),
+                // This makes the visual density adapt to the platform that you run
+                // the app on. For desktop platforms, the controls will be smaller and
+                // closer together (more dense) than on mobile platforms.
+                visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
               locale: DevicePreview.locale(context),
               builder: EasyLoading.init(builder: (context, child) {
@@ -103,8 +105,9 @@ class _BaseWidgetState extends State<BaseWidget> {
               }),
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
-              // initialRoute: AppRoutes.splashScreenRoute,
-              initialRoute: AppRoutes.postJobScreenRoute,
+              initialRoute: AppRoutes.splashScreenRoute,
+              // initialRoute: AppRoutes.splashTransParentScreenRoute,
+              // initialRoute: AppRoutes.bottomTabsScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

@@ -8,10 +8,12 @@ class AppColors {
   static final textGreyColor = Color(0xFF565656).withOpacity(.85);
   static final backIconBackgroundColor = Color(0xFF565656).withOpacity(.10);
   static final searchIconColor = Color(0xFF565656).withOpacity(.55);
-  static final itemBGColor = Color(0xFFF3F3F3).withOpacity(.9);
+  static final switchTabBackgroundColor = Color(0xFFF2F3F7);
+  static final itemBGColor = Color(0xFFF3F3F3);
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);
   static const textWhiteColor = Color(0xFFFCFCFC);
+  static const appliedJobOutlineColor = Color(0xFF21A455);
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
   static const backgroundColor = Color(0xFFF5F5F5);

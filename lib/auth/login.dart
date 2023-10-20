@@ -71,7 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       print('Button Pressed');
                       // EasyLoading.show();
-                      Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
+                      // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
+                      // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
+                      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.bottomTabsScreenRoute, (route) => false);
+
                     }),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(

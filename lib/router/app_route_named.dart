@@ -3,6 +3,7 @@
 class AppRoutes {
   ///-------------------- Common Navigation Routes -------------------- ///
   static const String splashScreenRoute = "/";
+  static const String splashTransParentScreenRoute = "/splashTransParent";
   static const String myHomeScreenRoute = "/myHomePage";
   static const String loginScreenRoute = "/login";
   static const String signupScreenRoute = "/signup";
@@ -13,4 +14,6 @@ class AppRoutes {
   static const String postProductScreenRoute = "/postProduct";
   static const String postServiceScreenRoute = "/postService";
   static const String postJobScreenRoute = "/postJob";
+  static const String wantedJobScreenRoute = "/wantedJob";
+  static const String bottomTabsScreenRoute = "/bottomTabs";
 }

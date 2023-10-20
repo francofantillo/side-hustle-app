@@ -39,8 +39,8 @@ class ItemsWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: AppDimensions.buttonVerticalPadding,
-        color: boarderColor,
+        elevation: 6,
+        // color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),

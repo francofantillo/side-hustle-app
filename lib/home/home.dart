@@ -41,10 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      drawer: const AppDrawer(),
-      bottomNavBar: BottomNav(
-        onTap: (index) {},
-      ),
       body: Builder(builder: (contextBuilder) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   left: AppDimensions.rootPadding,
                   right: AppDimensions.rootPadding,
                   top: AppDimensions.rootPadding),
-              child: SearchTextField(onChanged: (search) {}),
+              child: SearchTextField(
+                  hintText: AppStrings.searchHintText,
+                  onChanged: (search) {}),
             ),
             // Horizontal ListView
             Padding(
@@ -87,33 +85,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: AppStrings.postASideHustle,
                 onPressed: () {
                   AppDialogues.postSideHustleDialogue(
-                          context: contextBuilder,
-                          body: PostYourSideHustle(
-                            isProductSelected: (v) {
-                              isProductSelected = v;
-                              print("prodcut: $isProductSelected");
-                            },
-                            onPressed: () {
-                              print("pressed Dialogue");
-                              if(isProductSelected) {
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                // Navigator.pop(contextBuilder);
-                                AppDialogues.postSideHustleDialogue(context: contextBuilder).dismiss();
-                                Navigator.pushNamed(contextBuilder, AppRoutes.postProductScreenRoute);
-                              } else {
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                AppDialogues.postSideHustleDialogue(context: contextBuilder).dismiss();
-                                // Navigator.pop(contextBuilder);
-                                Navigator.pushNamed(contextBuilder, AppRoutes.postServiceScreenRoute);
-                              }
-                            },
-                            onTapClose: () {
-                              Navigator.pop(contextBuilder);
-                            },
-                          ))
-                      // ..show()
+                      context: contextBuilder,
+                      body: PostYourSideHustle(
+                        isProductSelected: (v) {
+                          isProductSelected = v;
+                          print("prodcut: $isProductSelected");
+                        },
+                        onPressed: () {
+                          print("pressed Dialogue");
+                          if(isProductSelected) {
+                            /// reset to Default Value
+                            isProductSelected = true;
+                            // Navigator.pop(contextBuilder);
+                            AppDialogues.postSideHustleDialogue(context: contextBuilder).dismiss();
+                            Navigator.pushNamed(contextBuilder, AppRoutes.postProductScreenRoute);
+                          } else {
+                            /// reset to Default Value
+                            isProductSelected = true;
+                            AppDialogues.postSideHustleDialogue(context: contextBuilder).dismiss();
+                            // Navigator.pop(contextBuilder);
+                            Navigator.pushNamed(contextBuilder, AppRoutes.postServiceScreenRoute);
+                          }
+                        },
+                        onTapClose: () {
+                          Navigator.pop(contextBuilder);
+                        },
+                      ))
+                  // ..show()
                       .show();
                 }),
           ],

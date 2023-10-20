@@ -25,7 +25,8 @@ class _BottomNavState extends State<BottomNav> {
       decoration: const BoxDecoration(
         color: AppColors.primaryColor,
         boxShadow: [
-          BoxShadow(color: AppColors.primaryColor, spreadRadius: 0, blurRadius: 10),
+          BoxShadow(
+              color: AppColors.primaryColor, spreadRadius: 0, blurRadius: 10),
         ],
       ),
       child: ClipRRect(
@@ -51,13 +52,18 @@ class _BottomNavState extends State<BottomNav> {
             BottomNavigationBarItem(
                 icon: imageWidget(AssetsPath.home, 0), label: AppStrings.home),
             BottomNavigationBarItem(
-                icon: imageWidget(AssetsPath.sideHustle, 1), label: AppStrings.wantedJobs),
+                icon: imageWidget(AssetsPath.sideHustle, 1),
+                label: AppStrings.wantedJob),
             BottomNavigationBarItem(
-                icon: imageWidget(AssetsPath.eventsBottomNav, 2), label: AppStrings.events,),
+              icon: imageWidget(AssetsPath.eventsBottomNav, 2),
+              label: AppStrings.events,
+            ),
             BottomNavigationBarItem(
-                icon: imageWidget(AssetsPath.sideHustle, 3), label: AppStrings.sideHustle),
+                icon: imageWidget(AssetsPath.sideHustle, 3),
+                label: AppStrings.sideHustle),
             BottomNavigationBarItem(
-                icon: imageWidget(AssetsPath.profile, 4), label: AppStrings.profile),
+                icon: imageWidget(AssetsPath.profile, 4),
+                label: AppStrings.profile),
           ],
         ),
       ),

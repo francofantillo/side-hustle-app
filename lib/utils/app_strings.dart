@@ -76,7 +76,7 @@ class AppStrings {
 
   /// Bottom Nav Items
   static const String home = "Home";
-  static const String wantedJobs = "Wanted Job";
+  static const String wantedJob = "Wanted Job";
   static const String events = "Events";
   static const String sideHustle = "Side Hustle";
   static const String profile = "Profile";
@@ -134,5 +134,14 @@ class AppStrings {
   static const String jobTimeHint = "10:00am";
   static const String totalHoursHint = "1:00pm";
   static const String totalHours = "Total Hours: 3 Hours";
+
+  /// Wanted Job
+  static const String wa = "Wanted Jobs";
+  static const String searchJob = "Search jobs";
+  static const String applied = "Applied";
+  static const String booked = "Booked";
+  static const String completed = "Completed";
+  static const String jobApplied = "Job Applied";
+  static const String startJob = "Start Job";
 
 }
