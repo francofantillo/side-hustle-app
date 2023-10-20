@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:side_hustle/utils/app_colors.dart';
 import 'package:intl/intl.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 
 class AppUtils {
   /// Easy Loading Config

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
+import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:side_hustle/widgets/text_field/phone_textField.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
+import 'package:side_hustle/widgets/text_field/phone_textField.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

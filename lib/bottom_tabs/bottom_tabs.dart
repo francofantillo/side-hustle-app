@@ -3,12 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_navigation/bottom_nav.dart';
 import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/home/home.dart';
-import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/wanted_job/wanted_job.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
-import 'package:side_hustle/widgets/images/circular_image.dart';
 
 class BottomTabsScreen extends StatefulWidget {
   final int? currentIndex;

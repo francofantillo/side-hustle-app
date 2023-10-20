@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/wanted_job/widgets/applied_job.dart';
 import 'package:side_hustle/wanted_job/widgets/booked_job.dart';
 
 class BookedTabList extends StatefulWidget {

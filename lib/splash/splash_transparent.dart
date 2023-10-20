@@ -1,12 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
-import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/screen_design_size.dart';
-import 'package:side_hustle/widgets/background_widget.dart';
-import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 
 class SplashTransParentScreen extends StatefulWidget {
   const SplashTransParentScreen({super.key});

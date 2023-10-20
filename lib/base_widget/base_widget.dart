@@ -7,12 +7,10 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/router/app_router.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/my_behaviour.dart';
 import 'package:side_hustle/utils/screen_design_size.dart';
 
 import '../utils/app_font.dart';
-import '../utils/app_size.dart';
 
 class BaseWidget extends StatefulWidget {
   static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
