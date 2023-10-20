@@ -145,6 +145,9 @@ class AppStrings {
   static const String jobApplied = "Job Applied";
   static const String startJob = "Start Job";
 
+  /// Wanted Job
+  static const String hustle = "Hustle";
+
   /// Apply Job
   static const String applyForJob = "Apply for Job";
   static const String userNameJob = "Emerson Aminoff";
@@ -155,5 +158,28 @@ class AppStrings {
   static const String jobPostBy = "Job Post by";
   static const String jobDescText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
   static const String additionalTextDesc = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+
+  /// Wanted Job
+  static const String searchEvent = "Search Events";
+  static const String postAnEvent = "Post an Event";
+  static const String eventName = "Event Name";
+  static const String startTime = "Start Time";
+  static const String endTime = "End Time";
+  static const String eventNameHint = "Enter the event name";
+  static const String eventLocation = "Event Location/Venue";
+  static const String eventLocationHint = "5251 2nd Street, Belmont Shore, Long Beach, California, 90803";
+  static const String eventDate = "Date of Event";
+  static const String eventTime = "Time of the Event";
+  static const String eventPurpose = "Event Purpose";
+  static const String eventPurposeHint = "Go on vacation with the proceeds";
+  static const String eventTheme = "Event Theme";
+  static const String eventThemeHint = "Ghost Busters 80's All White";
+  static const String eventVendorList = "Vendor’s List";
+  static const String eventVendorListHint = "Burgers, BBQ, Wraps, Hot dogs, Fries, Ice Cream";
+  static const String eventTicketPrice = "Ticket Price";
+  static const String paymentType = "Payment Type";
+  static const String paymentTypeHint = "Select the Payment Type";
+  static const String eventAvailableAttractions = "Available Attractions";
+  static const String eventAvailableAttractionsHint = "Child Care, Bounce House, Full Bar, Swimming Pool, Musical Chair, Stand Up Comedy, Music";
 
 }

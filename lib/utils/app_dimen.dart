@@ -117,4 +117,7 @@ class AppDimensions {
   /// Apply For a Jo
   static double applyForJobIconSize = 0.03.sh;
 
+  /// Event
+  static double eventWidgetIconSize = 0.02.sh;
+
 }

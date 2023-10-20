@@ -4,10 +4,11 @@ import 'package:side_hustle/utils/app_dimen.dart';
 
 class CustomDropDown extends StatefulWidget {
   final List<String> items;
+  final String? hintText;
   final ValueChanged<String?> selectedValue;
 
   const CustomDropDown(
-      {super.key, required this.items, required this.selectedValue});
+      {super.key, required this.items, required this.selectedValue, this.hintText});
 
   @override
   State<CustomDropDown> createState() => _CustomDropDownState();
@@ -28,7 +29,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
         child: DropdownButton2<String>(
           isExpanded: true,
           hint: Text(
-            'Select Item',
+            widget.hintText ?? 'Select Item',
             style: TextStyle(
               fontSize: 14,
               color: Theme.of(context).hintColor,

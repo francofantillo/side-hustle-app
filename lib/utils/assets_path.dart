@@ -24,6 +24,7 @@ class AssetsPath {
   static const delete = "${iconsPath}delete.png";
   static const profile = "${iconsPath}profile.png";
   static const sideHustle = "${iconsPath}side_hustle.png";
+  static const wantedJob = "${iconsPath}wanted_job.png";
   static const star = "${iconsPath}star.png";
   static const eventsBottomNav = "${iconsPath}star_bottom_nav.png";
   static const job = "${iconsPath}job.png";

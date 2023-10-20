@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_navigation/bottom_nav.dart';
 import 'package:side_hustle/drawer/app_drawer.dart';
+import 'package:side_hustle/event/event.dart';
 import 'package:side_hustle/home/home.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/wanted_job/wanted_job.dart';
@@ -59,10 +60,10 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
       child: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
-        children: [
+        children: const [
           HomeScreen(),
           WantedJobScreen(),
-          HomeScreen(),
+          EventScreen(),
           HomeScreen(),
           HomeScreen()
         ],

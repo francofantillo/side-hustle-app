@@ -5,6 +5,8 @@ import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/auth/reset_password.dart';
 import 'package:side_hustle/auth/signup.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
+import 'package:side_hustle/event/event.dart';
+import 'package:side_hustle/event/post_event.dart';
 import 'package:side_hustle/home/home.dart';
 import 'package:side_hustle/job/apply_job.dart';
 import 'package:side_hustle/job/post_job.dart';
@@ -61,6 +63,12 @@ class AppRouter {
 
           case AppRoutes.wantedJobScreenRoute:
             return const WantedJobScreen();
+
+          case AppRoutes.eventScreenRoute:
+            return const EventScreen();
+
+          case AppRoutes.postEventScreenRoute:
+            return const PostEvent();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

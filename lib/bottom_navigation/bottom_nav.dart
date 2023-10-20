@@ -52,7 +52,7 @@ class _BottomNavState extends State<BottomNav> {
             BottomNavigationBarItem(
                 icon: imageWidget(AssetsPath.home, 0), label: AppStrings.home),
             BottomNavigationBarItem(
-                icon: imageWidget(AssetsPath.sideHustle, 1),
+                icon: imageWidget(AssetsPath.wantedJob, 1),
                 label: AppStrings.wantedJob),
             BottomNavigationBarItem(
               icon: imageWidget(AssetsPath.eventsBottomNav, 2),
