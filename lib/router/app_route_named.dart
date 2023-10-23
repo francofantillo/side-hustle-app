@@ -18,5 +18,8 @@ class AppRoutes {
   static const String wantedJobScreenRoute = "/wantedJob";
   static const String eventScreenRoute = "/event";
   static const String postEventScreenRoute = "/postEvent";
+  static const String viewEventScreenRoute = "/viewEvent";
+  static const String viewEventSelfScreenRoute = "/viewEventSelf";
+  static const String attendeesEventScreenRoute = "/attendeesEvent";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }

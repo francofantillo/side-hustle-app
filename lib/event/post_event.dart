@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -28,8 +29,8 @@ class _PostEventState extends State<PostEvent> {
   String? formattedDate;
 
   final List<String> items = [
-    'Cash',
-    'Card',
+    PaymentTypeEnum.Cash.name,
+    PaymentTypeEnum.Card.name,
   ];
 
   @override
@@ -147,7 +148,10 @@ class _PostEventState extends State<PostEvent> {
                           controller: firstTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.startTime,
-                          suffixIcon: ImageIcon(AssetImage(AssetsPath.time), color: AppColors.blackColor,),
+                          suffixIcon: ImageIcon(
+                            AssetImage(AssetsPath.time),
+                            color: AppColors.blackColor,
+                          ),
                           isSuffixIcon: true,
                           isReadonly: true,
                           onTap: () async {
@@ -176,7 +180,10 @@ class _PostEventState extends State<PostEvent> {
                           controller: secondTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.endTime,
-                          suffixIcon: ImageIcon(AssetImage(AssetsPath.time), color: AppColors.blackColor,),
+                          suffixIcon: ImageIcon(
+                            AssetImage(AssetsPath.time),
+                            color: AppColors.blackColor,
+                          ),
                           isSuffixIcon: true,
                           isReadonly: true,
                           onTap: () async {

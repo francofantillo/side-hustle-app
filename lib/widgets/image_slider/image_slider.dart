@@ -49,14 +49,22 @@ class _ImageSliderState extends State<ImageSlider> {
   }
 
   dotIndicatorWidget() {
-    return SmoothPageIndicator(
-      controller: pageController,
-      count: 3,
-      effect: const ExpandingDotsEffect(
-        dotHeight: 4,
-        dotWidth: 7,
-        activeDotColor: AppColors.primaryColor,
-        dotColor: Color(0xFFA5A5A5),
+    return Card(
+      elevation: 2,
+      shadowColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius:
+        BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+      ),
+      child: SmoothPageIndicator(
+        controller: pageController,
+        count: 3,
+        effect: const ExpandingDotsEffect(
+          dotHeight: 4,
+          dotWidth: 7,
+          activeDotColor: AppColors.primaryColor,
+          dotColor: Color(0xFFA5A5A5),
+        ),
       ),
     );
   }
@@ -64,35 +72,43 @@ class _ImageSliderState extends State<ImageSlider> {
   pageViewChild(int index) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Stack(
-        children: [
-          RoundedCornersImage(
-            imageHeight: AppDimensions.productImageSliderHeight,
-            imageWidth: AppDimensions.productImageSliderWidth,
-            assetImage: AssetsPath.social,
-            boarderColor: Colors.white,
-          ),
-          index == 0
-              ? Positioned(
-                  left: AppDimensions.productImageSliderWidth - 0.27.sw,
-                  top: AppDimensions.productImageSliderHeight - 0.20.sw,
-                  child: Container(
-                      height: 0.12.sw,
-                      width: 0.12.sw,
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Image.asset(
-                        AssetsPath.camera,
-                        height: 2,
-                        width: 2,
-                        scale: .1,
-                      )))
-              : const SizedBox.shrink()
-        ],
+      child: Card(
+        elevation: 2,
+        shadowColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+        ),
+        child: Stack(
+          children: [
+            RoundedCornersImage(
+              imageHeight: AppDimensions.productImageSliderHeight,
+              imageWidth: AppDimensions.productImageSliderWidth,
+              assetImage: AssetsPath.social,
+              boarderColor: Colors.white,
+            ),
+            index == 0
+                ? Positioned(
+                    left: AppDimensions.productImageSliderWidth - 0.28.sw,
+                    top: AppDimensions.productImageSliderHeight - 0.23.sw,
+                    child: Container(
+                        height: 0.12.sw,
+                        width: 0.12.sw,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Image.asset(
+                          AssetsPath.camera,
+                          height: 2,
+                          width: 2,
+                          scale: .1,
+                        )))
+                : const SizedBox.shrink()
+          ],
+        ),
       ),
     );
   }

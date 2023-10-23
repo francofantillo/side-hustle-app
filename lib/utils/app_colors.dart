@@ -7,8 +7,10 @@ class AppColors {
   static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
   static final textGreyColor = Color(0xFF565656).withOpacity(.85);
   static final backIconBackgroundColor = Color(0xFF565656).withOpacity(.10);
+  static final cancelIconBackgroundColor = Color(0xFF565656).withOpacity(.20);
   static final searchIconColor = Color(0xFF565656).withOpacity(.55);
-  static final switchTabBackgroundColor = Color(0xFFF2F3F7);
+  // static final switchTabBackgroundColor = Color(0xFFF2F3F7);
+  static final switchTabBackgroundColor = Color(0xFFe9eaea);
   static final itemBGColor = Color(0xFFF3F3F3);
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);

@@ -6,34 +6,35 @@ class CircularImageWidget extends StatelessWidget {
   final String image;
   final double? imageSize;
   final Color? boarderColor;
+  final Color? backgroundColor;
 
   const CircularImageWidget(
-      {Key? key, required this.image, this.imageSize, this.boarderColor})
+      {Key? key, required this.image, this.imageSize, this.boarderColor, this.backgroundColor})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // Set your desired height
-      width: imageSize ?? 60.h,
-      // Set your desired width
-      height: imageSize ?? 60.h,
-      padding: const EdgeInsets.all(12.0),
-      decoration: BoxDecoration(
-        color: AppColors.backIconBackgroundColor,
-        shape: BoxShape.circle,
-        // border: Border.all(
-        //   color: widget.boarderColor ?? AppColors.whiteColor,
-        //   // Change the border color as needed
-        //   width: 1.5.h, // Use the provided border width
-        // ),
-        // image: DecorationImage(
-        //     image: widget.image == null
-        //         ? const AssetImage(AssetsPath.placeHolderProfileImage)
-        //         : NetworkImage(widget.image!) as ImageProvider,
-        //     fit: BoxFit.cover)
-      ),
-      child: Image.asset(image),
-    );
+        // Set your desired height
+        width: imageSize ?? 60.h,
+        // Set your desired width
+        height: imageSize ?? 60.h,
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: backgroundColor ?? AppColors.backIconBackgroundColor,
+          shape: BoxShape.circle,
+          // border: Border.all(
+          //   color: widget.boarderColor ?? AppColors.whiteColor,
+          //   // Change the border color as needed
+          //   width: 1.5.h, // Use the provided border width
+          // ),
+          // image: DecorationImage(
+          //     image: widget.image == null
+          //         ? const AssetImage(AssetsPath.placeHolderProfileImage)
+          //         : NetworkImage(widget.image!) as ImageProvider,
+          //     fit: BoxFit.cover)
+        ),
+        child: Image.asset(image),
+      );
   }
 }

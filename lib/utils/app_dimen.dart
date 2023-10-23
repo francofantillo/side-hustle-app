@@ -11,6 +11,7 @@ class AppDimensions {
   /// Text Size
   static double textSizeSmall = 14.sp;
   static double textSizeVerySmall = 12.sp;
+  static double textSizePerHead = 10.sp;
   static double textSizeNormal = 16.sp;
   static double textSizeTermsAndConditions = 14.sp;
   static double textHeadingSize = 26.sp;
@@ -104,7 +105,7 @@ class AppDimensions {
   static double listItemImageRoundedBorder = 15.h;
 
   /// Product Image Slider
-  static double productImageSliderHeight = 0.50.sw;
+  static double productImageSliderHeight = 0.55.sw;
   static double productImageSliderWidth = 1.sw;
 
   /// Custom AppBar
