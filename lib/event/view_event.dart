@@ -6,12 +6,15 @@ import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_list.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
+import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/circular_image.dart';
+import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
 import 'package:side_hustle/widgets/list/bullet_point_list.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -48,7 +51,7 @@ class _ViewEventState extends State<ViewEvent> {
               padding: const EdgeInsets.only(right: 8.0),
               child: IconButton(
                 icon: Icon(
-                  Icons.mobile_screen_share_outlined,
+                  CustomIcon.forward,
                   size: 0.05.sw,
                   color: AppColors.primaryColor,
                 ),
@@ -117,49 +120,58 @@ class _ViewEventState extends State<ViewEvent> {
                   ],
                 ),
               ),
-              height(0.02.sh),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ImageIcon(
-                      const AssetImage(AssetsPath.calender),
-                      size: AppDimensions.applyForJobIconSize,
-                    ),
-                    width(0.02.sw),
-                    Expanded(
-                      child: textWidget(
-                          text: AppStrings.jobDateText,
-                          fontSize: AppDimensions.textSizeVerySmall),
-                    ),
-                  ],
-                ),
-              ),
-              height(0.02.sh),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ImageIcon(
-                      const AssetImage(AssetsPath.time),
-                      size: AppDimensions.applyForJobIconSize,
-                    ),
-                    width(0.02.sw),
-                    Expanded(
-                      child: textWidget(
-                          text: AppStrings.eventTimeText,
-                          fontSize: AppDimensions.textSizeVerySmall),
-                    ),
-                  ],
-                ),
-              ),
               height(0.01.sh),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Divider(
                   color: AppColors.greyColor,
+                ),
+              ),
+              height(0.02.sh),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: textWidget(
+                    text: AppStrings.eventPostedBy,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeNormal),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          CircularCacheImageWidget(
+                            showLoading: false,
+                            image: AssetsPath.userProfileJob,
+                            boarderColor: AppColors.primaryColor,
+                            imageHeight: .09.sh,
+                            imageWidth: .09.sw,
+                          ),
+                          width(.02.sw),
+                          Expanded(
+                            child: textWidget(
+                                text: AppStrings.eventPostedProfileName,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textBlackColor),
+                          ),
+                        ],
+                      ),
+                    ),
+                    RoundedImageWithBackgroundColor(
+                      assetPath: AssetsPath.message,
+                      imageHeight: .03.sh,
+                      imageWidth: .06.sw,
+                      backgroundColor: AppColors.primaryColor,
+                      socialButtonSize: .03.sh,
+                      borderRadius: 12,
+                    ),
+                  ],
                 ),
               ),
               height(0.02.sh),
@@ -176,7 +188,7 @@ class _ViewEventState extends State<ViewEvent> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventPurposeText,
-                    fontSize: AppDimensions.textSizeSmall),
+                    fontSize: AppDimensions.textSizeNormal),
               ),
               height(0.02.sh),
               Padding(
@@ -257,7 +269,7 @@ class _ViewEventState extends State<ViewEvent> {
                 child: customMaterialButton(
                     onPressed: () {},
                     color: AppColors.primaryColor,
-                    name: AppStrings.shareEvent),
+                    name: AppStrings.interestedInEvent),
               )
             ],
           ),

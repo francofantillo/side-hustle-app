@@ -204,13 +204,17 @@ class AppStrings {
   static const String eventAvailableAttractionsHint =
       "Child Care, Bounce House, Full Bar, Swimming Pool, Musical Chair, Stand Up Comedy, Music";
   static const String viewEvent = "View Event";
+  static const String viewProfile = "View Profile";
   static const String attendees = "Attendees";
   static const String viewEventMusical = "Musical Event";
   static const String viewAttendees = "View Attendees";
   static const String vendorsList = "Vendor’s List";
   static const String shareEvent = "Share Event";
+  static const String interestedInEvent = "Interested in Event";
   static const String eventPrice = "\$12.46";
   static const String perHead = "per head";
   static const String eventTimeText = "Start at 10:00am to 5:00pm";
+  static const String eventPostedBy = "Event Posted by";
+  static const String eventPostedProfileName = "Leo Lubin";
 
 }

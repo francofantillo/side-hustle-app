@@ -4,6 +4,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 
 class CircularIconButton extends StatelessWidget {
   final IconData icon;
+  final double? height, width;
   final VoidCallback onPressed;
   final Color backgroundColor;
   final Color iconColor;
@@ -14,6 +15,8 @@ class CircularIconButton extends StatelessWidget {
     required this.icon,
     required this.onPressed,
     required this.backgroundColor,
+    this.height,
+    this.width,
     this.iconColor = AppColors.primaryColor,
     this.iconSize = 24.0,
   });
@@ -21,13 +24,14 @@ class CircularIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 0.11.sw, // Adjust as needed
-      height: 0.11.sw, // Adjust as needed
+      width: width ?? 0.11.sw, // Adjust as needed
+      height: height ?? 0.11.sw, // Adjust as needed
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: backgroundColor,
       ),
       child: IconButton(
+        padding: EdgeInsets.zero,
         icon: Icon(
           icon,
           size: iconSize,

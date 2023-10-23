@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/event/widgets/attendees_confirmed_list.dart';
+import 'package:side_hustle/event/widgets/attendees_interested_list.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -42,7 +44,7 @@ class _AttendeesEventState extends State<AttendeesEvent> {
             SizedBox(
               width: 1.sw,
               child: ToggleSwitch(
-                customWidths: [.5.sw, .43.sw],
+                customWidths: [.5.sw, .434.sw],
                 isVertical: false,
                 minWidth: 90,
                 cornerRadius: 20.0,
@@ -71,62 +73,15 @@ class _AttendeesEventState extends State<AttendeesEvent> {
             Builder(builder: (context) {
               return Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: AppDimensions.rootPadding, vertical: 8),
-                  child: ListView.builder(
-                    physics: const AlwaysScrollableScrollPhysics(
-                        parent: BouncingScrollPhysics()),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-                    itemCount: AppList.attendeesList.length ?? 0,
-                    // Replace with your item count
-                    itemBuilder: (context, index) {
-                      // Replace with your horizontal list item
-                      return Row(children: [
-                        CircularCacheImageWidget(
-                          showLoading: true,
-                          assetImage: AppList.attendeesList[index].image,
-                          imageWidth: .15.sw,
-                        ),
-                        //bullet text
-                        width(
-                          0.02.sw,
-                        ),
-                        //space between bullet and text
-                        Expanded(
-                          child: textWidget(
-                              text: AppList.attendeesList[index].name,
-                              fontSize: AppDimensions.textSizeSmall),
-                        ),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                print("clicked cancel");
-                              },
-                              icon: Icon(
-                                Icons.cancel_sharp,
-                                size: 0.06.sh,
-                              ),
-                              color: AppColors.cancelIconBackgroundColor,
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                print("clicked checked");
-                              },
-                              icon: Icon(
-                                Icons.check_circle,
-                                size: 0.059.sh,
-                              ),
-                              color: AppColors.primaryColor,
-                            ),
-                          ],
-                        ),
-                      ]);
-                    },
-                  ),
-                ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: AppDimensions.rootPadding, vertical: 8),
+                    child: _tabIndexBasicToggle.value == 0
+                        ? AttendeesInterestedList(
+                            itemsList: AppList.attendeesList,
+                          )
+                        : AttendeesConfirmedList(
+                            itemsList: AppList.attendeesList,
+                          )),
               );
             })
           ],

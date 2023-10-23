@@ -34,7 +34,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      actions:  [
+      actions: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Container(
@@ -52,13 +52,12 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                   size: 0.05.sw,
                   color: AppColors.primaryColor,
                 ),
-                onPressed: (){},
+                onPressed: () {},
               ),
             ),
           ),
         )
       ],
-
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const AlwaysScrollableScrollPhysics(
@@ -163,6 +162,33 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                 ),
               ),
               height(0.02.sh),
+              SizedBox(
+                width: 1.sw,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Add your button click logic here
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue, // Set the background color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0), // Make it round
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(
+                        Icons.add,
+                        color: Colors.white, // Set the icon color
+                      ),
+                      Text(
+                        'Add Item',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
@@ -241,7 +267,11 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset(AssetsPath.cash, width: 22, height: 22,),
+                    Image.asset(
+                      AssetsPath.cash,
+                      width: 22,
+                      height: 22,
+                    ),
                     width(0.02.sw),
                     Expanded(
                       child: textWidget(
