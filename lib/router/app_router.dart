@@ -17,7 +17,7 @@ import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/side_hustle/side_hustle.dart';
-import 'package:side_hustle/side_hustle/view_product.dart';
+import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/splash/splash.dart';
 import 'package:side_hustle/splash/splash_transparent.dart';
 import 'package:side_hustle/wanted_job/wanted_job.dart';

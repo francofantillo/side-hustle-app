@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
 
 class AppUtils {
   /// Easy Loading Config
@@ -91,5 +92,22 @@ class AppUtils {
     final int hours = differenceMinutes ~/ 60;
     final int minutes = differenceMinutes % 60;
     return '$hours hours and $minutes minutes';
+  }
+
+  static showBottomModelSheet({required BuildContext context,required Widget widget}) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      isDismissible: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(
+              AppDimensions.boarderRadiusBottomSheet),
+        ),
+      ),
+      builder: (context) {
+        return widget;
+      },
+    );
   }
 }
