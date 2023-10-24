@@ -15,6 +15,7 @@ class AppDimensions {
   static double textSizeNormal = 16.sp;
   static double textSizeTermsAndConditions = 14.sp;
   static double textHeadingSize = 26.sp;
+  static double textSizeCartText = 22.sp;
   static double textHeadingSizeHome = 22.sp;
 
   /// Dialogue Text Size
@@ -104,6 +105,10 @@ class AppDimensions {
   static double listItemElevation = 0.02.sh;
   static double listItemImageRoundedBorder = 15.h;
 
+  /// Event and Job Item
+  static double sideHustleItemHeight = 0.35.sw;
+  static double sideHustleItemWidth = 0.24.sw;
+
   /// Product Image Slider
   static double productImageSliderHeight = 0.55.sw;
   static double productImageSliderWidth = 1.sw;
@@ -120,5 +125,13 @@ class AppDimensions {
 
   /// Event
   static double eventWidgetIconSize = 0.02.sh;
+
+  /// Product
+  static double boarderRadiusViewProduct = 16.w;
+
+  /// BottomSheet
+  static double boarderRadiusBottomSheet = 25.0.h;
+  static double boarderRadiusCartPlaceOrder = 16.0.h;
+  static double textSizeBottomSheet = 22.sp;
 
 }

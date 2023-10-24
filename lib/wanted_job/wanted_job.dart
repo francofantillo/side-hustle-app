@@ -34,20 +34,6 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
     super.initState();
   }
 
-  List<List<Color>?>? bgColorsZero = [
-    [AppColors.primaryColor],
-    [Colors.transparent],
-    [Colors.transparent],
-    [Colors.transparent],
-  ];
-
-  List<List<Color>?>? bgColorsOne = [
-    [Colors.transparent],
-    [AppColors.primaryColor],
-    [Colors.transparent],
-    [Colors.transparent],
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (contextBuilder) {

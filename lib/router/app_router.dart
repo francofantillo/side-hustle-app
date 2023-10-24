@@ -16,6 +16,8 @@ import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
+import 'package:side_hustle/side_hustle/side_hustle.dart';
+import 'package:side_hustle/side_hustle/view_product.dart';
 import 'package:side_hustle/splash/splash.dart';
 import 'package:side_hustle/splash/splash_transparent.dart';
 import 'package:side_hustle/wanted_job/wanted_job.dart';
@@ -81,6 +83,12 @@ class AppRouter {
 
           case AppRoutes.attendeesEventScreenRoute:
             return const AttendeesEvent();
+
+          case AppRoutes.sideHustleScreenRoute:
+            return const SideHustle();
+
+          case AppRoutes.viewProductScreenRoute:
+            return const ViewPorduct();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

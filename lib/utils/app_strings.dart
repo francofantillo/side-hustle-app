@@ -28,6 +28,7 @@ class AppStrings {
   static const String lastName = "Last name";
   static const String phoneNumber = "Phone Number";
   static const String zipCode = "Zip Code";
+  static const String zipCodeText = "000000";
   static const String country = "Country";
   static const String register = "Register";
   static const String agreeToSideHustle = "Agree to Side Hustle ";
@@ -216,5 +217,24 @@ class AppStrings {
   static const String eventTimeText = "Start at 10:00am to 5:00pm";
   static const String eventPostedBy = "Event Posted by";
   static const String eventPostedProfileName = "Leo Lubin";
+
+  /// Side Hustle
+  static const String getDirectionToShop = "Get Direction to shop";
+  static const String watch = "Watch";
+  static const String productDescViewProduct = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
+  static const String pickUpViewProduct = "Pick-up";
+  static const String productPostBy = "Product Post by";
+  static const String userNameViewProduct = "Brandon Lubin";
+  static const String viewShop = "View Shop";
+
+
+  /// Cart
+  static const String addToCart = "Add to Cart";
+  static const String viewCartText = "View Cart (1)";
+  static const String yourCart = "Your Cart";
+  static const String yourCartItems = "1 Items";
+  static const String placeOrder = "Place Order";
+  static const String estimatedTotal = "Estimated Total";
+  static const String estimatedTotalText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
 }

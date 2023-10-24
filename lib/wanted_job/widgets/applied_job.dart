@@ -77,14 +77,14 @@ class AppliedJobsWidget extends StatelessWidget {
                         width: imageWidth!,
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: AppColors.appliedJobOutlineColor),
+                              color: AppColors.greenColor),
                           borderRadius: BorderRadius.circular(
                               AppDimensions.appliedJobRoundedBorder),
                         ),
                         child: Center(
                           child: textWidget(
                             text: AppStrings.jobApplied,
-                            color: AppColors.appliedJobOutlineColor,
+                            color: AppColors.greenColor,
                             fontSize: 12.sp,
                             textAlign: TextAlign.center,
                           ),

@@ -21,5 +21,7 @@ class AppRoutes {
   static const String viewEventScreenRoute = "/viewEvent";
   static const String viewEventSelfScreenRoute = "/viewEventSelf";
   static const String attendeesEventScreenRoute = "/attendeesEvent";
+  static const String sideHustleScreenRoute = "/sideHustle";
+  static const String viewProductScreenRoute = "/viewProduct";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }

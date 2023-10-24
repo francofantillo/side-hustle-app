@@ -22,6 +22,7 @@ class AssetsPath {
   static const changePassword = "${iconsPath}change_password.png";
   static const messages = "${iconsPath}messages.png";
   static const delete = "${iconsPath}delete.png";
+  static const minus = "${iconsPath}minus.png";
   static const cancel = "${iconsPath}cancel.png";
   static const profile = "${iconsPath}profile.png";
   static const sideHustle = "${iconsPath}side_hustle.png";
@@ -39,6 +40,7 @@ class AssetsPath {
   static const comment = "${iconsPath}comment.png";
   static const favUnfilled = "${iconsPath}fav_unfilled.png";
   static const message = "${iconsPath}message.png";
+  static const add = "${iconsPath}add.png";
   static const calender = "${iconsPath}calender.png";
   static const time = "${iconsPath}time.png";
   static const searchFilter = "${iconsPath}search_filter.png";
@@ -46,6 +48,7 @@ class AssetsPath {
   static const cash = "${iconsPath}cash.png";
   static const check = "${iconsPath}check.png";
   static const checkFill = "${iconsPath}check_fill.png";
+  static const attendees = "${iconsPath}attendees.png";
 
   /// Images
   static const continueWith = "${imagePath}continue_with.png";

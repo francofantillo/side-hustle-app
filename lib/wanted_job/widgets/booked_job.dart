@@ -84,7 +84,7 @@ class BookedJobsWidget extends StatelessWidget {
                               height: imageHeight! * .21,
                               width: .55.sw,
                               decoration: BoxDecoration(
-                                color: AppColors.appliedJobOutlineColor,
+                                color: AppColors.greenColor,
                                 borderRadius: BorderRadius.circular(
                                     AppDimensions.bookedJobRoundedBorder),
                               ),

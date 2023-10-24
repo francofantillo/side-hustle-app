@@ -169,22 +169,22 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                     // Add your button click logic here
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.blue, // Set the background color
+                    backgroundColor: AppColors.primaryColor, // Set the background color
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0), // Make it round
+                      borderRadius:
+                          BorderRadius.circular(30.0), // Make it round
                     ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Icon(
-                        Icons.add,
+                      const ImageIcon(AssetImage(AssetsPath.attendees),
                         color: Colors.white, // Set the icon color
+                        size: 17,
                       ),
-                      Text(
-                        'Add Item',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      width(0.02.sw),
+                      textWidget(
+                        text: AppStrings.viewAttendees, color: AppColors.textWhiteColor),
                     ],
                   ),
                 ),

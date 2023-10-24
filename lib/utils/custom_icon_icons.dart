@@ -27,6 +27,7 @@ class CustomIcon {
 
   static const IconData forward = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData cross = IconData(0xe870, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData cancel = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData ok = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 
 }

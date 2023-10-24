@@ -4,6 +4,7 @@ class AppColors {
   static const primaryColor = Color(0xFF3896EE);
   static const eyeGreyColor = Color(0xFF929292);
   static const greyColor = Color(0xFF929292);
+  static final bottomSheetBackgroundColor = Color(0xFF929292);
   static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
   static final textGreyColor = Color(0xFF565656).withOpacity(.85);
   static final backIconBackgroundColor = Color(0xFF565656).withOpacity(.10);
@@ -15,7 +16,7 @@ class AppColors {
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);
   static const textWhiteColor = Color(0xFFFCFCFC);
-  static const appliedJobOutlineColor = Color(0xFF21A455);
+  static const greenColor = Color(0xFF21A455);
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
   static const backgroundColor = Color(0xFFF5F5F5);

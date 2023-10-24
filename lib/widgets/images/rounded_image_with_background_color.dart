@@ -5,6 +5,7 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
   final String? imageUrl;
   final String? assetPath;
   final Color? backgroundColor;
+  final Color? iconColor;
   final double? imageHeight;
   final double? imageWidth;
   final double? borderRadius;
@@ -18,6 +19,7 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
     this.borderRadius,
     this.socialButtonSize,
     this.backgroundColor,
+    this.iconColor
   });
 
   @override
@@ -47,6 +49,7 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
                   assetPath!,
                   width: imageWidth,
                   height: imageHeight,
+                  color: iconColor,
                   // fit: BoxFit.contain,
                 ),
         ),

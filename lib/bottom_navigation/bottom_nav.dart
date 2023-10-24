@@ -22,11 +22,17 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     // add the curve in BottomNav
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.primaryColor,
+      decoration: BoxDecoration(
+        color: _currentIndex == 3
+            ? AppColors.whiteColor.withOpacity(.2)
+            : AppColors.primaryColor,
         boxShadow: [
           BoxShadow(
-              color: AppColors.primaryColor, spreadRadius: 0, blurRadius: 10),
+              color: _currentIndex == 3
+                  ? AppColors.searchIconColor
+                  : AppColors.primaryColor,
+              spreadRadius: 0,
+              blurRadius: 10),
         ],
       ),
       child: ClipRRect(

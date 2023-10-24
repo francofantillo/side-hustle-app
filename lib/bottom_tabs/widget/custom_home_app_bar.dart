@@ -11,9 +11,13 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 class CustomHomeAppBarWidget extends StatelessWidget {
   final BuildContext contextBuilder;
   final String title;
+  final bool? hideNotificationIcon;
 
   const CustomHomeAppBarWidget(
-      {super.key, required this.contextBuilder, required this.title});
+      {super.key,
+      required this.contextBuilder,
+      required this.title,
+      this.hideNotificationIcon = false});
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +42,15 @@ class CustomHomeAppBarWidget extends StatelessWidget {
               fontFamily: AppFont.gilroyBold,
               maxLines: 1),
         ),
-        Image.asset(
-          AssetsPath.notificationBell,
-          // Set your desired height
-          width: 20.h,
-          // Set your desired width
-          height: 20.h,
-        )
+        hideNotificationIcon == false
+            ? Image.asset(
+                AssetsPath.notificationBell,
+                // Set your desired height
+                width: 20.h,
+                // Set your desired width
+                height: 20.h,
+              )
+            : const SizedBox.shrink()
       ],
     );
   }

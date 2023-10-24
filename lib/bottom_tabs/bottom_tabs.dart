@@ -4,6 +4,7 @@ import 'package:side_hustle/bottom_navigation/bottom_nav.dart';
 import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/event/event.dart';
 import 'package:side_hustle/home/home.dart';
+import 'package:side_hustle/side_hustle/side_hustle.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/wanted_job/wanted_job.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -64,7 +65,7 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
           HomeScreen(),
           WantedJobScreen(),
           EventScreen(),
-          HomeScreen(),
+          SideHustle(),
           HomeScreen()
         ],
       ),
