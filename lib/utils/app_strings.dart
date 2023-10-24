@@ -1,5 +1,4 @@
-import 'package:side_hustle/event/model/attendees_model.dart';
-import 'package:side_hustle/utils/assets_path.dart';
+
 
 class AppStrings {
   static const String APP_PACKAGE_NAME = "com.eplanet.pop";
