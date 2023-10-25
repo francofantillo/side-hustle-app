@@ -9,13 +9,13 @@ import 'package:side_hustle/widgets/images/rounded_image_with_background_color.d
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class ProductsItemsWidget extends StatelessWidget {
+class ServiceItemsWidget extends StatelessWidget {
   final String? title, subTitle, price, imagePath, deliveryType;
   final Function()? onTap;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ProductsItemsWidget({super.key,
+  const ServiceItemsWidget({super.key,
     this.title,
     this.subTitle,
     this.price,

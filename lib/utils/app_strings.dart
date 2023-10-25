@@ -33,6 +33,7 @@ class AppStrings {
   static const String agreeToSideHustle = "Agree to Side Hustle ";
   static const String alreadyAMember = "Already a member? ";
   static const String confirmPassword = "Confirm Password";
+  static const String confirm = "Confirm";
 
   /// Forgot Password
   static const String forgotPassword = "Forget Password";
@@ -122,6 +123,10 @@ class AppStrings {
       "Upload 2-3 relevant images of your service, so anyone can understand about your service";
   static const String enterTheServiceName = "Enter the service name";
   static const String serviceDescription = "Service Description";
+  static const String serviceDate = "Service Date";
+  static const String serviceDuration = "Service Duration";
+  static const String serviceDurationHint = "Please enter the Total hours required, Start time and End time for this service.";
+  static const String serviceDateHint = "Please enter the date for the required service.";
   static const String enterServiceDescription = "Enter the service description";
   static const String howWouldYouLikeToSellService =
       "How would you like to sell this service as:";
@@ -220,21 +225,37 @@ class AppStrings {
   /// Side Hustle
   static const String getDirectionToShop = "Get Direction to shop";
   static const String watch = "Watch";
+  static const String serviceAdded = "Service added";
   static const String productDescViewProduct = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
   static const String pickUpViewProduct = "Pick-up";
   static const String productPostBy = "Product Post by";
   static const String userNameViewProduct = "Brandon Lubin";
   static const String viewShop = "View Shop";
   static const String viewProduct = "View Product";
-
+  static const String viewService = "View Service";
+  static const String deliveryType = "Delivery Type: ";
+  static const String requestService = "Request Service";
 
   /// Cart
   static const String addToCart = "Add to Cart";
+  static const String next = "Next";
+  static const String done = "Done";
   static const String viewCartText = "View Cart (1)";
+  static const String deliveryAddress = "Delivery Address";
+  static const String deliveryAddressHint = "Please enter the delivery address and other information to rider. ";
+  static const String deliveryAddressServiceHint = "Please enter the delivery address and other information to the service Provider. ";
+  static const String enterCompleteAddress = "Enter your complete address";
+  static const String street = "Street";
+  static const String suitApartment = "Suit, Apartment";
   static const String yourCart = "Your Cart";
   static const String yourCartItems = "4 Items";
   static const String placeOrder = "Place Order";
   static const String estimatedTotal = "Estimated Total";
+  static const String cancel = "Cancel";
   static const String estimatedTotalText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+
+  /// Shop
+  static const String shop = "Brandon’s Shop";
+  static const String getDirections = "Get Directions";
 
 }

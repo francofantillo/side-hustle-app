@@ -6,6 +6,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 Widget customMaterialButton(
     {String? name,
     Color? color,
+    textColor,
     double? width,
     double? height,
     double? borderRadius,
@@ -13,6 +14,7 @@ Widget customMaterialButton(
   return CustomMaterialButton(
     name: name,
     color: color,
+    textColor: textColor,
     width: width,
     height: height,
     onPressed: onPressed,
@@ -22,7 +24,7 @@ Widget customMaterialButton(
 
 class CustomMaterialButton extends StatelessWidget {
   final String? name;
-  final Color? color;
+  final Color? color, textColor;
   final double? width;
   final double? height;
   final double? borderRadius;
@@ -32,6 +34,7 @@ class CustomMaterialButton extends StatelessWidget {
       {super.key,
       this.name,
       this.color,
+      this.textColor,
       this.borderRadius,
       this.height,
       this.width,
@@ -44,21 +47,26 @@ class CustomMaterialButton extends StatelessWidget {
       elevation: AppDimensions.defaultButtonElevation,
       // what are the Google Material Design guidelines text field, buttons and appBar elevation
       padding: EdgeInsets.only(
-        right: width != null ? AppDimensions.buttonDefaultWidth : 0,
-        top: height != null ? AppDimensions.buttonDefaultHeight : 12,
-        bottom: height != null ? AppDimensions.buttonDefaultHeight : 12,
-        left: width != null ? AppDimensions.buttonDefaultWidth : 0,
+        /// This was befor
+        // right: width != null ? AppDimensions.buttonDefaultWidth : 0,
+        // top: height != null ? AppDimensions.buttonDefaultHeight : 12,
+        // bottom: height != null ? AppDimensions.buttonDefaultHeight : 12,
+        // left: width != null ? AppDimensions.buttonDefaultWidth : 0,
+        right: width != null ? width! : AppDimensions.buttonDefaultWidth,
+        top: height != null ? height! : AppDimensions.buttonDefaultHeight,
+        bottom: height != null ? height! : AppDimensions.buttonDefaultHeight,
+        left: width != null ? width! : AppDimensions.buttonDefaultWidth,
       ),
       onPressed: onPressed,
       color: color ?? AppColors.primaryColor,
       textColor: Colors.white,
       shape: RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.circular(borderRadius ?? 20.0), // Adjust the radius as needed
+        borderRadius: BorderRadius.circular(
+            borderRadius ?? 20.0), // Adjust the radius as needed
       ),
       child: Text(
         name ?? "",
-        style: const TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 20, color: textColor),
       ),
     );
   }

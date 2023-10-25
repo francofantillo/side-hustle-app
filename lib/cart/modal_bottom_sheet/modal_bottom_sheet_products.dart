@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/model_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/cart/products/products_cart_list.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ModelBottomSheetProducts extends StatefulWidget {
-  const ModelBottomSheetProducts({super.key});
+  final bool isDelivery;
+  const ModelBottomSheetProducts({super.key, this.isDelivery = false});
 
   @override
   State<ModelBottomSheetProducts> createState() =>
@@ -23,10 +27,13 @@ class _ModelBottomSheetProductsState extends State<ModelBottomSheetProducts> {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return Container(
-        height: .7.sh,
+        height: AppDimensions.modelSheetProductsHeight,
         decoration: BoxDecoration(
-            borderRadius:
-                BorderRadius.circular(AppDimensions.boarderRadiusBottomSheet),
+            borderRadius: BorderRadius.only(
+                topRight:
+                    Radius.circular(AppDimensions.boarderRadiusBottomSheet),
+                topLeft:
+                    Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
             image: const DecorationImage(
                 image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)),
         child: Column(
@@ -80,6 +87,58 @@ class _ModelBottomSheetProductsState extends State<ModelBottomSheetProducts> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    widget.isDelivery
+                    ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        textWidget(
+                            text: AppStrings.deliveryAddress,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSizeBottomSheet,
+                            fontWeight: FontWeight.w500),
+                        IconButtonWithBackground(
+                          onTap: () {
+                            AppUtils.showBottomModelSheet(
+                                context: context,
+                                widget: const BottomModelSheetDeliveryAddress(isEdit: true,));
+                          },
+                          iconPath: AssetsPath.edit,
+                          backgroundColor: AppColors.primaryColor,
+                          iconColor: AppColors.whiteColor,
+                          height: 30.h,
+                          width: 30.h,
+                        )
+                      ],
+                    )
+                    : const SizedBox.shrink(),
+                    widget.isDelivery
+                    ? height(0.02.sh)
+                    : const SizedBox.shrink(),
+                    widget.isDelivery
+                    ? Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ImageIcon(
+                          const AssetImage(AssetsPath.location),
+                          size: 0.025.sh,
+                        ),
+                        width(0.02.sw),
+                        Expanded(
+                          child: textWidget(
+                              text: AppStrings.locationText,
+                              maxLines: 2,
+                              fontSize: AppDimensions.textSizeVerySmall),
+                        ),
+                      ],
+                    )
+                    : const SizedBox.shrink(),
+                    widget.isDelivery
+                    ? height(0.02.sh)
+                    : const SizedBox.shrink(),
+                    widget.isDelivery
+                    ? const Divider()
+                    : const SizedBox.shrink(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,

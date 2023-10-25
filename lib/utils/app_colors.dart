@@ -29,6 +29,7 @@ class AppColors {
   static const textFieldColor = Color(0xFF959597);
   static Color redColor = const Color(0xFFFF2323);
   static const blackColor = Color(0xFF040404);
+  static const greyColorNoOpacity = Color(0xFF565656);
 
 
 

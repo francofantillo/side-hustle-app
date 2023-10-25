@@ -27,6 +27,12 @@ class _PostJobState extends State<PostJob> {
   String? formattedDate;
 
   @override
+  void initState() {
+    AppUtils.firstSelectedTime = null;
+    AppUtils.secondSelectedTime = null;
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     dateTextController.text = formattedDate ?? "";
     firstTimeTextController.text = AppUtils.firstSelectedTime != null

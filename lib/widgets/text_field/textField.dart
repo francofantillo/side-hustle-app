@@ -16,6 +16,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
+  final double? suffixIconScale;
   final int? maxLines;
   final Function()? onTap;
   final TextEditingController? controller;
@@ -45,6 +46,7 @@ class CustomTextFormField extends StatefulWidget {
     this.prefixIconColor,
     this.keyboardType = TextInputType.text,
     this.isSuffixIcon = false,
+    this.suffixIconScale,
     this.suffixIcon,
     this.hintText,
     this.maxLines,
@@ -196,7 +198,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Transform.scale(
-        scale: 0.6,
+        scale: widget.suffixIconScale ?? 0.6,
         child: widget.suffixIcon,
       ),
     );

@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppDimensions {
 
-  static double buttonDefaultWidth = .307.sw;
+  static double buttonDefaultWidth = 0;
   static const double buttonDefaultHeight = 12;
 
   /// Text Size
@@ -106,7 +106,7 @@ class AppDimensions {
   static double listItemImageRoundedBorder = 15.h;
 
   /// Event and Job Item
-  static double sideHustleItemHeight = 0.35.sw;
+  static double sideHustleItemHeight = 0.41.sw;
   static double sideHustleItemWidth = 0.24.sw;
 
   /// Product Image Slider
@@ -128,12 +128,20 @@ class AppDimensions {
 
   /// Product
   static double boarderRadiusViewProduct = 16.w;
+  static double productTextSize = 12.sp;
 
   /// BottomSheet
   static double boarderRadiusBottomSheet = 25.0.h;
   static double boarderRadiusCartPlaceOrder = 16.0.h;
   static double cartItemHeight = 0.39.sw;
+  // static double modelSheetDeliveryHeight = .63.sh;
+  static double modelSheetDeliveryHeight = .48.sh;
+  static double modelSheetProductsHeight = .7.sh;
+  static double modelSheetServiceHeight = .87.sh;
 
   static double textSizeBottomSheet = 22.sp;
+
+  /// Shop
+  static double imageSizeShop = 0.28.sw;
 
 }

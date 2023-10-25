@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/widgets/service_item.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 
-class ServicesList extends StatefulWidget {
-  const ServicesList({super.key});
+class ServicesListShop extends StatefulWidget {
+  const ServicesListShop({super.key});
 
   @override
-  State<ServicesList> createState() => _ServicesListState();
+  State<ServicesListShop> createState() => _ServicesListShopState();
 }
 
-class _ServicesListState extends State<ServicesList> {
+class _ServicesListShopState extends State<ServicesListShop> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -38,10 +37,10 @@ class _ServicesListState extends State<ServicesList> {
               subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
               deliveryType: AppStrings.pickUpViewProduct,
               imagePath:
-                  AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
+              AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
               price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.viewServiceScreenRoute);
+
               },
             ),
           );

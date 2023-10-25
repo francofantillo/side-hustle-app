@@ -17,6 +17,8 @@ import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
+import 'package:side_hustle/service/view_service.dart';
+import 'package:side_hustle/shop/shop.dart';
 import 'package:side_hustle/side_hustle/side_hustle.dart';
 import 'package:side_hustle/splash/splash.dart';
 import 'package:side_hustle/splash/splash_transparent.dart';
@@ -89,6 +91,12 @@ class AppRouter {
 
           case AppRoutes.viewProductScreenRoute:
             return const ViewPorduct();
+
+          case AppRoutes.viewServiceScreenRoute:
+            return const ViewService();
+
+          case AppRoutes.shopScreenRoute:
+            return const ShopScreen();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

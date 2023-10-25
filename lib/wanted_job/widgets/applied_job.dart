@@ -3,15 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/widgets/buttons/outlined_button.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class AppliedJobsWidget extends StatelessWidget {
-  final String? title,
-      subTitle,
-      price,
-      imagePath;
+  final String? title, subTitle, price, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
@@ -72,21 +70,23 @@ class AppliedJobsWidget extends StatelessWidget {
                         height: 1.h,
                       ),
                       const Spacer(),
-                      Container(
-                        height: imageHeight! * .21,
-                        width: imageWidth!,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: AppColors.greenColor),
-                          borderRadius: BorderRadius.circular(
-                              AppDimensions.appliedJobRoundedBorder),
-                        ),
-                        child: Center(
-                          child: textWidget(
-                            text: AppStrings.jobApplied,
-                            color: AppColors.greenColor,
-                            fontSize: 12.sp,
-                            textAlign: TextAlign.center,
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: imageHeight! * .21,
+                          width: imageWidth!,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.greenColor),
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.appliedJobRoundedBorder),
+                          ),
+                          child: Center(
+                            child: textWidget(
+                              text: AppStrings.jobApplied,
+                              color: AppColors.greenColor,
+                              fontSize: 12.sp,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                       )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/model_bottom_sheet_delivery_address.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/model_bottom_sheet_service.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -15,6 +16,7 @@ import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
+import 'package:side_hustle/widgets/buttons/outlined_button.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
@@ -22,14 +24,14 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
-class ViewPorduct extends StatefulWidget {
-  const ViewPorduct({super.key});
+class ViewService extends StatefulWidget {
+  const ViewService({super.key});
 
   @override
-  State<ViewPorduct> createState() => _ViewPorductState();
+  State<ViewService> createState() => _ViewServiceState();
 }
 
-class _ViewPorductState extends State<ViewPorduct> {
+class _ViewServiceState extends State<ViewService> {
   bool isAddToCart = false;
 
   @override
@@ -42,7 +44,7 @@ class _ViewPorductState extends State<ViewPorduct> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.viewProduct,
+      appBarTitle: AppStrings.viewService,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
@@ -222,7 +224,8 @@ class _ViewPorductState extends State<ViewPorduct> {
                         child: CustomButtonWithIcon(
                           onPressed: () {
                             print("pressed Elevated Button");
-                            Navigator.pushNamed(context, AppRoutes.shopScreenRoute);
+                            Navigator.pushNamed(
+                                context, AppRoutes.shopScreenRoute);
                           },
                           borderRadius: 10,
                           backgroundColor: AppColors.greenColor,
@@ -245,17 +248,22 @@ class _ViewPorductState extends State<ViewPorduct> {
                     ],
                   ),
                 ),
+                height(0.03.sh),
                 isAddToCart ? const SizedBox.shrink() : height(0.02.sh),
                 isAddToCart
                     ? const SizedBox.shrink()
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
                         child: customMaterialButton(
+                            height: 12.h,
                             onPressed: () {
                               isAddToCart = true;
                               setState(() {});
+                              // AppUtils.showBottomModelSheet(
+                              //     context: context,
+                              //     widget: const BottomModelSheetService());
                             },
-                            name: AppStrings.addToCart,
+                            name: AppStrings.requestService,
                             borderRadius:
                                 AppDimensions.boarderRadiusViewProduct),
                       ),
@@ -265,45 +273,36 @@ class _ViewPorductState extends State<ViewPorduct> {
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
                         child: Row(
                           children: [
-                            IconButtonWithBackground(
-                              height: .074.sh,
-                              width: .13.sw,
-                              borderRadius: 10,
-                              backgroundColor:
-                                  AppColors.backIconBackgroundColor,
-                              iconColor: AppColors.bottomNavUnSelectedColor,
-                              onTap: () {
-                                print("clicked minus");
-                              },
-                              iconPath: AssetsPath.minus,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: textWidget(
-                                  text: "1",
-                                  fontSize: AppDimensions.textSizeCartText,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textBlackColor),
-                            ),
-                            IconButtonWithBackground(
-                              height: .07.sh,
-                              width: .13.sw,
-                              borderRadius: 10,
-                              backgroundColor:
-                                  AppColors.backIconBackgroundColor,
-                              onTap: () {
-                                print("clicked add");
-                              },
-                              iconPath: AssetsPath.add,
-                              iconColor: AppColors.bottomNavUnSelectedColor,
-                            ),
+                            Expanded(
+                                child: InkWell(
+                              onTap: () {},
+                              child: Container(
+                                height: 48.h,
+                                // width: imageWidth!,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColors.primaryColor,
+                                      width: 1.7),
+                                  borderRadius: BorderRadius.circular(
+                                      AppDimensions.boarderRadiusViewProduct),
+                                ),
+                                child: Center(
+                                  child: textWidget(
+                                    text: AppStrings.serviceAdded,
+                                    color: AppColors.primaryColor,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            )),
                             width(0.03.sw),
                             Expanded(
                                 child: customMaterialButton(
                                     onPressed: () {
                                       AppUtils.showBottomModelSheet(
-                                          context: contextBuilder,
+                                          context: context,
                                           widget:
                                               // const ModelBottomSheetProducts()
                                               const BottomModelSheetDeliveryAddress());
