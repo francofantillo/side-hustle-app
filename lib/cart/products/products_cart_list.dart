@@ -27,11 +27,11 @@ class _ProductsCartListState extends State<ProductsCartList> {
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
           return Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 16.0, vertical: 8),
+            padding: const EdgeInsets.only(
+                left: 16.0, right: 16.0, bottom: 8),
             child: ProductCartItemWidget(
               imageWidth: 1.sw,
-              imageHeight: AppDimensions.sideHustleItemHeight,
+              imageHeight: AppDimensions.cartItemHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
               subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,

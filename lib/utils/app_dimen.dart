@@ -132,6 +132,8 @@ class AppDimensions {
   /// BottomSheet
   static double boarderRadiusBottomSheet = 25.0.h;
   static double boarderRadiusCartPlaceOrder = 16.0.h;
+  static double cartItemHeight = 0.39.sw;
+
   static double textSizeBottomSheet = 22.sp;
 
 }

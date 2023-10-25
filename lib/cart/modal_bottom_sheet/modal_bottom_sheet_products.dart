@@ -33,8 +33,7 @@ class _ModelBottomSheetProductsState extends State<ModelBottomSheetProducts> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -44,6 +43,7 @@ class _ModelBottomSheetProductsState extends State<ModelBottomSheetProducts> {
                       fontSize: AppDimensions.textSizeBottomSheet,
                       fontWeight: FontWeight.w500),
                   IconButton(
+                    padding: EdgeInsets.zero,
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -56,12 +56,13 @@ class _ModelBottomSheetProductsState extends State<ModelBottomSheetProducts> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
               child: textWidget(
                   text: AppStrings.yourCartItems,
                   color: AppColors.textWhiteColor,
                   fontSize: AppDimensions.textSizeSmall),
             ),
+            height(0.02.sh),
             const ProductsCartList(),
             Container(
               width: 1.sw,
@@ -116,7 +117,8 @@ class _ModelBottomSheetProductsState extends State<ModelBottomSheetProducts> {
                         onPressed: () {},
                         name: AppStrings.placeOrder,
                         borderRadius: AppDimensions.boarderRadiusCartPlaceOrder,
-                        color: AppColors.primaryColor)
+                        color: AppColors.primaryColor),
+                    height(0.02.sh),
                   ],
                 ),
               ),

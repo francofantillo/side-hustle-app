@@ -10,6 +10,7 @@ import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
@@ -36,7 +37,7 @@ class _ViewPorductState extends State<ViewPorduct> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.applyForJob,
+      appBarTitle: AppStrings.viewProduct,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
@@ -212,7 +213,7 @@ class _ViewPorductState extends State<ViewPorduct> {
                         ),
                       ),
                       SizedBox(
-                        height: 45.h,
+                        height: 50.h,
                         child: CustomButtonWithIcon(
                           onPressed: () {
                             print("pressed Elevated Button");
@@ -223,13 +224,17 @@ class _ViewPorductState extends State<ViewPorduct> {
                           name: AppStrings.viewShop,
                         ),
                       ),
-                      RoundedImageWithBackgroundColor(
-                        assetPath: AssetsPath.message,
-                        imageHeight: .03.sh,
-                        imageWidth: .06.sw,
+                      width(0.01.sw),
+                      IconButtonWithBackground(
+                        height: 50.h,
+                        width: .17.sw,
+                        borderRadius: 10,
+                        onTap: () {
+                          print("clicked message");
+                        },
+                        iconPath: AssetsPath.message,
                         backgroundColor: AppColors.primaryColor,
-                        socialButtonSize: .03.sh,
-                        borderRadius: 12,
+                        iconColor: AppColors.whiteColor,
                       ),
                     ],
                   ),
@@ -254,34 +259,38 @@ class _ViewPorductState extends State<ViewPorduct> {
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
                         child: Row(
                           children: [
-                            RoundedImageWithBackgroundColor(
-                              assetPath: AssetsPath.minus,
-                              iconColor: AppColors.greyColor,
-                              imageHeight: .03.sh,
-                              imageWidth: .06.sw,
-                              backgroundColor:
+                            IconButtonWithBackground(
+                              height: .074.sh,
+                              width: .13.sw,
+                              borderRadius: 10,
+                                backgroundColor:
                                   AppColors.backIconBackgroundColor,
-                              socialButtonSize: .03.sh,
-                              borderRadius: 12,
+                              iconColor: AppColors.bottomNavUnSelectedColor,
+                              onTap: () {
+                                print("clicked minus");
+                              },
+                              iconPath: AssetsPath.minus,
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                                  const EdgeInsets.symmetric(horizontal: 12.0),
                               child: textWidget(
                                   text: "1",
                                   fontSize: AppDimensions.textSizeCartText,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textBlackColor),
                             ),
-                            RoundedImageWithBackgroundColor(
-                              assetPath: AssetsPath.add,
-                              iconColor: AppColors.greyColor,
-                              imageHeight: .03.sh,
-                              imageWidth: .06.sw,
+                            IconButtonWithBackground(
+                              height: .07.sh,
+                              width: .13.sw,
+                              borderRadius: 10,
                               backgroundColor:
-                                  AppColors.backIconBackgroundColor,
-                              socialButtonSize: .03.sh,
-                              borderRadius: 12,
+                              AppColors.backIconBackgroundColor,
+                              onTap: () {
+                                print("clicked add");
+                              },
+                              iconPath: AssetsPath.add,
+                              iconColor: AppColors.bottomNavUnSelectedColor,
                             ),
                             width(0.03.sw),
                             Expanded(

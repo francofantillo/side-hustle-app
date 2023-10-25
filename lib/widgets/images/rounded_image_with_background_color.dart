@@ -10,6 +10,7 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
   final double? imageWidth;
   final double? borderRadius;
   final double? socialButtonSize;
+  final Function()? onTap;
 
   const RoundedImageWithBackgroundColor({super.key,
     this.imageUrl,
@@ -19,7 +20,8 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
     this.borderRadius,
     this.socialButtonSize,
     this.backgroundColor,
-    this.iconColor
+    this.iconColor,
+    this.onTap
   });
 
   @override
@@ -30,28 +32,31 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
         borderRadius:
         BorderRadius.circular(AppDimensions.roundedImageViewBorderRadius),
       ),
-      child: Container(
-        padding: EdgeInsets.all(socialButtonSize ?? 0),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
-          child: imageUrl != null
-              ? Image.network(
-                  imageUrl!,
-                  width: imageWidth,
-                  height: imageHeight,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  assetPath!,
-                  width: imageWidth,
-                  height: imageHeight,
-                  color: iconColor,
-                  // fit: BoxFit.contain,
-                ),
+      child: InkWell(
+        onTap:onTap,
+        child: Container(
+          padding: EdgeInsets.all(socialButtonSize ?? 0),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
+            child: imageUrl != null
+                ? Image.network(
+                    imageUrl!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    assetPath!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    color: iconColor,
+                    // fit: BoxFit.contain,
+                  ),
+          ),
         ),
       ),
     );

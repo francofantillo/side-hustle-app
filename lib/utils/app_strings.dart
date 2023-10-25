@@ -225,13 +225,14 @@ class AppStrings {
   static const String productPostBy = "Product Post by";
   static const String userNameViewProduct = "Brandon Lubin";
   static const String viewShop = "View Shop";
+  static const String viewProduct = "View Product";
 
 
   /// Cart
   static const String addToCart = "Add to Cart";
   static const String viewCartText = "View Cart (1)";
   static const String yourCart = "Your Cart";
-  static const String yourCartItems = "1 Items";
+  static const String yourCartItems = "4 Items";
   static const String placeOrder = "Place Order";
   static const String estimatedTotal = "Estimated Total";
   static const String estimatedTotalText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
