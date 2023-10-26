@@ -4,6 +4,7 @@ import 'package:side_hustle/bottom_navigation/bottom_nav.dart';
 import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/event/event.dart';
 import 'package:side_hustle/home/home.dart';
+import 'package:side_hustle/profile/profile.dart';
 import 'package:side_hustle/side_hustle/side_hustle.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/wanted_job/wanted_job.dart';
@@ -59,14 +60,14 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
       height: 1.sh,
       width: 1.sw,
       child: PageView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: const [
           HomeScreen(),
           WantedJobScreen(),
           EventScreen(),
           SideHustle(),
-          HomeScreen()
+          ProfileScreen()
         ],
       ),
     );

@@ -10,22 +10,25 @@ import 'package:side_hustle/widgets/images/rounded_image_with_background_color.d
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class ProductsItemsWidget extends StatelessWidget {
+class YourServiceItemWidget extends StatelessWidget {
   final String? title, subTitle, price, imagePath, deliveryType;
   final Function()? onTap;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final bool isDelete;
 
-  const ProductsItemsWidget({super.key,
-    this.title,
-    this.subTitle,
-    this.price,
-    this.deliveryType,
-    this.onTap,
-    this.imagePath,
-    this.imageHeight,
-    this.imageWidth,
-    this.boarderColor});
+  const YourServiceItemWidget(
+      {super.key,
+        this.title,
+        this.subTitle,
+        this.isDelete = false,
+        this.price,
+        this.deliveryType,
+        this.onTap,
+        this.imagePath,
+        this.imageHeight,
+        this.imageWidth,
+        this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +75,10 @@ class ProductsItemsWidget extends StatelessWidget {
                                   fontSize: AppDimensions.textSizeVerySmall)),
                           IconButtonWithBackground(
                             onTap: onTap,
-                            iconPath: AssetsPath.add,
+                            iconPath: isDelete ? AssetsPath.delete : AssetsPath.edit,
                             width: imageHeight! * .24,
                             height: imageHeight! * .24,
-                            backgroundColor: AppColors.primaryColor,
+                            backgroundColor: isDelete ? AppColors.appRedColor : AppColors.primaryColor,
                             iconColor: AppColors.whiteColor,
                           )
                         ],

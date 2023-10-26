@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
-import 'package:side_hustle/cart/modal_bottom_sheet/model_bottom_sheet_delivery_address.dart';
-import 'package:side_hustle/cart/modal_bottom_sheet/model_bottom_sheet_service.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_request_service.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_service.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -257,11 +258,15 @@ class _ViewServiceState extends State<ViewService> {
                         child: customMaterialButton(
                             height: 12.h,
                             onPressed: () {
-                              isAddToCart = true;
-                              setState(() {});
-                              // AppUtils.showBottomModelSheet(
-                              //     context: context,
-                              //     widget: const BottomModelSheetService());
+                              // isAddToCart = true;
+                              // setState(() {});
+                              AppUtils.showBottomModalSheet(
+                                  context: context,
+                                  // widget: const ModalBottomSheetProducts(isDelivery: true,));
+                                  // widget: const BottomModalSheetRequestService());
+                                  widget: const ModalBottomSheetServices(
+                                    isDelivery: true,
+                                  ));
                             },
                             name: AppStrings.requestService,
                             borderRadius:
@@ -301,11 +306,11 @@ class _ViewServiceState extends State<ViewService> {
                             Expanded(
                                 child: customMaterialButton(
                                     onPressed: () {
-                                      AppUtils.showBottomModelSheet(
+                                      AppUtils.showBottomModalSheet(
                                           context: context,
                                           widget:
                                               // const ModelBottomSheetProducts()
-                                              const BottomModelSheetDeliveryAddress());
+                                              const BottomModalSheetDeliveryAddress());
                                     },
                                     name: AppStrings.viewCartText,
                                     borderRadius:

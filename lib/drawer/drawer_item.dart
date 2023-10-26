@@ -7,10 +7,18 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 class DrawerItemListTile extends StatelessWidget {
   final String iconPath;
   final String title;
+  final Color? textColor, iconColor;
   final Function()? onTap;
+  final FontWeight? fontWeight;
 
   const DrawerItemListTile(
-      {super.key, required this.iconPath, required this.title, this.onTap});
+      {super.key,
+      required this.iconPath,
+      this.textColor,
+      this.iconColor,
+      required this.title,
+      this.fontWeight,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,7 @@ class DrawerItemListTile extends StatelessWidget {
         children: [
           Image.asset(
             iconPath,
-            color: AppColors.whiteColor,
+            color: iconColor ?? AppColors.whiteColor,
             width: AppDimensions.drawerIconSize,
             height: AppDimensions.drawerIconSize,
           ),
@@ -37,15 +45,14 @@ class DrawerItemListTile extends StatelessWidget {
               return Colors.blue;
             }),*/
             child: textWidget(
-              text: title,
-              color: AppColors.textWhiteColor,
-              textAlign: TextAlign.start,
-              fontSize: AppDimensions.drawerItemTextSize,
-            ),
+                text: title,
+                color: textColor ?? AppColors.textWhiteColor,
+                textAlign: TextAlign.start,
+                fontSize: AppDimensions.drawerItemTextSize,
+                fontWeight: fontWeight),
           ),
         ],
       ),
     );
   }
 }
-

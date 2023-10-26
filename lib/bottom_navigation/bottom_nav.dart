@@ -24,15 +24,19 @@ class _BottomNavState extends State<BottomNav> {
     return Container(
       decoration: BoxDecoration(
         color: _currentIndex == 3
-            ? AppColors.whiteColor.withOpacity(.2)
-            : AppColors.primaryColor,
+            ? Colors.transparent
+            : _currentIndex == 4
+                ? Colors.transparent
+                : AppColors.primaryColor,
         boxShadow: [
           BoxShadow(
               color: _currentIndex == 3
                   ? AppColors.searchIconColor
-                  : AppColors.primaryColor,
+                  : _currentIndex == 4
+                      ? AppColors.searchIconColor
+                      : AppColors.primaryColor,
               spreadRadius: 0,
-              blurRadius: 10),
+              blurRadius: 15),
         ],
       ),
       child: ClipRRect(

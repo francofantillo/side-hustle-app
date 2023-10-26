@@ -94,7 +94,7 @@ class AppUtils {
     return '$hours hours and $minutes minutes';
   }
 
-  static showBottomModelSheet({required BuildContext context,required Widget widget}) {
+  static showBottomModalSheet({required BuildContext context,required Widget widget}) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,

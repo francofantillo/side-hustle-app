@@ -15,10 +15,12 @@ import 'package:side_hustle/job/apply_job.dart';
 import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
+import 'package:side_hustle/profile/profile.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/service/view_service.dart';
 import 'package:side_hustle/shop/shop.dart';
+import 'package:side_hustle/shop/your_shop.dart';
 import 'package:side_hustle/side_hustle/side_hustle.dart';
 import 'package:side_hustle/splash/splash.dart';
 import 'package:side_hustle/splash/splash_transparent.dart';
@@ -97,6 +99,12 @@ class AppRouter {
 
           case AppRoutes.shopScreenRoute:
             return const ShopScreen();
+
+          case AppRoutes.profileScreenRoute:
+            return const ProfileScreen();
+
+          case AppRoutes.yourShopScreenRoute:
+            return const YourShopScreen();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

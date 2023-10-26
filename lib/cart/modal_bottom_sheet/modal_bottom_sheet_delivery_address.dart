@@ -11,19 +11,19 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
-class BottomModelSheetDeliveryAddress extends StatefulWidget {
+class BottomModalSheetDeliveryAddress extends StatefulWidget {
   final bool isEdit, isService;
 
-  const BottomModelSheetDeliveryAddress(
+  const BottomModalSheetDeliveryAddress(
       {super.key, this.isEdit = false, this.isService = false});
 
   @override
-  State<BottomModelSheetDeliveryAddress> createState() =>
-      _BottomModelSheetDeliveryAddressState();
+  State<BottomModalSheetDeliveryAddress> createState() =>
+      _BottomModalSheetDeliveryAddressState();
 }
 
-class _BottomModelSheetDeliveryAddressState
-    extends State<BottomModelSheetDeliveryAddress> {
+class _BottomModalSheetDeliveryAddressState
+    extends State<BottomModalSheetDeliveryAddress> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
@@ -115,9 +115,9 @@ class _BottomModelSheetDeliveryAddressState
                             Navigator.pop(context);
                           } else {
                             Navigator.pop(context);
-                            AppUtils.showBottomModelSheet(
+                            AppUtils.showBottomModalSheet(
                                 context: context,
-                                widget: const ModelBottomSheetProducts(
+                                widget: const ModalBottomSheetProducts(
                                   isDelivery: true,
                                 ));
                           }

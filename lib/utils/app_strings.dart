@@ -256,6 +256,16 @@ class AppStrings {
 
   /// Shop
   static const String shop = "Brandon’s Shop";
+  static const String shopName = "Shop name";
+  static const String shopAddress = "Shop Address";
   static const String getDirections = "Get Directions";
+  static const String yourShop = "Your Shop";
+
+  /// Profile
+  static const String profileResumePage = "Profile Resume Page";
+  static const String myJobs = "My Jobs";
+  static const String jobsCompleted = "Jobs Completed";
+  static const String myEvents = "My Events";
+  static const String paymentMethods = "Payment Methods";
 
 }

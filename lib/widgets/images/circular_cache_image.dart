@@ -6,7 +6,7 @@ import 'package:side_hustle/utils/assets_path.dart';
 
 class CircularCacheImageWidget extends StatelessWidget {
   final String? image, assetImage;
-  final double? imageHeight, imageWidth, loadingWidgetSize;
+  final double? imageHeight, imageWidth, loadingWidgetSize, borderWidth;
   final Color? boarderColor;
   final bool showLoading;
 
@@ -16,6 +16,7 @@ class CircularCacheImageWidget extends StatelessWidget {
       this.image,
       this.assetImage,
       this.imageHeight,
+      this.borderWidth,
       this.imageWidth,
       this.loadingWidgetSize,
       this.boarderColor})
@@ -36,7 +37,7 @@ class CircularCacheImageWidget extends StatelessWidget {
           border: Border.all(
             color: boarderColor ?? AppColors.whiteColor,
             // Change the border color as needed
-            width: 2.h, // Use the provided border width
+            width: borderWidth ?? 2.h, // Use the provided border width
           ),
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
@@ -60,7 +61,7 @@ class CircularCacheImageWidget extends StatelessWidget {
             border: Border.all(
               color: boarderColor ?? AppColors.whiteColor,
               // Change the border color as needed
-              width: 2.h, // Use the provided border width
+              width: borderWidth ?? 2.h, // Use the provided border width
             ),
             image: DecorationImage(
                 image: AssetImage(

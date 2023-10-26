@@ -8,7 +8,7 @@ class CustomButtonWithIcon extends StatelessWidget {
   final Color backgroundColor;
   final Color? textColor;
   final String iconPath, name;
-  final double? borderRadius;
+  final double? borderRadius, iconSize;
   final Function() onPressed;
 
   const CustomButtonWithIcon(
@@ -18,6 +18,7 @@ class CustomButtonWithIcon extends StatelessWidget {
       required this.iconPath,
       required this.name,
       this.borderRadius,
+      this.iconSize,
       this.textColor});
 
   @override
@@ -37,7 +38,7 @@ class CustomButtonWithIcon extends StatelessWidget {
           ImageIcon(
             AssetImage(iconPath),
             color: Colors.white, // Set the icon color
-            size: 17,
+            size: iconSize ?? 17,
           ),
           width(0.02.sw),
           textWidget(text: name, color: textColor ?? AppColors.textWhiteColor),

@@ -21,6 +21,7 @@ class AssetsPath {
   static const notification = "${iconsPath}notification.png";
   static const changePassword = "${iconsPath}change_password.png";
   static const messages = "${iconsPath}messages.png";
+  static const paymentMethod = "${iconsPath}payment_method.png";
   static const delete = "${iconsPath}delete.png";
   static const minus = "${iconsPath}minus.png";
   static const cancel = "${iconsPath}cancel.png";

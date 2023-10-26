@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/products/product_cart_item.dart';
+import 'package:side_hustle/cart/services/service_cart_item.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 
-class ProductsCartList extends StatefulWidget {
-  const ProductsCartList({super.key});
+class ServicesCartList extends StatefulWidget {
+  const ServicesCartList({super.key});
 
   @override
-  State<ProductsCartList> createState() => _ProductsCartListState();
+  State<ServicesCartList> createState() => _ServicesCartListState();
 }
 
-class _ProductsCartListState extends State<ProductsCartList> {
+class _ServicesCartListState extends State<ServicesCartList> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -29,9 +30,9 @@ class _ProductsCartListState extends State<ProductsCartList> {
           return Padding(
             padding: const EdgeInsets.only(
                 left: 16.0, right: 16.0, bottom: 8),
-            child: ProductCartItemWidget(
+            child: ServiceCartItemWidget(
               imageWidth: 1.sw,
-              imageHeight: AppDimensions.cartItemProductHeight,
+              imageHeight: AppDimensions.cartItemServiceHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
               subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,

@@ -16,6 +16,7 @@ class AppColors {
   static final itemBGColor = Color(0xFFF3F3F3);
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);
+  static const appTextBlackColor = Color(0xFF6B6B6B);
   static const textWhiteColor = Color(0xFFFCFCFC);
   static const greenColor = Color(0xFF21A455);
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
@@ -28,6 +29,7 @@ class AppColors {
   static const ratingColor = Color(0xFFECAF53);
   static const textFieldColor = Color(0xFF959597);
   static Color redColor = const Color(0xFFFF2323);
+  static Color appRedColor = const Color(0xFFFE6E6E);
   static const blackColor = Color(0xFF040404);
   static const greyColorNoOpacity = Color(0xFF565656);
 

@@ -74,7 +74,7 @@ class _ShopScreenState extends State<ShopScreen> {
                 children: [
                   RoundedCornersImage(
                     imageHeight: 80.h,
-                    imageWidth: AppDimensions.imageSizeShop,
+                    imageWidth: AppDimensions.imageWidthShop,
                     assetImage: AssetsPath.social,
                     boarderColor: AppColors.whiteColor,
                   ),

@@ -103,6 +103,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                     ImageIcon(
                       const AssetImage(AssetsPath.location),
                       size: AppDimensions.applyForJobIconSize,
+                      color: AppColors.greyColorNoOpacity,
                     ),
                     width(0.02.sw),
                     Expanded(
@@ -123,6 +124,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                     ImageIcon(
                       const AssetImage(AssetsPath.calender),
                       size: AppDimensions.applyForJobIconSize,
+                      color: AppColors.greyColorNoOpacity,
                     ),
                     width(0.02.sw),
                     Expanded(
@@ -142,6 +144,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                     ImageIcon(
                       const AssetImage(AssetsPath.time),
                       size: AppDimensions.applyForJobIconSize,
+                      color: AppColors.greyColorNoOpacity,
                     ),
                     width(0.02.sw),
                     Expanded(

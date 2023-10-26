@@ -71,7 +71,7 @@ class _ImageSliderState extends State<ImageSlider> {
 
   pageViewChild(int index) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 2.0),
       child: Card(
         elevation: 2,
         shadowColor: Colors.transparent,
@@ -89,7 +89,7 @@ class _ImageSliderState extends State<ImageSlider> {
             ),
             index == 0
                 ? Positioned(
-                    left: AppDimensions.productImageSliderWidth - 0.28.sw,
+                    left: AppDimensions.productImageSliderWidth - 0.26.sw,
                     top: AppDimensions.productImageSliderHeight - 0.23.sw,
                     child: Container(
                         height: 0.12.sw,

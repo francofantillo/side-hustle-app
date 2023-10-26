@@ -4,6 +4,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -69,21 +70,14 @@ class ServiceItemsWidget extends StatelessWidget {
                                   text: subTitle,
                                   maxLines: 2,
                                   fontSize: AppDimensions.textSizeVerySmall)),
-                          // width(0.02.sw),
-                          InkWell(
+                          IconButtonWithBackground(
                             onTap: onTap,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 0.0),
-                              child: RoundedImageWithBackgroundColor(
-                                assetPath: AssetsPath.add,
-                                imageHeight: imageHeight! * .15,
-                                imageWidth: imageHeight! * .14,
-                                backgroundColor: AppColors.primaryColor,
-                                socialButtonSize: imageHeight! * .04,
-                                borderRadius: 8,
-                              ),
-                            ),
-                          ),
+                            iconPath: AssetsPath.add,
+                            width: imageHeight! * .24,
+                            height: imageHeight! * .24,
+                            backgroundColor: AppColors.primaryColor,
+                            iconColor: AppColors.whiteColor,
+                          )
                         ],
                       ),
                       height(imageHeight! * .042),

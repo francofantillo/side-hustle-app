@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 
 class IconButtonWithBackground extends StatelessWidget {
-  final double? height, width, borderRadius;
+  final double? height, width, borderRadius, iconSize;
   final String iconPath;
   final Color? backgroundColor, iconColor;
   final Function()? onTap;
@@ -12,6 +12,7 @@ class IconButtonWithBackground extends StatelessWidget {
       this.height,
       this.width,
       required this.iconPath,
+      this.iconSize,
       this.borderRadius,
       this.onTap,
       this.backgroundColor,
@@ -30,6 +31,7 @@ class IconButtonWithBackground extends StatelessWidget {
             icon: ImageIcon(
               AssetImage(iconPath),
               color: iconColor ?? AppColors.greyColor,
+              size: iconSize,
             )));
   }
 }

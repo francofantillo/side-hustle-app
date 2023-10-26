@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
-import 'package:side_hustle/home/widgets/home_widgets.dart';
+import 'package:side_hustle/home/widgets/home_top_widgets.dart';
 import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';

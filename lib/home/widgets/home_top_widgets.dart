@@ -4,6 +4,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/circular_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -19,13 +20,17 @@ class HomeTopWidgets extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        InkWell(
+        IconButtonWithBackground(
+          height: .12.sw,
+          width: .12.sw,
+          borderRadius: 40,
+          backgroundColor: AppColors.backIconBackgroundColor,
+          iconColor: AppColors.primaryColor,
+          iconSize: 14,
           onTap: () {
             Scaffold.of(contextBuilder).openDrawer();
           },
-          child: CircularImageWidget(
-              image: AssetsPath.drawer,
-              imageSize: AppDimensions.drawerIconSizeHome),
+          iconPath: AssetsPath.drawer,
         ),
         width(AppDimensions.topIconsSpacing),
         CircularCacheImageWidget(
@@ -53,13 +58,16 @@ class HomeTopWidgets extends StatelessWidget {
             ],
           ),
         ),
-        Image.asset(
-          AssetsPath.notificationBell,
-          // Set your desired height
-          width: 20.h,
-          // Set your desired width
-          height: 20.h,
-        )
+        IconButtonWithBackground(
+          height: .12.sw,
+          width: .12.sw,
+          borderRadius: 40,
+          backgroundColor: Colors.transparent,
+          iconColor: AppColors.greyColorNoOpacity,
+          iconSize: 20,
+          onTap: () {},
+          iconPath: AssetsPath.notificationBell,
+        ),
       ],
     );
   }

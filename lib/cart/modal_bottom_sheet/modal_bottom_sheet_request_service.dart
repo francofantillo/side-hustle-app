@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
-import 'package:side_hustle/cart/modal_bottom_sheet/model_bottom_sheet_delivery_address.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -15,17 +15,17 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
-class BottomModelSheetService extends StatefulWidget {
+class BottomModalSheetRequestService extends StatefulWidget {
   final bool isEdit;
 
-  const BottomModelSheetService({super.key, this.isEdit = false});
+  const BottomModalSheetRequestService({super.key, this.isEdit = false});
 
   @override
-  State<BottomModelSheetService> createState() =>
-      _BottomModelSheetServiceState();
+  State<BottomModalSheetRequestService> createState() =>
+      _BottomModalSheetRequestServiceState();
 }
 
-class _BottomModelSheetServiceState extends State<BottomModelSheetService> {
+class _BottomModalSheetRequestServiceState extends State<BottomModalSheetRequestService> {
   TextEditingController dateTextController = TextEditingController();
   TextEditingController firstTimeTextController = TextEditingController();
   TextEditingController secondTimeTextController = TextEditingController();
@@ -187,9 +187,9 @@ class _BottomModelSheetServiceState extends State<BottomModelSheetService> {
                     Navigator.pop(context);
                   } else {
                     Navigator.pop(context);
-                    AppUtils.showBottomModelSheet(
+                    AppUtils.showBottomModalSheet(
                         context: context,
-                        widget: const BottomModelSheetDeliveryAddress(
+                        widget: const BottomModalSheetDeliveryAddress(
                           isEdit: false,
                           isService: true,
                         ));
