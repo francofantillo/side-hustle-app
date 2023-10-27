@@ -4,6 +4,9 @@ import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_events.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_jobs.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_shops.dart';
+import 'package:side_hustle/job/my_jobs/widgets/completed_job_list.dart';
+import 'package:side_hustle/job/my_jobs/widgets/ongoing_job_list.dart';
+import 'package:side_hustle/job/my_jobs/widgets/scheduled_job_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
@@ -99,11 +102,11 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
               ),
             ),
             _tabIndexBasicToggle.value == 0
-                ? const FavouritesListEvent()
+                ? const MyJobsScheduledList()
                 : _tabIndexBasicToggle.value == 1
-                    ? const FavouritesListJobs()
+                    ? const MyJobsOnGoingList()
                     : _tabIndexBasicToggle.value == 2
-                        ? const FavouritesListShops()
+                        ? const MyJobsCompletedList()
                         : const SizedBox.shrink(),
             height(0.02.sh)
           ],

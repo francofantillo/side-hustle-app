@@ -155,4 +155,10 @@ class AppDimensions {
 
   /// Profile
   static double textSizeProfileJobs = 10.sp;
+
+  /// My Jobs
+  static double listItemScheduledHeight = 0.45.sw;
+  static double listItemOnGoingHeight = 0.57.sw;
+  static double listItemCompletedJobHeight = 0.57.sw;
+
 }

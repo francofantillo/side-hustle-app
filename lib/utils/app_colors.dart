@@ -20,6 +20,7 @@ class AppColors {
   static const appTextBlackColor = Color(0xFF6B6B6B);
   static const textWhiteColor = Color(0xFFFCFCFC);
   static const greenColor = Color(0xFF21A455);
+  static const orangeColor = Color(0xFFFF8139);
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
   static const backgroundColor = Color(0xFFF5F5F5);
