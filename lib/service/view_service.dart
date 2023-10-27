@@ -26,7 +26,9 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class ViewService extends StatefulWidget {
-  const ViewService({super.key});
+  final bool isMyService;
+
+  const ViewService({super.key, this.isMyService = false});
 
   @override
   State<ViewService> createState() => _ViewServiceState();
@@ -184,71 +186,75 @@ class _ViewServiceState extends State<ViewService> {
                   child: Divider(),
                 ),
                 height(0.02.sh),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: textWidget(
-                      text: AppStrings.productPostBy,
-                      maxLines: 2,
-                      fontSize: AppDimensions.textSizeSmall,
-                      color: AppColors.textBlackColor,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
+                widget.isMyService
+                    ? const SizedBox.shrink()
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: textWidget(
+                            text: AppStrings.servicePostBy,
+                            maxLines: 2,
+                            fontSize: AppDimensions.textSizeSmall,
+                            color: AppColors.textBlackColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                widget.isMyService
+                    ? const SizedBox.shrink()
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 4),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            CircularCacheImageWidget(
-                              showLoading: false,
-                              image: AssetsPath.userProfileJob,
-                              boarderColor: AppColors.primaryColor,
-                              imageHeight: .09.sh,
-                              imageWidth: .09.sw,
-                            ),
-                            width(.02.sw),
                             Expanded(
-                              child: textWidget(
-                                  text: AppStrings.userNameViewProduct,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textBlackColor),
+                              child: Row(
+                                children: [
+                                  CircularCacheImageWidget(
+                                    showLoading: false,
+                                    image: AssetsPath.userProfileJob,
+                                    boarderColor: AppColors.primaryColor,
+                                    imageHeight: .09.sh,
+                                    imageWidth: .09.sw,
+                                  ),
+                                  width(.02.sw),
+                                  Expanded(
+                                    child: textWidget(
+                                        text: AppStrings.userNameViewProduct,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.textBlackColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 50.h,
+                              child: CustomButtonWithIcon(
+                                onPressed: () {
+                                  print("pressed Elevated Button");
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.shopScreenRoute);
+                                },
+                                borderRadius: 10,
+                                backgroundColor: AppColors.greenColor,
+                                iconPath: AssetsPath.sideHustle,
+                                name: AppStrings.viewShop,
+                              ),
+                            ),
+                            width(0.01.sw),
+                            IconButtonWithBackground(
+                              height: 50.h,
+                              width: .17.sw,
+                              borderRadius: 10,
+                              onTap: () {
+                                print("clicked message");
+                              },
+                              iconPath: AssetsPath.message,
+                              backgroundColor: AppColors.primaryColor,
+                              iconColor: AppColors.whiteColor,
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 50.h,
-                        child: CustomButtonWithIcon(
-                          onPressed: () {
-                            print("pressed Elevated Button");
-                            Navigator.pushNamed(
-                                context, AppRoutes.shopScreenRoute);
-                          },
-                          borderRadius: 10,
-                          backgroundColor: AppColors.greenColor,
-                          iconPath: AssetsPath.sideHustle,
-                          name: AppStrings.viewShop,
-                        ),
-                      ),
-                      width(0.01.sw),
-                      IconButtonWithBackground(
-                        height: 50.h,
-                        width: .17.sw,
-                        borderRadius: 10,
-                        onTap: () {
-                          print("clicked message");
-                        },
-                        iconPath: AssetsPath.message,
-                        backgroundColor: AppColors.primaryColor,
-                        iconColor: AppColors.whiteColor,
-                      ),
-                    ],
-                  ),
-                ),
                 height(0.03.sh),
                 isAddToCart ? const SizedBox.shrink() : height(0.02.sh),
                 isAddToCart
@@ -260,15 +266,21 @@ class _ViewServiceState extends State<ViewService> {
                             onPressed: () {
                               // isAddToCart = true;
                               // setState(() {});
-                              AppUtils.showBottomModalSheet(
-                                  context: context,
-                                  // widget: const ModalBottomSheetProducts(isDelivery: true,));
-                                  // widget: const BottomModalSheetRequestService());
-                                  widget: const ModalBottomSheetServices(
-                                    isDelivery: true,
-                                  ));
+                              if (widget.isMyService) {
+                                Navigator.pushNamed(context, AppRoutes.postServiceScreenRoute);
+                              } else {
+                                AppUtils.showBottomModalSheet(
+                                    context: context,
+                                    // widget: const ModalBottomSheetProducts(isDelivery: true,));
+                                    // widget: const BottomModalSheetRequestService());
+                                    widget: const ModalBottomSheetServices(
+                                      isDelivery: true,
+                                    ));
+                              }
                             },
-                            name: AppStrings.requestService,
+                            name: widget.isMyService
+                                ? AppStrings.editService
+                                : AppStrings.requestService,
                             borderRadius:
                                 AppDimensions.boarderRadiusViewProduct),
                       ),

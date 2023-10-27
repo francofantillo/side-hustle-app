@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/product/widgets/products_items.dart';
 import 'package:side_hustle/product/widgets/your_products_item.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -32,18 +34,29 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
           // Replace with your horizontal list item
           return Padding(
             padding: const EdgeInsets.only(right: 16.0, left: 8.0),
-            child: YourProductsItemWidget(
-              imageWidth: 1.sw,
-              isDelete: widget.isEdit,
-              imageHeight: AppDimensions.sideHustleItemHeight,
-              boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-              deliveryType: AppStrings.pickUpViewProduct,
-              imagePath:
-                  AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              onTap: () {},
+            child: InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute,
+                    arguments: const ViewProduct(isMyProduct: true));
+              },
+              child: YourProductsItemWidget(
+                imageWidth: 1.sw,
+                isDelete: widget.isEdit,
+                imageHeight: AppDimensions.sideHustleItemHeight,
+                boarderColor: AppColors.itemBGColor,
+                title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
+                subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+                deliveryType: AppStrings.pickUpViewProduct,
+                imagePath:
+                    AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
+                price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+                onTap: () {
+                  if(widget.isEdit) {
+                  } else {
+                    Navigator.pushNamed(context, AppRoutes.postProductScreenRoute);
+                  }
+                },
+              ),
             ),
           );
         },

@@ -225,10 +225,13 @@ class AppStrings {
   /// Side Hustle
   static const String getDirectionToShop = "Get Direction to shop";
   static const String watch = "Watch";
+  static const String editProduct = "Edit Product";
+  static const String editService = "Edit Service";
   static const String serviceAdded = "Service added";
   static const String productDescViewProduct = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
   static const String pickUpViewProduct = "Pick-up";
   static const String productPostBy = "Product Post by";
+  static const String servicePostBy = "Service Post by";
   static const String userNameViewProduct = "Brandon Lubin";
   static const String viewShop = "View Shop";
   static const String viewProduct = "View Product";

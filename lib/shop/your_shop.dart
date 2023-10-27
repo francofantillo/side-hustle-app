@@ -21,6 +21,7 @@ import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -242,39 +243,38 @@ class _YourShopScreenState extends State<YourShopScreen> {
                 title: AppStrings.postASideHustle,
                 onPressed: () {
                   AppDialogues.postSideHustleDialogue(
-                          context: contextBuilder,
-                          body: PostYourSideHustle(
-                            isProductSelected: (v) {
-                              isProductSelected = v;
-                              print("prodcut: $isProductSelected");
-                            },
-                            onPressed: () {
-                              print("pressed Dialogue");
-                              if (isProductSelected) {
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                // Navigator.pop(contextBuilder);
-                                AppDialogues.postSideHustleDialogue(
-                                        context: contextBuilder)
-                                    .dismiss();
-                                Navigator.pushNamed(contextBuilder,
-                                    AppRoutes.postProductScreenRoute);
-                              } else {
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                AppDialogues.postSideHustleDialogue(
-                                        context: contextBuilder)
-                                    .dismiss();
-                                // Navigator.pop(contextBuilder);
-                                Navigator.pushNamed(contextBuilder,
-                                    AppRoutes.postServiceScreenRoute);
-                              }
-                            },
-                            onTapClose: () {
-                              Navigator.pop(contextBuilder);
-                            },
-                          ))
-                      .show();
+                      context: contextBuilder,
+                      body: PostYourSideHustle(
+                        isProductSelected: (v) {
+                          isProductSelected = v;
+                          print("prodcut: $isProductSelected");
+                        },
+                        onPressed: () {
+                          print("pressed Dialogue");
+                          if (isProductSelected) {
+                            /// reset to Default Value
+                            isProductSelected = true;
+                            // Navigator.pop(contextBuilder);
+                            AppDialogues.postSideHustleDialogue(
+                                    context: contextBuilder)
+                                .dismiss();
+                            Navigator.pushNamed(contextBuilder,
+                                AppRoutes.postProductScreenRoute);
+                          } else {
+                            /// reset to Default Value
+                            isProductSelected = true;
+                            AppDialogues.postSideHustleDialogue(
+                                    context: contextBuilder)
+                                .dismiss();
+                            // Navigator.pop(contextBuilder);
+                            Navigator.pushNamed(contextBuilder,
+                                AppRoutes.postServiceScreenRoute);
+                          }
+                        },
+                        onTapClose: () {
+                          Navigator.pop(contextBuilder);
+                        },
+                      )).show();
                 }),
           ],
         ),

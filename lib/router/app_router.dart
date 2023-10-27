@@ -92,10 +92,14 @@ class AppRouter {
             return const SideHustle();
 
           case AppRoutes.viewProductScreenRoute:
-            return const ViewPorduct();
+            final args = routeSettings.arguments as ViewProduct?;
+            return ViewProduct(
+              isMyProduct: args?.isMyProduct ?? false
+            );
 
           case AppRoutes.viewServiceScreenRoute:
-            return const ViewService();
+            final args = routeSettings.arguments as ViewService?;
+            return ViewService(isMyService: args?.isMyService ?? false,);
 
           case AppRoutes.shopScreenRoute:
             return const ShopScreen();
