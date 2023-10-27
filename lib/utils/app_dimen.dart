@@ -150,6 +150,9 @@ class AppDimensions {
   static double imageHeightShop = 0.16.sh;
   // static double imageHeightShop = 80.h;
 
+  /// Favourites
+  static double listItemFavouritesShopHeight = 0.47.sw;
+
   /// Profile
   static double textSizeProfileJobs = 10.sp;
 }

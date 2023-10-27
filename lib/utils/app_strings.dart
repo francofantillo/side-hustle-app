@@ -153,6 +153,7 @@ class AppStrings {
   static const String jobTimeHint = "10:00am";
   static const String totalHoursHint = "1:00pm";
   static const String totalHours = "Total Hours: 3 Hours";
+  static const String jobs = "Jobs";
 
   /// Wanted Job
   static const String wa = "Wanted Jobs";
@@ -260,6 +261,7 @@ class AppStrings {
   /// Shop
   static const String shop = "Brandon’s Shop";
   static const String shopName = "Shop name";
+  static const String shops = "Shops";
   static const String shopAddress = "Shop Address";
   static const String getDirections = "Get Directions";
   static const String yourShop = "Your Shop";
@@ -270,5 +272,9 @@ class AppStrings {
   static const String jobsCompleted = "Jobs Completed";
   static const String myEvents = "My Events";
   static const String paymentMethods = "Payment Methods";
+
+  /// My Jobs
+  static const String scheduled = "Scheduled";
+  static const String ongoing = "Ongoing";
 
 }

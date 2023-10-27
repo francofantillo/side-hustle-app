@@ -117,6 +117,8 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                   child: ToggleSwitch(
                     // customWidths: [110.0, 70.0, 70.0, 90.0],
                     isVertical: false,
+                    animate: true,
+                    animationDuration: 200,
                     minWidth: 90,
                     cornerRadius: 20.0,
                     changeOnTap: true,

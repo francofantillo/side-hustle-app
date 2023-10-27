@@ -27,5 +27,7 @@ class AppRoutes {
   static const String viewServiceScreenRoute = "/viewService";
   static const String profileScreenRoute = "/profile";
   static const String yourShopScreenRoute = "/yourShop";
+  static const String favouritesScreenRoute = "/favourites";
+  static const String myJobsScreenRoute = "/myJobs";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }

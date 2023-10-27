@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -53,7 +54,9 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           textColor: AppColors.appTextBlackColor,
           fontWeight: FontWeight.w500,
           iconColor: AppColors.greyColorNoOpacity,
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.favouritesScreenRoute);
+          },
         ),
         height(AppDimensions.drawerItemsVerticalSpacing),
         DrawerItemListTile(

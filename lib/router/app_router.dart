@@ -10,8 +10,10 @@ import 'package:side_hustle/event/event.dart';
 import 'package:side_hustle/event/post_event.dart';
 import 'package:side_hustle/event/view_event.dart';
 import 'package:side_hustle/event/view_event_self.dart';
+import 'package:side_hustle/favourites/favourites.dart';
 import 'package:side_hustle/home/home.dart';
 import 'package:side_hustle/job/apply_job.dart';
+import 'package:side_hustle/job/my_jobs/my_jobs.dart';
 import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
@@ -109,6 +111,12 @@ class AppRouter {
 
           case AppRoutes.yourShopScreenRoute:
             return const YourShopScreen();
+
+          case AppRoutes.favouritesScreenRoute:
+            return const FavouritesScreen();
+
+          case AppRoutes.myJobsScreenRoute:
+            return const MyJobsScreen();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

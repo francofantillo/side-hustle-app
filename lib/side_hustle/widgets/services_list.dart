@@ -29,7 +29,7 @@ class _ServicesListState extends State<ServicesList> {
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
           return Padding(
-            padding: const EdgeInsets.only(right: 16.0, left: 8.0),
+            padding: EdgeInsets.only(right: 16.0, left: 8.0, top: 0.015.sh),
             child: ServiceItemsWidget(
               imageWidth: 1.sw,
               imageHeight: AppDimensions.sideHustleItemHeight,

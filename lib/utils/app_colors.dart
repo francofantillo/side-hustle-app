@@ -8,6 +8,7 @@ class AppColors {
   static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
   static final textGreyColor = Color(0xFF565656).withOpacity(.85);
   static final backIconBackgroundColor = Color(0xFF565656).withOpacity(.10);
+  static final tabOutlineColor = Color(0xFF565656).withOpacity(.2);
   static final cartItemIconBackgroundColor = Color(0xFFBABABA).withOpacity(0.90);
   static final cancelIconBackgroundColor = Color(0xFF565656).withOpacity(.20);
   static final searchIconColor = Color(0xFF565656).withOpacity(.55);

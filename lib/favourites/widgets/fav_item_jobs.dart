@@ -10,7 +10,7 @@ import 'package:side_hustle/widgets/images/rounded_image_with_background_color.d
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class ItemsWidget extends StatelessWidget {
+class FavItemJobsWidget extends StatelessWidget {
   final String? title,
       subTitle,
       price,
@@ -21,7 +21,7 @@ class ItemsWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ItemsWidget(
+  const FavItemJobsWidget(
       {super.key,
       this.title,
       this.subTitle,
@@ -153,7 +153,7 @@ class ItemsWidget extends StatelessWidget {
                                 onTap: () {
                                   print("Clicked");
                                 },
-                                iconPath: AssetsPath.favUnfilled,
+                                iconPath: AssetsPath.favourite,
                                 height: imageHeight! * .2,
                                 width: imageHeight! * .2,
                                 backgroundColor: AppColors.primaryColor,

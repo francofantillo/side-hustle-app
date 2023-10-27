@@ -161,17 +161,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               height(0.01.sh),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ProfileJobsWidget(
-                        name: AppStrings.myJobs, myJobsCount: "12"),
+                        name: AppStrings.myJobs,
+                        myJobsCount: "12",
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, AppRoutes.myJobsScreenRoute);
+                        }),
                     ProfileJobsWidget(
-                        name: AppStrings.jobsCompleted, myJobsCount: "12"),
+                        name: AppStrings.jobsCompleted,
+                        myJobsCount: "12",
+                        onTap: () {}),
                     ProfileJobsWidget(
-                        name: AppStrings.myEvents, myJobsCount: "12"),
+                        name: AppStrings.myEvents,
+                        myJobsCount: "12",
+                        onTap: () {}),
                   ],
                 ),
               ),

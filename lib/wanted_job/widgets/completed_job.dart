@@ -39,13 +39,13 @@ class CompletedJobsWidget extends StatelessWidget {
       width: imageWidth,
       child: Card(
         elevation: 6,
-        // color: boarderColor,
+        color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -65,14 +65,26 @@ class CompletedJobsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          textWidget(text: title),
-                          textWidget(text: price),
+                          Expanded(
+                              child: textWidget(
+                                  text: title,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppDimensions.textSizeSmall,
+                                  color: AppColors.textBlackColor)),
+                          textWidget(
+                              text: price,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textBlackColor),
                         ],
                       ),
                       height(0.01.sw),
                       SizedBox(
                         width: .5.sw,
-                        child: textWidget(text: subTitle, maxLines: 2),
+                        child: textWidget(
+                          text: subTitle,
+                          maxLines: 2,
+                          fontSize: AppDimensions.textSizeVerySmall,
+                        ),
                       ),
                       height(imageHeight! * .04),
                       Divider(

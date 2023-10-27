@@ -10,9 +10,10 @@ import 'package:side_hustle/widgets/images/rounded_image_with_background_color.d
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class ItemsWidget extends StatelessWidget {
+class FavItemShopsWidget extends StatelessWidget {
   final String? title,
-      subTitle,
+      products,
+      services,
       price,
       userProfile,
       userName,
@@ -21,10 +22,11 @@ class ItemsWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ItemsWidget(
+  const FavItemShopsWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.products,
+      this.services,
       this.price,
       this.userProfile,
       this.userName,
@@ -47,7 +49,7 @@ class ItemsWidget extends StatelessWidget {
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -59,7 +61,8 @@ class ItemsWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:
+                      const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -73,32 +76,38 @@ class ItemsWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
-                          Column(
-                            children: [
-                              textWidget(
-                                  text: price,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textBlackColor),
-                              textWidget(
-                                  text: "per head",
-                                  textAlign: TextAlign.end,
-                                  fontSize: 8),
-                            ],
+                          IconButtonWithBackground(
+                            onTap: () {
+                              print("Clicked");
+                            },
+                            iconPath: AssetsPath.favourite,
+                            height: imageHeight! * .2,
+                            width: imageHeight! * .2,
+                            backgroundColor: AppColors.primaryColor,
+                            iconColor: AppColors.whiteColor,
                           ),
                         ],
                       ),
                       SizedBox(
                         width: .5.sw,
                         child: textWidget(
-                          text: subTitle,
-                          maxLines: 2,
-                          fontSize: AppDimensions.textSizeVerySmall,
-                        ),
+                            text: products,
+                            maxLines: 1,
+                            fontSize: AppDimensions.textSizeVerySmall),
+                      ),
+                      height(0.01.sh),
+                      SizedBox(
+                        width: .5.sw,
+                        child: textWidget(
+                            text: services,
+                            maxLines: 1,
+                            fontSize: AppDimensions.textSizeVerySmall),
                       ),
                       height(imageHeight! * .04),
                       Divider(
                         height: 1.h,
                       ),
+                      height(imageHeight! * .04),
                       const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +129,7 @@ class ItemsWidget extends StatelessWidget {
                               textWidget(
                                   text: userName,
                                   fontSize: 10.sp,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.bold,
                                   color: AppColors.textBlackColor),
                               Row(
                                 children: [
@@ -145,32 +154,15 @@ class ItemsWidget extends StatelessWidget {
                             ],
                           ),
                           const Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                },
-                                iconPath: AssetsPath.favUnfilled,
-                                height: imageHeight! * .2,
-                                width: imageHeight! * .2,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
-                              ),
-                              width(0.025.sw),
-                              IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                },
-                                iconPath: AssetsPath.message,
-                                height: imageHeight! * .2,
-                                width: imageHeight! * .2,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
-                              ),
-                            ],
+                          IconButtonWithBackground(
+                            onTap: () {
+                              print("Clicked");
+                            },
+                            iconPath: AssetsPath.message,
+                            height: imageHeight! * .2,
+                            width: imageHeight! * .2,
+                            backgroundColor: AppColors.primaryColor,
+                            iconColor: AppColors.whiteColor,
                           ),
                         ],
                       ),

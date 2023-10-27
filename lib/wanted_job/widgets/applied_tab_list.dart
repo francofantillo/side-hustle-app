@@ -28,7 +28,7 @@ class _AppliedTabListState extends State<AppliedTabList> {
           itemBuilder: (context, index) {
             // Replace with your horizontal list item
             return Padding(
-              padding: const EdgeInsets.only(right: 16.0, left: 8.0),
+              padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
               child: AppliedJobsWidget(
                 imageWidth: 1.sw,
                 imageHeight: AppDimensions.listItemHeight,

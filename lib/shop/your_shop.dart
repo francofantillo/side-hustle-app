@@ -209,6 +209,8 @@ class _YourShopScreenState extends State<YourShopScreen> {
                 width: 1.sw,
                 child: ToggleSwitch(
                   customWidths: [.5.sw, .396.sw],
+                  animate: true,
+                  animationDuration: 200,
                   isVertical: false,
                   minWidth: 90,
                   cornerRadius: 12.0.w,

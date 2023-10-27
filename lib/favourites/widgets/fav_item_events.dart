@@ -10,7 +10,7 @@ import 'package:side_hustle/widgets/images/rounded_image_with_background_color.d
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class ItemsWidget extends StatelessWidget {
+class FavItemEventsWidget extends StatelessWidget {
   final String? title,
       subTitle,
       price,
@@ -21,7 +21,7 @@ class ItemsWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ItemsWidget(
+  const FavItemEventsWidget(
       {super.key,
       this.title,
       this.subTitle,
@@ -77,8 +77,8 @@ class ItemsWidget extends StatelessWidget {
                             children: [
                               textWidget(
                                   text: price,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textBlackColor),
+                                  color: AppColors.textBlackColor,
+                                  fontWeight: FontWeight.bold),
                               textWidget(
                                   text: "per head",
                                   textAlign: TextAlign.end,
@@ -89,10 +89,22 @@ class ItemsWidget extends StatelessWidget {
                       ),
                       SizedBox(
                         width: .5.sw,
-                        child: textWidget(
-                          text: subTitle,
-                          maxLines: 2,
-                          fontSize: AppDimensions.textSizeVerySmall,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 3.0),
+                              child: ImageIcon(
+                                const AssetImage(AssetsPath.location),
+                                size: AppDimensions.eventWidgetIconSize,
+                                color: AppColors.greyColorNoOpacity,
+                              ),
+                            ),
+                            width(0.02.sw),
+                            Expanded(
+                                child: textWidget(text: subTitle, maxLines: 2,
+                                    fontSize: AppDimensions.textSizeVerySmall)),
+                          ],
                         ),
                       ),
                       height(imageHeight! * .04),
@@ -153,7 +165,7 @@ class ItemsWidget extends StatelessWidget {
                                 onTap: () {
                                   print("Clicked");
                                 },
-                                iconPath: AssetsPath.favUnfilled,
+                                iconPath: AssetsPath.favourite,
                                 height: imageHeight! * .2,
                                 width: imageHeight! * .2,
                                 backgroundColor: AppColors.primaryColor,

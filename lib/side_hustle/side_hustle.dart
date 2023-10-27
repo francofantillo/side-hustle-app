@@ -72,11 +72,14 @@ class _SideHustleState extends State<SideHustle> {
                   hintText: AppStrings.searchHintText, onChanged: (search) {}),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+              // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+              padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 0.02.sw),
               child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(
-                  customWidths: [.5.sw, .396.sw],
+                  customWidths: [.5.sw, .41.sw],
+                  animate: true,
+                  animationDuration: 200,
                   isVertical: false,
                   minWidth: 90,
                   cornerRadius: 12.0.w,

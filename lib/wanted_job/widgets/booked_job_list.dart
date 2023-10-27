@@ -17,7 +17,7 @@ class _BookedTabListState extends State<BookedTabList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(bottom: 0.14.sh),
+        padding: EdgeInsets.only(bottom: 0.14.sh, top: 8),
         child: ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           shrinkWrap: true,

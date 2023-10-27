@@ -7,13 +7,15 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 class ProfileJobsWidget extends StatelessWidget {
   final String? myJobsCount;
   final String? name;
+  final Function()? onTap;
 
-  const ProfileJobsWidget({super.key, this.myJobsCount, this.name});
+  const ProfileJobsWidget({super.key, this.myJobsCount, this.name, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: onTap,
+      // onTap: (){},
       child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(

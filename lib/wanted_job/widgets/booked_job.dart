@@ -4,16 +4,14 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class BookedJobsWidget extends StatelessWidget {
-  final String? title,
-      subTitle,
-      price,
-      imagePath;
+  final String? title, subTitle, price, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
@@ -34,13 +32,13 @@ class BookedJobsWidget extends StatelessWidget {
       width: imageWidth,
       child: Card(
         elevation: 6,
-        // color: boarderColor,
+        color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -60,14 +58,26 @@ class BookedJobsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(child: textWidget(text: title)),
-                          textWidget(text: price),
+                          Expanded(
+                              child: textWidget(
+                                  text: title,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppDimensions.textSizeSmall,
+                                  color: AppColors.textBlackColor)),
+                          textWidget(
+                              text: price,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textBlackColor),
                         ],
                       ),
                       height(0.01.sw),
                       SizedBox(
                         width: .5.sw,
-                        child: textWidget(text: subTitle, maxLines: 2),
+                        child: textWidget(
+                          text: subTitle,
+                          maxLines: 2,
+                          fontSize: AppDimensions.textSizeVerySmall,
+                        ),
                       ),
                       height(imageHeight! * .04),
                       Divider(
@@ -80,31 +90,40 @@ class BookedJobsWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: Container(
-                              height: imageHeight! * .21,
-                              width: .55.sw,
-                              decoration: BoxDecoration(
-                                color: AppColors.greenColor,
-                                borderRadius: BorderRadius.circular(
-                                    AppDimensions.bookedJobRoundedBorder),
-                              ),
-                              child: Center(
-                                child: textWidget(
-                                  text: AppStrings.startJob,
-                                  color: AppColors.textWhiteColor,
-                                  fontSize: 12.sp,
-                                  textAlign: TextAlign.center,
+                            child: InkWell(
+                              onTap:(){
+                                print("Clicked");
+                              },
+                              child: Container(
+                                height: imageHeight! * .21,
+                                width: .55.sw,
+                                decoration: BoxDecoration(
+                                  color: AppColors.greenColor,
+                                  borderRadius: BorderRadius.circular(
+                                      AppDimensions.bookedJobRoundedBorder),
+                                ),
+                                child: Center(
+                                  child: textWidget(
+                                    text: AppStrings.startJob,
+                                    color: AppColors.textWhiteColor,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w700,
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          RoundedImageWithBackgroundColor(
-                            assetPath: AssetsPath.message,
-                            imageHeight: imageHeight! * .08,
-                            imageWidth: imageHeight! * .1,
+                          width(0.02.sw),
+                          IconButtonWithBackground(
+                            onTap: () {
+                              print("Clicked");
+                            },
+                            iconPath: AssetsPath.message,
+                            height: imageHeight! * .22,
+                            width: imageHeight! * .22,
                             backgroundColor: AppColors.primaryColor,
-                            socialButtonSize: imageHeight! * .05,
-                            borderRadius: 8,
+                            iconColor: AppColors.whiteColor,
                           ),
                         ],
                       ),

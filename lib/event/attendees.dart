@@ -39,6 +39,8 @@ class _AttendeesEventState extends State<AttendeesEvent> {
               width: 1.sw,
               child: ToggleSwitch(
                 customWidths: [.5.sw, .434.sw],
+                animate: true,
+                animationDuration: 200,
                 isVertical: false,
                 minWidth: 90,
                 cornerRadius: 20.0,
