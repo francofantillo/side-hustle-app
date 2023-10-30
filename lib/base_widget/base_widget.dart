@@ -22,7 +22,6 @@ class BaseWidget extends StatefulWidget {
 }
 
 class _BaseWidgetState extends State<BaseWidget> {
-
   // static double sh = 533.3333333333334; // Default Nexus S value
   // static double sw = 320; // Default Nexus S value
 
@@ -104,7 +103,7 @@ class _BaseWidgetState extends State<BaseWidget> {
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
               initialRoute: AppRoutes.splashScreenRoute,
-              // initialRoute: AppRoutes.viewServiceScreenRoute,
+              // initialRoute: AppRoutes.otherUserProfileScreenRoute,
               // initialRoute: AppRoutes.bottomTabsScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );

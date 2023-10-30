@@ -160,5 +160,6 @@ class AppDimensions {
   static double listItemScheduledHeight = 0.45.sw;
   static double listItemOnGoingHeight = 0.57.sw;
   static double listItemCompletedJobHeight = 0.57.sw;
+  static double listItemJobRequestHeight = 0.38.sw;
 
 }

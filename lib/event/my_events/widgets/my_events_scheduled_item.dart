@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
@@ -11,7 +13,7 @@ import 'package:side_hustle/widgets/images/rounded_image_with_background_color.d
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class CompletedJobItemWidget extends StatelessWidget {
+class MyEventsScheduledItemsWidget extends StatelessWidget {
   final String? title,
       subTitle,
       price,
@@ -22,18 +24,18 @@ class CompletedJobItemWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const CompletedJobItemWidget(
+  const MyEventsScheduledItemsWidget(
       {super.key,
-        this.title,
-        this.subTitle,
-        this.price,
-        this.userProfile,
-        this.userName,
-        this.userRating,
-        this.imagePath,
-        this.imageHeight,
-        this.imageWidth,
-        this.boarderColor});
+      this.title,
+      this.subTitle,
+      this.price,
+      this.userProfile,
+      this.userName,
+      this.userRating,
+      this.imagePath,
+      this.imageHeight,
+      this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class CompletedJobItemWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
@@ -74,27 +76,34 @@ class CompletedJobItemWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: textWidget(
-                                text: AppStrings.completed,
-                                fontSize: AppDimensions.textSizeVerySmall,
-                                color: AppColors.textWhiteColor),
-                          )
+                          Column(
+                            children: [
+                              textWidget(
+                                  text: price,
+                                  color: AppColors.textBlackColor,
+                                  fontWeight: FontWeight.bold),
+                              textWidget(
+                                  text: "per head",
+                                  textAlign: TextAlign.end,
+                                  fontSize: 8),
+                            ],
+                          ),
                         ],
                       ),
-                      height(imageHeight! * .01),
                       SizedBox(
                         width: .5.sw,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 3.0),
+                              child: ImageIcon(
+                                const AssetImage(AssetsPath.location),
+                                size: AppDimensions.eventWidgetIconSize,
+                                color: AppColors.greyColorNoOpacity,
+                              ),
+                            ),
+                            width(0.02.sw),
                             Expanded(
                                 child: textWidget(
                                     text: subTitle,
@@ -103,58 +112,16 @@ class CompletedJobItemWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      height(imageHeight! * .015),
-                      textWidget(
-                          text: price,
-                          color: AppColors.textBlackColor,
-                          fontWeight: FontWeight.bold),
-                      height(imageHeight! * .02),
+                      height(imageHeight! * .04),
                       Divider(
                         height: 1.h,
                       ),
-                      height(imageHeight! * .04),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CircularCacheImageWidget(
-                            showLoading: false,
-                            image: userProfile,
-                            boarderColor: AppColors.primaryColor,
-                            imageHeight: imageHeight! * .16,
-                            imageWidth: imageHeight! * .16,
-                          ),
-                          width(.01.sw),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // place RoundedImageWithBackgroundColor at end
-                              textWidget(
-                                  text: userName,
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textBlackColor),
-                            ],
-                          ),
-                          const Spacer(),
-                          IconButtonWithBackground(
-                            onTap: () {
-                              print("Clicked");
-                            },
-                            iconPath: AssetsPath.message,
-                            height: imageHeight! * .16,
-                            width: imageHeight! * .16,
-                            backgroundColor: AppColors.primaryColor,
-                            iconColor: AppColors.whiteColor,
-                          ),
-                        ],
-                      ),
-                      height(0.01.sh),
+                      height(imageHeight! * .06),
                       Expanded(
                         child: InkWell(
                           onTap: () {
                             print("Clicked");
+                            Navigator.pushNamed(context, AppRoutes.viewEventSelfScreenRoute);
                           },
                           highlightColor: AppColors.greenColor,
                           splashColor: AppColors.greyColor,
@@ -168,7 +135,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                             ),
                             child: Center(
                               child: textWidget(
-                                text: AppStrings.rateAndReview,
+                                text: AppStrings.viewEvent,
                                 color: AppColors.textWhiteColor,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w700,

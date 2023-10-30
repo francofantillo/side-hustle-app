@@ -60,7 +60,9 @@ class AppStrings {
   /// Drawer
   static const String sideMenu = "Side Menu";
   static const String userName = "Brandon Gouse";
+  static const String otherUserName = "Roger Baptista";
   static const String userEmail = "brandon.gouse@example.com";
+  static const String otherUserEmail = "Roger.baptista@example.com";
   static const String account = "Account";
   static const String message = "Message";
   static const String favorites = "Favorites";
@@ -269,9 +271,15 @@ class AppStrings {
   /// Profile
   static const String profileResumePage = "Profile Resume Page";
   static const String myJobs = "My Jobs";
+  static const String shopOverview = "Shop Overview";
   static const String jobsCompleted = "Jobs Completed";
   static const String myEvents = "My Events";
   static const String paymentMethods = "Payment Methods";
+  static const String userProfile = "User Profile";
+  static const String jobsPosted = "Jobs Posted";
+  static const String eventsPosted = "Events Posted";
+  static const String eventsJobPosted = "Event’s Job Posted";
+  // static const String jobsPosted = "Jobs Posted";
 
   /// My Jobs
   static const String scheduled = "Scheduled";
@@ -279,5 +287,9 @@ class AppStrings {
   static const String viewRequest = "View Request";
   static const String markAsComplete = "Mark as Complete";
   static const String rateAndReview  = "Rate and Review ";
+  static const String reject  = "Reject";
+  static const String hire  = "Hire";
+  static const String viewJob = "View Job";
+  static const String jobRequest = "Job Request";
 
 }

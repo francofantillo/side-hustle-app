@@ -26,8 +26,15 @@ class AppRoutes {
   static const String shopScreenRoute = "/shop";
   static const String viewServiceScreenRoute = "/viewService";
   static const String profileScreenRoute = "/profile";
+  static const String otherUserProfileScreenRoute = "/otherUserProfile";
+  static const String otherUserEventsPostedScreenRoute = "/otherUserEventsPosted";
+  static const String otherUserJobsPostedScreenRoute = "/otherUserJobsPosted";
   static const String yourShopScreenRoute = "/yourShop";
+  static const String otherUserShopScreenRoute = "/otherUserShop";
   static const String favouritesScreenRoute = "/favourites";
   static const String myJobsScreenRoute = "/myJobs";
+  static const String myEventsScreenRoute = "/myEvents";
+  static const String jobRequestScreenRoute = "/jobRequest";
+  static const String viewJobScreenRoute = "/viewJob";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }

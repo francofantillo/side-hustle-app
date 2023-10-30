@@ -5,7 +5,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class BackgroundWidget extends StatelessWidget {
   final Widget? body;
-  final Widget? drawer, bottomNavBar;
+  final Widget? drawer, bottomNavBar, floatingActionButton;
   final List<Widget>? actions;
   final Widget? leading;
   final String? appBarTitle;
@@ -16,6 +16,7 @@ class BackgroundWidget extends StatelessWidget {
       this.body,
       this.drawer,
       this.bottomNavBar,
+      this.floatingActionButton,
       this.actions,
       this.appBarTitle,
       this.leading,
@@ -27,6 +28,8 @@ class BackgroundWidget extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         drawer: drawer,
+        floatingActionButton: floatingActionButton,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: showAppBar
             ? AppBar(
                 backgroundColor: Colors.white,

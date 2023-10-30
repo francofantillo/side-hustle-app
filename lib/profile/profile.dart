@@ -144,12 +144,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     text: AppStrings.userEmail,
                     fontSize: AppDimensions.textSizeVerySmall),
               ),
+              height(0.01.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppDimensions.defaultHorizontalPadding + 4),
                 child: SizedBox(
                   width: 1.sw,
+                  height: 36.h,
                   child: CustomButtonWithIcon(
+                      borderRadius: 12,
                       onPressed: () {
                         Navigator.pushNamed(
                             context, AppRoutes.yourShopScreenRoute);
@@ -160,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       name: AppStrings.yourShop),
                 ),
               ),
-              height(0.01.sh),
+              height(0.03.sh),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
@@ -180,7 +183,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ProfileJobsWidget(
                         name: AppStrings.myEvents,
                         myJobsCount: "12",
-                        onTap: () {}),
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, AppRoutes.myEventsScreenRoute);
+                        }),
                   ],
                 ),
               ),
@@ -195,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppDimensions.defaultHorizontalPadding + 4),
                 child: textWidget(
-                    text: AppStrings.account,
+                    text: AppStrings.account.toUpperCase(),
                     color: AppColors.primaryColor,
                     fontSize: AppDimensions.textSizeNormal,
                     fontWeight: AppDimensions.headingFontWeight),

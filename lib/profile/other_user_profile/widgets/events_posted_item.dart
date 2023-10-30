@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
@@ -11,7 +10,7 @@ import 'package:side_hustle/widgets/images/rounded_image_with_background_color.d
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class CompletedJobItemWidget extends StatelessWidget {
+class EventsPostedItemWidget extends StatelessWidget {
   final String? title,
       subTitle,
       price,
@@ -22,7 +21,7 @@ class CompletedJobItemWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const CompletedJobItemWidget(
+  const EventsPostedItemWidget(
       {super.key,
         this.title,
         this.subTitle,
@@ -74,45 +73,45 @@ class CompletedJobItemWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: textWidget(
-                                text: AppStrings.completed,
-                                fontSize: AppDimensions.textSizeVerySmall,
-                                color: AppColors.textWhiteColor),
-                          )
+                          Column(
+                            children: [
+                              textWidget(
+                                  text: price,
+                                  color: AppColors.textBlackColor,
+                                  fontWeight: FontWeight.bold),
+                              textWidget(
+                                  text: "per head",
+                                  textAlign: TextAlign.end,
+                                  fontSize: 8),
+                            ],
+                          ),
                         ],
                       ),
-                      height(imageHeight! * .01),
                       SizedBox(
                         width: .5.sw,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 3.0),
+                              child: ImageIcon(
+                                const AssetImage(AssetsPath.location),
+                                size: AppDimensions.eventWidgetIconSize,
+                                color: AppColors.greyColorNoOpacity,
+                              ),
+                            ),
+                            width(0.02.sw),
                             Expanded(
-                                child: textWidget(
-                                    text: subTitle,
-                                    maxLines: 2,
+                                child: textWidget(text: subTitle, maxLines: 2,
                                     fontSize: AppDimensions.textSizeVerySmall)),
                           ],
                         ),
                       ),
-                      height(imageHeight! * .015),
-                      textWidget(
-                          text: price,
-                          color: AppColors.textBlackColor,
-                          fontWeight: FontWeight.bold),
-                      height(imageHeight! * .02),
+                      height(imageHeight! * .04),
                       Divider(
                         height: 1.h,
                       ),
-                      height(imageHeight! * .04),
+                      const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,8 +120,8 @@ class CompletedJobItemWidget extends StatelessWidget {
                             showLoading: false,
                             image: userProfile,
                             boarderColor: AppColors.primaryColor,
-                            imageHeight: imageHeight! * .16,
-                            imageWidth: imageHeight! * .16,
+                            imageHeight: imageHeight! * .2,
+                            imageWidth: imageHeight! * .2,
                           ),
                           width(.01.sw),
                           Column(
@@ -135,48 +134,57 @@ class CompletedJobItemWidget extends StatelessWidget {
                                   fontSize: 10.sp,
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.textBlackColor),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    AssetsPath.star,
+                                    height: imageHeight! * .08,
+                                    width: imageHeight! * .08,
+                                    color: AppColors.ratingColor,
+                                  ),
+                                  width(.01.sw),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      textWidget(
+                                          text: userRating, fontSize: 8.sp),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           const Spacer(),
-                          IconButtonWithBackground(
-                            onTap: () {
-                              print("Clicked");
-                            },
-                            iconPath: AssetsPath.message,
-                            height: imageHeight! * .16,
-                            width: imageHeight! * .16,
-                            backgroundColor: AppColors.primaryColor,
-                            iconColor: AppColors.whiteColor,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              IconButtonWithBackground(
+                                onTap: () {
+                                  print("Clicked");
+                                },
+                                iconPath: AssetsPath.favUnfilled,
+                                height: imageHeight! * .2,
+                                width: imageHeight! * .2,
+                                backgroundColor: AppColors.primaryColor,
+                                iconColor: AppColors.whiteColor,
+                              ),
+                              width(0.025.sw),
+                              IconButtonWithBackground(
+                                onTap: () {
+                                  print("Clicked");
+                                },
+                                iconPath: AssetsPath.message,
+                                height: imageHeight! * .2,
+                                width: imageHeight! * .2,
+                                backgroundColor: AppColors.primaryColor,
+                                iconColor: AppColors.whiteColor,
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                      height(0.01.sh),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            print("Clicked");
-                          },
-                          highlightColor: AppColors.greenColor,
-                          splashColor: AppColors.greyColor,
-                          child: Container(
-                            padding: EdgeInsets.zero,
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: Center(
-                              child: textWidget(
-                                text: AppStrings.rateAndReview,
-                                color: AppColors.textWhiteColor,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
                       ),
                     ],
                   ),

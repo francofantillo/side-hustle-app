@@ -7,16 +7,23 @@ import 'package:side_hustle/auth/signup.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/event/attendees.dart';
 import 'package:side_hustle/event/event.dart';
+import 'package:side_hustle/event/my_events/my_events.dart';
 import 'package:side_hustle/event/post_event.dart';
 import 'package:side_hustle/event/view_event.dart';
 import 'package:side_hustle/event/view_event_self.dart';
 import 'package:side_hustle/favourites/favourites.dart';
 import 'package:side_hustle/home/home.dart';
 import 'package:side_hustle/job/apply_job.dart';
+import 'package:side_hustle/job/my_jobs/job_request.dart';
 import 'package:side_hustle/job/my_jobs/my_jobs.dart';
+import 'package:side_hustle/job/my_jobs/view_job.dart';
 import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
+import 'package:side_hustle/profile/other_user_profile/events_posted_other_user.dart';
+import 'package:side_hustle/profile/other_user_profile/jobs_posted_other_user.dart';
+import 'package:side_hustle/profile/other_user_profile/other_user_profile.dart';
+import 'package:side_hustle/profile/other_user_profile/other_user_shop.dart';
 import 'package:side_hustle/profile/profile.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
@@ -95,13 +102,13 @@ class AppRouter {
 
           case AppRoutes.viewProductScreenRoute:
             final args = routeSettings.arguments as ViewProduct?;
-            return ViewProduct(
-              isMyProduct: args?.isMyProduct ?? false
-            );
+            return ViewProduct(isMyProduct: args?.isMyProduct ?? false);
 
           case AppRoutes.viewServiceScreenRoute:
             final args = routeSettings.arguments as ViewService?;
-            return ViewService(isMyService: args?.isMyService ?? false,);
+            return ViewService(
+              isMyService: args?.isMyService ?? false,
+            );
 
           case AppRoutes.shopScreenRoute:
             return const ShopScreen();
@@ -109,14 +116,35 @@ class AppRouter {
           case AppRoutes.profileScreenRoute:
             return const ProfileScreen();
 
+          case AppRoutes.otherUserProfileScreenRoute:
+            return const OtherUserProfileScreen();
+
+          case AppRoutes.otherUserEventsPostedScreenRoute:
+            return const OtherUserEventsPostedScreen();
+
+          case AppRoutes.otherUserJobsPostedScreenRoute:
+            return const OtherUserJobsPostedScreen();
+
           case AppRoutes.yourShopScreenRoute:
             return const YourShopScreen();
+
+          case AppRoutes.otherUserShopScreenRoute:
+            return const OtherUserShopScreen();
 
           case AppRoutes.favouritesScreenRoute:
             return const FavouritesScreen();
 
           case AppRoutes.myJobsScreenRoute:
             return const MyJobsScreen();
+
+          case AppRoutes.myEventsScreenRoute:
+            return const MyEventsScreen();
+
+          case AppRoutes.jobRequestScreenRoute:
+            return const JobRequest();
+
+          case AppRoutes.viewJobScreenRoute:
+            return const ViewJob();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

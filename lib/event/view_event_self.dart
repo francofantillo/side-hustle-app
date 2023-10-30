@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -168,9 +169,12 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Add your button click logic here
+                    Navigator.pushNamed(
+                        context, AppRoutes.attendeesEventScreenRoute);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor, // Set the background color
+                    backgroundColor: AppColors.primaryColor,
+                    // Set the background color
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(30.0), // Make it round
@@ -179,13 +183,15 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const ImageIcon(AssetImage(AssetsPath.attendees),
+                      const ImageIcon(
+                        AssetImage(AssetsPath.attendees),
                         color: Colors.white, // Set the icon color
                         size: 17,
                       ),
                       width(0.02.sw),
                       textWidget(
-                        text: AppStrings.viewAttendees, color: AppColors.textWhiteColor),
+                          text: AppStrings.viewAttendees,
+                          color: AppColors.textWhiteColor),
                     ],
                   ),
                 ),

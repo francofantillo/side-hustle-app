@@ -95,7 +95,7 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
         ),
         height(AppDimensions.drawerItemsVerticalSpacing),
         textWidget(
-            text: AppStrings.supports,
+            text: AppStrings.supports.toUpperCase(),
             color: AppColors.primaryColor,
             fontSize: AppDimensions.drawerItemTextSize,
             fontWeight: AppDimensions.headingFontWeight),
