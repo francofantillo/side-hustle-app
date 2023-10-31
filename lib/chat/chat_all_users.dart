@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:searchable_listview/searchable_listview.dart';
 import 'package:side_hustle/chat/widgets/chat_all_user_list.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -13,6 +14,7 @@ import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
+import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class ChatAllUsers extends StatefulWidget {
   const ChatAllUsers({super.key});
@@ -42,16 +44,14 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
               shape: BoxShape.circle,
               color: AppColors.backIconBackgroundColor,
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: IconButton(
-                icon: Icon(
-                  CustomIcon.forward,
-                  size: 0.05.sw,
-                  color: AppColors.primaryColor,
-                ),
-                onPressed: () {},
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              icon: Icon(
+                Icons.more_vert_sharp,
+                size: 0.055.sw,
+                color: AppColors.primaryColor,
               ),
+              onPressed: () {},
             ),
           ),
         )
@@ -61,9 +61,9 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-                left: AppDimensions.rootPadding,
-                right: AppDimensions.rootPadding,
-                top: AppDimensions.rootPadding),
+              left: AppDimensions.rootPadding,
+              right: AppDimensions.rootPadding,
+            ),
             child: SearchTextField(
                 hintText: AppStrings.searchChatHint, onChanged: (search) {}),
           ),

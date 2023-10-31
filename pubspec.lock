@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  chat_bubbles:
+    dependency: "direct main"
+    description:
+      name: chat_bubbles
+      sha256: "16b4d0f575fbd80ef7a687d6e63c56c23137c660f6de7884507c55e255ef2920"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
   clock:
     dependency: transitive
     description:
@@ -413,6 +421,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  searchable_listview:
+    dependency: "direct main"
+    description:
+      name: searchable_listview
+      sha256: e1ba75eda1460c24648e54c543843a7142811ea4966c2106e0cc6792128b7127
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.1"
   shared_preferences:
     dependency: transitive
     description:

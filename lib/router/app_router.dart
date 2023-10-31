@@ -6,6 +6,7 @@ import 'package:side_hustle/auth/reset_password.dart';
 import 'package:side_hustle/auth/signup.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/chat/chat_all_users.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/event/attendees.dart';
 import 'package:side_hustle/event/event.dart';
 import 'package:side_hustle/event/my_events/my_events.dart';
@@ -153,6 +154,9 @@ class AppRouter {
 
           case AppRoutes.chatAllUsersScreenRoute:
             return const ChatAllUsers();
+
+          case AppRoutes.chatOneToOneScreenRoute:
+            return const ChatOneToOne();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();
