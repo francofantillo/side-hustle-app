@@ -34,6 +34,7 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           iconColor: AppColors.greyColorNoOpacity,
           onTap: () {
             print("Clicked");
+            Navigator.pushNamed(context, AppRoutes.paymentMethodScreenRoute);
           },
         ),
         height(AppDimensions.drawerItemsVerticalSpacing),

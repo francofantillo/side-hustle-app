@@ -102,8 +102,8 @@ class _BaseWidgetState extends State<BaseWidget> {
               }),
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
-              initialRoute: AppRoutes.splashScreenRoute,
-              // initialRoute: AppRoutes.otherUserProfileScreenRoute,
+              // initialRoute: AppRoutes.splashScreenRoute,
+              initialRoute: AppRoutes.chatAllUsersScreenRoute,
               // initialRoute: AppRoutes.bottomTabsScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );

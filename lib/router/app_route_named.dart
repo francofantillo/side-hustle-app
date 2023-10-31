@@ -36,5 +36,7 @@ class AppRoutes {
   static const String myEventsScreenRoute = "/myEvents";
   static const String jobRequestScreenRoute = "/jobRequest";
   static const String viewJobScreenRoute = "/viewJob";
+  static const String paymentMethodScreenRoute = "/paymentMethod";
+  static const String chatAllUsersScreenRoute = "/chatAllUsers";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }

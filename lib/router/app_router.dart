@@ -5,6 +5,7 @@ import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/auth/reset_password.dart';
 import 'package:side_hustle/auth/signup.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
+import 'package:side_hustle/chat/chat_all_users.dart';
 import 'package:side_hustle/event/attendees.dart';
 import 'package:side_hustle/event/event.dart';
 import 'package:side_hustle/event/my_events/my_events.dart';
@@ -18,6 +19,7 @@ import 'package:side_hustle/job/my_jobs/job_request.dart';
 import 'package:side_hustle/job/my_jobs/my_jobs.dart';
 import 'package:side_hustle/job/my_jobs/view_job.dart';
 import 'package:side_hustle/job/post_job.dart';
+import 'package:side_hustle/payment_methods/payment_methods.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/profile/other_user_profile/events_posted_other_user.dart';
@@ -145,6 +147,12 @@ class AppRouter {
 
           case AppRoutes.viewJobScreenRoute:
             return const ViewJob();
+
+          case AppRoutes.paymentMethodScreenRoute:
+            return const ManagePaymentMethods();
+
+          case AppRoutes.chatAllUsersScreenRoute:
+            return const ChatAllUsers();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

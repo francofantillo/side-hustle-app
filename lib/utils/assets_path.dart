@@ -9,6 +9,7 @@ class AssetsPath {
 
   /// Icons
   static const fb = "${iconsPath}fb.png";
+  static const debit = "${iconsPath}debit.png";
   static const google = "${iconsPath}google.png";
   static const apple = "${iconsPath}apple.png";
   static const eyeOpen = "${iconsPath}eye_open.png";

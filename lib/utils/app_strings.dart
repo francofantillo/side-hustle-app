@@ -292,4 +292,26 @@ class AppStrings {
   static const String viewJob = "View Job";
   static const String jobRequest = "Job Request";
 
+  /// Payment Methods
+  static const String managePaymentMethods = "Manage Payment Methods";
+  static const String addPaymentMethod = "Add Payment Method";
+  static const String debitCreditCard = "Debit/Credit Card";
+  static const String debitCreditCardSecret = "****  ****  ****  4567";
+  static const String selectPaymentType = "Select Payment Type";
+  static const String selectPaymentTypeHint = "Please select the payment type";
+  static const String addCardDetails = "Add Card Details";
+  static const String addCardDetailsHint = "Please enter the card details";
+
+  /// Card
+  static const String nameOnCard = "Name on Card";
+  static const String cardNumber = "Card Number";
+  static const String expiry = "Expiry";
+  static const String cVV = "CVV";
+  static const String addCard = "Add Card";
+
+  /// Chat
+  static const String searchChatHint = "Search Person or chat";
+  static const String talanCalzoniChat = "Talan Calzoni";
+  static const String chatUserHint = "You: Hey! How are you doing?";
+  static const String chatUserTime = "18 Aug, 2023";
 }
