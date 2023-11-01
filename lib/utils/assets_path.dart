@@ -25,6 +25,7 @@ class AssetsPath {
   static const paymentMethod = "${iconsPath}payment_method.png";
   static const delete = "${iconsPath}delete.png";
   static const minus = "${iconsPath}minus.png";
+  static const send = "${iconsPath}send.png";
   static const cancel = "${iconsPath}cancel.png";
   static const profile = "${iconsPath}profile.png";
   static const sideHustle = "${iconsPath}side_hustle.png";

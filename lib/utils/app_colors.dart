@@ -4,6 +4,7 @@ class AppColors {
   static const primaryColor = Color(0xFF3896EE);
   static const eyeGreyColor = Color(0xFF929292);
   static const greyColor = Color(0xFF929292);
+  static final greyColorChat = Color(0xFF9E9E9E).withOpacity(.1);
   static final bottomSheetBackgroundColor = Color(0xFF929292);
   static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
   static final textGreyColor = Color(0xFF565656).withOpacity(.85);

@@ -314,4 +314,9 @@ class AppStrings {
   static const String talanCalzoniChat = "Talan Calzoni";
   static const String chatUserHint = "You: Hey! How are you doing?";
   static const String chatUserTime = "18 Aug, 2023";
+  static const String messageReceiveOne = "Hello, Good Afternoon";
+  static const String messageReceiveTwo = "How was your weekend?";
+  static const String typeAMessage = "Type a message";
+  static const String chatUserName = "Talan Calzoni";
+
 }

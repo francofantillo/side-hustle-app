@@ -10,6 +10,7 @@ class BackgroundWidget extends StatelessWidget {
   final Widget? leading;
   final String? appBarTitle;
   final bool showAppBar;
+  final Color? backgroundColor;
 
   const BackgroundWidget(
       {Key? key,
@@ -20,6 +21,7 @@ class BackgroundWidget extends StatelessWidget {
       this.actions,
       this.appBarTitle,
       this.leading,
+      this.backgroundColor,
       this.showAppBar = false})
       : super(key: key);
 
@@ -46,7 +48,7 @@ class BackgroundWidget extends StatelessWidget {
               )
             : null,
         bottomNavigationBar: bottomNavBar,
-        backgroundColor: AppColors.whiteColor,
+        backgroundColor: backgroundColor ?? AppColors.whiteColor,
         body: body ?? Container(),
       ),
     );
