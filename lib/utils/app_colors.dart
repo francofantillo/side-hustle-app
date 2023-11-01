@@ -26,6 +26,7 @@ class AppColors {
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
   static const backgroundColor = Color(0xFFF5F5F5);
+  static const chatMessageTimeColor = Color(0xFF9E9E9E);
   static const whiteColor = Colors.white;
   static const labelColor = Color(0xFF757575);
   // static const bottomNavBackgroundColor = Color(0xFFDFDFDF);

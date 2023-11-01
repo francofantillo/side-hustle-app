@@ -318,5 +318,12 @@ class AppStrings {
   static const String messageReceiveTwo = "How was your weekend?";
   static const String typeAMessage = "Type a message";
   static const String chatUserName = "Talan Calzoni";
+  static const String blockedUsers = "Blocked Users";
+  static const String help = "Help";
+  static const String unblockAll = "Unblock all";
+  static const String unblockUserMessage = "Tap or send message to Unblock this user";
+  static const String messageOptions = "Message options";
+  static const String chatOptions = "Chat options";
+  static const String report = "Report";
 
 }

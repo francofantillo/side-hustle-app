@@ -9,10 +9,13 @@ import 'package:chat_bubbles/date_chips/date_chip.dart';
 import 'package:chat_bubbles/message_bars/message_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/chat/widgets/chat_one_to_one_list.dart';
+import 'package:side_hustle/chat/widgets/chat_options_bottomsheet.dart';
 import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -21,7 +24,9 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class ChatOneToOne extends StatefulWidget {
-  const ChatOneToOne({super.key});
+  final bool isBlockedUser;
+
+  const ChatOneToOne({super.key, this.isBlockedUser = false});
 
   @override
   State<ChatOneToOne> createState() => _ChatOneToOneState();
@@ -103,6 +108,14 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
     // }
   }
 
+  String addTimeSpacing({required int textLength}) {
+    String x = "     ";
+    for (int i = 0; i < textLength; i++) {
+      x += "";
+    }
+    return x;
+  }
+
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
@@ -132,19 +145,23 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                 size: 0.055.sw,
                 color: AppColors.primaryColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                AppUtils.showBottomModalSheet(
+                    context: context, widget: const ChatOptionsBottomSheet());
+              },
             ),
           ),
         )
       ],
       body: Material(
         elevation: 6,
-        child: Stack(
+        child: Column(
           children: [
-            SingleChildScrollView(
+            const ChatOneToOneUsersList(),
+            /*SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  /*    BubbleNormalImage(
+                  */ /*    BubbleNormalImage(
                     id: 'id001',
                     image: _image(),
                     color: Colors.purpleAccent,
@@ -161,14 +178,14 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                     onSeekChanged: _changeSeek,
                     onPlayPauseButtonClick: _playAudio,
                     sent: true,
-                  ),*/
+                  ),*/ /*
                   height(0.02.sh),
                   DateChip(
                     date: now,
                     color: Color(0xFFE8E8EE),
                   ),
                   BubbleNormal(
-                    text: "${AppStrings.messageReceiveOne}\n\n03:00",
+                    text: "${AppStrings.messageReceiveOne}\n${addTimeSpacing(textLength: AppStrings.messageReceiveOne.length)}03:00",
                     isSender: false,
                     // color: Color(0xFF1B97F3),
                     color: Colors.white,
@@ -202,6 +219,24 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                       color: AppColors.textBlackColor,
                     ),
                   ),
+                  height(0.15.sh),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 7,
+                      bottom: 20,
+                    ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                        color: Color(0xFFE8E8EE),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(AppStrings.unblockUserMessage,
+                        ),
+                      ),
+                    ),
+                  ),
                   // DateChip(
                   //   date: new DateTime(now.year, now.month, now.day - 2),
                   // ),
@@ -210,7 +245,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                   // ),
                 ],
               ),
-            ),
+            ),*/
             // MessageBar(
             //   onSend: (_) => print(_),
             //   actions: [
@@ -233,39 +268,69 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Expanded(
-                        child: CustomTextFieldChat(
-                      hintText: AppStrings.typeAMessage,
-                      // isSuffixIcon: true,
-                      // suffixIcon: Icon(Icons.emoji_emotions_outlined),
-                      // isPrefixIcon: true,
-                      // prefixIconPath: AssetsPath.camera,
-                    )),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 2),
-                      // child: InkWell(
-                      //   child: const Icon(
-                      //     Icons.send,
-                      //     color: AppColors.primaryColor,
-                      //     size: 24,
-                      //   ),
-                      //   onTap: () {},
-                      // ),
-                      child: IconButtonWithBackground(
-                        height: .08.sh,
-                        width: .13.sw,
-                        borderRadius: 30,
-                        iconSize: 18,
-                        backgroundColor: AppColors.primaryColor,
-                        iconColor: AppColors.whiteColor,
-                        onTap: () {
-                          print("clicked minus");
-                        },
-                        iconPath: AssetsPath.send,
+                    Center(
+                      child: Material(
+                        child: InkWell(
+                          onTap: () {
+                            print("clicked");
+                          },
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                              color: Color(0xFFE8E8EE),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Text(
+                                AppStrings.unblockUserMessage,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
+                    ),
+                    height(0.02.sh),
+                    Row(
+                      children: [
+                        const Expanded(
+                            child: CustomTextFieldChat(
+                          hintText: AppStrings.typeAMessage,
+                          // isSuffixIcon: true,
+                          // suffixIcon: Icon(Icons.emoji_emotions_outlined),
+                          // isPrefixIcon: true,
+                          // prefixIconPath: AssetsPath.camera,
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2),
+                          // child: InkWell(
+                          //   child: const Icon(
+                          //     Icons.send,
+                          //     color: AppColors.primaryColor,
+                          //     size: 24,
+                          //   ),
+                          //   onTap: () {},
+                          // ),
+                          child: IconButtonWithBackground(
+                            height: .15.sw,
+                            width: .15.sw,
+                            // width: .08.sh,
+                            borderRadius: 30,
+                            iconSize: 18,
+                            backgroundColor: AppColors.primaryColor,
+                            iconColor: AppColors.whiteColor,
+                            onTap: () {
+                              print("clicked minus");
+                            },
+                            iconPath: AssetsPath.send,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -39,5 +39,6 @@ class AppRoutes {
   static const String paymentMethodScreenRoute = "/paymentMethod";
   static const String chatAllUsersScreenRoute = "/chatAllUsers";
   static const String chatOneToOneScreenRoute = "/chatOneToOne";
+  static const String chatBlockUsersScreenRoute = "/chatBlockUsers";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }
