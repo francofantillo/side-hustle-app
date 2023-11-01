@@ -6,6 +6,11 @@ class AppStrings {
 
   /// Auth
   static const String GET_STARTED = "Get Started";
+  static const String aboutUs = "About Us";
+  static const String accepted = "I accept";
+  static const String aboutUsTextOne = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+  static const String aboutUsTextTwo = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+  static const String aboutUsTextThree = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
   /// Login
   static const String login = "Login";
@@ -69,7 +74,6 @@ class AppStrings {
   static const String changPassword = "Change Password";
   static const String pushNotifications = "Push Notifications";
   static const String supports = "SUPPORTS";
-  static const String aboutUs = "About Us";
   static const String deleteAccount = "Delete Account";
   static const String logout = "Logout";
   static const String version = "Version 1.0";

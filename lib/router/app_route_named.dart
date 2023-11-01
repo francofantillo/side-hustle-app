@@ -40,5 +40,8 @@ class AppRoutes {
   static const String chatAllUsersScreenRoute = "/chatAllUsers";
   static const String chatOneToOneScreenRoute = "/chatOneToOne";
   static const String chatBlockUsersScreenRoute = "/chatBlockUsers";
+  static const String aboutUsScreenRoute = "/aboutUs";
+  static const String privacyPolicyScreenRoute = "/privacyPolicy";
+  static const String termsAndConditionsScreenRoute = "/termsAndConditions";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }

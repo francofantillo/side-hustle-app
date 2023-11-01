@@ -163,7 +163,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             color: AppColors.greyColor),
                       ),
                       TextSpan(
-                        text: AppStrings.signUpNow,
+                        text: AppStrings.login,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: AppDimensions.textSizeTermsAndConditions,
@@ -172,6 +172,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                          Navigator.pop(context);
                             print("Clicked");
                           },
                       ),

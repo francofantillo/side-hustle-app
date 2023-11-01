@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:side_hustle/auth/about_us.dart';
 import 'package:side_hustle/auth/forgot_password.dart';
 import 'package:side_hustle/auth/login.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
+import 'package:side_hustle/auth/privacy_policy.dart';
 import 'package:side_hustle/auth/reset_password.dart';
 import 'package:side_hustle/auth/signup.dart';
+import 'package:side_hustle/auth/terms_and_conditions.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/chat/chat_all_users.dart';
 import 'package:side_hustle/chat/chat_block_users.dart';
@@ -161,6 +164,15 @@ class AppRouter {
 
           case AppRoutes.chatBlockUsersScreenRoute:
             return const ChatBlockUsers();
+
+          case AppRoutes.aboutUsScreenRoute:
+            return const AboutUs();
+
+          case AppRoutes.privacyPolicyScreenRoute:
+            return const PrivacyPolicy();
+
+          case AppRoutes.termsAndConditionsScreenRoute:
+            return const TermsAndConditions();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

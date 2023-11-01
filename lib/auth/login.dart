@@ -8,6 +8,7 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
@@ -22,14 +23,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: BackgroundWidget(
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
           child: Padding(
             padding: EdgeInsets.all(AppDimensions.rootPadding),
             child: Column(
@@ -71,8 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       // EasyLoading.show();
                       // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
                       // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
-                      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.bottomTabsScreenRoute, (route) => false);
-
+                      Navigator.pushNamedAndRemoveUntil(context,
+                          AppRoutes.bottomTabsScreenRoute, (route) => false);
                     }),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(
@@ -84,29 +85,44 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    RoundedImageWithBackgroundColor(
-                      assetPath: AssetsPath.google,
-                      backgroundColor: AppColors.whiteColor,
-                      socialButtonSize:
-                          AppDimensions.socialButtonGoogleBackgroundSize,
-                      imageHeight: AppDimensions.socialButtonImageGoogleSize,
-                      imageWidth: AppDimensions.socialButtonImageGoogleSize,
+                    Material(
+                      child: InkWell(
+                        onTap: (){},
+                        child: RoundedImageWithBackgroundColor(
+                          assetPath: AssetsPath.google,
+                          backgroundColor: AppColors.whiteColor,
+                          socialButtonSize:
+                              AppDimensions.socialButtonGoogleBackgroundSize,
+                          imageHeight: AppDimensions.socialButtonImageGoogleSize,
+                          imageWidth: AppDimensions.socialButtonImageGoogleSize,
+                        ),
+                      ),
                     ),
-                    RoundedImageWithBackgroundColor(
-                      assetPath: AssetsPath.apple,
-                      backgroundColor: AppColors.whiteColor,
-                      socialButtonSize:
-                          AppDimensions.socialButtonBackgroundSize,
-                      imageHeight: AppDimensions.socialButtonImageSize,
-                      imageWidth: AppDimensions.socialButtonImageSize,
+                    Material(
+                      child: InkWell(
+                        onTap: (){},
+                        child: RoundedImageWithBackgroundColor(
+                          assetPath: AssetsPath.apple,
+                          backgroundColor: AppColors.whiteColor,
+                          socialButtonSize:
+                              AppDimensions.socialButtonBackgroundSize,
+                          imageHeight: AppDimensions.socialButtonImageSize,
+                          imageWidth: AppDimensions.socialButtonImageSize,
+                        ),
+                      ),
                     ),
-                    RoundedImageWithBackgroundColor(
-                      assetPath: AssetsPath.fb,
-                      backgroundColor: AppColors.whiteColor,
-                      socialButtonSize:
-                          AppDimensions.socialButtonBackgroundSize,
-                      imageHeight: AppDimensions.socialButtonImageSize,
-                      imageWidth: AppDimensions.socialButtonImageSize,
+                    Material(
+                      child: InkWell(
+                        onTap: (){},
+                        child: RoundedImageWithBackgroundColor(
+                          assetPath: AssetsPath.fb,
+                          backgroundColor: AppColors.whiteColor,
+                          socialButtonSize:
+                              AppDimensions.socialButtonBackgroundSize,
+                          imageHeight: AppDimensions.socialButtonImageSize,
+                          imageWidth: AppDimensions.socialButtonImageSize,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -133,6 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: AppColors.blackColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                            Navigator.pushNamed(context,
+                                AppRoutes.termsAndConditionsScreenRoute);
                             print("Clicked");
                           },
                       ),
@@ -153,6 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: AppColors.blackColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.privacyPolicyScreenRoute);
                             print("Clicked");
                           },
                       ),
