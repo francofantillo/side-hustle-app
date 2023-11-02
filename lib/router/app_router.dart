@@ -40,6 +40,7 @@ import 'package:side_hustle/shop/your_shop.dart';
 import 'package:side_hustle/side_hustle/side_hustle.dart';
 import 'package:side_hustle/splash/splash.dart';
 import 'package:side_hustle/splash/splash_transparent.dart';
+import 'package:side_hustle/walkthrough/walkthrough.dart';
 import 'package:side_hustle/wanted_job/wanted_job.dart';
 
 class AppRouter {
@@ -173,6 +174,9 @@ class AppRouter {
 
           case AppRoutes.termsAndConditionsScreenRoute:
             return const TermsAndConditions();
+
+          case AppRoutes.walkthroughScreenRoute:
+            return const Walkthrough();
 
           case AppRoutes.bottomTabsScreenRoute:
             return const BottomTabsScreen();

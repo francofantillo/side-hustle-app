@@ -114,6 +114,13 @@ class AppDimensions {
   static double productImageSliderHeight = 0.50.sw;
   static double productImageSliderWidth = 1.sw;
 
+  /// Walkthrough Image Slider
+  // static double productImageSliderHeight = 0.55.sw;
+  static double walkthroughImageSliderHeight = .95.sh;
+  static double walkthroughImageSliderWidth = 1.sw;
+  static double walkthroughImageHeight = .38.sh;
+  static double walkthroughImageWidth = 1.sw;
+
   /// Custom AppBar
   static double customAppBarTitleTextSize = 14.sp;
 

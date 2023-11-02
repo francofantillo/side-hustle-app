@@ -43,5 +43,6 @@ class AppRoutes {
   static const String aboutUsScreenRoute = "/aboutUs";
   static const String privacyPolicyScreenRoute = "/privacyPolicy";
   static const String termsAndConditionsScreenRoute = "/termsAndConditions";
+  static const String walkthroughScreenRoute = "/walkthrough";
   static const String bottomTabsScreenRoute = "/bottomTabs";
 }

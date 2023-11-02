@@ -330,4 +330,8 @@ class AppStrings {
   static const String chatOptions = "Chat options";
   static const String report = "Report";
 
+  /// Walkthrough
+  static const String skip = "Skip";
+  static const String walkthroughSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry." + "hfjdh fdhfhdj fdjfhdjfh jdfjd fhdh dfdfdfdf jdfhdjfh dfhdjf dhfdh fjdhfj dfhjdj hdjhfjd fjdjhjd jsdhjs";
+
 }
