@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
-import 'package:side_hustle/drawer/drawer_item.dart';
-import 'package:side_hustle/event/widgets/event_list.dart';
 import 'package:side_hustle/profile/widgets/jobs_widget.dart';
 import 'package:side_hustle/profile/widgets/profile_items_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
-import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
-import 'package:side_hustle/widgets/buttons/primary_button.dart';
-import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
-import 'package:side_hustle/widgets/images/circular_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
-import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

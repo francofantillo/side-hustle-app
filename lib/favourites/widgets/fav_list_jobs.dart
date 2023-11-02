@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/event/widgets/event_item.dart';
 import 'package:side_hustle/favourites/widgets/fav_item_jobs.dart';
-import 'package:side_hustle/home/widgets/items_widget.dart';
-import 'package:side_hustle/product/widgets/products_items.dart';
-import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_strings.dart';
 
 class FavouritesListJobs extends StatefulWidget {
   const FavouritesListJobs({super.key});

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/shop/widgets/product_list_shop.dart';
 import 'package:side_hustle/shop/widgets/services_list_shop.dart';
-import 'package:side_hustle/side_hustle/widgets/products_list.dart';
-import 'package:side_hustle/side_hustle/widgets/services_list.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -16,7 +13,6 @@ import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
-import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class ShopScreen extends StatefulWidget {
