@@ -88,7 +88,8 @@ class AppRouter {
             return const ApplyForJob();
 
           case AppRoutes.wantedJobScreenRoute:
-            return const WantedJobScreen();
+            final args = routeSettings.arguments as WantedJobScreen?;
+            return WantedJobScreen(currentTabIndex: args?.currentTabIndex ?? 0);
 
           case AppRoutes.eventScreenRoute:
             return const EventScreen();
@@ -179,7 +180,11 @@ class AppRouter {
             return const Walkthrough();
 
           case AppRoutes.bottomTabsScreenRoute:
-            return const BottomTabsScreen();
+            final args = routeSettings.arguments as BottomTabsScreen?;
+            return BottomTabsScreen(
+              currentIndex: args?.currentIndex ?? 0,
+              wantedTabCurrentIndex: args?.wantedTabCurrentIndex ?? 0,
+            );
 
           default:
             return Container();

@@ -19,6 +19,12 @@ class _BottomNavState extends State<BottomNav> {
   int _currentIndex = 0;
 
   @override
+  void initState() {
+    _currentIndex = widget.currentIndex ?? 0;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // add the curve in BottomNav
     return Container(

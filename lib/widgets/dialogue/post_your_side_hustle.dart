@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -36,7 +37,7 @@ class _PostYourSideHustleState extends State<PostYourSideHustle> {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -45,10 +46,12 @@ class _PostYourSideHustleState extends State<PostYourSideHustle> {
                 child: InkWell(
                   onTap: widget.onTapClose,
                   child: const Icon(
-                    Icons.close,
+                    // Icons.close,
+                    CustomIcon.cancel,
                     size: 22,
                   ),
-                )),
+                )
+            ),
             height(.02.sh),
             textWidget(
                 text: "Post your Side Hustle",
@@ -142,8 +145,10 @@ class _PostYourSideHustleState extends State<PostYourSideHustle> {
             ),
             height(.03.sh),
             customMaterialButton(
+              height: 10.h,
                 name: AppStrings.continueText,
                 color: AppColors.primaryColor,
+                borderRadius: 12,
                 onPressed: widget.onPressed),
           ],
         ),

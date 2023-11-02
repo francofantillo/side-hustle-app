@@ -12,12 +12,8 @@ class Walkthrough extends StatefulWidget {
 class _WalkthroughState extends State<Walkthrough> {
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      body: Column(
-        children: [
-          const WalkthroughSlider(),
-        ],
-      ),
+    return const BackgroundWidget(
+      body: WalkthroughSlider()
     );
   }
 }

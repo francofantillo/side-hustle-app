@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -103,45 +104,62 @@ class ItemsWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CircularCacheImageWidget(
-                            showLoading: false,
-                            image: userProfile,
-                            boarderColor: AppColors.primaryColor,
-                            imageHeight: imageHeight! * .2,
-                            imageWidth: imageHeight! * .2,
+                          Material(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context,
+                                    AppRoutes.otherUserProfileScreenRoute);
+                              },
+                              child: CircularCacheImageWidget(
+                                showLoading: false,
+                                image: userProfile,
+                                boarderColor: AppColors.primaryColor,
+                                imageHeight: imageHeight! * .2,
+                                imageWidth: imageHeight! * .2,
+                              ),
+                            ),
                           ),
                           width(.01.sw),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // place RoundedImageWithBackgroundColor at end
-                              textWidget(
-                                  text: userName,
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textBlackColor),
-                              Row(
+                          Material(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context,
+                                    AppRoutes.otherUserProfileScreenRoute);
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.asset(
-                                    AssetsPath.star,
-                                    height: imageHeight! * .08,
-                                    width: imageHeight! * .08,
-                                    color: AppColors.ratingColor,
-                                  ),
-                                  width(.01.sw),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                  // place RoundedImageWithBackgroundColor at end
+                                  textWidget(
+                                      text: userName,
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.textBlackColor),
+                                  Row(
                                     children: [
-                                      textWidget(
-                                          text: userRating, fontSize: 8.sp),
+                                      Image.asset(
+                                        AssetsPath.star,
+                                        height: imageHeight! * .08,
+                                        width: imageHeight! * .08,
+                                        color: AppColors.ratingColor,
+                                      ),
+                                      width(.01.sw),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          textWidget(
+                                              text: userRating, fontSize: 8.sp),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
                           const Spacer(),
                           Row(

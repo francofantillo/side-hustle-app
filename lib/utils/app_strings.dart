@@ -101,6 +101,7 @@ class AppStrings {
 
   /// Post Product
   static const String postYourSideHustle = "Post Your Side Hustle Product";
+  static const String enterTheBidAmount = "Enter the Bid amount";
   static const String productName = "Product Name";
   static const String productDescription = "Product Description";
   static const String enterTheProductDescription =
@@ -315,6 +316,7 @@ class AppStrings {
 
   /// Chat
   static const String searchChatHint = "Search Person or chat";
+  static const String submit = "Submit";
   static const String talanCalzoniChat = "Talan Calzoni";
   static const String chatUserHint = "You: Hey! How are you doing?";
   static const String chatUserTime = "18 Aug, 2023";

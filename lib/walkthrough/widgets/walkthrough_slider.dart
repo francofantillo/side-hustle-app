@@ -64,7 +64,7 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
                 // pageController.jumpToPage(currentIndex);
                 if (currentIndex != 2) {
                   pageController.animateToPage(currentIndex + 1,
-                      duration: const Duration(milliseconds: 700),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.easeOut);
                 }
               },

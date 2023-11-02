@@ -16,21 +16,23 @@ import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class WantedJobScreen extends StatefulWidget {
-  const WantedJobScreen({super.key});
+  final int currentTabIndex;
+  const WantedJobScreen({super.key, this.currentTabIndex = 0});
 
   @override
   State<WantedJobScreen> createState() => _WantedJobScreenState();
 }
 
 class _WantedJobScreenState extends State<WantedJobScreen> {
-  var index = 0;
-  bool isProductSelected = true;
+  // var index = 0;
+  // bool isProductSelected = true;
 
-  final ValueNotifier<int> _tabIndexBasicToggle = ValueNotifier(0);
+  late final ValueNotifier<int> _tabIndexBasicToggle;
 
   @override
   void initState() {
-    isProductSelected = true;
+    _tabIndexBasicToggle = ValueNotifier(widget.currentTabIndex);
+    // isProductSelected = true;
     super.initState();
   }
 
@@ -45,41 +47,7 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
           child: PrimaryPostButton(
               title: AppStrings.postJob,
               onPressed: () {
-                AppDialogues.postSideHustleDialogue(
-                        context: contextBuilder,
-                        body: PostYourSideHustle(
-                          isProductSelected: (v) {
-                            isProductSelected = v;
-                            print("prodcut: $isProductSelected");
-                          },
-                          onPressed: () {
-                            print("pressed Dialogue");
-                            if (isProductSelected) {
-                              /// reset to Default Value
-                              isProductSelected = true;
-                              // Navigator.pop(contextBuilder);
-                              AppDialogues.postSideHustleDialogue(
-                                      context: contextBuilder)
-                                  .dismiss();
-                              Navigator.pushNamed(contextBuilder,
-                                  AppRoutes.postProductScreenRoute);
-                            } else {
-                              /// reset to Default Value
-                              isProductSelected = true;
-                              AppDialogues.postSideHustleDialogue(
-                                      context: contextBuilder)
-                                  .dismiss();
-                              // Navigator.pop(contextBuilder);
-                              Navigator.pushNamed(contextBuilder,
-                                  AppRoutes.postServiceScreenRoute);
-                            }
-                          },
-                          onTapClose: () {
-                            Navigator.pop(contextBuilder);
-                          },
-                        ))
-                    // ..show()
-                    .show();
+                Navigator.pushNamed(context, AppRoutes.postJobScreenRoute);
               }),
         ),
         body: Column(

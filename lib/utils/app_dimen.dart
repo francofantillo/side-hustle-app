@@ -57,6 +57,10 @@ class AppDimensions {
   static double defaultSearchTextFieldElevation = 0.01.sw;
   static double defaultButtonElevation = 0.02.sw;
 
+  /// Material Button
+  static double defaultMaterialButtonHeightHome = 10.h;
+  static double defaultMaterialButtonRadiusHome = 12;
+
   /// Drawer
   static final double drawerIconSize = 14.h;
   static double drawerHeadingSize = 22.sp;
