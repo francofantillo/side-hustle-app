@@ -101,6 +101,8 @@ class AppStrings {
 
   /// Post Product
   static const String postYourSideHustle = "Post Your Side Hustle Product";
+  static const String sideHustlePosted = "Side Hustle Posted";
+  static const String sideHustlePostedSubTitle = "Your Side Hustle is Posted, are you wish to see your side hustle?";
   static const String enterTheBidAmount = "Enter the Bid amount";
   static const String productName = "Product Name";
   static const String productDescription = "Product Description";
@@ -197,6 +199,8 @@ class AppStrings {
 
   /// Event
   static const String eventNameHint = "Enter the event name";
+  static const String eventPosted = "Event Posted";
+  static const String eventPostedSubTitle = "Your Event is Posted, are you wish to see your Event?";
   static const String eventLocation = "Event Location/Venue";
   static const String eventLocationHint =
       "5251 2nd Street, Belmont Shore, Long Beach, California, 90803";
@@ -217,6 +221,7 @@ class AppStrings {
   static const String eventAvailableAttractionsHint =
       "Child Care, Bounce House, Full Bar, Swimming Pool, Musical Chair, Stand Up Comedy, Music";
   static const String viewEvent = "View Event";
+  static const String view = "View";
   static const String viewProfile = "View Profile";
   static const String attendees = "Attendees";
   static const String viewEventMusical = "Musical Event";
@@ -301,8 +306,13 @@ class AppStrings {
   static const String managePaymentMethods = "Manage Payment Methods";
   static const String addPaymentMethod = "Add Payment Method";
   static const String debitCreditCard = "Debit/Credit Card";
+  static const String eventPackage_1 = "1";
+  static const String eventPackage_2 = "7";
+  static const String eventPackage_3 = "30";
   static const String debitCreditCardSecret = "****  ****  ****  4567";
   static const String selectPaymentType = "Select Payment Type";
+  static const String selectPackageType = "Select Package Type";
+  static const String selectPackageTypeHint = "Please select the Package type";
   static const String selectPaymentTypeHint = "Please select the payment type";
   static const String addCardDetails = "Add Card Details";
   static const String addCardDetailsHint = "Please enter the card details";

@@ -11,6 +11,7 @@ import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/chat/chat_all_users.dart';
 import 'package:side_hustle/chat/chat_block_users.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
+import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/event/attendees.dart';
 import 'package:side_hustle/event/event.dart';
 import 'package:side_hustle/event/my_events/my_events.dart';
@@ -178,6 +179,15 @@ class AppRouter {
 
           case AppRoutes.walkthroughScreenRoute:
             return const Walkthrough();
+
+          case AppRoutes.postAddedScreenRoute:
+            final args = routeSettings.arguments as PostAdded?;
+            return PostAdded(
+                buttonName: args?.buttonName,
+                title: args?.title,
+                subTitle: args?.subTitle,
+                isEvent: args?.isEvent ?? false,
+                isProduct: args?.isProduct ?? false);
 
           case AppRoutes.bottomTabsScreenRoute:
             final args = routeSettings.arguments as BottomTabsScreen?;

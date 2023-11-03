@@ -104,7 +104,6 @@ class _BaseWidgetState extends State<BaseWidget> {
               debugShowCheckedModeBanner: false,
               initialRoute: AppRoutes.splashScreenRoute,
               // initialRoute: AppRoutes.walkthroughScreenRoute,
-              // initialRoute: AppRoutes.bottomTabsScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

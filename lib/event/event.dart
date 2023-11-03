@@ -55,41 +55,7 @@ class _EventScreenState extends State<EventScreen> {
           child: PrimaryPostButton(
               title: AppStrings.postAnEvent,
               onPressed: () {
-                AppDialogues.postSideHustleDialogue(
-                        context: contextBuilder,
-                        body: PostYourSideHustle(
-                          isProductSelected: (v) {
-                            isProductSelected = v;
-                            print("prodcut: $isProductSelected");
-                          },
-                          onPressed: () {
-                            print("pressed Dialogue");
-                            if (isProductSelected) {
-                              /// reset to Default Value
-                              isProductSelected = true;
-                              // Navigator.pop(contextBuilder);
-                              AppDialogues.postSideHustleDialogue(
-                                      context: contextBuilder)
-                                  .dismiss();
-                              Navigator.pushNamed(contextBuilder,
-                                  AppRoutes.postProductScreenRoute);
-                            } else {
-                              /// reset to Default Value
-                              isProductSelected = true;
-                              AppDialogues.postSideHustleDialogue(
-                                      context: contextBuilder)
-                                  .dismiss();
-                              // Navigator.pop(contextBuilder);
-                              Navigator.pushNamed(contextBuilder,
-                                  AppRoutes.postServiceScreenRoute);
-                            }
-                          },
-                          onTapClose: () {
-                            Navigator.pop(contextBuilder);
-                          },
-                        ))
-                    // ..show()
-                    .show();
+                Navigator.pushNamed(context, AppRoutes.postEventScreenRoute);
               }),
         ),
         body: Column(

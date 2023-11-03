@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_event_post.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -103,7 +106,7 @@ class _PostEventState extends State<PostEvent> {
                   hintText: AppStrings.eventLocationHint,
                   suffixIcon: const Icon(
                     Icons.my_location,
-                    color: Colors.black,
+                    color: AppColors.blackColor,
                   ),
                   isSuffixIcon: true,
                 ),
@@ -126,7 +129,7 @@ class _PostEventState extends State<PostEvent> {
                   hintText: AppStrings.selectTheDate,
                   isReadonly: true,
                   suffixIcon: const ImageIcon(AssetImage(AssetsPath.calender),
-                      color: Colors.black),
+                      color: AppColors.blackColor),
                   isSuffixIcon: true,
                   onTap: () async {
                     formattedDate = await AppUtils.selectDate(
@@ -155,7 +158,7 @@ class _PostEventState extends State<PostEvent> {
                           controller: firstTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.startTime,
-                          suffixIcon: ImageIcon(
+                          suffixIcon: const ImageIcon(
                             AssetImage(AssetsPath.time),
                             color: AppColors.blackColor,
                           ),
@@ -187,7 +190,7 @@ class _PostEventState extends State<PostEvent> {
                           controller: secondTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.endTime,
-                          suffixIcon: ImageIcon(
+                          suffixIcon: const ImageIcon(
                             AssetImage(AssetsPath.time),
                             color: AppColors.blackColor,
                           ),
@@ -315,7 +318,9 @@ class _PostEventState extends State<PostEvent> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      AppUtils.showBottomModalSheet(context: context, widget: ModalBottomSheetEventPost());
+                    },
                     color: AppColors.primaryColor,
                     name: AppStrings.postAnEvent),
               )
