@@ -18,7 +18,8 @@ class ItemsWidget extends StatelessWidget {
       userProfile,
       userName,
       userRating,
-      imagePath;
+      imagePath,
+      commentIconPath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
   final bool isEvent;
@@ -33,6 +34,7 @@ class ItemsWidget extends StatelessWidget {
       this.isEvent = false,
       this.userRating,
       this.imagePath,
+      this.commentIconPath,
       this.imageHeight,
       this.imageWidth,
       this.boarderColor});
@@ -174,7 +176,8 @@ class ItemsWidget extends StatelessWidget {
                             children: [
                               IconButtonWithBackground(
                                 onTap: () {
-                                  Navigator.pushNamed(context, AppRoutes.favouritesScreenRoute);
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.favouritesScreenRoute);
                                   print("Clicked");
                                 },
                                 iconPath: AssetsPath.favUnfilled,
@@ -188,7 +191,7 @@ class ItemsWidget extends StatelessWidget {
                                 onTap: () {
                                   print("Clicked");
                                 },
-                                iconPath: AssetsPath.message,
+                                iconPath: commentIconPath ?? AssetsPath.messages,
                                 height: imageHeight! * .2,
                                 width: imageHeight! * .2,
                                 backgroundColor: AppColors.primaryColor,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
+import 'package:side_hustle/drawer/widgets/logout_widget.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -165,59 +166,9 @@ class _AppDrawerState extends State<AppDrawer> {
                     onTap: () {
                       print("clicked Logout");
                       AppDialogues.logoutDialogue(
-                          context: context,
-                          body: Container(
-                            color: AppColors.primaryColor,
-                            child: Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      textWidget(
-                                          text: AppStrings.logout,
-                                          fontSize:
-                                              AppDimensions.textHeadingSize,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.whiteColor,
-                                          textAlign: TextAlign.center),
-                                      height(0.03.sh),
-                                      textWidget(
-                                          text: AppStrings.logoutMessage,
-                                          fontSize: AppDimensions.textSizeSmall,
-                                          color: AppColors.whiteColor,
-                                          textAlign: TextAlign.center),
-                                      height(0.03.sh),
-                                      customMaterialButton(
-                                          height: 10.h,
-                                          borderRadius: 12,
-                                          onPressed: () {},
-                                          name: AppStrings.logout,
-                                          textColor: AppColors.appRedColor,
-                                          color: AppColors.whiteColor),
-                                      height(0.03.sh),
-                                      Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: textWidget(
-                                              text: AppStrings.keepMeLoggedIn,
-                                              fontSize:
-                                                  AppDimensions.textSizeSmall,
-                                              color: AppColors.whiteColor,
-                                              textAlign: TextAlign.center),
-                                        ),
-                                      ),
-                                      height(0.04.sh),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )).show();
+                              context: context,
+                              body: const LogoutDialogueWidget())
+                          .show();
                     },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing),

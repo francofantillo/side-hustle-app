@@ -115,12 +115,13 @@ class _ModalBottomSheetEventPostState extends State<ModalBottomSheetEventPost> {
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, AppRoutes.postAddedScreenRoute, arguments: const PostAdded(
-                      isEvent: true,
-                      title: AppStrings.eventPosted,
-                      subTitle: AppStrings.sideHustlePostedSubTitle,
-                      buttonName: AppStrings.viewEvent,
-                    ));
+                    Navigator.pushNamed(context, AppRoutes.postAddedScreenRoute,
+                        arguments: const PostAdded(
+                          isEvent: true,
+                          title: AppStrings.eventPosted,
+                          subTitle: AppStrings.sideHustlePostedSubTitle,
+                          buttonName: AppStrings.viewEvent,
+                        ));
                   },
                   name: AppStrings.continueText,
                   borderRadius: AppDimensions.boarderRadiusCartPlaceOrder,

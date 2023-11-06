@@ -96,7 +96,8 @@ class AppRouter {
             return const EventScreen();
 
           case AppRoutes.postEventScreenRoute:
-            return const PostEvent();
+            final args = routeSettings.arguments as PostEvent?;
+            return PostEvent(isEdit: args?.isEdit ?? false,);
 
           case AppRoutes.viewEventScreenRoute:
             return const ViewEvent();
@@ -190,6 +191,7 @@ class AppRouter {
                 title: args?.title,
                 subTitle: args?.subTitle,
                 isEvent: args?.isEvent ?? false,
+                isService: args?.isService ?? false,
                 isProduct: args?.isProduct ?? false);
 
           case AppRoutes.bottomTabsScreenRoute:

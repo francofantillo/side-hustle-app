@@ -6,6 +6,7 @@ import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class JobsHorizontalListWidget extends StatelessWidget {
@@ -71,6 +72,7 @@ class JobsHorizontalListWidget extends StatelessWidget {
                     }
                   },
                   child: ItemsWidget(
+                    commentIconPath: AssetsPath.comment,
                     isEvent: isEvent,
                     imageWidth: 1.sw,
                     imageHeight: horizontalListSize,

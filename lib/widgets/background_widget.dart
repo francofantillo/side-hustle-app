@@ -30,6 +30,8 @@ class BackgroundWidget extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         drawer: drawer,
+        // Disable opening the drawer with a swipe gesture.
+        drawerEnableOpenDragGesture: false,
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: showAppBar

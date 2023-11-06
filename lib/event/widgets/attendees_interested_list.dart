@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/model/attendees_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -48,6 +50,8 @@ class _AttendeesInterestedListState extends State<AttendeesInterestedList> {
               Expanded(
                 child: textWidget(
                     text: widget.itemsList?[index].name,
+                    color: AppColors.blackColor,
+                    fontWeight: FontWeight.bold,
                     fontSize: AppDimensions.textSizeSmall),
               ),
               Row(
@@ -59,7 +63,7 @@ class _AttendeesInterestedListState extends State<AttendeesInterestedList> {
                     icon: CustomIcon.cross,
                     backgroundColor: AppColors.backIconBackgroundColor,
                     iconSize: 0.050.sw,
-                    iconColor: AppColors.searchIconColor,
+                    iconColor: AppColors.blackColor,
                   ),
                   width(0.07.sw),
                   CircularIconButton(

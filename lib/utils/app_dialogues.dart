@@ -12,7 +12,7 @@ class AppDialogues {
       bool? dismissOnTouchOutside}) {
     return AwesomeDialog(
         // width: 1.sw,
-        dialogBackgroundColor: dialogBackgroundColor ?? AppColors.primaryColor,
+        dialogBackgroundColor: dialogBackgroundColor,
         context: context,
         dismissOnTouchOutside: dismissOnTouchOutside ?? false,
         dialogType: DialogType.noHeader,

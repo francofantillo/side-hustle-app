@@ -48,6 +48,7 @@ class AssetsPath {
   static const time = "${iconsPath}time.png";
   static const searchFilter = "${iconsPath}search_filter.png";
   static const location = "${iconsPath}location.png";
+  static const logo = "${iconsPath}logo.png";
   static const cash = "${iconsPath}cash.png";
   static const check = "${iconsPath}check.png";
   static const checkFill = "${iconsPath}check_fill.png";

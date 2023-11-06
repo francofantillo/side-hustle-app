@@ -105,6 +105,7 @@ class AppStrings {
   static const String postYourSideHustle = "Post Your Side Hustle Product";
   static const String sideHustlePosted = "Side Hustle Posted";
   static const String sideHustlePostedSubTitle = "Your Side Hustle is Posted, are you wish to see your side hustle?";
+  static const String viewSideHustle = "View Side Hustle";
   static const String enterTheBidAmount = "Enter the Bid amount";
   static const String productName = "Product Name";
   static const String productDescription = "Product Description";
@@ -231,6 +232,7 @@ class AppStrings {
   static const String vendorsList = "Vendor’s List";
   static const String shareEvent = "Share Event";
   static const String interestedInEvent = "Interested in Event";
+  static const String interested = "Interested";
   static const String eventPrice = "\$12.46";
   static const String perHead = "per head";
   static const String perHour= "per hour";
@@ -278,6 +280,7 @@ class AppStrings {
   static const String shopName = "Shop name";
   static const String shops = "Shops";
   static const String shopAddress = "Shop Address";
+  static const String saveChanges = "Save Changes";
   static const String getDirections = "Get Directions";
   static const String yourShop = "Your Shop";
 

@@ -43,6 +43,7 @@ class CustomMaterialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+
       minWidth: width != null ? null : 1.sw,
       elevation: AppDimensions.defaultButtonElevation,
       // what are the Google Material Design guidelines text field, buttons and appBar elevation
@@ -61,8 +62,11 @@ class CustomMaterialButton extends StatelessWidget {
       color: color ?? AppColors.primaryColor,
       textColor: Colors.white,
       shape: RoundedRectangleBorder(
+        side: BorderSide(width: 1, color: AppColors.primaryColor),
         borderRadius: BorderRadius.circular(
-            borderRadius ?? 20.0), // Adjust the radius as needed
+          borderRadius ?? 20.0,
+        ),
+        // Adjust the radius as needed
       ),
       child: Text(
         name ?? "",

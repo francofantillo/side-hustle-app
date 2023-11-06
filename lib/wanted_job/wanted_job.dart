@@ -17,6 +17,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 
 class WantedJobScreen extends StatefulWidget {
   final int currentTabIndex;
+
   const WantedJobScreen({super.key, this.currentTabIndex = 0});
 
   @override
@@ -44,6 +45,13 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Align(
           alignment: Alignment.bottomCenter,
+          // child: _tabIndexBasicToggle.value == 0
+          //     ? PrimaryPostButton(
+          //         title: AppStrings.postJob,
+          //         onPressed: () {
+          //           Navigator.pushNamed(context, AppRoutes.postJobScreenRoute);
+          //         })
+          //     : const SizedBox.shrink(),
           child: PrimaryPostButton(
               title: AppStrings.postJob,
               onPressed: () {

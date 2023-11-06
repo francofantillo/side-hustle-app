@@ -5,15 +5,17 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
+import 'package:side_hustle/widgets/images/custom_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class PostAdded extends StatelessWidget {
   final String? title, subTitle, buttonName;
-  final bool isProduct, isEvent;
+  final bool isProduct, isEvent, isService;
 
   const PostAdded(
       {super.key,
@@ -21,6 +23,7 @@ class PostAdded extends StatelessWidget {
       this.subTitle,
       this.buttonName = "",
       this.isProduct = false,
+      this.isService = false,
       this.isEvent = false});
 
   @override
@@ -31,10 +34,14 @@ class PostAdded extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           height(0.2.sh),
-          CircularCacheImageWidget(showLoading: false,
-          imageHeight: 0.3.sh,
-          imageWidth: 0.3.sh,
-
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: CustomCacheImage(
+              showLoading: false,
+              imageHeight: 0.28.sh,
+              imageWidth: 1.sw,
+              assetImage: AssetsPath.logo,
+            ),
           ),
           height(0.01.sh),
           Padding(
@@ -62,7 +69,13 @@ class PostAdded extends StatelessWidget {
                 onPressed: () {
                   if (isProduct) {
                     Navigator.pushReplacementNamed(
-                        context, AppRoutes.viewProductScreenRoute,
+                        context, AppRoutes.yourShopScreenRoute,
+                        arguments: const ViewProduct(
+                          isMyProduct: true,
+                        ));
+                  } else if (isService) {
+                    Navigator.pushReplacementNamed(
+                        context, AppRoutes.yourShopScreenRoute,
                         arguments: const ViewProduct(
                           isMyProduct: true,
                         ));

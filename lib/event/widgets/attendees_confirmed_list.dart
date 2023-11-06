@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/model/attendees_model.dart';
+import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -32,8 +34,7 @@ class _AttendeesConfirmedListState extends State<AttendeesConfirmedList> {
         // Replace with your horizontal list item
         return Column(
           children: [
-            Row(
-                children: [
+            Row(children: [
               CircularCacheImageWidget(
                 showLoading: true,
                 assetImage: widget.itemsList?[index].image,
@@ -46,13 +47,32 @@ class _AttendeesConfirmedListState extends State<AttendeesConfirmedList> {
               Expanded(
                 child: textWidget(
                     text: widget.itemsList?[index].name,
+                    color: AppColors.blackColor,
+                    fontWeight: FontWeight.bold,
                     fontSize: AppDimensions.textSizeSmall),
               ),
-              Expanded(child: Column(
-                children: [
-                  customMaterialButton(onPressed: (){}, height: 0.01, borderRadius: 16, name: AppStrings.viewProfile, ),
-                ],
-              ))
+              // Expanded(child: Column(
+              //   children: [
+              //     customMaterialButton(onPressed: (){}, height: 0.01, borderRadius: 16, name: AppStrings.viewProfile, ),
+              //   ],
+              // ))
+              InkWell(
+                splashColor: AppColors.greyColor,
+                onTap: (){
+                  // Navigator.pushReplacementNamed(context, AppRoutes.otherUserProfileScreenRoute);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  decoration: const BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: textWidget(
+                      text: AppStrings.viewProfile,
+                      color: AppColors.whiteColor,
+                      fontSize: AppDimensions.textSizeVerySmall,
+                      fontWeight: FontWeight.w500),
+                ),
+              )
               // Expanded(
               //   child: InkWell(
               //     onTap: (){},

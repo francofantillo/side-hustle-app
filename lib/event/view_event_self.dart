@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/event/post_event.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -51,7 +52,14 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                   size: 0.05.sw,
                   color: AppColors.primaryColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  print("clicked");
+                  Navigator.pushReplacementNamed(
+                      context, AppRoutes.postEventScreenRoute,
+                      arguments: const PostEvent(
+                        isEdit: true,
+                      ));
+                },
               ),
             ),
           ),

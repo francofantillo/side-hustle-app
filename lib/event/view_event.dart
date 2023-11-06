@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/event/post_event.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -25,6 +27,14 @@ class ViewEvent extends StatefulWidget {
 }
 
 class _ViewEventState extends State<ViewEvent> {
+  bool _isInterestedInEvent = false;
+
+  @override
+  void initState() {
+    _isInterestedInEvent = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
@@ -35,7 +45,7 @@ class _ViewEventState extends State<ViewEvent> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      actions:  [
+      actions: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Container(
@@ -53,13 +63,14 @@ class _ViewEventState extends State<ViewEvent> {
                   size: 0.05.sw,
                   color: AppColors.primaryColor,
                 ),
-                onPressed: (){},
+                onPressed: () {
+                  print("clicked");
+                },
               ),
             ),
           ),
         )
       ],
-
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const AlwaysScrollableScrollPhysics(
@@ -251,7 +262,11 @@ class _ViewEventState extends State<ViewEvent> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset(AssetsPath.cash, width: 22, height: 22,),
+                    Image.asset(
+                      AssetsPath.cash,
+                      width: 22,
+                      height: 22,
+                    ),
                     width(0.02.sw),
                     Expanded(
                       child: textWidget(
@@ -265,9 +280,25 @@ class _ViewEventState extends State<ViewEvent> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
-                    onPressed: () {},
-                    color: AppColors.primaryColor,
-                    name: AppStrings.interestedInEvent),
+                    borderRadius: 14,
+                    onPressed: () {
+                      if (_isInterestedInEvent) {
+                        _isInterestedInEvent = false;
+                        setState(() {});
+                      } else {
+                        _isInterestedInEvent = true;
+                        setState(() {});
+                      }
+                    },
+                    color: _isInterestedInEvent
+                        ? AppColors.whiteColor
+                        : AppColors.primaryColor,
+                    textColor: _isInterestedInEvent
+                        ? AppColors.primaryColor
+                        : AppColors.whiteColor,
+                    name: _isInterestedInEvent
+                        ? AppStrings.interested
+                        : AppStrings.interestedInEvent),
               )
             ],
           ),

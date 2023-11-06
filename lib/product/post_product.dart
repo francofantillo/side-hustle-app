@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/common_screens/post_added.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -36,7 +38,8 @@ class _PostProductState extends State<PostProduct> {
       appBarTitle: AppStrings.postYourSideHustle,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
-        child: backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+        child:
+            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -47,7 +50,9 @@ class _PostProductState extends State<PostProduct> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageSlider(itemImages: AlphaAppData.postProductImagesList,),
+              ImageSlider(
+                itemImages: AlphaAppData.postProductImagesList,
+              ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -223,7 +228,16 @@ class _PostProductState extends State<PostProduct> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, AppRoutes.postAddedScreenRoute,
+                          arguments: const PostAdded(
+                            isProduct: true,
+                            title: AppStrings.sideHustlePosted,
+                            subTitle: AppStrings.sideHustlePostedSubTitle,
+                            buttonName: AppStrings.viewSideHustle,
+                          ));
+                    },
                     color: AppColors.primaryColor,
                     name: AppStrings.addProduct),
               )

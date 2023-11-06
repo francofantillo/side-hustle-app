@@ -19,7 +19,9 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class PostEvent extends StatefulWidget {
-  const PostEvent({super.key});
+  final bool isEdit;
+
+  const PostEvent({super.key, this.isEdit = false});
 
   @override
   State<PostEvent> createState() => _PostEventState();
@@ -319,10 +321,18 @@ class _PostEventState extends State<PostEvent> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
                     onPressed: () {
-                      AppUtils.showBottomModalSheet(context: context, widget: ModalBottomSheetEventPost());
+                      if (widget.isEdit) {
+                        Navigator.pop(context);
+                      } else {
+                        AppUtils.showBottomModalSheet(
+                            context: context,
+                            widget: const ModalBottomSheetEventPost());
+                      }
                     },
                     color: AppColors.primaryColor,
-                    name: AppStrings.postAnEvent),
+                    name: widget.isEdit
+                        ? AppStrings.saveChanges
+                        : AppStrings.postAnEvent),
               )
             ],
           ),
