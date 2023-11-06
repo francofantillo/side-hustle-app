@@ -157,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               height(0.03.sh),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

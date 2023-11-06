@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/chat/widgets/chat_all_user_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 
 class ChatBlockUsersList extends StatefulWidget {
   final List? itemList;
+
   const ChatBlockUsersList({super.key, this.itemList});
 
   @override
@@ -26,8 +28,11 @@ class _ChatBlockUsersListState extends State<ChatBlockUsersList> {
           // Replace with your horizontal list item
           return Material(
             child: InkWell(
-              onTap: (){
-                Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
+                    arguments: const ChatOneToOne(
+                      isBlockedUser: true,
+                    ));
               },
               child: const Padding(
                   padding: EdgeInsets.only(right: 16.0, left: 8.0),

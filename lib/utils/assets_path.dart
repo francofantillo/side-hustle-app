@@ -61,6 +61,7 @@ class AssetsPath {
 
   /// Alpha Images
   static const carpenter = "${alphaPath}carpenter.png";
+  static const headphones = "${alphaPath}headphones.png";
   static const social = "${alphaPath}social.png";
   static const homeR1 = "${alphaPath}home_r_1.png";
   static const homeR2 = "${alphaPath}home_r_2.png";
@@ -68,6 +69,9 @@ class AssetsPath {
   static const homeR4 = "${alphaPath}home_r_4.png";
   static const homeR5 = "${alphaPath}home_r_5.png";
   static const userProfileJob = "${alphaPath}user_profile_jobs.png";
-  static const userProfileEvents = "${alphaPath}events_profile.png";
+  // static const carpenterProfile = "${alphaPath}carpenter_profile.png";
+  static const carpenterProfile = "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
+  // static const userProfileEvents = "${alphaPath}events_profile.png";
+  static const userProfileEvents = "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk";
 
 }

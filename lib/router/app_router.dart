@@ -163,7 +163,10 @@ class AppRouter {
             return const ChatAllUsers();
 
           case AppRoutes.chatOneToOneScreenRoute:
-            return const ChatOneToOne();
+            final args = routeSettings.arguments as ChatOneToOne?;
+            return ChatOneToOne(
+              isBlockedUser: args?.isBlockedUser ?? false,
+            );
 
           case AppRoutes.chatBlockUsersScreenRoute:
             return const ChatBlockUsers();

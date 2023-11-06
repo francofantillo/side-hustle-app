@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -44,6 +45,7 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           fontWeight: FontWeight.w500,
           iconColor: AppColors.greyColorNoOpacity,
           onTap: () {
+            Navigator.pushNamed(context, AppRoutes.chatAllUsersScreenRoute);
             print("Clicked");
           },
         ),
@@ -133,7 +135,9 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           textColor: AppColors.appRedColor,
           iconColor: AppColors.appRedColor,
           fontWeight: FontWeight.w500,
-          onTap: () {},
+          onTap: () {
+            AppDialogues.postSideHustleDialogue(context: context);
+          },
         ),
       ],
     );

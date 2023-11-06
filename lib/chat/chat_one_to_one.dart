@@ -4,7 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_one_to_one_list.dart';
 import 'package:side_hustle/chat/widgets/chat_options_bottomsheet.dart';
 import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
+import 'package:side_hustle/chat/widgets/order_item_widget.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -12,6 +15,7 @@ import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ChatOneToOne extends StatefulWidget {
   final bool isBlockedUser;
@@ -116,7 +120,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
-            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       actions: [
         Padding(
@@ -148,6 +152,37 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         child: Column(
           children: [
             const ChatOneToOneUsersList(),
+
+/*
+            Container(
+              width: 1.sw,
+              height: 100,
+              constraints: BoxConstraints(maxWidth: .95.sw),
+              padding: const EdgeInsets.only(left: 8.0, bottom: 10),
+              child: Card(
+                color: AppColors.primaryColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius:
+                  BorderRadius.only(topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(12)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: OrderItemWidget(
+                    imageHeight: 3.sh,
+                    imageWidth: 3.sh,
+                  )
+                ),
+              ),
+            ),
+*/
+            // Container(height: 100,
+            // decoration: BoxDecoration(
+            //   color: Colors.red,
+            //
+            // ),
+            // ),
             /*SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -263,7 +298,8 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Center(
+                    widget.isBlockedUser
+                        ? Center(
                       child: Material(
                         child: InkWell(
                           onTap: () {
@@ -272,7 +308,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                           child: Container(
                             decoration: const BoxDecoration(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(6)),
+                              BorderRadius.all(Radius.circular(6)),
                               color: Color(0xFFE8E8EE),
                             ),
                             child: const Padding(
@@ -284,18 +320,19 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                           ),
                         ),
                       ),
-                    ),
+                    )
+                        : const SizedBox.shrink(),
                     height(0.02.sh),
                     Row(
                       children: [
                         const Expanded(
                             child: CustomTextFieldChat(
-                          hintText: AppStrings.typeAMessage,
-                          // isSuffixIcon: true,
-                          // suffixIcon: Icon(Icons.emoji_emotions_outlined),
-                          // isPrefixIcon: true,
-                          // prefixIconPath: AssetsPath.camera,
-                        )),
+                              hintText: AppStrings.typeAMessage,
+                              // isSuffixIcon: true,
+                              // suffixIcon: Icon(Icons.emoji_emotions_outlined),
+                              // isPrefixIcon: true,
+                              // prefixIconPath: AssetsPath.camera,
+                            )),
                         Padding(
                           padding: const EdgeInsets.only(left: 2),
                           // child: InkWell(

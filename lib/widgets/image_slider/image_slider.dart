@@ -9,7 +9,8 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageSlider extends StatefulWidget {
-  const ImageSlider({super.key});
+  final List<String>? itemImages;
+  const ImageSlider({super.key, this.itemImages});
 
   @override
   State<ImageSlider> createState() => _ImageSliderState();
@@ -42,7 +43,7 @@ class _ImageSliderState extends State<ImageSlider> {
       child: PageView.builder(
           scrollDirection: Axis.horizontal,
           controller: pageController,
-          itemCount: 3,
+          itemCount: widget.itemImages?.length ?? 3,
           itemBuilder: (context, index) {
             return pageViewChild(index);
           }),
@@ -59,7 +60,7 @@ class _ImageSliderState extends State<ImageSlider> {
       ),
       child: SmoothPageIndicator(
         controller: pageController,
-        count: 3,
+        count: widget.itemImages?.length ?? 3,
         effect: const ExpandingDotsEffect(
           dotHeight: 4,
           dotWidth: 7,
@@ -85,7 +86,8 @@ class _ImageSliderState extends State<ImageSlider> {
             RoundedCornersImage(
               imageHeight: AppDimensions.productImageSliderHeight,
               imageWidth: AppDimensions.productImageSliderWidth,
-              assetImage: AssetsPath.social,
+              assetImage: widget.itemImages?[index] ?? AssetsPath.carpenter,
+              // image: AssetsPath.carpenterProfile,
               boarderColor: Colors.white,
             ),
             index == 0

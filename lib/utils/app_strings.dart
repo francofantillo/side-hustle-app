@@ -76,6 +76,8 @@ class AppStrings {
   static const String supports = "SUPPORTS";
   static const String deleteAccount = "Delete Account";
   static const String logout = "Logout";
+  static const String logoutMessage = "Are you sure you want to logout?";
+  static const String keepMeLoggedIn = "Keep me Logged In";
   static const String version = "Version 1.0";
 
   /// Home
@@ -231,6 +233,7 @@ class AppStrings {
   static const String interestedInEvent = "Interested in Event";
   static const String eventPrice = "\$12.46";
   static const String perHead = "per head";
+  static const String perHour= "per hour";
   static const String eventTimeText = "Start at 10:00am to 5:00pm";
   static const String eventPostedBy = "Event Posted by";
   static const String eventPostedProfileName = "Leo Lubin";
@@ -327,6 +330,8 @@ class AppStrings {
   /// Chat
   static const String searchChatHint = "Search Person or chat";
   static const String submit = "Submit";
+  static const String orderMessage = "Hey Brandon, I’d like to buy this product from your shop.";
+  static const String orderMessageChatText = "Thank you for showing your interest, I’ll prepare your order in next 1 hour, then you can collect it, from my shop.";
   static const String talanCalzoniChat = "Talan Calzoni";
   static const String chatUserHint = "You: Hey! How are you doing?";
   static const String chatUserTime = "18 Aug, 2023";

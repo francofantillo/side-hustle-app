@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -22,6 +25,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    // widget.contextBuilder;
     return ClipRRect(
       borderRadius: BorderRadius.only(
           topRight: Radius.circular(AppDimensions.drawerBGCurve),
@@ -35,7 +39,8 @@ class _AppDrawerState extends State<AppDrawer> {
             padding: EdgeInsets.all(AppDimensions.rootPadding),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+              physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics()),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -58,7 +63,9 @@ class _AppDrawerState extends State<AppDrawer> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircularCacheImageWidget(showLoading: false,),
+                      const CircularCacheImageWidget(
+                        showLoading: false,
+                      ),
                       width(0.03.sw),
                       Expanded(
                         child: Column(
@@ -155,7 +162,63 @@ class _AppDrawerState extends State<AppDrawer> {
                   DrawerItemListTile(
                     iconPath: AssetsPath.logout,
                     title: AppStrings.logout,
-                    onTap: () {},
+                    onTap: () {
+                      print("clicked Logout");
+                      AppDialogues.logoutDialogue(
+                          context: context,
+                          body: Container(
+                            color: AppColors.primaryColor,
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      textWidget(
+                                          text: AppStrings.logout,
+                                          fontSize:
+                                              AppDimensions.textHeadingSize,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.whiteColor,
+                                          textAlign: TextAlign.center),
+                                      height(0.03.sh),
+                                      textWidget(
+                                          text: AppStrings.logoutMessage,
+                                          fontSize: AppDimensions.textSizeSmall,
+                                          color: AppColors.whiteColor,
+                                          textAlign: TextAlign.center),
+                                      height(0.03.sh),
+                                      customMaterialButton(
+                                          height: 10.h,
+                                          borderRadius: 12,
+                                          onPressed: () {},
+                                          name: AppStrings.logout,
+                                          textColor: AppColors.appRedColor,
+                                          color: AppColors.whiteColor),
+                                      height(0.03.sh),
+                                      Material(
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: textWidget(
+                                              text: AppStrings.keepMeLoggedIn,
+                                              fontSize:
+                                                  AppDimensions.textSizeSmall,
+                                              color: AppColors.whiteColor,
+                                              textAlign: TextAlign.center),
+                                        ),
+                                      ),
+                                      height(0.04.sh),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )).show();
+                    },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing),
                   Center(
@@ -163,7 +226,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         text: AppStrings.version,
                         color: AppColors.textWhiteColor,
                         textAlign: TextAlign.center,
-                    fontSize: 12.sp),
+                        fontSize: 12.sp),
                   )
                 ],
               ),

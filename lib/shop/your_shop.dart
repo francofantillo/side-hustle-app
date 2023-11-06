@@ -66,7 +66,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
-              backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+          backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
         ),
         actions: [
           Padding(
@@ -115,86 +115,99 @@ class _YourShopScreenState extends State<YourShopScreen> {
                       ),
                       isEdit
                           ? Positioned(
-                              left: AppDimensions.imageWidthShopEdit - 0.15.sw,
-                              top: AppDimensions.imageHeightShopEdit - 0.15.sw,
-                              child: IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                },
-                                iconPath: AssetsPath.camera,
-                                height: 0.12.sw,
-                                width: 0.12.sw,
-                                backgroundColor: AppColors.whiteColor,
-                                iconColor: AppColors.primaryColor,
-                              ),
-                            )
+                        left: AppDimensions.imageWidthShopEdit - 0.15.sw,
+                        top: AppDimensions.imageHeightShopEdit - 0.15.sw,
+                        child: IconButtonWithBackground(
+                          onTap: () {
+                            print("Clicked");
+                          },
+                          iconPath: AssetsPath.camera,
+                          height: 0.12.sw,
+                          width: 0.12.sw,
+                          backgroundColor: AppColors.whiteColor,
+                          iconColor: AppColors.primaryColor,
+                        ),
+                      )
                           : const SizedBox.shrink()
                     ],
                   ),
                   width(0.03.sw),
                   isEdit
                       ? Expanded(
-                          child: Row(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
                             children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    const CustomTextFormField(
-                                      hintText: AppStrings.shopName,
-                                      maxLines: 1,
-                                    ),
-                                    CustomTextFormField(
-                                      hintText: AppStrings.shopAddress,
-                                      maxLines: 2,
-                                      height: 75.h,
-                                      // height: 0.16.sh
-                                    )
-                                  ],
-                                ),
+                              const CustomTextFormField(
+                                hintText: AppStrings.shopName,
+                                maxLines: 1,
+                              ),
+                              CustomTextFormField(
+                                hintText: AppStrings.zipCode,
+                                maxLines: 2,
+                                height: 75.h,
+                                // height: 0.16.sh
                               )
                             ],
                           ),
                         )
+                      ],
+                    ),
+                  )
                       : Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 6.h),
-                                child: textWidget(
-                                    text: AppStrings.shop,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: AppDimensions.textSizeNormal,
-                                    color: AppColors.textBlackColor),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 2.0),
-                                    child: ImageIcon(
-                                      const AssetImage(AssetsPath.location),
-                                      size: 0.025.sh,
-                                      color: AppColors.greyColorNoOpacity,
-                                    ),
-                                  ),
-                                  width(0.02.sw),
-                                  Expanded(
-                                    child: textWidget(
-                                        text: AppStrings.locationText,
-                                        maxLines: 3,
-                                        fontSize:
-                                            AppDimensions.textSizeVerySmall),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 6.h),
+                          child: textWidget(
+                              text: AppStrings.shop,
+                              fontWeight: FontWeight.bold,
+                              fontSize: AppDimensions.textSizeNormal,
+                              color: AppColors.textBlackColor),
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2.0),
+                              child: ImageIcon(
+                                const AssetImage(AssetsPath.location),
+                                size: 0.025.sh,
+                                color: AppColors.greyColorNoOpacity,
+                              ),
+                            ),
+                            width(0.02.sw),
+                            Expanded(
+                              child: textWidget(
+                                  text: AppStrings.locationText,
+                                  maxLines: 3,
+                                  fontSize:
+                                  AppDimensions.textSizeVerySmall),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
+            isEdit
+                ? Padding(
+              padding:
+              EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+              child: CustomTextFormField(
+
+                hintText: AppStrings.shopAddress,
+                maxLines: 1,
+                height: 45.h,
+                // height: 0.16.sh
+              ),
+            )
+                : const SizedBox.shrink(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
               child: SizedBox(
@@ -238,7 +251,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                 onPressed: () {
                   AppDialogues.postSideHustleDialogue(
                       context: contextBuilder,
-                      body: PostYourSideHustle(
+                      body: PostYourSideHustleDialogueWidget(
                         isProductSelected: (v) {
                           isProductSelected = v;
                           print("prodcut: $isProductSelected");
@@ -250,7 +263,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                             isProductSelected = true;
                             // Navigator.pop(contextBuilder);
                             AppDialogues.postSideHustleDialogue(
-                                    context: contextBuilder)
+                                context: contextBuilder)
                                 .dismiss();
                             Navigator.pushNamed(contextBuilder,
                                 AppRoutes.postProductScreenRoute);
@@ -258,7 +271,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                             /// reset to Default Value
                             isProductSelected = true;
                             AppDialogues.postSideHustleDialogue(
-                                    context: contextBuilder)
+                                context: contextBuilder)
                                 .dismiss();
                             // Navigator.pop(contextBuilder);
                             Navigator.pushNamed(contextBuilder,

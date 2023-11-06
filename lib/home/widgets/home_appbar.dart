@@ -9,10 +9,10 @@ import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class HomeTopWidgets extends StatelessWidget {
+class HomeAppBar extends StatelessWidget {
   final BuildContext contextBuilder;
 
-  const HomeTopWidgets({super.key, required this.contextBuilder});
+  const HomeAppBar({super.key, required this.contextBuilder});
 
   @override
   Widget build(BuildContext context) {

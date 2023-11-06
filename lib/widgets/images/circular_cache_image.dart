@@ -66,6 +66,7 @@ class CircularCacheImageWidget extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage(
                     assetImage ?? AssetsPath.placeHolderProfileImage),
+                scale: 1,
                 fit: BoxFit.cover)),
       ),
     );

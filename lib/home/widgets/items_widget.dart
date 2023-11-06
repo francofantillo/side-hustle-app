@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
@@ -20,6 +21,7 @@ class ItemsWidget extends StatelessWidget {
       imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final bool isEvent;
 
   const ItemsWidget(
       {super.key,
@@ -28,6 +30,7 @@ class ItemsWidget extends StatelessWidget {
       this.price,
       this.userProfile,
       this.userName,
+      this.isEvent = false,
       this.userRating,
       this.imagePath,
       this.imageHeight,
@@ -80,7 +83,9 @@ class ItemsWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textBlackColor),
                               textWidget(
-                                  text: "per head",
+                                  text: isEvent
+                                      ? AppStrings.perHead
+                                      : AppStrings.perHour,
                                   textAlign: TextAlign.end,
                                   fontSize: 8),
                             ],
@@ -113,6 +118,7 @@ class ItemsWidget extends StatelessWidget {
                               child: CircularCacheImageWidget(
                                 showLoading: false,
                                 image: userProfile,
+                                // assetImage: userProfile,
                                 boarderColor: AppColors.primaryColor,
                                 imageHeight: imageHeight! * .2,
                                 imageWidth: imageHeight! * .2,
@@ -168,6 +174,7 @@ class ItemsWidget extends StatelessWidget {
                             children: [
                               IconButtonWithBackground(
                                 onTap: () {
+                                  Navigator.pushNamed(context, AppRoutes.favouritesScreenRoute);
                                   print("Clicked");
                                 },
                                 iconPath: AssetsPath.favUnfilled,

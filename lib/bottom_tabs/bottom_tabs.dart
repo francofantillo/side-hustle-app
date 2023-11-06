@@ -22,6 +22,7 @@ class BottomTabsScreen extends StatefulWidget {
 
 class _BottomTabsScreenState extends State<BottomTabsScreen> {
   late final PageController _pageController;
+
   // final GlobalKey<ScaffoldState> _key = GlobalKey();
   int _selectedIndex = 0;
 

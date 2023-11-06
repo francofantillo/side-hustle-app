@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/home/widgets/home_first_item_widget.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -51,12 +52,19 @@ class FirstHomeListItemWidget extends StatelessWidget {
             itemCount: itemsList?.length ?? 0, // Replace with your item count
             itemBuilder: (context, index) {
               // Replace with your horizontal list item
-              return Padding(
-                padding: const EdgeInsets.only(right: 2.0, left: 8.0, top: 8),
-                child: HomeFirstItemWidget(
-                  title: itemsList?[index].name,
-                  assetImage: itemsList?[index].imagePath,
-                  boarderColor: AppColors.homeFirstItemOutlineColor,
+              return Material(
+                child: InkWell(
+                  onTap: (){
+                    Navigator.pushNamed(context, AppRoutes.otherUserProfileScreenRoute);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 2.0, left: 8.0, top: 8),
+                    child: HomeFirstItemWidget(
+                      title: itemsList?[index].name,
+                      assetImage: itemsList?[index].imagePath,
+                      boarderColor: AppColors.homeFirstItemOutlineColor,
+                    ),
+                  ),
                 ),
               );
             },

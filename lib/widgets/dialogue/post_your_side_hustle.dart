@@ -8,22 +8,22 @@ import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class PostYourSideHustle extends StatefulWidget {
+class PostYourSideHustleDialogueWidget extends StatefulWidget {
   final Function()? onTapClose;
   final Function() onPressed;
   final ValueChanged<bool> isProductSelected;
 
-  const PostYourSideHustle(
+  const PostYourSideHustleDialogueWidget(
       {super.key,
       required this.onPressed,
       this.onTapClose,
       required this.isProductSelected});
 
   @override
-  State<PostYourSideHustle> createState() => _PostYourSideHustleState();
+  State<PostYourSideHustleDialogueWidget> createState() => _PostYourSideHustleDialogueWidgetState();
 }
 
-class _PostYourSideHustleState extends State<PostYourSideHustle> {
+class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDialogueWidget> {
   bool isItemOneSelected = true;
 
   @override

@@ -10,11 +10,13 @@ class AlphaAppData {
     HomeFirstList(name: "Leo’s shop", imagePath: AssetsPath.homeR4),
     HomeFirstList(name: "Kim’s shop", imagePath: AssetsPath.homeR5),
   ];
+
   /// Jobs And Events List
   static List<JobsAndEvents> jobsAndEventsList = [
     JobsAndEvents(title: "Jobs around you", itemList: jobsAroundYou),
     JobsAndEvents(title: "Events around you", itemList: eventsAroundYou)
   ];
+
   /// Jobs Around You
   static List<ItemList> jobsAroundYou = [
     ItemList(
@@ -25,20 +27,36 @@ class AlphaAppData {
         userRating: "5.0 ratings",
         price: "\$24.56",
         imagePath: AssetsPath.carpenter,
-        userProfile: AssetsPath.userProfileJob)
+        userProfile: AssetsPath.carpenterProfile)
   ];
+
   /// Jobs Around You
   static List<ItemList> eventsAroundYou = [
     ItemList(
         title: "Social Event",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Phillip Press",
         userRating: "5.0 ratings",
         price: "\$24.56",
         imagePath: AssetsPath.social,
         userProfile: AssetsPath.userProfileEvents)
   ];
+
+  /// Post Service Images List
+  static List<String> postServiceImagesList = [
+    AssetsPath.carpenter,
+    AssetsPath.carpenter,
+    AssetsPath.carpenter
+  ];
+
+  /// Post Product Images List
+  static List<String> postProductImagesList = [
+    AssetsPath.headphones,
+    AssetsPath.headphones,
+    AssetsPath.headphones
+  ];
+
 }
 
 class HomeFirstList {

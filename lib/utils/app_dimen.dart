@@ -12,6 +12,7 @@ class AppDimensions {
   static double textSizeSmall = 14.sp;
   static double textSizeVerySmall = 12.sp;
   static double textSizePerHead = 10.sp;
+  static double textSizeChatMessageTime = 12.sp;
   static double textSizeNormal = 16.sp;
   static double textSizeTermsAndConditions = 14.sp;
   static double textHeadingSize = 26.sp;

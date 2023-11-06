@@ -2,9 +2,12 @@ import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:chat_bubbles/date_chips/date_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/chat/widgets/order_item_widget.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -28,6 +31,77 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
     return x;
   }
 
+  Widget orderWidget() {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        width: 1.sw,
+        height: 0.42.sh,
+        constraints: BoxConstraints(maxWidth: .95.sw),
+        padding: const EdgeInsets.only(right: 8.0, bottom: 10),
+        child: Card(
+          color: AppColors.primaryColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+                bottomRight: Radius.circular(4)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 8.0, left: 8.0, right: 8.0, bottom: 8),
+                child: OrderItemWidget(
+                  imageHeight: 0.21.sh,
+                  imageWidth: 1.sw,
+                  title: AppStrings.watch,
+                  subTitle: AppStrings.walkthroughSubTitle,
+                  deliveryType: DeliveryOptions.Pickup.name,
+                  price: AppStrings.productPricingNumeric,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
+                child: textWidget(
+                    maxLines: 2,
+                    text: AppStrings.orderMessage,
+                    color: AppColors.textWhiteColor),
+              ),
+              const Spacer(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0, bottom: 8),
+                  child: textWidget(
+                      text: "03:00",
+                      fontSize: AppDimensions.textSizeChatMessageTime,
+                      color: AppColors.textWhiteColor),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getDirectionToShop() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, bottom: 10, right: 8),
+      child: customMaterialButton(
+          width: 24.w,
+          height: 12,
+          onPressed: () {},
+          color: AppColors.greenColor,
+          name: AppStrings.getDirectionToShop,
+          borderRadius: 12),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
@@ -48,6 +122,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              orderWidget(),
+              getDirectionToShop(),
               /*    BubbleNormalImage(
                     id: 'id001',
                     image: _image(),
