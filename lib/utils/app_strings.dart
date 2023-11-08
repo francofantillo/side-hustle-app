@@ -1,5 +1,3 @@
-
-
 class AppStrings {
   static const String APP_PACKAGE_NAME = "com.eplanet.pop";
   static const String APP_TITLE = "Side Hustle";
@@ -8,9 +6,12 @@ class AppStrings {
   static const String GET_STARTED = "Get Started";
   static const String aboutUs = "About Us";
   static const String accepted = "I accept";
-  static const String aboutUsTextOne = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
-  static const String aboutUsTextTwo = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-  static const String aboutUsTextThree = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+  static const String aboutUsTextOne =
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+  static const String aboutUsTextTwo =
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+  static const String aboutUsTextThree =
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
   /// Login
   static const String login = "Login";
@@ -104,7 +105,8 @@ class AppStrings {
   /// Post Product
   static const String postYourSideHustle = "Post Your Side Hustle Product";
   static const String sideHustlePosted = "Side Hustle Posted";
-  static const String sideHustlePostedSubTitle = "Your Side Hustle is Posted, are you wish to see your side hustle?";
+  static const String sideHustlePostedSubTitle =
+      "Your Side Hustle is Posted, are you wish to see your side hustle?";
   static const String viewSideHustle = "View Side Hustle";
   static const String enterTheBidAmount = "Enter the Bid amount";
   static const String productName = "Product Name";
@@ -137,8 +139,10 @@ class AppStrings {
   static const String serviceDescription = "Service Description";
   static const String serviceDate = "Service Date";
   static const String serviceDuration = "Service Duration";
-  static const String serviceDurationHint = "Please enter the Total hours required, Start time and End time for this service.";
-  static const String serviceDateHint = "Please enter the date for the required service.";
+  static const String serviceDurationHint =
+      "Please enter the Total hours required, Start time and End time for this service.";
+  static const String serviceDateHint =
+      "Please enter the date for the required service.";
   static const String enterServiceDescription = "Enter the service description";
   static const String howWouldYouLikeToSellService =
       "How would you like to sell this service as:";
@@ -148,6 +152,7 @@ class AppStrings {
   static const String pleaseEnterAdditionalInformation =
       "Please enter additional Information about your service";
   static const String addService = "Add Service";
+  static const String plumber = "Plumber";
 
   /// Post Job
   static const String postJob = "Post a Job";
@@ -165,6 +170,7 @@ class AppStrings {
   static const String jobTimeHint = "10:00am";
   static const String totalHoursHint = "1:00pm";
   static const String totalHours = "Total Hours: 3 Hours";
+  static const String totalHoursRequired = "Total hours required";
   static const String jobs = "Jobs";
 
   /// Wanted Job
@@ -203,7 +209,8 @@ class AppStrings {
   /// Event
   static const String eventNameHint = "Enter the event name";
   static const String eventPosted = "Event Posted";
-  static const String eventPostedSubTitle = "Your Event is Posted, are you wish to see your Event?";
+  static const String eventPostedSubTitle =
+      "Your Event is Posted, are you wish to see your Event?";
   static const String eventLocation = "Event Location/Venue";
   static const String eventLocationHint =
       "5251 2nd Street, Belmont Shore, Long Beach, California, 90803";
@@ -235,7 +242,7 @@ class AppStrings {
   static const String interested = "Interested";
   static const String eventPrice = "\$12.46";
   static const String perHead = "per head";
-  static const String perHour= "per hour";
+  static const String perHour = "per hour";
   static const String eventTimeText = "Start at 10:00am to 5:00pm";
   static const String eventPostedBy = "Event Posted by";
   static const String eventPostedProfileName = "Leo Lubin";
@@ -246,7 +253,8 @@ class AppStrings {
   static const String editProduct = "Edit Product";
   static const String editService = "Edit Service";
   static const String serviceAdded = "Service added";
-  static const String productDescViewProduct = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
+  static const String productDescViewProduct =
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
   static const String pickUpViewProduct = "Pick-up";
   static const String productPostBy = "Product Post by";
   static const String servicePostBy = "Service Post by";
@@ -263,17 +271,20 @@ class AppStrings {
   static const String done = "Done";
   static const String viewCartText = "View Cart (1)";
   static const String deliveryAddress = "Delivery Address";
-  static const String deliveryAddressHint = "Please enter the delivery address and other information to rider. ";
-  static const String deliveryAddressServiceHint = "Please enter the delivery address and other information to the service Provider. ";
+  static const String deliveryAddressHint =
+      "Please enter the delivery address and other information to rider. ";
+  static const String deliveryAddressServiceHint =
+      "Please enter the delivery address and other information to the service Provider. ";
   static const String enterCompleteAddress = "Enter your complete address";
   static const String street = "Street";
   static const String suitApartment = "Suit, Apartment";
   static const String yourCart = "Your Cart";
-  static const String yourCartItems = "4 Items";
+  static const String yourCartItems = "1 Items";
   static const String placeOrder = "Place Order";
   static const String estimatedTotal = "Estimated Total";
   static const String cancel = "Cancel";
-  static const String estimatedTotalText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+  static const String estimatedTotalText =
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
   /// Shop
   static const String shop = "Brandon’s Shop";
@@ -283,6 +294,7 @@ class AppStrings {
   static const String saveChanges = "Save Changes";
   static const String getDirections = "Get Directions";
   static const String yourShop = "Your Shop";
+  static const String editResume = "Edit Resume";
 
   /// Profile
   static const String profileResumePage = "Profile Resume Page";
@@ -295,6 +307,7 @@ class AppStrings {
   static const String jobsPosted = "Jobs Posted";
   static const String eventsPosted = "Events Posted";
   static const String eventsJobPosted = "Event’s Job Posted";
+
   // static const String jobsPosted = "Jobs Posted";
 
   /// My Jobs
@@ -302,9 +315,9 @@ class AppStrings {
   static const String ongoing = "Ongoing";
   static const String viewRequest = "View Request";
   static const String markAsComplete = "Mark as Complete";
-  static const String rateAndReview  = "Rate and Review ";
-  static const String reject  = "Reject";
-  static const String hire  = "Hire";
+  static const String rateAndReview = "Rate and Review ";
+  static const String reject = "Reject";
+  static const String hire = "Hire";
   static const String viewJob = "View Job";
   static const String jobRequest = "Job Request";
 
@@ -333,8 +346,12 @@ class AppStrings {
   /// Chat
   static const String searchChatHint = "Search Person or chat";
   static const String submit = "Submit";
-  static const String orderMessage = "Hey Brandon, I’d like to buy this product from your shop.";
-  static const String orderMessageChatText = "Thank you for showing your interest, I’ll prepare your order in next 1 hour, then you can collect it, from my shop.";
+  static const String orderMessageProduct =
+      "Hey Brandon, I’d like to buy this product from your shop.";
+  static const String orderMessageService =
+      "Hey Brandon, I’m interested in to get this service from you. please reached at me at the time i have mentioned. Also please confirm me, if you are availbale for this service in the above timings. ";
+  static const String orderMessageChatText =
+      "Thank you for showing your interest, I’ll prepare your order in next 1 hour, then you can collect it, from my shop.";
   static const String talanCalzoniChat = "Talan Calzoni";
   static const String chatUserHint = "You: Hey! How are you doing?";
   static const String chatUserTime = "18 Aug, 2023";
@@ -345,13 +362,41 @@ class AppStrings {
   static const String blockedUsers = "Blocked Users";
   static const String help = "Help";
   static const String unblockAll = "Unblock all";
-  static const String unblockUserMessage = "Tap or send message to Unblock this user";
+  static const String unblockUserMessage =
+      "Tap or send message to Unblock this user";
   static const String messageOptions = "Message options";
   static const String chatOptions = "Chat options";
   static const String report = "Report";
 
   /// Walkthrough
   static const String skip = "Skip";
-  static const String walkthroughSubTitle = "Lorem Ipsum is simply dummy text of the printing and typesetting industry." + "hfjdh fdhfhdj fdjfhdjfh jdfjd fhdh dfdfdfdf jdfhdjfh dfhdjf dhfdh fjdhfj dfhjdj hdjhfjd fjdjhjd jsdhjs";
+  static const String walkthroughSubTitle =
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+          "hfjdh fdhfhdj fdjfhdjfh jdfjd fhdh dfdfdfdf jdfhdjfh dfhdjf dhfdh fjdhfj dfhjdj hdjhfjd fjdjhjd jsdhjs";
 
+  /// Your Resume
+  static const String yourResume = "Your Resume";
+  static const String editYourResume = "Edit Resume";
+  static const String actualName = "Actual Name";
+  static const String davidHan = "David Han";
+  static const String nickname = "Nickname";
+  static const String profession = "Profession";
+  static const String actualNameHint = "Enter the actual Name";
+  static const String callSignOrNickname = "Call Sign/Nickname";
+  static const String callSignOrNicknameHint = "Enter call sign/nickname";
+  static const String familyTies = "Family Ties";
+  static const String familyTiesHint = "Enter Family Ties";
+  static const String professionalBackground = "Professional Background";
+  static const String professionalBackgroundHint = "Enter Professional Background";
+  static const String hobbies = "Hobbies";
+  static const String hobbiesHint = "Enter Hobbies";
+  static const String favoriteQuote = "Favorite Quote";
+  static const String favoriteQuoteHint = "Enter Favorite Quote";
+  static const String whatDoYou = "What do you want out of this life?";
+  static const String whatDoYouHint = "Enter Answer";
+  static const String attachedResume = "Attached Resume";
+  static const String uploadResume = "Upload Resume";
+  static const String saveResume = "Save Resume";
+  static const String resumePdf = "Resume.pdf";
+  static const String resumePdfSize = "2 Pages - 10.9MB";
 }

@@ -37,6 +37,7 @@ class AssetsPath {
   static const drawer = "${iconsPath}drawer.png";
   static const notificationBell = "${iconsPath}notification_bell.png";
   static const search = "${iconsPath}search.png";
+  static const pdf = "${iconsPath}pdf.png";
   static const edit = "${iconsPath}edit.png";
   static const camera = "${iconsPath}camera.png";
   static const arrowRight = "${iconsPath}arrow_right.png";
@@ -46,6 +47,8 @@ class AssetsPath {
   static const add = "${iconsPath}add.png";
   static const calender = "${iconsPath}calender.png";
   static const time = "${iconsPath}time.png";
+  static const plumber = "${iconsPath}plumber.png";
+  static const watch = "${iconsPath}watch.png";
   static const searchFilter = "${iconsPath}search_filter.png";
   static const location = "${iconsPath}location.png";
   static const logo = "${iconsPath}logo.png";

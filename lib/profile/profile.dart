@@ -9,6 +9,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -51,49 +52,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Builder(builder: (contextBuilder) {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return Scaffold(
-/*        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Align(
-          alignment: Alignment.bottomCenter,
-          child: PrimaryPostButton(
-              title: AppStrings.postAnEvent,
-              onPressed: () {
-                AppDialogues.postSideHustleDialogue(
-                        context: contextBuilder,
-                        body: PostYourSideHustle(
-                          isProductSelected: (v) {
-                            isProductSelected = v;
-                            print("prodcut: $isProductSelected");
-                          },
-                          onPressed: () {
-                            print("pressed Dialogue");
-                            if (isProductSelected) {
-                              /// reset to Default Value
-                              isProductSelected = true;
-                              // Navigator.pop(contextBuilder);
-                              AppDialogues.postSideHustleDialogue(
-                                      context: contextBuilder)
-                                  .dismiss();
-                              Navigator.pushNamed(contextBuilder,
-                                  AppRoutes.postProductScreenRoute);
-                            } else {
-                              /// reset to Default Value
-                              isProductSelected = true;
-                              AppDialogues.postSideHustleDialogue(
-                                      context: contextBuilder)
-                                  .dismiss();
-                              // Navigator.pop(contextBuilder);
-                              Navigator.pushNamed(contextBuilder,
-                                  AppRoutes.postServiceScreenRoute);
-                            }
-                          },
-                          onTapClose: () {
-                            Navigator.pop(contextBuilder);
-                          },
-                        ))
-                    // ..show()
-                    .show();
-              }),
-        ),*/
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           physics: const AlwaysScrollableScrollPhysics(
@@ -154,6 +112,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       iconPath: AssetsPath.sideHustle,
                       name: AppStrings.yourShop),
                 ),
+              ),
+              // height(0.01.sh),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.defaultHorizontalPadding + 4),
+                child: customMaterialButton(
+                    height: 6,
+                    borderRadius: 12,
+                    fontSize: AppDimensions.textSizeSmall,
+                    color: AppColors.primaryColor,
+                    textColor: AppColors.whiteColor,
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          // context, AppRoutes.yourResumeEditScreenRoute);
+                          context, AppRoutes.yourResumeScreenRoute);
+                    },
+                    name: AppStrings.yourResume),
               ),
               height(0.03.sh),
               Padding(

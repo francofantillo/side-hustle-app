@@ -18,6 +18,8 @@ import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
+import '../cart/modal_bottom_sheet/modal_bottom_sheet_request_service.dart';
+
 class ViewService extends StatefulWidget {
   final bool isMyService;
 
@@ -34,6 +36,11 @@ class _ViewServiceState extends State<ViewService> {
   void initState() {
     isAddToCart = false;
     super.initState();
+  }
+
+  void onItemAdded(bool onItemAdded) {
+    isAddToCart = onItemAdded;
+    setState(() {});
   }
 
   @override
@@ -224,7 +231,7 @@ class _ViewServiceState extends State<ViewService> {
                               child: CustomButtonWithIcon(
                                 onPressed: () {
                                   print("pressed Elevated Button");
-                                  Navigator.pushNamed(
+                                  Navigator.pushReplacementNamed(
                                       context, AppRoutes.shopScreenRoute);
                                 },
                                 borderRadius: 10,
@@ -260,15 +267,18 @@ class _ViewServiceState extends State<ViewService> {
                               // isAddToCart = true;
                               // setState(() {});
                               if (widget.isMyService) {
-                                Navigator.pushNamed(context, AppRoutes.postServiceScreenRoute);
+                                Navigator.pushNamed(
+                                    context, AppRoutes.postServiceScreenRoute);
                               } else {
                                 AppUtils.showBottomModalSheet(
                                     context: context,
                                     // widget: const ModalBottomSheetProducts(isDelivery: true,));
-                                    // widget: const BottomModalSheetRequestService());
-                                    widget: const ModalBottomSheetServices(
-                                      isDelivery: true,
+                                    widget: BottomModalSheetRequestService(
+                                      onItemAdded: onItemAdded,
                                     ));
+                                // widget: const ModalBottomSheetServices(
+                                //   isDelivery: true,
+                                // ));
                               }
                             },
                             name: widget.isMyService
@@ -315,7 +325,7 @@ class _ViewServiceState extends State<ViewService> {
                                           context: context,
                                           widget:
                                               // const ModelBottomSheetProducts()
-                                              const BottomModalSheetDeliveryAddress());
+                                              const ModalBottomSheetServices());
                                     },
                                     name: AppStrings.viewCartText,
                                     borderRadius:

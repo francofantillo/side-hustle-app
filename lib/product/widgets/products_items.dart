@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -14,16 +15,17 @@ class ProductsItemsWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ProductsItemsWidget({super.key,
-    this.title,
-    this.subTitle,
-    this.price,
-    this.deliveryType,
-    this.onTap,
-    this.imagePath,
-    this.imageHeight,
-    this.imageWidth,
-    this.boarderColor});
+  const ProductsItemsWidget(
+      {super.key,
+      this.title,
+      this.subTitle,
+      this.price,
+      this.deliveryType,
+      this.onTap,
+      this.imagePath,
+      this.imageHeight,
+      this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -35,73 +37,84 @@ class ProductsItemsWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              RoundedCornersImage(
-                imageHeight: imageHeight,
-                imageWidth: AppDimensions.sideHustleItemWidth,
-                assetImage: imagePath,
-                boarderColor: boarderColor,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      textWidget(
-                          text: title,
-                          fontSize: AppDimensions.textSizeNormal,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.textBlackColor),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: textWidget(
-                                  text: subTitle,
-                                  maxLines: 2,
-                                  fontSize: AppDimensions.textSizeVerySmall)),
-                          IconButtonWithBackground(
-                            onTap: onTap,
-                            iconPath: AssetsPath.add,
-                            width: imageHeight! * .24,
-                            height: imageHeight! * .24,
-                            backgroundColor: AppColors.primaryColor,
-                            iconColor: AppColors.whiteColor,
-                          )
-                        ],
-                      ),
-                      height(imageHeight! * .042),
-                      Row(
+        child: Material(
+          color: boarderColor,
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+          ),
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  RoundedCornersImage(
+                    imageHeight: imageHeight,
+                    imageWidth: AppDimensions.sideHustleItemWidth,
+                    assetImage: imagePath,
+                    boarderColor: boarderColor,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           textWidget(
-                              text: AppStrings.deliveryType,
-                              fontSize: AppDimensions.productTextSize,
+                              text: title,
+                              fontSize: AppDimensions.textSizeNormal,
                               fontWeight: FontWeight.w500,
                               color: AppColors.textBlackColor),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: textWidget(
+                                      text: subTitle,
+                                      maxLines: 2,
+                                      fontSize:
+                                          AppDimensions.textSizeVerySmall)),
+                              IconButtonWithBackground(
+                                iconPath: AssetsPath.add,
+                                width: imageHeight! * .24,
+                                height: imageHeight! * .24,
+                                backgroundColor: AppColors.primaryColor,
+                                iconColor: AppColors.whiteColor,
+                              )
+                            ],
+                          ),
+                          height(imageHeight! * .042),
+                          Row(
+                            children: [
+                              textWidget(
+                                  text: AppStrings.deliveryType,
+                                  fontSize: AppDimensions.productTextSize,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.textBlackColor),
+                              textWidget(
+                                  text: deliveryType,
+                                  maxLines: 2,
+                                  fontSize: AppDimensions.productTextSize)
+                            ],
+                          ),
+                          height(imageHeight! * .042),
                           textWidget(
-                              text: deliveryType,
-                              maxLines: 2,
-                              fontSize: AppDimensions.productTextSize)
+                              text: price,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.textBlackColor),
                         ],
                       ),
-                      height(imageHeight! * .042),
-                      textWidget(
-                          text: price,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.textBlackColor),
-                    ],
-                  ),
-                ),
-              )
-            ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

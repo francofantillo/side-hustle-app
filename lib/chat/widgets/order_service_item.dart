@@ -8,13 +8,13 @@ import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class OrderItemWidget extends StatelessWidget {
+class OrderServiceItemWidget extends StatelessWidget {
   final String? title, subTitle, price, imagePath, deliveryType;
   final Function()? onTap;
   final Color? boarderColor;
   final double imageHeight, imageWidth;
 
-  const OrderItemWidget({super.key,
+  const OrderServiceItemWidget({super.key,
     this.title,
     this.subTitle,
     this.price,

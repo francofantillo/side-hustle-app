@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/cart/services/services_cart_list.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -179,7 +181,15 @@ class _ModalBottomSheetServicesState extends State<ModalBottomSheetServices> {
                     ),
                     height(0.02.sh),
                     customMaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(
+                              context, AppRoutes.chatOneToOneScreenRoute,
+                              arguments: const ChatOneToOne(
+                                isOrderChat: true,
+                                isOrderService: true,
+                              ));
+                        },
                         name: AppStrings.placeOrder,
                         borderRadius: AppDimensions.boarderRadiusCartPlaceOrder,
                         color: AppColors.primaryColor),

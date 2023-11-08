@@ -19,7 +19,8 @@ class _ProductsListState extends State<ProductsList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
@@ -30,19 +31,18 @@ class _ProductsListState extends State<ProductsList> {
           return Padding(
             padding: EdgeInsets.only(right: 16.0, left: 8.0, top: 0.015.sh),
             child: ProductsItemsWidget(
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute);
+              },
               imageWidth: 1.sw,
               imageHeight: AppDimensions.sideHustleItemHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+              subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
               deliveryType: AppStrings.pickUpViewProduct,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
+              imagePath:
+                  AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
               price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute);
-              },
             ),
           );
         },

@@ -24,6 +24,7 @@ class CustomTextFormField extends StatefulWidget {
   // final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final double? height, top, bottom;
+  final Function(String)? onFieldSubmitted;
   final Color? lableColor;
   final FocusNode? focusNode;
   final Color? fillColor;
@@ -39,6 +40,7 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     this.label,
+    this.onFieldSubmitted,
     this.isPrefixIcon = false,
     this.isPasswordField = false,
     this.focusNode,
@@ -137,6 +139,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   Widget textFormField() {
     return TextFormField(
+      onFieldSubmitted: widget.onFieldSubmitted,
       focusNode: _focusNode,
       inputFormatters: widget.inputFormatter,
       validator: widget.fieldValidator,

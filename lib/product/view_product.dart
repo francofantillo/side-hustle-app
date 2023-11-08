@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -223,7 +224,7 @@ class _ViewProductState extends State<ViewProduct> {
                               child: CustomButtonWithIcon(
                                 onPressed: () {
                                   print("pressed Elevated Button");
-                                  Navigator.pushNamed(
+                                  Navigator.pushReplacementNamed(
                                       context, AppRoutes.shopScreenRoute);
                                 },
                                 borderRadius: 10,
@@ -314,8 +315,9 @@ class _ViewProductState extends State<ViewProduct> {
                                       AppUtils.showBottomModalSheet(
                                           context: contextBuilder,
                                           widget:
-                                              // const ModelBottomSheetProducts()
-                                              const BottomModalSheetDeliveryAddress());
+                                               const ModalBottomSheetProducts()
+                                              // const BottomModalSheetDeliveryAddress()
+                                      );
                                     },
                                     name: AppStrings.viewCartText,
                                     borderRadius:

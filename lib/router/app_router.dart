@@ -33,6 +33,8 @@ import 'package:side_hustle/profile/other_user_profile/jobs_posted_other_user.da
 import 'package:side_hustle/profile/other_user_profile/other_user_profile.dart';
 import 'package:side_hustle/profile/other_user_profile/other_user_shop.dart';
 import 'package:side_hustle/profile/profile.dart';
+import 'package:side_hustle/profile/your_resume_edit.dart';
+import 'package:side_hustle/profile/your_resume.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/service/view_service.dart';
@@ -78,6 +80,12 @@ class AppRouter {
 
           case AppRoutes.postProductScreenRoute:
             return const PostProduct();
+
+          case AppRoutes.yourResumeEditScreenRoute:
+            return const YourResumeEdit();
+
+          case AppRoutes.yourResumeScreenRoute:
+            return const YourResume();
 
           case AppRoutes.postServiceScreenRoute:
             return const PostService();
@@ -167,6 +175,8 @@ class AppRouter {
             final args = routeSettings.arguments as ChatOneToOne?;
             return ChatOneToOne(
               isBlockedUser: args?.isBlockedUser ?? false,
+              isOrderChat: args?.isOrderChat ?? false,
+              isOrderService: args?.isOrderService ?? false,
             );
 
           case AppRoutes.chatBlockUsersScreenRoute:

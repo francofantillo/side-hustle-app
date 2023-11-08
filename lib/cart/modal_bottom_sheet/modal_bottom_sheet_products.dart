@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/cart/products/products_cart_list.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -15,6 +17,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ModalBottomSheetProducts extends StatefulWidget {
   final bool isDelivery;
+
   const ModalBottomSheetProducts({super.key, this.isDelivery = false});
 
   @override
@@ -88,57 +91,60 @@ class _ModalBottomSheetProductsState extends State<ModalBottomSheetProducts> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     widget.isDelivery
-                    ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        textWidget(
-                            text: AppStrings.deliveryAddress,
-                            color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSizeBottomSheet,
-                            fontWeight: FontWeight.w500),
-                        IconButtonWithBackground(
-                          onTap: () {
-                            AppUtils.showBottomModalSheet(
-                                context: context,
-                                widget: const BottomModalSheetDeliveryAddress(isEdit: true,));
-                          },
-                          iconPath: AssetsPath.edit,
-                          backgroundColor: AppColors.primaryColor,
-                          iconColor: AppColors.whiteColor,
-                          height: 30.h,
-                          width: 30.h,
-                        )
-                      ],
-                    )
-                    : const SizedBox.shrink(),
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              textWidget(
+                                  text: AppStrings.deliveryAddress,
+                                  color: AppColors.textBlackColor,
+                                  fontSize: AppDimensions.textSizeBottomSheet,
+                                  fontWeight: FontWeight.w500),
+                              IconButtonWithBackground(
+                                onTap: () {
+                                  AppUtils.showBottomModalSheet(
+                                      context: context,
+                                      widget:
+                                          const BottomModalSheetDeliveryAddress(
+                                        isEdit: true,
+                                      ));
+                                },
+                                iconPath: AssetsPath.edit,
+                                backgroundColor: AppColors.primaryColor,
+                                iconColor: AppColors.whiteColor,
+                                height: 30.h,
+                                width: 30.h,
+                              )
+                            ],
+                          )
+                        : const SizedBox.shrink(),
                     widget.isDelivery
-                    ? height(0.02.sh)
-                    : const SizedBox.shrink(),
+                        ? height(0.02.sh)
+                        : const SizedBox.shrink(),
                     widget.isDelivery
-                    ? Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ImageIcon(
-                          const AssetImage(AssetsPath.location),
-                          size: 0.025.sh,
-                        ),
-                        width(0.02.sw),
-                        Expanded(
-                          child: textWidget(
-                              text: AppStrings.locationText,
-                              maxLines: 2,
-                              fontSize: AppDimensions.textSizeVerySmall),
-                        ),
-                      ],
-                    )
-                    : const SizedBox.shrink(),
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ImageIcon(
+                                const AssetImage(AssetsPath.location),
+                                size: 0.025.sh,
+                              ),
+                              width(0.02.sw),
+                              Expanded(
+                                child: textWidget(
+                                    text: AppStrings.locationText,
+                                    maxLines: 2,
+                                    fontSize: AppDimensions.textSizeVerySmall),
+                              ),
+                            ],
+                          )
+                        : const SizedBox.shrink(),
                     widget.isDelivery
-                    ? height(0.02.sh)
-                    : const SizedBox.shrink(),
+                        ? height(0.02.sh)
+                        : const SizedBox.shrink(),
                     widget.isDelivery
-                    ? const Divider()
-                    : const SizedBox.shrink(),
+                        ? const Divider()
+                        : const SizedBox.shrink(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +179,14 @@ class _ModalBottomSheetProductsState extends State<ModalBottomSheetProducts> {
                     ),
                     height(0.02.sh),
                     customMaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(
+                              context, AppRoutes.chatOneToOneScreenRoute,
+                              arguments: const ChatOneToOne(
+                                isOrderChat: true,
+                              ));
+                        },
                         name: AppStrings.placeOrder,
                         borderRadius: AppDimensions.boarderRadiusCartPlaceOrder,
                         color: AppColors.primaryColor),

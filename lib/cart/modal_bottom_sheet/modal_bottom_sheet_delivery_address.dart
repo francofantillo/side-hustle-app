@@ -13,9 +13,10 @@ import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class BottomModalSheetDeliveryAddress extends StatefulWidget {
   final bool isEdit, isService;
+  final ValueChanged<bool>? onItemAdded;
 
   const BottomModalSheetDeliveryAddress(
-      {super.key, this.isEdit = false, this.isService = false});
+      {super.key, this.isEdit = false, this.isService = false, this.onItemAdded});
 
   @override
   State<BottomModalSheetDeliveryAddress> createState() =>
@@ -112,6 +113,7 @@ class _BottomModalSheetDeliveryAddressState
                           Navigator.pop(context);
                         } else {
                           if (widget.isService) {
+                            widget.onItemAdded!(true);
                             Navigator.pop(context);
                           } else {
                             Navigator.pop(context);

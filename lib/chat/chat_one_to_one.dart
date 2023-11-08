@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_one_to_one_list.dart';
 import 'package:side_hustle/chat/widgets/chat_options_bottomsheet.dart';
 import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
-import 'package:side_hustle/chat/widgets/order_item_widget.dart';
+import 'package:side_hustle/chat/widgets/order_product_item.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -19,8 +19,13 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ChatOneToOne extends StatefulWidget {
   final bool isBlockedUser;
+  final bool isOrderChat, isOrderService;
 
-  const ChatOneToOne({super.key, this.isBlockedUser = false});
+  const ChatOneToOne(
+      {super.key,
+      this.isBlockedUser = false,
+      this.isOrderChat = false,
+      this.isOrderService = false});
 
   @override
   State<ChatOneToOne> createState() => _ChatOneToOneState();
@@ -29,8 +34,8 @@ class ChatOneToOne extends StatefulWidget {
 class _ChatOneToOneState extends State<ChatOneToOne> {
   double BUBBLE_RADIUS = 16;
 
-  Duration duration = new Duration();
-  Duration position = new Duration();
+  Duration duration = const Duration();
+  Duration position = const Duration();
   bool isPlaying = false;
   bool isLoading = false;
   bool isPause = false;
@@ -120,7 +125,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
-        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       actions: [
         Padding(
@@ -151,8 +156,9 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         elevation: 6,
         child: Column(
           children: [
-            const ChatOneToOneUsersList(),
-
+            ChatOneToOneUsersList(
+                isOrderChat: widget.isOrderChat,
+                isOrderService: widget.isOrderService),
 /*
             Container(
               width: 1.sw,
@@ -293,46 +299,46 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 4),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     widget.isBlockedUser
                         ? Center(
-                      child: Material(
-                        child: InkWell(
-                          onTap: () {
-                            print("clicked");
-                          },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(6)),
-                              color: Color(0xFFE8E8EE),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(5.0),
-                              child: Text(
-                                AppStrings.unblockUserMessage,
+                            child: Material(
+                              child: InkWell(
+                                onTap: () {
+                                  print("clicked");
+                                },
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6)),
+                                    color: Color(0xFFE8E8EE),
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Text(
+                                      AppStrings.unblockUserMessage,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                    )
+                          )
                         : const SizedBox.shrink(),
                     height(0.02.sh),
                     Row(
                       children: [
                         const Expanded(
                             child: CustomTextFieldChat(
-                              hintText: AppStrings.typeAMessage,
-                              // isSuffixIcon: true,
-                              // suffixIcon: Icon(Icons.emoji_emotions_outlined),
-                              // isPrefixIcon: true,
-                              // prefixIconPath: AssetsPath.camera,
-                            )),
+                          hintText: AppStrings.typeAMessage,
+                          // isSuffixIcon: true,
+                          // suffixIcon: Icon(Icons.emoji_emotions_outlined),
+                          // isPrefixIcon: true,
+                          // prefixIconPath: AssetsPath.camera,
+                        )),
                         Padding(
                           padding: const EdgeInsets.only(left: 2),
                           // child: InkWell(

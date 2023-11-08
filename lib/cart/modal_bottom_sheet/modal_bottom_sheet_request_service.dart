@@ -16,15 +16,17 @@ import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class BottomModalSheetRequestService extends StatefulWidget {
   final bool isEdit;
+  final ValueChanged<bool>? onItemAdded;
 
-  const BottomModalSheetRequestService({super.key, this.isEdit = false});
+  const BottomModalSheetRequestService({super.key, this.isEdit = false, this.onItemAdded});
 
   @override
   State<BottomModalSheetRequestService> createState() =>
       _BottomModalSheetRequestServiceState();
 }
 
-class _BottomModalSheetRequestServiceState extends State<BottomModalSheetRequestService> {
+class _BottomModalSheetRequestServiceState
+    extends State<BottomModalSheetRequestService> {
   TextEditingController dateTextController = TextEditingController();
   TextEditingController firstTimeTextController = TextEditingController();
   TextEditingController secondTimeTextController = TextEditingController();
@@ -121,18 +123,30 @@ class _BottomModalSheetRequestServiceState extends State<BottomModalSheetRequest
                 fontSize: AppDimensions.textSizeSmall),
           ),
           height(0.02.sh),
+          // SizedBox(
+          //   width: 1.sh,
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          //     child: CustomDropDown(
+          //       items: items,
+          //       hintText: AppStrings.paymentTypeHint,
+          //       selectedValue: (v) {
+          //         print("selectedValue: $v");
+          //       },
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             width: 1.sh,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: CustomDropDown(
-                items: items,
-                hintText: AppStrings.paymentTypeHint,
-                selectedValue: (v) {
-                  print("selectedValue: $v");
-                },
-              ),
-            ),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: CustomTextFormField(
+                  height: 40.h,
+                  hintText: AppStrings.totalHoursRequired,
+                  suffixIcon: Icon(Icons.keyboard_arrow_down, size: 30,),
+                  isSuffixIcon: true,
+                  keyboardType: TextInputType.number,
+                )),
           ),
           height(0.02.sh),
           Padding(
@@ -188,9 +202,10 @@ class _BottomModalSheetRequestServiceState extends State<BottomModalSheetRequest
                     Navigator.pop(context);
                     AppUtils.showBottomModalSheet(
                         context: context,
-                        widget: const BottomModalSheetDeliveryAddress(
+                        widget: BottomModalSheetDeliveryAddress(
                           isEdit: false,
                           isService: true,
+                          onItemAdded: widget.onItemAdded,
                         ));
                   }
                 },

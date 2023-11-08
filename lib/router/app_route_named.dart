@@ -12,6 +12,8 @@ class AppRoutes {
   static const String otpVerificationScreenRoute = "/otpVerification";
   static const String homeScreenRoute = "/home";
   static const String postProductScreenRoute = "/postProduct";
+  static const String yourResumeEditScreenRoute = "/yourResumeEdit";
+  static const String yourResumeScreenRoute = "/yourResume";
   static const String postServiceScreenRoute = "/postService";
   static const String postJobScreenRoute = "/postJob";
   static const String applyForJobScreenRoute = "/applyForJob";

@@ -10,11 +10,13 @@ Widget customMaterialButton(
     double? width,
     double? height,
     double? borderRadius,
+    double? fontSize,
     required Function() onPressed}) {
   return CustomMaterialButton(
     name: name,
     color: color,
     textColor: textColor,
+    fontSize: fontSize,
     width: width,
     height: height,
     onPressed: onPressed,
@@ -25,9 +27,7 @@ Widget customMaterialButton(
 class CustomMaterialButton extends StatelessWidget {
   final String? name;
   final Color? color, textColor;
-  final double? width;
-  final double? height;
-  final double? borderRadius;
+  final double? width, height, borderRadius, fontSize;
   final Function()? onPressed;
 
   const CustomMaterialButton(
@@ -36,6 +36,7 @@ class CustomMaterialButton extends StatelessWidget {
       this.color,
       this.textColor,
       this.borderRadius,
+      this.fontSize,
       this.height,
       this.width,
       this.onPressed});
@@ -43,7 +44,6 @@ class CustomMaterialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-
       minWidth: width != null ? null : 1.sw,
       elevation: AppDimensions.defaultButtonElevation,
       // what are the Google Material Design guidelines text field, buttons and appBar elevation
@@ -70,7 +70,7 @@ class CustomMaterialButton extends StatelessWidget {
       ),
       child: Text(
         name ?? "",
-        style: TextStyle(fontSize: 20, color: textColor),
+        style: TextStyle(fontSize: fontSize ?? 20, color: textColor),
       ),
     );
   }

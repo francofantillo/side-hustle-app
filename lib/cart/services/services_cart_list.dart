@@ -22,7 +22,7 @@ class _ServicesCartListState extends State<ServicesCartList> {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 4,
+        itemCount: 1,
         // Replace with your item count
         itemBuilder: (context, index) {
           // Replace with your horizontal list item

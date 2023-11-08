@@ -9,6 +9,7 @@ class CustomButtonWithIcon extends StatelessWidget {
   final Color? textColor;
   final String iconPath, name;
   final double? borderRadius, iconSize;
+  final bool iconPositionRight;
   final Function() onPressed;
 
   const CustomButtonWithIcon(
@@ -17,6 +18,7 @@ class CustomButtonWithIcon extends StatelessWidget {
       required this.backgroundColor,
       required this.iconPath,
       required this.name,
+      this.iconPositionRight = false,
       this.borderRadius,
       this.iconSize,
       this.textColor});
@@ -32,18 +34,35 @@ class CustomButtonWithIcon extends StatelessWidget {
               BorderRadius.circular(borderRadius ?? 30.0), // Make it round
         ),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ImageIcon(
-            AssetImage(iconPath),
-            color: Colors.white, // Set the icon color
-            size: iconSize ?? 17,
-          ),
-          width(0.02.sw),
-          textWidget(text: name, color: textColor ?? AppColors.textWhiteColor),
-        ],
-      ),
+      child: iconPositionRight
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                textWidget(
+                    text: name, color: textColor ?? AppColors.textWhiteColor),
+                width(0.02.sw),
+                ImageIcon(
+                  AssetImage(iconPath),
+                  color: Colors.white, // Set the icon color
+                  size: iconSize ?? 17,
+                ),
+              ],
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ImageIcon(
+                  AssetImage(iconPath),
+                  color: Colors.white, // Set the icon color
+                  size: iconSize ?? 17,
+                ),
+                width(0.02.sw),
+                textWidget(
+                    text: name, color: textColor ?? AppColors.textWhiteColor),
+              ],
+            ),
     );
   }
 }
