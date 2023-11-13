@@ -16,24 +16,22 @@ class HomeLocationWidget extends StatelessWidget {
       width: 1.sw,
       child: Stack(
         children: [
-          const IconButtonWithBackground(
-            iconPath: AssetsPath.location,
-            borderRadius: 30,
-            height: 28,
-            width: 28,
-            backgroundColor: AppColors.primaryColor,
-            iconColor: AppColors.whiteColor,
-          ),
+
           Positioned(
-            left: 0.078.sw,
-            top: 0.010.sh,
+            // left: 0.07.sw,
+            top: 0.015.sw,
             child: Container(
-              width: .80.sw,
+              width: .88.sw,
+              padding: EdgeInsets.only(left: .07.sw),
               decoration: const BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
+                      bottomRight: Radius.circular(20),
+                      topLeft: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+
+                  )),
               child: Padding(
                 padding:
                 const EdgeInsets.only(left: 8.0, top: 2.5, bottom: 2.5, right: 4),
@@ -55,7 +53,15 @@ class HomeLocationWidget extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          const IconButtonWithBackground(
+            iconPath: AssetsPath.location,
+            borderRadius: 30,
+            height: 28,
+            width: 28,
+            backgroundColor: AppColors.primaryColor,
+            iconColor: AppColors.whiteColor,
+          ),
         ],
       ),
     );

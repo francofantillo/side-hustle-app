@@ -62,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   right: AppDimensions.rootPadding,
                   top: AppDimensions.rootPadding),
               child: SearchTextField(
-                  hintText: AppStrings.searchHintText, onChanged: (search) {}),
+                  height: 0.17.sw,
+                  hintText: AppStrings.searchHintText,
+                  onChanged: (search) {}),
             ),
             // Horizontal ListView
             Padding(
@@ -73,9 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: FirstHomeListItemWidget(
                 horizontalListSize: AppDimensions.homeFirstHorizontalListSize,
                 itemsList: AlphaAppData.homeFirstList,
-                onTapLabel: () {
-                  print("Clicked");
-                },
+                // onTapLabel: () {
+                //   print("Clicked");
+                // },
               ),
             ),
             // Vertical ListView

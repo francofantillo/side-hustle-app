@@ -68,7 +68,7 @@ class JobsHorizontalListWidget extends StatelessWidget {
                           context, AppRoutes.viewEventScreenRoute);
                     } else {
                       Navigator.pushNamed(
-                          context, AppRoutes.viewJobScreenRoute);
+                          context, AppRoutes.applyForJobScreenRoute);
                     }
                   },
                   child: ItemsWidget(

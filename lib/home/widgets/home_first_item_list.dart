@@ -55,10 +55,11 @@ class FirstHomeListItemWidget extends StatelessWidget {
               return Material(
                 child: InkWell(
                   onTap: (){
-                    Navigator.pushNamed(context, AppRoutes.otherUserProfileScreenRoute);
+                    Navigator.pushNamed(context, AppRoutes.shopScreenRoute);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 2.0, left: 8.0, top: 8),
+                    // padding: const EdgeInsets.only(right: 2.0, left: 8.0, top: 8),
+                    padding: const EdgeInsets.only(top: 8, left: 6),
                     child: HomeFirstItemWidget(
                       title: itemsList?[index].name,
                       assetImage: itemsList?[index].imagePath,

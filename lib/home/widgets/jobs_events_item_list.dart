@@ -30,14 +30,14 @@ class JobsAndEventsList extends StatelessWidget {
               title: jobsAndEventsList?[index].title,
               horizontalListSize: AppDimensions.listItemHeight,
               itemsList: jobsAndEventsList?[index].itemList,
-              onTapLabel: () {
-                if (index == 1) {
-                  Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
-                } else {
-                  Navigator.pushNamed(context, AppRoutes.viewJobScreenRoute);
-                }
-                print("Clicked");
-              },
+              // onTapLabel: () {
+              //   if (index == 1) {
+              //     Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
+              //   } else {
+              //     Navigator.pushNamed(context, AppRoutes.applyForJobScreenRoute);
+              //   }
+              //   print("Clicked");
+              // },
             ),
           );
         },

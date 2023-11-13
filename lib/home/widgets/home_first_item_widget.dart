@@ -17,13 +17,15 @@ class HomeFirstItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RoundedCornersImage(
+          imageHeight: 0.09.sh,
+          imageWidth: 0.09.sh,
           assetImage: assetImage,
           image: image,
           boarderColor: boarderColor,
         ),
         height(5.h),
         Container(
-            padding: const EdgeInsets.only(left: 8),
+            padding: const EdgeInsets.only(left: 4),
             width: 0.18.sw,
             child: textWidget(
                 text: title ?? "", textAlign: TextAlign.start, maxLines: 1))
