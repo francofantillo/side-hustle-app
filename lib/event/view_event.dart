@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/event/post_event.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -12,6 +14,7 @@ import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
@@ -80,7 +83,13 @@ class _ViewEventState extends State<ViewEvent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ImageSlider(),
+              const ImageSlider(
+                itemImages: [
+                  AssetsPath.musical,
+                  AssetsPath.musical,
+                  AssetsPath.musical
+                ],
+              ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -156,7 +165,7 @@ class _ViewEventState extends State<ViewEvent> {
                         children: [
                           CircularCacheImageWidget(
                             showLoading: false,
-                            image: AssetsPath.userProfileJob,
+                            image: AssetsPath.leoLubinProfile,
                             boarderColor: AppColors.primaryColor,
                             imageHeight: .09.sh,
                             imageWidth: .09.sw,
@@ -172,13 +181,21 @@ class _ViewEventState extends State<ViewEvent> {
                         ],
                       ),
                     ),
-                    RoundedImageWithBackgroundColor(
-                      assetPath: AssetsPath.message,
-                      imageHeight: .03.sh,
-                      imageWidth: .06.sw,
+                    IconButtonWithBackground(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, AppRoutes.chatOneToOneScreenRoute,
+                            arguments: const ChatOneToOne(
+                              userName: AppStrings.leoLubin,
+                            ));
+                      },
+                      iconPath: AssetsPath.message,
+                      height: .13.sw,
+                      width: .13.sw,
                       backgroundColor: AppColors.primaryColor,
-                      socialButtonSize: .03.sh,
+                      iconColor: AppColors.whiteColor,
                       borderRadius: 12,
+                      iconSize: 20,
                     ),
                   ],
                 ),

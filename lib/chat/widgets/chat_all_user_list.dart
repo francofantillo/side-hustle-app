@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/chat/widgets/chat_all_user_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
+import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 
 class ChatAllUsersList extends StatefulWidget {
   final List? itemList;
+
   const ChatAllUsersList({super.key, this.itemList});
 
   @override
@@ -20,18 +24,23 @@ class _ChatAllUsersListState extends State<ChatAllUsersList> {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 10,
+        itemCount: 6,
         // Replace with your item count
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
           return Material(
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
               },
-              child: const Padding(
+              child: Padding(
                   padding: EdgeInsets.only(right: 16.0, left: 8.0),
-                  child: ChatAllUsersItem()),
+                  child: ChatAllUsersItem(
+                    image: AlphaAppData.chatAllUsersList[index].image,
+                    time: AlphaAppData.chatAllUsersList[index].time,
+                    name: AlphaAppData.chatAllUsersList[index].name,
+                    message: AlphaAppData.chatAllUsersList[index].message,
+                  )),
             ),
           );
         },

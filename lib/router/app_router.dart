@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/auth/about_us.dart';
+import 'package:side_hustle/auth/change_password.dart';
+import 'package:side_hustle/auth/download_book_screen.dart';
+import 'package:side_hustle/auth/flyer_under_capitalism.dart';
 import 'package:side_hustle/auth/forgot_password.dart';
 import 'package:side_hustle/auth/login.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
@@ -62,6 +65,9 @@ class AppRouter {
           case AppRoutes.loginScreenRoute:
             return const LoginScreen();
 
+          case AppRoutes.changePasswordScreenRoute:
+            return const ChangePassword();
+
           case AppRoutes.signupScreenRoute:
             return const SignupScreen();
 
@@ -91,7 +97,8 @@ class AppRouter {
             return const PostService();
 
           case AppRoutes.postJobScreenRoute:
-            return const PostJob();
+            final args = routeSettings.arguments as PostJob?;
+            return PostJob(isEdit: args?.isEdit ?? false,);
 
           case AppRoutes.applyForJobScreenRoute:
             return const ApplyForJob();
@@ -174,6 +181,7 @@ class AppRouter {
           case AppRoutes.chatOneToOneScreenRoute:
             final args = routeSettings.arguments as ChatOneToOne?;
             return ChatOneToOne(
+              userName: args?.userName,
               isBlockedUser: args?.isBlockedUser ?? false,
               isOrderChat: args?.isOrderChat ?? false,
               isOrderService: args?.isOrderService ?? false,
@@ -190,6 +198,12 @@ class AppRouter {
 
           case AppRoutes.termsAndConditionsScreenRoute:
             return const TermsAndConditions();
+
+          case AppRoutes.flyerUnderCapitalismScreenRoute:
+            return const FlyerUnderCapitalismScreen();
+
+          case AppRoutes.downloadBookScreenRoute:
+            return const DownloadBookScreen();
 
           case AppRoutes.walkthroughScreenRoute:
             return const Walkthrough();

@@ -51,7 +51,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       alignment: Alignment.centerRight,
       child: Container(
         width: 1.sw,
-        height: 0.53.sh,
+        // height: 0.53.sh,
+        height: 0.9.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(right: 8.0, bottom: 10),
         child: Card(
@@ -133,7 +134,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       alignment: Alignment.centerRight,
       child: Container(
         width: 1.sw,
-        height: 0.42.sh,
+        height: 0.66.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(right: 8.0, bottom: 10),
         child: Card(

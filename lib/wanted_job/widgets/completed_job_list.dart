@@ -24,7 +24,7 @@ class _CompletedTabListState extends State<CompletedTabList> {
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-          itemCount: 4,
+          itemCount: 3,
           // Replace with your item count
           itemBuilder: (context, index) {
             // Replace with your horizontal list item
@@ -34,18 +34,18 @@ class _CompletedTabListState extends State<CompletedTabList> {
                 imageWidth: 1.sw,
                 imageHeight: AppDimensions.listItemHeight,
                 boarderColor: AppColors.itemBGColor,
-                title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
+                title: AlphaAppData.wantedJobList[index].title,
                 subTitle:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+                AlphaAppData.wantedJobList[index].subTitle,
                 imagePath:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-                price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+                AlphaAppData.wantedJobList[index].imagePath,
+                price: AlphaAppData.wantedJobList[index].price,
                 userName:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
+                AlphaAppData.wantedJobList[index].userName,
                 userRating:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].userRating,
+                AlphaAppData.wantedJobList[index].userRating,
                 userProfile:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].userProfile,
+                AlphaAppData.wantedJobList[index].userProfile,
               ),
             );
           },

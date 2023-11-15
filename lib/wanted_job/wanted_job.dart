@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -78,8 +79,17 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                   top: AppDimensions.rootPadding),
               child: SearchTextField(
                   hintText: AppStrings.searchJob,
+
                   suffixIcon:
-                      const ImageIcon(AssetImage(AssetsPath.searchFilter)),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12.0, left: 0),
+                    child: Material(
+                        child: InkWell(
+                            onTap: (){
+                              print("onClicked Filter");
+                            },
+                            child: const ImageIcon(AssetImage(AssetsPath.searchFilter)))),
+                  ),
                   onChanged: (search) {}),
             ),
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
@@ -96,6 +106,7 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                     animate: true,
                     animationDuration: 200,
                     minWidth: 90,
+                    minHeight: 0.1.sw,
                     cornerRadius: 20.0,
                     changeOnTap: true,
                     activeBgColors: const [
@@ -106,7 +117,7 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                     ],
                     activeFgColor: Colors.white,
                     inactiveBgColor: AppColors.switchTabBackgroundColor,
-                    inactiveFgColor: Colors.black,
+                    inactiveFgColor: AppColors.greyColor,
                     initialLabelIndex: _tabIndexBasicToggle.value,
                     totalSwitches: 4,
                     labels: const [
@@ -115,6 +126,7 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                       AppStrings.booked,
                       AppStrings.completed
                     ],
+                    fontSize: 8.sp,
                     radiusStyle: true,
                     onToggle: (index) {
                       _tabIndexBasicToggle.value = index ?? 0;

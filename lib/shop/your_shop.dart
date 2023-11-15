@@ -15,6 +15,7 @@ import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
+import 'package:side_hustle/widgets/image_slider/camera_button.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -110,14 +111,24 @@ class _YourShopScreenState extends State<YourShopScreen> {
                             ? AppDimensions.imageWidthShopEdit
                             : AppDimensions.imageWidthShop,
                         // imageWidth: 0.22.sh,
-                        assetImage: AssetsPath.social,
+                        assetImage: AssetsPath.yourShop,
                         boarderColor: AppColors.whiteColor,
                       ),
                       isEdit
                           ? Positioned(
                         left: AppDimensions.imageWidthShopEdit - 0.15.sw,
                         top: AppDimensions.imageHeightShopEdit - 0.15.sw,
-                        child: IconButtonWithBackground(
+                        // child: IconButtonWithBackground(
+                        //   onTap: () {
+                        //     print("Clicked");
+                        //   },
+                        //   iconPath: AssetsPath.camera,
+                        //   height: 0.12.sw,
+                        //   width: 0.12.sw,
+                        //   backgroundColor: AppColors.whiteColor,
+                        //   iconColor: AppColors.primaryColor,
+                        // ),
+                        child: CameraButton(
                           onTap: () {
                             print("Clicked");
                           },

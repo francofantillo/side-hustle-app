@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ChatAllUsersItem extends StatelessWidget {
-  const ChatAllUsersItem({super.key});
+  final String? image, name, message, time;
+
+  const ChatAllUsersItem(
+      {super.key, this.image, this.name, this.message, this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +19,29 @@ class ChatAllUsersItem extends StatelessWidget {
       children: [
         Padding(
             padding: EdgeInsets.only(
-              left: AppDimensions.rootPadding,
+                left: AppDimensions.rootPadding,
                 right: AppDimensions.rootPadding,
                 top: AppDimensions.rootPadding),
-            child: const CircularCacheImageWidget(
-              showLoading: false,
-            )),
+            child: image == null
+                ? Container(
+                    width: 60.h, // Set your desired width
+                    height: 60.h, // Set your desired height
+                    decoration: const BoxDecoration(
+                      color: AppColors.chatNameImageBackgroundColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: textWidget(
+                          text: name != null ? name!.characters.first : "",
+                          color: AppColors.whiteColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppDimensions.textSizeNormal),
+                    ),
+                  )
+                : CircularCacheImageWidget(
+                    image: image,
+                    showLoading: false,
+                  )),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +52,7 @@ class ChatAllUsersItem extends StatelessWidget {
                       right: AppDimensions.rootPadding,
                       top: AppDimensions.rootPadding),
                   child: textWidget(
-                      text: AppStrings.talanCalzoniChat,
+                      text: name ?? "",
                       color: AppColors.textBlackColor,
                       fontSize: AppDimensions.textSizeNormal,
                       fontWeight: FontWeight.w500)),
@@ -43,16 +65,14 @@ class ChatAllUsersItem extends StatelessWidget {
                             right: AppDimensions.rootPadding,
                             top: 2),
                         child: textWidget(
-                            text: AppStrings.chatUserHint,
+                            text: message ?? "",
                             fontSize: AppDimensions.textSizeVerySmall)),
                   ),
                   Padding(
                       padding: EdgeInsets.only(
-                          left: 2,
-                          right: AppDimensions.rootPadding,
-                          top: 2),
+                          left: 2, right: AppDimensions.rootPadding, top: 2),
                       child: textWidget(
-                          text: AppStrings.chatUserTime,
+                          text: time ?? "",
                           fontSize: AppDimensions.textSizeVerySmall)),
                 ],
               ),

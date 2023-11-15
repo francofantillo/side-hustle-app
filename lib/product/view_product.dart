@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -56,7 +57,13 @@ class _ViewProductState extends State<ViewProduct> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ImageSlider(),
+                const ImageSlider(
+                  itemImages: [
+                    AssetsPath.watch,
+                    AssetsPath.watch,
+                    AssetsPath.watch
+                  ],
+                ),
                 height(0.02.sh),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -203,7 +210,7 @@ class _ViewProductState extends State<ViewProduct> {
                                 children: [
                                   CircularCacheImageWidget(
                                     showLoading: false,
-                                    image: AssetsPath.userProfileJob,
+                                    image: AssetsPath.phillipPressProfile,
                                     boarderColor: AppColors.primaryColor,
                                     imageHeight: .09.sh,
                                     imageWidth: .09.sw,
@@ -240,6 +247,11 @@ class _ViewProductState extends State<ViewProduct> {
                               borderRadius: 10,
                               onTap: () {
                                 print("clicked message");
+                                Navigator.pushNamed(
+                                    context, AppRoutes.chatOneToOneScreenRoute,
+                                    arguments: const ChatOneToOne(
+                                      userName: AppStrings.userNameViewProduct,
+                                    ));
                               },
                               iconPath: AssetsPath.message,
                               backgroundColor: AppColors.primaryColor,
@@ -259,8 +271,19 @@ class _ViewProductState extends State<ViewProduct> {
                                 Navigator.pushNamed(
                                     context, AppRoutes.postProductScreenRoute);
                               } else {
-                                isAddToCart = true;
-                                setState(() {});
+                                // isAddToCart = true;
+                                // setState(() {});
+                                AppUtils.showBottomModalSheet(
+                                    context: contextBuilder,
+                                    widget:
+                                    // const ModalBottomSheetProducts()
+                                    BottomModalSheetDeliveryAddress(onItemAdded: (v) {
+                                      if(v) {
+                                        isAddToCart = true;
+                                        setState(() {});
+                                      }
+                                    })
+                                );
                               }
                             },
                             name: widget.isMyProduct
@@ -315,9 +338,9 @@ class _ViewProductState extends State<ViewProduct> {
                                       AppUtils.showBottomModalSheet(
                                           context: contextBuilder,
                                           widget:
-                                               const ModalBottomSheetProducts()
-                                              // const BottomModalSheetDeliveryAddress()
-                                      );
+                                              const ModalBottomSheetProducts()
+                                          // const BottomModalSheetDeliveryAddress()
+                                          );
                                     },
                                     name: AppStrings.viewCartText,
                                     borderRadius:

@@ -19,12 +19,14 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
       imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final Function()? onTap;
 
   const MyEventsScheduledItemsWidget(
       {super.key,
       this.title,
       this.subTitle,
       this.price,
+      this.onTap,
       this.userProfile,
       this.userName,
       this.userRating,
@@ -114,28 +116,28 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .06),
                       Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            print("Clicked");
-                            Navigator.pushNamed(context, AppRoutes.viewEventSelfScreenRoute);
-                          },
-                          highlightColor: AppColors.greenColor,
-                          splashColor: AppColors.greyColor,
-                          child: Container(
-                            padding: EdgeInsets.zero,
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: Center(
-                              child: textWidget(
-                                text: AppStrings.viewEvent,
-                                color: AppColors.textWhiteColor,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                                textAlign: TextAlign.center,
+                        child: Container(
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.bookedJobRoundedBorder),
+                          ),
+                          child: Material(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.bookedJobRoundedBorder),
+                            child: InkWell(
+                              onTap: onTap,
+                              child: Center(
+                                child: textWidget(
+                                  text: AppStrings.viewEvent,
+                                  color: AppColors.textWhiteColor,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),

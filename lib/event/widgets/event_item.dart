@@ -19,12 +19,14 @@ class EventItemsWidget extends StatelessWidget {
       imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final Function()? onTap;
 
   const EventItemsWidget(
       {super.key,
       this.title,
       this.subTitle,
       this.price,
+      this.onTap,
       this.userProfile,
       this.userName,
       this.userRating,
@@ -45,153 +47,163 @@ class EventItemsWidget extends StatelessWidget {
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              RoundedCornersImage(
-                imageHeight: imageHeight,
-                imageWidth: AppDimensions.listItemWidth,
-                assetImage: imagePath,
-                boarderColor: boarderColor,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Material(
+          color: boarderColor,
+          shape: RoundedRectangleBorder(
+            borderRadius:
+            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+          ),
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  RoundedCornersImage(
+                    imageHeight: imageHeight,
+                    imageWidth: AppDimensions.listItemWidth,
+                    assetImage: imagePath,
+                    boarderColor: boarderColor,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                              child: textWidget(
-                                  text: title,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: AppDimensions.textSizeSmall,
-                                  color: AppColors.textBlackColor)),
-                          Column(
-                            children: [
-                              textWidget(
-                                  text: price,
-                                  color: AppColors.textBlackColor,
-                                  fontWeight: FontWeight.bold),
-                              textWidget(
-                                  text: "per head",
-                                  textAlign: TextAlign.end,
-                                  fontSize: 8),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: .5.sw,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3.0),
-                              child: ImageIcon(
-                                const AssetImage(AssetsPath.location),
-                                size: AppDimensions.eventWidgetIconSize,
-                                color: AppColors.greyColorNoOpacity,
-                              ),
-                            ),
-                            width(0.02.sw),
-                            Expanded(
-                                child: textWidget(
-                                    text: subTitle,
-                                    maxLines: 2,
-                                    fontSize: AppDimensions.textSizeVerySmall)),
-                          ],
-                        ),
-                      ),
-                      height(imageHeight! * .04),
-                      Divider(
-                        height: 1.h,
-                      ),
-                      const Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CircularCacheImageWidget(
-                            showLoading: false,
-                            image: userProfile,
-                            boarderColor: AppColors.primaryColor,
-                            imageHeight: imageHeight! * .2,
-                            imageWidth: imageHeight! * .2,
-                          ),
-                          width(.01.sw),
-                          Column(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // place RoundedImageWithBackgroundColor at end
-                              textWidget(
-                                  text: userName,
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textBlackColor),
-                              Row(
+                              Expanded(
+                                  child: textWidget(
+                                      text: title,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions.textSizeSmall,
+                                      color: AppColors.textBlackColor)),
+                              Column(
                                 children: [
-                                  Image.asset(
-                                    AssetsPath.star,
-                                    height: imageHeight! * .08,
-                                    width: imageHeight! * .08,
-                                    color: AppColors.ratingColor,
-                                  ),
-                                  width(.01.sw),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      textWidget(
-                                          text: userRating, fontSize: 8.sp),
-                                    ],
-                                  ),
+                                  textWidget(
+                                      text: price,
+                                      color: AppColors.textBlackColor,
+                                      fontWeight: FontWeight.bold),
+                                  textWidget(
+                                      text: "per head",
+                                      textAlign: TextAlign.end,
+                                      fontSize: 8),
                                 ],
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            width: .5.sw,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 3.0),
+                                  child: ImageIcon(
+                                    const AssetImage(AssetsPath.location),
+                                    size: AppDimensions.eventWidgetIconSize,
+                                    color: AppColors.greyColorNoOpacity,
+                                  ),
+                                ),
+                                width(0.02.sw),
+                                Expanded(
+                                    child: textWidget(
+                                        text: subTitle,
+                                        maxLines: 2,
+                                        fontSize: AppDimensions.textSizeVerySmall)),
+                              ],
+                            ),
+                          ),
+                          height(imageHeight! * .04),
+                          Divider(
+                            height: 1.h,
                           ),
                           const Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                },
-                                iconPath: AssetsPath.favUnfilled,
-                                height: imageHeight! * .2,
-                                width: imageHeight! * .2,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
+                              CircularCacheImageWidget(
+                                showLoading: false,
+                                image: userProfile,
+                                boarderColor: AppColors.primaryColor,
+                                imageHeight: imageHeight! * .2,
+                                imageWidth: imageHeight! * .2,
                               ),
-                              width(0.025.sw),
-                              IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                },
-                                iconPath: AssetsPath.message,
-                                height: imageHeight! * .2,
-                                width: imageHeight! * .2,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
+                              width(.01.sw),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // place RoundedImageWithBackgroundColor at end
+                                  textWidget(
+                                      text: userName,
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.textBlackColor),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        AssetsPath.star,
+                                        height: imageHeight! * .08,
+                                        width: imageHeight! * .08,
+                                        color: AppColors.ratingColor,
+                                      ),
+                                      width(.01.sw),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          textWidget(
+                                              text: userRating, fontSize: 8.sp),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const Spacer(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  IconButtonWithBackground(
+                                    onTap: () {
+                                      print("Clicked");
+                                    },
+                                    iconPath: AssetsPath.favUnfilled,
+                                    height: imageHeight! * .2,
+                                    width: imageHeight! * .2,
+                                    backgroundColor: AppColors.primaryColor,
+                                    iconColor: AppColors.whiteColor,
+                                  ),
+                                  width(0.025.sw),
+                                  IconButtonWithBackground(
+                                    onTap: () {
+                                      print("Clicked");
+                                    },
+                                    iconPath: AssetsPath.message,
+                                    height: imageHeight! * .2,
+                                    width: imageHeight! * .2,
+                                    backgroundColor: AppColors.primaryColor,
+                                    iconColor: AppColors.whiteColor,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-              )
-            ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -72,7 +72,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
               Padding(
                   padding: const EdgeInsets.only(top: 24.0),
                   child: customMaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       borderRadius: 12,
                       name: AppStrings.accepted,
                       color: AppColors.primaryColor,

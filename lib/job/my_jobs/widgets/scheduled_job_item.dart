@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -89,6 +90,7 @@ class ScheduledJobItemWidget extends StatelessWidget {
                           IconButtonWithBackground(
                             onTap: () {
                               print("Clicked");
+                              Navigator.pushNamed(context, AppRoutes.postJobScreenRoute, arguments: const PostJob(isEdit: true,));
                             },
                             iconPath: AssetsPath.edit,
                             height: imageHeight! * .22,
@@ -105,28 +107,30 @@ class ScheduledJobItemWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                       height(imageHeight! * .03),
                       Expanded(
-                        child: InkWell(
-                          onTap:(){
-                            print("Clicked");
-                            Navigator.pushNamed(context, AppRoutes.viewJobScreenRoute);
-                          },
-                          highlightColor: AppColors.greenColor,
-                          splashColor: AppColors.greyColor,
-                          child: Container(
-                            padding: EdgeInsets.zero,
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: Center(
-                              child: textWidget(
-                                text: AppStrings.viewRequest,
-                                color: AppColors.textWhiteColor,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                                textAlign: TextAlign.center,
+                        child: Container(
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.bookedJobRoundedBorder),
+                          ),
+                          child: Material(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.bookedJobRoundedBorder),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, AppRoutes.viewJobScreenRoute);
+                              },
+                              child: Center(
+                                child: textWidget(
+                                  text: AppStrings.viewRequest,
+                                  color: AppColors.textWhiteColor,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),

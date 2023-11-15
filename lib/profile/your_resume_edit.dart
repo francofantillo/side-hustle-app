@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -313,7 +315,15 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     borderRadius: 14,
                     fontSize: AppDimensions.textSizeNormal,
                     height: 10.h,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          AppRoutes.bottomTabsScreenRoute,
+                          arguments: const BottomTabsScreen(
+                            currentIndex: 4,
+                          ),
+                          (route) => false);
+                    },
                     color: AppColors.primaryColor,
                     name: AppStrings.saveResume),
               )

@@ -11,7 +11,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class FavItemEventsWidget extends StatelessWidget {
   final String? title,
-      subTitle,
+      location,
       price,
       userProfile,
       userName,
@@ -23,7 +23,7 @@ class FavItemEventsWidget extends StatelessWidget {
   const FavItemEventsWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.location,
       this.price,
       this.userProfile,
       this.userName,
@@ -101,8 +101,8 @@ class FavItemEventsWidget extends StatelessWidget {
                             ),
                             width(0.02.sw),
                             Expanded(
-                                child: textWidget(text: subTitle, maxLines: 2,
-                                    fontSize: AppDimensions.textSizeVerySmall)),
+                                child: textWidget(text: location, maxLines: 2,
+                                    fontSize: AppDimensions.textSizePerHead)),
                           ],
                         ),
                       ),

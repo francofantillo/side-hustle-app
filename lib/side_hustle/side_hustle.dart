@@ -82,6 +82,7 @@ class _SideHustleState extends State<SideHustle> {
                   animationDuration: 200,
                   isVertical: false,
                   minWidth: 90,
+                  minHeight: 0.13.sw,
                   cornerRadius: 12.0.w,
                   changeOnTap: true,
                   activeBgColors: const [
@@ -90,7 +91,7 @@ class _SideHustleState extends State<SideHustle> {
                   ],
                   activeFgColor: Colors.white,
                   inactiveBgColor: AppColors.switchTabBackgroundColor,
-                  inactiveFgColor: Colors.black,
+                  inactiveFgColor: AppColors.greyColor,
                   initialLabelIndex: _tabIndexBasicToggle.value,
                   totalSwitches: 2,
                   labels: [

@@ -32,17 +32,14 @@ class _FavouritesListShopsState extends State<FavouritesListShops> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemFavouritesShopHeight,
               boarderColor: AppColors.itemBGColor,
-              title: "Gustavo Rosser’s Shop",
+              title: AlphaAppData.favShopsList[index].title,
               products: "24 Products",
               services: "5 Services",
-              imagePath:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              userName: AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
-              userRating:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userRating,
-              userProfile:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userProfile,
+              imagePath: AlphaAppData.favShopsList[index].imagePath,
+              price: AlphaAppData.favShopsList[index].price,
+              userName: AlphaAppData.favShopsList[index].userName,
+              userRating: AlphaAppData.favShopsList[index].userRating,
+              userProfile: AlphaAppData.favShopsList[index].userProfile,
             ),
           );
         },

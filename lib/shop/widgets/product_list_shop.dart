@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/product/widgets/products_items.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -29,18 +30,18 @@ class _ProductsListShopState extends State<ProductsListShop> {
           return Padding(
             padding: const EdgeInsets.only(right: 16.0, left: 8.0),
             child: ProductsItemsWidget(
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute);
+              },
               imageWidth: 1.sw,
               imageHeight: AppDimensions.sideHustleItemHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+              title: AlphaAppData.sideHustleProductsList[index].title,
+              subTitle: AlphaAppData.sideHustleProductsList[index].subTitle,
               deliveryType: AppStrings.pickUpViewProduct,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              onTap: () {
-              },
+              imagePath:
+              AlphaAppData.sideHustleProductsList[index].imagePath,
+              price: AlphaAppData.sideHustleProductsList[index].price,
             ),
           );
         },

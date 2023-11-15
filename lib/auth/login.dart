@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -8,6 +9,7 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/images/custom_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
@@ -35,7 +37,17 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                height(AppDimensions.loginTopStartSpacing),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: CustomCacheImage(
+                      showLoading: false,
+                      imageHeight: AppDimensions.loginLogoSize,
+                      imageWidth: 1.sw,
+                      assetImage: AssetsPath.logo,
+                    ),
+                  ),
+                ),
                 textWidget(text: AppStrings.helloThere),
                 textWidget(
                   text: AppStrings.welcomeBack,

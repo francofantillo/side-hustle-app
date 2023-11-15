@@ -89,25 +89,28 @@ class BookedJobsWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: InkWell(
-                              onTap:(){
-                                print("Clicked");
-                              },
-                              child: Container(
-                                height: imageHeight! * .21,
-                                width: .55.sw,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greenColor,
-                                  borderRadius: BorderRadius.circular(
-                                      AppDimensions.bookedJobRoundedBorder),
-                                ),
-                                child: Center(
-                                  child: textWidget(
-                                    text: AppStrings.startJob,
-                                    color: AppColors.textWhiteColor,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w700,
-                                    textAlign: TextAlign.center,
+                            child: Container(
+                              height: imageHeight! * .21,
+                              width: .55.sw,
+                              decoration: BoxDecoration(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.bookedJobRoundedBorder),
+                              ),
+                              child: Material(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.bookedJobRoundedBorder),
+                                child: InkWell(
+                                  onTap: (){},
+                                  child: Center(
+                                    child: textWidget(
+                                      text: AppStrings.startJob,
+                                      color: AppColors.textWhiteColor,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w700,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                 ),
                               ),

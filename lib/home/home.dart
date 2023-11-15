@@ -39,93 +39,95 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Builder(builder: (contextBuilder) {
       return SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
+        child: Scaffold(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    left: AppDimensions.rootPadding,
+                    right: AppDimensions.rootPadding,
+                    top: AppDimensions.rootPadding),
+                child: HomeAppBar(contextBuilder: contextBuilder),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: AppDimensions.rootPadding + 6,
+                    right: AppDimensions.rootPadding,
+                    top: AppDimensions.rootPadding),
+                child: const HomeLocationWidget(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: AppDimensions.rootPadding,
+                    right: AppDimensions.rootPadding,
+                    top: AppDimensions.rootPadding),
+                child: SearchTextField(
+                    height: 0.17.sw,
+                    hintText: AppStrings.searchHintText,
+                    onChanged: (search) {}),
+              ),
+              // Horizontal ListView
+              Padding(
+                padding: EdgeInsets.only(
                   left: AppDimensions.rootPadding,
                   right: AppDimensions.rootPadding,
-                  top: AppDimensions.rootPadding),
-              child: HomeAppBar(contextBuilder: contextBuilder),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: AppDimensions.rootPadding + 6,
-                  right: AppDimensions.rootPadding,
-                  top: AppDimensions.rootPadding),
-              child: const HomeLocationWidget(),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: AppDimensions.rootPadding,
-                  right: AppDimensions.rootPadding,
-                  top: AppDimensions.rootPadding),
-              child: SearchTextField(
-                  height: 0.17.sw,
-                  hintText: AppStrings.searchHintText,
-                  onChanged: (search) {}),
-            ),
-            // Horizontal ListView
-            Padding(
-              padding: EdgeInsets.only(
-                left: AppDimensions.rootPadding,
-                right: AppDimensions.rootPadding,
+                ),
+                child: FirstHomeListItemWidget(
+                  horizontalListSize: AppDimensions.homeFirstHorizontalListSize,
+                  itemsList: AlphaAppData.homeFirstList,
+                  // onTapLabel: () {
+                  //   print("Clicked");
+                  // },
+                ),
               ),
-              child: FirstHomeListItemWidget(
-                horizontalListSize: AppDimensions.homeFirstHorizontalListSize,
-                itemsList: AlphaAppData.homeFirstList,
-                // onTapLabel: () {
-                //   print("Clicked");
-                // },
-              ),
-            ),
-            // Vertical ListView
-            JobsAndEventsList(
-                rightPadding: AppDimensions.rootPadding,
-                leftPadding: AppDimensions.rootPadding,
-                jobsAndEventsList: AlphaAppData.jobsAndEventsList),
-            height(20),
-            PrimaryPostButton(
-                title: AppStrings.postASideHustle,
-                onPressed: () {
-                  AppDialogues.postSideHustleDialogue(
-                          context: contextBuilder,
-                          body: PostYourSideHustleDialogueWidget(
-                            isProductSelected: (v) {
-                              isProductSelected = v;
-                              print("prodcut: $isProductSelected");
-                            },
-                            onPressed: () {
-                              print("pressed Dialogue");
-                              if (isProductSelected) {
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                // Navigator.pop(contextBuilder);
-                                AppDialogues.postSideHustleDialogue(
-                                        context: contextBuilder)
-                                    .dismiss();
-                                Navigator.pushNamed(contextBuilder,
-                                    AppRoutes.postProductScreenRoute);
-                              } else {
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                AppDialogues.postSideHustleDialogue(
-                                        context: contextBuilder)
-                                    .dismiss();
-                                // Navigator.pop(contextBuilder);
-                                Navigator.pushNamed(contextBuilder,
-                                    AppRoutes.postServiceScreenRoute);
-                              }
-                            },
-                            onTapClose: () {
-                              Navigator.pop(contextBuilder);
-                            },
-                          ))
-                      // ..show()
-                      .show();
-                }),
-          ],
+              // Vertical ListView
+              JobsAndEventsList(
+                  rightPadding: AppDimensions.rootPadding,
+                  leftPadding: AppDimensions.rootPadding,
+                  jobsAndEventsList: AlphaAppData.jobsAndEventsList),
+              height(20),
+              PrimaryPostButton(
+                  title: AppStrings.postASideHustle,
+                  onPressed: () {
+                    AppDialogues.postSideHustleDialogue(
+                            context: contextBuilder,
+                            body: PostYourSideHustleDialogueWidget(
+                              isProductSelected: (v) {
+                                isProductSelected = v;
+                                print("prodcut: $isProductSelected");
+                              },
+                              onPressed: () {
+                                print("pressed Dialogue");
+                                if (isProductSelected) {
+                                  /// reset to Default Value
+                                  isProductSelected = true;
+                                  // Navigator.pop(contextBuilder);
+                                  AppDialogues.postSideHustleDialogue(
+                                          context: contextBuilder)
+                                      .dismiss();
+                                  Navigator.pushNamed(contextBuilder,
+                                      AppRoutes.postProductScreenRoute);
+                                } else {
+                                  /// reset to Default Value
+                                  isProductSelected = true;
+                                  AppDialogues.postSideHustleDialogue(
+                                          context: contextBuilder)
+                                      .dismiss();
+                                  // Navigator.pop(contextBuilder);
+                                  Navigator.pushNamed(contextBuilder,
+                                      AppRoutes.postServiceScreenRoute);
+                                }
+                              },
+                              onTapClose: () {
+                                Navigator.pop(contextBuilder);
+                              },
+                            ))
+                        // ..show()
+                        .show();
+                  }),
+            ],
+          ),
         ),
       );
     });

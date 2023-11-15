@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/event/my_events/widgets/my_events_completed_list.dart';
+import 'package:side_hustle/event/my_events/widgets/my_events_onging_list.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_scheduled_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/completed_job_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/ongoing_job_list.dart';
@@ -86,9 +88,9 @@ class _MyEventsScreenState extends State<MyEventsScreen> {
             _tabIndexBasicToggle.value == 0
                 ? const MyEventsScheduledList()
                 : _tabIndexBasicToggle.value == 1
-                ? const MyJobsOnGoingList()
+                ? const MyEventsOngoingList()
                 : _tabIndexBasicToggle.value == 2
-                ? const MyJobsCompletedList()
+                ? const MyEventsCompletedList()
                 : const SizedBox.shrink(),
             height(0.02.sh)
           ],

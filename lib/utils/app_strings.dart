@@ -5,6 +5,27 @@ class AppStrings {
   /// Auth
   static const String GET_STARTED = "Get Started";
   static const String aboutUs = "About Us";
+  static const String howToHustler = "How to be a Hustler";
+  static const String howToHustlerPdf = "How to be a Hustler.pdf";
+  static const String howToHustlerSubText = "Download this book to get a better idea about side huslte";
+  static const String flyerUnderCapitalism = "Flyer Under Capitalism";
+  static const String flyerUnderCapitalismTextOne =
+      "At 22 years old, freshly separated from the military, I found myself on vacation in San Francisco, California. During a memorable weekend, I visited a Leonardo da Vinci exhibit showcasing scaled-down models of his inventions, from parachutes to ball bearings. Amidst my awe for these remarkable creations, I stumbled upon a model of a small city, prompting a profound question: "
+      "Had this man discovered the blueprint for a perfect city? To this day, that question remains unanswered, but it ignited a concept that continues to fuel my passion. This experience led me to contemplate the essence of a perfect city, emphasizing one vital element: circulation—the seamless flow of goods and resources within a community.";
+  static const String flyerUnderCapitalismTextTwo =
+      "The thought of circulation led me to ponder the Local Circulation of Money (LCM). In many cities, monopolies, represented by giant chain stores like Wal-Mart, drain substantial amounts of money from the local economy, leaving minimal returns. This financial drain cripples the LCM, hindering the city's economic growth and prosperity.";
+  static const String flyerUnderCapitalismTextThree =
+      "As responsible neighbors and citizens, it is our duty to reinforce the LCM by supporting one another, enhancing the circulation of money within our communities. Large corporations, akin to winners in a Monopoly game, often dominate the economic landscape. To counter this, I envisioned United Capitalism—a concept aimed at empowering ordinary people to compete with these monopolies. This vision materialized into the Side Hustle app, a platform designed to give individuals a chance to participate actively in their local economies.";
+  static const String flyerUnderCapitalismTextFour =
+      "The Side Hustle app, in its initial stages, serves as a basic tool to facilitate local transactions. However, my aspiration is to evolve it into a platform promoting "
+      "Repetitious Cyclical Patterns of Money."
+      " This concept involves establishing a chain of transactions among neighbors, allowing them to nurture their side hustles and break free from the chains of the system. Starting a business demands substantial resources, especially when competing against colossal franchises. Yet, the potential for success is evident; anyone can create a superior product, like a healthier cheeseburger, compared to what large corporations offer. The missing element has always been a supportive community platform.";
+  static const String flyerUnderCapitalismTextFive =
+      "Imagine our neighbor Jimmy using the Side Hustle app to announce, "
+      "I'm grilling cheeseburgers in my driveway this Saturday."
+      " When our community rallies behind Jimmy, we provide him with more than just financial support. We give him hope—a chance to break free from a job he dislikes, in a place he despises, working with people he cannot stand. By challenging the system, we offer Jimmy the opportunity to plan a new, brighter future.";
+  static const String flyerUnderCapitalismTextSix =
+      "In essence, United Capitalism and the Side Hustle app are not just about financial transactions; they represent the embodiment of hope and the power of communities working together. My wish is for everyone involved to find the strength and support they need to escape the confines of the existing economic system, paving the way for a more prosperous and equitable future for all.";
   static const String accepted = "I accept";
   static const String aboutUsTextOne =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
@@ -23,6 +44,8 @@ class AppStrings {
   static const String continueWithGoogle =
       "Continue with Google, Apple or Facebook, you agree to Side Hustle ";
   static const String termsAndConditions = "Terms and Conditions";
+  static const String unitedCapitalism = "United Capitalism";
+  static const String unitedCapitalismSubText = "Reinventing Local Economies through Community Support";
   static const String privacyPolicy = "Privacy Policy";
   static const String notAMember = "Not a member? ";
   static const String signUpNow = "Sign up now";
@@ -48,6 +71,14 @@ class AppStrings {
 
   /// Reset Password
   static const String setNewPassword = "Set New Password";
+  static const String changPassword = "Change Password";
+  static const String currentPassword = "Current Password";
+  static const String passwordRequirement =
+      "At least 12 characters long but 14 or more is better.";
+  static const String passwordCombination =
+      "A combination of uppercase letters, lowercase letters, numbers, and symbols.";
+  static const String changPasswordHint =
+      "In order to change password you need to enter the current password";
   static const String pleaseEnterNewPassword = "Please enter your new password";
   static const String continueText = "Continue";
   static const String newPassword = "New Password";
@@ -72,7 +103,6 @@ class AppStrings {
   static const String account = "Account";
   static const String message = "Message";
   static const String favorites = "Favorites";
-  static const String changPassword = "Change Password";
   static const String pushNotifications = "Push Notifications";
   static const String supports = "SUPPORTS";
   static const String deleteAccount = "Delete Account";
@@ -83,7 +113,7 @@ class AppStrings {
 
   /// Home
   static const String searchHintText = "Search Product, Services or event";
-  static const String blessTheseBusinesses = "Let's bless these businesses";
+  static const String blessTheseBusinesses = "Let's Bless These Businesses";
   static const String jobsAroundYou = "Jobs around you";
   static const String eventsAroundYou = "Events around you";
   static const String welcomeHome = "Welcome here!";
@@ -121,6 +151,7 @@ class AppStrings {
   static const String enterTheAdditionalInformation =
       "Enter the additional information";
   static const String location = "Location";
+  static const String leoLubin = "Leo Lubin";
   static const String enterTheLocation = "Enter the location";
   static const String useYourShopLocation = "Use your Shop Location";
   static const String uploadImages = "Upload Images";
@@ -156,6 +187,7 @@ class AppStrings {
 
   /// Post Job
   static const String postJob = "Post a Job";
+  static const String editJob = "Edit Job";
   static const String postJobTitle = "Job Title";
   static const String enterTheJobTitle = "Enter the Job title";
   static const String jobLocation = "Job Location";
@@ -269,6 +301,7 @@ class AppStrings {
   static const String addToCart = "Add to Cart";
   static const String next = "Next";
   static const String done = "Done";
+  static const String downloadThisBook = "Download this Book";
   static const String viewCartText = "View Cart (1)";
   static const String deliveryAddress = "Delivery Address";
   static const String deliveryAddressHint =
@@ -387,7 +420,8 @@ class AppStrings {
   static const String familyTies = "Family Ties";
   static const String familyTiesHint = "Enter Family Ties";
   static const String professionalBackground = "Professional Background";
-  static const String professionalBackgroundHint = "Enter Professional Background";
+  static const String professionalBackgroundHint =
+      "Enter Professional Background";
   static const String hobbies = "Hobbies";
   static const String hobbiesHint = "Enter Hobbies";
   static const String favoriteQuote = "Favorite Quote";

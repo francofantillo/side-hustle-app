@@ -23,7 +23,7 @@ class _BookedTabListState extends State<BookedTabList> {
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-          itemCount: 4,
+          itemCount: 3,
           // Replace with your item count
           itemBuilder: (context, index) {
             // Replace with your horizontal list item
@@ -33,14 +33,10 @@ class _BookedTabListState extends State<BookedTabList> {
                   imageWidth: 1.sw,
                   imageHeight: AppDimensions.listItemHeight,
                   boarderColor: AppColors.itemBGColor,
-                  title: AlphaAppData
-                      .jobsAndEventsList[0].itemList?[0].title,
-                  subTitle: AlphaAppData
-                      .jobsAndEventsList[0].itemList?[0].subTitle,
-                  imagePath: AlphaAppData
-                      .jobsAndEventsList[0].itemList?[0].imagePath,
-                  price: AlphaAppData
-                      .jobsAndEventsList[0].itemList?[0].price
+                  title: AlphaAppData.wantedJobList[index].title,
+                  subTitle: AlphaAppData.wantedJobList[index].subTitle,
+                  imagePath: AlphaAppData.wantedJobList[index].imagePath,
+                  price: AlphaAppData.wantedJobList[index].price
               ),
             );
           },

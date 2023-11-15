@@ -4,6 +4,7 @@ import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/profile/widgets/jobs_widget.dart';
 import 'package:side_hustle/profile/widgets/profile_items_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -68,13 +69,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   contextBuilder: contextBuilder,
                   title: AppStrings.profileResumePage,
                   hideNotificationIcon: true,
-                  hideProfileIcon: false,
+                  hideEditProfileIcon: true,
                 ),
               ),
               height(0.02.sh),
               Center(
                 child: CircularCacheImageWidget(
                   showLoading: true,
+                  image: AlphaAppData.dpProfile,
                   boarderColor: AppColors.primaryColor,
                   imageHeight: 90.w,
                   imageWidth: 90.w,
@@ -126,7 +128,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     onPressed: () {
                       Navigator.pushNamed(
                           // context, AppRoutes.yourResumeEditScreenRoute);
-                          context, AppRoutes.yourResumeScreenRoute);
+                          context,
+                          AppRoutes.yourResumeScreenRoute);
                     },
                     name: AppStrings.yourResume),
               ),
@@ -143,13 +146,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Navigator.pushNamed(
                               context, AppRoutes.myJobsScreenRoute);
                         }),
-                    ProfileJobsWidget(
-                        name: AppStrings.jobsCompleted,
-                        myJobsCount: "12",
-                        onTap: () {}),
+                    const ProfileJobsWidget(
+                        name: AppStrings.jobsCompleted, myJobsCount: "12"),
                     ProfileJobsWidget(
                         name: AppStrings.myEvents,
-                        myJobsCount: "12",
+                        myJobsCount: "28",
                         onTap: () {
                           Navigator.pushNamed(
                               context, AppRoutes.myEventsScreenRoute);

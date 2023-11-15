@@ -79,7 +79,15 @@ class _EventScreenState extends State<EventScreen> {
               child: SearchTextField(
                   hintText: AppStrings.searchEvent,
                   suffixIcon:
-                      const ImageIcon(AssetImage(AssetsPath.searchFilter)),
+                   Padding(
+                    padding: const EdgeInsets.only(right: 12.0, left: 0),
+                    child: Material(
+                        child: InkWell(
+                            onTap: (){
+                              print("onClicked Filter");
+                            },
+                            child: const ImageIcon(AssetImage(AssetsPath.searchFilter)))),
+                  ),
                   onChanged: (search) {}),
             ),
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor

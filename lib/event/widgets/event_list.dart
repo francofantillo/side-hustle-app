@@ -30,29 +30,22 @@ class _EventListState extends State<EventList> {
             // Replace with your horizontal list item
             return Padding(
               padding: const EdgeInsets.only(right: 16.0, left: 8.0),
-              child: Material(
-                child: InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
-                  },
-                  child: EventItemsWidget(
-                    imageWidth: 1.sw,
-                    imageHeight: AppDimensions.listItemHeight,
-                    boarderColor: AppColors.itemBGColor,
-                    title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-                    subTitle:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-                    imagePath: AlphaAppData
-                        .jobsAndEventsList[0].itemList?[0].imagePath,
-                    price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-                    userName:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
-                    userRating: AlphaAppData
-                        .jobsAndEventsList[0].itemList?[0].userRating,
-                    userProfile: AlphaAppData
-                        .jobsAndEventsList[0].itemList?[0].userProfile,
-                  ),
-                ),
+              child: EventItemsWidget(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
+                },
+                imageWidth: 1.sw,
+                imageHeight: AppDimensions.listItemHeight,
+                boarderColor: AppColors.itemBGColor,
+                title: AlphaAppData.eventsList[index].title,
+                subTitle:
+                AlphaAppData.eventsList[index].subTitle,
+                imagePath: AlphaAppData.eventsList[index].imagePath,
+                price: AlphaAppData.eventsList[index].price,
+                userName:
+                AlphaAppData.eventsList[index].userName,
+                userRating: AlphaAppData.eventsList[index].userRating,
+                userProfile: AlphaAppData.eventsList[index].userProfile,
               ),
             );
           },

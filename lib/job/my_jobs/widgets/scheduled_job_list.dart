@@ -17,7 +17,8 @@ class _MyJobsScheduledListState extends State<MyJobsScheduledList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
@@ -31,18 +32,13 @@ class _MyJobsScheduledListState extends State<MyJobsScheduledList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemScheduledHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              userName:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
-              userRating: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userRating,
-              userProfile: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userProfile,
+              title: AlphaAppData.myJobsScheduleList[index].title,
+              subTitle: AlphaAppData.myJobsScheduleList[index].subTitle,
+              imagePath: AlphaAppData.myJobsScheduleList[index].imagePath,
+              price: AlphaAppData.myJobsScheduleList[index].price,
+              userName: AlphaAppData.myJobsScheduleList[index].userName,
+              userRating: AlphaAppData.myJobsScheduleList[index].userRating,
+              userProfile: AlphaAppData.myJobsScheduleList[index].userProfile,
             ),
           );
         },

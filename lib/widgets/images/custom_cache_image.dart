@@ -56,6 +56,7 @@ class CustomCacheImage extends StatelessWidget {
       errorWidget: (context, url, error) => Image.asset(
         assetImage ?? AssetsPath.placeHolderProfileImage,
         fit: BoxFit.cover,
+        height: imageHeight,
       )
     );
   }

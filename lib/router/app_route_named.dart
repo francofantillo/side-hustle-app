@@ -6,6 +6,7 @@ class AppRoutes {
   static const String splashTransParentScreenRoute = "/splashTransParent";
   static const String myHomeScreenRoute = "/myHomePage";
   static const String loginScreenRoute = "/login";
+  static const String changePasswordScreenRoute = "/changePassword";
   static const String signupScreenRoute = "/signup";
   static const String forgotPasswordScreenRoute = "/forgotPassword";
   static const String resetPasswordScreenRoute = "/resetPassword";
@@ -45,6 +46,8 @@ class AppRoutes {
   static const String aboutUsScreenRoute = "/aboutUs";
   static const String privacyPolicyScreenRoute = "/privacyPolicy";
   static const String termsAndConditionsScreenRoute = "/termsAndConditions";
+  static const String flyerUnderCapitalismScreenRoute = "/flyerUnderCapitalism";
+  static const String downloadBookScreenRoute = "/downloadBook";
   static const String walkthroughScreenRoute = "/walkthrough";
   static const String postAddedScreenRoute = "/postAdded";
   static const String bottomTabsScreenRoute = "/bottomTabs";

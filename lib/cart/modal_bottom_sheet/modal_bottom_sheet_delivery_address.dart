@@ -112,17 +112,21 @@ class _BottomModalSheetDeliveryAddressState
                         if (widget.isEdit) {
                           Navigator.pop(context);
                         } else {
-                          if (widget.isService) {
-                            widget.onItemAdded!(true);
-                            Navigator.pop(context);
-                          } else {
-                            Navigator.pop(context);
-                            AppUtils.showBottomModalSheet(
-                                context: context,
-                                widget: const ModalBottomSheetProducts(
-                                  isDelivery: true,
-                                ));
-                          }
+                          widget.onItemAdded!(true);
+                          Navigator.pop(context);
+                          // if (widget.isService) {
+                          //   widget.onItemAdded!(true);
+                          //   Navigator.pop(context);
+                          // } else {
+                          //   // Navigator.pop(context);
+                          //   // AppUtils.showBottomModalSheet(
+                          //   //     context: context,
+                          //   //     widget: const ModalBottomSheetProducts(
+                          //   //       isDelivery: true,
+                          //   //     ));
+                          //   widget.onItemAdded!(true);
+                          //   Navigator.pop(context);
+                          // }
                         }
                       },
                       borderRadius: 16,

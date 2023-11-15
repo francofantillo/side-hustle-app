@@ -151,27 +151,30 @@ class CompletedJobItemWidget extends StatelessWidget {
                       ),
                       height(0.01.sh),
                       Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            print("Clicked");
-                          },
-                          highlightColor: AppColors.greenColor,
-                          splashColor: AppColors.greyColor,
-                          child: Container(
-                            padding: EdgeInsets.zero,
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: Center(
-                              child: textWidget(
-                                text: AppStrings.rateAndReview,
-                                color: AppColors.textWhiteColor,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                                textAlign: TextAlign.center,
+                        child: Container(
+                          padding: EdgeInsets.zero,
+                          margin: EdgeInsets.zero,
+                          decoration: BoxDecoration(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.bookedJobRoundedBorder),
+                          ),
+                          child: Material(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.bookedJobRoundedBorder),
+                            child: InkWell(
+                              onTap: () {
+
+                              },
+                              child: Center(
+                                child: textWidget(
+                                  text: AppStrings.rateAndReview,
+                                  color: AppColors.textWhiteColor,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),

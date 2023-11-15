@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/widgets/service_item.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -33,14 +34,13 @@ class _ServicesListShopState extends State<ServicesListShop> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.sideHustleItemHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+              title: AlphaAppData.sideHustleServicesList[index].title,
+              subTitle: AlphaAppData.sideHustleServicesList[index].subTitle,
               deliveryType: AppStrings.pickUpViewProduct,
-              imagePath:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+              imagePath: AlphaAppData.sideHustleServicesList[index].imagePath,
+              price: AlphaAppData.sideHustleServicesList[index].price,
               onTap: () {
-
+                Navigator.pushNamed(context, AppRoutes.viewServiceScreenRoute);
               },
             ),
           );

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
 import 'package:side_hustle/drawer/widgets/logout_widget.dart';
+import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
-import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
-import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -66,6 +66,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     children: [
                       const CircularCacheImageWidget(
                         showLoading: false,
+                        image: AlphaAppData.dpProfile,
                       ),
                       width(0.03.sw),
                       Expanded(
@@ -92,19 +93,30 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: AppStrings.message,
                     onTap: () {
                       print("Clicked");
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.chatAllUsersScreenRoute);
                     },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing),
                   DrawerItemListTile(
                     iconPath: AssetsPath.favourite,
                     title: AppStrings.favorites,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.favouritesScreenRoute);
+                    },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing),
                   DrawerItemListTile(
                     iconPath: AssetsPath.changePassword,
                     title: AppStrings.changPassword,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.changePasswordScreenRoute);
+                    },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing - 20),
                   Row(
@@ -139,25 +151,60 @@ class _AppDrawerState extends State<AppDrawer> {
                   DrawerItemListTile(
                     iconPath: AssetsPath.aboutUs,
                     title: AppStrings.aboutUs,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.aboutUsScreenRoute);
+                    },
+                  ),
+                  height(AppDimensions.drawerItemsVerticalSpacing),
+                  DrawerItemListTile(
+                    iconPath: AssetsPath.aboutUs,
+                    title: AppStrings.flyerUnderCapitalism,
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.flyerUnderCapitalismScreenRoute);
+                    },
+                  ),
+                  height(AppDimensions.drawerItemsVerticalSpacing),
+                  DrawerItemListTile(
+                    iconPath: AssetsPath.aboutUs,
+                    title: AppStrings.howToHustler,
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.downloadBookScreenRoute);
+                    },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing),
                   DrawerItemListTile(
                     iconPath: AssetsPath.list,
                     title: AppStrings.termsAndConditions,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.termsAndConditionsScreenRoute);
+                    },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing),
                   DrawerItemListTile(
                     iconPath: AssetsPath.pp,
                     title: AppStrings.privacyPolicy,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(
+                          context, AppRoutes.privacyPolicyScreenRoute);
+                    },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing),
                   DrawerItemListTile(
                     iconPath: AssetsPath.delete,
                     title: AppStrings.deleteAccount,
-                    onTap: () {},
+                    onTap: () {
+                      // Navigator.pushNamedAndRemoveUntil(context,
+                      //     AppRoutes.loginScreenRoute, (route) => false);
+                    },
                   ),
                   height(AppDimensions.drawerItemsVerticalSpacing + 20),
                   DrawerItemListTile(

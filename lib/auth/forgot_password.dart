@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/drawer/app_drawer.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -21,20 +23,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      drawer: const AppDrawer(),
+      showAppBar: true,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child:
+        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+      ),
       body: Builder(builder: (builderContext) {
         return SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
           child: Padding(
             padding: EdgeInsets.all(AppDimensions.rootPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                backButton(onPressed: () {
-                  Navigator.pop(builderContext);
-                }),
-                height(AppDimensions.fieldsVerticalSpacingBetween),
+                // backButton(onPressed: () {
+                //   Navigator.pop(builderContext);
+                // }),
+                // height(AppDimensions.fieldsVerticalSpacingBetween),
                 textWidget(
                     text: AppStrings.forgotPassword,
                     color: AppColors.textBlackColor,
@@ -57,11 +65,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     name: AppStrings.continueText,
                     onPressed: () {
                       print('Button Pressed');
-                      // Navigator.pushNamed(
-                      //     context, AppRoutes.otpVerificationScreenRoute,
-                      //     arguments:
-                      //         const OtpVerificationScreen(isSocial: false)); How to open from that
-                      Scaffold.of(builderContext).openDrawer();
+                      Navigator.pushNamed(
+                          context, AppRoutes.otpVerificationScreenRoute,
+                          arguments:
+                              const OtpVerificationScreen(isSocial: false));
                     }),
               ],
             ),

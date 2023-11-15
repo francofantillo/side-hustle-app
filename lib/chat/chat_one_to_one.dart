@@ -20,9 +20,11 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 class ChatOneToOne extends StatefulWidget {
   final bool isBlockedUser;
   final bool isOrderChat, isOrderService;
+  final String? userName;
 
   const ChatOneToOne(
       {super.key,
+      this.userName,
       this.isBlockedUser = false,
       this.isOrderChat = false,
       this.isOrderService = false});
@@ -121,7 +123,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
     return BackgroundWidget(
       backgroundColor: Colors.white.withOpacity(0.01),
       showAppBar: true,
-      appBarTitle: AppStrings.chatUserName,
+      appBarTitle: widget.userName ?? AppStrings.chatUserName,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:

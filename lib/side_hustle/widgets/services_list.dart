@@ -34,12 +34,12 @@ class _ServicesListState extends State<ServicesList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.sideHustleItemHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+              title: AlphaAppData.sideHustleServicesList[index].title,
+              subTitle: AlphaAppData.sideHustleServicesList[index].subTitle,
               deliveryType: AppStrings.pickUpViewProduct,
               imagePath:
-                  AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+              AlphaAppData.sideHustleServicesList[index].imagePath,
+              price: AlphaAppData.sideHustleServicesList[index].price,
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.viewServiceScreenRoute);
               },

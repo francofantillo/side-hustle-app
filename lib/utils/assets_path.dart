@@ -61,21 +61,43 @@ class AssetsPath {
   static const continueWith = "${imagePath}continue_with.png";
   static const placeHolderProfileImage = "${imagePath}profile_image.jpeg";
   static const drawerBg = "${imagePath}drawer_bg.png";
+  static const downloadBook = "${imagePath}download_book.png";
 
 
   /// Alpha Images
   static const carpenter = "${alphaPath}carpenter.png";
+  static const driver = "${alphaPath}driver.png";
+  static const cleaner = "${alphaPath}wanted_job_1.png";
+  static const mouse = "${alphaPath}mouse.png";
+  static const electrician = "${alphaPath}wanted_job_2.png";
   static const headphones = "${alphaPath}headphones.png";
   static const social = "${alphaPath}social.png";
+  static const yourShop = "${alphaPath}your_shop.png";
   static const homeR1 = "${alphaPath}home_r_1.png";
   static const homeR2 = "${alphaPath}home_r_2.png";
   static const homeR3 = "${alphaPath}home_r_3.png";
   static const homeR4 = "${alphaPath}home_r_4.png";
   static const homeR5 = "${alphaPath}home_r_5.png";
+  static const fav1 = "${alphaPath}fav1.png";
+  static const fav2 = "${alphaPath}fav2.png";
+  static const fav3 = "${alphaPath}fav3.png";
   static const userProfileJob = "${alphaPath}user_profile_jobs.png";
   // static const carpenterProfile = "${alphaPath}carpenter_profile.png";
-  static const carpenterProfile = "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
+  static const leoLubinProfile = "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
   // static const userProfileEvents = "${alphaPath}events_profile.png";
-  static const userProfileEvents = "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk";
+  static const phillipPressProfile = "https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk";
+
+  /// Event
+  static const musical = "${alphaPath}musical_event.png";
+  static const event2 = "${alphaPath}event_2.png";
+  static const event3 = "${alphaPath}event_3.png";
+  static const event4 = "${alphaPath}social.png";
+
+  /// Chat Users Images
+  static const chatUser1 = "https://i.pravatar.cc/150?img=18";
+  static const chatUser2 = "https://i.pravatar.cc/150?img=8";
+  static const chatUser3 = "https://i.pravatar.cc/150?img=11";
+  static const chatUser4 = "https://i.pravatar.cc/150?img=12";
+  static const chatUser5 = "https://i.pravatar.cc/150?img=13";
 
 }

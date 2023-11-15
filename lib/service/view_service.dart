@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_service.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -63,7 +64,13 @@ class _ViewServiceState extends State<ViewService> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ImageSlider(),
+                const ImageSlider(
+                  itemImages: [
+                    AssetsPath.plumber,
+                    AssetsPath.plumber,
+                    AssetsPath.plumber
+                  ],
+                ),
                 height(0.02.sh),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -210,7 +217,7 @@ class _ViewServiceState extends State<ViewService> {
                                 children: [
                                   CircularCacheImageWidget(
                                     showLoading: false,
-                                    image: AssetsPath.userProfileJob,
+                                    image: AssetsPath.phillipPressProfile,
                                     boarderColor: AppColors.primaryColor,
                                     imageHeight: .09.sh,
                                     imageWidth: .09.sw,
@@ -247,6 +254,11 @@ class _ViewServiceState extends State<ViewService> {
                               borderRadius: 10,
                               onTap: () {
                                 print("clicked message");
+                                Navigator.pushNamed(
+                                    context, AppRoutes.chatOneToOneScreenRoute,
+                                    arguments: const ChatOneToOne(
+                                      userName: AppStrings.userNameViewProduct,
+                                    ));
                               },
                               iconPath: AssetsPath.message,
                               backgroundColor: AppColors.primaryColor,

@@ -34,6 +34,10 @@ class AppDimensions {
 
   /// Login
   static double loginTopStartSpacing = .15.sh;
+  // static double loginLogoSize = .13.sh;
+  static double loginLogoSize = .27.sw;
+  // static double downloadBookSize = .57.sw;
+  static double downloadBookSize = .67.sw;
   static double welcomeBackSpacingBetween = .05.sh;
   static double fieldsVerticalSpacingBetween = .02.sh;
   static double forgotPasswordSpacingBetween = .01.sh;
@@ -175,4 +179,6 @@ class AppDimensions {
   static double listItemCompletedJobHeight = 0.57.sw;
   static double listItemJobRequestHeight = 0.38.sw;
 
+  /// Button Border Radius
+  static double buttonBorderRadius = 0.04.sw;
 }

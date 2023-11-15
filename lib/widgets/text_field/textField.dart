@@ -245,7 +245,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             isVisible ? AssetsPath.eyeClosed : AssetsPath.eyeOpen,
             width: 40,
             height: 40,
-            color: AppColors.eyeGreyColor,
+            color: AppColors.blackColor,
           ),
           // child: ImageIcon(
           //   AssetImage(isVisible ? AssetPath.EYE_ICON : AssetPath.EYE_ICON),

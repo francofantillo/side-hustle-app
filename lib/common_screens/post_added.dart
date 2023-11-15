@@ -34,13 +34,24 @@ class PostAdded extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           height(0.2.sh),
-          Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: CustomCacheImage(
-              showLoading: false,
-              imageHeight: 0.28.sh,
-              imageWidth: 1.sw,
-              assetImage: AssetsPath.logo,
+          // Padding(
+          //   padding: const EdgeInsets.all(32.0),
+          //   child: CustomCacheImage(
+          //     showLoading: false,
+          //     imageHeight: 0.28.sh,
+          //     imageWidth: 1.sw,
+          //     assetImage: AssetsPath.logo,
+          //   ),
+          // ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(32.0),
+              child: CustomCacheImage(
+                showLoading: false,
+                imageHeight: AppDimensions.loginLogoSize,
+                imageWidth: 1.sw,
+                assetImage: AssetsPath.logo,
+              ),
             ),
           ),
           height(0.01.sh),

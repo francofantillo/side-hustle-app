@@ -92,7 +92,7 @@ class FavItemShopsWidget extends StatelessWidget {
                         child: textWidget(
                             text: products,
                             maxLines: 1,
-                            fontSize: AppDimensions.textSizeVerySmall),
+                            fontSize: AppDimensions.textSizePerHead),
                       ),
                       height(0.01.sh),
                       SizedBox(
@@ -100,7 +100,7 @@ class FavItemShopsWidget extends StatelessWidget {
                         child: textWidget(
                             text: services,
                             maxLines: 1,
-                            fontSize: AppDimensions.textSizeVerySmall),
+                            fontSize: AppDimensions.textSizePerHead),
                       ),
                       height(imageHeight! * .04),
                       Divider(

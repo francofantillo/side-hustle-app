@@ -11,14 +11,14 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 class CustomHomeAppBarWidget extends StatelessWidget {
   final BuildContext contextBuilder;
   final String title;
-  final bool? hideNotificationIcon, hideProfileIcon;
+  final bool? hideNotificationIcon, hideEditProfileIcon;
 
   const CustomHomeAppBarWidget(
       {super.key,
       required this.contextBuilder,
       required this.title,
       this.hideNotificationIcon = false,
-      this.hideProfileIcon = true});
+      this.hideEditProfileIcon = true});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class CustomHomeAppBarWidget extends StatelessWidget {
                 iconPath: AssetsPath.notificationBell,
               )
             : const SizedBox.shrink(),
-        hideProfileIcon == false
+        hideEditProfileIcon == false
             ? IconButtonWithBackground(
                 // height: .074.sh,
                 height: .12.sw,

@@ -13,6 +13,7 @@ class Themes {
       activeFillColor: Colors.white,
       activeColor: AppColors.primaryColor,
       inactiveFillColor: Colors.white,
-      inactiveColor: AppColors.greyColor
+      // inactiveColor: AppColors.greyColor
+      inactiveColor: AppColors.backIconBackgroundColor.withOpacity(.3)
   );
 }

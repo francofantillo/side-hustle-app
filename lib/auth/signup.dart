@@ -1,11 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/auth/otp_verification.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/images/custom_cache_image.dart';
 import 'package:side_hustle/widgets/text/checkbox.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/phone_textField.dart';
@@ -23,17 +28,26 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
-
     return BackgroundWidget(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         child: Padding(
           padding: EdgeInsets.all(AppDimensions.rootPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              height(AppDimensions.signUpTopStartSpacing),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: CustomCacheImage(
+                    showLoading: false,
+                    imageHeight: AppDimensions.loginLogoSize,
+                    assetImage: AssetsPath.logo,
+                  ),
+                ),
+              ),
               textWidget(text: AppStrings.helloThere),
               textWidget(
                   text: AppStrings.registerYourSelf,
@@ -60,7 +74,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 },
                 onCountryChanged: (country) {
                   print(
-                      "dialCode: ${country?.dialCode}, code: ${country?.code}");
+                      "country: ${country?.name}, dialCode: ${country?.dialCode}, code: ${country?.code}");
                 },
               ),
               height(AppDimensions.fieldsVerticalSpacingBetween),
@@ -79,6 +93,8 @@ class _SignupScreenState extends State<SignupScreen> {
               height(AppDimensions.agreeToSideHustleSpacing),
               // height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CheckboxWidget(
                     onChanged: (newValue) {
@@ -111,6 +127,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 print("Clicked");
+                                Navigator.pushNamed(context,
+                                    AppRoutes.termsAndConditionsScreenRoute);
                               },
                           ),
                           TextSpan(
@@ -133,6 +151,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 print("Clicked");
+                                Navigator.pushNamed(context,
+                                    AppRoutes.privacyPolicyScreenRoute);
                               },
                           ),
                         ],
@@ -146,6 +166,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   name: AppStrings.register,
                   onPressed: () {
                     print('Button Pressed');
+                    Navigator.pushNamed(
+                        context, AppRoutes.otpVerificationScreenRoute,
+                        arguments:
+                        const OtpVerificationScreen(isSocial: true));
                   }),
               height(AppDimensions.loginButtonVerticalSpacingBetween),
               Align(
@@ -172,7 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                          Navigator.pop(context);
+                            Navigator.pop(context);
                             print("Clicked");
                           },
                       ),

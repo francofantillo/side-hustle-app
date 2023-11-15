@@ -43,12 +43,12 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
                 isDelete: widget.isEdit,
                 imageHeight: AppDimensions.sideHustleItemHeight,
                 boarderColor: AppColors.itemBGColor,
-                title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-                subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+                title: AlphaAppData.sideHustleProductsList[index].title,
+                subTitle: AlphaAppData.sideHustleProductsList[index].subTitle,
                 deliveryType: AppStrings.pickUpViewProduct,
                 imagePath:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-                price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+                AlphaAppData.sideHustleProductsList[index].imagePath,
+                price: AlphaAppData.sideHustleProductsList[index].price,
                 onTap: () {
                   if(widget.isEdit) {
                   } else {

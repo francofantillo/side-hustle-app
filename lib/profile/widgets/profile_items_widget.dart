@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
+import 'package:side_hustle/drawer/widgets/logout_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
@@ -67,7 +68,9 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           textColor: AppColors.appTextBlackColor,
           fontWeight: FontWeight.w500,
           iconColor: AppColors.greyColorNoOpacity,
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.changePasswordScreenRoute);
+          },
         ),
         height(AppDimensions.drawerItemsVerticalSpacing - 20),
         Row(
@@ -108,7 +111,32 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           textColor: AppColors.appTextBlackColor,
           fontWeight: FontWeight.w500,
           iconColor: AppColors.greyColorNoOpacity,
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.aboutUsScreenRoute);
+          },
+        ),
+        height(AppDimensions.drawerItemsVerticalSpacing),
+        DrawerItemListTile(
+          iconPath: AssetsPath.aboutUs,
+          title: AppStrings.flyerUnderCapitalism,
+          textColor: AppColors.appTextBlackColor,
+          fontWeight: FontWeight.w500,
+          iconColor: AppColors.greyColorNoOpacity,
+          onTap: () {
+            Navigator.pushNamed(
+                context, AppRoutes.flyerUnderCapitalismScreenRoute);
+          },
+        ),
+        height(AppDimensions.drawerItemsVerticalSpacing),
+        DrawerItemListTile(
+          iconPath: AssetsPath.aboutUs,
+          title: AppStrings.howToHustler,
+          textColor: AppColors.appTextBlackColor,
+          fontWeight: FontWeight.w500,
+          iconColor: AppColors.greyColorNoOpacity,
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.downloadBookScreenRoute);
+          },
         ),
         height(AppDimensions.drawerItemsVerticalSpacing),
         DrawerItemListTile(
@@ -117,7 +145,10 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           textColor: AppColors.appTextBlackColor,
           fontWeight: FontWeight.w500,
           iconColor: AppColors.greyColorNoOpacity,
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(
+                context, AppRoutes.termsAndConditionsScreenRoute);
+          },
         ),
         height(AppDimensions.drawerItemsVerticalSpacing),
         DrawerItemListTile(
@@ -126,7 +157,9 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           textColor: AppColors.appTextBlackColor,
           fontWeight: FontWeight.w500,
           iconColor: AppColors.greyColorNoOpacity,
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, AppRoutes.privacyPolicyScreenRoute);
+          },
         ),
         height(AppDimensions.drawerItemsVerticalSpacing),
         DrawerItemListTile(
@@ -136,7 +169,10 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           iconColor: AppColors.appRedColor,
           fontWeight: FontWeight.w500,
           onTap: () {
-            AppDialogues.postSideHustleDialogue(context: context);
+            print("clicked Logout");
+            AppDialogues.logoutDialogue(
+                    context: context, body: const LogoutDialogueWidget())
+                .show();
           },
         ),
       ],

@@ -14,7 +14,9 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class PostJob extends StatefulWidget {
-  const PostJob({super.key});
+  final bool isEdit;
+
+  const PostJob({super.key, this.isEdit = false});
 
   @override
   State<PostJob> createState() => _PostJobState();
@@ -32,6 +34,7 @@ class _PostJobState extends State<PostJob> {
     AppUtils.secondSelectedTime = null;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     dateTextController.text = formattedDate ?? "";
@@ -44,7 +47,7 @@ class _PostJobState extends State<PostJob> {
 
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.postJob,
+      appBarTitle: widget.isEdit ? AppStrings.editJob : AppStrings.postJob,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
@@ -52,7 +55,8 @@ class _PostJobState extends State<PostJob> {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         child: Padding(
           padding: EdgeInsets.all(AppDimensions.rootPadding),
           child: Column(
@@ -292,9 +296,12 @@ class _PostJobState extends State<PostJob> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
-                    onPressed: () {},
-                    color: AppColors.primaryColor,
-                    name: AppStrings.postJob),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  color: AppColors.primaryColor,
+                  name: widget.isEdit ? AppStrings.editJob : AppStrings.postJob,
+                ),
               )
             ],
           ),

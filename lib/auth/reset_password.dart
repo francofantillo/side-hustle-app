@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -23,7 +24,8 @@ class _ResetPasswordState extends State<ResetPassword> {
     return BackgroundWidget(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         child: Padding(
           padding: EdgeInsets.all(AppDimensions.rootPadding),
           child: Column(
@@ -63,6 +65,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                   name: AppStrings.continueText,
                   onPressed: () {
                     print('Button Pressed');
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, AppRoutes.loginScreenRoute, (route) => false);
                   }),
             ],
           ),

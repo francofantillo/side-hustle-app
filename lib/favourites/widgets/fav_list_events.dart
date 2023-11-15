@@ -4,6 +4,7 @@ import 'package:side_hustle/favourites/widgets/fav_item_events.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 
 class FavouritesListEvent extends StatefulWidget {
   const FavouritesListEvent({super.key});
@@ -17,11 +18,12 @@ class _FavouritesListEventState extends State<FavouritesListEvent> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 4,
+        itemCount: 3,
         // Replace with your item count
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
@@ -31,18 +33,13 @@ class _FavouritesListEventState extends State<FavouritesListEvent> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              userName:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
-              userRating: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userRating,
-              userProfile: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userProfile,
+              title: AlphaAppData.favEventsList[index].title,
+              location: AppStrings.locationText,
+              imagePath: AlphaAppData.favEventsList[index].imagePath,
+              price: AlphaAppData.favEventsList[index].price,
+              userName: AlphaAppData.favEventsList[index].userName,
+              userRating: AlphaAppData.favEventsList[index].userRating,
+              userProfile: AlphaAppData.favEventsList[index].userProfile,
             ),
           );
         },

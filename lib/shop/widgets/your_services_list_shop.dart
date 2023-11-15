@@ -40,18 +40,19 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                       isMyService: true,
                     ));
               },
+              // I need 2 horizontal Listview builders inside a vertical scrollview flutter
               child: YourServiceItemWidget(
                 imageWidth: 1.sw,
                 isDelete: widget.isEdit,
                 imageHeight: AppDimensions.sideHustleItemHeight,
                 boarderColor: AppColors.itemBGColor,
-                title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
+                title: AlphaAppData.sideHustleServicesList[index].title,
                 subTitle:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+                AlphaAppData.sideHustleServicesList[index].subTitle,
                 deliveryType: AppStrings.pickUpViewProduct,
                 imagePath:
-                    AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-                price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+                AlphaAppData.sideHustleServicesList[index].imagePath,
+                price: AlphaAppData.sideHustleServicesList[index].price,
                 onTap: () {
                   if (widget.isEdit) {
                   } else {

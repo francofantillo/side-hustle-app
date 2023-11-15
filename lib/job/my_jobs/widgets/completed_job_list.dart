@@ -17,11 +17,12 @@ class _MyJobsCompletedListState extends State<MyJobsCompletedList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 4,
+        itemCount: 2,
         // Replace with your item count
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
@@ -31,18 +32,13 @@ class _MyJobsCompletedListState extends State<MyJobsCompletedList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemCompletedJobHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              userName:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
-              userRating: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userRating,
-              userProfile: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userProfile,
+              title: AlphaAppData.myJobsOngoingList[index].title,
+              subTitle: AlphaAppData.myJobsOngoingList[index].subTitle,
+              imagePath: AlphaAppData.myJobsOngoingList[index].imagePath,
+              price: AlphaAppData.myJobsOngoingList[index].price,
+              userName: AlphaAppData.myJobsOngoingList[index].userName,
+              userRating: AlphaAppData.myJobsOngoingList[index].userRating,
+              userProfile: AlphaAppData.myJobsOngoingList[index].userProfile,
             ),
           );
         },

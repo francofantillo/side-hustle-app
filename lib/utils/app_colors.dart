@@ -30,6 +30,7 @@ class AppColors {
   static const chatMessageTimeColor = Color(0xFF9E9E9E);
   static const whiteColor = Colors.white;
   static const labelColor = Color(0xFF757575);
+  static const chatNameImageBackgroundColor = Color(0xFFD461E7);
   // static const bottomNavBackgroundColor = Color(0xFFDFDFDF);
   static const bottomNavBackgroundColor = Color(0xFFFFFFFF);
   static const ratingColor = Color(0xFFECAF53);
