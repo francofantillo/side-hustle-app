@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
-import 'package:side_hustle/cart/products/products_cart_list.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/event/widgets/event_post_packages_list.dart';
 import 'package:side_hustle/event/widgets/select_payment_type_dropdown.dart';
-import 'package:side_hustle/payment_methods/widgets/payment_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/app_utils.dart';
-import 'package:side_hustle/utils/assets_path.dart';
-import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
-import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
-import 'package:side_hustle/widgets/dropdown/dropdown.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 

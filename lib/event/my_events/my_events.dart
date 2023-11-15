@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_completed_list.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_onging_list.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_scheduled_list.dart';
-import 'package:side_hustle/job/my_jobs/widgets/completed_job_list.dart';
-import 'package:side_hustle/job/my_jobs/widgets/ongoing_job_list.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';

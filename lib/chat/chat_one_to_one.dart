@@ -4,10 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_one_to_one_list.dart';
 import 'package:side_hustle/chat/widgets/chat_options_bottomsheet.dart';
 import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
-import 'package:side_hustle/chat/widgets/order_product_item.dart';
 import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -15,7 +12,6 @@ import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ChatOneToOne extends StatefulWidget {
   final bool isBlockedUser;

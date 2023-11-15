@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
-import 'package:side_hustle/drawer/app_drawer.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';

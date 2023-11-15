@@ -12,7 +12,6 @@ import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
-import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';

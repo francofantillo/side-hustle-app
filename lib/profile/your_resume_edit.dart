@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/router/app_route_named.dart';

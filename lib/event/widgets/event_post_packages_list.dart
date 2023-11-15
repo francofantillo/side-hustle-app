@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:side_hustle/event/widgets/event_post_pacakges_item.dart';
-import 'package:side_hustle/payment_methods/widgets/payment_item.dart';
 
 class EventPostPackagesList extends StatefulWidget {
   const EventPostPackagesList({super.key});

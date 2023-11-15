@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
-import 'package:side_hustle/event/post_event.dart';
 import 'package:side_hustle/router/app_route_named.dart';
-import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -17,7 +15,6 @@ import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
-import 'package:side_hustle/widgets/images/rounded_image_with_background_color.dart';
 import 'package:side_hustle/widgets/list/bullet_point_list.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';

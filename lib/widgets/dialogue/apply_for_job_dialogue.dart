@@ -7,7 +7,6 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
-import 'package:side_hustle/wanted_job/wanted_job.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';

@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_appbar.dart';
+import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_location_widget.dart';
 import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
-import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/assets_path.dart';
-import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
