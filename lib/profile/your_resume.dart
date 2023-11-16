@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -21,8 +22,6 @@ class YourResume extends StatefulWidget {
 }
 
 class _YourResumeState extends State<YourResume> {
-  final TextEditingController _textEditingControllerHobbies =
-      TextEditingController();
 
   final List<String> itemsList = [
     "Hobbies 1",
@@ -70,11 +69,11 @@ class _YourResumeState extends State<YourResume> {
                   CircularCacheImageWidget(
                     showLoading: true,
                     image:
-                        "https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg",
+                        AlphaAppData.dpProfile,
                     boarderColor: AppColors.primaryColor,
-                    imageHeight: 90.w,
-                    imageWidth: 90.w,
-                    borderWidth: .003.sh,
+                    imageHeight: 0.28.sw,
+                    imageWidth: 0.28.sw,
+                    borderWidth: .005.sw,
                   ),
                   width(0.02.sw),
                   Column(
@@ -168,25 +167,23 @@ class _YourResumeState extends State<YourResume> {
                   spacing: 8.0, // gap between adjacent chips
                   runSpacing: 8.0, // gap between lines
                   direction: Axis.horizontal,
-                  children: <Widget>[
+                  children: [
                     for (int i = 0; i < itemsList.length; i++)
-                      Flexible(
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: Container(
-                            // width: .35.sw,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 8),
-                            decoration: const BoxDecoration(
-                                color: AppColors.primaryColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                            child: textWidget(
-                                text: itemsList[i],
-                                maxLines: 2,
-                                color: AppColors.whiteColor,
-                                fontSize: AppDimensions.textSizeSmall),
-                          ),
+                      FittedBox(
+                        fit: BoxFit.cover,
+                        child: Container(
+                          // width: .35.sw,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 8),
+                          decoration: const BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12))),
+                          child: textWidget(
+                              text: itemsList[i],
+                              maxLines: 2,
+                              color: AppColors.whiteColor,
+                              fontSize: AppDimensions.textSizeSmall),
                         ),
                       )
                   ],

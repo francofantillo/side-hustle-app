@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_service.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -21,9 +22,12 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import '../cart/modal_bottom_sheet/modal_bottom_sheet_request_service.dart';
 
 class ViewService extends StatefulWidget {
-  final bool isMyService;
+  final bool isMyService, isViewingServiceFromOthersShop;
 
-  const ViewService({super.key, this.isMyService = false});
+  const ViewService(
+      {super.key,
+      this.isMyService = false,
+      this.isViewingServiceFromOthersShop = false});
 
   @override
   State<ViewService> createState() => _ViewServiceState();
@@ -64,6 +68,7 @@ class _ViewServiceState extends State<ViewService> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const ImageSlider(
+                  hideCameraIcon: true,
                   itemImages: [
                     AssetsPath.plumber,
                     AssetsPath.plumber,
@@ -194,78 +199,85 @@ class _ViewServiceState extends State<ViewService> {
                 height(0.02.sh),
                 widget.isMyService
                     ? const SizedBox.shrink()
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: textWidget(
-                            text: AppStrings.servicePostBy,
-                            maxLines: 2,
-                            fontSize: AppDimensions.textSizeSmall,
-                            color: AppColors.textBlackColor,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    : widget.isViewingServiceFromOthersShop
+                        ? const SizedBox.shrink()
+                        : Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.servicePostBy,
+                                maxLines: 2,
+                                fontSize: AppDimensions.textSizeSmall,
+                                color: AppColors.textBlackColor,
+                                fontWeight: FontWeight.bold),
+                          ),
                 widget.isMyService
                     ? const SizedBox.shrink()
-                    : Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  CircularCacheImageWidget(
-                                    showLoading: false,
-                                    image: AssetsPath.phillipPressProfile,
-                                    boarderColor: AppColors.primaryColor,
-                                    imageHeight: .09.sh,
-                                    imageWidth: .09.sw,
+                    : widget.isViewingServiceFromOthersShop
+                        ? const SizedBox.shrink()
+                        : Padding(
+                            padding: const EdgeInsets.only(left: 8.0, right: 4),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      CircularCacheImageWidget(
+                                        showLoading: false,
+                                        image: AssetsPath.phillipPressProfile,
+                                        boarderColor: AppColors.primaryColor,
+                                        imageHeight: .09.sh,
+                                        imageWidth: .09.sw,
+                                      ),
+                                      width(.02.sw),
+                                      Expanded(
+                                        child: textWidget(
+                                            text:
+                                                AppStrings.userNameViewProduct,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.textBlackColor),
+                                      ),
+                                    ],
                                   ),
-                                  width(.02.sw),
-                                  Expanded(
-                                    child: textWidget(
-                                        text: AppStrings.userNameViewProduct,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.textBlackColor),
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                  child: CustomButtonWithIcon(
+                                    onPressed: () {
+                                      print("pressed Elevated Button");
+                                      Navigator.pushReplacementNamed(
+                                          context, AppRoutes.shopScreenRoute);
+                                    },
+                                    borderRadius: 10,
+                                    backgroundColor: AppColors.greenColor,
+                                    iconPath: AssetsPath.sideHustle,
+                                    name: AppStrings.viewShop,
                                   ),
-                                ],
-                              ),
+                                ),
+                                width(0.01.sw),
+                                IconButtonWithBackground(
+                                  height: 50.h,
+                                  width: .17.sw,
+                                  borderRadius: 10,
+                                  onTap: () {
+                                    print("clicked message");
+                                    Navigator.pushNamed(context,
+                                        AppRoutes.chatOneToOneScreenRoute,
+                                        arguments: const ChatOneToOne(
+                                          userName:
+                                              AppStrings.userNameViewProduct,
+                                        ));
+                                  },
+                                  iconPath: AssetsPath.message,
+                                  backgroundColor: AppColors.primaryColor,
+                                  iconColor: AppColors.whiteColor,
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 50.h,
-                              child: CustomButtonWithIcon(
-                                onPressed: () {
-                                  print("pressed Elevated Button");
-                                  Navigator.pushReplacementNamed(
-                                      context, AppRoutes.shopScreenRoute);
-                                },
-                                borderRadius: 10,
-                                backgroundColor: AppColors.greenColor,
-                                iconPath: AssetsPath.sideHustle,
-                                name: AppStrings.viewShop,
-                              ),
-                            ),
-                            width(0.01.sw),
-                            IconButtonWithBackground(
-                              height: 50.h,
-                              width: .17.sw,
-                              borderRadius: 10,
-                              onTap: () {
-                                print("clicked message");
-                                Navigator.pushNamed(
-                                    context, AppRoutes.chatOneToOneScreenRoute,
-                                    arguments: const ChatOneToOne(
-                                      userName: AppStrings.userNameViewProduct,
-                                    ));
-                              },
-                              iconPath: AssetsPath.message,
-                              backgroundColor: AppColors.primaryColor,
-                              iconColor: AppColors.whiteColor,
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
                 height(0.03.sh),
                 isAddToCart ? const SizedBox.shrink() : height(0.02.sh),
                 isAddToCart
@@ -279,7 +291,10 @@ class _ViewServiceState extends State<ViewService> {
                               // setState(() {});
                               if (widget.isMyService) {
                                 Navigator.pushNamed(
-                                    context, AppRoutes.postServiceScreenRoute);
+                                    context, AppRoutes.postServiceScreenRoute,
+                                    arguments: const PostService(
+                                      isEdit: true,
+                                    ));
                               } else {
                                 AppUtils.showBottomModalSheet(
                                     context: context,

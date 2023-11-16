@@ -17,7 +17,9 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class PostProduct extends StatefulWidget {
-  const PostProduct({super.key});
+  final bool isEdit;
+
+  const PostProduct({super.key, this.isEdit = false});
 
   @override
   State<PostProduct> createState() => _PostProductState();
@@ -35,7 +37,9 @@ class _PostProductState extends State<PostProduct> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.postYourSideHustle,
+      appBarTitle: widget.isEdit
+          ? AppStrings.editYourSideHustle
+          : AppStrings.postYourSideHustle,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
@@ -228,7 +232,10 @@ class _PostProductState extends State<PostProduct> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
-                    onPressed: () {
+                  onPressed: () {
+                    if (widget.isEdit) {
+                      Navigator.pop(context);
+                    } else {
                       Navigator.pushReplacementNamed(
                           context, AppRoutes.postAddedScreenRoute,
                           arguments: const PostAdded(
@@ -237,9 +244,13 @@ class _PostProductState extends State<PostProduct> {
                             subTitle: AppStrings.sideHustlePostedSubTitle,
                             buttonName: AppStrings.viewSideHustle,
                           ));
-                    },
-                    color: AppColors.primaryColor,
-                    name: AppStrings.addProduct),
+                    }
+                  },
+                  color: AppColors.primaryColor,
+                  name: widget.isEdit
+                      ? AppStrings.saveChanges
+                      : AppStrings.addProduct,
+                ),
               )
             ],
           ),

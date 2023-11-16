@@ -61,9 +61,9 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                         image:
                             "https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg",
                         boarderColor: AppColors.primaryColor,
-                        imageHeight: 90.w,
-                        imageWidth: 90.w,
-                        borderWidth: .003.sh,
+                        imageHeight: 0.28.sw,
+                        imageWidth: 0.28.sw,
+                        borderWidth: .005.sw,
                       ),
                       Positioned(
                         left: 0.2.sw,
@@ -87,7 +87,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   ),
                   width(0.02.sw),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(7.2),
                     decoration: const BoxDecoration(
                         color: AppColors.greenColor,
                         borderRadius: BorderRadius.all(Radius.circular(12))),
@@ -233,40 +233,38 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   direction: Axis.horizontal,
                   children: <Widget>[
                     for (int i = 0; i < itemsList.length; i++)
-                      Flexible(
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: Container(
-                            // width: .35.sw,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 8),
-                            decoration: const BoxDecoration(
+                      FittedBox(
+                        fit: BoxFit.cover,
+                        child: Container(
+                          // width: .35.sw,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 8),
+                          decoration: const BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12))),
+                          child: Row(
+                            children: [
+                              textWidget(
+                                  text: itemsList[i],
+                                  maxLines: 2,
+                                  color: AppColors.whiteColor,
+                                  fontSize: AppDimensions.textSizeSmall),
+                              width(0.015.sw),
+                              Material(
                                 color: AppColors.primaryColor,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                            child: Row(
-                              children: [
-                                textWidget(
-                                    text: itemsList[i],
-                                    maxLines: 2,
+                                child: InkWell(
+                                  onTap: () {
+                                    itemsList.removeAt(i);
+                                    setState(() {});
+                                  },
+                                  child: const Icon(
+                                    CustomIcon.cancel,
                                     color: AppColors.whiteColor,
-                                    fontSize: AppDimensions.textSizeSmall),
-                                width(0.015.sw),
-                                Material(
-                                  color: AppColors.primaryColor,
-                                  child: InkWell(
-                                    onTap: () {
-                                      itemsList.removeAt(i);
-                                      setState(() {});
-                                    },
-                                    child: const Icon(
-                                      CustomIcon.cancel,
-                                      color: AppColors.whiteColor,
-                                    ),
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       )

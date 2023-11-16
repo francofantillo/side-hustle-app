@@ -45,7 +45,9 @@ class _ApplyForJobState extends State<ApplyForJob> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ImageSlider(),
+                  const ImageSlider(
+                    hideCameraIcon: true,
+                  ),
                   height(0.02.sh),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),

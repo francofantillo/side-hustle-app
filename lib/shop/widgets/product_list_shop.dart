@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/product/widgets/products_items.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
@@ -19,7 +20,8 @@ class _ProductsListShopState extends State<ProductsListShop> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
@@ -31,7 +33,10 @@ class _ProductsListShopState extends State<ProductsListShop> {
             padding: const EdgeInsets.only(right: 16.0, left: 8.0),
             child: ProductsItemsWidget(
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute);
+                Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute,
+                    arguments: const ViewProduct(
+                      isViewingProductFromOthersShop: true,
+                    ));
               },
               imageWidth: 1.sw,
               imageHeight: AppDimensions.sideHustleItemHeight,
@@ -39,8 +44,7 @@ class _ProductsListShopState extends State<ProductsListShop> {
               title: AlphaAppData.sideHustleProductsList[index].title,
               subTitle: AlphaAppData.sideHustleProductsList[index].subTitle,
               deliveryType: AppStrings.pickUpViewProduct,
-              imagePath:
-              AlphaAppData.sideHustleProductsList[index].imagePath,
+              imagePath: AlphaAppData.sideHustleProductsList[index].imagePath,
               price: AlphaAppData.sideHustleProductsList[index].price,
             ),
           );

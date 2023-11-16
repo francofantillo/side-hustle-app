@@ -134,6 +134,7 @@ class AppStrings {
 
   /// Post Product
   static const String postYourSideHustle = "Post Your Side Hustle Product";
+  static const String editYourSideHustle = "Edit Your Side Hustle Product";
   static const String sideHustlePosted = "Side Hustle Posted";
   static const String sideHustlePostedSubTitle =
       "Your Side Hustle is Posted, are you wish to see your side hustle?";
@@ -163,6 +164,8 @@ class AppStrings {
   /// Post Service
   static const String postYourSideHustleService =
       "Post your Side Hustle Service";
+  static const String editYourSideHustleService =
+      "Edit your Side Hustle Service";
   static const String serviceName = "Service Name";
   static const String uploadImagesBodyService =
       "Upload 2-3 relevant images of your service, so anyone can understand about your service";
@@ -284,6 +287,7 @@ class AppStrings {
   static const String watch = "Watch";
   static const String editProduct = "Edit Product";
   static const String editService = "Edit Service";
+  static const String editEvent = "Edit an Event";
   static const String serviceAdded = "Service added";
   static const String productDescViewProduct =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";

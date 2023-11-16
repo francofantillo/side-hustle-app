@@ -300,7 +300,8 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                    },
                     color: AppColors.primaryColor,
                     name: AppStrings.shareEvent),
               )

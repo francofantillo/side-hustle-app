@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/service/view_service.dart';
 import 'package:side_hustle/service/widgets/service_item.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -40,7 +41,10 @@ class _ServicesListShopState extends State<ServicesListShop> {
               imagePath: AlphaAppData.sideHustleServicesList[index].imagePath,
               price: AlphaAppData.sideHustleServicesList[index].price,
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.viewServiceScreenRoute);
+                Navigator.pushNamed(context, AppRoutes.viewServiceScreenRoute,
+                    arguments: const ViewService(
+                      isViewingServiceFromOthersShop: true,
+                    ));
               },
             ),
           );

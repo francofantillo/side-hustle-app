@@ -32,7 +32,7 @@ class _BottomModalSheetDeliveryAddressState
             // height: widget.isEdit
             //     ? AppDimensions.modelSheetProductsHeight
             //     : AppDimensions.modelSheetDeliveryHeight,
-            width: 1.sw,
+            // width: 1.sw,
             decoration: BoxDecoration(
               color: AppColors.primaryColor,
               borderRadius: BorderRadius.only(
@@ -155,7 +155,7 @@ class _BottomModalSheetDeliveryAddressState
                       color: AppColors.textWhiteColor,
                       fontSize: AppDimensions.textSizeSmall),
                 ),
-                height(0.1.sw),
+                height(0.04.sw),
               ],
             ),
           ),

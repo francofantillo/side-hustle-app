@@ -152,9 +152,11 @@ class AppDimensions {
   static double boarderRadiusCartPlaceOrder = 16.0.h;
   // static double cartItemProductHeight = 0.39.sw;
   static double cartItemProductHeight = 0.37.sw;
-  static double cartItemServiceHeight = 0.50.sw;
+  // static double cartItemServiceHeight = 0.50.sw;
+  static double cartItemServiceHeight = 0.43.sw;
   // static double modelSheetDeliveryHeight = .63.sh;
   static double modelSheetDeliveryHeight = .48.sh;
+  // static double modelSheetProductsHeight = .7.sh;
   static double modelSheetProductsHeight = .7.sh;
   static double modelSheetServiceHeight = .87.sh;
 

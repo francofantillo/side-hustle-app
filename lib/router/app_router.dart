@@ -85,7 +85,10 @@ class AppRouter {
             return const HomeScreen();
 
           case AppRoutes.postProductScreenRoute:
-            return const PostProduct();
+            final args = routeSettings.arguments as PostProduct?;
+            return PostProduct(
+              isEdit: args?.isEdit ?? false,
+            );
 
           case AppRoutes.yourResumeEditScreenRoute:
             return const YourResumeEdit();
@@ -94,11 +97,14 @@ class AppRouter {
             return const YourResume();
 
           case AppRoutes.postServiceScreenRoute:
-            return const PostService();
+            final args = routeSettings.arguments as PostService?;
+            return PostService(isEdit: args?.isEdit ?? false);
 
           case AppRoutes.postJobScreenRoute:
             final args = routeSettings.arguments as PostJob?;
-            return PostJob(isEdit: args?.isEdit ?? false,);
+            return PostJob(
+              isEdit: args?.isEdit ?? false,
+            );
 
           case AppRoutes.applyForJobScreenRoute:
             return const ApplyForJob();
@@ -112,7 +118,9 @@ class AppRouter {
 
           case AppRoutes.postEventScreenRoute:
             final args = routeSettings.arguments as PostEvent?;
-            return PostEvent(isEdit: args?.isEdit ?? false,);
+            return PostEvent(
+              isEdit: args?.isEdit ?? false,
+            );
 
           case AppRoutes.viewEventScreenRoute:
             return const ViewEvent();
@@ -128,12 +136,16 @@ class AppRouter {
 
           case AppRoutes.viewProductScreenRoute:
             final args = routeSettings.arguments as ViewProduct?;
-            return ViewProduct(isMyProduct: args?.isMyProduct ?? false);
+            return ViewProduct(
+              isMyProduct: args?.isMyProduct ?? false,
+              isViewingProductFromOthersShop: args?.isViewingProductFromOthersShop ?? false,
+            );
 
           case AppRoutes.viewServiceScreenRoute:
             final args = routeSettings.arguments as ViewService?;
             return ViewService(
               isMyService: args?.isMyService ?? false,
+              isViewingServiceFromOthersShop: args?.isViewingServiceFromOthersShop ?? false,
             );
 
           case AppRoutes.shopScreenRoute:

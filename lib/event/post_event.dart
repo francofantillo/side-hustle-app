@@ -55,7 +55,8 @@ class _PostEventState extends State<PostEvent> {
 
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.postAnEvent,
+      appBarTitle:
+          widget.isEdit ? AppStrings.editEvent : AppStrings.postAnEvent,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:

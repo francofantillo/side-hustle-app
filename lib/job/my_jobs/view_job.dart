@@ -39,7 +39,9 @@ class _ViewJobState extends State<ViewJob> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ImageSlider(),
+              const ImageSlider(
+                hideCameraIcon: true,
+              ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),

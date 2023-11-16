@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
+import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -20,9 +21,12 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ViewProduct extends StatefulWidget {
-  final bool isMyProduct;
+  final bool isMyProduct, isViewingProductFromOthersShop;
 
-  const ViewProduct({super.key, this.isMyProduct = false});
+  const ViewProduct(
+      {super.key,
+      this.isMyProduct = false,
+      this.isViewingProductFromOthersShop = false});
 
   @override
   State<ViewProduct> createState() => _ViewProductState();
@@ -58,6 +62,7 @@ class _ViewProductState extends State<ViewProduct> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const ImageSlider(
+                  hideCameraIcon: true,
                   itemImages: [
                     AssetsPath.watch,
                     AssetsPath.watch,
@@ -188,78 +193,85 @@ class _ViewProductState extends State<ViewProduct> {
                 height(0.02.sh),
                 widget.isMyProduct
                     ? const SizedBox.shrink()
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: textWidget(
-                            text: AppStrings.productPostBy,
-                            maxLines: 2,
-                            fontSize: AppDimensions.textSizeSmall,
-                            color: AppColors.textBlackColor,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    : widget.isViewingProductFromOthersShop
+                        ? const SizedBox.shrink()
+                        : Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.productPostBy,
+                                maxLines: 2,
+                                fontSize: AppDimensions.textSizeSmall,
+                                color: AppColors.textBlackColor,
+                                fontWeight: FontWeight.bold),
+                          ),
                 widget.isMyProduct
                     ? const SizedBox.shrink()
-                    : Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  CircularCacheImageWidget(
-                                    showLoading: false,
-                                    image: AssetsPath.phillipPressProfile,
-                                    boarderColor: AppColors.primaryColor,
-                                    imageHeight: .09.sh,
-                                    imageWidth: .09.sw,
+                    : widget.isViewingProductFromOthersShop
+                        ? const SizedBox.shrink()
+                        : Padding(
+                            padding: const EdgeInsets.only(left: 8.0, right: 4),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      CircularCacheImageWidget(
+                                        showLoading: false,
+                                        image: AssetsPath.phillipPressProfile,
+                                        boarderColor: AppColors.primaryColor,
+                                        imageHeight: .09.sh,
+                                        imageWidth: .09.sw,
+                                      ),
+                                      width(.02.sw),
+                                      Expanded(
+                                        child: textWidget(
+                                            text:
+                                                AppStrings.userNameViewProduct,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.textBlackColor),
+                                      ),
+                                    ],
                                   ),
-                                  width(.02.sw),
-                                  Expanded(
-                                    child: textWidget(
-                                        text: AppStrings.userNameViewProduct,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: AppColors.textBlackColor),
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                  child: CustomButtonWithIcon(
+                                    onPressed: () {
+                                      print("pressed Elevated Button");
+                                      Navigator.pushReplacementNamed(
+                                          context, AppRoutes.shopScreenRoute);
+                                    },
+                                    borderRadius: 10,
+                                    backgroundColor: AppColors.greenColor,
+                                    iconPath: AssetsPath.sideHustle,
+                                    name: AppStrings.viewShop,
                                   ),
-                                ],
-                              ),
+                                ),
+                                width(0.01.sw),
+                                IconButtonWithBackground(
+                                  height: 50.h,
+                                  width: .17.sw,
+                                  borderRadius: 10,
+                                  onTap: () {
+                                    print("clicked message");
+                                    Navigator.pushNamed(context,
+                                        AppRoutes.chatOneToOneScreenRoute,
+                                        arguments: const ChatOneToOne(
+                                          userName:
+                                              AppStrings.userNameViewProduct,
+                                        ));
+                                  },
+                                  iconPath: AssetsPath.message,
+                                  backgroundColor: AppColors.primaryColor,
+                                  iconColor: AppColors.whiteColor,
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 50.h,
-                              child: CustomButtonWithIcon(
-                                onPressed: () {
-                                  print("pressed Elevated Button");
-                                  Navigator.pushReplacementNamed(
-                                      context, AppRoutes.shopScreenRoute);
-                                },
-                                borderRadius: 10,
-                                backgroundColor: AppColors.greenColor,
-                                iconPath: AssetsPath.sideHustle,
-                                name: AppStrings.viewShop,
-                              ),
-                            ),
-                            width(0.01.sw),
-                            IconButtonWithBackground(
-                              height: 50.h,
-                              width: .17.sw,
-                              borderRadius: 10,
-                              onTap: () {
-                                print("clicked message");
-                                Navigator.pushNamed(
-                                    context, AppRoutes.chatOneToOneScreenRoute,
-                                    arguments: const ChatOneToOne(
-                                      userName: AppStrings.userNameViewProduct,
-                                    ));
-                              },
-                              iconPath: AssetsPath.message,
-                              backgroundColor: AppColors.primaryColor,
-                              iconColor: AppColors.whiteColor,
-                            ),
-                          ],
-                        ),
-                      ),
+                          ),
                 isAddToCart ? const SizedBox.shrink() : height(0.02.sh),
                 isAddToCart
                     ? const SizedBox.shrink()
@@ -269,21 +281,24 @@ class _ViewProductState extends State<ViewProduct> {
                             onPressed: () {
                               if (widget.isMyProduct) {
                                 Navigator.pushNamed(
-                                    context, AppRoutes.postProductScreenRoute);
+                                    context, AppRoutes.postProductScreenRoute,
+                                    arguments: const PostProduct(
+                                      isEdit: true,
+                                    ));
                               } else {
                                 // isAddToCart = true;
                                 // setState(() {});
                                 AppUtils.showBottomModalSheet(
                                     context: contextBuilder,
                                     widget:
-                                    // const ModalBottomSheetProducts()
-                                    BottomModalSheetDeliveryAddress(onItemAdded: (v) {
-                                      if(v) {
+                                        // const ModalBottomSheetProducts()
+                                        BottomModalSheetDeliveryAddress(
+                                            onItemAdded: (v) {
+                                      if (v) {
                                         isAddToCart = true;
                                         setState(() {});
                                       }
-                                    })
-                                );
+                                    }));
                               }
                             },
                             name: widget.isMyProduct

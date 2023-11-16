@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/service/view_service.dart';
 import 'package:side_hustle/service/widgets/your_service_item.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
@@ -59,6 +60,7 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                     Navigator.pushNamed(
                       context,
                       AppRoutes.postServiceScreenRoute,
+                      arguments: const PostService(isEdit: true,)
                     );
                   }
                 },

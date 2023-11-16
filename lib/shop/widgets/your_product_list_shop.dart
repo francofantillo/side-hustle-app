@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/product/widgets/your_products_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
@@ -34,7 +35,7 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
           return Padding(
             padding: const EdgeInsets.only(right: 16.0, left: 8.0),
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute,
                     arguments: const ViewProduct(isMyProduct: true));
               },
@@ -46,13 +47,16 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
                 title: AlphaAppData.sideHustleProductsList[index].title,
                 subTitle: AlphaAppData.sideHustleProductsList[index].subTitle,
                 deliveryType: AppStrings.pickUpViewProduct,
-                imagePath:
-                AlphaAppData.sideHustleProductsList[index].imagePath,
+                imagePath: AlphaAppData.sideHustleProductsList[index].imagePath,
                 price: AlphaAppData.sideHustleProductsList[index].price,
                 onTap: () {
-                  if(widget.isEdit) {
+                  if (widget.isEdit) {
                   } else {
-                    Navigator.pushNamed(context, AppRoutes.postProductScreenRoute);
+                    Navigator.pushNamed(
+                        context, AppRoutes.postProductScreenRoute,
+                        arguments: const PostProduct(
+                          isEdit: true,
+                        ));
                   }
                 },
               ),

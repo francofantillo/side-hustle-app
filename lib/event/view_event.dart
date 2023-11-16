@@ -81,6 +81,7 @@ class _ViewEventState extends State<ViewEvent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const ImageSlider(
+                hideCameraIcon: true,
                 itemImages: [
                   AssetsPath.musical,
                   AssetsPath.musical,

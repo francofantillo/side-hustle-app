@@ -96,44 +96,32 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Material(
-                      child: InkWell(
-                        onTap: (){},
-                        child: RoundedImageWithBackgroundColor(
-                          assetPath: AssetsPath.google,
-                          backgroundColor: AppColors.whiteColor,
-                          socialButtonSize:
-                              AppDimensions.socialButtonGoogleBackgroundSize,
-                          imageHeight: AppDimensions.socialButtonImageGoogleSize,
-                          imageWidth: AppDimensions.socialButtonImageGoogleSize,
-                        ),
-                      ),
+                    RoundedImageWithBackgroundColor(
+                      onTap: () {},
+                      assetPath: AssetsPath.google,
+                      backgroundColor: AppColors.whiteColor,
+                      socialButtonSize:
+                          AppDimensions.socialButtonGoogleBackgroundSize,
+                      imageHeight: AppDimensions.socialButtonImageGoogleSize,
+                      imageWidth: AppDimensions.socialButtonImageGoogleSize,
                     ),
-                    Material(
-                      child: InkWell(
-                        onTap: (){},
-                        child: RoundedImageWithBackgroundColor(
-                          assetPath: AssetsPath.apple,
-                          backgroundColor: AppColors.whiteColor,
-                          socialButtonSize:
-                              AppDimensions.socialButtonBackgroundSize,
-                          imageHeight: AppDimensions.socialButtonImageSize,
-                          imageWidth: AppDimensions.socialButtonImageSize,
-                        ),
-                      ),
+                    RoundedImageWithBackgroundColor(
+                      onTap: () {},
+                      assetPath: AssetsPath.apple,
+                      backgroundColor: AppColors.whiteColor,
+                      socialButtonSize:
+                          AppDimensions.socialButtonBackgroundSize,
+                      imageHeight: AppDimensions.socialButtonImageSize,
+                      imageWidth: AppDimensions.socialButtonImageSize,
                     ),
-                    Material(
-                      child: InkWell(
-                        onTap: (){},
-                        child: RoundedImageWithBackgroundColor(
-                          assetPath: AssetsPath.fb,
-                          backgroundColor: AppColors.whiteColor,
-                          socialButtonSize:
-                              AppDimensions.socialButtonBackgroundSize,
-                          imageHeight: AppDimensions.socialButtonImageSize,
-                          imageWidth: AppDimensions.socialButtonImageSize,
-                        ),
-                      ),
+                    RoundedImageWithBackgroundColor(
+                      onTap: () {},
+                      assetPath: AssetsPath.fb,
+                      backgroundColor: AppColors.whiteColor,
+                      socialButtonSize:
+                          AppDimensions.socialButtonBackgroundSize,
+                      imageHeight: AppDimensions.socialButtonImageSize,
+                      imageWidth: AppDimensions.socialButtonImageSize,
                     ),
                   ],
                 ),

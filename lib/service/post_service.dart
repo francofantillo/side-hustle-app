@@ -16,7 +16,9 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class PostService extends StatefulWidget {
-  const PostService({super.key});
+  final bool isEdit;
+
+  const PostService({super.key, this.isEdit = false});
 
   @override
   State<PostService> createState() => _PostServiceState();
@@ -34,10 +36,13 @@ class _PostServiceState extends State<PostService> {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       showAppBar: true,
-      appBarTitle: AppStrings.postYourSideHustleService,
+      appBarTitle: widget.isEdit
+          ? AppStrings.editYourSideHustleService
+          : AppStrings.postYourSideHustleService,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
-        child: backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+        child:
+            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -48,7 +53,9 @@ class _PostServiceState extends State<PostService> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageSlider(itemImages: AlphaAppData.postServiceImagesList,),
+              ImageSlider(
+                itemImages: AlphaAppData.postServiceImagesList,
+              ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -151,15 +158,13 @@ class _PostServiceState extends State<PostService> {
                       print('Checkbox value changed: $newValue');
                     },
                   ),
-                  Expanded(
-                      child: textWidget(text: AppStrings.hourlyRate)),
+                  Expanded(child: textWidget(text: AppStrings.hourlyRate)),
                   CheckboxWidget(
                     onChanged: (newValue) {
                       print('Checkbox value changed: $newValue');
                     },
                   ),
-                  Expanded(
-                      child: textWidget(text: AppStrings.fixedRate)),
+                  Expanded(child: textWidget(text: AppStrings.fixedRate)),
                 ],
               ),
               height(0.02.sh),
@@ -201,17 +206,23 @@ class _PostServiceState extends State<PostService> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, AppRoutes.postAddedScreenRoute,
-                          arguments: const PostAdded(
-                            isService: true,
-                            title: AppStrings.sideHustlePosted,
-                            subTitle: AppStrings.sideHustlePostedSubTitle,
-                            buttonName: AppStrings.viewSideHustle,
-                          ));
+                      if (widget.isEdit) {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.pushReplacementNamed(
+                            context, AppRoutes.postAddedScreenRoute,
+                            arguments: const PostAdded(
+                              isService: true,
+                              title: AppStrings.sideHustlePosted,
+                              subTitle: AppStrings.sideHustlePostedSubTitle,
+                              buttonName: AppStrings.viewSideHustle,
+                            ));
+                      }
                     },
                     color: AppColors.primaryColor,
-                    name: AppStrings.addService),
+                    name: widget.isEdit
+                        ? AppStrings.saveChanges
+                        : AppStrings.addService),
               )
             ],
           ),

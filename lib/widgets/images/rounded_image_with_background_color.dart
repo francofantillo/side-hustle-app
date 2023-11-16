@@ -32,28 +32,36 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
         borderRadius:
         BorderRadius.circular(AppDimensions.roundedImageViewBorderRadius),
       ),
-      child: Container(
-        padding: EdgeInsets.all(socialButtonSize ?? 0),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
-          child: imageUrl != null
-              ? Image.network(
-                  imageUrl!,
-                  width: imageWidth,
-                  height: imageHeight,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  assetPath!,
-                  width: imageWidth,
-                  height: imageHeight,
-                  color: iconColor,
-                  // fit: BoxFit.contain,
-                ),
+      child: Material(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.all(socialButtonSize ?? 0),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(
+                  borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
+              child: imageUrl != null
+                  ? Image.network(
+                      imageUrl!,
+                      width: imageWidth,
+                      height: imageHeight,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      assetPath!,
+                      width: imageWidth,
+                      height: imageHeight,
+                      color: iconColor,
+                      // fit: BoxFit.contain,
+                    ),
+            ),
+          ),
         ),
       ),
     );

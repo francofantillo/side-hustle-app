@@ -10,8 +10,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageSlider extends StatefulWidget {
   final List<String>? itemImages;
+  final bool hideCameraIcon;
 
-  const ImageSlider({super.key, this.itemImages});
+  const ImageSlider({super.key, this.itemImages, this.hideCameraIcon = false});
 
   @override
   State<ImageSlider> createState() => _ImageSliderState();
@@ -110,30 +111,32 @@ class _ImageSliderState extends State<ImageSlider> {
                 //           width: 2,
                 //           scale: .1,
                 //         )))
-                ? Positioned(
-                    left: AppDimensions.productImageSliderWidth - 0.26.sw,
-                    top: AppDimensions.productImageSliderHeight - 0.23.sw,
-                    // child: IconButtonWithBackground(
-                    //   onTap: () {
-                    //     print("Clicked");
-                    //   },
-                    //   iconPath: AssetsPath.camera,
-                    //   height: 0.12.sw,
-                    //   width: 0.12.sw,
-                    //   backgroundColor: AppColors.whiteColor,
-                    //   iconColor: AppColors.primaryColor,
-                    // ),
-                    child: CameraButton(
-                      onTap: () {
-                        print("Clicked");
-                      },
-                      iconPath: AssetsPath.camera,
-                      height: 0.12.sw,
-                      width: 0.12.sw,
-                      backgroundColor: AppColors.whiteColor,
-                      iconColor: AppColors.primaryColor,
-                    ),
-                  )
+                ? widget.hideCameraIcon
+                    ? const SizedBox.shrink()
+                    : Positioned(
+                        left: AppDimensions.productImageSliderWidth - 0.26.sw,
+                        top: AppDimensions.productImageSliderHeight - 0.23.sw,
+                        // child: IconButtonWithBackground(
+                        //   onTap: () {
+                        //     print("Clicked");
+                        //   },
+                        //   iconPath: AssetsPath.camera,
+                        //   height: 0.12.sw,
+                        //   width: 0.12.sw,
+                        //   backgroundColor: AppColors.whiteColor,
+                        //   iconColor: AppColors.primaryColor,
+                        // ),
+                        child: CameraButton(
+                          onTap: () {
+                            print("Clicked");
+                          },
+                          iconPath: AssetsPath.camera,
+                          height: 0.12.sw,
+                          width: 0.12.sw,
+                          backgroundColor: AppColors.whiteColor,
+                          iconColor: AppColors.primaryColor,
+                        ),
+                      )
                 : const SizedBox.shrink()
           ],
         ),
