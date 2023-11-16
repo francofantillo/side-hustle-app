@@ -27,6 +27,7 @@ class AppDimensions {
   static double textFieldHeight = 55.h;
   static double textFieldBorderRadius = 15;
   static double roundedImageViewBorderRadius = 16;
+  static double searchTextFieldHeight = 0.15.sw;
   static FontWeight headingFontWeight = FontWeight.w500;
 
   /// OTP Text Field
@@ -109,7 +110,8 @@ class AppDimensions {
   static const double fullScreenWidth = 375;
 
   /// Event and Job Item
-  static double listItemHeight = 0.43.sw;
+  // static double listItemHeight = 0.43.sw;
+  static double listItemHeight = 0.40.sw;
   static double listItemWidth = 0.21.sw;
   static double listItemElevation = 0.02.sh;
   static double listItemImageRoundedBorder = 15.h;
@@ -146,6 +148,8 @@ class AppDimensions {
   /// Product
   static double boarderRadiusViewProduct = 16.w;
   static double productTextSize = 12.sp;
+  // static double productOrderWidgetHeight = 0.33.sw;
+  static double productOrderWidgetHeight = 0.37.sw;
 
   /// BottomSheet
   static double boarderRadiusBottomSheet = 25.0.h;

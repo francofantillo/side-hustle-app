@@ -77,16 +77,17 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                   top: AppDimensions.rootPadding),
               child: SearchTextField(
                   hintText: AppStrings.searchJob,
-
-                  suffixIcon:
-                  Padding(
+                  contentPaddingBottom: 10,
+                  height: AppDimensions.searchTextFieldHeight,
+                  suffixIcon: Padding(
                     padding: const EdgeInsets.only(right: 12.0, left: 0),
                     child: Material(
                         child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               print("onClicked Filter");
                             },
-                            child: const ImageIcon(AssetImage(AssetsPath.searchFilter)))),
+                            child: const ImageIcon(
+                                AssetImage(AssetsPath.searchFilter)))),
                   ),
                   onChanged: (search) {}),
             ),

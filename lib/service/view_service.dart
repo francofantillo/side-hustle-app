@@ -76,6 +76,20 @@ class _ViewServiceState extends State<ViewService> {
                   ],
                 ),
                 height(0.02.sh),
+                // AspectRatio(
+                //   aspectRatio: 21/9,
+                //   child: Container(
+                //     // width: imageWidth ?? 0.18.sw, // Set your desired width
+                //     // height: imageHeight ?? 0.18.sw, // Set your desired height
+                //     decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.all(
+                //             Radius.circular(AppDimensions.homeFirstItemWidgetCurve)),
+                //         image: DecorationImage(
+                //             image: AssetImage(AssetsPath.plumber),
+                //             // image: AssetImage(AssetsPath.carpenter),
+                //             fit: BoxFit.cover)),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(

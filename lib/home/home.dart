@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/home/widgets/home_appbar.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_location_widget.dart';
@@ -59,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: AppDimensions.rootPadding,
                     top: AppDimensions.rootPadding),
                 child: SearchTextField(
-                    height: 0.17.sw,
+                    height: AppDimensions.searchTextFieldHeight,
+                    contentPaddingBottom: 8,
                     hintText: AppStrings.searchHintText,
                     onChanged: (search) {}),
               ),

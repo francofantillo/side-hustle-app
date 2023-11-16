@@ -234,7 +234,7 @@ class _BottomModalSheetRequestServiceState
                     color: AppColors.textWhiteColor,
                     fontSize: AppDimensions.textSizeSmall),
               ),
-              height(0.04.sw)
+              height(0.1.sw)
             ],
           ),
         ),

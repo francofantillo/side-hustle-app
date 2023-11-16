@@ -39,6 +39,7 @@ class OrderProductItemWidget extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               RoundedCornersImage(
                 imageHeight: imageHeight,
@@ -48,7 +49,7 @@ class OrderProductItemWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 2.0, left: 8, right: 8),
+                  padding: const EdgeInsets.only(top: 6.0, left: 8, right: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

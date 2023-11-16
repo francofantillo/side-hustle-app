@@ -17,8 +17,8 @@ class HomeFirstItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RoundedCornersImage(
-          imageHeight: 0.09.sh,
-          imageWidth: 0.09.sh,
+          imageHeight: 0.15.sw,
+          imageWidth: 0.15.sw,
           assetImage: assetImage,
           image: image,
           boarderColor: boarderColor,

@@ -4,8 +4,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';
-import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
-import 'package:side_hustle/widgets/size_widget.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageSlider extends StatefulWidget {
@@ -28,12 +27,12 @@ class _ImageSliderState extends State<ImageSlider> {
 
   bodyContent() {
     return SizedBox(
-      height: AppDimensions.productImageSliderHeight,
+      height: AppDimensions.productImageSliderHeight - 10,
       width: AppDimensions.productImageSliderWidth,
       child: Column(
         children: [
           pageViewWidget(),
-          height(0.01.sh),
+          // height(0.01.sw),
           dotIndicatorWidget(),
         ],
       ),
@@ -75,7 +74,7 @@ class _ImageSliderState extends State<ImageSlider> {
 
   pageViewChild(int index) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+      padding: const EdgeInsets.symmetric(horizontal: 0.0),
       child: Card(
         elevation: 2,
         shadowColor: Colors.transparent,
@@ -84,48 +83,21 @@ class _ImageSliderState extends State<ImageSlider> {
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Stack(
+          // fit: StackFit.expand,
           children: [
-            RoundedCornersImage(
+            ImageSliderItem(
               imageHeight: AppDimensions.productImageSliderHeight,
               imageWidth: AppDimensions.productImageSliderWidth,
-              assetImage: widget.itemImages?[index] ?? AssetsPath.carpenter,
-              // image: AssetsPath.carpenterProfile,
+              assetImage: widget.itemImages?[index] ?? AssetsPath.carpenterSlider,
+              // image: AssetsPath.leoLubinProfile,
               boarderColor: Colors.white,
             ),
             index == 0
-                // ? Positioned(
-                //     left: AppDimensions.productImageSliderWidth - 0.26.sw,
-                //     top: AppDimensions.productImageSliderHeight - 0.23.sw,
-                //     child: Container(
-                //         height: 0.12.sw,
-                //         width: 0.12.sw,
-                //         padding: const EdgeInsets.all(8),
-                //         decoration: BoxDecoration(
-                //           color: Colors.white,
-                //           shape: BoxShape.rectangle,
-                //           borderRadius: BorderRadius.circular(12),
-                //         ),
-                //         child: Image.asset(
-                //           AssetsPath.camera,
-                //           height: 2,
-                //           width: 2,
-                //           scale: .1,
-                //         )))
                 ? widget.hideCameraIcon
                     ? const SizedBox.shrink()
                     : Positioned(
                         left: AppDimensions.productImageSliderWidth - 0.26.sw,
                         top: AppDimensions.productImageSliderHeight - 0.23.sw,
-                        // child: IconButtonWithBackground(
-                        //   onTap: () {
-                        //     print("Clicked");
-                        //   },
-                        //   iconPath: AssetsPath.camera,
-                        //   height: 0.12.sw,
-                        //   width: 0.12.sw,
-                        //   backgroundColor: AppColors.whiteColor,
-                        //   iconColor: AppColors.primaryColor,
-                        // ),
                         child: CameraButton(
                           onTap: () {
                             print("Clicked");

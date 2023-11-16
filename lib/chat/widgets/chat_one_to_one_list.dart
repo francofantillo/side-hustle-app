@@ -51,7 +51,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       child: Container(
         width: 1.sw,
         // height: 0.53.sh,
-        height: 0.9.sw,
+        height: 0.93.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(right: 8.0, bottom: 10),
         child: Card(
@@ -70,7 +70,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 padding: const EdgeInsets.only(
                     top: 8.0, left: 8.0, right: 8.0, bottom: 8),
                 child: OrderServiceItemWidget(
-                  imageHeight: 0.21.sh,
+                  imageHeight: AppDimensions.productOrderWidgetHeight,
                   imageWidth: 1.sw,
                   imagePath: image,
                   title: name,
@@ -80,16 +80,16 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
+                padding: const EdgeInsets.only(
+                    left: 16.0, right: 8.0, bottom: 8),
                 child: textWidget(
                     maxLines: 4,
                     text: AppStrings.orderMessageService,
                     color: AppColors.textWhiteColor),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
+                padding: const EdgeInsets.only(
+                    left: 10.0, right: 8.0, bottom: 8, top: 8),
                 child: Row(
                   children: [
                     const Icon(
@@ -133,7 +133,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       alignment: Alignment.centerRight,
       child: Container(
         width: 1.sw,
-        height: 0.66.sw,
+        height: 0.67.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(right: 8.0, bottom: 10),
         child: Card(
@@ -152,7 +152,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 padding: const EdgeInsets.only(
                     top: 8.0, left: 8.0, right: 8.0, bottom: 8),
                 child: OrderProductItemWidget(
-                  imageHeight: 0.21.sh,
+                  // imageHeight: 0.21.sh,
+                  imageHeight: AppDimensions.productOrderWidgetHeight,
                   imageWidth: 1.sw,
                   imagePath: image,
                   title: name,
@@ -162,8 +163,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
+                padding: const EdgeInsets.only(
+                    left: 16.0, right: 8.0, bottom: 8),
                 child: textWidget(
                     maxLines: 2,
                     text: AppStrings.orderMessageProduct,

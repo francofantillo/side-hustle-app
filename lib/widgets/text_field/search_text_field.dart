@@ -7,7 +7,7 @@ import 'package:side_hustle/utils/assets_path.dart';
 
 class SearchTextField extends StatelessWidget {
   final ValueChanged<String?> onChanged;
-  final double? height;
+  final double? height, contentPaddingBottom;
   final Widget? suffixIcon;
   final String hintText;
 
@@ -15,6 +15,7 @@ class SearchTextField extends StatelessWidget {
       {super.key,
       required this.onChanged,
       this.height,
+      this.contentPaddingBottom,
       required this.hintText,
       this.suffixIcon});
 
@@ -40,12 +41,16 @@ class SearchTextField extends StatelessWidget {
             filled: true,
             contentPadding: EdgeInsets.only(
               top: suffixIcon != null ? 3.h : 0,
+              bottom: contentPaddingBottom ?? 5,
               // left: AppDimensions.textFieldHorizontalPadding,
               right: 16.w,
             ),
             prefixIcon: const Padding(
               padding: EdgeInsets.only(left: 16.0, right: 8),
-              child: ImageIcon(AssetImage(AssetsPath.search), size: 18,),
+              child: ImageIcon(
+                AssetImage(AssetsPath.search),
+                size: 18,
+              ),
             ),
             prefixIconConstraints:
                 BoxConstraints.loose(const Size.fromRadius(76)),

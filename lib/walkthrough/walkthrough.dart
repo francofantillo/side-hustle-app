@@ -10,10 +10,16 @@ class Walkthrough extends StatefulWidget {
 }
 
 class _WalkthroughState extends State<Walkthrough> {
+  Future<bool> onWillPop() async {
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const BackgroundWidget(
-      body: WalkthroughSlider()
+    return BackgroundWidget(
+        body: WillPopScope(
+            onWillPop: onWillPop,
+            child: const WalkthroughSlider())
     );
   }
 }

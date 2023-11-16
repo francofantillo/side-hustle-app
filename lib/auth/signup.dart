@@ -9,7 +9,6 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
-import 'package:side_hustle/widgets/images/custom_cache_image.dart';
 import 'package:side_hustle/widgets/text/checkbox.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/phone_textField.dart';
@@ -37,16 +36,32 @@ class _SignupScreenState extends State<SignupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Center(
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(32.0),
+              //     child: CustomCacheImage(
+              //       showLoading: false,
+              //       imageHeight: AppDimensions.loginLogoSize,
+              //       assetImage: AssetsPath.logo,
+              //     ),
+              //   ),
+              // ),
+              height(AppDimensions.welcomeBackSpacingBetween),
               Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: CustomCacheImage(
-                    showLoading: false,
-                    imageHeight: AppDimensions.loginLogoSize,
-                    assetImage: AssetsPath.logo,
-                  ),
-                ),
-              ),
+                  child: Container(
+                    height: AppDimensions.loginLogoSize,
+                    // width: .7.sw,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                        image: DecorationImage(
+                          image: AssetImage(
+                            AssetsPath.logo,
+                          ),
+                        )),
+                  )),
+              height(AppDimensions.welcomeBackSpacingBetween),
               textWidget(text: AppStrings.helloThere),
               textWidget(
                   text: AppStrings.registerYourSelf,

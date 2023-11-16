@@ -6,7 +6,6 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
-import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/custom_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -47,7 +46,10 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
                 color: const Color(0xFFB5B5B5),
                 borderRadius: BorderRadius.circular(14),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamedAndRemoveUntil(context,
+                        AppRoutes.bottomTabsScreenRoute, (route) => false);
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(11),
                     child: textWidget(

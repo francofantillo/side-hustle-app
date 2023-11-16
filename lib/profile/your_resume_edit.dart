@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -58,8 +59,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     children: [
                       CircularCacheImageWidget(
                         showLoading: true,
-                        image:
-                            "https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg",
+                        image: AlphaAppData.dpProfile,
                         boarderColor: AppColors.primaryColor,
                         imageHeight: 0.28.sw,
                         imageWidth: 0.28.sw,

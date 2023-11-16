@@ -117,12 +117,14 @@ class ItemsWidget extends StatelessWidget {
                           Divider(
                             height: 1.h,
                           ),
+                          height(0.015.sw),
                           const Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Material(
+                                color: boarderColor,
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(context,
@@ -140,6 +142,7 @@ class ItemsWidget extends StatelessWidget {
                               ),
                               width(.01.sw),
                               Material(
+                                color: boarderColor,
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(context,

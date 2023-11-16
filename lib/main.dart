@@ -13,6 +13,7 @@ void main() async {
   runApp(
     const BaseWidget(),
   );
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

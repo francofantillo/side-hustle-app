@@ -76,6 +76,8 @@ class _EventScreenState extends State<EventScreen> {
                   top: AppDimensions.rootPadding),
               child: SearchTextField(
                   hintText: AppStrings.searchEvent,
+                  contentPaddingBottom: 10,
+                  height: AppDimensions.searchTextFieldHeight,
                   suffixIcon:
                    Padding(
                     padding: const EdgeInsets.only(right: 12.0, left: 0),
