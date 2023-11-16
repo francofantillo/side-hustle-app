@@ -96,8 +96,9 @@ class _ImageSliderState extends State<ImageSlider> {
                 ? widget.hideCameraIcon
                     ? const SizedBox.shrink()
                     : Positioned(
-                        left: AppDimensions.productImageSliderWidth - 0.26.sw,
-                        top: AppDimensions.productImageSliderHeight - 0.23.sw,
+                        left: AppDimensions.productImageSliderWidth - 0.24.sw,
+                        // top: AppDimensions.productImageSliderHeight - 0.23.sw,
+                        top: AppDimensions.productImageSliderHeight - 0.255.sw,
                         child: CameraButton(
                           onTap: () {
                             print("Clicked");

@@ -141,28 +141,31 @@ class JobRequestItemWidget extends StatelessWidget {
                           ),
                           width(0.04.sw),
                           Expanded(
-                            child: InkWell(
-                              onTap: () {
-                                print("Clicked");
-                              },
-                              highlightColor: AppColors.greenColor,
-                              splashColor: AppColors.greyColor,
-                              child: Container(
-                                height: 32.h,
-                                padding: EdgeInsets.zero,
-                                margin: EdgeInsets.zero,
-                                decoration: BoxDecoration(
-                                  color: AppColors.greenColor,
-                                  borderRadius: BorderRadius.circular(
-                                      AppDimensions.bookedJobRoundedBorder),
-                                ),
-                                child: Center(
-                                  child: textWidget(
-                                    text: AppStrings.hire,
-                                    color: AppColors.textWhiteColor,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w700,
-                                    textAlign: TextAlign.center,
+                            child: Container(
+                              height: 32.h,
+                              padding: EdgeInsets.zero,
+                              margin: EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.bookedJobRoundedBorder),
+                              ),
+                              child: Material(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.bookedJobRoundedBorder),
+                                child: InkWell(
+                                  onTap: () {
+
+                                  },
+                                  child: Center(
+                                    child: textWidget(
+                                      text: AppStrings.hire,
+                                      color: AppColors.textWhiteColor,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w700,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -124,7 +124,8 @@ class _ShopScreenState extends State<ShopScreen> {
                   height: 9.h),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+              // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+              padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 0.02.sw),
               child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(

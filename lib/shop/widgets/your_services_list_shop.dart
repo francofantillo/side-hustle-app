@@ -33,7 +33,8 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
           return Padding(
-            padding: const EdgeInsets.only(right: 16.0, left: 8.0),
+            // padding: const EdgeInsets.only(right: 16.0, left: 8.0),
+            padding: EdgeInsets.only(right: 16.0.w, left: 16.0.w, top: 8),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.viewServiceScreenRoute,

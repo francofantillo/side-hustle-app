@@ -296,11 +296,12 @@ class _PostJobState extends State<PostJob> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
+                  borderRadius: 14,
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   color: AppColors.primaryColor,
-                  name: widget.isEdit ? AppStrings.editJob : AppStrings.postJob,
+                  name: widget.isEdit ? AppStrings.saveChanges : AppStrings.postJob,
                 ),
               )
             ],

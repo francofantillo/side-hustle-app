@@ -60,7 +60,8 @@ class ScheduledJobItemWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  // padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -105,32 +106,63 @@ class ScheduledJobItemWidget extends StatelessWidget {
                           text: price,
                           color: AppColors.textBlackColor,
                           fontWeight: FontWeight.bold),
-                      height(imageHeight! * .03),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.zero,
-                          margin: EdgeInsets.zero,
-                          decoration: BoxDecoration(
-                            color: AppColors.greenColor,
-                            borderRadius: BorderRadius.circular(
-                                AppDimensions.bookedJobRoundedBorder),
-                          ),
-                          child: Material(
-                            color: AppColors.greenColor,
-                            borderRadius: BorderRadius.circular(
-                                AppDimensions.bookedJobRoundedBorder),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, AppRoutes.viewJobScreenRoute);
-                              },
-                              child: Center(
-                                child: textWidget(
-                                  text: AppStrings.viewRequest,
-                                  color: AppColors.textWhiteColor,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w700,
-                                  textAlign: TextAlign.center,
-                                ),
+                      // height(imageHeight! * .03),
+                      // Expanded(
+                      //   child: Container(
+                      //     padding: EdgeInsets.zero,
+                      //     margin: EdgeInsets.zero,
+                      //     decoration: BoxDecoration(
+                      //       color: AppColors.greenColor,
+                      //       borderRadius: BorderRadius.circular(
+                      //           AppDimensions.bookedJobRoundedBorder),
+                      //     ),
+                      //     child: Material(
+                      //       color: AppColors.greenColor,
+                      //       borderRadius: BorderRadius.circular(
+                      //           AppDimensions.bookedJobRoundedBorder),
+                      //       child: InkWell(
+                      //         onTap: () {
+                      //           Navigator.pushNamed(context, AppRoutes.viewJobScreenRoute);
+                      //         },
+                      //         child: Center(
+                      //           child: textWidget(
+                      //             text: AppStrings.viewRequest,
+                      //             color: AppColors.textWhiteColor,
+                      //             fontSize: 12.sp,
+                      //             fontWeight: FontWeight.w700,
+                      //             textAlign: TextAlign.center,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      const Spacer(),
+                      Container(
+                        // height: 0.0725.sw,
+                        padding: const EdgeInsets.all(8),
+                        margin: EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                          color: AppColors.greenColor,
+                          borderRadius: BorderRadius.circular(
+                              AppDimensions.bookedJobRoundedBorder),
+                        ),
+                        child: Material(
+                          color: AppColors.greenColor,
+                          borderRadius: BorderRadius.circular(
+                              AppDimensions.bookedJobRoundedBorder),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.viewJobScreenRoute);
+                            },
+                            child: Center(
+                              child: textWidget(
+                                text: AppStrings.viewRequest,
+                                color: AppColors.textWhiteColor,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),

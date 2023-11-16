@@ -39,6 +39,7 @@ class ProductsItemsWidget extends StatelessWidget {
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Material(
+          elevation: 6,
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:

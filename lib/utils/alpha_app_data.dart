@@ -243,7 +243,8 @@ class AlphaAppData {
   ];
 
   /// Brandon Gouse Profile Image
-  static const String dpProfile = "https://i.pravatar.cc/150?img=14";
+  // static const String dpProfile = "https://i.pravatar.cc/150?img=14";
+  static const String dpProfile = "https://i.pravatar.cc/150?img=52";
 
   /// My Jobs Schedule List
   static List<ItemList> myJobsScheduleList = [

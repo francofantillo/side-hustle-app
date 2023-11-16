@@ -30,7 +30,7 @@ class _MyJobsScheduledListState extends State<MyJobsScheduledList> {
             padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
             child: ScheduledJobItemWidget(
               imageWidth: 1.sw,
-              imageHeight: AppDimensions.listItemScheduledHeight,
+              imageHeight: AppDimensions.listItemJobScheduledHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.myJobsScheduleList[index].title,
               subTitle: AlphaAppData.myJobsScheduleList[index].subTitle,

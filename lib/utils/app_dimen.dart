@@ -117,7 +117,8 @@ class AppDimensions {
   static double listItemImageRoundedBorder = 15.h;
 
   /// Event and Job Item
-  static double sideHustleItemHeight = 0.41.sw;
+  // static double sideHustleItemHeight = 0.41.sw;
+  static double sideHustleItemHeight = 0.40.sw;
   static double sideHustleItemWidth = 0.24.sw;
 
   /// Product Image Slider
@@ -180,7 +181,9 @@ class AppDimensions {
   static double textSizeProfileJobs = 10.sp;
 
   /// My Jobs
-  static double listItemScheduledHeight = 0.45.sw;
+  // static double listItemScheduledHeight = 0.45.sw;
+  static double listItemEventScheduledHeight = 0.40.sw;
+  static double listItemJobScheduledHeight = 0.41.sw;
   static double listItemOnGoingHeight = 0.57.sw;
   static double listItemCompletedJobHeight = 0.57.sw;
   static double listItemJobRequestHeight = 0.38.sw;

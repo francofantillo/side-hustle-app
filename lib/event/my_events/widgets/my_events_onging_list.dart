@@ -34,7 +34,7 @@ class _MyEventsOngoingListState extends State<MyEventsOngoingList> {
                 Navigator.pushNamed(context, AppRoutes.viewEventSelfScreenRoute);
               },
               imageWidth: 1.sw,
-              imageHeight: AppDimensions.listItemScheduledHeight,
+              imageHeight: AppDimensions.listItemEventScheduledHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.favEventsList[index].title,
               subTitle: AlphaAppData.favEventsList[index].subTitle,
