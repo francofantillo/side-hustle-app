@@ -61,7 +61,7 @@ class JobsHorizontalListWidget extends StatelessWidget {
               // Replace with your horizontal list item
               return Padding(
                 padding: const EdgeInsets.only(right: 2.0, left: 8.0),
-                child: InkWell(
+                child: ItemsWidget(
                   onTap: () {
                     if (isEvent) {
                       Navigator.pushNamed(
@@ -71,20 +71,18 @@ class JobsHorizontalListWidget extends StatelessWidget {
                           context, AppRoutes.applyForJobScreenRoute);
                     }
                   },
-                  child: ItemsWidget(
-                    commentIconPath: AssetsPath.comment,
-                    isEvent: isEvent,
-                    imageWidth: 1.sw,
-                    imageHeight: horizontalListSize,
-                    boarderColor: AppColors.itemBGColor,
-                    title: itemsList?[index].title,
-                    subTitle: itemsList?[index].subTitle,
-                    imagePath: itemsList?[index].imagePath,
-                    price: itemsList?[index].price,
-                    userName: itemsList?[index].userName,
-                    userRating: itemsList?[index].userRating,
-                    userProfile: itemsList?[index].userProfile,
-                  ),
+                  commentIconPath: AssetsPath.comment,
+                  isEvent: isEvent,
+                  imageWidth: 1.sw,
+                  imageHeight: horizontalListSize,
+                  boarderColor: AppColors.itemBGColor,
+                  title: itemsList?[index].title,
+                  subTitle: itemsList?[index].subTitle,
+                  imagePath: itemsList?[index].imagePath,
+                  price: itemsList?[index].price,
+                  userName: itemsList?[index].userName,
+                  userRating: itemsList?[index].userRating,
+                  userProfile: itemsList?[index].userProfile,
                 ),
               );
             },

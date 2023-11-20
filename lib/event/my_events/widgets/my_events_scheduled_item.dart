@@ -117,7 +117,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                       const Spacer(),
                       Container(
                         // height: 0.0725.sw,
-                        padding: const EdgeInsets.all(8),
+                        // padding: const EdgeInsets.all(8),
                         margin: EdgeInsets.zero,
                         decoration: BoxDecoration(
                           color: AppColors.greenColor,
@@ -130,13 +130,16 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                               AppDimensions.bookedJobRoundedBorder),
                           child: InkWell(
                             onTap: onTap,
-                            child: Center(
-                              child: textWidget(
-                                text: AppStrings.viewEvent,
-                                color: AppColors.textWhiteColor,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                                textAlign: TextAlign.center,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: textWidget(
+                                  text: AppStrings.viewEvent,
+                                  color: AppColors.textWhiteColor,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),

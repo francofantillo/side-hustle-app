@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/chat/widgets/chat_all_user_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 
 class ChatBlockUsersList extends StatefulWidget {
   final List? itemList;
@@ -34,9 +35,14 @@ class _ChatBlockUsersListState extends State<ChatBlockUsersList> {
                       isBlockedUser: true,
                     ));
               },
-              child: const Padding(
-                  padding: EdgeInsets.only(right: 16.0, left: 8.0),
-                  child: ChatAllUsersItem()),
+              child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0, left: 8.0),
+                  child: ChatAllUsersItem(
+                    image: AlphaAppData.chatAllUsersList[index].image,
+                    time: AlphaAppData.chatAllUsersList[index].time,
+                    name: AlphaAppData.chatAllUsersList[index].name,
+                    message: AlphaAppData.chatAllUsersList[index].message,
+                  )),
             ),
           );
         },

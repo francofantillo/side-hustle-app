@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 
@@ -42,17 +43,36 @@ class CustomCacheImage extends StatelessWidget {
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
       ),
-      placeholder: showLoading
-          ? (context, url) => Container(
-              width: loadingWidgetSize ?? 40.h,
-              // Set your desired width
-              height: loadingWidgetSize ?? 40.h,
-              // Set your desired height
-              padding: const EdgeInsets.all(8),
-              child: const CircularProgressIndicator(
-                color: AppColors.whiteColor,
-              ))
-          : null,
+      // placeholder: showLoading
+      //     ? (context, url) => Container(
+      //         width: loadingWidgetSize ?? 40.h,
+      //         // Set your desired width
+      //         height: loadingWidgetSize ?? 40.h,
+      //         // Set your desired height
+      //         padding: const EdgeInsets.all(8),
+      //         child: const CircularProgressIndicator(
+      //           color: AppColors.whiteColor,
+      //         ))
+      //     : null,
+        placeholder: (context, url) => Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+          child: Container(
+            width: imageWidth ?? 60.h, // Set your desired width
+            height: imageHeight ?? 60.h, // Set your desired height
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: boarderColor ?? AppColors.whiteColor,
+                // Change the border color as needed
+                width: borderWidth ?? 2.h, // Use the provided border width
+              ),
+              image: const DecorationImage(
+                  image: AssetImage(AssetsPath.placeHolderProfileImage),
+                  fit: BoxFit.cover),
+            ),
+          ),
+        ),
       errorWidget: (context, url, error) => Image.asset(
         assetImage ?? AssetsPath.placeHolderProfileImage,
         fit: BoxFit.cover,

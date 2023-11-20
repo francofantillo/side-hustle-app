@@ -41,6 +41,8 @@ class RoundedCornersImage extends StatelessWidget {
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
       ),
+      // progressIndicatorBuilder: (context, url, downloadProgress) =>
+      //     CircularProgressIndicator(value: downloadProgress.progress),
       placeholder: (context, url) => Shimmer.fromColors(
         baseColor: Colors.grey.shade300,
         highlightColor: Colors.grey.shade100,

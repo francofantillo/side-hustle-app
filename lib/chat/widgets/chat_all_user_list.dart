@@ -32,7 +32,7 @@ class _ChatAllUsersListState extends State<ChatAllUsersList> {
                 Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
               },
               child: Padding(
-                  padding: EdgeInsets.only(right: 16.0, left: 8.0),
+                  padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                   child: ChatAllUsersItem(
                     image: AlphaAppData.chatAllUsersList[index].image,
                     time: AlphaAppData.chatAllUsersList[index].time,

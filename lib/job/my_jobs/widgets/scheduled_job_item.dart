@@ -157,7 +157,7 @@ class ScheduledJobItemWidget extends StatelessWidget {
                           const Spacer(),
                           Container(
                             // height: 0.0725.sw,
-                            padding: const EdgeInsets.all(8),
+                            // padding: const EdgeInsets.all(8),
                             margin: EdgeInsets.zero,
                             decoration: BoxDecoration(
                               color: AppColors.greenColor,
@@ -172,13 +172,16 @@ class ScheduledJobItemWidget extends StatelessWidget {
                                 onTap: () {
                                   Navigator.pushNamed(context, AppRoutes.jobRequestScreenRoute);
                                 },
-                                child: Center(
-                                  child: textWidget(
-                                    text: AppStrings.viewRequest,
-                                    color: AppColors.textWhiteColor,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w700,
-                                    textAlign: TextAlign.center,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: textWidget(
+                                      text: AppStrings.viewRequest,
+                                      color: AppColors.textWhiteColor,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w700,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                 ),
                               ),

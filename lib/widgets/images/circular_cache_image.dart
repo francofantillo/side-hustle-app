@@ -44,21 +44,35 @@ class CircularCacheImageWidget extends StatelessWidget {
         ),
       ),
       placeholder: (context, url) => Shimmer.fromColors(
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
-          child: Container(
-            width: imageWidth ?? 60.h, // Set your desired width
-            height: imageHeight ?? 60.h, // Set your desired height
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: boarderColor ?? AppColors.whiteColor,
-                // Change the border color as needed
-                width: borderWidth ?? 2.h, // Use the provided border width
-              ),
-              // image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        child: Container(
+          width: imageWidth ?? 60.h, // Set your desired width
+          height: imageHeight ?? 60.h, // Set your desired height
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: boarderColor ?? AppColors.whiteColor,
+              // Change the border color as needed
+              width: borderWidth ?? 2.h, // Use the provided border width
             ),
-          )),
+            image: const DecorationImage(
+                image: AssetImage(AssetsPath.placeHolderProfileImage),
+                fit: BoxFit.cover),
+          ),
+        ),
+      ),
+      // progressIndicatorBuilder: (context, url, downloadProgress) =>
+      //     CircularProgressIndicator(value: downloadProgress.progress),
+      // placeholder: (context, url) => Container(
+      //     width: loadingWidgetSize ?? 40.h,
+      //     // Set your desired width
+      //     height: loadingWidgetSize ?? 40.h,
+      //     // Set your desired height
+      //     padding: const EdgeInsets.all(8),
+      //     child: const CircularProgressIndicator(
+      //       color: AppColors.primaryColor,
+      //     )),
       // placeholder: showLoading
       // ? (context, url) => Container(
       //     width: loadingWidgetSize ?? 40.h,
