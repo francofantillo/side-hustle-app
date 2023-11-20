@@ -97,9 +97,9 @@ class AppStrings {
   /// Drawer
   static const String sideMenu = "Side Menu";
   static const String userName = "Brandon Gouse";
-  static const String otherUserName = "Roger Baptista";
+  static const String otherUserName = "Brandon Baptista";
   static const String userEmail = "brandon.gouse@example.com";
-  static const String otherUserEmail = "Roger.baptista@example.com";
+  static const String otherUserEmail = "brandon.baptista@example.com";
   static const String account = "Account";
   static const String message = "Message";
   static const String favorites = "Favorites";

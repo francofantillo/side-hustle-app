@@ -22,7 +22,7 @@ class _JobsPostedListState extends State<JobsPostedList> {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 4,
+        itemCount: 3,
         // Replace with your item count
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
@@ -32,16 +32,16 @@ class _JobsPostedListState extends State<JobsPostedList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+              title: AlphaAppData.otherUsersJobsPostedList[index].title,
+              subTitle: AlphaAppData.otherUsersJobsPostedList[index].subTitle,
               imagePath:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              userName: AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
+              AlphaAppData.otherUsersJobsPostedList[index].imagePath,
+              price: AlphaAppData.otherUsersJobsPostedList[index].price,
+              userName: AlphaAppData.otherUsersJobsPostedList[index].userName,
               userRating:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userRating,
+              AlphaAppData.otherUsersJobsPostedList[index].userRating,
               userProfile:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userProfile,
+              AlphaAppData.otherUsersJobsPostedList[index].userProfile,
             ),
           );
         },

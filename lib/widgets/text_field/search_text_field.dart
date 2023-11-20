@@ -40,8 +40,8 @@ class SearchTextField extends StatelessWidget {
             fillColor: Colors.transparent,
             filled: true,
             contentPadding: EdgeInsets.only(
-              top: suffixIcon != null ? 3.h : 0,
-              bottom: contentPaddingBottom ?? 5,
+              // top: suffixIcon != null ? 3.h : 0,
+              // bottom: contentPaddingBottom ?? .003.sw,
               // left: AppDimensions.textFieldHorizontalPadding,
               right: 16.w,
             ),
@@ -57,6 +57,7 @@ class SearchTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             suffixIconConstraints:
                 BoxConstraints.loose(const Size.fromRadius(14)),
+                // BoxConstraints.loose(const Size.fromRadius(5)),
             // border: InputBorder.none,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             labelStyle: TextStyle(

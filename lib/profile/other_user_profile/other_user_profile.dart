@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/profile/other_user_profile/widgets/shop_overview_list.dart';
 import 'package:side_hustle/profile/widgets/jobs_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -110,6 +111,7 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
           children: [
             Center(
               child: CircularCacheImageWidget(
+                image: AssetsPath.phillipPressProfile,
                 showLoading: true,
                 boarderColor: AppColors.primaryColor,
                 imageHeight: 90.w,
@@ -138,7 +140,7 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                 children: [
                   ProfileJobsWidget(
                       name: AppStrings.jobsPosted,
-                      myJobsCount: "12",
+                      myJobsCount: "03",
                       onTap: () {
                         Navigator.pushNamed(
                             context, AppRoutes.otherUserJobsPostedScreenRoute);
@@ -146,7 +148,7 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                   width(0.04.sw),
                   ProfileJobsWidget(
                       name: AppStrings.eventsPosted,
-                      myJobsCount: "28",
+                      myJobsCount: "03",
                       onTap: () {
                         Navigator.pushNamed(context,
                             AppRoutes.otherUserEventsPostedScreenRoute);
@@ -160,7 +162,9 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                   horizontal: AppDimensions.defaultHorizontalPadding + 4),
               child: customMaterialButton(
                   height: 11.h,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
+                  },
                   name: AppStrings.message,
                   borderRadius: 12),
             ),

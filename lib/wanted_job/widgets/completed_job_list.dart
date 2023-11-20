@@ -32,7 +32,7 @@ class _CompletedTabListState extends State<CompletedTabList> {
               padding: const EdgeInsets.only(right: 16.0, left: 8.0),
               child: CompletedJobsWidget(
                 imageWidth: 1.sw,
-                imageHeight: AppDimensions.listItemHeight,
+                imageHeight: AppDimensions.listItemHeightJobCompleted,
                 boarderColor: AppColors.itemBGColor,
                 title: AlphaAppData.wantedJobList[index].title,
                 subTitle:

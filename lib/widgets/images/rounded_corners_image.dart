@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -40,15 +41,35 @@ class RoundedCornersImage extends StatelessWidget {
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
       ),
-      placeholder: (context, url) => Container(
-          width: loadingWidgetSize ?? 40.h,
-          // Set your desired width
-          height: loadingWidgetSize ?? 40.h,
-          // Set your desired height
-          padding: const EdgeInsets.all(8),
-          child: const CircularProgressIndicator(
-            color: AppColors.whiteColor,
-          )),
+      placeholder: (context, url) => Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        child: Container(
+          width: imageWidth ?? 0.18.sw, // Set your desired width
+          height: imageHeight ?? 0.18.sw, // Set your desired height
+          decoration: BoxDecoration(
+            // shape: BoxShape.circle,
+            borderRadius: BorderRadius.all(
+                Radius.circular(AppDimensions.homeFirstItemWidgetCurve)),
+            border: Border.all(
+              color: boarderColor ?? AppColors.whiteColor,
+              // Change the border color as needed
+              width: 1.8.h, // Use the provided border width
+            ),
+            image: const DecorationImage(image: AssetImage(AssetsPath.placeHolderProfileImage), fit: BoxFit.cover),
+
+          ),
+        ),
+      ),
+      // placeholder: (context, url) => Container(
+      //     width: loadingWidgetSize ?? 40.h,
+      //     // Set your desired width
+      //     height: loadingWidgetSize ?? 40.h,
+      //     // Set your desired height
+      //     padding: const EdgeInsets.all(8),
+      //     child: const CircularProgressIndicator(
+      //       color: AppColors.whiteColor,
+      //     )),
       errorWidget: (context, url, error) => Container(
         width: imageWidth ?? 0.18.sw, // Set your desired width
         height: imageHeight ?? 0.18.sw, // Set your desired height

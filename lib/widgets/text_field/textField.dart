@@ -25,7 +25,7 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onChanged;
   final double? height, top, bottom;
   final Function(String)? onFieldSubmitted;
-  final Color? lableColor;
+  final Color? labelColor;
   final FocusNode? focusNode;
   final Color? fillColor;
   final Color? containerColor;
@@ -61,7 +61,7 @@ class CustomTextFormField extends StatefulWidget {
     this.top,
     this.bottom = 0,
     this.isReadonly = false,
-    this.lableColor,
+    this.labelColor,
     this.fillColor,
     this.containerColor,
     this.isForCard,
@@ -129,7 +129,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               color: widget.fillColor ?? AppColors.whiteColor,
             ),
             height: widget.height ?? AppDimensions.textFieldHeight,
-            child: textFormField() ,
+            child: textFormField(),
           ),
         ),
         // textFormField(),
@@ -173,10 +173,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintText: widget.hintText,
         errorStyle: _errorTextStyle(),
         hintStyle: const TextStyle(
-          color: AppColors.textFieldColor,
-          fontSize: 15,
-          height: 2
-        ),
+            color: AppColors.textFieldColor, fontSize: 15, height: 2),
         errorMaxLines: 3,
         suffixIcon: widget.isPasswordField!
             ? _passwordSuffixIconWidget()
@@ -219,7 +216,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget _label() {
     return textWidget(
       text: widget.label ?? '',
-      color: widget.lableColor ?? AppColors.labelColor,
+      color: widget.labelColor ?? AppColors.labelColor,
       //  fontSize: 17.sp,
     );
   }

@@ -24,7 +24,8 @@ class AppDimensions {
   static double dialogueTextBodyHeadingSize = 16.sp;
 
   /// Text Field
-  static double textFieldHeight = 55.h;
+  // static double textFieldHeight = 55.h;
+  static double textFieldHeight = .15.sw;
   static double textFieldBorderRadius = 15;
   static double roundedImageViewBorderRadius = 16;
   static double searchTextFieldHeight = 0.15.sw;
@@ -112,6 +113,7 @@ class AppDimensions {
   /// Event and Job Item
   // static double listItemHeight = 0.43.sw;
   static double listItemHeight = 0.40.sw;
+  static double listItemHeightJobCompleted = 0.41.sw;
   static double listItemWidth = 0.21.sw;
   static double listItemElevation = 0.02.sh;
   static double listItemImageRoundedBorder = 15.h;

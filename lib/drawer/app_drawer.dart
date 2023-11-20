@@ -65,7 +65,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircularCacheImageWidget(
-                        showLoading: false,
+                        showLoading: true,
                         image: AlphaAppData.dpProfile,
                       ),
                       width(0.03.sw),

@@ -16,7 +16,8 @@ class AppColors {
   static final searchIconColor = Color(0xFF565656).withOpacity(.55);
   // static final switchTabBackgroundColor = Color(0xFFF2F3F7);
   static final switchTabBackgroundColor = Color(0xFFe9eaea);
-  static final itemBGColor = Color(0xFFF3F3F3);
+  // static final itemBGColor = Color(0xFFF3F3F3);
+  static final itemBGColor = Colors.white;
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);
   static const appTextBlackColor = Color(0xFF6B6B6B);

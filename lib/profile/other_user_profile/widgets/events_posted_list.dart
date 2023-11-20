@@ -17,11 +17,12 @@ class _EventsPostedListState extends State<EventsPostedList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 4,
+        itemCount: 3,
         // Replace with your item count
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
@@ -31,18 +32,13 @@ class _EventsPostedListState extends State<EventsPostedList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
-              userName:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,
-              userRating: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userRating,
-              userProfile: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].userProfile,
+              title: AlphaAppData.eventsList[index].title,
+              subTitle: AlphaAppData.eventsList[index].subTitle,
+              imagePath: AlphaAppData.eventsList[index].imagePath,
+              price: AlphaAppData.eventsList[index].price,
+              userName: AlphaAppData.eventsList[index].userName,
+              userRating: AlphaAppData.eventsList[index].userRating,
+              userProfile: AlphaAppData.eventsList[index].userProfile,
             ),
           );
         },

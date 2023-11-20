@@ -19,11 +19,12 @@ class _ShopOverviewListState extends State<ShopOverviewList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 4,
+        itemCount: 2,
         // Replace with your item count
         itemBuilder: (context, index) {
           // Replace with your horizontal list item
@@ -33,13 +34,11 @@ class _ShopOverviewListState extends State<ShopOverviewList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.sideHustleItemHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
+              title: AlphaAppData.otherUserProfileList[index].title,
+              subTitle: AlphaAppData.otherUserProfileList[index].subTitle,
               deliveryType: AppStrings.pickUpViewProduct,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+              imagePath: AlphaAppData.otherUserProfileList[index].imagePath,
+              price: AlphaAppData.otherUserProfileList[index].price,
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.viewProductScreenRoute);
               },

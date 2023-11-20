@@ -66,6 +66,8 @@ class AssetsPath {
 
   /// Alpha Images
   static const carpenter = "${alphaPath}carpenter.png";
+  static const developer = "${alphaPath}developer.png";
+  static const designer = "${alphaPath}designer.png";
   static const carpenterSlider = "${alphaPath}carpenter_slider.png";
   static const driver = "${alphaPath}driver.png";
   static const cleaner = "${alphaPath}wanted_job_1.png";

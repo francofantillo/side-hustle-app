@@ -38,7 +38,7 @@ class ChatAllUsersItem extends StatelessWidget {
                   )
                 : CircularCacheImageWidget(
                     image: image,
-                    showLoading: false,
+                    showLoading: true,
                   )),
         Expanded(
           child: Column(

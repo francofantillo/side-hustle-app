@@ -251,7 +251,7 @@ class AlphaAppData {
     ItemList(
         title: "Carpenter",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Davis Dorwart",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -260,7 +260,7 @@ class AlphaAppData {
     ItemList(
         title: "Cleaner",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Brandon Korsgaard",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -269,7 +269,7 @@ class AlphaAppData {
     ItemList(
         title: "Driver",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Terry Botosh",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -278,7 +278,7 @@ class AlphaAppData {
     ItemList(
         title: "Carpenter",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Emerson Aminoff",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -291,7 +291,7 @@ class AlphaAppData {
     ItemList(
         title: "Carpenter",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Davis Dorwart",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -300,7 +300,7 @@ class AlphaAppData {
     ItemList(
         title: "Cleaner",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Brandon Korsgaard",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -313,7 +313,7 @@ class AlphaAppData {
     ItemList(
         title: "Musical Event",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Jaylon Gouse",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -322,7 +322,7 @@ class AlphaAppData {
     ItemList(
         title: "Social Event",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Marcus Arcand",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -331,7 +331,7 @@ class AlphaAppData {
     ItemList(
         title: "Children’s Birthday",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "James Curtis",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -344,7 +344,7 @@ class AlphaAppData {
     ItemList(
         title: "Carpenter",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Davis Dorwart",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -353,7 +353,7 @@ class AlphaAppData {
     ItemList(
         title: "Driver",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Terry Botosh",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -362,7 +362,7 @@ class AlphaAppData {
     ItemList(
         title: "Cleaner",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Brandon Korsgaard",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -375,7 +375,7 @@ class AlphaAppData {
     ItemList(
         title: "Gustavo Rosser’s Shop",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Gustavo Rosser",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -384,7 +384,7 @@ class AlphaAppData {
     ItemList(
         title: "Jakob Donin’s Shop",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Jakob Donin",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -393,7 +393,7 @@ class AlphaAppData {
     ItemList(
         title: "Carter Curtis’s Shop",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Carter Curtis",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -402,7 +402,7 @@ class AlphaAppData {
     ItemList(
         title: "Ruben Press’s Shop",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Ruben Press",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -410,6 +410,58 @@ class AlphaAppData {
         userProfile: AssetsPath.phillipPressProfile),
   ];
 
+  /// Other user profile List
+  static List<ItemList> otherUserProfileList = [
+    ItemList(
+        title: "Headphones",
+        subTitle:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        userName: "Emerson Aminoff",
+        userRating: "5.0 ratings",
+        price: "\$24.56",
+        imagePath: AssetsPath.headphones,
+        userProfile: "https://i.pravatar.cc/150?img=8"),
+    ItemList(
+        title: "Mouse",
+        subTitle:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        userName: "Talan Stanton",
+        userRating: "5.0 ratings",
+        price: "\$24.56",
+        imagePath: AssetsPath.mouse,
+        userProfile: "https://i.pravatar.cc/150?img=18"),
+  ];
+
+  /// other user jobs posted List
+  static List<ItemList> otherUsersJobsPostedList = [
+    ItemList(
+        title: "Plumber",
+        subTitle:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        userName: "Emerson Aminoff",
+        userRating: "5.0 ratings",
+        price: "\$24.56",
+        imagePath: AssetsPath.plumber,
+        userProfile: "https://i.pravatar.cc/150?img=8"),
+    ItemList(
+        title: "Developer",
+        subTitle:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        userName: "Emerson Aminoff",
+        userRating: "5.0 ratings",
+        price: "\$24.56",
+        imagePath: AssetsPath.developer,
+        userProfile: "https://i.pravatar.cc/150?img=8"),
+    ItemList(
+        title: "Designer",
+        subTitle:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        userName: "Emerson Aminoff",
+        userRating: "5.0 ratings",
+        price: "\$24.56",
+        imagePath: AssetsPath.designer,
+        userProfile: "https://i.pravatar.cc/150?img=8"),
+  ];
 }
 
 class ChatAllUsersItemModel {

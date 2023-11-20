@@ -4,6 +4,7 @@ import 'package:side_hustle/profile/other_user_profile/widgets/events_posted_lis
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -19,7 +20,8 @@ class OtherUserEventsPostedScreen extends StatefulWidget {
       _OtherUserEventsPostedScreenState();
 }
 
-class _OtherUserEventsPostedScreenState extends State<OtherUserEventsPostedScreen> {
+class _OtherUserEventsPostedScreenState
+    extends State<OtherUserEventsPostedScreen> {
   var index = 0;
   bool isProductSelected = true;
 
@@ -90,7 +92,8 @@ class _OtherUserEventsPostedScreenState extends State<OtherUserEventsPostedScree
                 children: [
                   Center(
                     child: CircularCacheImageWidget(
-                      showLoading: true,
+                      showLoading: false,
+                      image: AssetsPath.phillipPressProfile,
                       boarderColor: AppColors.primaryColor,
                       imageHeight: 70.w,
                       imageWidth: 70.w,

@@ -5,6 +5,8 @@ import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 
+import '../../../router/app_route_named.dart';
+
 class MyJobsScheduledList extends StatefulWidget {
   const MyJobsScheduledList({super.key});
 
@@ -29,6 +31,10 @@ class _MyJobsScheduledListState extends State<MyJobsScheduledList> {
           return Padding(
             padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
             child: ScheduledJobItemWidget(
+              onTap: () {
+                Navigator.pushNamed(
+                    context, AppRoutes.viewJobScreenRoute);
+              },
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemJobScheduledHeight,
               boarderColor: AppColors.itemBGColor,

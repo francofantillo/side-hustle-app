@@ -53,58 +53,6 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
     );
   }
 
-  void _changeSeek(double value) {
-    // setState(() {
-    //   audioPlayer.seek(new Duration(seconds: value.toInt()));
-    // });
-  }
-
-  void _playAudio() async {
-    //   final url =
-    //       'https://file-examples.com/storage/fef1706276640fa2f99a5a4/2017/11/file_example_MP3_700KB.mp3';
-    //   if (isPause) {
-    //     await audioPlayer.resume();
-    //     setState(() {
-    //       isPlaying = true;
-    //       isPause = false;
-    //     });
-    //   } else if (isPlaying) {
-    //     await audioPlayer.pause();
-    //     setState(() {
-    //       isPlaying = false;
-    //       isPause = true;
-    //     });
-    //   } else {
-    //     setState(() {
-    //       isLoading = true;
-    //     });
-    //     await audioPlayer.play(UrlSource(url));
-    //     setState(() {
-    //       isPlaying = true;
-    //     });
-    //   }
-    //
-    //   audioPlayer.onDurationChanged.listen((Duration d) {
-    //     setState(() {
-    //       duration = d;
-    //       isLoading = false;
-    //     });
-    //   });
-    //   audioPlayer.onPositionChanged.listen((Duration p) {
-    //     setState(() {
-    //       position = p;
-    //     });
-    //   });
-    //   audioPlayer.onPlayerComplete.listen((event) {
-    //     setState(() {
-    //       isPlaying = false;
-    //       duration = new Duration();
-    //       position = new Duration();
-    //     });
-    //   });
-    // }
-  }
-
   String addTimeSpacing({required int textLength}) {
     String x = "     ";
     for (int i = 0; i < textLength; i++) {
@@ -190,7 +138,8 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
             /*SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  */ /*    BubbleNormalImage(
+                  */
+            /*    BubbleNormalImage(
                     id: 'id001',
                     image: _image(),
                     color: Colors.purpleAccent,
