@@ -5,7 +5,9 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -27,11 +29,6 @@ class PostProduct extends StatefulWidget {
 
 class _PostProductState extends State<PostProduct> {
   final PageController pageController = PageController();
-
-  final List<String> items = [
-    'Pickup',
-    'Delivery',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +201,7 @@ class _PostProductState extends State<PostProduct> {
               SizedBox(
                 width: 1.sw,
                 child: CustomDropDown(
-                  items: items,
+                  items: AppUtils.items,
                   selectedValue: (v) {
                     print("selectedValue: $v");
                   },

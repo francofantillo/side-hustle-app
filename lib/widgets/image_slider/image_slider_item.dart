@@ -89,7 +89,7 @@ class ImageSliderItem extends StatelessWidget {
                 width: 0.h, // Use the provided border width
               ),
               image: DecorationImage(
-                  image: AssetImage(assetImage ?? AssetsPath.homeR1),
+                  image: AssetImage(assetImage ?? AssetsPath.imageLoadError),
                   fit: BoxFit.cover)),
         ),
       ),

@@ -10,6 +10,7 @@ class AssetsPath {
   /// Icons
   static const fb = "${iconsPath}fb.png";
   static const debit = "${iconsPath}debit.png";
+  static const imageLoadError = "${iconsPath}image_load_error.png";
   static const google = "${iconsPath}google.png";
   static const apple = "${iconsPath}apple.png";
   static const eyeOpen = "${iconsPath}eye_open.png";
@@ -60,9 +61,9 @@ class AssetsPath {
   /// Images
   static const continueWith = "${imagePath}continue_with.png";
   static const placeHolderProfileImage = "${imagePath}profile_image.jpeg";
+  // static const placeHolderProfileImage = "${iconsPath}place_holder.png";
   static const drawerBg = "${imagePath}drawer_bg.png";
   static const downloadBook = "${imagePath}download_book.png";
-
 
   /// Alpha Images
   static const carpenter = "${alphaPath}carpenter.png";

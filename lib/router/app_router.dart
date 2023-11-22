@@ -31,6 +31,7 @@ import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/payment_methods/payment_methods.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
+import 'package:side_hustle/product/your_cart_products.dart';
 import 'package:side_hustle/profile/other_user_profile/events_posted_other_user.dart';
 import 'package:side_hustle/profile/other_user_profile/jobs_posted_other_user.dart';
 import 'package:side_hustle/profile/other_user_profile/other_user_profile.dart';
@@ -41,6 +42,7 @@ import 'package:side_hustle/profile/your_resume_edit.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/service/view_service.dart';
+import 'package:side_hustle/service/your_service_cart.dart';
 import 'package:side_hustle/shop/shop.dart';
 import 'package:side_hustle/shop/your_shop.dart';
 import 'package:side_hustle/side_hustle/side_hustle.dart';
@@ -219,6 +221,12 @@ class AppRouter {
 
           case AppRoutes.walkthroughScreenRoute:
             return const Walkthrough();
+
+          case AppRoutes.yourServiceCartScreenRoute:
+            return const YourServiceCart();
+
+          case AppRoutes.yourProductsCartScreenRoute:
+            return const YourProductsCart();
 
           case AppRoutes.postAddedScreenRoute:
             final args = routeSettings.arguments as PostAdded?;

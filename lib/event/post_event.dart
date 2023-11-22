@@ -286,15 +286,21 @@ class _PostEventState extends State<PostEvent> {
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
-                width: 1.sh,
-                child: CustomDropDown(
-                  items: items,
-                  hintText: AppStrings.paymentTypeHint,
-                  selectedValue: (v) {
-                    print("selectedValue: $v");
-                  },
-                ),
+              // SizedBox(
+              //   width: 1.sh,
+              //   child: CustomDropDown(
+              //     items: items,
+              //     hintText: AppStrings.paymentTypeHint,
+              //     selectedValue: (v) {
+              //       print("selectedValue: $v");
+              //     },
+              //   ),
+              // ),
+              CustomTextFormField(
+                height: 45.h,
+                hintText: AppStrings.paymentTypeHint,
+                isReadonly: true,
+                // fillColor: AppColors.productTextFieldColor,
               ),
               height(0.02.sh),
               Padding(

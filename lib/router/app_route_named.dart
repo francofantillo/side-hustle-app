@@ -51,4 +51,6 @@ class AppRoutes {
   static const String walkthroughScreenRoute = "/walkthrough";
   static const String postAddedScreenRoute = "/postAdded";
   static const String bottomTabsScreenRoute = "/bottomTabs";
+  static const String yourServiceCartScreenRoute = "/yourServiceCart";
+  static const String yourProductsCartScreenRoute = "/yourProductsCart";
 }

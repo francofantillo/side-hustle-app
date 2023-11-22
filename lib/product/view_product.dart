@@ -63,6 +63,11 @@ class _ViewProductState extends State<ViewProduct> {
               children: [
                 const ImageSlider(
                   hideCameraIcon: true,
+                  // itemImages: [
+                  //   AssetsPath.imageLoadError, I want to implement qr code in my flutter app. How can I achieve that
+                  //   AssetsPath.imageLoadError,
+                  //   AssetsPath.imageLoadError,
+                  // ],
                   itemImages: [
                     AssetsPath.watch,
                     AssetsPath.watch,
@@ -350,12 +355,13 @@ class _ViewProductState extends State<ViewProduct> {
                             Expanded(
                                 child: customMaterialButton(
                                     onPressed: () {
-                                      AppUtils.showBottomModalSheet(
-                                          context: contextBuilder,
-                                          widget:
-                                              const ModalBottomSheetProducts()
-                                          // const BottomModalSheetDeliveryAddress()
-                                          );
+                                      // AppUtils.showBottomModalSheet(
+                                      //     context: contextBuilder,
+                                      //     widget:
+                                      //         const ModalBottomSheetProducts()
+                                      //     // const BottomModalSheetDeliveryAddress()
+                                      //     );
+                                      Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
                                     },
                                     name: AppStrings.viewCartText,
                                     borderRadius:

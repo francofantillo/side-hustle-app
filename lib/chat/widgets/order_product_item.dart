@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -12,16 +13,17 @@ class OrderProductItemWidget extends StatelessWidget {
   final Color? boarderColor;
   final double imageHeight, imageWidth;
 
-  const OrderProductItemWidget({super.key,
-    this.title,
-    this.subTitle,
-    this.price,
-    this.deliveryType,
-    this.onTap,
-    this.imagePath,
-    required this.imageHeight,
-    required this.imageWidth,
-    this.boarderColor});
+  const OrderProductItemWidget(
+      {super.key,
+      this.title,
+      this.subTitle,
+      this.price,
+      this.deliveryType,
+      this.onTap,
+      this.imagePath,
+      required this.imageHeight,
+      required this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -33,79 +35,108 @@ class OrderProductItemWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              RoundedCornersImage(
-                imageHeight: imageHeight,
-                imageWidth: AppDimensions.sideHustleItemWidth,
-                assetImage: imagePath,
-                boarderColor: boarderColor,
-              ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 6.0, left: 8, right: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: textWidget(
-                                text: title,
-                                fontSize: AppDimensions.textSizeNormal,
-                                color: AppColors.blackColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: textWidget(
-                                  text: price,
-                                  color: AppColors.blackColor,
-                                  fontWeight: FontWeight.bold),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    RoundedCornersImage(
+                      imageHeight: imageHeight,
+                      imageWidth: AppDimensions.sideHustleItemWidth,
+                      assetImage: imagePath,
+                      boarderColor: boarderColor,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 6.0, left: 8, right: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: textWidget(
+                                      text: title,
+                                      fontSize: AppDimensions.textSizeNormal,
+                                      color: AppColors.blackColor,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                // Align(
+                                //   alignment: Alignment.topRight,
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.only(right: 4.0),
+                                //     child: textWidget(
+                                //         text: price,
+                                //         color: AppColors.blackColor,
+                                //         fontWeight: FontWeight.bold),
+                                //   ),
+                                // ),
+                              ],
                             ),
-                          ),
-                        ],
+                            height(imageHeight! * .01),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: textWidget(
+                                        text: subTitle,
+                                        maxLines: 3,
+                                        fontSize: AppDimensions.textSizeVerySmall)),
+                              ],
+                            ),
+                            height(imageHeight! * .042),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  textWidget(
+                                      text: AppStrings.deliveryType,
+                                      fontSize: AppDimensions.textSizePerHead,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.textBlackColor),
+                                  Expanded(
+                                    child: textWidget(
+                                        text: deliveryType,
+                                        maxLines: 1,
+                                        fontSize: AppDimensions.textSizePerHead),
+                                  )
+                                ],
+                              ),
+                            ),
+                            height(imageHeight! * .042),
+                          ],
+                        ),
                       ),
-                      height(imageHeight! * .01),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: textWidget(
-                                  text: subTitle,
-                                  maxLines: 3,
-                                  fontSize: AppDimensions.textSizeVerySmall)),
-                        ],
-                      ),
-                      height(imageHeight! * .042),
-                      Row(
-                        children: [
-                          textWidget(
-                              text: AppStrings.deliveryType,
-                              fontSize: AppDimensions.productTextSize,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textBlackColor),
-                          textWidget(
-                              text: deliveryType,
-                              maxLines: 2,
-                              fontSize: AppDimensions.productTextSize)
-                        ],
-                      ),
-                      height(imageHeight! * .042),
-                    ],
+                    )
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: imageHeight - 40,
+                  width: AppDimensions.sideHustleItemWidth - 20,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    color: AppColors.backIconBackgroundColor,
+                  ),
+                  child: Center(
+                    child: textWidget(
+                        text: "4+ >",
+                        color: AppColors.textBlackColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimensions.textSizeNormal),
                   ),
                 ),
-              )
+              ),
+              width(0.02.sw)
             ],
           ),
         ),

@@ -132,6 +132,12 @@ class AppStrings {
   static const String productDesc =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
+
+  /// Delivery Options
+  static const String deliveryOptionPickup = "Pickup";
+  static const String deliveryOptionCOD = "Deliver to Address (COD)";
+
+
   /// Post Product
   static const String postYourSideHustle = "Post Your Side Hustle Product";
   static const String editYourSideHustle = "Edit Your Side Hustle Product";
@@ -261,7 +267,8 @@ class AppStrings {
       "Burgers, BBQ, Wraps, Hot dogs, Fries, Ice Cream";
   static const String eventTicketPrice = "Ticket Price";
   static const String paymentType = "Payment Type";
-  static const String paymentTypeHint = "Select the Payment Type";
+  // static const String paymentTypeHint = "Select the Payment Type";
+  static const String paymentTypeHint = "Cash (Onsite)";
   static const String eventAvailableAttractions = "Available Attractions";
   static const String eventAvailableAttractionsHint =
       "Child Care, Bounce House, Full Bar, Swimming Pool, Musical Chair, Stand Up Comedy, Music";
@@ -284,6 +291,7 @@ class AppStrings {
 
   /// Side Hustle
   static const String getDirectionToShop = "Get Direction to shop";
+  static const String getDirectionToMyLocation = "Get Direction to my location";
   static const String watch = "Watch";
   static const String editProduct = "Edit Product";
   static const String editService = "Edit Service";
@@ -309,14 +317,14 @@ class AppStrings {
   static const String viewCartText = "View Cart (1)";
   static const String deliveryAddress = "Delivery Address";
   static const String deliveryAddressHint =
-      "Please enter the delivery address and other information to rider. ";
+      "Please enter the delivery address";
   static const String deliveryAddressServiceHint =
       "Please enter the delivery address and other information to the service Provider. ";
   static const String enterCompleteAddress = "Enter your complete address";
   static const String street = "Street";
   static const String suitApartment = "Suit, Apartment";
   static const String yourCart = "Your Cart";
-  static const String yourCartItems = "1 Items";
+  static const String yourCartItems = " Items";
   static const String placeOrder = "Place Order";
   static const String estimatedTotal = "Estimated Total";
   static const String cancel = "Cancel";
@@ -387,8 +395,9 @@ class AppStrings {
       "Hey Brandon, I’d like to buy this product from your shop.";
   static const String orderMessageService =
       "Hey Brandon, I’m interested in to get this service from you. please reached at me at the time i have mentioned. Also please confirm me, if you are availbale for this service in the above timings. ";
-  static const String orderMessageChatText =
-      "Thank you for showing your interest, I’ll prepare your order in next 1 hour, then you can collect it, from my shop.";
+  static const String orderMessageChatTextProduct =
+      "Thank you for showing your interest, I’ll prepare your order and will deliver it in 24-48 Hours.";
+  static const String orderMessageChatTextService = "Thank you for showing your interest, I’ll let you know in few minutes.";
   static const String talanCalzoniChat = "Talan Calzoni";
   static const String chatUserHint = "You: Hey! How are you doing?";
   static const String chatUserTime = "18 Aug, 2023";

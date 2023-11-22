@@ -14,6 +14,7 @@ class AppDimensions {
   static double textSizePerHead = 10.sp;
   static double textSizeChatMessageTime = 12.sp;
   static double textSizeNormal = 16.sp;
+  static double textSizeLarge = 18.sp;
   static double textSizeTermsAndConditions = 14.sp;
   static double textHeadingSize = 26.sp;
   static double textSizeCartText = 22.sp;
@@ -23,9 +24,13 @@ class AppDimensions {
   static double dialogueTextHeadingSize = 18.sp;
   static double dialogueTextBodyHeadingSize = 16.sp;
 
+  /// Location Expended and UnExpanded
+  static double expendedLocation = .88.sw;
+  static double unExpendedLocation = .15.sw;
+
   /// Text Field
   // static double textFieldHeight = 55.h;
-  static double textFieldHeight = .15.sw;
+  static double textFieldHeight = .12.sw;
   static double textFieldBorderRadius = 15;
   static double roundedImageViewBorderRadius = 16;
   static double searchTextFieldHeight = 0.15.sw;
@@ -156,7 +161,7 @@ class AppDimensions {
 
   /// BottomSheet
   static double boarderRadiusBottomSheet = 25.0.h;
-  static double boarderRadiusCartPlaceOrder = 16.0.h;
+  static double boarderRadiusCartPlaceOrder = 12.0.h;
   // static double cartItemProductHeight = 0.39.sw;
   static double cartItemProductHeight = 0.37.sw;
   // static double cartItemServiceHeight = 0.50.sw;

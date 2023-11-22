@@ -153,6 +153,7 @@ class _ApplyForJobState extends State<ApplyForJob> {
                       children: [
                         Expanded(
                           child: Material(
+                            color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
                                 Navigator.pushNamed(

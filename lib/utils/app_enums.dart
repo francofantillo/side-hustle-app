@@ -16,5 +16,5 @@ enum SideHustleType {
 
 enum DeliveryOptions {
   Pickup,
-  CashOnDelivery
+  DeliverToAddress_COD
 }

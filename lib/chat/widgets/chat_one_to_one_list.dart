@@ -44,6 +44,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       String? price,
       String? serviceDate,
       String? serviceTime,
+      String? deliveryType,
       String? location,
       String? messageTime}) {
     return Align(
@@ -51,9 +52,11 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       child: Container(
         width: 1.sw,
         // height: 0.53.sh,
-        height: 0.93.sw,
+        height: 0.86.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
-        padding: const EdgeInsets.only(right: 8.0, bottom: 10),
+        padding: const EdgeInsets.only(
+          right: 8.0,
+        ),
         child: Card(
           color: AppColors.primaryColor,
           shape: const RoundedRectangleBorder(
@@ -75,16 +78,106 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                   imagePath: image,
                   title: name,
                   subTitle: subTitle,
-                  deliveryType: DeliveryOptions.Pickup.name,
+                  deliveryType: deliveryType,
                   price: price,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 16.0, right: 8.0, bottom: 8),
+                padding:
+                    const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
                 child: textWidget(
                     maxLines: 4,
                     text: AppStrings.orderMessageService,
+                    fontSize: AppDimensions.textSizeVerySmall,
+                    color: AppColors.textWhiteColor),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10.0, right: 8.0, bottom: 8, top: 8),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      color: AppColors.whiteColor,
+                    ),
+                    Expanded(
+                      child: textWidget(
+                          maxLines: 2,
+                          text: location,
+                          fontSize: AppDimensions.textSizeVerySmall,
+                          color: AppColors.textWhiteColor),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0, bottom: 8),
+                  child: textWidget(
+                      text: messageTime,
+                      fontSize: AppDimensions.textSizeChatMessageTime,
+                      color: AppColors.textWhiteColor),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget orderProductWidget(
+      {String? image,
+      String? name,
+      String? subTitle,
+      String? price,
+      String? deliveryType,
+      String? location,
+      String? messageTime}) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        width: 1.sw,
+        // height: 0.67.sw,
+        height: 0.79.sw,
+        constraints: BoxConstraints(maxWidth: .95.sw),
+        padding: const EdgeInsets.only(
+          right: 8.0,
+        ),
+        child: Card(
+          color: AppColors.primaryColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+                bottomRight: Radius.circular(4)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 8.0, left: 8.0, right: 8.0, bottom: 8),
+                child: OrderProductItemWidget(
+                  // imageHeight: 0.21.sh,
+                  imageHeight: AppDimensions.productOrderWidgetHeight,
+                  imageWidth: 1.sw,
+                  imagePath: image,
+                  title: name,
+                  subTitle: subTitle,
+                  deliveryType: deliveryType,
+                  price: price,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
+                child: textWidget(
+                    maxLines: 2,
+                    text: AppStrings.orderMessageProduct,
                     color: AppColors.textWhiteColor),
               ),
               Padding(
@@ -123,81 +216,20 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
     );
   }
 
-  Widget orderProductWidget(
-      {String? image,
-      String? name,
-      String? subTitle,
-      String? price,
-      String? messageTime}) {
+  Widget getDirectionToMyLocation() {
     return Align(
       alignment: Alignment.centerRight,
-      child: Container(
-        width: 1.sw,
-        height: 0.67.sw,
-        constraints: BoxConstraints(maxWidth: .95.sw),
-        padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-        child: Card(
-          color: AppColors.primaryColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-                bottomRight: Radius.circular(4)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 8.0, left: 8.0, right: 8.0, bottom: 8),
-                child: OrderProductItemWidget(
-                  // imageHeight: 0.21.sh,
-                  imageHeight: AppDimensions.productOrderWidgetHeight,
-                  imageWidth: 1.sw,
-                  imagePath: image,
-                  title: name,
-                  subTitle: subTitle,
-                  deliveryType: DeliveryOptions.Pickup.name,
-                  price: price,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 16.0, right: 8.0, bottom: 8),
-                child: textWidget(
-                    maxLines: 2,
-                    text: AppStrings.orderMessageProduct,
-                    color: AppColors.textWhiteColor),
-              ),
-              const Spacer(),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16.0, bottom: 8),
-                  child: textWidget(
-                      text: messageTime,
-                      fontSize: AppDimensions.textSizeChatMessageTime,
-                      color: AppColors.textWhiteColor),
-                ),
-              )
-            ],
-          ),
-        ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 12.0, bottom: 5, right: 8),
+        child: customMaterialButton(
+            width: 20.w,
+            height: 8,
+            fontSize: AppDimensions.textSizeSmall,
+            onPressed: () {},
+            color: AppColors.greenColor,
+            name: AppStrings.getDirectionToMyLocation,
+            borderRadius: 12),
       ),
-    );
-  }
-
-  Widget getDirectionToShop() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12.0, bottom: 10, right: 8),
-      child: customMaterialButton(
-          width: 24.w,
-          height: 8,
-          onPressed: () {},
-          color: AppColors.greenColor,
-          name: AppStrings.getDirectionToShop,
-          borderRadius: 12),
     );
   }
 
@@ -207,6 +239,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       child: Padding(
         padding: EdgeInsets.only(left: 8.0, bottom: bottomWidth ?? 10),
         child: Card(
+          color: Colors.white,
           elevation: 2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -217,30 +250,43 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 bottomLeft:
                     Radius.circular(AppDimensions.listItemImageRoundedBorder)),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              BubbleNormal(
-                // text: AppStrings.messageReceiveOne,
-                text: message ?? "",
-                isSender: false,
-                // color: Color(0xFF1B97F3),
-                color: Colors.white,
-                tail: true,
-                textStyle: TextStyle(
-                  fontSize: AppDimensions.textSizeSmall,
-                  color: AppColors.textGreyColor,
+          child: Material(
+            color: Colors.white,
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topRight:
+                      Radius.circular(AppDimensions.listItemImageRoundedBorder),
+                  bottomRight:
+                      Radius.circular(AppDimensions.listItemImageRoundedBorder),
+                  bottomLeft: Radius.circular(
+                      AppDimensions.listItemImageRoundedBorder)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                BubbleNormal(
+                  // text: AppStrings.messageReceiveOne,
+                  text: message ?? "",
+                  isSender: false,
+                  // color: Color(0xFF1B97F3),
+                  color: Colors.white,
+                  tail: true,
+                  textStyle: TextStyle(
+                    fontSize: AppDimensions.textSizeSmall,
+                    color: AppColors.textGreyColor,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0, bottom: 8),
-                child: textWidget(
-                    // text: "03:00",
-                    text: time ?? "",
-                    fontSize: AppDimensions.textSizePerHead,
-                    color: AppColors.appTextBlackColor),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                  child: textWidget(
+                      // text: "03:00",
+                      text: time ?? "",
+                      fontSize: AppDimensions.textSizePerHead,
+                      color: AppColors.appTextBlackColor),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -266,29 +312,42 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                   bottomLeft: Radius.circular(
                       AppDimensions.listItemImageRoundedBorder)),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                BubbleNormal(
-                  text: message ?? "",
-                  isSender: true,
-                  // color: Color(0xFFE8E8EE),
-                  color: const Color(0xFF1B97F3),
-                  tail: true,
-                  // sent: true,
-                  textStyle: TextStyle(
-                    fontSize: AppDimensions.textSizeSmall,
-                    color: AppColors.whiteColor,
+            child: Material(
+              color: const Color(0xFF1B97F3),
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(
+                        AppDimensions.listItemImageRoundedBorder),
+                    topLeft: Radius.circular(
+                        AppDimensions.listItemImageRoundedBorder),
+                    bottomLeft: Radius.circular(
+                        AppDimensions.listItemImageRoundedBorder)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  BubbleNormal(
+                    text: message ?? "",
+                    isSender: true,
+                    // color: Color(0xFFE8E8EE),
+                    color: const Color(0xFF1B97F3),
+                    tail: true,
+                    // sent: true,
+                    textStyle: TextStyle(
+                      fontSize: AppDimensions.textSizeSmall,
+                      color: AppColors.whiteColor,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0, bottom: 8),
-                  child: textWidget(
-                      text: time ?? "",
-                      fontSize: AppDimensions.textSizePerHead,
-                      color: AppColors.whiteColor),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                    child: textWidget(
+                        text: time ?? "",
+                        fontSize: AppDimensions.textSizePerHead,
+                        color: AppColors.whiteColor),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -326,6 +385,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                             image: AssetsPath.plumber,
                             name: AppStrings.plumber,
                             subTitle: AppStrings.jobDescText,
+                            deliveryType: AppStrings.deliveryOptionPickup,
                             price: AppStrings.productPricingNumeric,
                             serviceDate: "25-Sep-2023",
                             serviceTime: "10:00am to 5:00pm",
@@ -334,15 +394,21 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                         : orderProductWidget(
                             image: AssetsPath.watch,
                             name: AppStrings.watch,
+                            deliveryType: AppStrings.deliveryOptionCOD,
                             subTitle: AppStrings.jobDescText,
+                            location: AppStrings.locationText,
                             price: AppStrings.productPricingNumeric,
                             messageTime: "03:00PM"),
+                    widget.isOrderService
+                        ? getDirectionToMyLocation()
+                        : const SizedBox.shrink(),
                     receiverWidget(
-                        message: AppStrings.orderMessageChatText,
+                        message: widget.isOrderService
+                            ? AppStrings.orderMessageChatTextService
+                            : AppStrings.orderMessageChatTextProduct,
                         time: "03:12PM",
                         bottomWidth: 2),
                     // height(0.02.sh),
-                    getDirectionToShop()
                   ],
                 )
               : Column(

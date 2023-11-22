@@ -3,6 +3,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_validation_messages.dart';
 
 class AppUtils {
   /// Easy Loading Config
@@ -69,15 +71,27 @@ class AppUtils {
         secondSelectedTime =
             null; // Reset second time when selecting the first time
       } else {
-        if (picked.hour > (firstSelectedTime?.hour ?? 0) ||
-            (picked.hour == (firstSelectedTime?.hour ?? 0) &&
-                picked.minute > (firstSelectedTime?.minute ?? 0))) {
-          secondSelectedTime = picked;
-          timeDifference =
-              calculateTimeDifference(firstSelectedTime!, secondSelectedTime!);
+        if (firstSelectedTime != null) {
+          if (picked.hour > (firstSelectedTime?.hour ?? 0) ||
+              (picked.hour == (firstSelectedTime?.hour ?? 0) &&
+                  picked.minute > (firstSelectedTime?.minute ?? 0))) {
+            secondSelectedTime = picked;
+            timeDifference = calculateTimeDifference(
+                firstSelectedTime!, secondSelectedTime!);
+          } else {
+            // Display an error or handle validation in your app
+            // For this example, we reset the second time to null
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(AppValidationMessages.timeValidation)));
+            }
+            secondSelectedTime = null;
+          }
         } else {
-          // Display an error or handle validation in your app
-          // For this example, we reset the second time to null
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text(AppValidationMessages.firstTimeNotSelected)));
+          }
           secondSelectedTime = null;
         }
       }
@@ -94,15 +108,15 @@ class AppUtils {
     return '$hours hours and $minutes minutes';
   }
 
-  static showBottomModalSheet({required BuildContext context,required Widget widget}) {
+  static showBottomModalSheet(
+      {required BuildContext context, required Widget widget}) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       isDismissible: false,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(
-              AppDimensions.boarderRadiusBottomSheet),
+          top: Radius.circular(AppDimensions.boarderRadiusBottomSheet),
         ),
       ),
       builder: (context) {
@@ -110,4 +124,11 @@ class AppUtils {
       },
     );
   }
+
+  /// Delivery Options List
+  static const List<String> items = [
+    AppStrings.deliveryOptionPickup,
+    AppStrings.deliveryOptionCOD,
+  ];
+
 }

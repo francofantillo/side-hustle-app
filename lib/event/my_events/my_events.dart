@@ -39,7 +39,7 @@ class _MyEventsScreenState extends State<MyEventsScreen> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
-          backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+              backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,10 +86,10 @@ class _MyEventsScreenState extends State<MyEventsScreen> {
             _tabIndexBasicToggle.value == 0
                 ? const MyEventsScheduledList()
                 : _tabIndexBasicToggle.value == 1
-                ? const MyEventsOngoingList()
-                : _tabIndexBasicToggle.value == 2
-                ? const MyEventsCompletedList()
-                : const SizedBox.shrink(),
+                    ? const MyEventsOngoingList()
+                    : _tabIndexBasicToggle.value == 2
+                        ? const MyEventsCompletedList()
+                        : const SizedBox.shrink(),
             height(0.02.sh)
           ],
         ),

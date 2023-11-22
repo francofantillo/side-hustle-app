@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_service.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
@@ -361,11 +362,12 @@ class _ViewServiceState extends State<ViewService> {
                             Expanded(
                                 child: customMaterialButton(
                                     onPressed: () {
-                                      AppUtils.showBottomModalSheet(
-                                          context: context,
-                                          widget:
-                                              // const ModelBottomSheetProducts()
-                                              const ModalBottomSheetServices());
+                                      // AppUtils.showBottomModalSheet(
+                                      //     context: context,
+                                      //     widget:
+                                      //         // const ModelBottomSheetProducts()
+                                      //         const ModalBottomSheetServices());
+                                      Navigator.pushNamed(context, AppRoutes.yourServiceCartScreenRoute);
                                     },
                                     name: AppStrings.viewCartText,
                                     borderRadius:
