@@ -68,9 +68,10 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
                     isExpanded: true,
                     hint: Text(
                       widget.hintText ?? 'Select Item',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
-                        color: Theme.of(context).hintColor,
+                        // color: Theme.of(context).hintColor,
+                        color: AppColors.blackColor,
                       ),
                     ),
                     items: widget.items

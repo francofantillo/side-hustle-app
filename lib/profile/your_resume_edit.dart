@@ -59,7 +59,8 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     children: [
                       CircularCacheImageWidget(
                         showLoading: true,
-                        image: AlphaAppData.dpProfile,
+                        // image: AlphaAppData.dpProfile,
+                        assetImage: AssetsPath.brandonProfile,
                         boarderColor: AppColors.primaryColor,
                         imageHeight: 0.28.sw,
                         imageWidth: 0.28.sw,

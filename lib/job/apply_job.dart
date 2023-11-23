@@ -237,7 +237,7 @@ class _ApplyForJobState extends State<ApplyForJob> {
                           borderRadius:
                               AppDimensions.defaultMaterialButtonRadiusHome,
                           onPressed: () {
-                            AppDialogues.postSideHustleDialogue(
+                            AppDialogues.noHeaderDialogue(
                                     context: contextBuilder,
                                     body: const ApplyForJobDialogue())
                                 .show();

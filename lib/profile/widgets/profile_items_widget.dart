@@ -170,8 +170,10 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           fontWeight: FontWeight.w500,
           onTap: () {
             print("clicked Logout");
-            AppDialogues.logoutDialogue(
-                    context: context, body: const LogoutDialogueWidget())
+            AppDialogues.noHeaderDialogue(
+                context: context,
+                backgroundColor: AppColors.primaryColor,
+                body: const LogoutDialogueWidget())
                 .show();
           },
         ),

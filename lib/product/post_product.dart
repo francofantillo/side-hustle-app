@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_request_service.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
@@ -233,14 +235,17 @@ class _PostProductState extends State<PostProduct> {
                     if (widget.isEdit) {
                       Navigator.pop(context);
                     } else {
-                      Navigator.pushReplacementNamed(
-                          context, AppRoutes.postAddedScreenRoute,
-                          arguments: const PostAdded(
-                            isProduct: true,
-                            title: AppStrings.sideHustlePosted,
-                            subTitle: AppStrings.sideHustlePostedSubTitle,
-                            buttonName: AppStrings.viewSideHustle,
-                          ));
+                      AppUtils.showBottomModalSheet(
+                          context: context,
+                          widget: const ModalBottomSheetPackageTypePost(isProduct: true,));
+                      // Navigator.pushReplacementNamed(
+                      //     context, AppRoutes.postAddedScreenRoute,
+                      //     arguments: const PostAdded(
+                      //       isProduct: true,
+                      //       title: AppStrings.sideHustlePosted,
+                      //       subTitle: AppStrings.sideHustlePostedSubTitle,
+                      //       buttonName: AppStrings.viewSideHustle,
+                      //     ));
                     }
                   },
                   color: AppColors.primaryColor,

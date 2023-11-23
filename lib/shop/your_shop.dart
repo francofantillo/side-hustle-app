@@ -260,7 +260,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
             PrimaryPostButton(
                 title: AppStrings.postASideHustle,
                 onPressed: () {
-                  AppDialogues.postSideHustleDialogue(
+                  AppDialogues.noHeaderDialogue(
                       context: contextBuilder,
                       body: PostYourSideHustleDialogueWidget(
                         isProductSelected: (v) {
@@ -273,7 +273,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                             /// reset to Default Value
                             isProductSelected = true;
                             // Navigator.pop(contextBuilder);
-                            AppDialogues.postSideHustleDialogue(
+                            AppDialogues.noHeaderDialogue(
                                 context: contextBuilder)
                                 .dismiss();
                             Navigator.pushNamed(contextBuilder,
@@ -281,7 +281,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                           } else {
                             /// reset to Default Value
                             isProductSelected = true;
-                            AppDialogues.postSideHustleDialogue(
+                            AppDialogues.noHeaderDialogue(
                                 context: contextBuilder)
                                 .dismiss();
                             // Navigator.pop(contextBuilder);

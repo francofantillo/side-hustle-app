@@ -168,8 +168,8 @@ class AppRouter {
           case AppRoutes.yourShopScreenRoute:
             return const YourShopScreen();
 
-          case AppRoutes.otherUserShopScreenRoute:
-            return const OtherUserShopScreen();
+          // case AppRoutes.otherUserShopScreenRoute:
+          //   return const OtherUserShopScreen();
 
           case AppRoutes.favouritesScreenRoute:
             return const FavouritesScreen();

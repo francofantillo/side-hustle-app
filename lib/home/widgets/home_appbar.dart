@@ -38,7 +38,8 @@ class HomeAppBar extends StatelessWidget {
           boarderColor: AppColors.primaryColor,
           imageHeight: 42.h,
           imageWidth: 42.h,
-          image: AlphaAppData.dpProfile,
+          assetImage: AssetsPath.brandonProfile,
+          // image: AlphaAppData.dpProfile,
         ),
         width(0.03.sw),
         Expanded(

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -209,14 +211,17 @@ class _PostServiceState extends State<PostService> {
                       if (widget.isEdit) {
                         Navigator.pop(context);
                       } else {
-                        Navigator.pushReplacementNamed(
-                            context, AppRoutes.postAddedScreenRoute,
-                            arguments: const PostAdded(
-                              isService: true,
-                              title: AppStrings.sideHustlePosted,
-                              subTitle: AppStrings.sideHustlePostedSubTitle,
-                              buttonName: AppStrings.viewSideHustle,
-                            ));
+                        // Navigator.pushReplacementNamed(
+                        //     context, AppRoutes.postAddedScreenRoute,
+                        //     arguments: const PostAdded(
+                        //       isService: true,
+                        //       title: AppStrings.sideHustlePosted,
+                        //       subTitle: AppStrings.sideHustlePostedSubTitle,
+                        //       buttonName: AppStrings.viewSideHustle,
+                        //     ));
+                        AppUtils.showBottomModalSheet(
+                            context: context,
+                            widget: const ModalBottomSheetPackageTypePost(isService: true,));
                       }
                     },
                     color: AppColors.primaryColor,

@@ -54,7 +54,7 @@ class _ShopScreenState extends State<ShopScreen> {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return BackgroundWidget(
         showAppBar: true,
-        appBarTitle: AppStrings.shop,
+        appBarTitle: AppStrings.shop + " abc",
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:

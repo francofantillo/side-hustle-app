@@ -68,8 +68,10 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                 borderRadius: 12,
                 onPressed: () {
                   // Navigator.pushNamed(context, AppRoutes.yourShopScreenRoute);
-                  Navigator.pushNamed(
-                      context, AppRoutes.otherUserShopScreenRoute);
+                  // Navigator.pushNamed(
+                  //     context, AppRoutes.otherUserShopScreenRoute);
+                  Navigator.pushReplacementNamed(
+                      context, AppRoutes.shopScreenRoute);
                 },
                 iconSize: 12,
                 backgroundColor: AppColors.primaryColor,
@@ -184,7 +186,7 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                   fontWeight: AppDimensions.headingFontWeight),
             ),
             const ShopOverviewList(),
-            height(0.03.sh),
+            height(0.2.sw),
           ],
         ),
       );

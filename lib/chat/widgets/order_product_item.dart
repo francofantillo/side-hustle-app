@@ -11,6 +11,7 @@ class OrderProductItemWidget extends StatelessWidget {
   final String? title, subTitle, price, imagePath, deliveryType;
   final Function()? onTap;
   final Color? boarderColor;
+  final int productsQuantity;
   final double imageHeight, imageWidth;
 
   const OrderProductItemWidget(
@@ -19,6 +20,7 @@ class OrderProductItemWidget extends StatelessWidget {
       this.subTitle,
       this.price,
       this.deliveryType,
+      this.productsQuantity = 1,
       this.onTap,
       this.imagePath,
       required this.imageHeight,
@@ -54,7 +56,8 @@ class OrderProductItemWidget extends StatelessWidget {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 6.0, left: 8, right: 8),
+                        padding:
+                            const EdgeInsets.only(top: 6.0, left: 8, right: 8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -89,7 +92,8 @@ class OrderProductItemWidget extends StatelessWidget {
                                     child: textWidget(
                                         text: subTitle,
                                         maxLines: 3,
-                                        fontSize: AppDimensions.textSizeVerySmall)),
+                                        fontSize:
+                                            AppDimensions.textSizeVerySmall)),
                               ],
                             ),
                             height(imageHeight! * .042),
@@ -105,7 +109,8 @@ class OrderProductItemWidget extends StatelessWidget {
                                     child: textWidget(
                                         text: deliveryType,
                                         maxLines: 1,
-                                        fontSize: AppDimensions.textSizePerHead),
+                                        fontSize:
+                                            AppDimensions.textSizePerHead),
                                   )
                                 ],
                               ),
@@ -127,12 +132,21 @@ class OrderProductItemWidget extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                     color: AppColors.backIconBackgroundColor,
                   ),
-                  child: Center(
-                    child: textWidget(
-                        text: "4+ >",
-                        color: AppColors.textBlackColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: AppDimensions.textSizeNormal),
+                  child: Material(
+                    color: AppColors.backIconBackgroundColor,
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    child: InkWell(
+                      onTap: () {
+
+                      },
+                      child: Center(
+                        child: textWidget(
+                            text: productsQuantity == 1 ? "$productsQuantity" : "$productsQuantity+ >",
+                            color: AppColors.textBlackColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: AppDimensions.textSizeNormal),
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -298,8 +299,9 @@ class _PostJobState extends State<PostJob> {
                 child: customMaterialButton(
                   borderRadius: 14,
                   onPressed: () {
-                    Navigator.pop(context);
-                  },
+                    AppUtils.showBottomModalSheet(
+                        context: context,
+                        widget: const ModalBottomSheetPackageTypePost(isJob: true,));                  },
                   color: AppColors.primaryColor,
                   name: widget.isEdit ? AppStrings.saveChanges : AppStrings.postJob,
                 ),

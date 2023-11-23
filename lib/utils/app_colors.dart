@@ -9,6 +9,8 @@ class AppColors {
   static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
   static final textGreyColor = Color(0xFF565656).withOpacity(.85);
   static final backIconBackgroundColor = Color(0xFF565656).withOpacity(.10);
+  static final unratedColor = Color(0xFF565656).withOpacity(.10);
+  static final ratingTextFieldColor = Color(0xFFEFEFF4).withOpacity(.7);
   static final borderColorResumePage = Color(0xFF565656).withOpacity(.3);
   static final tabOutlineColor = Color(0xFF565656).withOpacity(.2);
   static final cartItemIconBackgroundColor = Color(0xFFBABABA).withOpacity(0.90);
@@ -34,7 +36,8 @@ class AppColors {
   static const chatNameImageBackgroundColor = Color(0xFFD461E7);
   // static const bottomNavBackgroundColor = Color(0xFFDFDFDF);
   static const bottomNavBackgroundColor = Color(0xFFFFFFFF);
-  static const ratingColor = Color(0xFFECAF53);
+  // static const ratingColor = Color(0xFFECAF53);
+  static const ratingColor = Color(0xFFFFA800);
   static const textFieldColor = Color(0xFF959597);
   static Color redColor = const Color(0xFFFF2323);
   static Color appRedColor = const Color(0xFFFE6E6E);

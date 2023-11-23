@@ -111,6 +111,11 @@ class AppStrings {
   static const String keepMeLoggedIn = "Keep me Logged In";
   static const String version = "Version 1.0";
 
+  /// Rating and Review
+  static const String howIsYourService = "How is your Service?";
+  static const String howIsYourServiceHint = "Your feedback will help improve our experience";
+  static const String brandonLubin = "Brandon Lubin";
+
   /// Home
   static const String searchHintText = "Search Product, Services or event";
   static const String blessTheseBusinesses = "Let's Bless These Businesses";
@@ -140,6 +145,8 @@ class AppStrings {
 
   /// Post Product
   static const String postYourSideHustle = "Post Your Side Hustle Product";
+  static const String additionalComments = "Additional comments...";
+  static const String submitReview = "Submit Review";
   static const String editYourSideHustle = "Edit Your Side Hustle Product";
   static const String sideHustlePosted = "Side Hustle Posted";
   static const String sideHustlePostedSubTitle =

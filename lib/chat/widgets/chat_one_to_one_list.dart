@@ -134,6 +134,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       String? subTitle,
       String? price,
       String? deliveryType,
+      int? productsQuantity,
       String? location,
       String? messageTime}) {
     return Align(
@@ -141,7 +142,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       child: Container(
         width: 1.sw,
         // height: 0.67.sw,
-        height: 0.79.sw,
+        // height: 0.79.sw,
+        height: 0.77.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(
           right: 8.0,
@@ -163,6 +165,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     top: 8.0, left: 8.0, right: 8.0, bottom: 8),
                 child: OrderProductItemWidget(
                   // imageHeight: 0.21.sh,
+                  productsQuantity: productsQuantity ?? 1,
                   imageHeight: AppDimensions.productOrderWidgetHeight,
                   imageWidth: 1.sw,
                   imagePath: image,
@@ -176,8 +179,9 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 padding:
                     const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
                 child: textWidget(
-                    maxLines: 2,
-                    text: AppStrings.orderMessageProduct,
+                    maxLines: 4,
+                    text: AppStrings.orderMessageChatTextProduct,
+                    fontSize: AppDimensions.textSizeVerySmall,
                     color: AppColors.textWhiteColor),
               ),
               Padding(
@@ -193,6 +197,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                       child: textWidget(
                           maxLines: 2,
                           text: location,
+                          fontSize: AppDimensions.textSizeVerySmall,
                           color: AppColors.textWhiteColor),
                     ),
                   ],
@@ -394,6 +399,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                         : orderProductWidget(
                             image: AssetsPath.watch,
                             name: AppStrings.watch,
+                            productsQuantity: 4,
                             deliveryType: AppStrings.deliveryOptionCOD,
                             subTitle: AppStrings.jobDescText,
                             location: AppStrings.locationText,

@@ -281,6 +281,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                         const Expanded(
                             child: CustomTextFieldChat(
                           hintText: AppStrings.typeAMessage,
+
                           // isSuffixIcon: true,
                           // suffixIcon: Icon(Icons.emoji_emotions_outlined),
                           // isPrefixIcon: true,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/drawer/widgets/logout_widget.dart';
+import 'package:side_hustle/job/my_jobs/widgets/rate_and_review.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -23,16 +26,16 @@ class CompletedJobItemWidget extends StatelessWidget {
 
   const CompletedJobItemWidget(
       {super.key,
-        this.title,
-        this.subTitle,
-        this.price,
-        this.userProfile,
-        this.userName,
-        this.userRating,
-        this.imagePath,
-        this.imageHeight,
-        this.imageWidth,
-        this.boarderColor});
+      this.title,
+      this.subTitle,
+      this.price,
+      this.userProfile,
+      this.userName,
+      this.userRating,
+      this.imagePath,
+      this.imageHeight,
+      this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class CompletedJobItemWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
@@ -165,7 +168,10 @@ class CompletedJobItemWidget extends StatelessWidget {
                                 AppDimensions.bookedJobRoundedBorder),
                             child: InkWell(
                               onTap: () {
-
+                                AppDialogues.noHeaderDialogue(
+                                        context: context,
+                                        body: const RateAndReviewDialogue())
+                                    .show();
                               },
                               child: Center(
                                 child: textWidget(

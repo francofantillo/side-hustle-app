@@ -4,31 +4,14 @@ import 'package:side_hustle/utils/app_colors.dart';
 
 class AppDialogues {
   /// Post your Side Hustle Dialogue
-  static AwesomeDialog postSideHustleDialogue(
+  static AwesomeDialog noHeaderDialogue(
       {required BuildContext context,
       Widget? body,
-      Color? dialogBackgroundColor,
+      Color? backgroundColor,
       bool? dismissOnTouchOutside}) {
     return AwesomeDialog(
         // width: 1.sw,
-        dialogBackgroundColor: dialogBackgroundColor,
-        context: context,
-        dismissOnTouchOutside: dismissOnTouchOutside ?? false,
-        dialogType: DialogType.noHeader,
-        animType: AnimType.scale,
-        alignment: Alignment.center,
-        body: body);
-  }
-
-  /// Post your Side Hustle Dialogue
-  static AwesomeDialog logoutDialogue(
-      {required BuildContext context,
-        Widget? body,
-        Color? dialogBackgroundColor,
-        bool? dismissOnTouchOutside}) {
-    return AwesomeDialog(
-      // width: 1.sw,
-        dialogBackgroundColor: dialogBackgroundColor ?? AppColors.primaryColor,
+        dialogBackgroundColor: backgroundColor ?? Colors.white,
         context: context,
         dismissOnTouchOutside: dismissOnTouchOutside ?? false,
         dialogType: DialogType.noHeader,

@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
               PrimaryPostButton(
                   title: AppStrings.postASideHustle,
                   onPressed: () {
-                    AppDialogues.postSideHustleDialogue(
+                    AppDialogues.noHeaderDialogue(
                             context: contextBuilder,
                             body: PostYourSideHustleDialogueWidget(
                               isProductSelected: (v) {
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   /// reset to Default Value
                                   isProductSelected = true;
                                   // Navigator.pop(contextBuilder);
-                                  AppDialogues.postSideHustleDialogue(
+                                  AppDialogues.noHeaderDialogue(
                                           context: contextBuilder)
                                       .dismiss();
                                   Navigator.pushNamed(contextBuilder,
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 } else {
                                   /// reset to Default Value
                                   isProductSelected = true;
-                                  AppDialogues.postSideHustleDialogue(
+                                  AppDialogues.noHeaderDialogue(
                                           context: contextBuilder)
                                       .dismiss();
                                   // Navigator.pop(contextBuilder);

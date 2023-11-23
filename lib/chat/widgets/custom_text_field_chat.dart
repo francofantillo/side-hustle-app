@@ -196,7 +196,8 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
           maxWidth: 1.sw,
           minHeight: 25.0,
           // maxHeight: 135.0,
-          maxHeight: 200.0,
+          // maxHeight: 200.0,
+          maxHeight: 0.5.sw,
         ),
         child: Scrollbar(
           child: TextField(
@@ -211,7 +212,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
                   top: 2.0,
                   left: 13.0,
                   right: 13.0,
-                  bottom: 2.0),
+                  bottom: 12.0),
               hintText: AppStrings.typeAMessage,
               hintStyle: TextStyle(
                 color: AppColors.greyColor,

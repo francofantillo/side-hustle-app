@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/event/widgets/event_post_packages_list.dart';
 import 'package:side_hustle/event/widgets/select_payment_type_dropdown.dart';
@@ -12,20 +13,26 @@ import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class ModalBottomSheetEventPost extends StatefulWidget {
-  final bool isDelivery;
+class ModalBottomSheetPackageTypePost extends StatefulWidget {
+  final bool isEvent, isProduct, isService, isJob;
 
-  const ModalBottomSheetEventPost({super.key, this.isDelivery = false});
+  const ModalBottomSheetPackageTypePost(
+      {super.key,
+      this.isEvent = false,
+      this.isProduct = false,
+      this.isService = false,
+      this.isJob = false});
 
   @override
-  State<ModalBottomSheetEventPost> createState() =>
-      _ModalBottomSheetEventPostState();
+  State<ModalBottomSheetPackageTypePost> createState() =>
+      _ModalBottomSheetPackageTypePostState();
 }
 
-class _ModalBottomSheetEventPostState extends State<ModalBottomSheetEventPost> {
+class _ModalBottomSheetPackageTypePostState
+    extends State<ModalBottomSheetPackageTypePost> {
   final List<String> items = [
-    PaymentTypeEnum.Cash.name,
-    PaymentTypeEnum.Card.name,
+    "****  ****  ****  4567",
+    "****  ****  ****  4568",
   ];
 
   @override
@@ -92,7 +99,7 @@ class _ModalBottomSheetEventPostState extends State<ModalBottomSheetEventPost> {
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
                 child: SelectPaymentTypeDropDown(
                   items: items,
-                  hintText: AppStrings.paymentTypeHint,
+                  hintText: AppStrings.debitCreditCardSecret,
                   selectedValue: (v) {
                     print("selectedValue: $v");
                   },
@@ -107,13 +114,39 @@ class _ModalBottomSheetEventPostState extends State<ModalBottomSheetEventPost> {
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, AppRoutes.postAddedScreenRoute,
-                        arguments: const PostAdded(
-                          isEvent: true,
-                          title: AppStrings.eventPosted,
-                          subTitle: AppStrings.sideHustlePostedSubTitle,
-                          buttonName: AppStrings.viewEvent,
-                        ));
+                    if (widget.isJob) {
+                      return;
+                    } else if (widget.isProduct) {
+                      Navigator.pushNamed(
+                          context, AppRoutes.postAddedScreenRoute,
+                          arguments: const PostAdded(
+                            isProduct: true,
+                            title: AppStrings.sideHustlePosted,
+                            subTitle: AppStrings.sideHustlePostedSubTitle,
+                            buttonName: AppStrings.viewSideHustle,
+                          ));
+                      return;
+                    } else if (widget.isService) {
+                      Navigator.pushNamed(
+                          context, AppRoutes.postAddedScreenRoute,
+                          arguments: const PostAdded(
+                            isService: true,
+                            title: AppStrings.sideHustlePosted,
+                            subTitle: AppStrings.sideHustlePostedSubTitle,
+                            buttonName: AppStrings.viewSideHustle,
+                          ));
+                      return;
+                    } else if (widget.isEvent) {
+                      Navigator.pushNamed(
+                          context, AppRoutes.postAddedScreenRoute,
+                          arguments: const PostAdded(
+                            isEvent: true,
+                            title: AppStrings.eventPosted,
+                            subTitle: AppStrings.sideHustlePostedSubTitle,
+                            buttonName: AppStrings.viewEvent,
+                          ));
+                      return;
+                    }
                   },
                   name: AppStrings.continueText,
                   borderRadius: AppDimensions.boarderRadiusCartPlaceOrder,

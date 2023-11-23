@@ -66,7 +66,8 @@ class _AppDrawerState extends State<AppDrawer> {
                     children: [
                       const CircularCacheImageWidget(
                         showLoading: true,
-                        image: AlphaAppData.dpProfile,
+                        assetImage: AssetsPath.brandonProfile,
+                        // image: AlphaAppData.dpProfile,
                       ),
                       width(0.03.sw),
                       Expanded(
@@ -212,8 +213,9 @@ class _AppDrawerState extends State<AppDrawer> {
                     title: AppStrings.logout,
                     onTap: () {
                       print("clicked Logout");
-                      AppDialogues.logoutDialogue(
+                      AppDialogues.noHeaderDialogue(
                               context: context,
+                              backgroundColor: AppColors.primaryColor,
                               body: const LogoutDialogueWidget())
                           .show();
                     },

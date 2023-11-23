@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: CustomHomeAppBarWidget(
                   contextBuilder: contextBuilder,
                   title: AppStrings.profileResumePage,
-                  hideNotificationIcon: true,
+                  hideNotificationIcon: false,
                   hideEditProfileIcon: true,
                 ),
               ),
@@ -76,7 +76,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Center(
                 child: CircularCacheImageWidget(
                   showLoading: true,
-                  image: AlphaAppData.dpProfile,
+                  // image: AlphaAppData.dpProfile,
+                  assetImage: AssetsPath.brandonProfile,
                   boarderColor: AppColors.primaryColor,
                   imageHeight: 90.w,
                   imageWidth: 90.w,
