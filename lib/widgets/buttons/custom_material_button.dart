@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 
 Widget customMaterialButton(
     {String? name,
@@ -64,13 +65,16 @@ class CustomMaterialButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         side: BorderSide(width: 1, color: AppColors.primaryColor),
         borderRadius: BorderRadius.circular(
-          borderRadius ?? 20.0,
+          borderRadius ?? 16.0,
         ),
         // Adjust the radius as needed
       ),
       child: Text(
         name ?? "",
-        style: TextStyle(fontSize: fontSize ?? 20, color: textColor),
+        style: TextStyle(
+            fontSize: fontSize ?? 16,
+            color: textColor,
+            fontFamily: AppFont.gilroyBold),
       ),
     );
   }

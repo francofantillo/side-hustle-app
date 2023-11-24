@@ -8,6 +8,7 @@ import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -56,51 +57,59 @@ class _PostProductState extends State<PostProduct> {
               ImageSlider(
                 itemImages: AlphaAppData.postProductImagesList,
               ),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.uploadImages,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                   text: AppStrings.uploadImagesBodyProduct,
+                  fontSize: AppDimensions.textSizeVerySmall,
+                  fontFamily: AppFont.gilroyMedium,
                   maxLines: 2,
                 ),
               ),
-              height(0.02.sh),
+              height(0.04.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.productName,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.enterTheProductName,
-                  // fillColor: AppColors.productTextFieldColor,
+                  fillColor: AppColors.textFieldBackgroundColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.location,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -115,6 +124,8 @@ class _PostProductState extends State<PostProduct> {
                 ),
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CheckboxWidget(
                     onChanged: (newValue) {
@@ -122,19 +133,27 @@ class _PostProductState extends State<PostProduct> {
                     },
                   ),
                   Expanded(
-                      child: textWidget(text: AppStrings.useYourShopLocation)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: textWidget(
+                            text: AppStrings.useYourShopLocation,
+                            fontFamily: AppFont.gilroyMedium,
+                            fontSize: AppDimensions.textSizeVerySmall),
+                      )),
                 ],
               ),
-              height(0.02.sh),
+              // height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.productDescription,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -143,7 +162,7 @@ class _PostProductState extends State<PostProduct> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Row(
                 children: [
                   Expanded(
@@ -156,9 +175,11 @@ class _PostProductState extends State<PostProduct> {
                               text: AppStrings.productPricing,
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           height: 45.h,
                           hintText: "\$\$\$",
@@ -178,9 +199,11 @@ class _PostProductState extends State<PostProduct> {
                               text: AppStrings.zipCode,
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           height: 45.h,
                           hintText: "00000",
@@ -191,13 +214,15 @@ class _PostProductState extends State<PostProduct> {
                   ),
                 ],
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.deliveryOptions,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -209,16 +234,18 @@ class _PostProductState extends State<PostProduct> {
                   },
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.additionalInformation,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -227,7 +254,7 @@ class _PostProductState extends State<PostProduct> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.03.sh),
+              height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
@@ -237,7 +264,9 @@ class _PostProductState extends State<PostProduct> {
                     } else {
                       AppUtils.showBottomModalSheet(
                           context: context,
-                          widget: const ModalBottomSheetPackageTypePost(isProduct: true,));
+                          widget: const ModalBottomSheetPackageTypePost(
+                            isProduct: true,
+                          ));
                       // Navigator.pushReplacementNamed(
                       //     context, AppRoutes.postAddedScreenRoute,
                       //     arguments: const PostAdded(

@@ -83,6 +83,38 @@ flutter:
     - family: CustomIcon
       fonts:
         - asset: assets/font/CustomIcon.ttf
+    - family: GilroyBlack
+      fonts:
+        - asset: assets/font/GILROY-BLACK.ttf
+    - family: GilroyBold
+      fonts:
+         - asset: assets/font/GILROY-BOLD.ttf
+    - family: GilroyExtraBold
+      fonts:
+        - asset: assets/font/GILROY-EXTRABOLD.ttf
+    - family: GilroyHeavy
+      fonts:
+        - asset: assets/font/GILROY-HEAVY.ttf
+    - family: GilroyLight
+      fonts:
+        - asset: assets/font/GILROY-LIGHT.ttf
+    - family: GilroyMedium
+      fonts:
+        - asset: assets/font/GILROY-MEDIUM.ttf
+    - family: GilroyRegular
+      fonts:
+        - asset: assets/font/GILROY-REGULAR.ttf
+    - family: GilroySemiBold
+      fonts:
+        - asset: assets/font/GILROY-SEMIBOLD.ttf
+    - family: GilroyThin
+      fonts:
+        - asset: assets/font/GILROY-THIN.ttf
+    - family: GilroyUltraThin
+      fonts:
+        - asset: assets/font/GILROY-ULTRALIGHT.ttf
+
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

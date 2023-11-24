@@ -19,7 +19,9 @@ class AppColors {
   // static final switchTabBackgroundColor = Color(0xFFF2F3F7);
   static final switchTabBackgroundColor = Color(0xFFe9eaea);
   // static final itemBGColor = Color(0xFFF3F3F3);
-  static final itemBGColor = Colors.white;
+  static const itemBGColor = Colors.white;
+  static const dialogueSelected = Color(0x0FFF3F3F3);
+  static const textFieldBackgroundColor = Color(0x0FFFDFDFD);
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);
   static const appTextBlackColor = Color(0xFF6B6B6B);

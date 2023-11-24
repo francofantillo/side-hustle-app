@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -44,6 +45,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 padding: const EdgeInsets.only(left: 4.0),
                 child: textWidget(
                   text: AppStrings.changPassword,
+                  fontFamily: AppFont.gilroyBold,
                   fontSize: AppDimensions.textHeadingSize,
                   color: AppColors.textBlackColor,
                   fontWeight: AppDimensions.headingFontWeight,
@@ -51,8 +53,10 @@ class _ChangePasswordState extends State<ChangePassword> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
-                child:
-                    textWidget(text: AppStrings.changPasswordHint, maxLines: 2),
+                child: textWidget(
+                    text: AppStrings.changPasswordHint,
+                    maxLines: 2,
+                    fontSize: AppDimensions.textSizeSmall),
               ),
               height(0.03.sh),
               Padding(
@@ -61,19 +65,21 @@ class _ChangePasswordState extends State<ChangePassword> {
                     text: AppStrings.currentPassword,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.w500),
               ),
               const CustomTextFormField(
                   label: AppStrings.currentPassword, isPasswordField: true),
-              height(0.05.sh),
+              height(0.07.sw),
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
                 child: textWidget(
                     text: AppStrings.setNewPassword,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.w500),
               ),
               const CustomTextFormField(
@@ -94,7 +100,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               height(0.02.sh),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4),
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: customMaterialButton(
                     onPressed: () {
                       Navigator.pop(context);

@@ -48,6 +48,7 @@ class AppStrings {
   static const String unitedCapitalismSubText = "Reinventing Local Economies through Community Support";
   static const String privacyPolicy = "Privacy Policy";
   static const String notAMember = "Not a member? ";
+  static const String notifications = "Notifications";
   static const String signUpNow = "Sign up now";
 
   /// Signup

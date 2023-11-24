@@ -33,7 +33,7 @@ class SearchTextField extends StatelessWidget {
           keyboardType: TextInputType.text,
           onChanged: onChanged,
           maxLines: 1,
-          style: TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroy),
+          style: TextStyle(fontSize: AppDimensions.textSizeSmall, fontFamily: AppFont.gilroyMedium),
           decoration: InputDecoration(
             border: InputBorder.none,
             // fillColor: widget.fillColor ?? AppColors.whiteColor,
@@ -57,18 +57,17 @@ class SearchTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             suffixIconConstraints:
                 BoxConstraints.loose(const Size.fromRadius(14)),
-                // BoxConstraints.loose(const Size.fromRadius(5)),
+            // BoxConstraints.loose(const Size.fromRadius(5)),
             // border: InputBorder.none,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
-            labelStyle: TextStyle(
-              fontSize: 10.sp,
-            ),
+            labelStyle:
+                TextStyle(fontSize: AppDimensions.textSizeSmall, fontFamily: AppFont.gilroyMedium),
             hintText: hintText,
             // labelText: AppStrings.searchHintText,
             hintStyle: TextStyle(
-              color: AppColors.textFieldColor,
-              fontSize: 12.sp,
-            ),
+                color: AppColors.textFieldColor,
+                fontSize: AppDimensions.textSizeSmall,
+                fontFamily: AppFont.gilroyMedium),
             errorMaxLines: 3,
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -12,7 +13,9 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class WalkthroughSlider extends StatefulWidget {
-  const WalkthroughSlider({super.key});
+  final List<ChatAllUsersItemModel>? items;
+
+  const WalkthroughSlider({super.key, this.items});
 
   @override
   State<WalkthroughSlider> createState() => _WalkthroughSliderState();
@@ -67,7 +70,7 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
             child: customMaterialButton(
               onPressed: () {
                 // pageController.jumpToPage(currentIndex);
-                if (currentIndex != 2) {
+                if (currentIndex != 1) {
                   pageController.animateToPage(currentIndex + 1,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeOut);
@@ -94,7 +97,7 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
       child: PageView.builder(
           scrollDirection: Axis.horizontal,
           controller: pageController,
-          itemCount: 3,
+          itemCount: widget.items?.length ?? 0,
           onPageChanged: (index) {
             currentIndex = index;
             setState(() {});
@@ -115,7 +118,7 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
       ),
       child: SmoothPageIndicator(
         controller: pageController,
-        count: 3,
+        count: widget.items?.length ?? 0,
         effect: const ExpandingDotsEffect(
           dotHeight: 4,
           dotWidth: 7,
@@ -145,21 +148,21 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
             //     imageWidth: AppDimensions.walkthroughImageWidth,
             //     showLoading: false),
             Center(
-              child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: CustomCacheImage(
-                  showLoading: false,
-                  imageHeight: AppDimensions.loginLogoSize,
-                  imageWidth: 1.sw,
-                  assetImage: AssetsPath.logo,
-                ),
+              child: CustomCacheImage(
+                showLoading: false,
+                imageHeight: AppDimensions.walkthroughSize,
+                imageWidth: 1.sw,
+                // assetImage: AssetsPath.walkthrough,
+                assetImage: widget.items?[index].image,
               ),
             ),
             height(0.05.sh),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: textWidget(
-                  text: AppStrings.postYourSideHustle,
+                  // text: AppStrings.postYourSideHustle,
+                  text: widget.items?[index].name,
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.bold,
                   fontSize: AppDimensions.textHeadingSize,
@@ -167,8 +170,10 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child:
-                  textWidget(text: AppStrings.walkthroughSubTitle, maxLines: 3),
+              child: textWidget(
+                  // text: AppStrings.walkthroughSubTitle,
+                  text: widget.items?[index].message,
+                  maxLines: 3),
             ),
           ],
         ),

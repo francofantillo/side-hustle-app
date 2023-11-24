@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class PrimaryPostButton extends StatelessWidget {
   final String? title;
@@ -12,7 +14,8 @@ class PrimaryPostButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // height: .13.sh,
-      height: .11.sh,
+      // height: .11.sh,
+      height: .21.sw,
       // height: 95.h,
       width: 1.sw,
       padding: EdgeInsets.only(
@@ -32,25 +35,15 @@ class PrimaryPostButton extends StatelessWidget {
         textColor: AppColors.primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-              BorderRadius.circular(0.023.sh), // Adjust the radius as needed
+              BorderRadius.circular(16), // Adjust the radius as needed
         ),
-        child: Text(
-          title ?? "",
-          style: const TextStyle(fontSize: 16),
+        child: textWidget(
+          text: title,
+          fontSize: AppDimensions.textSizeNormal,
+          color: AppColors.primaryColor,
+          fontFamily: AppFont.gilroyBold
         ),
       ),
-      // child: Center(
-      //   child: Container(
-      //     width: 1.sw,
-      //     height: 1.sh,
-      //     decoration: BoxDecoration(
-      //       color: AppColors.whiteColor,
-      //       borderRadius: BorderRadius.all(Radius.circular(AppDimensions.bottomButtonBGCurve)
-      //           ),
-      //     ),
-      //     child: Center(child: textWidget(text: AppStrings.postASideHustle, color: AppColors.primaryColor)),
-      //   ),
-      // ),
     );
   }
 }

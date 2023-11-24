@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -64,33 +65,39 @@ class _PostJobState extends State<PostJob> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const ImageSlider(),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.uploadImages,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                   text: AppStrings.uploadImagesBodyService,
+                  fontSize: AppDimensions.textSizeVerySmall,
+                  fontFamily: AppFont.gilroyMedium,
                   maxLines: 3,
                 ),
               ),
-              height(0.02.sh),
+              height(0.04.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.postJobTitle,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -99,16 +106,18 @@ class _PostJobState extends State<PostJob> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.jobLocation,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -121,16 +130,18 @@ class _PostJobState extends State<PostJob> {
                   isSuffixIcon: true,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.jobDesc,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -139,7 +150,7 @@ class _PostJobState extends State<PostJob> {
                   maxLines: 2,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Row(
                 children: [
                   Expanded(
@@ -152,9 +163,11 @@ class _PostJobState extends State<PostJob> {
                               text: AppStrings.jobBudget,
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           height: 45.h,
                           hintText: "\$\$\$",
@@ -174,9 +187,11 @@ class _PostJobState extends State<PostJob> {
                               text: AppStrings.areaCode,
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           height: 45.h,
                           hintText: "00000",
@@ -188,16 +203,18 @@ class _PostJobState extends State<PostJob> {
                   ),
                 ],
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.jobDate,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -215,7 +232,7 @@ class _PostJobState extends State<PostJob> {
                   },
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Row(
                 children: [
                   Expanded(
@@ -228,9 +245,11 @@ class _PostJobState extends State<PostJob> {
                               text: AppStrings.jobTime,
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           controller: firstTimeTextController,
                           height: 45.h,
@@ -255,9 +274,11 @@ class _PostJobState extends State<PostJob> {
                               text: AppStrings.totalHours,
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           controller: secondTimeTextController,
                           height: 45.h,
@@ -274,16 +295,18 @@ class _PostJobState extends State<PostJob> {
                   ),
                 ],
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.additionalInformation,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -293,7 +316,7 @@ class _PostJobState extends State<PostJob> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.03.sh),
+              height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(

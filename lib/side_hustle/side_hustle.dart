@@ -60,7 +60,7 @@ class _SideHustleState extends State<SideHustle> {
               child: CustomHomeAppBarWidget(
                 contextBuilder: contextBuilder,
                 title: AppStrings.sideHustle,
-                hideNotificationIcon: true,
+                hideNotificationIcon: false,
               ),
             ),
             Padding(

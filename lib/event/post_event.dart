@@ -4,6 +4,7 @@ import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_t
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -72,16 +73,18 @@ class _PostEventState extends State<PostEvent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const ImageSlider(),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventName,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -90,16 +93,18 @@ class _PostEventState extends State<PostEvent> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventLocation,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -112,16 +117,18 @@ class _PostEventState extends State<PostEvent> {
                   isSuffixIcon: true,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventDate,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -139,7 +146,7 @@ class _PostEventState extends State<PostEvent> {
                   },
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Row(
                 children: [
                   Expanded(
@@ -152,9 +159,11 @@ class _PostEventState extends State<PostEvent> {
                               text: AppStrings.eventTime,
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           controller: firstTimeTextController,
                           height: 45.h,
@@ -181,12 +190,14 @@ class _PostEventState extends State<PostEvent> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: textWidget(
-                              text: AppStrings.totalHours,
+                              text: "",
                               maxLines: 1,
                               color: AppColors.textBlackColor,
+                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold),
                         ),
-                        height(0.01.sh),
+                        height(0.01.sw),
                         CustomTextFormField(
                           controller: secondTimeTextController,
                           height: 45.h,
@@ -208,16 +219,18 @@ class _PostEventState extends State<PostEvent> {
                   ),
                 ],
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventPurpose,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -226,16 +239,18 @@ class _PostEventState extends State<PostEvent> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventTheme,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -244,16 +259,18 @@ class _PostEventState extends State<PostEvent> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventVendorList,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -262,28 +279,32 @@ class _PostEventState extends State<PostEvent> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventTicketPrice,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               CustomTextFormField(
                 height: 45.h,
                 hintText: "\$\$\$",
                 // fillColor: AppColors.productTextFieldColor,
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.paymentType,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
               // SizedBox(
@@ -302,16 +323,18 @@ class _PostEventState extends State<PostEvent> {
                 isReadonly: true,
                 // fillColor: AppColors.productTextFieldColor,
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventAvailableAttractions,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -321,7 +344,7 @@ class _PostEventState extends State<PostEvent> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.03.sh),
+              height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(

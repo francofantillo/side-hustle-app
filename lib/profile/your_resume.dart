@@ -4,6 +4,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -84,32 +85,35 @@ class _YourResumeState extends State<YourResume> {
                           text: AppStrings.davidHan,
                           maxLines: 1,
                           color: AppColors.textBlackColor,
-                          fontSize: AppDimensions.textSizeNormal,
+                          fontFamily: AppFont.gilroyBold,
+                          fontSize: AppDimensions.textHeadingSize,
                           fontWeight: FontWeight.bold),
-                      height(0.001.sh),
+                      height(0.001.sw),
                       textWidget(
                           text: AppStrings.nickname,
                           maxLines: 1,
-                          fontSize: AppDimensions.textSizeVerySmall),
-                      height(0.01.sh),
+                          fontSize: AppDimensions.textSizeSmall),
+                      height(0.01.sw),
                       textWidget(
                           text: AppStrings.profession,
                           maxLines: 1,
-                          fontSize: AppDimensions.textSizeVerySmall),
+                          fontSize: AppDimensions.textSizeSmall),
                     ],
                   )
                 ],
               ),
-              height(0.05.sh),
+              height(0.08.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.familyTies,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.02.sw),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Container(
@@ -123,19 +127,23 @@ class _YourResumeState extends State<YourResume> {
                             width: 1, color: AppColors.borderColorResumePage)),
                     child: textWidget(
                       text: AppStrings.familyTies,
+                      fontSize: AppDimensions.textSizeVerySmall,
+                      fontFamily: AppFont.gilroyMedium,
                       maxLines: 1,
                     ),
                   )),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.professionalBackground,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.02.sw),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Container(
@@ -149,19 +157,23 @@ class _YourResumeState extends State<YourResume> {
                             width: 1, color: AppColors.borderColorResumePage)),
                     child: textWidget(
                       text: AppStrings.professionalBackgroundHint,
+                      fontSize: AppDimensions.textSizeVerySmall,
+                      fontFamily: AppFont.gilroyMedium,
                       maxLines: 1,
                     ),
                   )),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.hobbies,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Wrap(
@@ -184,22 +196,25 @@ class _YourResumeState extends State<YourResume> {
                               text: itemsList[i],
                               maxLines: 2,
                               color: AppColors.whiteColor,
-                              fontSize: AppDimensions.textSizeSmall),
+                              fontFamily: AppFont.gilroyMedium,
+                              fontSize: AppDimensions.textSizeVerySmall),
                         ),
                       )
                   ],
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.favoriteQuote,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Container(
@@ -213,19 +228,23 @@ class _YourResumeState extends State<YourResume> {
                             width: 1, color: AppColors.borderColorResumePage)),
                     child: textWidget(
                       text: AppStrings.favoriteQuote,
+                      fontSize: AppDimensions.textSizeVerySmall,
+                      fontFamily: AppFont.gilroyMedium,
                       maxLines: 1,
                     ),
                   )),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.whatDoYou,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Container(
@@ -239,19 +258,23 @@ class _YourResumeState extends State<YourResume> {
                             width: 1, color: AppColors.borderColorResumePage)),
                     child: textWidget(
                       text: AppStrings.jobDescText,
+                      fontSize: AppDimensions.textSizeVerySmall,
+                      fontFamily: AppFont.gilroyBold,
                       maxLines: 2,
                     ),
                   )),
-              height(0.03.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.attachedResume,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -275,13 +298,15 @@ class _YourResumeState extends State<YourResume> {
                         children: [
                           textWidget(
                               text: AppStrings.resumePdf,
+                              fontFamily: AppFont.gilroyBold,
                               fontSize: AppDimensions.textSizeSmall,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.appTextBlackColor),
+                              color: AppColors.textBlackColor),
                           height(0.002.sh),
                           textWidget(
                             text: AppStrings.resumePdfSize,
-                            fontSize: AppDimensions.textSizeVerySmall,
+                            fontFamily: AppFont.gilroyBold,
+                            fontSize: AppDimensions.textSizePerHead,
                           ),
                         ],
                       ),

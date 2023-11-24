@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -92,6 +93,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               child: textWidget(
                   text: AppStrings.otpVerification,
                   color: AppColors.textBlackColor,
+                  fontFamily: AppFont.gilroyBold,
                   fontSize: AppDimensions.textHeadingSize,
                   fontWeight: AppDimensions.headingFontWeight),
             ),
@@ -100,7 +102,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 child: textWidget(
                     text: AppStrings.otpTextBody,
                     color: AppColors.backIconBackgroundColor.withOpacity(0.9),
-                    fontSize: AppDimensions.textSizeVerySmall,
+                    fontSize: AppDimensions.textSizeSmall,
                     textAlign: TextAlign.center,
                     maxLines: 3)),
             height(AppDimensions.welcomeBackSpacingBetween + 20),
@@ -108,26 +110,29 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             height(AppDimensions.loginButtonVerticalSpacingBetween + 20),
             _timer(),
             height(AppDimensions.loginButtonVerticalSpacingBetween + 20),
-            customMaterialButton(
-                name:
-                    enableResend ? AppStrings.reSend : AppStrings.continueText,
-                onPressed: () {
-                  print('Button Pressed'); //
-                  if (enableResend) {
-                    /// Reset Timer
-                    secondsRemaining = 59;
-                    enableResend = false;
-                    currentSeconds = 0;
-                  } else {
-                    if (widget.isSocial) {
-                      Navigator.pushReplacementNamed(
-                          context, AppRoutes.walkthroughScreenRoute);
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: customMaterialButton(
+                  name:
+                      enableResend ? AppStrings.reSend : AppStrings.continueText,
+                  onPressed: () {
+                    print('Button Pressed'); //
+                    if (enableResend) {
+                      /// Reset Timer
+                      secondsRemaining = 59;
+                      enableResend = false;
+                      currentSeconds = 0;
                     } else {
-                      Navigator.pushNamed(
-                          context, AppRoutes.resetPasswordScreenRoute);
+                      if (widget.isSocial) {
+                        Navigator.pushReplacementNamed(
+                            context, AppRoutes.walkthroughScreenRoute);
+                      } else {
+                        Navigator.pushNamed(
+                            context, AppRoutes.resetPasswordScreenRoute);
+                      }
                     }
-                  }
-                }),
+                  }),
+            ),
             // enableResend ? _resendCodeButton() : const SizedBox.shrink(),
             // _spaceBelowButton(),
           ],
@@ -179,12 +184,9 @@ class RoundedText extends StatelessWidget {
             BorderRadius.circular(20.0), // Adjust the radius as needed
       ),
       padding: const EdgeInsets.all(14.0), // Adjust the padding as needed
-      child: Text(
-        text,
-        style: TextStyle(
-          color: textColor,
-          fontSize: 12.0.sp, // Adjust the font size as needed
-        ),
+      child: textWidget(
+        text: text,
+        fontSize: AppDimensions.textSizeVerySmall
       ),
     );
   }

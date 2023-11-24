@@ -4,6 +4,7 @@ import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 
 class PhoneNumberTextField extends StatefulWidget {
@@ -119,14 +120,18 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
         decoration: InputDecoration(
           hintStyle: const TextStyle(
             color: Colors.grey,
+            fontFamily: AppFont.gilroyMedium
           ),
+
           floatingLabelBehavior: FloatingLabelBehavior.always,
           counter: const SizedBox.shrink(),
           border: InputBorder.none,
           fillColor: Colors.transparent,
-          label: _label(),
+          // label: _label(),
           filled: true,
-          contentPadding: const EdgeInsets.symmetric(vertical: 10),
+          hintText: AppStrings.phoneNumber,
+
+          contentPadding: const EdgeInsets.only(top: 15),
           errorMaxLines: 2,
           errorStyle: const TextStyle(
             color: Colors.red,
@@ -141,7 +146,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
 
   TextStyle _textStyle() {
     return TextStyle(
-      color: widget.textColor ?? Colors.black,
+      color: widget.textColor ?? Colors.black, fontFamily: AppFont.gilroyMedium
     );
   }
 
@@ -152,7 +157,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
         AppStrings.phoneNumber,
         style: TextStyle(
           color: Colors.grey,
-          fontFamily: 'GilroyBold',
+          fontFamily: AppFont.gilroyMedium,
           fontSize: 17,
         ),
       ),

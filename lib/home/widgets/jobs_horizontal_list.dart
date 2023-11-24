@@ -5,6 +5,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -38,6 +39,7 @@ class JobsHorizontalListWidget extends StatelessWidget {
               children: [
                 textWidget(
                     text: title ?? AppStrings.blessTheseBusinesses,
+                    fontFamily: AppFont.gilroyBold,
                     fontSize: AppDimensions.textSizeNormal,
                     fontWeight: FontWeight.w500,
                     color: AppColors.textBlackColor),

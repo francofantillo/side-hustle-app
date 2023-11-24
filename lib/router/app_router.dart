@@ -28,6 +28,7 @@ import 'package:side_hustle/job/my_jobs/job_request.dart';
 import 'package:side_hustle/job/my_jobs/my_jobs.dart';
 import 'package:side_hustle/job/my_jobs/view_job.dart';
 import 'package:side_hustle/job/post_job.dart';
+import 'package:side_hustle/notifications/notifications.dart';
 import 'package:side_hustle/payment_methods/payment_methods.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/product/view_product.dart';
@@ -140,14 +141,16 @@ class AppRouter {
             final args = routeSettings.arguments as ViewProduct?;
             return ViewProduct(
               isMyProduct: args?.isMyProduct ?? false,
-              isViewingProductFromOthersShop: args?.isViewingProductFromOthersShop ?? false,
+              isViewingProductFromOthersShop:
+                  args?.isViewingProductFromOthersShop ?? false,
             );
 
           case AppRoutes.viewServiceScreenRoute:
             final args = routeSettings.arguments as ViewService?;
             return ViewService(
               isMyService: args?.isMyService ?? false,
-              isViewingServiceFromOthersShop: args?.isViewingServiceFromOthersShop ?? false,
+              isViewingServiceFromOthersShop:
+                  args?.isViewingServiceFromOthersShop ?? false,
             );
 
           case AppRoutes.shopScreenRoute:
@@ -237,6 +240,9 @@ class AppRouter {
                 isEvent: args?.isEvent ?? false,
                 isService: args?.isService ?? false,
                 isProduct: args?.isProduct ?? false);
+
+          case AppRoutes.notificationsScreenRoute:
+            return const NotificationsScreen();
 
           case AppRoutes.bottomTabsScreenRoute:
             final args = routeSettings.arguments as BottomTabsScreen?;

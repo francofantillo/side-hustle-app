@@ -12,7 +12,7 @@ Widget textWidget(
     maxLines: maxLines,
     overflow: TextOverflow.ellipsis,
     style: TextStyle(
-      fontFamily: fontFamily ?? AppFont.gilroy,
+      fontFamily: fontFamily ?? AppFont.gilroyRegular,
       fontSize: fontSize ?? AppDimensions.textSizeSmall,
       color: color ?? AppColors.textGreyColor,
       fontWeight: fontWeight

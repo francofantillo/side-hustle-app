@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -35,18 +37,30 @@ class _ResetPasswordState extends State<ResetPassword> {
                 Navigator.pop(context);
               }),
               height(AppDimensions.fieldsVerticalSpacingBetween),
-              textWidget(
-                  text: AppStrings.setNewPassword,
-                  color: AppColors.textBlackColor,
-                  fontSize: AppDimensions.textHeadingSize,
-                  fontWeight: AppDimensions.headingFontWeight),
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: textWidget(
+                    text: AppStrings.setNewPassword,
+                    color: AppColors.textBlackColor,
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textHeadingSize,
+                    fontWeight: AppDimensions.headingFontWeight),
+              ),
               height(AppDimensions.forgotPasswordSpacingBetween),
-              textWidget(text: AppStrings.pleaseEnterNewPassword),
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: textWidget(text: AppStrings.pleaseEnterNewPassword, fontSize: AppDimensions.textSizeSmall),
+              ),
               height(AppDimensions.welcomeBackSpacingBetween),
-              textWidget(
-                  text: AppStrings.setNewPassword,
-                  color: AppColors.textBlackColor,
-                  fontWeight: AppDimensions.headingFontWeight),
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: textWidget(
+                    text: AppStrings.setNewPassword,
+                    color: AppColors.textBlackColor,
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontWeight: AppDimensions.headingFontWeight),
+              ),
               height(AppDimensions.fieldsVerticalSpacingBetween),
               const CustomTextFormField(
                   label: AppStrings.newPassword, isPasswordField: true),
@@ -57,17 +71,21 @@ class _ResetPasswordState extends State<ResetPassword> {
               BulletedListItem(
                 text: AppStrings.atLeast12,
               ),
+              height(0.02.sw),
               BulletedListItem(
                 text: AppStrings.aCombinationOfUpper,
               ),
               height(AppDimensions.loginButtonVerticalSpacingBetween),
-              customMaterialButton(
-                  name: AppStrings.continueText,
-                  onPressed: () {
-                    print('Button Pressed');
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, AppRoutes.loginScreenRoute, (route) => false);
-                  }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: customMaterialButton(
+                    name: AppStrings.continueText,
+                    onPressed: () {
+                      print('Button Pressed');
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AppRoutes.loginScreenRoute, (route) => false);
+                    }),
+              ),
             ],
           ),
         ),

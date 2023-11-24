@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
@@ -63,7 +64,7 @@ class ItemsWidget extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 6.0, left: 8.0),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -75,6 +76,7 @@ class ItemsWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
+                      // padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,6 +88,7 @@ class ItemsWidget extends StatelessWidget {
                               Expanded(
                                   child: textWidget(
                                       text: title,
+                                      fontFamily: AppFont.gilroyBold,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppDimensions.textSizeSmall,
                                       color: AppColors.textBlackColor)),
@@ -93,14 +96,16 @@ class ItemsWidget extends StatelessWidget {
                                 children: [
                                   textWidget(
                                       text: price,
+                                      fontFamily: AppFont.gilroyBold,
                                       fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions.textSizeSmall,
                                       color: AppColors.textBlackColor),
                                   textWidget(
                                       text: isEvent
                                           ? AppStrings.perHead
                                           : AppStrings.perHour,
                                       textAlign: TextAlign.end,
-                                      fontSize: 8),
+                                      fontSize: AppDimensions.textSizeTiny),
                                 ],
                               ),
                             ],
@@ -110,7 +115,7 @@ class ItemsWidget extends StatelessWidget {
                             child: textWidget(
                               text: subTitle,
                               maxLines: 2,
-                              fontSize: AppDimensions.textSizeVerySmall,
+                              fontSize: AppDimensions.textSizePerHead,
                             ),
                           ),
                           height(imageHeight! * .04),
@@ -156,7 +161,8 @@ class ItemsWidget extends StatelessWidget {
                                       // place RoundedImageWithBackgroundColor at end
                                       textWidget(
                                           text: userName,
-                                          fontSize: 10.sp,
+                                          fontSize: AppDimensions.textSizePerHead,
+                                          fontFamily: AppFont.gilroySemiBold,
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.textBlackColor),
                                       Row(

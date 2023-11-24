@@ -3,6 +3,7 @@ import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -45,10 +46,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 textWidget(
                     text: AppStrings.forgotPassword,
                     color: AppColors.textBlackColor,
+                    fontFamily: AppFont.gilroyBold,
                     fontSize: AppDimensions.textHeadingSize,
                     fontWeight: AppDimensions.headingFontWeight),
                 height(AppDimensions.forgotPasswordSpacingBetween),
-                textWidget(text: AppStrings.inOrderTo),
+                textWidget(text: AppStrings.inOrderTo, maxLines: 2, fontSize: AppDimensions.textSizeSmall),
                 height(AppDimensions.welcomeBackSpacingBetween),
                 PhoneNumberTextField(
                   onChanged: (phone) {
@@ -60,15 +62,18 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   },
                 ),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
-                customMaterialButton(
-                    name: AppStrings.continueText,
-                    onPressed: () {
-                      print('Button Pressed');
-                      Navigator.pushNamed(
-                          context, AppRoutes.otpVerificationScreenRoute,
-                          arguments:
-                              const OtpVerificationScreen(isSocial: false));
-                    }),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: customMaterialButton(
+                      name: AppStrings.continueText,
+                      onPressed: () {
+                        print('Button Pressed');
+                        Navigator.pushNamed(
+                            context, AppRoutes.otpVerificationScreenRoute,
+                            arguments:
+                                const OtpVerificationScreen(isSocial: false));
+                      }),
+                ),
               ],
             ),
           ),

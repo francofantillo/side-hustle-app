@@ -80,7 +80,7 @@ class _BaseWidgetState extends State<BaseWidget> {
             return MaterialApp(
               navigatorKey: BaseWidget.globalKey,
               theme: ThemeData(
-                fontFamily: AppFont.jostRegular,
+                fontFamily: AppFont.gilroyRegular,
                 colorScheme: ThemeData()
                     .colorScheme
                     .copyWith(primary: AppColors.primaryColor)
@@ -103,7 +103,7 @@ class _BaseWidgetState extends State<BaseWidget> {
               title: AppStrings.APP_TITLE,
               debugShowCheckedModeBanner: false,
               initialRoute: AppRoutes.splashScreenRoute,
-              // initialRoute: AppRoutes.yourServiceCartScreenRoute,
+              // initialRoute: AppRoutes.walkthroughScreenRoute,
               onGenerateRoute: AppRouter().onGenerateRoute,
             );
           },

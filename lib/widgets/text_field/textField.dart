@@ -151,7 +151,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: widget.controller,
       readOnly: widget.isReadonly!,
       maxLines: widget.maxLines ?? 1,
-      style: TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroy),
+      style: TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroyMedium),
       decoration: InputDecoration(
         border: InputBorder.none,
         // fillColor: widget.fillColor ?? AppColors.whiteColor,
@@ -166,11 +166,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         prefixIcon: widget.isPrefixIcon! ? _prefixIconWidget() : null,
         // border: InputBorder.none,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        label: widget.label != null ? _label() : null,
-        labelStyle: TextStyle(
-          fontSize: 15.sp,
-        ),
-        hintText: widget.hintText,
+        // label: widget.label != null ? _label() : null,
+        labelStyle:
+            TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroyMedium),
+        hintText: widget.label ?? widget.hintText,
         errorStyle: _errorTextStyle(),
         hintStyle: const TextStyle(
             color: AppColors.textFieldColor, fontSize: 15, height: 2),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/walkthrough/widgets/walkthrough_slider.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 
@@ -19,7 +20,6 @@ class _WalkthroughState extends State<Walkthrough> {
     return BackgroundWidget(
         body: WillPopScope(
             onWillPop: onWillPop,
-            child: const WalkthroughSlider())
-    );
+            child: WalkthroughSlider(items: AlphaAppData.walkthroughItemList)));
   }
 }

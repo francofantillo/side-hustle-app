@@ -6,6 +6,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -58,33 +59,39 @@ class _PostServiceState extends State<PostService> {
               ImageSlider(
                 itemImages: AlphaAppData.postServiceImagesList,
               ),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.uploadImages,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                   text: AppStrings.uploadImagesBodyService,
-                  maxLines: 3,
+                  fontSize: AppDimensions.textSizeVerySmall,
+                  fontFamily: AppFont.gilroyMedium,
+                  maxLines: 2,
                 ),
               ),
-              height(0.02.sh),
+              height(0.04.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.serviceName,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -93,16 +100,18 @@ class _PostServiceState extends State<PostService> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.location,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -117,6 +126,8 @@ class _PostServiceState extends State<PostService> {
                 ),
               ),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CheckboxWidget(
                     onChanged: (newValue) {
@@ -124,19 +135,27 @@ class _PostServiceState extends State<PostService> {
                     },
                   ),
                   Expanded(
-                      child: textWidget(text: AppStrings.useYourShopLocation)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: textWidget(
+                            text: AppStrings.useYourShopLocation,
+                            fontFamily: AppFont.gilroyMedium,
+                            fontSize: AppDimensions.textSizeVerySmall),
+                      )),
                 ],
               ),
-              height(0.02.sh),
+              // height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.serviceDescription,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -144,13 +163,15 @@ class _PostServiceState extends State<PostService> {
                   hintText: AppStrings.enterServiceDescription,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.howWouldYouLikeToSellService,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
               Row(
@@ -160,40 +181,60 @@ class _PostServiceState extends State<PostService> {
                       print('Checkbox value changed: $newValue');
                     },
                   ),
-                  Expanded(child: textWidget(text: AppStrings.hourlyRate)),
+                  Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: textWidget(
+                    text: AppStrings.hourlyRate,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroySemiBold,
+                  ),
+                      )),
                   CheckboxWidget(
                     onChanged: (newValue) {
                       print('Checkbox value changed: $newValue');
                     },
                   ),
-                  Expanded(child: textWidget(text: AppStrings.fixedRate)),
+                  Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: textWidget(
+                    text: AppStrings.fixedRate,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyMedium,
+                  ),
+                      )),
                 ],
               ),
-              height(0.02.sh),
+              // height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.serviceHourlyRate,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               CustomTextFormField(
                 height: 45.h,
                 hintText: "\$\$\$",
                 // fillColor: AppColors.productTextFieldColor,
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.additionalInformation,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -203,7 +244,7 @@ class _PostServiceState extends State<PostService> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.03.sh),
+              height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
@@ -221,7 +262,9 @@ class _PostServiceState extends State<PostService> {
                         //     ));
                         AppUtils.showBottomModalSheet(
                             context: context,
-                            widget: const ModalBottomSheetPackageTypePost(isService: true,));
+                            widget: const ModalBottomSheetPackageTypePost(
+                              isService: true,
+                            ));
                       }
                     },
                     color: AppColors.primaryColor,

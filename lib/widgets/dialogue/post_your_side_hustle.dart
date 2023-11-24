@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -43,25 +44,30 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
           children: [
             Align(
                 alignment: Alignment.centerRight,
-                child: InkWell(
-                  onTap: widget.onTapClose,
-                  child: const Icon(
-                    // Icons.close,
-                    CustomIcon.cancel,
-                    size: 22,
+                child: Material(
+                  color: Colors.white,
+                  child: InkWell(
+                    onTap: widget.onTapClose,
+                    child: const Icon(
+                      // Icons.close,
+                      CustomIcon.cancel,
+                      size: 22,
+                    ),
                   ),
                 )
             ),
-            height(.02.sh),
+            // height(.02.sh),
             textWidget(
                 text: "Post your Side Hustle",
                 color: AppColors.textBlackColor,
+                fontFamily: AppFont.gilroyBold,
                 fontWeight: FontWeight.bold,
                 fontSize: AppDimensions.dialogueTextHeadingSize),
             height(.01.sh),
             textWidget(
                 text:
                     "Please select what would you like to post as your side hustle",
+                fontSize: AppDimensions.textSizePerHead,
                 maxLines: 2),
             height(.02.sh),
             InkWell(
@@ -81,9 +87,9 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
                         : AppColors.whiteColor,
                     width: 2.0,
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(18.0),
                   // Adjust the radius as needed
-                  color: AppColors.itemBGColor,
+                  color: AppColors.dialogueSelected,
                 ),
                 width: 1.sw,
                 child: Column(
@@ -92,18 +98,22 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
                     textWidget(
                         text: AppStrings.product,
                         color: AppColors.textBlackColor,
+                        fontFamily: AppFont.gilroyBold,
                         fontWeight: FontWeight.bold,
-                        fontSize: AppDimensions.dialogueTextHeadingSize),
-                    height(0.01.sh),
-                    textWidget(
-                        text: AppStrings.productDesc,
-                        maxLines: 2,
-                        fontSize: 16),
+                        fontSize: AppDimensions.textSizeNormal),
+                    // height(0.01.sw),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: textWidget(
+                          text: AppStrings.productDesc,
+                          fontSize: AppDimensions.textSizePerHead,
+                          maxLines: 2),
+                    ),
                   ],
                 ),
               ),
             ),
-            height(.02.sh),
+            height(.02.sw),
             InkWell(
               onTap: () {
                 widget.isProductSelected(false);
@@ -121,9 +131,9 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
                         : AppColors.primaryColor,
                     width: 2.0,
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(18.0),
                   // Adjust the radius as needed
-                  color: AppColors.itemBGColor,
+                  color: AppColors.dialogueSelected,
                 ),
                 width: 1.sw,
                 child: Column(
@@ -132,13 +142,16 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
                     textWidget(
                         text: AppStrings.service,
                         color: AppColors.textBlackColor,
+                        fontFamily: AppFont.gilroyBold,
                         fontWeight: FontWeight.bold,
-                        fontSize: AppDimensions.dialogueTextHeadingSize),
-                    height(0.01.sh),
-                    textWidget(
-                        text: AppStrings.productDesc,
-                        maxLines: 2,
-                        fontSize: 16),
+                        fontSize: AppDimensions.textSizeNormal),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: textWidget(
+                          text: AppStrings.productDesc,
+                          fontSize: AppDimensions.textSizePerHead,
+                          maxLines: 2),
+                    ),
                   ],
                 ),
               ),

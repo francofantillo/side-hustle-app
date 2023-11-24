@@ -238,7 +238,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
           controller: widget.controller,
           readOnly: widget.isReadonly!,
           maxLines: widget.maxLines ?? 1,
-          style: TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroy),
+          style: TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroyRegular),
           decoration: InputDecoration(
             border: InputBorder.none,
             // fillColor: widget.fillColor ?? AppColors.whiteColor,

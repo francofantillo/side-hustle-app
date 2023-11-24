@@ -50,7 +50,7 @@ class AssetsPath {
   static const time = "${iconsPath}time.png";
   static const plumber = "${iconsPath}plumber.png";
   static const watch = "${iconsPath}watch.png";
-  static const searchFilter = "${iconsPath}search_filter.png";
+  static const searchFilter = "${iconsPath}logosearch_filter.png";
   static const location = "${iconsPath}location.png";
   static const logo = "${iconsPath}logo.png";
   static const cash = "${iconsPath}cash.png";
@@ -61,6 +61,8 @@ class AssetsPath {
   /// Images
   static const continueWith = "${imagePath}continue_with.png";
   static const placeHolderProfileImage = "${imagePath}profile_image.jpeg";
+  static const walkthrough = "${imagePath}walkthrough.png";
+  static const walkthrough2 = "${imagePath}walkthrough_2.png";
   // static const placeHolderProfileImage = "${iconsPath}place_holder.png";
   static const drawerBg = "${imagePath}drawer_bg.png";
   static const downloadBook = "${imagePath}download_book.png";
@@ -104,5 +106,6 @@ class AssetsPath {
   static const chatUser3 = "https://i.pravatar.cc/150?img=11";
   static const chatUser4 = "https://i.pravatar.cc/150?img=12";
   static const chatUser5 = "https://i.pravatar.cc/150?img=13";
+  static const chatUser6 = "https://i.pravatar.cc/150?img=14";
 
 }

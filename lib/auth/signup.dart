@@ -91,7 +91,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       "country: ${country?.name}, dialCode: ${country?.dialCode}, code: ${country?.code}");
                 },
               ),
-              height(AppDimensions.fieldsVerticalSpacingBetween),
+              // height(AppDimensions.fieldsVerticalSpacingBetween),
               const CustomTextFormField(
                 label: AppStrings.zipCode,
                 // fillColor: AppColors.productTextFieldColor,
@@ -117,7 +117,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   Expanded(
                     child: RichText(
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       text: TextSpan(
                         style: DefaultTextStyle.of(context).style,
                         children: <TextSpan>[
@@ -127,7 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 fontWeight: FontWeight.normal,
                                 fontSize:
                                     AppDimensions.textSizeTermsAndConditions,
-                                fontFamily: AppFont.gilroy,
+                                fontFamily: AppFont.gilroyRegular,
                                 color: AppColors.blackColor),
                           ),
                           TextSpan(
@@ -136,7 +136,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 fontWeight: FontWeight.bold,
                                 fontSize:
                                     AppDimensions.textSizeTermsAndConditions,
-                                fontFamily: AppFont.gilroy,
+                                fontFamily: AppFont.gilroySemiBold,
                                 color: AppColors.blackColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
@@ -151,7 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 fontWeight: FontWeight.normal,
                                 fontSize:
                                     AppDimensions.textSizeTermsAndConditions,
-                                fontFamily: AppFont.gilroy,
+                                fontFamily: AppFont.gilroyRegular,
                                 color: AppColors.blackColor),
                           ),
                           TextSpan(
@@ -160,7 +160,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 fontWeight: FontWeight.bold,
                                 fontSize:
                                     AppDimensions.textSizeTermsAndConditions,
-                                fontFamily: AppFont.gilroy,
+                                fontFamily: AppFont.gilroySemiBold,
                                 color: AppColors.blackColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
@@ -176,15 +176,18 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
               height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
-              customMaterialButton(
-                  name: AppStrings.register,
-                  onPressed: () {
-                    print('Button Pressed');
-                    Navigator.pushNamed(
-                        context, AppRoutes.otpVerificationScreenRoute,
-                        arguments:
-                        const OtpVerificationScreen(isSocial: true));
-                  }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: customMaterialButton(
+                    name: AppStrings.register,
+                    onPressed: () {
+                      print('Button Pressed');
+                      Navigator.pushNamed(
+                          context, AppRoutes.otpVerificationScreenRoute,
+                          arguments:
+                          const OtpVerificationScreen(isSocial: true));
+                    }),
+              ),
               height(AppDimensions.loginButtonVerticalSpacingBetween),
               Align(
                 alignment: Alignment.center,
@@ -197,7 +200,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: AppDimensions.textSizeTermsAndConditions,
-                            fontFamily: AppFont.gilroy,
+                            fontFamily: AppFont.gilroyRegular,
                             color: AppColors.greyColor),
                       ),
                       TextSpan(
@@ -205,7 +208,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: AppDimensions.textSizeTermsAndConditions,
-                          fontFamily: AppFont.gilroy,
+                          fontFamily: AppFont.gilroyBold,
                           color: AppColors.primaryColor,
                         ),
                         recognizer: TapGestureRecognizer()

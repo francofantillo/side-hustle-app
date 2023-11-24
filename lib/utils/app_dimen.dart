@@ -11,14 +11,18 @@ class AppDimensions {
   /// Text Size
   static double textSizeSmall = 14.sp;
   static double textSizeVerySmall = 12.sp;
+  static double textSizeTiny = 8.sp;
   static double textSizePerHead = 10.sp;
   static double textSizeChatMessageTime = 12.sp;
   static double textSizeNormal = 16.sp;
   static double textSizeLarge = 18.sp;
-  static double textSizeTermsAndConditions = 14.sp;
+  static double textSizeTermsAndConditions = 12.sp;
   static double textHeadingSize = 26.sp;
   static double textSizeCartText = 22.sp;
   static double textHeadingSizeHome = 22.sp;
+
+  /// Form Fields
+  static double formFieldsBetweenSpacing = 0.03.sw;
 
   /// Dialogue Text Size
   static double dialogueTextHeadingSize = 18.sp;
@@ -43,6 +47,8 @@ class AppDimensions {
   static double loginTopStartSpacing = .15.sh;
   // static double loginLogoSize = .13.sh;
   static double loginLogoSize = .27.sw;
+  // static double walkthroughSize = .65.sw;
+  static double walkthroughSize = .5.sh;
   // static double downloadBookSize = .57.sw;
   static double downloadBookSize = .67.sw;
   static double welcomeBackSpacingBetween = .05.sh;
@@ -50,7 +56,8 @@ class AppDimensions {
   static double forgotPasswordSpacingBetween = .01.sh;
   static double loginButtonVerticalSpacingBetween = .04.sh;
   static double rootPadding = 10.w;
-  static double orContinueWithPadding = 24;
+  // static double orContinueWithPadding = 24;
+  static double orContinueWithPadding = 36;
   static double defaultRoundedImageWidth = .3.sw;
   static double defaultRoundedImageHeight = .3.sw;
   static double socialButtonBackgroundSize = .05.sw;
@@ -93,7 +100,8 @@ class AppDimensions {
   static double homeFirstHorizontalListSize = 0.3.sw;
   static double homeFirstItemWidgetCurve = 15.h;
   // static double bottomButtonBGCurve = 30.h;
-  static double bottomButtonBGCurve = 0.05.sh;
+  // static double bottomButtonBGCurve = 0.05.sh;
+  static double bottomButtonBGCurve = 0.1.sw;
 
   /// Bottom Nav
   static double bottomNavBGCurve = 0.04.sh;
@@ -117,7 +125,8 @@ class AppDimensions {
 
   /// Event and Job Item
   // static double listItemHeight = 0.43.sw;
-  static double listItemHeight = 0.40.sw;
+  // static double listItemHeight = 0.40.sw;
+  static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
   static double listItemHeightJobCompleted = 0.41.sw;
   static double listItemWidth = 0.21.sw;
   static double listItemElevation = 0.02.sh;

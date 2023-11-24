@@ -5,6 +5,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
@@ -101,7 +102,8 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                             child: textWidget(
                                 text: AppStrings.uploadResume,
                                 color: AppColors.whiteColor,
-                                fontSize: AppDimensions.textSizeSmall),
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeVerySmall),
                           ),
                         ),
                         width(0.015.sw),
@@ -120,16 +122,18 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   )
                 ],
               ),
-              height(0.02.sh),
+              height(0.08.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.actualName,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -138,16 +142,18 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.callSignOrNickname,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -155,16 +161,18 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   hintText: AppStrings.callSignOrNicknameHint,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.familyTies,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -172,16 +180,18 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   hintText: AppStrings.familyTiesHint,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.professionalBackground,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -189,16 +199,18 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   hintText: AppStrings.professionalBackgroundHint,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.hobbies,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -225,7 +237,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   ),
                 ),
               ),
-              height(0.01.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Wrap(
@@ -246,11 +258,15 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                                   BorderRadius.all(Radius.circular(12))),
                           child: Row(
                             children: [
-                              textWidget(
-                                  text: itemsList[i],
-                                  maxLines: 2,
-                                  color: AppColors.whiteColor,
-                                  fontSize: AppDimensions.textSizeSmall),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: textWidget(
+                                    text: itemsList[i],
+                                    maxLines: 2,
+                                    color: AppColors.whiteColor,
+                                    fontFamily: AppFont.gilroyMedium,
+                                    fontSize: AppDimensions.textSizeVerySmall),
+                              ),
                               width(0.015.sw),
                               Material(
                                 color: AppColors.primaryColor,
@@ -262,6 +278,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                                   child: const Icon(
                                     CustomIcon.cancel,
                                     color: AppColors.whiteColor,
+                                    size: 20,
                                   ),
                                 ),
                               )
@@ -272,16 +289,18 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   ],
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.favoriteQuote,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -289,16 +308,18 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   hintText: AppStrings.favoriteQuoteHint,
                 ),
               ),
-              height(0.02.sh),
+              height(AppDimensions.formFieldsBetweenSpacing),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.whatDoYou,
                     maxLines: 1,
                     color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
                 child: CustomTextFormField(
@@ -306,7 +327,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   hintText: AppStrings.whatDoYouHint,
                 ),
               ),
-              height(0.03.sh),
+              height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(

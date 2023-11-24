@@ -54,6 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textWidget(text: AppStrings.helloThere),
                 textWidget(
                   text: AppStrings.welcomeBack,
+                  fontFamily: AppFont.gilroyBold,
                   fontSize: AppDimensions.textHeadingSize,
                   color: AppColors.textBlackColor,
                   fontWeight: AppDimensions.headingFontWeight,
@@ -61,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height(AppDimensions.welcomeBackSpacingBetween),
                 const CustomTextFormField(
                   label: AppStrings.emailAddress,
+                  // hintText: AppStrings.emailAddress,
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 const CustomTextFormField(
@@ -76,19 +78,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: textWidget(
                           text: AppStrings.forgotPasswordLogin,
+                          fontFamily: AppFont.gilroyMedium,
                           color: AppColors.textBlackColor),
                     )),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
-                customMaterialButton(
-                    name: AppStrings.login,
-                    onPressed: () {
-                      print('Button Pressed');
-                      // EasyLoading.show();
-                      // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
-                      // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
-                      Navigator.pushNamedAndRemoveUntil(context,
-                          AppRoutes.bottomTabsScreenRoute, (route) => false);
-                    }),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: customMaterialButton(
+                      name: AppStrings.login,
+                      onPressed: () {
+                        print('Button Pressed');
+                        // EasyLoading.show();
+                        // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
+                        // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            AppRoutes.bottomTabsScreenRoute, (route) => false);
+                      }),
+                ),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(
                     padding: EdgeInsets.only(
@@ -139,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: AppDimensions.textSizeTermsAndConditions,
-                            fontFamily: AppFont.gilroy,
+                            fontFamily: AppFont.gilroyRegular,
                             color: AppColors.blackColor),
                       ),
                       TextSpan(
@@ -147,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                             fontWeight: AppDimensions.headingFontWeight,
                             fontSize: AppDimensions.textSizeTermsAndConditions,
-                            fontFamily: AppFont.gilroy,
+                            fontFamily: AppFont.gilroySemiBold,
                             color: AppColors.blackColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
@@ -161,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: AppDimensions.textSizeTermsAndConditions,
-                            fontFamily: AppFont.gilroy,
+                            fontFamily: AppFont.gilroyRegular,
                             color: AppColors.blackColor),
                       ),
                       TextSpan(
@@ -169,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                             fontWeight: AppDimensions.headingFontWeight,
                             fontSize: AppDimensions.textSizeTermsAndConditions,
-                            fontFamily: AppFont.gilroy,
+                            fontFamily: AppFont.gilroySemiBold,
                             color: AppColors.blackColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
@@ -194,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.normal,
                               fontSize:
                                   AppDimensions.textSizeTermsAndConditions,
-                              fontFamily: AppFont.gilroy,
+                              fontFamily: AppFont.gilroyMedium,
                               color: AppColors.greyColor),
                         ),
                         TextSpan(
@@ -202,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: AppDimensions.textSizeTermsAndConditions,
-                            fontFamily: AppFont.gilroy,
+                            fontFamily: AppFont.gilroyBold,
                             color: AppColors.primaryColor,
                           ),
                           recognizer: TapGestureRecognizer()

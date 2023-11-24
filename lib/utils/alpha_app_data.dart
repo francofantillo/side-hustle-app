@@ -12,6 +12,20 @@ class AlphaAppData {
     HomeFirstList(name: "Kim’s shop", imagePath: AssetsPath.homeR5),
   ];
 
+  /// Walkthrough List
+  static final List<ChatAllUsersItemModel> walkthroughItemList = [
+    ChatAllUsersItemModel(
+        image: AssetsPath.walkthrough,
+        name: "Post your Side Hustle",
+        message:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+    ChatAllUsersItemModel(
+        image: AssetsPath.walkthrough2,
+        name: "I Need a Job",
+        message:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+  ];
+
   /// Chat all users Messages List
   static final List<ChatAllUsersItemModel> chatAllUsersList = [
     ChatAllUsersItemModel(
@@ -43,6 +57,40 @@ class AlphaAppData {
         name: "Nolan Carder",
         message: "You: Hey! How are you doing?",
         time: "18 Aug, 2023"),
+  ];
+
+  /// Notifications List
+  static final List<ChatAllUsersItemModel> notificationsList = [
+    ChatAllUsersItemModel(
+        image: AssetsPath.chatUser6,
+        name: "Charlie Gouse",
+        message: "You: Hey! How are you doing?",
+        time: "02:56am"),
+    ChatAllUsersItemModel(
+        image: AssetsPath.chatUser1,
+        name: "Ruben Geidt",
+        message: "You: Hey! How are you doing?",
+        time: "01:36am"),
+    ChatAllUsersItemModel(
+        image: AssetsPath.chatUser2,
+        name: "Abram Westervelt",
+        message: "You: Hey! How are you doing?",
+        time: "22 June, 2023"),
+    ChatAllUsersItemModel(
+        image: AssetsPath.chatUser3,
+        name: "Zain Baptista",
+        message: "You: Hey! How are you doing?",
+        time: "18 June, 2023"),
+    ChatAllUsersItemModel(
+        image: AssetsPath.chatUser4,
+        name: "Zaire Bator",
+        message: "You: Hey! How are you doing?",
+        time: "14 June, 2023"),
+    ChatAllUsersItemModel(
+        image: AssetsPath.chatUser5,
+        name: "Cooper Ekstrom",
+        message: "You: Hey! How are you doing?",
+        time: "10 June, 2023"),
   ];
 
   /// Jobs And Events List
@@ -446,7 +494,7 @@ class AlphaAppData {
     ItemList(
         title: "Developer",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Emerson Aminoff",
         userRating: "5.0 ratings",
         price: "\$24.56",
@@ -455,7 +503,7 @@ class AlphaAppData {
     ItemList(
         title: "Designer",
         subTitle:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         userName: "Emerson Aminoff",
         userRating: "5.0 ratings",
         price: "\$24.56",

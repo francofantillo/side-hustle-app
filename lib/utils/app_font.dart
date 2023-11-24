@@ -1,15 +1,12 @@
 class AppFont {
-  static const jostBlack = 'jostBlack';
-  static const jostBold = 'jostBold';
-  static const jostSemiBold = 'jostSemiBold';
-  static const jostExtraLight = 'jostExtraLight';
-  static const jostRegular = 'Jost-Regular';
-  static const jostLight = 'jostLight';
-  static const jostMedium = 'jostMedium';
-
-
-  static const gilroy = 'Gilroy-Regular';
+  static const gilroyRegular = 'GilroyRegular';
   static const gilroyBold = 'Gilroy-Bold';
-
-
+  static const gilroyExtraBold = 'GilroyExtraBold';
+  static const gilroyBlack = 'GilroyBlack';
+  static const gilroyHeavy = 'GilroyHeavy';
+  static const gilroyLight = 'GilroyLight';
+  static const gilroyMedium = 'GilroyMedium';
+  static const gilroySemiBold = 'GilroySemiBold';
+  static const gilroyThin = 'GilroyThin';
+  static const gilroyUltraThin = 'GilroyUltraThin';
 }
