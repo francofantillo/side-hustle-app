@@ -65,14 +65,14 @@ class CustomMaterialButton extends StatelessWidget {
       shape: RoundedRectangleBorder(
         side: BorderSide(width: 1, color: AppColors.primaryColor),
         borderRadius: BorderRadius.circular(
-          borderRadius ?? 16.0,
+          borderRadius ?? AppDimensions.borderRadiusButton,
         ),
         // Adjust the radius as needed
       ),
       child: Text(
         name ?? "",
         style: TextStyle(
-            fontSize: fontSize ?? 16,
+            fontSize: fontSize ?? AppDimensions.textSizeNormal,
             color: textColor,
             fontFamily: AppFont.gilroyBold),
       ),

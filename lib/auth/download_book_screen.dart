@@ -81,7 +81,7 @@ class _DownloadBookScreenState extends State<DownloadBookScreen> {
                   textAlign: TextAlign.center,
                   color: AppColors.primaryColor,
                   maxLines: 2,
-                  fontSize: AppDimensions.textSizePerHead),
+                  fontSize: AppDimensions.textSize10),
             ),
           ],
         ),

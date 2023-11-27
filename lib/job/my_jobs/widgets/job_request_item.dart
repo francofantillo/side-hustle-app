@@ -93,7 +93,7 @@ class JobRequestItemWidget extends StatelessWidget {
                                     child: textWidget(
                                         text: userRating,
                                         fontSize:
-                                            AppDimensions.textSizePerHead),
+                                            AppDimensions.textSize10),
                                   ),
                                 ],
                               ),

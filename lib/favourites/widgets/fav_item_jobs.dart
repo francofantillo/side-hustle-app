@@ -91,7 +91,7 @@ class FavItemJobsWidget extends StatelessWidget {
                         child: textWidget(
                           text: subTitle,
                           maxLines: 2,
-                          fontSize: AppDimensions.textSizePerHead,
+                          fontSize: AppDimensions.textSize10,
                         ),
                       ),
                       height(imageHeight! * .04),

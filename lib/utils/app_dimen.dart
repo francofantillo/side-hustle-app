@@ -12,9 +12,10 @@ class AppDimensions {
   static double textSizeSmall = 14.sp;
   static double textSizeVerySmall = 12.sp;
   static double textSizeTiny = 8.sp;
-  static double textSizePerHead = 10.sp;
+  static double textSize10 = 10.sp;
   static double textSizeChatMessageTime = 12.sp;
   static double textSizeNormal = 16.sp;
+  static double textSizeUserRating = 8.sp;
   static double textSizeLarge = 18.sp;
   static double textSizeTermsAndConditions = 12.sp;
   static double textHeadingSize = 26.sp;
@@ -68,6 +69,12 @@ class AppDimensions {
   /// SignUp
   static double signUpTopStartSpacing = .10.sh;
   static double agreeToSideHustleSpacing = .04.sh - 4;
+
+  /// Tab bar Height
+
+  static double tabBarHeight = 0.1.sw;
+  static double tabBarWidth = 90;
+  static double tabBarFontSize = 8.sp;
 
   /// Elevation
   static double defaultUnFocusedTextFieldElevation = 0.02.sw;
@@ -167,6 +174,9 @@ class AppDimensions {
   static double productTextSize = 12.sp;
   // static double productOrderWidgetHeight = 0.33.sw;
   static double productOrderWidgetHeight = 0.37.sw;
+
+  /// Button Border Radius
+  static double borderRadiusButton = 16;
 
   /// BottomSheet
   static double boarderRadiusBottomSheet = 25.0.h;

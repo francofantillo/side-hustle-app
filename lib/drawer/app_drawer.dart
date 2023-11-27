@@ -7,6 +7,7 @@ import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
@@ -56,10 +57,12 @@ class _AppDrawerState extends State<AppDrawer> {
                       backgroundColor: AppColors.whiteColor),
                   height(AppDimensions.fieldsVerticalSpacingBetween),
                   textWidget(
-                      text: AppStrings.sideMenu,
-                      color: AppColors.textWhiteColor,
-                      fontSize: AppDimensions.drawerHeadingSize,
-                      fontWeight: AppDimensions.headingFontWeight),
+                    text: AppStrings.sideMenu,
+                    color: const Color(0xFFFCFCFC),
+                    fontFamily: AppFont.gilroyBold,
+                    fontWeight: FontWeight.bold,
+                    fontSize: AppDimensions.textHeadingSize,
+                  ),
                   height(AppDimensions.fieldsVerticalSpacingBetween),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +79,10 @@ class _AppDrawerState extends State<AppDrawer> {
                           children: [
                             textWidget(
                                 text: AppStrings.userName,
-                                color: AppColors.textWhiteColor,
+                                color: const Color(0xFFFCFCFC),
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold,
+                                fontSize: AppDimensions.textHeadingSize,
                                 maxLines: 1),
                             textWidget(
                                 text: AppStrings.userEmail,
@@ -87,6 +93,13 @@ class _AppDrawerState extends State<AppDrawer> {
                       ),
                     ],
                   ),
+                  height(0.05.sw),
+                  textWidget(
+                      text: AppStrings.account.toUpperCase(),
+                      color: const Color(0xFFFCFCFC),
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontWeight: AppDimensions.headingFontWeight),
                   height(AppDimensions.drawerProfileSpacingBetween),
                   // Drawer Items
                   DrawerItemListTile(

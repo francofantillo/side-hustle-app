@@ -306,7 +306,7 @@ class _YourResumeState extends State<YourResume> {
                           textWidget(
                             text: AppStrings.resumePdfSize,
                             fontFamily: AppFont.gilroyBold,
-                            fontSize: AppDimensions.textSizePerHead,
+                            fontSize: AppDimensions.textSize10,
                           ),
                         ],
                       ),

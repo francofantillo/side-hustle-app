@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -29,7 +30,8 @@ class DrawerItemListTile extends StatelessWidget {
         children: [
           Image.asset(
             iconPath,
-            color: iconColor ?? AppColors.whiteColor,
+            // color: iconColor ?? AppColors.whiteColor,
+            color: const Color(0xFFFCFCFC),
             width: AppDimensions.drawerIconSize,
             height: AppDimensions.drawerIconSize,
           ),
@@ -46,10 +48,13 @@ class DrawerItemListTile extends StatelessWidget {
             }),*/
             child: textWidget(
                 text: title,
-                color: textColor ?? AppColors.textWhiteColor,
+                // color: textColor ?? AppColors.drawerItemColor,
+                color: const Color(0xFFFCFCFC),
                 textAlign: TextAlign.start,
+                fontFamily: AppFont.gilroySemiBold,
                 fontSize: AppDimensions.drawerItemTextSize,
-                fontWeight: fontWeight),
+                // fontWeight: fontWeight),
+                fontWeight: FontWeight.w500),
           ),
         ],
       ),

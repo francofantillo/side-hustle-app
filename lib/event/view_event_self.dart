@@ -96,7 +96,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                             color: AppColors.textBlackColor),
                         textWidget(
                           text: AppStrings.perHead,
-                          fontSize: AppDimensions.textSizePerHead,
+                          fontSize: AppDimensions.textSize10,
                         ),
                       ],
                     ),

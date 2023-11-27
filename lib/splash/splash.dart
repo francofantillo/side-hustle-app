@@ -55,34 +55,44 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Entry(
             scale: 0.1,
-            // duration: const Duration(milliseconds: 800),
             duration: const Duration(seconds: 2, milliseconds: 500),
-            // curve: Curves.easeInBack,
-            // curve: Curves.easeInOutBack,
             curve: Curves.easeOutBack,
             child: Center(
-              child: Card(
-                color: Colors.white,
-                elevation: 4,
-                shape: RoundedRectangleBorder(
+              child: Container(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(140),
-                  // borderRadius: BorderRadius.circular(100),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(.5),
+                      blurRadius: 20.0, // soften the shadow
+                      spreadRadius: 3.0, //extend the shadow
+                      offset: const Offset(
+                        0.0, // Move to right 10  horizontally
+                        0.0, // Move to bottom 10 Vertically
+                      ),
+                    )
+                  ],
                 ),
-                child: Material(
-                  elevation: 4,
+                child: Card(
+                  shadowColor: Colors.transparent,
                   color: Colors.white,
+                  elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(140),
-                    // borderRadius: BorderRadius.circular(100),
                   ),
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
-                    // padding: const EdgeInsets.only(left: 12, right: 12),
-                    // width: .58.sw,
-                    // height: .58.sw,
-                    width: .5.sw,
-                    height: .5.sw,
-                    child: Image.asset(AssetsPath.logo),
+                  child: Material(
+                    shadowColor: Colors.transparent,
+                    elevation: 4,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(140),
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      width: .5.sw,
+                      height: .5.sw,
+                      child: Image.asset(AssetsPath.logo),
+                    ),
                   ),
                 ),
               ),

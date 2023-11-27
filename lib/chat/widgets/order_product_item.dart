@@ -102,7 +102,7 @@ class OrderProductItemWidget extends StatelessWidget {
                                 children: [
                                   textWidget(
                                       text: AppStrings.deliveryType,
-                                      fontSize: AppDimensions.textSizePerHead,
+                                      fontSize: AppDimensions.textSize10,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.textBlackColor),
                                   Expanded(
@@ -110,7 +110,7 @@ class OrderProductItemWidget extends StatelessWidget {
                                         text: deliveryType,
                                         maxLines: 1,
                                         fontSize:
-                                            AppDimensions.textSizePerHead),
+                                            AppDimensions.textSize10),
                                   )
                                 ],
                               ),

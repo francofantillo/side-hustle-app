@@ -67,7 +67,7 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
             textWidget(
                 text:
                     "Please select what would you like to post as your side hustle",
-                fontSize: AppDimensions.textSizePerHead,
+                fontSize: AppDimensions.textSize10,
                 maxLines: 2),
             height(.02.sh),
             InkWell(
@@ -106,7 +106,7 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
                       padding: const EdgeInsets.only(top: 4.0),
                       child: textWidget(
                           text: AppStrings.productDesc,
-                          fontSize: AppDimensions.textSizePerHead,
+                          fontSize: AppDimensions.textSize10,
                           maxLines: 2),
                     ),
                   ],
@@ -149,7 +149,7 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
                       padding: const EdgeInsets.only(top: 4.0),
                       child: textWidget(
                           text: AppStrings.productDesc,
-                          fontSize: AppDimensions.textSizePerHead,
+                          fontSize: AppDimensions.textSize10,
                           maxLines: 2),
                     ),
                   ],

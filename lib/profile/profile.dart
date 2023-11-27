@@ -7,6 +7,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
@@ -87,14 +88,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height(0.01.sh),
               Center(
                 child: textWidget(
-                    text: AppStrings.userName,
+                    text: AppStrings.davidHan,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal,
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textHeadingSize,
                     fontWeight: FontWeight.bold),
               ),
               Center(
                 child: textWidget(
                     text: AppStrings.userEmail,
+                    color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSizeVerySmall),
               ),
               height(0.01.sh),
@@ -105,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 1.sw,
                   height: 36.h,
                   child: CustomButtonWithIcon(
-                      borderRadius: 12,
+                      // borderRadius: 12,
                       onPressed: () {
                         Navigator.pushNamed(
                             context, AppRoutes.yourShopScreenRoute);
@@ -123,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: customMaterialButton(
                     height: 6,
                     borderRadius: 12,
-                    fontSize: AppDimensions.textSizeSmall,
+                    fontSize: AppDimensions.textSizeVerySmall,
                     color: AppColors.primaryColor,
                     textColor: AppColors.whiteColor,
                     onPressed: () {
@@ -165,14 +168,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     horizontal: AppDimensions.defaultHorizontalPadding + 4),
                 child: Divider(),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppDimensions.defaultHorizontalPadding + 4),
                 child: textWidget(
                     text: AppStrings.account.toUpperCase(),
-                    color: AppColors.primaryColor,
-                    fontSize: AppDimensions.textSizeNormal,
+                    // color: AppColors.primaryColor,
+                    color: const Color(0xFF3896EE),
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSizeSmall,
                     fontWeight: AppDimensions.headingFontWeight),
               ),
               const Padding(
@@ -180,7 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     horizontal: AppDimensions.defaultHorizontalPadding),
                 child: ProfileItemsWidget(),
               ),
-              height(0.03.sh),
+              height(0.03.sw),
             ],
           ),
         ),

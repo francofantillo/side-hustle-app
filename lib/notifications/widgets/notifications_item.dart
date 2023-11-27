@@ -67,7 +67,7 @@ class NotificationsItem extends StatelessWidget {
                   left: 2, right: AppDimensions.rootPadding, top: 2),
               child: textWidget(
                   text: time ?? "",
-                  fontSize: AppDimensions.textSizePerHead)),
+                  fontSize: AppDimensions.textSize10)),
         ),
         Padding(
           padding: EdgeInsets.only(

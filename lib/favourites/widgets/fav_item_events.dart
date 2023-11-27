@@ -102,7 +102,7 @@ class FavItemEventsWidget extends StatelessWidget {
                             width(0.02.sw),
                             Expanded(
                                 child: textWidget(text: location, maxLines: 2,
-                                    fontSize: AppDimensions.textSizePerHead)),
+                                    fontSize: AppDimensions.textSize10)),
                           ],
                         ),
                       ),

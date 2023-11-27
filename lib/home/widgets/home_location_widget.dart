@@ -68,7 +68,7 @@ class _HomeLocationWidgetState extends State<HomeLocationWidget> {
                               text:
                                   isLocationExpended ? AppStrings.locationText : "",
                               color: AppColors.textWhiteColor,
-                              fontSize: AppDimensions.textSizePerHead),
+                              fontSize: AppDimensions.textSize10),
                         ),
                         Icon(
                           Icons.arrow_forward_ios,

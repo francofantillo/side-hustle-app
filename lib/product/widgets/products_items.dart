@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
@@ -67,8 +68,9 @@ class ProductsItemsWidget extends StatelessWidget {
                         children: [
                           textWidget(
                               text: title,
-                              fontSize: AppDimensions.textSizeNormal,
-                              fontWeight: FontWeight.w500,
+                              fontFamily: AppFont.gilroyBold,
+                              fontWeight: FontWeight.bold,
+                              fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -79,7 +81,7 @@ class ProductsItemsWidget extends StatelessWidget {
                                       text: subTitle,
                                       maxLines: 2,
                                       fontSize:
-                                          AppDimensions.textSizeVerySmall)),
+                                          AppDimensions.textSize10)),
                               IconButtonWithBackground(
                                 iconPath: AssetsPath.add,
                                 width: imageHeight! * .24,
@@ -94,6 +96,7 @@ class ProductsItemsWidget extends StatelessWidget {
                             children: [
                               textWidget(
                                   text: AppStrings.deliveryType,
+                                  fontFamily: AppFont.gilroySemiBold,
                                   fontSize: AppDimensions.productTextSize,
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.textBlackColor),
@@ -106,7 +109,9 @@ class ProductsItemsWidget extends StatelessWidget {
                           height(imageHeight! * .042),
                           textWidget(
                               text: price,
-                              fontWeight: FontWeight.w500,
+                              fontFamily: AppFont.gilroyBold,
+                              fontWeight: FontWeight.bold,
+                              fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
                         ],
                       ),

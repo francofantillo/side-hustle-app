@@ -67,9 +67,12 @@ class _SideHustleState extends State<SideHustle> {
               padding: EdgeInsets.only(
                   left: AppDimensions.rootPadding,
                   right: AppDimensions.rootPadding,
-                  top: AppDimensions.rootPadding),
+                  top: AppDimensions.rootPadding - 8.w),
               child: SearchTextField(
-                  hintText: AppStrings.searchHintText, onChanged: (search) {}),
+                  height: AppDimensions.searchTextFieldHeight,
+                  contentPaddingBottom: 8,
+                  hintText: AppStrings.searchHintText,
+                  onChanged: (search) {}),
             ),
             Padding(
               // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),

@@ -89,7 +89,7 @@ class ApplyForJobDialogue extends StatelessWidget {
                 child: textWidget(
                     text: AppStrings.locationText,
                     maxLines: 2,
-                    fontSize: AppDimensions.textSizePerHead),
+                    fontSize: AppDimensions.textSize10),
               ),
             ],
           ),
@@ -109,7 +109,7 @@ class ApplyForJobDialogue extends StatelessWidget {
               Expanded(
                 child: textWidget(
                     text: AppStrings.jobDateText,
-                    fontSize: AppDimensions.textSizePerHead),
+                    fontSize: AppDimensions.textSize10),
               ),
             ],
           ),
@@ -129,7 +129,7 @@ class ApplyForJobDialogue extends StatelessWidget {
               Expanded(
                 child: textWidget(
                     text: AppStrings.jobTimeText,
-                    fontSize: AppDimensions.textSizePerHead),
+                    fontSize: AppDimensions.textSize10),
               ),
             ],
           ),

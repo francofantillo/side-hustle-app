@@ -109,7 +109,7 @@ class _ViewEventState extends State<ViewEvent> {
                             color: AppColors.textBlackColor),
                         textWidget(
                           text: AppStrings.perHead,
-                          fontSize: AppDimensions.textSizePerHead,
+                          fontSize: AppDimensions.textSize10,
                         ),
                       ],
                     ),

@@ -48,14 +48,16 @@ class ItemsWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: 0,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Material(
-          elevation: 6,
+          elevation: 0,
+          shadowColor: Colors.transparent,
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
@@ -115,7 +117,7 @@ class ItemsWidget extends StatelessWidget {
                             child: textWidget(
                               text: subTitle,
                               maxLines: 2,
-                              fontSize: AppDimensions.textSizePerHead,
+                              fontSize: AppDimensions.textSize10,
                             ),
                           ),
                           height(imageHeight! * .04),
@@ -161,7 +163,7 @@ class ItemsWidget extends StatelessWidget {
                                       // place RoundedImageWithBackgroundColor at end
                                       textWidget(
                                           text: userName,
-                                          fontSize: AppDimensions.textSizePerHead,
+                                          fontSize: AppDimensions.textSize10,
                                           fontFamily: AppFont.gilroySemiBold,
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.textBlackColor),
@@ -182,7 +184,7 @@ class ItemsWidget extends StatelessWidget {
                                             children: [
                                               textWidget(
                                                   text: userRating,
-                                                  fontSize: 8.sp),
+                                                  fontSize: AppDimensions.textSizeUserRating),
                                             ],
                                           ),
                                         ],

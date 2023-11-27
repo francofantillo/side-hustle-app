@@ -96,7 +96,7 @@ class _ViewProductState extends State<ViewProduct> {
                               color: AppColors.textBlackColor),
                           textWidget(
                             text: AppStrings.perHead,
-                            fontSize: AppDimensions.textSizePerHead,
+                            fontSize: AppDimensions.textSize10,
                           ),
                         ],
                       ),

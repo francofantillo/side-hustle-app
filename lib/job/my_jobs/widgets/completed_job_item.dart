@@ -5,6 +5,7 @@ import 'package:side_hustle/job/my_jobs/widgets/rate_and_review.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
@@ -73,6 +74,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                           Expanded(
                               child: textWidget(
                                   text: title,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
@@ -86,12 +88,12 @@ class CompletedJobItemWidget extends StatelessWidget {
                             ),
                             child: textWidget(
                                 text: AppStrings.completed,
-                                fontSize: AppDimensions.textSizeVerySmall,
+                                fontSize: AppDimensions.textSize10,
                                 color: AppColors.textWhiteColor),
                           )
                         ],
                       ),
-                      height(imageHeight! * .01),
+                      height(imageHeight! * .02),
                       SizedBox(
                         width: .5.sw,
                         child: Row(
@@ -101,7 +103,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                                 child: textWidget(
                                     text: subTitle,
                                     maxLines: 2,
-                                    fontSize: AppDimensions.textSizeVerySmall)),
+                                    fontSize: AppDimensions.textSize10)),
                           ],
                         ),
                       ),
@@ -109,7 +111,9 @@ class CompletedJobItemWidget extends StatelessWidget {
                       textWidget(
                           text: price,
                           color: AppColors.textBlackColor,
-                          fontWeight: FontWeight.bold),
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimensions.textSizeSmall),
                       height(imageHeight! * .02),
                       Divider(
                         height: 1.h,
@@ -134,7 +138,8 @@ class CompletedJobItemWidget extends StatelessWidget {
                               // place RoundedImageWithBackgroundColor at end
                               textWidget(
                                   text: userName,
-                                  fontSize: 10.sp,
+                                  fontSize: AppDimensions.textSize10,
+                                  fontFamily: AppFont.gilroySemiBold,
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.textBlackColor),
                             ],
@@ -164,8 +169,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                           ),
                           child: Material(
                             color: AppColors.greenColor,
-                            borderRadius: BorderRadius.circular(
-                                AppDimensions.bookedJobRoundedBorder),
+                            borderRadius: BorderRadius.circular(12),
                             child: InkWell(
                               onTap: () {
                                 AppDialogues.noHeaderDialogue(
@@ -177,7 +181,8 @@ class CompletedJobItemWidget extends StatelessWidget {
                                 child: textWidget(
                                   text: AppStrings.rateAndReview,
                                   color: AppColors.textWhiteColor,
-                                  fontSize: 12.sp,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textSize10,
                                   fontWeight: FontWeight.w700,
                                   textAlign: TextAlign.center,
                                 ),

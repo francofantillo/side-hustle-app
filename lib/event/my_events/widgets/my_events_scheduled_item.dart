@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
@@ -70,6 +71,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                           Expanded(
                               child: textWidget(
                                   text: title,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
@@ -78,11 +80,13 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                               textWidget(
                                   text: price,
                                   color: AppColors.textBlackColor,
-                                  fontWeight: FontWeight.bold),
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold,
+                                fontSize: AppDimensions.textSizeSmall,),
                               textWidget(
-                                  text: "per head",
+                                  text: AppStrings.perHead,
                                   textAlign: TextAlign.end,
-                                  fontSize: 8),
+                                  fontSize: AppDimensions.textSizeTiny),
                             ],
                           ),
                         ],
@@ -105,7 +109,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                                 child: textWidget(
                                     text: subTitle,
                                     maxLines: 2,
-                                    fontSize: AppDimensions.textSizeVerySmall)),
+                                    fontSize: AppDimensions.textSize10)),
                           ],
                         ),
                       ),
@@ -122,7 +126,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: AppColors.greenColor,
                           borderRadius: BorderRadius.circular(
-                              AppDimensions.bookedJobRoundedBorder),
+                              12),
                         ),
                         child: Material(
                           color: AppColors.greenColor,
@@ -136,7 +140,8 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                                 child: textWidget(
                                   text: AppStrings.viewEvent,
                                   color: AppColors.textWhiteColor,
-                                  fontSize: 12.sp,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textSize10,
                                   fontWeight: FontWeight.w700,
                                   textAlign: TextAlign.center,
                                 ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -58,12 +60,15 @@ class AppliedJobsWidget extends StatelessWidget {
                           Expanded(
                               child: textWidget(
                                   text: title,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
                           textWidget(
                               text: price,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
+                              fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
                         ],
                       ),
@@ -73,7 +78,7 @@ class AppliedJobsWidget extends StatelessWidget {
                         child: textWidget(
                           text: subTitle,
                           maxLines: 2,
-                          fontSize: AppDimensions.textSizeVerySmall,
+                          fontSize: AppDimensions.textSize10,
                         ),
                       ),
                       height(imageHeight! * .04),
@@ -95,12 +100,14 @@ class AppliedJobsWidget extends StatelessWidget {
                             child: textWidget(
                               text: AppStrings.jobApplied,
                               color: AppColors.greenColor,
+                              fontFamily: AppFont.gilroyBold,
                               fontSize: 12.sp,
+                              // fontSize: AppDimensions.textSizeNormal,
                               textAlign: TextAlign.center,
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

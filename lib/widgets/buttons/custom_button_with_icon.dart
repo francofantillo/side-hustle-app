@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -31,7 +33,7 @@ class CustomButtonWithIcon extends StatelessWidget {
         backgroundColor: backgroundColor, // Set the background color
         shape: RoundedRectangleBorder(
           borderRadius:
-              BorderRadius.circular(borderRadius ?? 30.0), // Make it round
+              BorderRadius.circular(borderRadius ?? 12.0), // Make it round
         ),
       ),
       child: iconPositionRight
@@ -41,6 +43,9 @@ class CustomButtonWithIcon extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 textWidget(
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSizeVerySmall,
+                    fontWeight: FontWeight.bold,
                     text: name, color: textColor ?? AppColors.textWhiteColor),
                 width(0.02.sw),
                 ImageIcon(
@@ -60,6 +65,9 @@ class CustomButtonWithIcon extends StatelessWidget {
                 ),
                 width(0.02.sw),
                 textWidget(
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSizeVerySmall,
+                    fontWeight: FontWeight.bold,
                     text: name, color: textColor ?? AppColors.textWhiteColor),
               ],
             ),

@@ -112,7 +112,7 @@ class _ViewServiceState extends State<ViewService> {
                               color: AppColors.textBlackColor),
                           textWidget(
                             text: AppStrings.perHead,
-                            fontSize: AppDimensions.textSizePerHead,
+                            fontSize: AppDimensions.textSize10,
                           ),
                         ],
                       ),

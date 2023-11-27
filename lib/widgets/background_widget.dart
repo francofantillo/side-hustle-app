@@ -51,6 +51,7 @@ class BackgroundWidget extends StatelessWidget {
             : null,
         bottomNavigationBar: bottomNavBar,
         backgroundColor: backgroundColor ?? AppColors.whiteColor,
+        // backgroundColor: backgroundColor ?? AppColors.backgroundColor,
         body: body ?? Container(),
       ),
     );

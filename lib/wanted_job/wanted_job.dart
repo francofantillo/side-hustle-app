@@ -104,8 +104,8 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                     isVertical: false,
                     animate: true,
                     animationDuration: 200,
-                    minWidth: 90,
-                    minHeight: 0.1.sw,
+                    minWidth: AppDimensions.tabBarWidth,
+                    minHeight: AppDimensions.tabBarHeight,
                     cornerRadius: 20.0,
                     changeOnTap: true,
                     activeBgColors: const [
@@ -125,7 +125,7 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                       AppStrings.booked,
                       AppStrings.completed
                     ],
-                    fontSize: 8.sp,
+                    fontSize: AppDimensions.tabBarFontSize,
                     radiusStyle: true,
                     onToggle: (index) {
                       _tabIndexBasicToggle.value = index ?? 0;

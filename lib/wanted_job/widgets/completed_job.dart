@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
@@ -68,12 +69,15 @@ class CompletedJobsWidget extends StatelessWidget {
                           Expanded(
                               child: textWidget(
                                   text: title,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
                           textWidget(
                               text: price,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
+                              fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
                         ],
                       ),
@@ -83,7 +87,7 @@ class CompletedJobsWidget extends StatelessWidget {
                         child: textWidget(
                           text: subTitle,
                           maxLines: 2,
-                          fontSize: AppDimensions.textSizeVerySmall,
+                          fontSize: AppDimensions.textSize10,
                         ),
                       ),
                       height(imageHeight! * .04),
@@ -110,7 +114,8 @@ class CompletedJobsWidget extends StatelessWidget {
                                 Expanded(
                                   child: textWidget(
                                       text: userName!,
-                                      fontSize: 12.sp,
+                                      fontSize: AppDimensions.textSize10,
+                                      fontFamily: AppFont.gilroySemiBold,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.textBlackColor),
                                 ),
@@ -129,7 +134,9 @@ class CompletedJobsWidget extends StatelessWidget {
                                 color: AppColors.ratingColor,
                               ),
                               height(0.02.sw),
-                              textWidget(text: userRating, fontSize: 10.sp),
+                              textWidget(
+                                  text: userRating,
+                                  fontSize: AppDimensions.textSizeUserRating),
                             ],
                           ),
                         ],

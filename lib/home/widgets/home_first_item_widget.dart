@@ -30,7 +30,7 @@ class HomeFirstItemWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 4),
             width: 0.18.sw,
             child: textWidget(
-                text: title ?? "", fontSize: AppDimensions.textSizePerHead, textAlign: TextAlign.start, maxLines: 1))
+                text: title ?? "", fontSize: AppDimensions.textSize10, textAlign: TextAlign.start, maxLines: 1))
       ],
     );
   }

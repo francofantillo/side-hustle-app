@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
@@ -51,7 +53,7 @@ class EventItemsWidget extends StatelessWidget {
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: InkWell(
             onTap: onTap,
@@ -79,6 +81,7 @@ class EventItemsWidget extends StatelessWidget {
                               Expanded(
                                   child: textWidget(
                                       text: title,
+                                      fontFamily: AppFont.gilroyBold,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppDimensions.textSizeSmall,
                                       color: AppColors.textBlackColor)),
@@ -86,12 +89,14 @@ class EventItemsWidget extends StatelessWidget {
                                 children: [
                                   textWidget(
                                       text: price,
-                                      color: AppColors.textBlackColor,
-                                      fontWeight: FontWeight.bold),
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions.textSizeSmall,
+                                      color: AppColors.textBlackColor),
                                   textWidget(
-                                      text: "per head",
+                                      text: AppStrings.perHead,
                                       textAlign: TextAlign.end,
-                                      fontSize: 8),
+                                      fontSize: AppDimensions.textSizeTiny),
                                 ],
                               ),
                             ],
@@ -112,9 +117,10 @@ class EventItemsWidget extends StatelessWidget {
                                 width(0.02.sw),
                                 Expanded(
                                     child: textWidget(
-                                        text: subTitle,
-                                        maxLines: 2,
-                                        fontSize: AppDimensions.textSizeVerySmall)),
+                                  text: subTitle,
+                                  maxLines: 2,
+                                  fontSize: AppDimensions.textSize10,
+                                )),
                               ],
                             ),
                           ),
@@ -142,7 +148,8 @@ class EventItemsWidget extends StatelessWidget {
                                   // place RoundedImageWithBackgroundColor at end
                                   textWidget(
                                       text: userName,
-                                      fontSize: 10.sp,
+                                      fontSize: AppDimensions.textSize10,
+                                      fontFamily: AppFont.gilroySemiBold,
                                       fontWeight: FontWeight.w500,
                                       color: AppColors.textBlackColor),
                                   Row(
@@ -157,10 +164,11 @@ class EventItemsWidget extends StatelessWidget {
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           textWidget(
-                                              text: userRating, fontSize: 8.sp),
+                                              text: userRating, fontSize: AppDimensions.textSizeUserRating),
                                         ],
                                       ),
                                     ],

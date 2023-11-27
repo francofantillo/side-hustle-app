@@ -287,7 +287,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                   child: textWidget(
                       // text: "03:00",
                       text: time ?? "",
-                      fontSize: AppDimensions.textSizePerHead,
+                      fontSize: AppDimensions.textSize10,
                       color: AppColors.appTextBlackColor),
                 )
               ],
@@ -348,7 +348,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     padding: const EdgeInsets.only(right: 8.0, bottom: 8),
                     child: textWidget(
                         text: time ?? "",
-                        fontSize: AppDimensions.textSizePerHead,
+                        fontSize: AppDimensions.textSize10,
                         color: AppColors.whiteColor),
                   )
                 ],
