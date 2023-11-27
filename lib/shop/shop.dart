@@ -5,6 +5,7 @@ import 'package:side_hustle/shop/widgets/services_list_shop.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -54,7 +55,7 @@ class _ShopScreenState extends State<ShopScreen> {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return BackgroundWidget(
         showAppBar: true,
-        appBarTitle: AppStrings.shop + " abc",
+        appBarTitle: AppStrings.shop,
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
@@ -83,8 +84,9 @@ class _ShopScreenState extends State<ShopScreen> {
                           padding: EdgeInsets.only(bottom: 6.h),
                           child: textWidget(
                               text: AppStrings.shop,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeNormal,
+                              fontSize: AppDimensions.textSizeLarge + 2.sp,
                               color: AppColors.textBlackColor),
                         ),
                         Row(
@@ -95,8 +97,8 @@ class _ShopScreenState extends State<ShopScreen> {
                               padding: const EdgeInsets.only(top: 2.0),
                               child: ImageIcon(
                                 const AssetImage(AssetsPath.location),
-                                size: 0.025.sh,
-                                color: AppColors.greyColorNoOpacity,
+                                size: 0.037.sw,
+                                color: Color(0xFF565656),
                               ),
                             ),
                             width(0.02.sw),
@@ -104,6 +106,7 @@ class _ShopScreenState extends State<ShopScreen> {
                               child: textWidget(
                                   text: AppStrings.locationText,
                                   maxLines: 3,
+                                  color: Color(0xFF565656),
                                   fontSize: AppDimensions.textSizeVerySmall),
                             ),
                           ],

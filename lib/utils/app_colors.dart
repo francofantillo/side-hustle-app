@@ -7,7 +7,8 @@ class AppColors {
   static final greyColorChat = Color(0xFF9E9E9E).withOpacity(.1);
   static final bottomSheetBackgroundColor = Color(0xFF929292);
   static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
-  static final textGreyColor = Color(0xFF565656).withOpacity(.85);
+  // static final textGreyColor = Color(0xFF565656).withOpacity(.85);
+  static final textGreyColor = Color(0xFF565656);
   static final backIconBackgroundColor = Color(0xFF565656).withOpacity(.10);
   static final unratedColor = Color(0xFF565656).withOpacity(.10);
   static final ratingTextFieldColor = Color(0xFFEFEFF4).withOpacity(.7);
@@ -42,6 +43,7 @@ class AppColors {
   // static const ratingColor = Color(0xFFECAF53);
   static const ratingColor = Color(0xFFFFA800);
   static const textFieldColor = Color(0xFF959597);
+  static const hintTextFieldColor = Color(0xFF757575);
   static Color redColor = const Color(0xFFFF2323);
   static Color appRedColor = const Color(0xFFFE6E6E);
   // static const blackColor = Color(0xFF040404);

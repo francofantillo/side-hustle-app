@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/profile/other_user_profile/widgets/events_posted_list.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
@@ -108,12 +109,14 @@ class _OtherUserEventsPostedScreenState
                         child: textWidget(
                             text: AppStrings.otherUserName,
                             color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSizeNormal,
+                            fontFamily: AppFont.gilroyBold,
+                            fontSize: AppDimensions.textHeadingSize,
                             fontWeight: FontWeight.bold),
                       ),
                       Center(
                         child: textWidget(
                             text: AppStrings.otherUserEmail,
+                            color: AppColors.textBlackColor,
                             fontSize: AppDimensions.textSizeVerySmall),
                       ),
                     ],
@@ -121,15 +124,16 @@ class _OtherUserEventsPostedScreenState
                 ],
               ),
             ),
-            height(0.02.sh),
+            height(0.04.sw),
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: AppDimensions.defaultHorizontalPadding + 4),
               child: textWidget(
                   text: AppStrings.eventsPosted.toUpperCase(),
                   color: AppColors.primaryColor,
-                  fontSize: AppDimensions.textSizeNormal,
-                  fontWeight: AppDimensions.headingFontWeight),
+                  fontFamily: AppFont.gilroyBold,
+                  fontSize: AppDimensions.textSizeSmall,
+                  fontWeight: FontWeight.bold),
             ),
             const EventsPostedList(),
             height(0.03.sh),

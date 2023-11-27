@@ -5,6 +5,7 @@ import 'package:side_hustle/profile/other_user_profile/widgets/other_user_servic
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -138,7 +139,8 @@ class _OtherUserShopScreenState extends State<OtherUserShopScreen> {
                                 child: textWidget(
                                     text: AppStrings.shop,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: AppDimensions.textSizeNormal,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontSize: AppDimensions.textSizeLarge + 2.sp,
                                     color: AppColors.textBlackColor),
                               ),
                               Row(

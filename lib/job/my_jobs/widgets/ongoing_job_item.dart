@@ -41,7 +41,8 @@ class OngoingJobItemWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:

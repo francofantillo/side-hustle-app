@@ -5,6 +5,7 @@ import 'package:side_hustle/chat/widgets/chat_one_to_one_list.dart';
 import 'package:side_hustle/chat/widgets/chat_options_bottomsheet.dart';
 import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -99,7 +100,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         )
       ],
       body: Material(
-        elevation: 6,
+        elevation: AppDimensions.cardElevation,
         child: Column(
           children: [
             ChatOneToOneUsersList(

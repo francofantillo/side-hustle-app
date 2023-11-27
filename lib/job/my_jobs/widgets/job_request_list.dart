@@ -31,11 +31,6 @@ class _JobRequestListState extends State<JobRequestList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.listItemJobRequestHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
-              subTitle:
-              AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-              imagePath: AlphaAppData
-                  .jobsAndEventsList[0].itemList?[0].imagePath,
               price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
               userName:
               AlphaAppData.jobsAndEventsList[0].itemList?[0].userName,

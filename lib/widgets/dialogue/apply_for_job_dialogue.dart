@@ -4,6 +4,7 @@ import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
@@ -27,8 +28,9 @@ class ApplyForJobDialogue extends StatelessWidget {
             width(0.18.sw),
             textWidget(
                 text: AppStrings.applyForJob,
-                fontSize: AppDimensions.textSizeNormal,
-                fontWeight: FontWeight.w500,
+                fontFamily: AppFont.gilroyBold,
+                fontSize: AppDimensions.textSizeNormal + 2.sp,
+                fontWeight: FontWeight.bold,
                 color: AppColors.blackColor),
             const Spacer(),
             IconButton(
@@ -38,7 +40,7 @@ class ApplyForJobDialogue extends StatelessWidget {
               },
               icon: const Icon(
                 CustomIcon.cancel,
-                size: 26,
+                size: 24,
               ),
             )
           ],
@@ -49,8 +51,8 @@ class ApplyForJobDialogue extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               RoundedCornersImage(
-                imageHeight: 70.h,
-                imageWidth: 70.h,
+                imageHeight: 0.25.sw,
+                imageWidth: 0.25.sw,
                 boarderColor: Colors.transparent,
               ),
               width(0.02.sw),
@@ -59,14 +61,16 @@ class ApplyForJobDialogue extends StatelessWidget {
                 children: [
                   textWidget(
                       text: AppStrings.carpenter,
+                      fontFamily: AppFont.gilroyBold,
                       fontWeight: FontWeight.bold,
-                      fontSize: AppDimensions.textHeadingSizeHome,
+                      fontSize: AppDimensions.textHeadingSizeViewForms,
                       color: AppColors.blackColor),
                   height(0.01.sh),
                   textWidget(
                       text: AppStrings.productPricingNumeric,
+                      fontFamily: AppFont.gilroyBold,
                       fontWeight: FontWeight.bold,
-                      fontSize: AppDimensions.textSizeNormal,
+                      fontSize: AppDimensions.textPriceSizeViewForms,
                       color: AppColors.blackColor),
                 ],
               )
@@ -81,7 +85,7 @@ class ApplyForJobDialogue extends StatelessWidget {
             children: [
               ImageIcon(
                 const AssetImage(AssetsPath.location),
-                color: AppColors.greyColorNoOpacity,
+                color: const Color(0xFF565656),
                 size: 0.025.sh,
               ),
               width(0.02.sw),
@@ -89,7 +93,7 @@ class ApplyForJobDialogue extends StatelessWidget {
                 child: textWidget(
                     text: AppStrings.locationText,
                     maxLines: 2,
-                    fontSize: AppDimensions.textSize10),
+                    fontSize: AppDimensions.textLocationSizeViewForms),
               ),
             ],
           ),
@@ -102,14 +106,14 @@ class ApplyForJobDialogue extends StatelessWidget {
             children: [
               ImageIcon(
                 const AssetImage(AssetsPath.calender),
-                color: AppColors.greyColorNoOpacity,
+                color: const Color(0xFF565656),
                 size: 0.025.sh,
               ),
               width(0.02.sw),
               Expanded(
                 child: textWidget(
                     text: AppStrings.jobDateText,
-                    fontSize: AppDimensions.textSize10),
+                    fontSize: AppDimensions.textLocationSizeViewForms),
               ),
             ],
           ),
@@ -122,14 +126,14 @@ class ApplyForJobDialogue extends StatelessWidget {
             children: [
               ImageIcon(
                 const AssetImage(AssetsPath.time),
-                color: AppColors.greyColorNoOpacity,
+                color: const Color(0xFF565656),
                 size: 0.025.sh,
               ),
               width(0.02.sw),
               Expanded(
                 child: textWidget(
                     text: AppStrings.jobTimeText,
-                    fontSize: AppDimensions.textSize10),
+                    fontSize: AppDimensions.textLocationSizeViewForms),
               ),
             ],
           ),

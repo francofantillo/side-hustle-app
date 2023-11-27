@@ -4,6 +4,7 @@ import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -73,8 +74,9 @@ class _BottomModalSheetRequestServiceState
                 child: textWidget(
                     text: AppStrings.serviceDate,
                     color: AppColors.textWhiteColor,
-                    fontSize: AppDimensions.textSizeBottomSheet,
-                    fontWeight: FontWeight.w500),
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSizeCartText,
+                    fontWeight: FontWeight.bold),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 4),
@@ -82,7 +84,7 @@ class _BottomModalSheetRequestServiceState
                     text: AppStrings.serviceDateHint,
                     maxLines: 2,
                     color: AppColors.textWhiteColor,
-                    fontSize: AppDimensions.textSizeSmall),
+                    fontSize: AppDimensions.textSize10),
               ),
               height(0.02.sh),
               Padding(
@@ -112,8 +114,9 @@ class _BottomModalSheetRequestServiceState
                 child: textWidget(
                     text: AppStrings.serviceDuration,
                     color: AppColors.textWhiteColor,
-                    fontSize: AppDimensions.textSizeBottomSheet,
-                    fontWeight: FontWeight.w500),
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSizeCartText,
+                    fontWeight: FontWeight.bold),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 4),
@@ -121,7 +124,7 @@ class _BottomModalSheetRequestServiceState
                     text: AppStrings.serviceDurationHint,
                     maxLines: 2,
                     color: AppColors.textWhiteColor,
-                    fontSize: AppDimensions.textSizeSmall),
+                    fontSize: AppDimensions.textSize10),
               ),
               height(0.02.sh),
               // SizedBox(
@@ -200,18 +203,19 @@ class _BottomModalSheetRequestServiceState
                       if (widget.isEdit) {
                         Navigator.pop(context);
                       } else {
+                        widget.onItemAdded!(true);
                         Navigator.pop(context);
-                        AppUtils.showBottomModalSheet(
-                            context: context,
-                            widget: BottomModalSheetDeliveryAddress(
-                              isEdit: false,
-                              isService: true,
-                              onItemAdded: widget.onItemAdded,
-                            ));
+                        // Navigator.pop(context);
+                        // AppUtils.showBottomModalSheet(
+                        //     context: context,
+                        //     widget: BottomModalSheetDeliveryAddress(
+                        //       isEdit: false,
+                        //       isService: true,
+                        //       onItemAdded: widget.onItemAdded,
+                        //     ));
                       }
                     },
-                    borderRadius: 16,
-                    name: AppStrings.next,
+                    name: AppStrings.confirm,
                     color: AppColors.whiteColor,
                     textColor: AppColors.primaryColor),
               ),
@@ -231,8 +235,9 @@ class _BottomModalSheetRequestServiceState
                 child: textWidget(
                     text: AppStrings.cancel,
                     maxLines: 2,
+                    fontFamily: AppFont.gilroySemiBold,
                     color: AppColors.textWhiteColor,
-                    fontSize: AppDimensions.textSizeSmall),
+                    fontSize: AppDimensions.textSize10),
               ),
               height(0.1.sw)
             ],

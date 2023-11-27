@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class BackgroundWidget extends StatelessWidget {
@@ -40,6 +42,8 @@ class BackgroundWidget extends StatelessWidget {
                 elevation: 0,
                 title: textWidget(
                     text: appBarTitle,
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSizeNormal,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textBlackColor),
                 automaticallyImplyLeading: false,

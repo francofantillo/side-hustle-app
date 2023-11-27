@@ -4,6 +4,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -56,13 +57,15 @@ class _ApplyForJobState extends State<ApplyForJob> {
                       children: [
                         textWidget(
                             text: AppStrings.carpenter,
-                            fontWeight: FontWeight.w500,
-                            fontSize: AppDimensions.textHeadingSizeHome,
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold,
+                            fontSize: AppDimensions.textHeadingSizeViewForms,
                             color: AppColors.textBlackColor),
                         textWidget(
                             text: AppStrings.productPricingNumeric,
+                            fontFamily: AppFont.gilroyBold,
                             fontWeight: FontWeight.bold,
-                            fontSize: AppDimensions.textSizeNormal,
+                            fontSize: AppDimensions.textPriceSizeViewForms,
                             color: AppColors.textBlackColor),
                       ],
                     ),
@@ -75,7 +78,7 @@ class _ApplyForJobState extends State<ApplyForJob> {
                       children: [
                         ImageIcon(
                           const AssetImage(AssetsPath.location),
-                          color: AppColors.greyColorNoOpacity,
+                          color: const Color(0xFF565656),
                           size: AppDimensions.applyForJobIconSize,
                         ),
                         width(0.02.sw),
@@ -83,7 +86,8 @@ class _ApplyForJobState extends State<ApplyForJob> {
                           child: textWidget(
                               text: AppStrings.locationText,
                               maxLines: 2,
-                              fontSize: AppDimensions.textSizeVerySmall),
+                              color: const Color(0xFF565656),
+                              fontSize: AppDimensions.textLocationSizeViewForms),
                         ),
                       ],
                     ),
@@ -96,14 +100,14 @@ class _ApplyForJobState extends State<ApplyForJob> {
                       children: [
                         ImageIcon(
                           const AssetImage(AssetsPath.calender),
-                          color: AppColors.greyColorNoOpacity,
+                          color: const Color(0xFF565656),
                           size: AppDimensions.applyForJobIconSize,
                         ),
                         width(0.02.sw),
                         Expanded(
                           child: textWidget(
                               text: AppStrings.jobDateText,
-                              fontSize: AppDimensions.textSizeVerySmall),
+                              fontSize: AppDimensions.textLocationSizeViewForms),
                         ),
                       ],
                     ),
@@ -116,14 +120,15 @@ class _ApplyForJobState extends State<ApplyForJob> {
                       children: [
                         ImageIcon(
                           const AssetImage(AssetsPath.time),
-                          color: AppColors.greyColorNoOpacity,
+                          color: const Color(0xFF565656),
                           size: AppDimensions.applyForJobIconSize,
                         ),
                         width(0.02.sw),
                         Expanded(
                           child: textWidget(
                               text: AppStrings.jobTimeText,
-                              fontSize: AppDimensions.textSizeVerySmall),
+                              color: const Color(0xFF565656),
+                              fontSize: AppDimensions.textLocationSizeViewForms),
                         ),
                       ],
                     ),
@@ -137,11 +142,12 @@ class _ApplyForJobState extends State<ApplyForJob> {
                   ),
                   height(0.02.sh),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: textWidget(
                         text: AppStrings.jobPostBy,
-                        maxLines: 2,
-                        fontSize: AppDimensions.textSizeSmall,
+                        maxLines: 1,
+                        fontFamily: AppFont.gilroyBold,
+                        fontSize: AppDimensions.textSubHeadingSizeViewForms,
                         color: AppColors.textBlackColor,
                         fontWeight: FontWeight.bold),
                   ),
@@ -165,13 +171,14 @@ class _ApplyForJobState extends State<ApplyForJob> {
                                     showLoading: false,
                                     image: AssetsPath.userProfileJob,
                                     boarderColor: AppColors.primaryColor,
-                                    imageHeight: .09.sh,
-                                    imageWidth: .09.sw,
+                                    imageHeight: .1.sw,
+                                    imageWidth: .1.sw,
                                   ),
                                   width(.02.sw),
                                   Expanded(
                                     child: textWidget(
                                         text: AppStrings.userNameJob,
+                                        fontFamily: AppFont.gilroySemiBold,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.textBlackColor),
@@ -187,6 +194,9 @@ class _ApplyForJobState extends State<ApplyForJob> {
                                 context, AppRoutes.chatOneToOneScreenRoute);
                           },
                           iconPath: AssetsPath.message,
+                          height: 0.12.sw,
+                          width: 0.12.sw,
+                          iconSize: 20,
                           backgroundColor: AppColors.primaryColor,
                           iconColor: AppColors.whiteColor,
                         )
@@ -199,37 +209,42 @@ class _ApplyForJobState extends State<ApplyForJob> {
                     child: textWidget(
                         text: AppStrings.jobDesc,
                         maxLines: 2,
-                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontSize: AppDimensions.textSubHeadingSizeViewForms,
                         color: AppColors.textBlackColor,
                         fontWeight: FontWeight.bold),
                   ),
-                  height(0.01.sh),
+                  height(0.01.sw),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: textWidget(
                         text: AppStrings.jobDescText,
                         maxLines: 30,
-                        fontSize: AppDimensions.textSizeVerySmall),
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                   ),
-                  height(0.02.sh),
+                  height(0.03.sw),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: textWidget(
                         text: AppStrings.additionalInformation,
                         maxLines: 2,
-                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontSize: AppDimensions.textSubHeadingSizeViewForms,
                         color: AppColors.textBlackColor,
                         fontWeight: FontWeight.bold),
                   ),
-                  height(0.01.sh),
+                  height(0.01.sw),
                   Padding(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+                        const EdgeInsets.symmetric(horizontal: 8.0,),
                     child: textWidget(
                         text: AppStrings.additionalTextDesc,
                         maxLines: 30,
-                        fontSize: AppDimensions.textSizeVerySmall),
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                   ),
+                  height(0.05.sw),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: customMaterialButton(

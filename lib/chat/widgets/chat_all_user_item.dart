@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -52,7 +53,8 @@ class ChatAllUsersItem extends StatelessWidget {
                   child: textWidget(
                       text: name ?? "",
                       color: AppColors.textBlackColor,
-                      fontSize: AppDimensions.textSizeNormal,
+                      fontSize: AppDimensions.textSizeVerySmall,
+                      fontFamily: AppFont.gilroySemiBold,
                       fontWeight: FontWeight.w500)),
               Row(
                 children: [
@@ -64,14 +66,14 @@ class ChatAllUsersItem extends StatelessWidget {
                             top: 2),
                         child: textWidget(
                             text: message ?? "",
-                            fontSize: AppDimensions.textSizeVerySmall)),
+                            fontSize: AppDimensions.textSize10)),
                   ),
                   Padding(
                       padding: EdgeInsets.only(
                           left: 2, right: AppDimensions.rootPadding, top: 2),
                       child: textWidget(
                           text: time ?? "",
-                          fontSize: AppDimensions.textSizeVerySmall)),
+                          fontSize: AppDimensions.textSizeTiny)),
                 ],
               ),
             ],

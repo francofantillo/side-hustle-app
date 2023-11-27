@@ -133,8 +133,8 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2.0),
       child: Card(
-        elevation: 2,
         shadowColor: Colors.transparent,
+        elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),

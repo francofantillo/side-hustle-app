@@ -7,6 +7,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -173,8 +174,9 @@ class _YourShopScreenState extends State<YourShopScreen> {
                           padding: EdgeInsets.only(bottom: 6.h),
                           child: textWidget(
                               text: AppStrings.shop,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeNormal,
+                              fontSize: AppDimensions.textSizeLarge + 2.sp,
                               color: AppColors.textBlackColor),
                         ),
                         Row(
@@ -185,8 +187,8 @@ class _YourShopScreenState extends State<YourShopScreen> {
                               padding: const EdgeInsets.only(top: 2.0),
                               child: ImageIcon(
                                 const AssetImage(AssetsPath.location),
-                                size: 0.025.sh,
-                                color: AppColors.greyColorNoOpacity,
+                                size: 0.037.sw,
+                                color: Color(0xFF565656),
                               ),
                             ),
                             width(0.02.sw),
@@ -194,6 +196,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                               child: textWidget(
                                   text: AppStrings.locationText,
                                   maxLines: 3,
+                                  color: Color(0xFF565656),
                                   fontSize:
                                   AppDimensions.textSizeVerySmall),
                             ),

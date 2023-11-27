@@ -58,11 +58,13 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              left: AppDimensions.rootPadding,
-              right: AppDimensions.rootPadding,
-            ),
+                left: AppDimensions.rootPadding,
+                right: AppDimensions.rootPadding),
             child: SearchTextField(
-                hintText: AppStrings.searchChatHint, onChanged: (search) {}),
+                height: AppDimensions.searchTextFieldHeight,
+                contentPaddingBottom: 8,
+                hintText: AppStrings.searchChatHint,
+                onChanged: (search) {}),
           ),
           const ChatAllUsersList(),
           height(0.02.sh)

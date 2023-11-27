@@ -22,6 +22,13 @@ class AppDimensions {
   static double textSizeCartText = 22.sp;
   static double textHeadingSizeHome = 22.sp;
 
+  /// View Forms
+  static double textHeadingSizeViewForms = 28.sp;
+  static double textPriceSizeViewForms = 20.sp;
+  static double textLocationSizeViewForms = 10.sp;
+  static double textSubHeadingSizeViewForms = 14.sp;
+  static double textSubHeadingTextSizeViewForms = 12.sp;
+
   /// Form Fields
   static double formFieldsBetweenSpacing = 0.03.sw;
 
@@ -82,6 +89,7 @@ class AppDimensions {
   static double defaultFocusedTextFieldElevation = 0.02.sw;
   static double defaultSearchTextFieldElevation = 0.01.sw;
   static double defaultButtonElevation = 0.02.sw;
+  static double cardElevation = 6;
 
   /// Material Button
   static double defaultMaterialButtonHeightHome = 10.h;
@@ -182,9 +190,12 @@ class AppDimensions {
   static double boarderRadiusBottomSheet = 25.0.h;
   static double boarderRadiusCartPlaceOrder = 12.0.h;
   // static double cartItemProductHeight = 0.39.sw;
-  static double cartItemProductHeight = 0.37.sw;
+  // static double cartItemProductHeight = 0.37.sw;
+  static double cartItemProductHeight = 0.32.sw;
+  static double orderDetailHeight = 0.26.sw;
+  static double cartItemProductImageWidth = 0.22.sw;
   // static double cartItemServiceHeight = 0.50.sw;
-  static double cartItemServiceHeight = 0.43.sw;
+  static double cartItemServiceHeight = 0.39.sw;
   // static double modelSheetDeliveryHeight = .63.sh;
   static double modelSheetDeliveryHeight = .48.sh;
   // static double modelSheetProductsHeight = .7.sh;

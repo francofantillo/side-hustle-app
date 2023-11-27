@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
+
+import '../../utils/app_strings.dart';
 
 class FavItemJobsWidget extends StatelessWidget {
   final String? title,
@@ -39,7 +42,8 @@ class FavItemJobsWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
@@ -69,6 +73,7 @@ class FavItemJobsWidget extends StatelessWidget {
                           Expanded(
                               child: textWidget(
                                   text: title,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
@@ -76,12 +81,15 @@ class FavItemJobsWidget extends StatelessWidget {
                             children: [
                               textWidget(
                                   text: price,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
+                                  fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor),
                               textWidget(
-                                  text: "per head",
+                                  text: AppStrings.perHead,
+                                  color: AppColors.textBlackColor,
                                   textAlign: TextAlign.end,
-                                  fontSize: 8),
+                                  fontSize: AppDimensions.textSizeTiny),
                             ],
                           ),
                         ],
@@ -90,6 +98,7 @@ class FavItemJobsWidget extends StatelessWidget {
                         width: .5.sw,
                         child: textWidget(
                           text: subTitle,
+                          color: AppColors.textBlackColor,
                           maxLines: 2,
                           fontSize: AppDimensions.textSize10,
                         ),
@@ -118,8 +127,9 @@ class FavItemJobsWidget extends StatelessWidget {
                               // place RoundedImageWithBackgroundColor at end
                               textWidget(
                                   text: userName,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontSize: 10.sp,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.bold,
                                   color: AppColors.textBlackColor),
                               Row(
                                 children: [

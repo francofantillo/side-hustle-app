@@ -24,6 +24,7 @@ class SearchTextField extends StatelessWidget {
     return SizedBox(
       height: height ?? 60.h,
       child: Card(
+        shadowColor: Colors.transparent,
         // elevation: AppDimensions.defaultSearchTextFieldElevation,
         shape: RoundedRectangleBorder(
             borderRadius:

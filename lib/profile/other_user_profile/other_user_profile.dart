@@ -6,6 +6,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
@@ -68,8 +69,6 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                 borderRadius: 12,
                 onPressed: () {
                   // Navigator.pushNamed(context, AppRoutes.yourShopScreenRoute);
-                  // Navigator.pushNamed(
-                  //     context, AppRoutes.otherUserShopScreenRoute);
                   Navigator.pushReplacementNamed(
                       context, AppRoutes.shopScreenRoute);
                 },
@@ -118,23 +117,25 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                 boarderColor: AppColors.primaryColor,
                 imageHeight: 90.w,
                 imageWidth: 90.w,
-                borderWidth: .003.sh,
+                borderWidth: .003.sw,
               ),
             ),
-            height(0.01.sh),
+            height(0.01.sw),
             Center(
               child: textWidget(
                   text: AppStrings.otherUserName,
                   color: AppColors.textBlackColor,
-                  fontSize: AppDimensions.textSizeNormal,
+                  fontFamily: AppFont.gilroyBold,
+                  fontSize: AppDimensions.textHeadingSize,
                   fontWeight: FontWeight.bold),
             ),
             Center(
               child: textWidget(
                   text: AppStrings.otherUserEmail,
+                  color: AppColors.textBlackColor,
                   fontSize: AppDimensions.textSizeVerySmall),
             ),
-            height(0.02.sh),
+            height(0.02.sw),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(
@@ -158,7 +159,7 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                 ],
               ),
             ),
-            height(0.02.sh),
+            height(0.02.sw),
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: AppDimensions.defaultHorizontalPadding + 4),
@@ -168,9 +169,9 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
                     Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
                   },
                   name: AppStrings.message,
-                  borderRadius: 12),
+                  ),
             ),
-            height(0.01.sh),
+            height(0.01.sw),
             const Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppDimensions.defaultHorizontalPadding + 4),
@@ -182,8 +183,9 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
               child: textWidget(
                   text: AppStrings.shopOverview.toUpperCase(),
                   color: AppColors.primaryColor,
-                  fontSize: AppDimensions.textSizeNormal,
-                  fontWeight: AppDimensions.headingFontWeight),
+                  fontFamily: AppFont.gilroyBold,
+                  fontSize: AppDimensions.textSizeVerySmall,
+                  fontWeight: FontWeight.bold),
             ),
             const ShopOverviewList(),
             height(0.2.sw),

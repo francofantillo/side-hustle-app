@@ -186,6 +186,7 @@ class AppStrings {
   static const String enterTheServiceName = "Enter the service name";
   static const String serviceDescription = "Service Description";
   static const String serviceDate = "Service Date";
+  static const String serviceTime = "Service Time";
   static const String serviceDuration = "Service Duration";
   static const String serviceDurationHint =
       "Please enter the Total hours required, Start time and End time for this service.";
@@ -236,6 +237,7 @@ class AppStrings {
 
   /// Apply Job
   static const String applyForJob = "Apply for Job";
+  static const String orderDetail = "Order Detail";
   static const String userNameJob = "Emerson Aminoff";
   static const String carpenter = "Carpenter";
   static const String locationText =

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
-import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -74,7 +74,7 @@ class _ViewProductState extends State<ViewProduct> {
                     AssetsPath.watch
                   ],
                 ),
-                height(0.02.sh),
+                height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -83,8 +83,9 @@ class _ViewProductState extends State<ViewProduct> {
                     children: [
                       textWidget(
                           text: AppStrings.watch,
-                          fontWeight: FontWeight.w500,
-                          fontSize: AppDimensions.textHeadingSizeHome,
+                          fontFamily: AppFont.gilroyBold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppDimensions.textHeadingSizeViewForms,
                           color: AppColors.textBlackColor),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -92,10 +93,11 @@ class _ViewProductState extends State<ViewProduct> {
                           textWidget(
                               text: AppStrings.eventPrice,
                               fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeNormal,
+                              fontSize: AppDimensions.textPriceSizeViewForms,
                               color: AppColors.textBlackColor),
                           textWidget(
                             text: AppStrings.perHead,
+                            color: AppColors.textBlackColor,
                             fontSize: AppDimensions.textSize10,
                           ),
                         ],
@@ -112,13 +114,14 @@ class _ViewProductState extends State<ViewProduct> {
                       borderRadius: AppDimensions.boarderRadiusViewProduct,
                       color: AppColors.greenColor),
                 ),
-                height(0.03.sh),
+                height(0.03.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
                       text: AppStrings.productDescription,
                       maxLines: 2,
-                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSubHeadingSizeViewForms,
                       color: AppColors.textBlackColor,
                       fontWeight: FontWeight.bold),
                 ),
@@ -128,7 +131,8 @@ class _ViewProductState extends State<ViewProduct> {
                   child: textWidget(
                       text: AppStrings.productDescViewProduct,
                       maxLines: 30,
-                      fontSize: AppDimensions.textSizeVerySmall),
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                 ),
                 height(0.02.sh),
                 Padding(
@@ -136,7 +140,8 @@ class _ViewProductState extends State<ViewProduct> {
                   child: textWidget(
                       text: AppStrings.zipCode,
                       maxLines: 2,
-                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSubHeadingSizeViewForms,
                       color: AppColors.textBlackColor,
                       fontWeight: FontWeight.bold),
                 ),
@@ -155,7 +160,8 @@ class _ViewProductState extends State<ViewProduct> {
                         child: textWidget(
                             text: AppStrings.zipCodeText,
                             maxLines: 1,
-                            fontSize: AppDimensions.textSizeVerySmall),
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                       ),
                     ],
                   ),
@@ -166,7 +172,8 @@ class _ViewProductState extends State<ViewProduct> {
                   child: textWidget(
                       text: AppStrings.deliveryOptions,
                       maxLines: 2,
-                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSubHeadingSizeViewForms,
                       color: AppColors.textBlackColor,
                       fontWeight: FontWeight.bold),
                 ),
@@ -185,7 +192,8 @@ class _ViewProductState extends State<ViewProduct> {
                         child: textWidget(
                             text: AppStrings.pickUpViewProduct,
                             maxLines: 1,
-                            fontSize: AppDimensions.textSizeVerySmall),
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                       ),
                     ],
                   ),
@@ -206,7 +214,8 @@ class _ViewProductState extends State<ViewProduct> {
                             child: textWidget(
                                 text: AppStrings.productPostBy,
                                 maxLines: 2,
-                                fontSize: AppDimensions.textSizeSmall,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSubHeadingSizeViewForms,
                                 color: AppColors.textBlackColor,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -227,8 +236,8 @@ class _ViewProductState extends State<ViewProduct> {
                                         showLoading: false,
                                         image: AssetsPath.phillipPressProfile,
                                         boarderColor: AppColors.primaryColor,
-                                        imageHeight: .09.sh,
-                                        imageWidth: .09.sw,
+                                        imageHeight: .1.sw,
+                                        imageWidth: .1.sw,
                                       ),
                                       width(.02.sw),
                                       Expanded(
@@ -236,7 +245,8 @@ class _ViewProductState extends State<ViewProduct> {
                                             text:
                                                 AppStrings.userNameViewProduct,
                                             fontSize: 12.sp,
-                                            fontWeight: FontWeight.w500,
+                                            fontFamily: AppFont.gilroyBold,
+                                            fontWeight: FontWeight.bold,
                                             color: AppColors.textBlackColor),
                                       ),
                                     ],
@@ -291,26 +301,13 @@ class _ViewProductState extends State<ViewProduct> {
                                       isEdit: true,
                                     ));
                               } else {
-                                // isAddToCart = true;
-                                // setState(() {});
-                                AppUtils.showBottomModalSheet(
-                                    context: contextBuilder,
-                                    widget:
-                                        // const ModalBottomSheetProducts()
-                                        BottomModalSheetDeliveryAddress(
-                                            onItemAdded: (v) {
-                                      if (v) {
-                                        isAddToCart = true;
-                                        setState(() {});
-                                      }
-                                    }));
+                                Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
+
                               }
                             },
                             name: widget.isMyProduct
                                 ? AppStrings.editProduct
-                                : AppStrings.addToCart,
-                            borderRadius:
-                                AppDimensions.boarderRadiusViewProduct),
+                                : AppStrings.addToCart,),
                       ),
                 height(0.02.sh),
                 isAddToCart

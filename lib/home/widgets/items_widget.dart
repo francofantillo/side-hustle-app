@@ -49,14 +49,14 @@ class ItemsWidget extends StatelessWidget {
       width: imageWidth,
       child: Card(
         shadowColor: Colors.transparent,
-        elevation: 0,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Material(
-          elevation: 0,
+          elevation: AppDimensions.cardElevation,
           shadowColor: Colors.transparent,
           color: boarderColor,
           shape: RoundedRectangleBorder(

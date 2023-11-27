@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class OrderServiceItemWidget extends StatelessWidget {
-  final String? title, subTitle, price, imagePath, deliveryType;
+  final String? title, subTitle, price, imagePath, serviceDate, serviceTime;
   final Function()? onTap;
   final Color? boarderColor;
   final double imageHeight, imageWidth;
 
-  const OrderServiceItemWidget({super.key,
-    this.title,
-    this.subTitle,
-    this.price,
-    this.deliveryType,
-    this.onTap,
-    this.imagePath,
-    required this.imageHeight,
-    required this.imageWidth,
-    this.boarderColor});
+  const OrderServiceItemWidget(
+      {super.key,
+      this.title,
+      this.subTitle,
+      this.serviceDate,
+      this.serviceTime,
+      this.price,
+      this.onTap,
+      this.imagePath,
+      required this.imageHeight,
+      required this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +33,12 @@ class OrderServiceItemWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
@@ -58,10 +63,34 @@ class OrderServiceItemWidget extends StatelessWidget {
                           Expanded(
                             child: textWidget(
                                 text: title,
-                                fontSize: AppDimensions.textSizeNormal,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeSmall,
                                 color: AppColors.blackColor,
                                 fontWeight: FontWeight.bold),
                           ),
+                          // Align(
+                          //   alignment: Alignment.topRight,
+                          //   child: Padding(
+                          //     padding: const EdgeInsets.only(right: 4.0),
+                          //     child: textWidget(
+                          //         text: price,
+                          //         color: AppColors.blackColor,
+                          //         fontWeight: FontWeight.bold),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                      height(imageHeight! * .01),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              child: textWidget(
+                                  text: subTitle,
+                                  maxLines: 3,
+                                  fontSize: AppDimensions.textSizeTiny)),
+                          width(0.02.sw),
                           Align(
                             alignment: Alignment.topRight,
                             child: Padding(
@@ -74,33 +103,33 @@ class OrderServiceItemWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      height(imageHeight! * .01),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: textWidget(
-                                  text: subTitle,
-                                  maxLines: 3,
-                                  fontSize: AppDimensions.textSizeVerySmall)),
-                        ],
-                      ),
                       height(imageHeight! * .042),
                       Row(
                         children: [
                           textWidget(
-                              text: AppStrings.deliveryType,
-                              fontSize: AppDimensions.productTextSize,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textBlackColor),
+                              text: "${AppStrings.serviceDate}: ",
+                              fontFamily: AppFont.gilroyBold,
+                              fontWeight: FontWeight.bold,
+                              fontSize: AppDimensions.textSizeTiny),
                           textWidget(
-                              text: deliveryType,
-                              maxLines: 2,
-                              fontSize: AppDimensions.productTextSize)
+                              text: serviceTime,
+                              maxLines: 1,
+                              fontSize: AppDimensions.textSizeTiny),
                         ],
                       ),
-                      height(imageHeight! * .042),
+                      Row(
+                        children: [
+                          textWidget(
+                              text: "${AppStrings.serviceTime}: ",
+                              fontFamily: AppFont.gilroyBold,
+                              fontWeight: FontWeight.bold,
+                              fontSize: AppDimensions.textSizeTiny),
+                          textWidget(
+                              text: serviceTime,
+                              maxLines: 1,
+                              fontSize: AppDimensions.textSizeTiny),
+                        ],
+                      )
                     ],
                   ),
                 ),

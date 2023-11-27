@@ -5,6 +5,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class NotificationsList extends StatefulWidget {
@@ -42,6 +43,8 @@ class _NotificationsListState extends State<NotificationsList> {
                   Padding(
                       padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                       child: NotificationsItem(
+                        index: index,
+                        totalItem: 5,
                         image: AlphaAppData.notificationsList[index].image,
                         time: AlphaAppData.notificationsList[index].time,
                         name: AlphaAppData.notificationsList[index].name,
@@ -55,7 +58,8 @@ class _NotificationsListState extends State<NotificationsList> {
                           child: textWidget(
                               text: "Older",
                               color: AppColors.blackColor,
-                              fontSize: AppDimensions.textSizeSmall,
+                              fontFamily: AppFont.gilroyBold,
+                              fontSize: AppDimensions.textSizeNormal,
                               fontWeight: FontWeight.bold),
                         )
                       : const SizedBox.shrink()

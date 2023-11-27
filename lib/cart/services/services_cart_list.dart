@@ -4,6 +4,8 @@ import 'package:side_hustle/cart/services/service_cart_item.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 
 class ServicesCartList extends StatefulWidget {
   const ServicesCartList({super.key});
@@ -33,10 +35,10 @@ class _ServicesCartListState extends State<ServicesCartList> {
               imageWidth: 1.sw,
               imageHeight: AppDimensions.cartItemServiceHeight,
               boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
+              title: AppStrings.plumber,
               subTitle: AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-              imagePath: AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
-              price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,
+              imagePath: AssetsPath.plumber,
+              price: "\$12.56",
               onTap: () {},
             ),
           );

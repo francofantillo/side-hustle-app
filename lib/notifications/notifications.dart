@@ -5,6 +5,7 @@ import 'package:side_hustle/chat/widgets/message_options_bottomsheet.dart';
 import 'package:side_hustle/notifications/widgets/notifications_list.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -43,7 +44,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             child: textWidget(
                 text: "Today",
                 color: AppColors.blackColor,
-                fontSize: AppDimensions.textSizeSmall,
+                fontFamily: AppFont.gilroyBold,
+                fontSize: AppDimensions.textSizeNormal,
                 fontWeight: FontWeight.bold),
           ),
           const NotificationsList(),

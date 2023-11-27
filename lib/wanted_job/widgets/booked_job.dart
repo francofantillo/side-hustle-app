@@ -31,7 +31,8 @@ class BookedJobsWidget extends StatelessWidget {
       height: imageHeight! + 2.h,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:

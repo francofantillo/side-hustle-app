@@ -5,6 +5,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_list.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -96,19 +97,22 @@ class _ViewEventState extends State<ViewEvent> {
                   children: [
                     textWidget(
                         text: AppStrings.viewEventMusical,
-                        fontWeight: FontWeight.w500,
-                        fontSize: AppDimensions.textHeadingSizeHome,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppDimensions.textHeadingSizeViewForms,
                         color: AppColors.textBlackColor),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         textWidget(
                             text: AppStrings.eventPrice,
+                            fontFamily: AppFont.gilroyBold,
                             fontWeight: FontWeight.bold,
-                            fontSize: AppDimensions.textSizeNormal,
+                            fontSize: AppDimensions.textPriceSizeViewForms,
                             color: AppColors.textBlackColor),
                         textWidget(
                           text: AppStrings.perHead,
+                          color: AppColors.textBlackColor,
                           fontSize: AppDimensions.textSize10,
                         ),
                       ],
@@ -125,13 +129,15 @@ class _ViewEventState extends State<ViewEvent> {
                     ImageIcon(
                       const AssetImage(AssetsPath.location),
                       size: AppDimensions.applyForJobIconSize,
+                      color: const Color(0xFF565656),
                     ),
                     width(0.02.sw),
                     Expanded(
                       child: textWidget(
                           text: AppStrings.locationText,
                           maxLines: 2,
-                          fontSize: AppDimensions.textSizeVerySmall),
+                          color: const Color(0xFF565656),
+                          fontSize: AppDimensions.textLocationSizeViewForms),
                     ),
                   ],
                 ),
@@ -148,10 +154,12 @@ class _ViewEventState extends State<ViewEvent> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventPostedBy,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal),
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Row(
@@ -165,13 +173,14 @@ class _ViewEventState extends State<ViewEvent> {
                             showLoading: false,
                             image: AssetsPath.leoLubinProfile,
                             boarderColor: AppColors.primaryColor,
-                            imageHeight: .09.sh,
-                            imageWidth: .09.sw,
+                            imageHeight: .1.sw,
+                            imageWidth: .1.sw,
                           ),
                           width(.02.sw),
                           Expanded(
                             child: textWidget(
                                 text: AppStrings.eventPostedProfileName,
+                                fontFamily: AppFont.gilroySemiBold,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w500,
                                 color: AppColors.textBlackColor),
@@ -188,12 +197,12 @@ class _ViewEventState extends State<ViewEvent> {
                             ));
                       },
                       iconPath: AssetsPath.message,
-                      height: .13.sw,
-                      width: .13.sw,
+                      height: 0.12.sw,
+                      width: 0.12.sw,
+                      iconSize: 20,
                       backgroundColor: AppColors.primaryColor,
                       iconColor: AppColors.whiteColor,
                       borderRadius: 12,
-                      iconSize: 20,
                     ),
                   ],
                 ),
@@ -203,47 +212,53 @@ class _ViewEventState extends State<ViewEvent> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventPurpose,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal),
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
               height(0.01.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventPurposeText,
-                    fontSize: AppDimensions.textSizeNormal),
+                    color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
               ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventTheme,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppFont.gilroyBold,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal),
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
               height(0.01.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventThemeHint,
-                    fontSize: AppDimensions.textSizeSmall),
+                    color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
               ),
               height(0.02.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.vendorsList,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppFont.gilroyBold,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal),
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
               height(0.01.sh),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: BulletPointList(
                   itemsList: AppList.vendorsListData,
+                  color: AppColors.textBlackColor,
                 ),
               ),
               height(0.02.sh),
@@ -251,15 +266,17 @@ class _ViewEventState extends State<ViewEvent> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.eventAvailableAttractions,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppFont.gilroyBold,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal),
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
               height(0.01.sh),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: BulletPointList(
                   itemsList: AppList.attractionList,
+                  color: AppColors.textBlackColor,
                 ),
               ),
               height(0.02.sh),
@@ -267,9 +284,9 @@ class _ViewEventState extends State<ViewEvent> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.paymentType,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeNormal),
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
               height(0.01.sh),
               Padding(
@@ -286,7 +303,9 @@ class _ViewEventState extends State<ViewEvent> {
                     Expanded(
                       child: textWidget(
                           text: PaymentTypeEnum.Cash.name,
-                          fontSize: AppDimensions.textSizeSmall),
+                          color: AppColors.textBlackColor,
+                          fontSize:
+                              AppDimensions.textSubHeadingTextSizeViewForms),
                     ),
                   ],
                 ),
@@ -295,7 +314,6 @@ class _ViewEventState extends State<ViewEvent> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
-                    borderRadius: 14,
                     onPressed: () {
                       if (_isInterestedInEvent) {
                         _isInterestedInEvent = false;

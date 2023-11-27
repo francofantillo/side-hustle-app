@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -24,6 +25,7 @@ class LogoutDialogueWidget extends StatelessWidget {
               children: [
                 textWidget(
                     text: AppStrings.logout,
+                    fontFamily: AppFont.gilroyBold,
                     fontSize: AppDimensions.textHeadingSize,
                     fontWeight: FontWeight.bold,
                     color: AppColors.whiteColor,
@@ -31,13 +33,13 @@ class LogoutDialogueWidget extends StatelessWidget {
                 height(0.03.sh),
                 textWidget(
                     text: AppStrings.logoutMessage,
-                    fontSize: AppDimensions.textSizeSmall,
+                    fontSize: AppDimensions.textSizeNormal,
+                    maxLines: 2,
                     color: AppColors.whiteColor,
                     textAlign: TextAlign.center),
                 height(0.03.sh),
                 customMaterialButton(
                     height: 10.h,
-                    borderRadius: 12,
                     onPressed: () {
                       Navigator.pop(context);
                       Navigator.pushNamedAndRemoveUntil(context,
@@ -55,7 +57,7 @@ class LogoutDialogueWidget extends StatelessWidget {
                     },
                     child: textWidget(
                         text: AppStrings.keepMeLoggedIn,
-                        fontSize: AppDimensions.textSizeSmall,
+                        fontSize: AppDimensions.textSizeNormal,
                         color: AppColors.whiteColor,
                         textAlign: TextAlign.center),
                   ),

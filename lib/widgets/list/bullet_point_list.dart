@@ -5,9 +5,17 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class BulletPointList extends StatefulWidget {
+  final double? fontSize;
+  final String? fontFamily;
+  final Color? color;
   final List? itemsList;
 
-  const BulletPointList({super.key, required this.itemsList});
+  const BulletPointList(
+      {super.key,
+      required this.itemsList,
+      this.fontFamily,
+      this.fontSize,
+      this.color});
 
   @override
   State<BulletPointList> createState() => _BulletPointListState();
@@ -38,7 +46,9 @@ class _BulletPointListState extends State<BulletPointList> {
           Expanded(
             child: textWidget(
                 text: widget.itemsList?[index],
-                fontSize: AppDimensions.textSizeVerySmall),
+                fontFamily: widget.fontFamily,
+                color: widget.color,
+                fontSize: widget.fontSize ?? AppDimensions.textSizeVerySmall),
           )
         ]);
       },

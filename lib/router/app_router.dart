@@ -14,6 +14,7 @@ import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/chat/chat_all_users.dart';
 import 'package:side_hustle/chat/chat_block_users.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
+import 'package:side_hustle/chat/order_detail.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/event/attendees.dart';
 import 'package:side_hustle/event/event.dart';
@@ -230,6 +231,9 @@ class AppRouter {
 
           case AppRoutes.yourProductsCartScreenRoute:
             return const YourProductsCart();
+
+          case AppRoutes.orderDetailScreenRoute:
+            return const OrderDetail();
 
           case AppRoutes.postAddedScreenRoute:
             final args = routeSettings.arguments as PostAdded?;

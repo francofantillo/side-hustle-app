@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -33,7 +34,8 @@ class OrderProductItemWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
@@ -109,8 +111,7 @@ class OrderProductItemWidget extends StatelessWidget {
                                     child: textWidget(
                                         text: deliveryType,
                                         maxLines: 1,
-                                        fontSize:
-                                            AppDimensions.textSize10),
+                                        fontSize: AppDimensions.textSize10),
                                   )
                                 ],
                               ),
@@ -136,12 +137,14 @@ class OrderProductItemWidget extends StatelessWidget {
                     color: AppColors.backIconBackgroundColor,
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                     child: InkWell(
-                      onTap: () {
-
-                      },
+                      onTap: productsQuantity > 1 ? () {
+                        Navigator.pushNamed(context, AppRoutes.orderDetailScreenRoute);
+                      } : null,
                       child: Center(
                         child: textWidget(
-                            text: productsQuantity == 1 ? "$productsQuantity" : "$productsQuantity+ >",
+                            text: productsQuantity == 1
+                                ? "$productsQuantity"
+                                : "$productsQuantity+ >",
                             color: AppColors.textBlackColor,
                             fontWeight: FontWeight.bold,
                             fontSize: AppDimensions.textSizeNormal),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_events.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_jobs.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_shops.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -56,6 +57,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               iconColor: AppColors.greyColorNoOpacity,
               iconSize: 20,
               onTap: () {
+                Navigator.pushNamed(context, AppRoutes.notificationsScreenRoute);
               },
               iconPath: AssetsPath.notificationBell,
             )

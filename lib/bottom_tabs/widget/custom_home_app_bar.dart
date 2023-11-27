@@ -41,13 +41,14 @@ class CustomHomeAppBarWidget extends StatelessWidget {
           iconPath: AssetsPath.drawer,
         ),
         // width(.23.sw),
-        width(.1.sw),
+        // width(.1.sw),
         Expanded(
           child: textWidget(
               text: title,
               color: AppColors.textBlackColor,
-              fontSize: AppDimensions.customAppBarTitleTextSize,
-              fontWeight: FontWeight.w500,
+              fontSize: AppDimensions.textSizeNormal,
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.bold,
               fontFamily: AppFont.gilroyBold,
               maxLines: 1),
         ),

@@ -9,6 +9,8 @@ import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
+import '../../utils/app_font.dart';
+
 class FavItemShopsWidget extends StatelessWidget {
   final String? title,
       products,
@@ -41,7 +43,8 @@ class FavItemShopsWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
@@ -72,6 +75,7 @@ class FavItemShopsWidget extends StatelessWidget {
                           Expanded(
                               child: textWidget(
                                   text: title,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
@@ -92,6 +96,7 @@ class FavItemShopsWidget extends StatelessWidget {
                         child: textWidget(
                             text: products,
                             maxLines: 1,
+                            color: AppColors.textBlackColor,
                             fontSize: AppDimensions.textSize10),
                       ),
                       height(0.01.sh),
@@ -100,6 +105,7 @@ class FavItemShopsWidget extends StatelessWidget {
                         child: textWidget(
                             text: services,
                             maxLines: 1,
+                            color: AppColors.textBlackColor,
                             fontSize: AppDimensions.textSize10),
                       ),
                       height(imageHeight! * .04),
@@ -127,6 +133,7 @@ class FavItemShopsWidget extends StatelessWidget {
                               // place RoundedImageWithBackgroundColor at end
                               textWidget(
                                   text: userName,
+                                  fontFamily: AppFont.gilroyBold,
                                   fontSize: 10.sp,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textBlackColor),

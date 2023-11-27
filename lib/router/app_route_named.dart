@@ -53,5 +53,6 @@ class AppRoutes {
   static const String bottomTabsScreenRoute = "/bottomTabs";
   static const String yourServiceCartScreenRoute = "/yourServiceCart";
   static const String yourProductsCartScreenRoute = "/yourProductsCart";
+  static const String orderDetailScreenRoute = "/orderDetail";
   static const String notificationsScreenRoute = "/notifications";
 }

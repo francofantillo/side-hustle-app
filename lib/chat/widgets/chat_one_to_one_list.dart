@@ -44,7 +44,6 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       String? price,
       String? serviceDate,
       String? serviceTime,
-      String? deliveryType,
       String? location,
       String? messageTime}) {
     return Align(
@@ -58,6 +57,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
           right: 8.0,
         ),
         child: Card(
+          shadowColor: Colors.transparent,
           color: AppColors.primaryColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -76,9 +76,10 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                   imageHeight: AppDimensions.productOrderWidgetHeight,
                   imageWidth: 1.sw,
                   imagePath: image,
+                  serviceDate: serviceDate,
+                  serviceTime: serviceTime,
                   title: name,
                   subTitle: subTitle,
-                  deliveryType: deliveryType,
                   price: price,
                 ),
               ),
@@ -149,6 +150,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
           right: 8.0,
         ),
         child: Card(
+          shadowColor: Colors.transparent,
           color: AppColors.primaryColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -244,6 +246,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       child: Padding(
         padding: EdgeInsets.only(left: 8.0, bottom: bottomWidth ?? 10),
         child: Card(
+          shadowColor: Colors.transparent,
           color: Colors.white,
           elevation: 2,
           shape: RoundedRectangleBorder(
@@ -256,6 +259,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     Radius.circular(AppDimensions.listItemImageRoundedBorder)),
           ),
           child: Material(
+            shadowColor: Colors.transparent,
             color: Colors.white,
             elevation: 2,
             shape: RoundedRectangleBorder(
@@ -318,6 +322,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                       AppDimensions.listItemImageRoundedBorder)),
             ),
             child: Material(
+              shadowColor: Colors.transparent,
               color: const Color(0xFF1B97F3),
               elevation: 2,
               shape: RoundedRectangleBorder(
@@ -390,7 +395,6 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                             image: AssetsPath.plumber,
                             name: AppStrings.plumber,
                             subTitle: AppStrings.jobDescText,
-                            deliveryType: AppStrings.deliveryOptionPickup,
                             price: AppStrings.productPricingNumeric,
                             serviceDate: "25-Sep-2023",
                             serviceTime: "10:00am to 5:00pm",

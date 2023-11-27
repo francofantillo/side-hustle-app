@@ -33,14 +33,16 @@ class ProductsItemsWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        elevation: 6,
+        shadowColor: Colors.transparent,
+        elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Material(
-          elevation: 6,
+          shadowColor: Colors.transparent,
+          elevation: AppDimensions.cardElevation,
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
@@ -96,14 +98,14 @@ class ProductsItemsWidget extends StatelessWidget {
                             children: [
                               textWidget(
                                   text: AppStrings.deliveryType,
-                                  fontFamily: AppFont.gilroySemiBold,
-                                  fontSize: AppDimensions.productTextSize,
-                                  fontWeight: FontWeight.w500,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textSize10,
+                                  fontWeight: FontWeight.bold,
                                   color: AppColors.textBlackColor),
                               textWidget(
                                   text: deliveryType,
                                   maxLines: 2,
-                                  fontSize: AppDimensions.productTextSize)
+                                  fontSize: AppDimensions.textSize10)
                             ],
                           ),
                           height(imageHeight! * .042),

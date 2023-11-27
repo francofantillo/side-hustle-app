@@ -110,6 +110,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
       clipBehavior: Clip.none,
       children: [
         Card(
+          shadowColor: Colors.transparent,
           elevation: _isFocused
               ? AppDimensions.defaultFocusedTextFieldElevation
               : AppDimensions.defaultUnFocusedTextFieldElevation,

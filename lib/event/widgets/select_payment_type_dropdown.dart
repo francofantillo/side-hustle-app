@@ -31,6 +31,7 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shadowColor: Colors.transparent,
       elevation: AppDimensions.defaultFocusedTextFieldElevation,
       shape: RoundedRectangleBorder(
         borderRadius:

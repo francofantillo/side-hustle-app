@@ -7,6 +7,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -76,21 +77,7 @@ class _ViewServiceState extends State<ViewService> {
                     AssetsPath.plumber
                   ],
                 ),
-                height(0.02.sh),
-                // AspectRatio(
-                //   aspectRatio: 21/9,
-                //   child: Container(
-                //     // width: imageWidth ?? 0.18.sw, // Set your desired width
-                //     // height: imageHeight ?? 0.18.sw, // Set your desired height
-                //     decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.all(
-                //             Radius.circular(AppDimensions.homeFirstItemWidgetCurve)),
-                //         image: DecorationImage(
-                //             image: AssetImage(AssetsPath.plumber),
-                //             // image: AssetImage(AssetsPath.carpenter),
-                //             fit: BoxFit.cover)),
-                //   ),
-                // ),
+                height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -99,27 +86,30 @@ class _ViewServiceState extends State<ViewService> {
                     children: [
                       textWidget(
                           text: AppStrings.watch,
-                          fontWeight: FontWeight.w500,
-                          fontSize: AppDimensions.textHeadingSizeHome,
+                          fontFamily: AppFont.gilroyBold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppDimensions.textHeadingSizeViewForms,
                           color: AppColors.textBlackColor),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           textWidget(
                               text: AppStrings.eventPrice,
+                              fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeNormal,
+                              fontSize: AppDimensions.textPriceSizeViewForms,
                               color: AppColors.textBlackColor),
                           textWidget(
                             text: AppStrings.perHead,
                             fontSize: AppDimensions.textSize10,
+                            color: AppColors.textBlackColor
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                height(0.02.sh),
+                height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6.0),
                   child: customMaterialButton(
@@ -128,35 +118,38 @@ class _ViewServiceState extends State<ViewService> {
                       borderRadius: AppDimensions.boarderRadiusViewProduct,
                       color: AppColors.greenColor),
                 ),
-                height(0.03.sh),
+                height(0.03.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
                       text: AppStrings.productDescription,
                       maxLines: 2,
-                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSubHeadingSizeViewForms,
                       color: AppColors.textBlackColor,
                       fontWeight: FontWeight.bold),
                 ),
-                height(0.01.sh),
+                height(0.01.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
                       text: AppStrings.productDescViewProduct,
                       maxLines: 30,
-                      fontSize: AppDimensions.textSizeVerySmall),
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                 ),
-                height(0.02.sh),
+                height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
                       text: AppStrings.zipCode,
                       maxLines: 2,
-                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSubHeadingSizeViewForms,
                       color: AppColors.textBlackColor,
                       fontWeight: FontWeight.bold),
                 ),
-                height(0.01.sh),
+                height(0.01.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -171,22 +164,25 @@ class _ViewServiceState extends State<ViewService> {
                         child: textWidget(
                             text: AppStrings.zipCodeText,
                             maxLines: 1,
-                            fontSize: AppDimensions.textSizeVerySmall),
+                            fontFamily: AppFont.gilroyBold,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                       ),
                     ],
                   ),
                 ),
-                height(0.02.sh),
+                height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
                       text: AppStrings.deliveryOptions,
                       maxLines: 2,
-                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
                       color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSubHeadingSizeViewForms,
                       fontWeight: FontWeight.bold),
                 ),
-                height(0.01.sh),
+                height(0.01.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -201,17 +197,20 @@ class _ViewServiceState extends State<ViewService> {
                         child: textWidget(
                             text: AppStrings.pickUpViewProduct,
                             maxLines: 1,
-                            fontSize: AppDimensions.textSizeVerySmall),
+                            fontFamily: AppFont.gilroyBold,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms
+                        ),
                       ),
                     ],
                   ),
                 ),
-                height(0.02.sh),
+                height(0.02.sw),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
                   child: Divider(),
                 ),
-                height(0.02.sh),
+                height(0.02.sw),
                 widget.isMyService
                     ? const SizedBox.shrink()
                     : widget.isViewingServiceFromOthersShop
@@ -222,8 +221,9 @@ class _ViewServiceState extends State<ViewService> {
                             child: textWidget(
                                 text: AppStrings.servicePostBy,
                                 maxLines: 2,
-                                fontSize: AppDimensions.textSizeSmall,
+                                fontFamily: AppFont.gilroyBold,
                                 color: AppColors.textBlackColor,
+                                fontSize: AppDimensions.textSubHeadingSizeViewForms,
                                 fontWeight: FontWeight.bold),
                           ),
                 widget.isMyService
@@ -243,8 +243,8 @@ class _ViewServiceState extends State<ViewService> {
                                         showLoading: false,
                                         image: AssetsPath.phillipPressProfile,
                                         boarderColor: AppColors.primaryColor,
-                                        imageHeight: .09.sh,
-                                        imageWidth: .09.sw,
+                                        imageHeight: .1.sw,
+                                        imageWidth: .1.sw,
                                       ),
                                       width(.02.sw),
                                       Expanded(
@@ -252,8 +252,9 @@ class _ViewServiceState extends State<ViewService> {
                                             text:
                                                 AppStrings.userNameViewProduct,
                                             fontSize: 12.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColors.textBlackColor),
+                                            fontFamily: AppFont.gilroyBold,
+                                            color: AppColors.textBlackColor,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -293,8 +294,8 @@ class _ViewServiceState extends State<ViewService> {
                               ],
                             ),
                           ),
-                height(0.03.sh),
-                isAddToCart ? const SizedBox.shrink() : height(0.02.sh),
+                height(0.05.sw),
+                isAddToCart ? const SizedBox.shrink() : height(0.02.sw),
                 isAddToCart
                     ? const SizedBox.shrink()
                     : Padding(
@@ -324,11 +325,9 @@ class _ViewServiceState extends State<ViewService> {
                             },
                             name: widget.isMyService
                                 ? AppStrings.editService
-                                : AppStrings.requestService,
-                            borderRadius:
-                                AppDimensions.boarderRadiusViewProduct),
+                                : AppStrings.requestService),
                       ),
-                height(0.02.sh),
+                height(0.02.sw),
                 isAddToCart
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
@@ -343,15 +342,15 @@ class _ViewServiceState extends State<ViewService> {
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: AppColors.primaryColor,
-                                      width: 1.7),
-                                  borderRadius: BorderRadius.circular(
-                                      AppDimensions.boarderRadiusViewProduct),
+                                      width: 2),
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
                                 child: Center(
                                   child: textWidget(
                                     text: AppStrings.serviceAdded,
                                     color: AppColors.primaryColor,
-                                    fontSize: 12.sp,
+                                    fontFamily: AppFont.gilroySemiBold,
+                                    fontSize: AppDimensions.textSizeNormal,
                                     fontWeight: FontWeight.w500,
                                     textAlign: TextAlign.center,
                                   ),

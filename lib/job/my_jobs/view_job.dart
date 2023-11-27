@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -42,7 +43,7 @@ class _ViewJobState extends State<ViewJob> {
               const ImageSlider(
                 hideCameraIcon: true,
               ),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
@@ -50,18 +51,20 @@ class _ViewJobState extends State<ViewJob> {
                   children: [
                     textWidget(
                         text: AppStrings.carpenter,
-                        fontWeight: FontWeight.w500,
-                        fontSize: AppDimensions.textHeadingSizeHome,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: AppFont.gilroyBold,
+                        fontSize: AppDimensions.textHeadingSizeViewForms,
                         color: AppColors.textBlackColor),
                     textWidget(
                         text: AppStrings.productPricingNumeric,
+                        fontFamily: AppFont.gilroyBold,
                         fontWeight: FontWeight.bold,
-                        fontSize: AppDimensions.textSizeNormal,
+                        fontSize: AppDimensions.textPriceSizeViewForms,
                         color: AppColors.textBlackColor),
                   ],
                 ),
               ),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
@@ -70,18 +73,20 @@ class _ViewJobState extends State<ViewJob> {
                     ImageIcon(
                       const AssetImage(AssetsPath.location),
                       size: AppDimensions.applyForJobIconSize,
+                      color: const Color(0xFF565656),
                     ),
                     width(0.02.sw),
                     Expanded(
                       child: textWidget(
                           text: AppStrings.locationText,
                           maxLines: 2,
-                          fontSize: AppDimensions.textSizeVerySmall),
+                          color: const Color(0xFF565656),
+                          fontSize: AppDimensions.textLocationSizeViewForms),
                     ),
                   ],
                 ),
               ),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
@@ -90,17 +95,19 @@ class _ViewJobState extends State<ViewJob> {
                     ImageIcon(
                       const AssetImage(AssetsPath.calender),
                       size: AppDimensions.applyForJobIconSize,
+                      color: const Color(0xFF565656),
                     ),
                     width(0.02.sw),
                     Expanded(
                       child: textWidget(
                           text: AppStrings.jobDateText,
-                          fontSize: AppDimensions.textSizeVerySmall),
+                          color: const Color(0xFF565656),
+                          fontSize: AppDimensions.textLocationSizeViewForms),
                     ),
                   ],
                 ),
               ),
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
@@ -109,108 +116,66 @@ class _ViewJobState extends State<ViewJob> {
                     ImageIcon(
                       const AssetImage(AssetsPath.time),
                       size: AppDimensions.applyForJobIconSize,
+                      color: const Color(0xFF565656),
                     ),
                     width(0.02.sw),
                     Expanded(
                       child: textWidget(
                           text: AppStrings.jobTimeText,
-                          fontSize: AppDimensions.textSizeVerySmall),
+                          color: const Color(0xFF565656),
+                          fontSize: AppDimensions.textLocationSizeViewForms),
                     ),
                   ],
                 ),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Divider(
                   color: AppColors.greyColor,
                 ),
               ),
-              /*   height(0.02.sh),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.jobPostBy,
-                    maxLines: 2,
-                    fontSize: AppDimensions.textSizeSmall,
-                    color: AppColors.textBlackColor,
-                    fontWeight: FontWeight.bold),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          CircularCacheImageWidget(
-                            showLoading: false,
-                            image: AssetsPath.userProfileJob,
-                            boarderColor: AppColors.primaryColor,
-                            imageHeight: .09.sh,
-                            imageWidth: .09.sw,
-                          ),
-                          width(.02.sw),
-                          Expanded(
-                            child: textWidget(
-                                text: AppStrings.userNameJob,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.textBlackColor),
-                          ),
-                        ],
-                      ),
-                    ),
-                    RoundedImageWithBackgroundColor(
-                      assetPath: AssetsPath.message,
-                      imageHeight: .03.sh,
-                      imageWidth: .06.sw,
-                      backgroundColor: AppColors.primaryColor,
-                      socialButtonSize: .03.sh,
-                      borderRadius: 12,
-                    ),
-                  ],
-                ),
-              ),*/
-              height(0.02.sh),
+              height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.jobDesc,
                     maxLines: 2,
-                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.jobDescText,
                     maxLines: 30,
-                    fontSize: AppDimensions.textSizeVerySmall),
+                    color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
               ),
-              height(0.02.sh),
+              height(0.03.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.additionalInformation,
                     maxLines: 2,
-                    fontSize: AppDimensions.textSizeSmall,
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textSubHeadingSizeViewForms,
                     color: AppColors.textBlackColor,
                     fontWeight: FontWeight.bold),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.additionalTextDesc,
                     maxLines: 30,
-                    fontSize: AppDimensions.textSizeVerySmall),
+                    color: AppColors.textBlackColor,
+                    fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
               ),
-              height(0.02.sh),
+              height(0.05.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: customMaterialButton(
@@ -218,8 +183,7 @@ class _ViewJobState extends State<ViewJob> {
                       Navigator.pushNamed(context, AppRoutes.jobRequestScreenRoute);
                     },
                     name: AppStrings.viewRequest,
-                    color: AppColors.greenColor,
-                    borderRadius: 12),
+                    color: AppColors.greenColor),
               ),
             ],
           ),
