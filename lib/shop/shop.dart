@@ -119,12 +119,13 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-              child: customMaterialButton(
+              child: CustomMaterialButton(
                   onPressed: () {},
                   name: AppStrings.getDirections,
                   color: AppColors.greenColor,
                   borderRadius: 16,
-                  height: 9.h),
+                  // height: 9.h
+              ),
             ),
             Padding(
               // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),

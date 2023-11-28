@@ -30,13 +30,23 @@ class _ChatBlockUsersState extends State<ChatBlockUsers> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Padding(
+          //   padding: EdgeInsets.only(
+          //     left: AppDimensions.rootPadding,
+          //     right: AppDimensions.rootPadding,
+          //   ),
+          //   child: SearchTextField(
+          //       hintText: AppStrings.searchChatHint, onChanged: (search) {}),
+          // ),
           Padding(
             padding: EdgeInsets.only(
-              left: AppDimensions.rootPadding,
-              right: AppDimensions.rootPadding,
-            ),
+                left: AppDimensions.rootPadding,
+                right: AppDimensions.rootPadding),
             child: SearchTextField(
-                hintText: AppStrings.searchChatHint, onChanged: (search) {}),
+                height: AppDimensions.searchTextFieldHeight,
+                contentPaddingBottom: 8,
+                hintText: AppStrings.searchChatHint,
+                onChanged: (search) {}),
           ),
           const ChatBlockUsersList(),
           Padding(
@@ -44,7 +54,7 @@ class _ChatBlockUsersState extends State<ChatBlockUsers> {
               left: AppDimensions.rootPadding + 8,
               right: AppDimensions.rootPadding + 8,
             ),
-            child: customMaterialButton(
+            child: CustomMaterialButton(
                 onPressed: () {},
                 borderRadius: 16,
                 name: AppStrings.unblockAll),

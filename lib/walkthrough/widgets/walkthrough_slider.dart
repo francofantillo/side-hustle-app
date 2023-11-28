@@ -67,7 +67,7 @@ class _WalkthroughSliderState extends State<WalkthroughSlider> {
           height(0.03.sh),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: customMaterialButton(
+            child: CustomMaterialButton(
               onPressed: () {
                 // pageController.jumpToPage(currentIndex);
                 if (currentIndex != 1) {

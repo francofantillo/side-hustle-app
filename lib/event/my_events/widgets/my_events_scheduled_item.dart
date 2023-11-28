@@ -119,32 +119,37 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                         height: 1.h,
                       ),
                       // height(imageHeight! * .03),
-                      const Spacer(),
-                      Container(
-                        // height: 0.0725.sw,
-                        // padding: const EdgeInsets.all(8),
-                        margin: EdgeInsets.zero,
-                        decoration: BoxDecoration(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(
-                              12),
-                        ),
-                        child: Material(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(
-                              AppDimensions.bookedJobRoundedBorder),
-                          child: InkWell(
-                            onTap: onTap,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: textWidget(
-                                  text: AppStrings.viewEvent,
-                                  color: AppColors.textWhiteColor,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: AppDimensions.textSize10,
-                                  fontWeight: FontWeight.w700,
-                                  textAlign: TextAlign.center,
+                      // const Spacer(),
+                      // width(0.05.sw),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 0.025.sw),
+                          child: Container(
+                            // padding: const EdgeInsets.all(8),
+                            margin: EdgeInsets.zero,
+                            decoration: BoxDecoration(
+                              color: AppColors.greenColor,
+                              borderRadius: BorderRadius.circular(
+                                  16),
+                            ),
+                            child: Material(
+                              color: AppColors.greenColor,
+                              borderRadius: BorderRadius.circular(
+                                  AppDimensions.bookedJobRoundedBorder),
+                              child: InkWell(
+                                onTap: onTap,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: textWidget(
+                                      text: AppStrings.viewEvent,
+                                      color: AppColors.textWhiteColor,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontSize: AppDimensions.textSizeVerySmall,
+                                      fontWeight: FontWeight.w700,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

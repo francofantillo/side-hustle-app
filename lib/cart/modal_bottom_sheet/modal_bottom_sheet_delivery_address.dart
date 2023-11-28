@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -54,8 +55,9 @@ class _BottomModalSheetDeliveryAddressState
                   child: textWidget(
                       text: AppStrings.deliveryAddress,
                       color: AppColors.textWhiteColor,
-                      fontSize: AppDimensions.textSizeBottomSheet,
-                      fontWeight: FontWeight.w500),
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSizeCartText,
+                      fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding:
@@ -65,8 +67,8 @@ class _BottomModalSheetDeliveryAddressState
                           ? AppStrings.deliveryAddressServiceHint
                           : AppStrings.deliveryAddressHint,
                       maxLines: 2,
-                      color: AppColors.textWhiteColor,
-                      fontSize: AppDimensions.textSizeSmall),
+                      color: const Color(0xFFFCFCFC),
+                      fontSize: AppDimensions.textSizeVerySmall),
                 ),
                 height(0.02.sh),
                 Padding(
@@ -104,8 +106,8 @@ class _BottomModalSheetDeliveryAddressState
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-                  child: customMaterialButton(
-                      height: 10.h,
+                  child: CustomMaterialButton(
+                      // height: 10.h,
                       onPressed: () {
                         if (widget.isEdit) {
                           Navigator.pop(context);
@@ -155,7 +157,7 @@ class _BottomModalSheetDeliveryAddressState
                       color: AppColors.textWhiteColor,
                       fontSize: AppDimensions.textSizeSmall),
                 ),
-                height(0.1.sw),
+                height(0.15.sw),
               ],
             ),
           ),

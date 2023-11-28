@@ -29,7 +29,7 @@ class CircularCacheImageWidget extends StatelessWidget {
       imageUrl:
           // Testing Url
           // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg',
-          image == null ? "" : image!,
+          image == null ? "https://www.example.com/non_existent_image.jpg" : image!,
       imageBuilder: (context, imageProvider) => Container(
         width: imageWidth ?? 60.h, // Set your desired width
         height: imageHeight ?? 60.h, // Set your desired height

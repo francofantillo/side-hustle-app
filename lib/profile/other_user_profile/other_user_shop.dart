@@ -173,7 +173,7 @@ class _OtherUserShopScreenState extends State<OtherUserShopScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-              child: customMaterialButton(
+              child: CustomMaterialButton(
                   onPressed: () {},
                   name: AppStrings.getDirections,
                   color: AppColors.greenColor,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -22,7 +24,7 @@ class EventPostPackagesItem extends StatelessWidget {
     print("widget.defaultCard : $defaultPackage ");
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.itemBGColor,
+          color: Colors.white,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(20)),
       child: Padding(
@@ -33,13 +35,17 @@ class EventPostPackagesItem extends StatelessWidget {
             textWidget(
                 text: "\$${packagePrice?.toStringAsFixed(2) ?? ""}",
                 color: AppColors.textBlackColor,
-                fontWeight: FontWeight.w500),
+                fontFamily: AppFont.gilroyBold,
+                fontSize: AppDimensions.textSizeNormal,
+                fontWeight: FontWeight.bold),
             width(0.03.sw),
             Expanded(
               child: textWidget(
                   text: packageType ?? "",
                   color: AppColors.textBlackColor,
-                  fontWeight: FontWeight.w500),
+                  fontFamily: AppFont.gilroyBold,
+                  fontSize: AppDimensions.textSizeNormal,
+                  fontWeight: FontWeight.bold),
             ),
             // const Spacer(),
             Radio(value: defaultPackage, groupValue: true, onChanged: onChanged)

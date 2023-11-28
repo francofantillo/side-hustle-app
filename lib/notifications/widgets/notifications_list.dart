@@ -35,7 +35,7 @@ class _NotificationsListState extends State<NotificationsList> {
             color: AppColors.whiteColor,
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
+                // Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

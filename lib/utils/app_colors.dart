@@ -27,13 +27,14 @@ class AppColors {
   static const textBlackColor = Color(0xFF323232);
   static const appTextBlackColor = Color(0xFF6B6B6B);
   static const drawerItemColor = Color(0xFF6B6B6B);
-  static const textWhiteColor = Color(0xFFFCFCFC);
+  static const textWhiteColor = Color(0xFFFFFFFF);
   static const greenColor = Color(0xFF21A455);
   static const orangeColor = Color(0xFFFF8139);
   static const jobRequestTextBoarderColor = Color(0xFFE76161);
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
-  static const backgroundColor = Color(0xFFFCFCFC);
+  // static const backgroundColor = Color(0xFFFCFCFC);
+  static const backgroundColor = Color(0xFFFFFFFF);
   static const chatMessageTimeColor = Color(0xFF9E9E9E);
   static const whiteColor = Colors.white;
   static const labelColor = Color(0xFF757575);

@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppDimensions {
 
   static double buttonDefaultWidth = 0;
-  static const double buttonDefaultHeight = 12;
+  // static const double buttonDefaultHeight = 12;
+  static const double buttonDefaultHeight = 16;
 
   /// Text Size
   static double textSizeSmall = 14.sp;
@@ -199,7 +200,10 @@ class AppDimensions {
   // static double modelSheetDeliveryHeight = .63.sh;
   static double modelSheetDeliveryHeight = .48.sh;
   // static double modelSheetProductsHeight = .7.sh;
-  static double modelSheetProductsHeight = .7.sh;
+  // static double modelSheetRequestServiceHeight = .7.sh;
+  static double modelSheetProductsHeight = .87.sh;
+  // static double modelSheetProductsHeight = .4.sh;
+  static double modelSheetPackageTypeHeight = .7.sh;
   static double modelSheetServiceHeight = .87.sh;
 
   static double textSizeBottomSheet = 22.sp;

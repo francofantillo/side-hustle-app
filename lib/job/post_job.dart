@@ -195,7 +195,7 @@ class _PostJobState extends State<PostJob> {
                         CustomTextFormField(
                           height: 45.h,
                           hintText: "00000",
-                          keyboardType: TextInputType.number,
+                          // keyboardType: TextInputType.number,
                           // fillColor: AppColors.productTextFieldColor,
                         ),
                       ],
@@ -319,7 +319,7 @@ class _PostJobState extends State<PostJob> {
               height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                   borderRadius: 14,
                   onPressed: () {
                     AppUtils.showBottomModalSheet(

@@ -41,7 +41,7 @@ class JobsHorizontalListWidget extends StatelessWidget {
                     text: title ?? AppStrings.blessTheseBusinesses,
                     fontFamily: AppFont.gilroyBold,
                     fontSize: AppDimensions.textSizeNormal,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                     color: AppColors.textBlackColor),
                 Icon(
                   Icons.arrow_forward_ios,

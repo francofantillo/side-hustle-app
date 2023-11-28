@@ -163,7 +163,7 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: AppDimensions.defaultHorizontalPadding + 4),
-              child: customMaterialButton(
+              child: CustomMaterialButton(
                   height: 11.h,
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);

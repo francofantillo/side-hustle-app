@@ -156,7 +156,7 @@ class OngoingJobItemWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      height(0.01.sh),
+                      height(0.02.sw),
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.zero,
@@ -168,7 +168,7 @@ class OngoingJobItemWidget extends StatelessWidget {
                           ),
                           child: Material(
                             color: AppColors.greenColor,
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(16),
                             child: InkWell(
                               onTap: () {},
                               child: Center(

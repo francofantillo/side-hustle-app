@@ -178,7 +178,7 @@ class _ModalBottomSheetProductsState extends State<ModalBottomSheetProducts> {
                       ],
                     ),
                     height(0.02.sh),
-                    customMaterialButton(
+                    CustomMaterialButton(
                         onPressed: () {
                           Navigator.pop(context);
                           Navigator.pushNamed(

@@ -311,7 +311,7 @@ class _YourResumeState extends State<YourResume> {
                         ],
                       ),
                       const Spacer(),
-                      customMaterialButton(
+                      CustomMaterialButton(
                           onPressed: () {},
                           width: 4,
                           borderRadius: 14,

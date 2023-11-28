@@ -178,7 +178,7 @@ class _ViewJobState extends State<ViewJob> {
               height(0.05.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     onPressed: () {
                       Navigator.pushNamed(context, AppRoutes.jobRequestScreenRoute);
                     },

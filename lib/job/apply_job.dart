@@ -247,8 +247,8 @@ class _ApplyForJobState extends State<ApplyForJob> {
                   height(0.05.sw),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: customMaterialButton(
-                          height: AppDimensions.defaultMaterialButtonHeightHome,
+                      child: CustomMaterialButton(
+                          // height: AppDimensions.defaultMaterialButtonHeightHome,
                           borderRadius:
                               AppDimensions.defaultMaterialButtonRadiusHome,
                           onPressed: () {

@@ -123,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppDimensions.defaultHorizontalPadding + 4),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     height: 6,
                     borderRadius: 12,
                     fontSize: AppDimensions.textSizeVerySmall,

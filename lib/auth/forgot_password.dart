@@ -64,8 +64,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: customMaterialButton(
+                  child: CustomMaterialButton(
                       name: AppStrings.continueText,
+                      textColor: AppColors.whiteColor,
                       onPressed: () {
                         print('Button Pressed');
                         Navigator.pushNamed(

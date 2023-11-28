@@ -178,7 +178,7 @@ class _SignupScreenState extends State<SignupScreen> {
               height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     name: AppStrings.register,
                     onPressed: () {
                       print('Button Pressed');

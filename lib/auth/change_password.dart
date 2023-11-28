@@ -101,10 +101,11 @@ class _ChangePasswordState extends State<ChangePassword> {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
+                    textColor: AppColors.whiteColor,
                     name: AppStrings.changPassword,
                     borderRadius: AppDimensions.buttonBorderRadius),
               ),

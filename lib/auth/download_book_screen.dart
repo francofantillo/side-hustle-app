@@ -29,11 +29,12 @@ class _DownloadBookScreenState extends State<DownloadBookScreen> {
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: customMaterialButton(
+        child: CustomMaterialButton(
             borderRadius: 14,
             fontSize: AppDimensions.textSizeSmall,
             onPressed: () {},
             name: AppStrings.downloadThisBook,
+            textColor: AppColors.whiteColor,
             color: AppColors.primaryColor),
       ),
       body: Padding(

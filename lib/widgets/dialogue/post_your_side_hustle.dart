@@ -157,8 +157,8 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
               ),
             ),
             height(.03.sh),
-            customMaterialButton(
-              height: 10.h,
+            CustomMaterialButton(
+              // height: 10.h,
                 name: AppStrings.continueText,
                 color: AppColors.primaryColor,
                 borderRadius: 12,

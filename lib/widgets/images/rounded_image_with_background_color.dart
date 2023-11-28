@@ -27,14 +27,14 @@ class RoundedImageWithBackgroundColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shadowColor: Colors.transparent,
+      // shadowColor: Colors.transparent,
       elevation: AppDimensions.defaultFocusedTextFieldElevation,
       shape: RoundedRectangleBorder(
         borderRadius:
         BorderRadius.circular(AppDimensions.roundedImageViewBorderRadius),
       ),
       child: Material(
-        shadowColor: Colors.transparent,
+        // shadowColor: Colors.transparent,
         color: backgroundColor,
         borderRadius: BorderRadius.circular(borderRadius ?? AppDimensions.roundedImageViewBorderRadius),
         child: InkWell(

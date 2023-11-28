@@ -33,7 +33,7 @@ class OrderServiceItemWidget extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
       child: Card(
-        shadowColor: Colors.transparent,
+        // shadowColor: Colors.transparent,
         elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(

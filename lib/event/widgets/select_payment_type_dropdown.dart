@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -47,6 +48,7 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
               children: [
                 textWidget(
                     text: AppStrings.debitCreditCard,
+                    fontFamily: AppFont.gilroyBold,
                     color: AppColors.blackColor,
                     fontWeight: FontWeight.w500),
               ],
@@ -71,6 +73,7 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
                       widget.hintText ?? 'Select Item',
                       style: const TextStyle(
                         fontSize: 14,
+                        fontFamily: AppFont.gilroyBold,
                         // color: Theme.of(context).hintColor,
                         color: AppColors.blackColor,
                       ),

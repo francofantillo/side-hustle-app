@@ -30,7 +30,7 @@ class _ModalBottomSheetServicesState extends State<ModalBottomSheetServices> {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return Container(
-        height: AppDimensions.modelSheetProductsHeight,
+        // height: AppDimensions.modelSheetProductsHeight,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
                 topRight:
@@ -39,8 +39,8 @@ class _ModalBottomSheetServicesState extends State<ModalBottomSheetServices> {
                     Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
             image: const DecorationImage(
                 image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Wrap(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8),
@@ -180,7 +180,7 @@ class _ModalBottomSheetServicesState extends State<ModalBottomSheetServices> {
                       ],
                     ),
                     height(0.02.sh),
-                    customMaterialButton(
+                    CustomMaterialButton(
                         onPressed: () {
                           Navigator.pop(context);
                           Navigator.pushNamed(

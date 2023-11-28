@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
         duration: const Duration(milliseconds: 500),
         child: Padding(
             padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 8),
-            child: customMaterialButton(
+            child: CustomMaterialButton(
                 name: AppStrings.GET_STARTED,
                 // borderRadius: 20,
                 onPressed: () {

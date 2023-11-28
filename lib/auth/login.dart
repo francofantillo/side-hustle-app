@@ -85,8 +85,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: customMaterialButton(
+                  child: CustomMaterialButton(
                       name: AppStrings.login,
+                      textColor: AppColors.whiteColor,
                       onPressed: () {
                         print('Button Pressed');
                         // EasyLoading.show();

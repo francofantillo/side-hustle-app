@@ -330,10 +330,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
               height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     borderRadius: 14,
                     fontSize: AppDimensions.textSizeNormal,
-                    height: 10.h,
+                    // height: 10.h,
                     onPressed: () {
                       Navigator.pushNamedAndRemoveUntil(
                           context,

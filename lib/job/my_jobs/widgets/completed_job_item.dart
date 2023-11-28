@@ -158,7 +158,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      height(0.01.sh),
+                      height(0.02.sw),
                       Expanded(
                         child: Container(
                           padding: EdgeInsets.zero,

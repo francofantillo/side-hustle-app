@@ -112,7 +112,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             height(AppDimensions.loginButtonVerticalSpacingBetween + 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: customMaterialButton(
+              child: CustomMaterialButton(
+                  textColor: AppColors.whiteColor,
                   name:
                       enableResend ? AppStrings.reSend : AppStrings.continueText,
                   onPressed: () {

@@ -126,33 +126,35 @@ class ScheduledJobItemWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
-                          const Spacer(),
-                          Container(
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: Material(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.jobRequestScreenRoute);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: textWidget(
-                                      text: AppStrings.viewRequest,
-                                      color: AppColors.textWhiteColor,
-                                      fontFamily: AppFont.gilroyBold,
-                                      fontSize: AppDimensions.textSize10,
-                                      fontWeight: FontWeight.bold,
-                                      textAlign: TextAlign.center,
+                          // const Spacer(),
+                          height(0.01.sw),
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Material(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.bookedJobRoundedBorder),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.jobRequestScreenRoute);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: textWidget(
+                                        text: AppStrings.viewRequest,
+                                        color: AppColors.textWhiteColor,
+                                        fontFamily: AppFont.gilroyBold,
+                                        fontSize: AppDimensions.textSize10,
+                                        fontWeight: FontWeight.bold,
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ),
                                   ),
                                 ),

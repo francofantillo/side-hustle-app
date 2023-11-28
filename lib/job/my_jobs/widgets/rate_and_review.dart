@@ -102,7 +102,7 @@ class _RateAndReviewDialogueState extends State<RateAndReviewDialogue> {
         height(0.36.sw),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 6.0),
-          child: customMaterialButton(
+          child: CustomMaterialButton(
               onPressed: () {
                 Navigator.pop(context);
               }, name: AppStrings.submitReview, fontSize: AppDimensions.textSizeSmall, borderRadius: 18),

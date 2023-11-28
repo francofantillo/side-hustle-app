@@ -228,7 +228,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       alignment: Alignment.centerRight,
       child: Padding(
         padding: const EdgeInsets.only(left: 12.0, bottom: 5, right: 8),
-        child: customMaterialButton(
+        child: CustomMaterialButton(
             width: 20.w,
             height: 8,
             fontSize: AppDimensions.textSizeSmall,

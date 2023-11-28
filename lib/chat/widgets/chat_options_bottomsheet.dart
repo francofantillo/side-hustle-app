@@ -104,7 +104,7 @@ class ChatOptionsBottomSheet extends StatelessWidget {
                     color: AppColors.textWhiteColor,
                     fontSize: AppDimensions.textSizeSmall),
               ),
-              height(0.1.sw),
+              height(0.15.sw),
             ],
           ),
         ),

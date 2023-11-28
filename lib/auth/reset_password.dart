@@ -78,7 +78,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               height(AppDimensions.loginButtonVerticalSpacingBetween),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     name: AppStrings.continueText,
                     onPressed: () {
                       print('Button Pressed');

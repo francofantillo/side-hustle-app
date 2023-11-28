@@ -25,7 +25,7 @@ class ImageSliderItem extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl:
       // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg', // Testing Url
-      image == null ? "" : image!,
+      image == null ? "https://www.example.com/non_existent_image.jpg" : image!,
       imageBuilder: (context, imageProvider) => AspectRatio(
         aspectRatio: 21/ 9,
         child: Container(

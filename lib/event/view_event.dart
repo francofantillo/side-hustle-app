@@ -313,7 +313,7 @@ class _ViewEventState extends State<ViewEvent> {
               height(0.03.sh),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     onPressed: () {
                       if (_isInterestedInEvent) {
                         _isInterestedInEvent = false;

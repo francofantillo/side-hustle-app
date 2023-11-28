@@ -18,7 +18,8 @@ class BottomModalSheetRequestService extends StatefulWidget {
   final bool isEdit;
   final ValueChanged<bool>? onItemAdded;
 
-  const BottomModalSheetRequestService({super.key, this.isEdit = false, this.onItemAdded});
+  const BottomModalSheetRequestService(
+      {super.key, this.isEdit = false, this.onItemAdded});
 
   @override
   State<BottomModalSheetRequestService> createState() =>
@@ -62,15 +63,18 @@ class _BottomModalSheetRequestServiceState
           decoration: BoxDecoration(
               // color: AppColors.primaryColor,
               borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(AppDimensions.boarderRadiusBottomSheet),
-                  topLeft: Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
+                  topRight:
+                      Radius.circular(AppDimensions.boarderRadiusBottomSheet),
+                  topLeft:
+                      Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
               image: const DecorationImage(
                   image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16),
+                padding:
+                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 16),
                 child: textWidget(
                     text: AppStrings.serviceDate,
                     color: AppColors.textWhiteColor,
@@ -145,12 +149,17 @@ class _BottomModalSheetRequestServiceState
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: CustomTextFormField(
-                      height: 40.h,
-                      hintText: AppStrings.totalHoursRequired,
-                      suffixIcon: Icon(Icons.keyboard_arrow_down, size: 30,),
-                      isSuffixIcon: true,
-                      keyboardType: TextInputType.number,
-                    )),
+                        height: 40.h,
+                        hintText: AppStrings.totalHoursRequired,
+                        suffixIcon: const Icon(
+                          Icons.keyboard_arrow_down,
+                          size: 30,
+                        ),
+                        isSuffixIcon: true,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            signed: true, decimal: false)
+                        // keyboardType: TextInputType.number,
+                        )),
               ),
               height(0.02.sh),
               Padding(
@@ -196,9 +205,10 @@ class _BottomModalSheetRequestServiceState
               ),
               height(0.03.sw),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-                child: customMaterialButton(
-                    height: 10.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
+                child: CustomMaterialButton(
+                    // height: 10.h,
                     onPressed: () {
                       if (widget.isEdit) {
                         Navigator.pop(context);
@@ -237,9 +247,9 @@ class _BottomModalSheetRequestServiceState
                     maxLines: 2,
                     fontFamily: AppFont.gilroySemiBold,
                     color: AppColors.textWhiteColor,
-                    fontSize: AppDimensions.textSize10),
+                    fontSize: AppDimensions.textSizeSmall),
               ),
-              height(0.1.sw)
+              height(0.15.sw)
             ],
           ),
         ),

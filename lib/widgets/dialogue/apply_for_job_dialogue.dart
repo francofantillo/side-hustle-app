@@ -142,14 +142,16 @@ class ApplyForJobDialogue extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: CustomTextFormField(
-            hintText: AppStrings.enterTheBidAmount,
-            keyboardType: TextInputType.numberWithOptions(signed: false),
-          ),
+              hintText: AppStrings.enterTheBidAmount,
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: false)
+              // keyboardType: TextInputType.numberWithOptions(signed: false),
+              ),
         ),
         height(0.02.sh),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: customMaterialButton(
+          child: CustomMaterialButton(
               borderRadius: AppDimensions.defaultMaterialButtonRadiusHome,
               height: AppDimensions.defaultMaterialButtonHeightHome,
               onPressed: () {

@@ -247,7 +247,7 @@ class _PostServiceState extends State<PostService> {
               height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     onPressed: () {
                       if (widget.isEdit) {
                         Navigator.pop(context);

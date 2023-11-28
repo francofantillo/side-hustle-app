@@ -47,7 +47,9 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
                 color: AppColors.primaryColor,
               ),
               onPressed: () {
-                AppUtils.showBottomModalSheet(context: context, widget: const MessageOptionsBottomSheet());
+                AppUtils.showBottomModalSheet(
+                    context: context,
+                    widget: const MessageOptionsBottomSheet());
               },
             ),
           ),

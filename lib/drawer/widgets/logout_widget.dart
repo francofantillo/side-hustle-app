@@ -38,8 +38,8 @@ class LogoutDialogueWidget extends StatelessWidget {
                     color: AppColors.whiteColor,
                     textAlign: TextAlign.center),
                 height(0.03.sh),
-                customMaterialButton(
-                    height: 10.h,
+                CustomMaterialButton(
+                    // height: 10.h,
                     onPressed: () {
                       Navigator.pop(context);
                       Navigator.pushNamedAndRemoveUntil(context,

@@ -74,7 +74,7 @@ class PostAdded extends StatelessWidget {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-            child: customMaterialButton(
+            child: CustomMaterialButton(
                 onPressed: () {
                   if (isProduct) {
                     Navigator.pushReplacementNamed(

@@ -8,6 +8,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -48,8 +49,9 @@ class _ModalBottomSheetPackageTypePostState
           // image: const DecorationImage(
           //     image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Wrap(
+
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(
@@ -60,8 +62,9 @@ class _ModalBottomSheetPackageTypePostState
               child: textWidget(
                   text: AppStrings.selectPackageType,
                   color: AppColors.textWhiteColor,
+                  fontFamily: AppFont.gilroyBold,
                   fontSize: AppDimensions.textSizeBottomSheet,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.bold),
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -73,30 +76,31 @@ class _ModalBottomSheetPackageTypePostState
               child: textWidget(
                   text: AppStrings.selectPackageTypeHint,
                   color: AppColors.textWhiteColor,
-                  fontSize: AppDimensions.textSizeSmall),
+                  fontSize: AppDimensions.textSize10),
             ),
-            height(0.02.sh),
+            height(0.06.sw),
             // const ProductsCartList(),
             const EventPostPackagesList(),
-            height(0.02.sh),
+            // height(0.02.sw),
             Padding(
               padding: const EdgeInsets.only(
                 left: 16.0,
                 right: 16.0,
-                top: 16,
+                // top: 16,
               ),
               child: textWidget(
                   text: AppStrings.selectPaymentType,
                   color: AppColors.textWhiteColor,
+                  fontFamily: AppFont.gilroyBold,
                   fontSize: AppDimensions.textSizeBottomSheet,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.bold),
             ),
-            height(0.02.sh),
+            height(0.02.sw),
             SizedBox(
-              width: 1.sh,
+              width: 1.sw,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                 child: SelectPaymentTypeDropDown(
                   items: items,
                   hintText: AppStrings.debitCreditCardSecret,
@@ -106,11 +110,10 @@ class _ModalBottomSheetPackageTypePostState
                 ),
               ),
             ),
-            height(0.02.sh),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
-              child: customMaterialButton(
+                  const EdgeInsets.symmetric(horizontal: 16.0,),
+              child: CustomMaterialButton(
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.pop(context);
@@ -153,7 +156,7 @@ class _ModalBottomSheetPackageTypePostState
                   color: AppColors.whiteColor,
                   textColor: AppColors.primaryColor),
             ),
-            height(0.02.sh),
+            // height(0.5.sh),
           ],
         ),
       );

@@ -41,6 +41,7 @@ class PrimaryPostButton extends StatelessWidget {
           text: title,
           fontSize: AppDimensions.textSizeNormal,
           color: AppColors.primaryColor,
+          fontWeight: FontWeight.bold,
           fontFamily: AppFont.gilroyBold
         ),
       ),

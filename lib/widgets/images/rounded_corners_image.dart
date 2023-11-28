@@ -25,7 +25,7 @@ class RoundedCornersImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl:
           // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg', // Testing Url
-          image == null ? "" : image!,
+          image == null ? "https://www.example.com/non_existent_image.jpg" : image!,
       imageBuilder: (context, imageProvider) => Container(
         width: imageWidth ?? 0.18.sw, // Set your desired width
         height: imageHeight ?? 0.18.sw, // Set your desired height

@@ -52,42 +52,40 @@ class _EventPostPackagesListState extends State<EventPostPackagesList> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: packages["packages"]?.length ?? 0,
-        // Replace with your item count
-        itemBuilder: (context, index) {
-          // Replace with your horizontal list item
-          if (kDebugMode) {
-            print("packages: ${packages["packages"]?[index]["default"]}");
-          }
-          return Padding(
-              padding:
-                  const EdgeInsets.only(right: 16.0, left: 8.0, bottom: 10),
-              child: EventPostPackagesItem(
-                defaultPackage: defaultCard["x"]?[index],
-                packageType: packages["packages"]?[index]["packageType"],
-                packagePrice: packages["packages"]?[index]["packagePrice"],
-                onChanged: (v) {
-                  if (v!) {
-                    defaultCard["x"]?[defaultCardIndex] = false;
-                    defaultCardIndex = index;
-                    defaultCard["x"]?[index] = false;
-                  } else {
-                    defaultCard["x"]?[defaultCardIndex] = false;
-                    defaultCardIndex = index;
-                    defaultCard["x"]?[index] = true;
-                  }
-                  setState(() {});
-                },
-              ));
-        },
-      ),
+    return ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(
+          parent: BouncingScrollPhysics()),
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
+      itemCount: packages["packages"]?.length ?? 0,
+      // Replace with your item count
+      itemBuilder: (context, index) {
+        // Replace with your horizontal list item
+        if (kDebugMode) {
+          print("packages: ${packages["packages"]?[index]["default"]}");
+        }
+        return Padding(
+            padding:
+                const EdgeInsets.only(right: 16.0, left: 8.0, bottom: 10),
+            child: EventPostPackagesItem(
+              defaultPackage: defaultCard["x"]?[index],
+              packageType: packages["packages"]?[index]["packageType"],
+              packagePrice: packages["packages"]?[index]["packagePrice"],
+              onChanged: (v) {
+                if (v!) {
+                  defaultCard["x"]?[defaultCardIndex] = false;
+                  defaultCardIndex = index;
+                  defaultCard["x"]?[index] = false;
+                } else {
+                  defaultCard["x"]?[defaultCardIndex] = false;
+                  defaultCardIndex = index;
+                  defaultCard["x"]?[index] = true;
+                }
+                setState(() {});
+              },
+            ));
+      },
     );
   }
 }

@@ -64,32 +64,32 @@ class AlphaAppData {
     ChatAllUsersItemModel(
         image: AssetsPath.chatUser6,
         name: "Charlie Gouse",
-        message: "You: Hey! How are you doing?",
+        message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         time: "02:56am"),
     ChatAllUsersItemModel(
         image: AssetsPath.chatUser1,
         name: "Ruben Geidt",
-        message: "You: Hey! How are you doing?",
+        message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         time: "01:36am"),
     ChatAllUsersItemModel(
         image: AssetsPath.chatUser2,
         name: "Abram Westervelt",
-        message: "You: Hey! How are you doing?",
+        message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         time: "22 June, 2023"),
     ChatAllUsersItemModel(
         image: AssetsPath.chatUser3,
         name: "Zain Baptista",
-        message: "You: Hey! How are you doing?",
+        message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         time: "18 June, 2023"),
     ChatAllUsersItemModel(
         image: AssetsPath.chatUser4,
         name: "Zaire Bator",
-        message: "You: Hey! How are you doing?",
+        message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         time: "14 June, 2023"),
     ChatAllUsersItemModel(
         image: AssetsPath.chatUser5,
         name: "Cooper Ekstrom",
-        message: "You: Hey! How are you doing?",
+        message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         time: "10 June, 2023"),
   ];
 

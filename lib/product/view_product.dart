@@ -108,11 +108,20 @@ class _ViewProductState extends State<ViewProduct> {
                 height(0.02.sh),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                  child: customMaterialButton(
-                      onPressed: () {},
-                      name: AppStrings.getDirectionToShop,
-                      borderRadius: AppDimensions.boarderRadiusViewProduct,
-                      color: AppColors.greenColor),
+                  // child: customMaterialButton(
+                  //     onPressed: () {},
+                  //     name: AppStrings.getDirectionToShop,
+                  //     borderRadius: AppDimensions.boarderRadiusViewProduct,
+                  //     color: AppColors.greenColor),
+                  child: CustomMaterialButton(
+                      // height: 6,
+                      borderRadius: 12,
+                      fontSize: AppDimensions.boarderRadiusViewProduct,
+                      color: AppColors.greenColor,
+                      textColor: AppColors.whiteColor,
+                      onPressed: () {
+                      },
+                      name: AppStrings.getDirectionToShop),
                 ),
                 height(0.03.sw),
                 Padding(
@@ -292,7 +301,7 @@ class _ViewProductState extends State<ViewProduct> {
                     ? const SizedBox.shrink()
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                        child: customMaterialButton(
+                        child: CustomMaterialButton(
                             onPressed: () {
                               if (widget.isMyProduct) {
                                 Navigator.pushNamed(
@@ -350,7 +359,7 @@ class _ViewProductState extends State<ViewProduct> {
                             ),
                             width(0.03.sw),
                             Expanded(
-                                child: customMaterialButton(
+                                child: CustomMaterialButton(
                                     onPressed: () {
                                       // AppUtils.showBottomModalSheet(
                                       //     context: contextBuilder,

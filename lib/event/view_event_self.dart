@@ -75,7 +75,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ImageSlider(),
+              const ImageSlider(hideCameraIcon: true),
               height(0.02.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -318,7 +318,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
               height(0.03.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: customMaterialButton(
+                child: CustomMaterialButton(
                     onPressed: () {},
                     color: AppColors.primaryColor,
                     name: AppStrings.shareEvent),

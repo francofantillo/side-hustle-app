@@ -112,7 +112,7 @@ class _ViewServiceState extends State<ViewService> {
                 height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                  child: customMaterialButton(
+                  child: CustomMaterialButton(
                       onPressed: () {},
                       name: AppStrings.getDirectionToShop,
                       borderRadius: AppDimensions.boarderRadiusViewProduct,
@@ -300,8 +300,8 @@ class _ViewServiceState extends State<ViewService> {
                     ? const SizedBox.shrink()
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                        child: customMaterialButton(
-                            height: 12.h,
+                        child: CustomMaterialButton(
+                            // height: 12.h,
                             onPressed: () {
                               // isAddToCart = true;
                               // setState(() {});
@@ -359,7 +359,7 @@ class _ViewServiceState extends State<ViewService> {
                             )),
                             width(0.03.sw),
                             Expanded(
-                                child: customMaterialButton(
+                                child: CustomMaterialButton(
                                     onPressed: () {
                                       // AppUtils.showBottomModalSheet(
                                       //     context: context,
