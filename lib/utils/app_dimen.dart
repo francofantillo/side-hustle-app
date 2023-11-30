@@ -50,7 +50,8 @@ class AppDimensions {
   static FontWeight headingFontWeight = FontWeight.w500;
 
   /// OTP Text Field
-  static double otpTextSize = 15.sp;
+  // static double otpTextSize = 15.sp;
+  static double otpTextSize = 22.sp;
 
   /// Login
   static double loginTopStartSpacing = .15.sh;
@@ -61,7 +62,7 @@ class AppDimensions {
   // static double downloadBookSize = .57.sw;
   static double downloadBookSize = .67.sw;
   static double welcomeBackSpacingBetween = .05.sh;
-  static double fieldsVerticalSpacingBetween = .02.sh;
+  static double fieldsVerticalSpacingBetween = .008.sw;
   static double forgotPasswordSpacingBetween = .01.sh;
   static double loginButtonVerticalSpacingBetween = .04.sh;
   static double rootPadding = 10.w;
@@ -85,16 +86,18 @@ class AppDimensions {
   static double tabBarFontSize = 8.sp;
 
   /// Elevation
-  static double defaultUnFocusedTextFieldElevation = 0.02.sw;
   static double defaultCardElevation = 0.02.sw;
   static double defaultFocusedTextFieldElevation = 0.02.sw;
+  // static double defaultFocusedTextFieldElevation = 2;
+  // static double defaultUnFocusedTextFieldElevation = 2;
+  static double defaultUnFocusedTextFieldElevation = 0.02.sw;
   static double defaultSearchTextFieldElevation = 0.01.sw;
   static double defaultButtonElevation = 0.02.sw;
   static double cardElevation = 6;
 
   /// Material Button
   static double defaultMaterialButtonHeightHome = 10.h;
-  static double defaultMaterialButtonRadiusHome = 12;
+  static double defaultMaterialButtonRadiusHome = 16;
 
   /// Drawer
   static final double drawerIconSize = 14.h;
@@ -113,7 +116,8 @@ class AppDimensions {
   static double homeSearchSpacingTop = 0.01.sh;
   static double homeSearchSpacingBelow = 0.015.sh;
   static double itemsArrowForwardIconSize = 12.h;
-  static double homeFirstHorizontalListSize = 0.3.sw;
+  // static double homeFirstHorizontalListSize = 0.3.sw;
+  static double homeFirstHorizontalListSize = 0.23.sw;
   static double homeFirstItemWidgetCurve = 15.h;
   // static double bottomButtonBGCurve = 30.h;
   // static double bottomButtonBGCurve = 0.05.sh;
@@ -142,6 +146,8 @@ class AppDimensions {
   /// Event and Job Item
   // static double listItemHeight = 0.43.sw;
   // static double listItemHeight = 0.40.sw;
+  // static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
+  // static double listItemHeight = 0.36.sw; // 353339563061758, 352879323061755
   static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
   static double listItemHeightJobCompleted = 0.41.sw;
   static double listItemWidth = 0.21.sw;
@@ -156,6 +162,7 @@ class AppDimensions {
   /// Product Image Slider
   // static double productImageSliderHeight = 0.55.sw;
   static double productImageSliderHeight = 0.50.sw;
+  // static double productImageSliderViewHeight = 0.57.sw;
   static double productImageSliderWidth = 1.sw;
 
   /// Walkthrough Image Slider
@@ -171,6 +178,8 @@ class AppDimensions {
   /// Applied Job
   static double appliedJobRoundedBorder = 10.h;
   static double bookedJobRoundedBorder = 10.h;
+
+  static double checkBoxRadius = 6;
 
   /// Apply For a Jo
   static double applyForJobIconSize = 0.03.sh;

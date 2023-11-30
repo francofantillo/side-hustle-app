@@ -46,7 +46,7 @@ class BackgroundWidget extends StatelessWidget {
                     fontSize: AppDimensions.textSizeNormal,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textBlackColor),
-                automaticallyImplyLeading: false,
+                automaticallyImplyLeading: true,
                 centerTitle: true,
                 leading: leading,
                 leadingWidth: 0.12.sw,
@@ -54,7 +54,7 @@ class BackgroundWidget extends StatelessWidget {
               )
             : null,
         bottomNavigationBar: bottomNavBar,
-        backgroundColor: backgroundColor ?? AppColors.whiteColor,
+        backgroundColor: backgroundColor ?? AppColors.backgroundColor,
         // backgroundColor: backgroundColor ?? AppColors.backgroundColor,
         body: body ?? Container(),
       ),

@@ -62,7 +62,7 @@ class JobsHorizontalListWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               // Replace with your horizontal list item
               return Padding(
-                padding: const EdgeInsets.only(right: 2.0, left: 8.0),
+                padding: const EdgeInsets.only(right: 2.0, left: 2.0),
                 child: ItemsWidget(
                   onTap: () {
                     if (isEvent) {

@@ -40,6 +40,7 @@ class _PostProductState extends State<PostProduct> {
       appBarTitle: widget.isEdit
           ? AppStrings.editYourSideHustle
           : AppStrings.postYourSideHustle,
+          // : AppStrings.postYourSideHustle + "idfi fkjdkfj dkfjd kfkdj",
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
@@ -188,7 +189,7 @@ class _PostProductState extends State<PostProduct> {
                       ],
                     ),
                   ),
-                  width(0.01.sw),
+                  width(0.015.sw),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,10 +226,12 @@ class _PostProductState extends State<PostProduct> {
                     fontFamily: AppFont.gilroyBold,
                     fontWeight: FontWeight.bold),
               ),
+              height(0.01.sw),
               SizedBox(
                 width: 1.sw,
                 child: CustomDropDown(
                   items: AppUtils.items,
+                  hintText: AppStrings.pickUp,
                   selectedValue: (v) {
                     print("selectedValue: $v");
                   },

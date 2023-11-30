@@ -86,6 +86,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 maxLines: 1),
                             textWidget(
                                 text: AppStrings.userEmail,
+                                fontSize: AppDimensions.textSizeVerySmall,
                                 color: AppColors.textWhiteColor,
                                 maxLines: 2),
                           ],

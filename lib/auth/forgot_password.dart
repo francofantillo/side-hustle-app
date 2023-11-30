@@ -53,6 +53,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 textWidget(text: AppStrings.inOrderTo, maxLines: 2, fontSize: AppDimensions.textSizeSmall),
                 height(AppDimensions.welcomeBackSpacingBetween),
                 PhoneNumberTextField(
+                  isShowShadow: true,
                   onChanged: (phone) {
                     print("$phone");
                   },

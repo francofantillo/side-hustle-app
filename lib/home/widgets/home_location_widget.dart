@@ -35,8 +35,8 @@ class _HomeLocationWidgetState extends State<HomeLocationWidget> {
       child: Stack(
         children: [
           Positioned(
-            // left: 0.07.sw,
-            top: 0.015.sw,
+            // top: 0.015.sw,
+            top: 0.010.sw,
             child: Container(
               width: isLocationExpended
                   ? AppDimensions.expendedLocation

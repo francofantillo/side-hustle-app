@@ -109,7 +109,7 @@ class AlphaAppData {
         userRating: "5.0 ratings",
         price: "\$24.56",
         imagePath: AssetsPath.carpenter,
-        userProfile: AssetsPath.leoLubinProfile)
+        userProfile: AssetsPath.leoLubinProfile),
   ];
 
   /// Events Around You

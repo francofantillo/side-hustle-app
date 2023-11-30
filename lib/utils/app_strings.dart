@@ -66,7 +66,7 @@ class AppStrings {
   static const String confirm = "Confirm";
 
   /// Forgot Password
-  static const String forgotPassword = "Forget Password";
+  static const String forgotPassword = "Forgot Password";
   static const String inOrderTo =
       "In order to reset your password you need to enter your registered phone number.";
 
@@ -456,4 +456,8 @@ class AppStrings {
   static const String saveResume = "Save Resume";
   static const String resumePdf = "Resume.pdf";
   static const String resumePdfSize = "2 Pages - 10.9MB";
+
+  /// Dio
+  static const String PLEASE_WAIT = "Please Wait";
+
 }

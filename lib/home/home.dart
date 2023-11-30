@@ -6,6 +6,7 @@ import 'package:side_hustle/home/widgets/home_location_widget.dart';
 import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';

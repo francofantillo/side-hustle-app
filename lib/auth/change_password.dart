@@ -70,6 +70,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                     fontWeight: FontWeight.w500),
               ),
               const CustomTextFormField(
+                  isShowShadow: true,
+                  isShowBoarder: false,
                   label: AppStrings.currentPassword, isPasswordField: true),
               height(0.07.sw),
               Padding(
@@ -83,9 +85,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                     fontWeight: FontWeight.w500),
               ),
               const CustomTextFormField(
+                  isShowShadow: true,
+                  isShowBoarder: false,
                   label: AppStrings.newPassword, isPasswordField: true),
               height(0.02.sh),
               const CustomTextFormField(
+                  isShowShadow: true,
+                  isShowBoarder: false,
                   label: AppStrings.confirmPassword, isPasswordField: true),
               height(0.05.sh),
               BulletedListItem(

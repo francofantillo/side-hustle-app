@@ -99,19 +99,22 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             ),
             height(AppDimensions.forgotPasswordSpacingBetween),
             Center(
-                child: textWidget(
-                    text: AppStrings.otpTextBody,
-                    color: AppColors.backIconBackgroundColor.withOpacity(0.9),
-                    fontSize: AppDimensions.textSizeSmall,
-                    textAlign: TextAlign.center,
-                    maxLines: 3)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 52.0),
+                  child: textWidget(
+                      text: AppStrings.otpTextBody,
+                      color: AppColors.backIconBackgroundColor.withOpacity(0.9),
+                      fontSize: AppDimensions.textSizeSmall,
+                      textAlign: TextAlign.center,
+                      maxLines: 3),
+                )),
             height(AppDimensions.welcomeBackSpacingBetween + 20),
             _otpPinField(context),
             height(AppDimensions.loginButtonVerticalSpacingBetween + 20),
             _timer(),
             height(AppDimensions.loginButtonVerticalSpacingBetween + 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomMaterialButton(
                   textColor: AppColors.whiteColor,
                   name:

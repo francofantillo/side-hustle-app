@@ -10,7 +10,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 class CustomTextFormField extends StatefulWidget {
   final String? label;
   final bool? isPasswordField, isSuffixIcon, isReadonly;
-  final bool isPrefixIcon;
+  final bool isPrefixIcon, isShowShadow, isShowBoarder;
   final String? prefixIconPath;
   final Color? prefixIconColor;
   final String? hintText;
@@ -42,6 +42,8 @@ class CustomTextFormField extends StatefulWidget {
     this.label,
     this.onFieldSubmitted,
     this.isPrefixIcon = false,
+    this.isShowShadow = false,
+    this.isShowBoarder = true,
     this.isPasswordField = false,
     this.focusNode,
     this.prefixIconPath,
@@ -80,7 +82,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late FocusNode _focusNode;
   late bool _isFocused;
 
-  // late bool texVisible;
   bool isVisible = true;
 
   @override
@@ -92,11 +93,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     _focusNode.addListener(_onFocusChange);
   }
 
-  void _onFocusChange() {
-    // setState(() {
-    //   _isFocused = _focusNode.hasFocus;
-    // });
-  }
+  void _onFocusChange() {}
 
   @override
   void dispose() {
@@ -109,30 +106,61 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Card(
-          elevation: _isFocused
-              ? AppDimensions.defaultFocusedTextFieldElevation
-              : AppDimensions.defaultUnFocusedTextFieldElevation,
-          // Adjust the elevation as needed
-          shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-          ),
-          child: Container(
-            padding: EdgeInsets.only(top: 4.h),
-            width: double.infinity,
-            decoration: BoxDecoration(
+        Container(
+          decoration: BoxDecoration(
               borderRadius:
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-              border:
-                  Border.all(color: widget.fillColor ?? AppColors.whiteColor),
-              color: widget.fillColor ?? AppColors.whiteColor,
+              border: widget.isShowBoarder
+                  ? Border.all(color: AppColors.fieldsOutlineColor)
+                  : null,
+              boxShadow: widget.isShowShadow
+                  ? [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(.15),
+                        blurRadius: 12.0, // soften the shadow
+                        spreadRadius: 0.0, //extend the shadow
+                        offset: const Offset(
+                          0.0, // Move to right 10  horizontally
+                          9.0, // Move to bottom 10 Vertically
+                        ),
+                      )
+                    ]
+                  : [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(.01),
+                        blurRadius: 12.0, // soften the shadow
+                        spreadRadius: 0.0, //extend the shadow
+                        offset: const Offset(
+                          0.0, // Move to right 10  horizontally
+                          9.0, // Move to bottom 10 Vertically
+                        ),
+                      )
+                    ]),
+          child: Card(
+            elevation: _isFocused
+                ? AppDimensions.defaultFocusedTextFieldElevation
+                : AppDimensions.defaultUnFocusedTextFieldElevation,
+            // shadowColor: Colors.grey.withOpacity(0.35), // Lighten shadow color
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.textFieldBorderRadius),
             ),
-            height: widget.height ?? AppDimensions.textFieldHeight,
-            child: textFormField(),
+            child: Container(
+              padding: EdgeInsets.only(top: 4.h),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+                border:
+                    Border.all(color: widget.fillColor ?? AppColors.whiteColor),
+                color: widget.fillColor ?? AppColors.whiteColor,
+              ),
+              height: widget.height ?? AppDimensions.textFieldHeight,
+              child: textFormField(),
+            ),
           ),
         ),
-        // textFormField(),
       ],
     );
   }
@@ -143,7 +171,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       focusNode: _focusNode,
       inputFormatters: widget.inputFormatter,
       validator: widget.fieldValidator,
-      // focusNode: widget.focusNode,
       keyboardType: widget.keyboardType,
       obscureText: textVisible,
       onTap: widget.onTap,
@@ -154,19 +181,21 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       style: TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroyMedium),
       decoration: InputDecoration(
         border: InputBorder.none,
-        // fillColor: widget.fillColor ?? AppColors.whiteColor,
         fillColor: Colors.transparent,
         filled: true,
         contentPadding: EdgeInsets.only(
           top: 8.h,
-          bottom: 8.h,
+          bottom: 10.h,
           left: AppDimensions.textFieldHorizontalPadding,
           right: AppDimensions.textFieldHorizontalPadding,
         ),
-        prefixIcon: widget.isPrefixIcon! ? _prefixIconWidget() : null,
-        // border: InputBorder.none,
+        prefixIcon: widget.isPrefixIcon!
+            ? Padding(
+                padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                child: _prefixIconWidget(),
+              )
+            : null,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        // label: widget.label != null ? _label() : null,
         labelStyle:
             TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroyMedium),
         hintText: widget.label ?? widget.hintText,
@@ -175,9 +204,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             color: AppColors.hintTextFieldColor, fontSize: 15, height: 2),
         errorMaxLines: 3,
         suffixIcon: widget.isPasswordField!
-            ? _passwordSuffixIconWidget()
+            ? Padding(
+                padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                child: _passwordSuffixIconWidget(),
+              )
             : widget.isSuffixIcon!
-                ? _suffixIconWidget()
+                ? Padding(
+                    padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                    child: _suffixIconWidget(),
+                  )
                 : null,
       ),
     );
@@ -203,20 +238,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     );
   }
 
-  // Widget _label() {
-  //   return CustomText(
-  //     text: widget.label,
-  //     color: widget.lableColor ?? AppColors.labelColor,
-  //     // fontWeight: FontWeight.bold,
-  //     fontSize: widget.labelFontSize ?? 12,
-  //     fontFamily: AppFont.jostRegular,
-  //   );
-  // }
   Widget _label() {
     return textWidget(
       text: widget.label ?? '',
       color: widget.labelColor ?? AppColors.labelColor,
-      //  fontSize: 17.sp,
     );
   }
 
@@ -231,22 +256,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         padding: EdgeInsets.only(top: 0.h),
         child: Transform.scale(
           scale: 0.3,
-          // child: Icon(
-          //   // isVisible ? Icons.visibility_off_rounded : Icons.visibility_rounded,
-          //   isVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded,
-          //   color: AppColors.eyeGreyColor,
-          //   size: 40,
-          // ),
           child: Image.asset(
             isVisible ? AssetsPath.eyeClosed : AssetsPath.eyeOpen,
             width: 40,
             height: 40,
             color: AppColors.blackColor,
           ),
-          // child: ImageIcon(
-          //   AssetImage(isVisible ? AssetPath.EYE_ICON : AssetPath.EYE_ICON),
-          //   color: AppColors.greyColor,
-          // ),
         ),
       ),
       onTap: () {

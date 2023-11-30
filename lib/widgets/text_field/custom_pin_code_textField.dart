@@ -1,13 +1,13 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/themes.dart';
 
 class CustomPinCodeTextField extends StatefulWidget {
   final Function onComplete;
+
   const CustomPinCodeTextField({super.key, required this.onComplete});
 
   @override
@@ -26,7 +26,11 @@ class _CustomPinCodeTextFieldState extends State<CustomPinCodeTextField> {
       length: 6,
       obscureText: false,
       animationType: AnimationType.fade,
-      textStyle: TextStyle(fontSize: AppDimensions.otpTextSize, color: AppColors.textBlackColor),
+      textStyle: TextStyle(
+          fontSize: AppDimensions.otpTextSize,
+          fontFamily: AppFont.gilroyBold,
+          fontWeight: FontWeight.bold,
+          color: AppColors.textBlackColor),
       pinTheme: Themes.pinCodeFieldTheme,
       animationDuration: const Duration(milliseconds: 300),
       cursorColor: Colors.white,

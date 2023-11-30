@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -16,6 +18,7 @@ class PhoneNumberTextField extends StatefulWidget {
     this.borderColor,
     this.isBorder = true,
     this.isReadOnly = false,
+    this.isShowShadow = false,
     this.isUnderLineBorder = true,
     this.textFieldBorderRadius,
     this.contentPadding,
@@ -32,6 +35,7 @@ class PhoneNumberTextField extends StatefulWidget {
   final bool? isBorder, isUnderLineBorder;
   final bool? isReadOnly;
   final double? textFieldBorderRadius;
+  final bool isShowShadow;
   final EdgeInsets? contentPadding;
   final double? horizontalPadding, verticalPadding;
   final TextEditingController? controller;
@@ -72,21 +76,41 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Card(
-          elevation: AppDimensions.defaultFocusedTextFieldElevation,
-          // Adjust the elevation as needed
-          shape: RoundedRectangleBorder(
+        Container(
+          decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+            boxShadow: widget.isShowShadow
+                ? [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(.15),
+                      blurRadius: 12.0, // soften the shadow
+                      spreadRadius: 0.0, //extend the shadow
+                      offset: const Offset(
+                        0.0, // Move to right 10  horizontally
+                        9.0, // Move to bottom 10 Vertically
+                      ),
+                    )
+                  ]
+                : null,
           ),
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
+          child: Card(
+            elevation: AppDimensions.defaultFocusedTextFieldElevation,
+            shadowColor: Colors.transparent,
+            // Adjust the elevation as needed
+            shape: RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-              color: widget.backgroundColor ?? Colors.white,
             ),
-            height: AppDimensions.textFieldHeight, // Set the height as needed
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+                color: widget.backgroundColor ?? Colors.white,
+              ),
+              height: AppDimensions.textFieldHeight, // Set the height as needed
+            ),
           ),
         ),
         Padding(
@@ -108,32 +132,31 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
         dropdownTextStyle: _textStyle(),
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         keyboardType: TextInputType.phone,
-        dropdownIcon: Icon(
-          Icons.arrow_drop_down,
-          color: widget.iconColor ?? Colors.blue,
+        dropdownIcon: const Icon(
+          Icons.keyboard_arrow_down,
+          // color: widget.iconColor ?? AppColors.greyColor,
+          color: Color(0xff757575),
         ),
         dropdownIconPosition: IconPosition.trailing,
         autovalidateMode: AutovalidateMode.disabled,
         // controller: widget.controller,
         controller: _textEditingController,
         style: _textStyle(),
-        decoration: InputDecoration(
-          hintStyle: const TextStyle(
-            color: Colors.grey,
-            fontFamily: AppFont.gilroyMedium
-          ),
+        decoration: const InputDecoration(
+          hintStyle:
+              TextStyle(color: Colors.grey, fontFamily: AppFont.gilroyMedium),
 
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          counter: const SizedBox.shrink(),
+          counter: SizedBox.shrink(),
           border: InputBorder.none,
           fillColor: Colors.transparent,
           // label: _label(),
           filled: true,
           hintText: AppStrings.phoneNumber,
 
-          contentPadding: const EdgeInsets.only(top: 15),
+          contentPadding: EdgeInsets.only(top: 15),
           errorMaxLines: 2,
-          errorStyle: const TextStyle(
+          errorStyle: TextStyle(
             color: Colors.red,
             height: 1,
           ),
@@ -146,8 +169,8 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
 
   TextStyle _textStyle() {
     return TextStyle(
-      color: widget.textColor ?? Colors.black, fontFamily: AppFont.gilroyMedium
-    );
+        color: widget.textColor ?? Colors.black,
+        fontFamily: AppFont.gilroyMedium);
   }
 
   Widget _label() {

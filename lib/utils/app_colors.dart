@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const primaryColor = Color(0xFF3896EE);
+  static const fieldsOutlineColor = Color(0xffE2E2E2);
   static const eyeGreyColor = Color(0xFF929292);
   static const greyColor = Color(0xFF929292);
   static final greyColorChat = Color(0xFF9E9E9E).withOpacity(.1);
@@ -33,8 +34,8 @@ class AppColors {
   static const jobRequestTextBoarderColor = Color(0xFFE76161);
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
-  // static const backgroundColor = Color(0xFFFCFCFC);
-  static const backgroundColor = Color(0xFFFFFFFF);
+  static const backgroundColor = Color(0xFFFCFCFC);
+  // static const backgroundColor = Color(0xFFFFFFFF);
   static const chatMessageTimeColor = Color(0xFF9E9E9E);
   static const whiteColor = Colors.white;
   static const labelColor = Color(0xFF757575);

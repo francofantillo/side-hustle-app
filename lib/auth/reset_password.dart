@@ -63,9 +63,13 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
               height(AppDimensions.fieldsVerticalSpacingBetween),
               const CustomTextFormField(
+                  isShowShadow: true,
+                  isShowBoarder: false,
                   label: AppStrings.newPassword, isPasswordField: true),
               height(AppDimensions.fieldsVerticalSpacingBetween),
               const CustomTextFormField(
+                  isShowShadow: true,
+                  isShowBoarder: false,
                   label: AppStrings.confirmPassword, isPasswordField: true),
               height(AppDimensions.fieldsVerticalSpacingBetween),
               BulletedListItem(

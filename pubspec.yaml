@@ -52,8 +52,13 @@ dependencies:
 
 # animations
   shimmer: 3.0.0
-  entry: ^0.0.9
-  flutter_rating_bar: ^4.0.1
+  entry: 0.0.9
+  flutter_rating_bar: 4.0.1
+
+# Bloc
+  flutter_bloc: 8.1.3
+  dio: 5.3.4
+  fluttertoast: 8.2.4
 
 dev_dependencies:
   flutter_test:

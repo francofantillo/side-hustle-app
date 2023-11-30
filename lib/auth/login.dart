@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -26,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BackgroundWidget(
-
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           physics: const AlwaysScrollableScrollPhysics(
@@ -39,37 +39,47 @@ class _LoginScreenState extends State<LoginScreen> {
                 height(AppDimensions.welcomeBackSpacingBetween),
                 Center(
                     child: Container(
-                      height: AppDimensions.loginLogoSize,
-                      // width: .7.sw,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(4),
-                          ),
-                          image: DecorationImage(
-                            image: AssetImage(
-                              AssetsPath.logo,
-                            ),
-                          )),
-                    )),
+                  height: AppDimensions.loginLogoSize,
+                  // width: .7.sw,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage(
+                          AssetsPath.logo,
+                        ),
+                      )),
+                )),
                 height(AppDimensions.welcomeBackSpacingBetween),
-                textWidget(text: AppStrings.helloThere),
-                textWidget(
-                  text: AppStrings.welcomeBack,
-                  fontFamily: AppFont.gilroyBold,
-                  fontSize: AppDimensions.textHeadingSize,
-                  color: AppColors.textBlackColor,
-                  fontWeight: AppDimensions.headingFontWeight,
+                Padding(
+                  padding: const EdgeInsets.only(left: 3.0),
+                  child: textWidget(text: AppStrings.helloThere),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 3.0),
+                  child: textWidget(
+                    text: AppStrings.welcomeBack,
+                    fontFamily: AppFont.gilroyBold,
+                    fontSize: AppDimensions.textHeadingSize,
+                    color: AppColors.textBlackColor,
+                    fontWeight: AppDimensions.headingFontWeight,
+                  ),
                 ),
                 height(AppDimensions.welcomeBackSpacingBetween),
                 const CustomTextFormField(
+                  isShowShadow: true,
+                  isShowBoarder: false,
                   label: AppStrings.emailAddress,
                   // hintText: AppStrings.emailAddress,
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 const CustomTextFormField(
-                    label: AppStrings.password, isPasswordField: true),
-                height(AppDimensions.fieldsVerticalSpacingBetween),
-                //
+                    isShowShadow: true,
+                    isShowBoarder: false,
+                    label: AppStrings.password,
+                    isPasswordField: true),
+                height(AppDimensions.fieldsVerticalSpacingBetween + 0.01.sw),
                 Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
@@ -77,10 +87,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.pushNamed(
                             context, AppRoutes.forgotPasswordScreenRoute);
                       },
-                      child: textWidget(
-                          text: AppStrings.forgotPasswordLogin,
-                          fontFamily: AppFont.gilroyMedium,
-                          color: AppColors.textBlackColor),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 3.0),
+                        child: textWidget(
+                            text: AppStrings.forgotPasswordLogin,
+                            fontFamily: AppFont.gilroyMedium,
+                            color: AppColors.textBlackColor),
+                      ),
                     )),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
                 Padding(

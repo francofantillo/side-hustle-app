@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -130,5 +131,16 @@ class AppUtils {
     AppStrings.deliveryOptionPickup,
     AppStrings.deliveryOptionCOD,
   ];
+
+  static void showToast(String? message) {
+    Fluttertoast.showToast(
+      // textColor: AppColors.whiteColor,
+      msg: message ?? "",
+      toastLength: Toast.LENGTH_SHORT,
+      // backgroundColor: AppColors.primaryColor,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+    );
+  }
 
 }
