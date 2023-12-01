@@ -62,9 +62,16 @@ class SearchTextField extends StatelessWidget {
           // ),
           prefixIconConstraints:
               BoxConstraints.loose(const Size.fromRadius(76)),
+          // suffixIcon: const Padding(
+          //   padding: EdgeInsets.only(left: 16.0, right: 8),
+          //   child: ImageIcon(
+          //     AssetImage(AssetsPath.searchFilter),
+          //     size: 18,
+          //   ),
+          // ),
           suffixIcon: suffixIcon,
           suffixIconConstraints:
-              BoxConstraints.loose(const Size.fromRadius(14)),
+          BoxConstraints.loose(const Size.fromRadius(76)),
           // BoxConstraints.loose(const Size.fromRadius(5)),
           // border: InputBorder.none,
           floatingLabelBehavior: FloatingLabelBehavior.auto,

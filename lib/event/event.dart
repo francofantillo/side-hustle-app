@@ -78,15 +78,15 @@ class _EventScreenState extends State<EventScreen> {
                   hintText: AppStrings.searchEvent,
                   contentPaddingBottom: 10,
                   height: AppDimensions.searchTextFieldHeight,
-                  suffixIcon:
-                   Padding(
+                  suffixIcon: Padding(
                     padding: const EdgeInsets.only(right: 12.0, left: 0),
                     child: Material(
                         child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               print("onClicked Filter");
                             },
-                            child: const ImageIcon(AssetImage(AssetsPath.searchFilter)))),
+                            child: const ImageIcon(
+                              AssetImage(AssetsPath.searchFilter), size: 18,))),
                   ),
                   onChanged: (search) {}),
             ),
