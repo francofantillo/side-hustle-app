@@ -36,7 +36,7 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
       elevation: AppDimensions.defaultFocusedTextFieldElevation,
       shape: RoundedRectangleBorder(
         borderRadius:
-            BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+           BorderRadius.circular(18),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,14 +67,16 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
               Expanded(
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton2<String>(
+                    iconStyleData: IconStyleData(icon: Icon(Icons.keyboard_arrow_down)),
                     isDense: true,
                     isExpanded: true,
                     hint: Text(
                       widget.hintText ?? 'Select Item',
                       style: const TextStyle(
                         fontSize: 14,
-                        fontFamily: AppFont.gilroyBold,
                         // color: Theme.of(context).hintColor,
+                        fontFamily: AppFont.gilroySemiBold,
+                        fontWeight: FontWeight.w500,
                         color: AppColors.blackColor,
                       ),
                     ),
@@ -85,6 +87,9 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
                                 item,
                                 style: const TextStyle(
                                   fontSize: 14,
+                                  fontFamily: AppFont.gilroySemiBold,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.blackColor,
                                 ),
                               ),
                             ))

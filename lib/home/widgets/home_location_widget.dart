@@ -41,7 +41,7 @@ class _HomeLocationWidgetState extends State<HomeLocationWidget> {
               width: isLocationExpended
                   ? AppDimensions.expendedLocation
                   : AppDimensions.unExpendedLocation,
-              padding: EdgeInsets.only(left: .07.sw),
+              padding: EdgeInsets.only(left: .07.sw,),
               decoration: BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.all(Radius.circular(0.12.sw))),

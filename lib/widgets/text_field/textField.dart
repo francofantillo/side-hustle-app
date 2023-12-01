@@ -147,7 +147,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
             ),
             child: Container(
-              padding: EdgeInsets.only(top: 4.h),
+              // padding: EdgeInsets.only(top: 4.h),
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius:
@@ -156,7 +156,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     Border.all(color: widget.fillColor ?? AppColors.whiteColor),
                 color: widget.fillColor ?? AppColors.whiteColor,
               ),
-              height: widget.height ?? AppDimensions.textFieldHeight,
+              // height: widget.height ?? AppDimensions.textFieldHeight,
               child: textFormField(),
             ),
           ),
@@ -183,12 +183,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         border: InputBorder.none,
         fillColor: Colors.transparent,
         filled: true,
-        contentPadding: EdgeInsets.only(
-          top: 8.h,
-          bottom: 10.h,
-          left: AppDimensions.textFieldHorizontalPadding,
-          right: AppDimensions.textFieldHorizontalPadding,
-        ),
+        // contentPadding: EdgeInsets.only(
+        //   top: 8.h,
+        //   bottom: 10.h,
+        //   left: AppDimensions.textFieldHorizontalPadding,
+        //   right: AppDimensions.textFieldHorizontalPadding,
+        // ),
+        // contentPadding: EdgeInsets.zero,
+        contentPadding: const EdgeInsets.only(left: 8),
         prefixIcon: widget.isPrefixIcon!
             ? Padding(
                 padding: EdgeInsets.only(left: 8.w, right: 8.w),
@@ -196,12 +198,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               )
             : null,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
-        labelStyle:
-            TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroyMedium),
+        labelStyle: TextStyle(
+            fontSize: AppDimensions.textSizeSmall,
+            fontFamily: AppFont.gilroyMedium),
         hintText: widget.label ?? widget.hintText,
         errorStyle: _errorTextStyle(),
         hintStyle: const TextStyle(
-            color: AppColors.hintTextFieldColor, fontSize: 15, height: 2),
+            color: AppColors.hintTextFieldColor, fontSize: 15,),
         errorMaxLines: 3,
         suffixIcon: widget.isPasswordField!
             ? Padding(
@@ -214,6 +217,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     child: _suffixIconWidget(),
                   )
                 : null,
+        suffixIconConstraints:
+        BoxConstraints.loose(const Size.fromRadius(76)),
+        prefixIconConstraints:
+        BoxConstraints.loose(const Size.fromRadius(76)),
       ),
     );
   }
@@ -231,10 +238,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   GestureDetector _suffixIconWidget() {
     return GestureDetector(
       onTap: widget.onTap,
-      child: Transform.scale(
-        scale: widget.suffixIconScale ?? 0.6,
-        child: widget.suffixIcon,
-      ),
+      child: widget.suffixIcon,
     );
   }
 
@@ -254,14 +258,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return GestureDetector(
       child: Padding(
         padding: EdgeInsets.only(top: 0.h),
-        child: Transform.scale(
-          scale: 0.3,
-          child: Image.asset(
-            isVisible ? AssetsPath.eyeClosed : AssetsPath.eyeOpen,
-            width: 40,
-            height: 40,
-            color: AppColors.blackColor,
-          ),
+        // child: Image.asset(
+        //   isVisible ? AssetsPath.eyeClosed : AssetsPath.eyeOpen,
+        //   width: 40,
+        //   height: 40,
+        //   color: AppColors.blackColor,
+        // ),
+        child: ImageIcon(
+          AssetImage(isVisible ? AssetsPath.eyeClosed : AssetsPath.eyeOpen),
+          color: AppColors.blackColor,
+          size: 18,
         ),
       ),
       onTap: () {

@@ -48,7 +48,7 @@ class SearchTextField extends StatelessWidget {
           //     // left: AppDimensions.textFieldHorizontalPadding,
           //     right: 16.w,
           //     top: suffixIcon == null ? 2 : 5),
-          contentPadding: EdgeInsets.zero,
+          contentPadding: const EdgeInsets.only(left: 8),
           prefixIcon: const Padding(
             padding: EdgeInsets.only(left: 16.0, right: 8),
             child: ImageIcon(

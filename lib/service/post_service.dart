@@ -228,7 +228,6 @@ class _PostServiceState extends State<PostService> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: textWidget(
                     text: AppStrings.additionalInformation,
-                    maxLines: 1,
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSizeSmall,
                     fontFamily: AppFont.gilroyBold,

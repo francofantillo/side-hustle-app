@@ -26,7 +26,8 @@ class CustomMaterialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
         minWidth: width != null ? null : 1.sw,
-        elevation: AppDimensions.defaultButtonElevation,
+        // elevation: AppDimensions.defaultButtonElevation,
+        elevation: 0,
         // what are the Google Material Design guidelines text field, buttons and appBar elevation
         padding: EdgeInsets.only(
           right: width != null ? width! : AppDimensions.buttonDefaultWidth,

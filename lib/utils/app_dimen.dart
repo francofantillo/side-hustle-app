@@ -38,12 +38,14 @@ class AppDimensions {
   static double dialogueTextBodyHeadingSize = 16.sp;
 
   /// Location Expended and UnExpanded
-  static double expendedLocation = .88.sw;
+  // static double expendedLocation = .88.sw;
+  static double expendedLocation = 0.9.sw;
   static double unExpendedLocation = .15.sw;
 
   /// Text Field
   // static double textFieldHeight = 55.h;
-  static double textFieldHeight = .12.sw;
+  // static double textFieldHeight = .12.sw;
+  static double textFieldHeight = 55.w;
   static double textFieldBorderRadius = 15;
   static double roundedImageViewBorderRadius = 16;
   static double searchTextFieldHeight = 0.15.sw;

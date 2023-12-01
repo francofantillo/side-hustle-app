@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
+import 'package:side_hustle/event/widgets/event_post_pacakges_item.dart';
 import 'package:side_hustle/event/widgets/event_post_packages_list.dart';
 import 'package:side_hustle/event/widgets/select_payment_type_dropdown.dart';
 import 'package:side_hustle/router/app_route_named.dart';
@@ -29,8 +30,55 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
       _ModalBottomSheetPackageTypePostState();
 }
 
+enum SingingCharacter { package1, package2, package3 }
+
 class _ModalBottomSheetPackageTypePostState
     extends State<ModalBottomSheetPackageTypePost> {
+
+  SingingCharacter? _character = SingingCharacter.package1;
+
+  late final ValueNotifier<bool> _packagesGroupValue;
+
+  int defaultCardIndex = 2;
+  Map<String, List> defaultCard = {
+    "x": [false, false, false],
+  };
+
+  Map<String, List> packages = {
+    "packages": [
+      {
+        "packagePrice": 1.00,
+        "packageType": "Post per day",
+        "default": false,
+      },
+      {
+        "packagePrice": 7.00,
+        "packageType": "Post per week",
+        "default": false,
+      },
+      {
+        "packagePrice": 30.00,
+        "packageType": "Post per Month",
+        "default": true,
+      }
+    ]
+  };
+
+  @override
+  void initState() {
+    setDefaultCardList();
+    super.initState();
+  }
+
+  setDefaultCardList() {
+    for (int i = 0; i < packages["packages"]!.length; i++) {
+      defaultCard["x"]![i] = packages["packages"]![i]["default"];
+      if (packages["packages"]![i]["default"]) {
+        defaultCardIndex = i;
+      }
+    }
+  }
+
   final List<String> items = [
     "****  ****  ****  4567",
     "****  ****  ****  4568",
@@ -40,7 +88,7 @@ class _ModalBottomSheetPackageTypePostState
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return Container(
-        height: AppDimensions.modelSheetProductsHeight,
+        // height: AppDimensions.modelSheetProductsHeight,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.only(
@@ -55,8 +103,8 @@ class _ModalBottomSheetPackageTypePostState
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
+                left: 18.0,
+                right: 18.0,
                 top: 16,
               ),
               child: textWidget(
@@ -68,10 +116,10 @@ class _ModalBottomSheetPackageTypePostState
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
+                left: 18.0,
+                right: 18.0,
                 top: 2,
-                bottom: 4,
+                bottom: 12,
               ),
               child: textWidget(
                   text: AppStrings.selectPackageTypeHint,
@@ -79,14 +127,139 @@ class _ModalBottomSheetPackageTypePostState
                   fontSize: AppDimensions.textSize10),
             ),
             height(0.06.sw),
+            Padding(
+              padding:
+              const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(18)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      textWidget(
+                          text: "\$${packages["packages"]?[0]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                          color: AppColors.textBlackColor,
+                          fontFamily: AppFont.gilroyBold,
+                          fontSize: AppDimensions.textSizeNormal,
+                          fontWeight: FontWeight.bold),
+                      width(0.03.sw),
+                      Expanded(
+                        child: textWidget(
+                            text: packages["packages"]?[0]["packageType"],
+                            color: AppColors.textBlackColor,
+                            fontFamily: AppFont.gilroyBold,
+                            fontSize: AppDimensions.textSizeNormal,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      // const Spacer(),
+                      Radio(value: SingingCharacter.package1, groupValue: _character, onChanged: (SingingCharacter? v) {
+                        if(v! == SingingCharacter.package1) {
+                          _character = SingingCharacter.package1;
+                        } else {
+                          // _character = SingingCharacter.lafayette;
+                        }
+                        setState(() {});
+                      })
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+              const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(18)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      textWidget(
+                          text: "\$${packages["packages"]?[1]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                          color: AppColors.textBlackColor,
+                          fontFamily: AppFont.gilroyBold,
+                          fontSize: AppDimensions.textSizeNormal,
+                          fontWeight: FontWeight.bold),
+                      width(0.03.sw),
+                      Expanded(
+                        child: textWidget(
+                            text: packages["packages"]?[1]["packageType"],
+                            color: AppColors.textBlackColor,
+                            fontFamily: AppFont.gilroyBold,
+                            fontSize: AppDimensions.textSizeNormal,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      // const Spacer(),
+                      Radio(value: SingingCharacter.package2, groupValue: _character, onChanged: (SingingCharacter? v) {
+                        if(v! == SingingCharacter.package2) {
+                          _character = SingingCharacter.package2;
+                        } else {
+                          // _character = SingingCharacter.lafayette;
+                        }
+                        setState(() {});
+                      })
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+              const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(18)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      textWidget(
+                          text: "\$${packages["packages"]?[2]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                          color: AppColors.textBlackColor,
+                          fontFamily: AppFont.gilroyBold,
+                          fontSize: AppDimensions.textSizeNormal,
+                          fontWeight: FontWeight.bold),
+                      width(0.03.sw),
+                      Expanded(
+                        child: textWidget(
+                            text: packages["packages"]?[2]["packageType"],
+                            color: AppColors.textBlackColor,
+                            fontFamily: AppFont.gilroyBold,
+                            fontSize: AppDimensions.textSizeNormal,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      // const Spacer(),
+                      Radio(value: SingingCharacter.package3, groupValue: _character, onChanged: (SingingCharacter? v) {
+                        if(v! == SingingCharacter.package3) {
+                          _character = SingingCharacter.package3;
+                        } else {
+                          // _character = SingingCharacter.lafayette;
+                        }
+                        setState(() {});
+                      })
+                    ],
+                  ),
+                ),
+              ),
+            ),
             // const ProductsCartList(),
-            const EventPostPackagesList(),
+            // const EventPostPackagesList(),
             // height(0.02.sw),
             Padding(
               padding: const EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
-                // top: 16,
+                left: 18.0,
+                right: 18.0,
               ),
               child: textWidget(
                   text: AppStrings.selectPaymentType,
@@ -112,7 +285,7 @@ class _ModalBottomSheetPackageTypePostState
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0,),
+                  const EdgeInsets.only(left: 20.0, right: 20, bottom: 16),
               child: CustomMaterialButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -152,7 +325,6 @@ class _ModalBottomSheetPackageTypePostState
                     }
                   },
                   name: AppStrings.continueText,
-                  borderRadius: AppDimensions.boarderRadiusCartPlaceOrder,
                   color: AppColors.whiteColor,
                   textColor: AppColors.primaryColor),
             ),
