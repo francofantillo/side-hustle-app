@@ -35,43 +35,40 @@ class _HomeLocationWidgetState extends State<HomeLocationWidget> {
       child: Stack(
         children: [
           Positioned(
-            // top: 0.015.sw,
-            top: 0.010.sw,
+            top: 0.015.sw,
+            // top: 0.010.sw,
             child: Container(
               width: isLocationExpended
                   ? AppDimensions.expendedLocation
                   : AppDimensions.unExpendedLocation,
               padding: EdgeInsets.only(left: .07.sw),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  )),
+                  borderRadius: BorderRadius.all(Radius.circular(0.12.sw))),
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     setLocationExpended(
                         isLocationExpended: !isLocationExpended);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 8.0, top: 2.5, bottom: 2.5, right: 4),
+                        left: 8.0, top: 2.5, bottom: 2, right: 4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: textWidget(
-                              text:
-                                  isLocationExpended ? AppStrings.locationText : "",
+                              text: isLocationExpended
+                                  ? AppStrings.locationText
+                                  : "",
                               color: AppColors.textWhiteColor,
                               fontSize: AppDimensions.textSize10),
                         ),
                         Icon(
                           Icons.arrow_forward_ios,
+                          // size: 0.039.sw,
                           size: 0.039.sw,
                           color: AppColors.whiteColor,
                         )
@@ -82,11 +79,11 @@ class _HomeLocationWidgetState extends State<HomeLocationWidget> {
               ),
             ),
           ),
-          const IconButtonWithBackground(
+          IconButtonWithBackground(
             iconPath: AssetsPath.location,
             borderRadius: 30,
-            height: 28,
-            width: 28,
+            height: 0.08.sw,
+            width: 0.08.sw,
             backgroundColor: AppColors.primaryColor,
             iconColor: AppColors.whiteColor,
           ),

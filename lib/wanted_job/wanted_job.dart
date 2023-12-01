@@ -4,13 +4,16 @@ import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/wanted_job/widgets/applied_tab_list.dart';
 import 'package:side_hustle/wanted_job/widgets/booked_job_list.dart';
 import 'package:side_hustle/wanted_job/widgets/completed_job_list.dart';
+import 'package:side_hustle/wanted_job/widgets/wanted_job_tab.dart';
 import 'package:side_hustle/wanted_job/widgets/wanted_tab_list.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -24,9 +27,6 @@ class WantedJobScreen extends StatefulWidget {
 }
 
 class _WantedJobScreenState extends State<WantedJobScreen> {
-  // var index = 0;
-  // bool isProductSelected = true;
-
   late final ValueNotifier<int> _tabIndexBasicToggle;
 
   @override
@@ -39,6 +39,7 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (contextBuilder) {
+      print("_tabIndexBasicToggle.value: ${_tabIndexBasicToggle.value}");
       print('switched to: ${_tabIndexBasicToggle.value}');
       return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -91,49 +92,15 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                   ),
                   onChanged: (search) {}),
             ),
-            // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const AlwaysScrollableScrollPhysics(
-                  parent: BouncingScrollPhysics()),
-              child: Scrollbar(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 16, top: 6),
-                  child: ToggleSwitch(
-                    // customWidths: [110.0, 70.0, 70.0, 90.0],
-                    isVertical: false,
-                    animate: true,
-                    animationDuration: 200,
-                    minWidth: AppDimensions.tabBarWidth,
-                    minHeight: AppDimensions.tabBarHeight,
-                    cornerRadius: 20.0,
-                    changeOnTap: true,
-                    activeBgColors: const [
-                      [AppColors.primaryColor],
-                      [AppColors.primaryColor],
-                      [AppColors.primaryColor],
-                      [AppColors.primaryColor],
-                    ],
-                    activeFgColor: Colors.white,
-                    inactiveBgColor: AppColors.switchTabBackgroundColor,
-                    inactiveFgColor: AppColors.greyColor,
-                    initialLabelIndex: _tabIndexBasicToggle.value,
-                    totalSwitches: 4,
-                    labels: const [
-                      "${AppStrings.wantedJob}s",
-                      AppStrings.applied,
-                      AppStrings.booked,
-                      AppStrings.completed
-                    ],
-                    fontSize: AppDimensions.tabBarFontSize,
-                    radiusStyle: true,
-                    onToggle: (index) {
-                      _tabIndexBasicToggle.value = index ?? 0;
-                      print('switched to: ${_tabIndexBasicToggle.value}');
-                      setState(() {});
-                    },
-                  ),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0),
+              child: WantedJobTab(
+                currentTabIndex: widget.currentTabIndex,
+                onChanged: (index) {
+                  setState(() {
+                    _tabIndexBasicToggle.value = index;
+                  });
+                },
               ),
             ),
             _tabIndexBasicToggle.value == 0

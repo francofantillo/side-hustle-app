@@ -81,9 +81,9 @@ class AppDimensions {
 
   /// Tab bar Height
 
-  static double tabBarHeight = 0.1.sw;
+  static double tabBarHeight = .030.sw;
   static double tabBarWidth = 90;
-  static double tabBarFontSize = 8.sp;
+  static double tabBarFontSize = 12.sp;
 
   /// Elevation
   static double defaultCardElevation = 0.02.sw;

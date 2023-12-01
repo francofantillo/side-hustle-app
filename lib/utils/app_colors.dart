@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const primaryColor = Color(0xFF3896EE);
+  static const tabBarInactiveTextColor = Color(0xff969696);
   static const fieldsOutlineColor = Color(0xffE2E2E2);
   static const eyeGreyColor = Color(0xFF929292);
   static const greyColor = Color(0xFF929292);

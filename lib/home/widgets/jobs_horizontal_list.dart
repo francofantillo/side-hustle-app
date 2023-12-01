@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/home/widgets/home_items_widget.dart';
 import 'package:side_hustle/home/widgets/items_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
@@ -54,7 +55,9 @@ class JobsHorizontalListWidget extends StatelessWidget {
         // Horizontal ListView
         SizedBox(
           height: horizontalListSize, // Set the desired height
+          width: 1.sw,
           child: ListView.builder(
+            shrinkWrap: true,
             physics: const AlwaysScrollableScrollPhysics(
                 parent: BouncingScrollPhysics()),
             scrollDirection: Axis.horizontal,
@@ -62,8 +65,8 @@ class JobsHorizontalListWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               // Replace with your horizontal list item
               return Padding(
-                padding: const EdgeInsets.only(right: 2.0, left: 2.0),
-                child: ItemsWidget(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: HomeItemsWidget(
                   onTap: () {
                     if (isEvent) {
                       Navigator.pushNamed(
