@@ -71,13 +71,17 @@ class FavItemEventsWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                              child: textWidget(
-                                  text: title,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: AppDimensions.textSizeSmall,
-                                  color: AppColors.textBlackColor)),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 0.03.sw),
+                                child: textWidget(
+                                    text: title,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: AppDimensions.textSizeSmall,
+                                    color: AppColors.textBlackColor),
+                              )),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               textWidget(
                                   text: price,
@@ -87,39 +91,37 @@ class FavItemEventsWidget extends StatelessWidget {
                                   color: AppColors.textBlackColor),
                               textWidget(
                                   text: AppStrings.perHead,
-                                  color: AppColors.textBlackColor,
                                   textAlign: TextAlign.end,
                                   fontSize: AppDimensions.textSizeTiny),
                             ],
                           ),
                         ],
                       ),
-                      SizedBox(
-                        width: .5.sw,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3.0),
-                              child: ImageIcon(
-                                const AssetImage(AssetsPath.location),
-                                size: AppDimensions.eventWidgetIconSize,
-                                // color: AppColors.greyColor,
-                              ),
+                      height(imageHeight! * .02),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 3.0),
+                            child: ImageIcon(
+                              const AssetImage(AssetsPath.location),
+                              size: AppDimensions.eventWidgetIconSize,
+                              // color: AppColors.greyColor,
                             ),
-                            width(0.02.sw),
-                            Expanded(
-                                child: textWidget(text: location, maxLines: 2,
-                                    color: AppColors.textBlackColor,
-                                    fontSize: AppDimensions.textSize10)),
-                          ],
-                        ),
+                          ),
+                          width(0.02.sw),
+                          Expanded(
+                              child: textWidget(text: location, maxLines: 2,
+                                  color: AppColors.textBlackColor,
+                                  fontSize: AppDimensions.textSize10)),
+                        ],
                       ),
                       height(imageHeight! * .04),
                       Divider(
                         height: 1.h,
                       ),
                       const Spacer(),
+                      height(imageHeight! * .04),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

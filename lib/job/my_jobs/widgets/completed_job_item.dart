@@ -52,7 +52,7 @@ class CompletedJobItemWidget extends StatelessWidget {
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -158,35 +158,34 @@ class CompletedJobItemWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      height(0.02.sw),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.zero,
-                          margin: EdgeInsets.zero,
-                          decoration: BoxDecoration(
-                            color: AppColors.greenColor,
-                            borderRadius: BorderRadius.circular(
-                                AppDimensions.bookedJobRoundedBorder),
-                          ),
-                          child: Material(
-                            color: AppColors.greenColor,
-                            borderRadius: BorderRadius.circular(12),
-                            child: InkWell(
-                              onTap: () {
-                                AppDialogues.noHeaderDialogue(
-                                        context: context,
-                                        body: const RateAndReviewDialogue())
-                                    .show();
-                              },
-                              child: Center(
-                                child: textWidget(
-                                  text: AppStrings.rateAndReview,
-                                  color: AppColors.textWhiteColor,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: AppDimensions.textSize10,
-                                  fontWeight: FontWeight.w700,
-                                  textAlign: TextAlign.center,
-                                ),
+                      const Spacer(),
+                      height(0.01.sw),
+                      Container(
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.all(0.03.sw),
+                        decoration: BoxDecoration(
+                          color: AppColors.greenColor,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Material(
+                          color: AppColors.greenColor,
+                          borderRadius: BorderRadius.circular(
+                              AppDimensions.bookedJobRoundedBorder),
+                          child: InkWell(
+                            onTap: () {
+                              AppDialogues.noHeaderDialogue(
+                                  context: context,
+                                  body: const RateAndReviewDialogue())
+                                  .show();
+                            },
+                            child: Center(
+                              child: textWidget(
+                                text: AppStrings.rateAndReview,
+                                color: AppColors.textWhiteColor,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSize10,
+                                fontWeight: FontWeight.bold,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),

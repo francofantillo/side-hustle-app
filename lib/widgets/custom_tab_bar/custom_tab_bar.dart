@@ -3,26 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
-import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class WantedJobTab extends StatefulWidget {
+class CustomTabBar extends StatefulWidget {
+  final List<String> tabNames;
   final int currentTabIndex;
   final ValueChanged<int> onChanged;
 
-  const WantedJobTab(
+  const CustomTabBar(
       {super.key,
       this.currentTabIndex = 0,
+      required this.tabNames,
       required this.onChanged});
 
   @override
-  State<WantedJobTab> createState() => _WantedJobTabState();
+  State<CustomTabBar> createState() => _CustomTabBarState();
 }
 
-class _WantedJobTabState extends State<WantedJobTab> {
-
+class _CustomTabBarState extends State<CustomTabBar> {
   late final ValueNotifier<int> _tabIndexBasicToggle;
-  
+
   @override
   void initState() {
     _tabIndexBasicToggle = ValueNotifier(widget.currentTabIndex);
@@ -57,8 +57,6 @@ class _WantedJobTabState extends State<WantedJobTab> {
                         padding: EdgeInsets.only(
                           top: AppDimensions.tabBarWantedTabsHeight,
                           bottom: AppDimensions.tabBarWantedTabsHeight,
-                          // left: 4,
-                          // right: 1,
                         ),
                         decoration: BoxDecoration(
                             color: _tabIndexBasicToggle.value == 0
@@ -70,7 +68,7 @@ class _WantedJobTabState extends State<WantedJobTab> {
                                     bottomLeft: Radius.circular(25),
                                     topLeft: Radius.circular(25))),
                         child: textWidget(
-                            text: "${AppStrings.wantedJob}s",
+                            text: widget.tabNames[0],
                             textAlign: TextAlign.center,
                             color: _tabIndexBasicToggle.value == 0
                                 ? AppColors.whiteColor
@@ -102,11 +100,9 @@ class _WantedJobTabState extends State<WantedJobTab> {
                                 ? AppColors.primaryColor
                                 : AppColors.switchTabBackgroundColor,
                             borderRadius: BorderRadius.all(Radius.circular(
-                                _tabIndexBasicToggle.value == 1
-                                    ? 25
-                                    : 0))),
+                                _tabIndexBasicToggle.value == 1 ? 25 : 0))),
                         child: textWidget(
-                            text: AppStrings.applied,
+                            text: widget.tabNames[1],
                             textAlign: TextAlign.center,
                             color: _tabIndexBasicToggle.value == 1
                                 ? AppColors.whiteColor
@@ -127,66 +123,30 @@ class _WantedJobTabState extends State<WantedJobTab> {
                     widget.onChanged(_tabIndexBasicToggle.value);
                   },
                   child: Container(
-                    color: AppColors.switchTabBackgroundColor,
-                    child: Container(
-                        padding: EdgeInsets.only(
-                          top: AppDimensions.tabBarWantedTabsHeight,
-                          bottom: AppDimensions.tabBarWantedTabsHeight,
-                        ),
-                        decoration: BoxDecoration(
-                            color: _tabIndexBasicToggle.value == 2
-                                ? AppColors.primaryColor
-                                : AppColors.switchTabBackgroundColor,
-                            borderRadius: BorderRadius.all(Radius.circular(
-                                _tabIndexBasicToggle.value == 2
-                                    ? 25
-                                    : 0))),
-                        child: textWidget(
-                            text: AppStrings.booked,
-                            textAlign: TextAlign.center,
-                            color: _tabIndexBasicToggle.value == 2
-                                ? AppColors.whiteColor
-                                : AppColors.tabBarInactiveTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: AppFont.gilroyBold,
-                            fontSize: AppDimensions.tabBarFontSize)),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Material(
-                elevation: 0,
-                child: InkWell(
-                  onTap: () {
-                    _tabIndexBasicToggle.value = 3;
-                    widget.onChanged(_tabIndexBasicToggle.value);
-                  },
-                  child: Container(
                     decoration: BoxDecoration(
-                        color: AppColors.switchTabBackgroundColor,
-                        borderRadius: const BorderRadius.only(
-                            bottomRight: Radius.circular(25),
-                            topRight: Radius.circular(25))),
+                      color: AppColors.switchTabBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(25),
+                          topRight: Radius.circular(25)),
+                    ),
                     child: Container(
-                        // padding: const EdgeInsets.all(8),
                         padding: EdgeInsets.only(
                           top: AppDimensions.tabBarWantedTabsHeight,
                           bottom: AppDimensions.tabBarWantedTabsHeight,
                         ),
                         decoration: BoxDecoration(
-                            color: _tabIndexBasicToggle.value == 3
+                            color: _tabIndexBasicToggle.value == 2
                                 ? AppColors.primaryColor
                                 : AppColors.switchTabBackgroundColor,
-                            borderRadius: _tabIndexBasicToggle.value == 3
+                            borderRadius: _tabIndexBasicToggle.value == 2
                                 ? const BorderRadius.all(Radius.circular(25))
                                 : const BorderRadius.only(
                                     bottomRight: Radius.circular(25),
                                     topRight: Radius.circular(25))),
                         child: textWidget(
-                            text: AppStrings.completed,
+                            text: widget.tabNames[2],
                             textAlign: TextAlign.center,
-                            color: _tabIndexBasicToggle.value == 3
+                            color: _tabIndexBasicToggle.value == 2
                                 ? AppColors.whiteColor
                                 : AppColors.tabBarInactiveTextColor,
                             fontWeight: FontWeight.bold,

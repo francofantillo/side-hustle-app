@@ -8,6 +8,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
+import 'package:side_hustle/widgets/custom_tab_bar/custom_tab_bar.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -48,7 +49,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             Padding(
               padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw),
-              child: SizedBox(
+         /*     child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(
                   customWidths: [.3.sw, .3.sw, .305.sw],
@@ -84,8 +85,20 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                     setState(() {});
                   },
                 ),
-              ),
-            ),
+              ),*/
+                child: CustomTabBar(
+                  currentTabIndex: 0,
+                  tabNames: const [
+                    AppStrings.scheduled,
+                    AppStrings.ongoing,
+                    AppStrings.completed,
+                  ],
+                  onChanged: (index) {
+                    setState(() {
+                      _tabIndexBasicToggle.value = index;
+                    });
+                  },
+                )),
             _tabIndexBasicToggle.value == 0
                 ? const MyJobsScheduledList()
                 : _tabIndexBasicToggle.value == 1

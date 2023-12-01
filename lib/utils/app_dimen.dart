@@ -81,7 +81,8 @@ class AppDimensions {
 
   /// Tab bar Height
 
-  static double tabBarHeight = .030.sw;
+  static double tabBarHeight = 0.1.sw;
+  static double tabBarWantedTabsHeight = .030.sw;
   static double tabBarWidth = 90;
   static double tabBarFontSize = 12.sp;
 
@@ -138,7 +139,7 @@ class AppDimensions {
   static const double floatingActionButtonPadding = 110;
   static double authFormTopPadding = 30;
   static const double constantAppBarHeightWithSearchIcon = 150;
-  static double constantAppBarHeightWithOutSearchIcon = 80.h;
+  static double constantAppBarHeightWithOutSearchIcon = 80.w;
   static const double constantButtonHeight = 55;
   static const double fullScreenHeight = 812;
   static const double fullScreenWidth = 375;
@@ -148,15 +149,24 @@ class AppDimensions {
   // static double listItemHeight = 0.40.sw;
   // static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
   // static double listItemHeight = 0.36.sw; // 353339563061758, 352879323061755
-  static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
+  // static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
+  static double listItemHeight = 135.w; // 353339563061758, 352879323061755
+  // static double listItemFavEventsHeight = 0.4.sw;
+  static double listItemFavEventsHeight = 132.w;
+  // static double listItemFavJobHeight = 0.39.sw;
+  static double listItemFavJobHeight = 130.w;
+  // static double listItemFavShopsHeight = 0.39.sw;
+  static double listItemFavShopsHeight = 130.w;
   static double listItemHeightJobCompleted = 0.41.sw;
   static double listItemWidth = 0.21.sw;
   static double listItemElevation = 0.02.sh;
-  static double listItemImageRoundedBorder = 15.h;
+  static double listItemImageRoundedBorder = 15.w;
 
   /// Event and Job Item
   // static double sideHustleItemHeight = 0.41.sw;
-  static double sideHustleItemHeight = 0.40.sw;
+  // static double sideHustleItemHeight = 0.40.sw;
+  // static double sideHustleItemHeight = 0.40.sw;
+  static double sideHustleItemHeight = 118.w;
   static double sideHustleItemWidth = 0.24.sw;
 
   /// Product Image Slider
@@ -176,8 +186,8 @@ class AppDimensions {
   static double customAppBarTitleTextSize = 14.sp;
 
   /// Applied Job
-  static double appliedJobRoundedBorder = 10.h;
-  static double bookedJobRoundedBorder = 10.h;
+  static double appliedJobRoundedBorder = 10.w;
+  static double bookedJobRoundedBorder = 10.w;
 
   static double checkBoxRadius = 6;
 
@@ -202,7 +212,8 @@ class AppDimensions {
   // static double cartItemProductHeight = 0.39.sw;
   // static double cartItemProductHeight = 0.37.sw;
   static double cartItemProductHeight = 0.32.sw;
-  static double orderDetailHeight = 0.26.sw;
+  // static double orderDetailHeight = 0.26.sw;
+  static double orderDetailHeight = 90.w;
   static double cartItemProductImageWidth = 0.22.sw;
   // static double cartItemServiceHeight = 0.50.sw;
   static double cartItemServiceHeight = 0.39.sw;
@@ -232,10 +243,14 @@ class AppDimensions {
 
   /// My Jobs
   // static double listItemScheduledHeight = 0.45.sw;
-  static double listItemEventScheduledHeight = 0.40.sw;
-  static double listItemJobScheduledHeight = 0.41.sw;
-  static double listItemOnGoingHeight = 0.57.sw;
-  static double listItemCompletedJobHeight = 0.57.sw;
+  // static double listItemEventScheduledHeight = 0.40.sw;
+  static double listItemEventScheduledHeight = 130.w;
+  // static double listItemJobScheduledHeight = 0.41.sw;
+  static double listItemJobScheduledHeight = 135.w;
+  // static double listItemOnGoingHeight = 0.57.sw;
+  static double listItemOnGoingHeight = 178.w;
+  // static double listItemCompletedJobHeight = 0.57.sw;
+  static double listItemCompletedJobHeight = 182.w;
   static double listItemJobRequestHeight = 0.38.sw;
 
   /// Button Border Radius

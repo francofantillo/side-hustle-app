@@ -13,7 +13,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class EventItemsWidget extends StatelessWidget {
   final String? title,
-      subTitle,
+      location,
       price,
       userProfile,
       userName,
@@ -26,7 +26,7 @@ class EventItemsWidget extends StatelessWidget {
   const EventItemsWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.location,
       this.price,
       this.onTap,
       this.userProfile,
@@ -81,13 +81,17 @@ class EventItemsWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                  child: textWidget(
-                                      text: title,
-                                      fontFamily: AppFont.gilroyBold,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: AppDimensions.textSizeSmall,
-                                      color: AppColors.textBlackColor)),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 0.03.sw),
+                                    child: textWidget(
+                                        text: title,
+                                        fontFamily: AppFont.gilroyBold,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: AppDimensions.textSizeSmall,
+                                        color: AppColors.textBlackColor),
+                                  )),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   textWidget(
                                       text: price,
@@ -103,32 +107,32 @@ class EventItemsWidget extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            width: .5.sw,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 3.0),
-                                  child: ImageIcon(
-                                    const AssetImage(AssetsPath.location),
-                                    size: AppDimensions.eventWidgetIconSize,
-                                    color: AppColors.greyColorNoOpacity,
-                                  ),
+                          height(imageHeight! * .02),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 3.0),
+                                child: ImageIcon(
+                                  const AssetImage(AssetsPath.location),
+                                  size: AppDimensions.eventWidgetIconSize,
+                                  color: AppColors.greyColorNoOpacity,
                                 ),
-                                width(0.02.sw),
-                                Expanded(
-                                    child: textWidget(
-                                  text: subTitle,
-                                  maxLines: 2,
-                                  fontSize: AppDimensions.textSize10,
-                                )),
-                              ],
-                            ),
+                              ),
+                              width(0.01.sw),
+                              Expanded(
+                                  child: textWidget(
+                                text: location,
+                                maxLines: 2,
+                                fontSize: AppDimensions.textSize10,
+                              )),
+                            ],
                           ),
-                          height(imageHeight! * .04),
+                          // height(imageHeight! * .04),
+                          const Spacer(),
                           Divider(
                             height: 1.h,
+                            color: AppColors.greyColor,
                           ),
                           const Spacer(),
                           Row(

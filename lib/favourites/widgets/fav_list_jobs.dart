@@ -30,7 +30,7 @@ class _FavouritesListJobsState extends State<FavouritesListJobs> {
             padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
             child: FavItemJobsWidget(
               imageWidth: 1.sw,
-              imageHeight: AppDimensions.listItemHeight,
+              imageHeight: AppDimensions.listItemFavJobHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.favJobsList[index].title,
               subTitle: AlphaAppData.favJobsList[index].subTitle,

@@ -90,13 +90,17 @@ class HomeItemsWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                    child: textWidget(
-                                        text: title,
-                                        fontFamily: AppFont.gilroyBold,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: AppDimensions.textSizeSmall,
-                                        color: AppColors.textBlackColor)),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 0.03.sw),
+                                      child: textWidget(
+                                          text: title,
+                                          fontFamily: AppFont.gilroyBold,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: AppDimensions.textSizeSmall,
+                                          color: AppColors.textBlackColor),
+                                    )),
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     textWidget(
                                         text: price,
@@ -114,19 +118,24 @@ class HomeItemsWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              width: .5.sw,
-                              child: textWidget(
-                                text: subTitle,
-                                maxLines: 2,
-                                fontSize: AppDimensions.textSize10,
-                              ),
+
+                            height(imageHeight! * .01),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: textWidget(
+                                    text: subTitle,
+                                    maxLines: 2,
+                                    fontSize: AppDimensions.textSize10,
+                                  ),
+                                ),
+                              ],
                             ),
                             // height(imageHeight! * .04),
                             const Spacer(),
                             Divider(
                               height: 1.h,
-                              color: Colors.grey,
+                              color: Colors.grey.withOpacity(0.8),
                             ),
                             height(imageHeight! * .04),
                             // height(0.015.sw),

@@ -78,6 +78,7 @@ class FavItemJobsWidget extends StatelessWidget {
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               textWidget(
                                   text: price,
@@ -108,6 +109,7 @@ class FavItemJobsWidget extends StatelessWidget {
                         height: 1.h,
                       ),
                       const Spacer(),
+                      height(imageHeight! * .04),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,

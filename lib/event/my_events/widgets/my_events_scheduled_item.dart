@@ -49,7 +49,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -70,20 +70,24 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                              child: textWidget(
-                                  text: title,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: AppDimensions.textSizeSmall,
-                                  color: AppColors.textBlackColor)),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 0.02.sw),
+                                child: textWidget(
+                                    text: title,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: AppDimensions.textSizeSmall,
+                                    color: AppColors.textBlackColor),
+                              )),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               textWidget(
                                   text: price,
-                                  color: AppColors.textBlackColor,
-                                fontFamily: AppFont.gilroyBold,
-                                fontWeight: FontWeight.bold,
-                                fontSize: AppDimensions.textSizeSmall,),
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppDimensions.textSizeSmall,
+                                  color: AppColors.textBlackColor),
                               textWidget(
                                   text: AppStrings.perHead,
                                   textAlign: TextAlign.end,
@@ -92,27 +96,25 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        width: .5.sw,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3.0),
-                              child: ImageIcon(
-                                const AssetImage(AssetsPath.location),
-                                size: AppDimensions.eventWidgetIconSize,
-                                color: AppColors.greyColorNoOpacity,
-                              ),
+                      height(imageHeight! * .02),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 3.0),
+                            child: ImageIcon(
+                              const AssetImage(AssetsPath.location),
+                              size: AppDimensions.eventWidgetIconSize,
+                              color: AppColors.greyColorNoOpacity,
                             ),
-                            width(0.02.sw),
-                            Expanded(
-                                child: textWidget(
-                                    text: subTitle,
-                                    maxLines: 2,
-                                    fontSize: AppDimensions.textSize10)),
-                          ],
-                        ),
+                          ),
+                          width(0.02.sw),
+                          Expanded(
+                              child: textWidget(
+                                  text: subTitle,
+                                  maxLines: 2,
+                                  fontSize: AppDimensions.textSize10)),
+                        ],
                       ),
                       height(imageHeight! * .04),
                       Divider(
@@ -121,36 +123,29 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                       // height(imageHeight! * .03),
                       // const Spacer(),
                       // width(0.05.sw),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 0.025.sw),
-                          child: Container(
-                            // padding: const EdgeInsets.all(8),
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  16),
-                            ),
-                            child: Material(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                              child: InkWell(
-                                onTap: onTap,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: textWidget(
-                                      text: AppStrings.viewEvent,
-                                      color: AppColors.textWhiteColor,
-                                      fontFamily: AppFont.gilroyBold,
-                                      fontSize: AppDimensions.textSizeVerySmall,
-                                      fontWeight: FontWeight.w700,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
+                      const Spacer(),
+                      height(0.01.sw),
+                      Container(
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.all(0.03.sw),
+                        decoration: BoxDecoration(
+                          color: AppColors.greenColor,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Material(
+                          color: AppColors.greenColor,
+                          borderRadius: BorderRadius.circular(
+                              AppDimensions.bookedJobRoundedBorder),
+                          child: InkWell(
+                            onTap: onTap,
+                            child: Center(
+                              child: textWidget(
+                                text: AppStrings.viewEvent,
+                                color: AppColors.textWhiteColor,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSize10,
+                                fontWeight: FontWeight.bold,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),

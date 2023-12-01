@@ -99,7 +99,7 @@ class FavItemShopsWidget extends StatelessWidget {
                             color: AppColors.textBlackColor,
                             fontSize: AppDimensions.textSize10),
                       ),
-                      height(0.01.sh),
+                      height(0.02.sw),
                       SizedBox(
                         width: .5.sw,
                         child: textWidget(

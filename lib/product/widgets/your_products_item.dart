@@ -43,7 +43,7 @@ class YourProductsItemWidget extends StatelessWidget {
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

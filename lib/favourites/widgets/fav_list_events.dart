@@ -31,7 +31,7 @@ class _FavouritesListEventState extends State<FavouritesListEvent> {
             padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
             child: FavItemEventsWidget(
               imageWidth: 1.sw,
-              imageHeight: AppDimensions.listItemHeight,
+              imageHeight: AppDimensions.listItemFavEventsHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.favEventsList[index].title,
               location: AppStrings.locationText,

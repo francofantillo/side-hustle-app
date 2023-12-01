@@ -30,7 +30,7 @@ class _FavouritesListShopsState extends State<FavouritesListShops> {
             padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8.0),
             child: FavItemShopsWidget(
               imageWidth: 1.sw,
-              imageHeight: AppDimensions.listItemFavouritesShopHeight,
+              imageHeight: AppDimensions.listItemFavShopsHeight,
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.favShopsList[index].title,
               products: "24 Products",

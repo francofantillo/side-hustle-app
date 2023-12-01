@@ -68,16 +68,17 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
           children: [
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             Padding(
-              padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw),
+              padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
               child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(
                   customWidths: [.3.sw, .3.sw, .305.sw],
                   animate: true,
+                  minHeight: 50.h,
                   animationDuration: 200,
                   isVertical: false,
                   // minWidth: 90,
-                  cornerRadius: 12.0.w,
+                  cornerRadius: 18.0.w,
                   changeOnTap: true,
                   activeBgColors: const [
                     [AppColors.primaryColor],

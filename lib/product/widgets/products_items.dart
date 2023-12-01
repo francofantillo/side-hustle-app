@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -51,7 +52,7 @@ class ProductsItemsWidget extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+              padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -84,10 +85,11 @@ class ProductsItemsWidget extends StatelessWidget {
                                       maxLines: 2,
                                       fontSize:
                                           AppDimensions.textSize10)),
+                              width(imageWidth! * .01),
                               IconButtonWithBackground(
                                 iconPath: AssetsPath.add,
-                                width: imageHeight! * .24,
-                                height: imageHeight! * .24,
+                                width: imageHeight! * .28,
+                                height: imageHeight! * .28,
                                 backgroundColor: AppColors.primaryColor,
                                 iconColor: AppColors.whiteColor,
                               )

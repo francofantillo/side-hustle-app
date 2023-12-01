@@ -38,7 +38,7 @@ class _EventListState extends State<EventList> {
                 imageHeight: AppDimensions.listItemHeight,
                 boarderColor: AppColors.itemBGColor,
                 title: AlphaAppData.eventsList[index].title,
-                subTitle:
+                location:
                 AlphaAppData.eventsList[index].subTitle,
                 imagePath: AlphaAppData.eventsList[index].imagePath,
                 price: AlphaAppData.eventsList[index].price,

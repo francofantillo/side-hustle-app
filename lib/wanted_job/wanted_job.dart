@@ -15,7 +15,6 @@ import 'package:side_hustle/wanted_job/widgets/wanted_tab_list.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class WantedJobScreen extends StatefulWidget {
   final int currentTabIndex;
