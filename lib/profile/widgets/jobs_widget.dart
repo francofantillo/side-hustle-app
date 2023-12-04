@@ -37,6 +37,7 @@ class ProfileJobsWidget extends StatelessWidget {
                   text: name ?? "",
                   fontFamily: AppFont.gilroySemiBold,
                   // color: AppColors.textBlackColor,
+                  textAlign: TextAlign.center,
                   color: const Color(0xFF565656),
                   fontSize: AppDimensions.textSizeVerySmall)
             ],

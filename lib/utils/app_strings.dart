@@ -356,7 +356,7 @@ class AppStrings {
 
   /// Profile
   static const String profileResumePage = "Profile Resume Page";
-  static const String myJobs = "My Jobs";
+  static const String myJobs = "My Jobs       ";
   static const String shopOverview = "Shop Overview";
   static const String jobsCompleted = "Jobs Completed";
   static const String myEvents = "My Events";

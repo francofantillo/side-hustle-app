@@ -28,8 +28,6 @@ class PrimaryPostButton extends StatelessWidget {
       ),
       child: MaterialButton(
         minWidth: 1.sw,
-        elevation: AppDimensions.defaultButtonElevation,
-        // what are the Google Material Design guidelines text field, buttons and appBar elevation
         onPressed: onPressed,
         color: Colors.white,
         textColor: AppColors.primaryColor,

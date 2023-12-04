@@ -45,6 +45,7 @@ class _PostYourSideHustleDialogueWidgetState extends State<PostYourSideHustleDia
             Align(
                 alignment: Alignment.centerRight,
                 child: Material(
+                  shadowColor: Colors.transparent,
                   color: Colors.white,
                   child: InkWell(
                     onTap: widget.onTapClose,
