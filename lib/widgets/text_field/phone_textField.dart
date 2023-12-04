@@ -10,7 +10,7 @@ import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 
 class PhoneNumberTextField extends StatefulWidget {
-  PhoneNumberTextField({
+  const PhoneNumberTextField({
     Key? key,
     this.controller,
     this.validator,
@@ -76,54 +76,10 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        /*       Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius:
-                BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-            boxShadow: widget.isShowShadow
-                ? [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(.15),
-                      blurRadius: 12.0, // soften the shadow
-                      spreadRadius: 0.0, //extend the shadow
-                      offset: const Offset(
-                        0.0, // Move to right 10  horizontally
-                        9.0, // Move to bottom 10 Vertically
-                      ),
-                    )
-                  ]
-                : null,
-          ),
-          child: Card(
-            color: Colors.white,
-            elevation: AppDimensions.defaultFocusedTextFieldElevation,
-            shadowColor: Colors.transparent,
-            // Adjust the elevation as needed
-            shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-            ),
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-                // color: widget.backgroundColor ?? Colors.white,
-                color: Colors.white,
-              ),
-              // height: AppDimensions.textFieldHeight, // Set the height as needed
-              child: _phoneTextField(),
-            ),
-          ),
-        ),*/
         Container(
           decoration: BoxDecoration(
               borderRadius:
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-              // border: widget.isShowBoarder
-              //     ? Border.all(color: AppColors.fieldsOutlineColor)
-              //     : null,
               boxShadow: widget.isShowShadow
                   ? [
                       BoxShadow(
@@ -164,57 +120,56 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
                 border: Border.all(color: AppColors.whiteColor),
                 color: AppColors.whiteColor,
               ),
-              // height: widget.height ?? AppDimensions.textFieldHeight,
               child: _phoneTextField(),
             ),
           ),
+          height: 55.w,
         ),
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 0),
-        //   child: _phoneTextField(),
-        // ),
       ],
     );
   }
 
   Widget _phoneTextField() {
-    return IntlPhoneField(
-      initialValue: null,
-      validator: widget.validator,
-      dropdownTextStyle: _textStyle(),
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      keyboardType: TextInputType.phone,
-      dropdownIcon: const Icon(
-        Icons.keyboard_arrow_down,
-        // color: widget.iconColor ?? AppColors.greyColor,
-        color: Color(0xff757575),
-      ),
-      dropdownIconPosition: IconPosition.trailing,
-      autovalidateMode: AutovalidateMode.disabled,
-      // controller: widget.controller,
-      controller: _textEditingController,
-      style: _textStyle(),
-      decoration: const InputDecoration(
-        hintStyle:
-            TextStyle(color: Colors.grey, fontFamily: AppFont.gilroyMedium),
-
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        counter: SizedBox.shrink(),
-        border: InputBorder.none,
-        fillColor: Colors.transparent,
-        // label: _label(),
-        filled: true,
-        hintText: AppStrings.phoneNumber,
-
-        contentPadding: EdgeInsets.only(top: 15),
-        errorMaxLines: 2,
-        errorStyle: TextStyle(
-          color: Colors.red,
-          height: 1,
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, left: 4),
+      child: IntlPhoneField(
+        initialValue: null,
+        validator: widget.validator,
+        dropdownTextStyle: _textStyle(),
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        keyboardType: TextInputType.phone,
+        dropdownIcon: const Icon(
+          Icons.keyboard_arrow_down,
+          // color: widget.iconColor ?? AppColors.greyColor,
+          color: Color(0xff757575),
         ),
+        dropdownIconPosition: IconPosition.trailing,
+        autovalidateMode: AutovalidateMode.disabled,
+        // controller: widget.controller,
+        controller: _textEditingController,
+        style: _textStyle(),
+        decoration: const InputDecoration(
+          hintStyle:
+              TextStyle(color: Colors.grey, fontFamily: AppFont.gilroyMedium),
+
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          counter: SizedBox.shrink(),
+          border: InputBorder.none,
+          fillColor: Colors.transparent,
+          // label: _label(),
+          filled: true,
+          hintText: AppStrings.phoneNumber,
+
+          contentPadding: EdgeInsets.only(top: 7),
+          errorMaxLines: 2,
+          errorStyle: TextStyle(
+            color: Colors.red,
+            height: 1,
+          ),
+        ),
+        onChanged: widget.onChanged,
+        onCountryChanged: widget.onCountryChanged,
       ),
-      onChanged: widget.onChanged,
-      onCountryChanged: widget.onCountryChanged,
     );
   }
 
@@ -222,19 +177,5 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
     return TextStyle(
         color: widget.textColor ?? Colors.black,
         fontFamily: AppFont.gilroyMedium);
-  }
-
-  Widget _label() {
-    return Padding(
-      padding: EdgeInsets.only(top: showLabel ? 16.0 : 4.0),
-      child: const Text(
-        AppStrings.phoneNumber,
-        style: TextStyle(
-          color: Colors.grey,
-          fontFamily: AppFont.gilroyMedium,
-          fontSize: 17,
-        ),
-      ),
-    );
   }
 }

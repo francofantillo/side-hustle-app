@@ -4,6 +4,7 @@ import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -48,7 +49,7 @@ class PostAdded extends StatelessWidget {
                 showLoading: false,
                 imageHeight: AppDimensions.loginLogoSize,
                 imageWidth: 1.sw,
-                assetImage: AssetsPath.logo,
+                assetImage: AssetsPath.sideHustlePosted,
               ),
             ),
           ),
@@ -58,10 +59,11 @@ class PostAdded extends StatelessWidget {
             child: textWidget(
                 text: title,
                 color: AppColors.textBlackColor,
+                fontFamily: AppFont.gilroyBold,
                 fontSize: AppDimensions.textSizeBottomSheet,
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.bold),
           ),
-          height(0.01.sh),
+          height(0.02.sw),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: textWidget(

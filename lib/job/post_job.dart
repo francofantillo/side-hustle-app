@@ -254,6 +254,11 @@ class _PostJobState extends State<PostJob> {
                           controller: firstTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.jobTimeHint,
+                          suffixIcon: const ImageIcon(
+                            AssetImage(AssetsPath.time),
+                            color: AppColors.blackColor,
+                          ),
+                          isSuffixIcon: true,
                           isReadonly: true,
                           onTap: () async {
                             await AppUtils.selectTime(context, true);
@@ -283,6 +288,11 @@ class _PostJobState extends State<PostJob> {
                           controller: secondTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.totalHoursHint,
+                          suffixIcon: const ImageIcon(
+                            AssetImage(AssetsPath.time),
+                            color: AppColors.blackColor,
+                          ),
+                          isSuffixIcon: true,
                           isReadonly: true,
                           onTap: () async {
                             await AppUtils.selectTime(context, false);

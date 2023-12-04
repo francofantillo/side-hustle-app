@@ -109,7 +109,7 @@ class _BaseWidgetState extends State<BaseWidget> {
                 title: AppStrings.APP_TITLE,
                 debugShowCheckedModeBanner: false,
                 initialRoute: AppRoutes.splashScreenRoute,
-                // initialRoute: AppRoutes.orderDetailScreenRoute,
+                // initialRoute: AppRoutes.yourShopScreenRoute,
                 onGenerateRoute: AppRouter().onGenerateRoute,
               );
             },

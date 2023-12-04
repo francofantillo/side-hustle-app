@@ -18,7 +18,7 @@ class ProfileJobsWidget extends StatelessWidget {
       onTap: onTap,
       // onTap: (){},
       child: Container(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
               color: AppColors.backIconBackgroundColor,
               borderRadius: BorderRadius.circular(10)),

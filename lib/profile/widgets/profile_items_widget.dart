@@ -6,6 +6,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -103,8 +104,9 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
         textWidget(
             text: AppStrings.supports.toUpperCase(),
             color: AppColors.primaryColor,
+            fontFamily: AppFont.gilroyBold,
             fontSize: AppDimensions.drawerItemTextSize,
-            fontWeight: AppDimensions.headingFontWeight),
+            fontWeight: FontWeight.bold),
         height(AppDimensions.drawerItemsVerticalSpacing),
         ProfileItemListTile(
           iconPath: AssetsPath.aboutUs,

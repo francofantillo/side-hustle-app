@@ -34,7 +34,6 @@ enum SingingCharacter { package1, package2, package3 }
 
 class _ModalBottomSheetPackageTypePostState
     extends State<ModalBottomSheetPackageTypePost> {
-
   SingingCharacter? _character = SingingCharacter.package1;
 
   late final ValueNotifier<bool> _packagesGroupValue;
@@ -87,250 +86,271 @@ class _ModalBottomSheetPackageTypePostState
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      return Container(
-        // height: AppDimensions.modelSheetProductsHeight,
-        decoration: BoxDecoration(
-          color: AppColors.primaryColor,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(AppDimensions.boarderRadiusBottomSheet),
-              topLeft: Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
-          // image: const DecorationImage(
-          //     image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)
-        ),
-        child: Wrap(
-
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 18.0,
-                right: 18.0,
-                top: 16,
-              ),
-              child: textWidget(
-                  text: AppStrings.selectPackageType,
-                  color: AppColors.textWhiteColor,
-                  fontFamily: AppFont.gilroyBold,
-                  fontSize: AppDimensions.textSizeBottomSheet,
-                  fontWeight: FontWeight.bold),
+      return Wrap(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius: BorderRadius.only(
+                  topRight:
+                      Radius.circular(AppDimensions.boarderRadiusBottomSheet),
+                  topLeft:
+                      Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
+              // image: const DecorationImage(
+              //     image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 18.0,
-                right: 18.0,
-                top: 2,
-                bottom: 12,
-              ),
-              child: textWidget(
-                  text: AppStrings.selectPackageTypeHint,
-                  color: AppColors.textWhiteColor,
-                  fontSize: AppDimensions.textSize10),
-            ),
-            height(0.06.sw),
-            Padding(
-              padding:
-              const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(18)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      textWidget(
-                          text: "\$${packages["packages"]?[0]["packagePrice"].toStringAsFixed(2) ?? ""}",
-                          color: AppColors.textBlackColor,
-                          fontFamily: AppFont.gilroyBold,
-                          fontSize: AppDimensions.textSizeNormal,
-                          fontWeight: FontWeight.bold),
-                      width(0.03.sw),
-                      Expanded(
-                        child: textWidget(
-                            text: packages["packages"]?[0]["packageType"],
-                            color: AppColors.textBlackColor,
-                            fontFamily: AppFont.gilroyBold,
-                            fontSize: AppDimensions.textSizeNormal,
-                            fontWeight: FontWeight.bold),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 18.0,
+                    right: 18.0,
+                    top: 16.w,
+                  ),
+                  child: textWidget(
+                      text: AppStrings.selectPackageType,
+                      color: AppColors.textWhiteColor,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSizeBottomSheet,
+                      fontWeight: FontWeight.bold),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 18.0,
+                    right: 18.0,
+                    top: 2,
+                    bottom: 12.w,
+                  ),
+                  child: textWidget(
+                      text: AppStrings.selectPackageTypeHint,
+                      color: AppColors.textWhiteColor,
+                      fontSize: AppDimensions.textSize10),
+                ),
+                // height(0.06.sw),
+                Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(18)),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          textWidget(
+                              text:
+                                  "\$${packages["packages"]?[0]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                              color: AppColors.textBlackColor,
+                              fontFamily: AppFont.gilroyBold,
+                              fontSize: AppDimensions.textSizeNormal,
+                              fontWeight: FontWeight.bold),
+                          width(0.03.sw),
+                          Expanded(
+                            child: textWidget(
+                                text: packages["packages"]?[0]["packageType"],
+                                color: AppColors.textBlackColor,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeNormal,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          // const Spacer(),
+                          Radio(
+                              value: SingingCharacter.package1,
+                              groupValue: _character,
+                              onChanged: (SingingCharacter? v) {
+                                if (v! == SingingCharacter.package1) {
+                                  _character = SingingCharacter.package1;
+                                } else {
+                                  // _character = SingingCharacter.lafayette;
+                                }
+                                setState(() {});
+                              })
+                        ],
                       ),
-                      // const Spacer(),
-                      Radio(value: SingingCharacter.package1, groupValue: _character, onChanged: (SingingCharacter? v) {
-                        if(v! == SingingCharacter.package1) {
-                          _character = SingingCharacter.package1;
-                        } else {
-                          // _character = SingingCharacter.lafayette;
-                        }
-                        setState(() {});
-                      })
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding:
-              const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(18)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      textWidget(
-                          text: "\$${packages["packages"]?[1]["packagePrice"].toStringAsFixed(2) ?? ""}",
-                          color: AppColors.textBlackColor,
-                          fontFamily: AppFont.gilroyBold,
-                          fontSize: AppDimensions.textSizeNormal,
-                          fontWeight: FontWeight.bold),
-                      width(0.03.sw),
-                      Expanded(
-                        child: textWidget(
-                            text: packages["packages"]?[1]["packageType"],
-                            color: AppColors.textBlackColor,
-                            fontFamily: AppFont.gilroyBold,
-                            fontSize: AppDimensions.textSizeNormal,
-                            fontWeight: FontWeight.bold),
+                Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(18)),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          textWidget(
+                              text:
+                                  "\$${packages["packages"]?[1]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                              color: AppColors.textBlackColor,
+                              fontFamily: AppFont.gilroyBold,
+                              fontSize: AppDimensions.textSizeNormal,
+                              fontWeight: FontWeight.bold),
+                          width(0.03.sw),
+                          Expanded(
+                            child: textWidget(
+                                text: packages["packages"]?[1]["packageType"],
+                                color: AppColors.textBlackColor,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeNormal,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          // const Spacer(),
+                          Radio(
+                              value: SingingCharacter.package2,
+                              groupValue: _character,
+                              onChanged: (SingingCharacter? v) {
+                                if (v! == SingingCharacter.package2) {
+                                  _character = SingingCharacter.package2;
+                                } else {
+                                  // _character = SingingCharacter.lafayette;
+                                }
+                                setState(() {});
+                              })
+                        ],
                       ),
-                      // const Spacer(),
-                      Radio(value: SingingCharacter.package2, groupValue: _character, onChanged: (SingingCharacter? v) {
-                        if(v! == SingingCharacter.package2) {
-                          _character = SingingCharacter.package2;
-                        } else {
-                          // _character = SingingCharacter.lafayette;
-                        }
-                        setState(() {});
-                      })
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding:
-              const EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(18)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      textWidget(
-                          text: "\$${packages["packages"]?[2]["packagePrice"].toStringAsFixed(2) ?? ""}",
-                          color: AppColors.textBlackColor,
-                          fontFamily: AppFont.gilroyBold,
-                          fontSize: AppDimensions.textSizeNormal,
-                          fontWeight: FontWeight.bold),
-                      width(0.03.sw),
-                      Expanded(
-                        child: textWidget(
-                            text: packages["packages"]?[2]["packageType"],
-                            color: AppColors.textBlackColor,
-                            fontFamily: AppFont.gilroyBold,
-                            fontSize: AppDimensions.textSizeNormal,
-                            fontWeight: FontWeight.bold),
+                Padding(
+                  padding:
+                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(18)),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          textWidget(
+                              text:
+                                  "\$${packages["packages"]?[2]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                              color: AppColors.textBlackColor,
+                              fontFamily: AppFont.gilroyBold,
+                              fontSize: AppDimensions.textSizeNormal,
+                              fontWeight: FontWeight.bold),
+                          width(0.03.sw),
+                          Expanded(
+                            child: textWidget(
+                                text: packages["packages"]?[2]["packageType"],
+                                color: AppColors.textBlackColor,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeNormal,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          // const Spacer(),
+                          Radio(
+                              value: SingingCharacter.package3,
+                              groupValue: _character,
+                              onChanged: (SingingCharacter? v) {
+                                if (v! == SingingCharacter.package3) {
+                                  _character = SingingCharacter.package3;
+                                } else {
+                                  // _character = SingingCharacter.lafayette;
+                                }
+                                setState(() {});
+                              })
+                        ],
                       ),
-                      // const Spacer(),
-                      Radio(value: SingingCharacter.package3, groupValue: _character, onChanged: (SingingCharacter? v) {
-                        if(v! == SingingCharacter.package3) {
-                          _character = SingingCharacter.package3;
-                        } else {
-                          // _character = SingingCharacter.lafayette;
-                        }
-                        setState(() {});
-                      })
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            // const ProductsCartList(),
-            // const EventPostPackagesList(),
-            // height(0.02.sw),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 18.0,
-                right: 18.0,
-              ),
-              child: textWidget(
-                  text: AppStrings.selectPaymentType,
-                  color: AppColors.textWhiteColor,
-                  fontFamily: AppFont.gilroyBold,
-                  fontSize: AppDimensions.textSizeBottomSheet,
-                  fontWeight: FontWeight.bold),
-            ),
-            height(0.02.sw),
-            SizedBox(
-              width: 1.sw,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                child: SelectPaymentTypeDropDown(
-                  items: items,
-                  hintText: AppStrings.debitCreditCardSecret,
-                  selectedValue: (v) {
-                    print("selectedValue: $v");
-                  },
+                // const ProductsCartList(),
+                // const EventPostPackagesList(),
+                // height(0.02.sw),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 18.0,
+                    right: 18.0,
+                  ),
+                  child: textWidget(
+                      text: AppStrings.selectPaymentType,
+                      color: AppColors.textWhiteColor,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textSizeBottomSheet,
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
+                height(0.02.sw),
+                SizedBox(
+                  width: 1.sw,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.w),
+                    child: SelectPaymentTypeDropDown(
+                      items: items,
+                      hintText: AppStrings.debitCreditCardSecret,
+                      selectedValue: (v) {
+                        print("selectedValue: $v");
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
+                  child: CustomMaterialButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        if (widget.isJob) {
+                          return;
+                        } else if (widget.isProduct) {
+                          Navigator.pushNamed(
+                              context, AppRoutes.postAddedScreenRoute,
+                              arguments: const PostAdded(
+                                isProduct: true,
+                                title: AppStrings.sideHustlePosted,
+                                subTitle: AppStrings.sideHustlePostedSubTitle,
+                                buttonName: AppStrings.viewSideHustle,
+                              ));
+                          return;
+                        } else if (widget.isService) {
+                          Navigator.pushNamed(
+                              context, AppRoutes.postAddedScreenRoute,
+                              arguments: const PostAdded(
+                                isService: true,
+                                title: AppStrings.sideHustlePosted,
+                                subTitle: AppStrings.sideHustlePostedSubTitle,
+                                buttonName: AppStrings.viewSideHustle,
+                              ));
+                          return;
+                        } else if (widget.isEvent) {
+                          Navigator.pushNamed(
+                              context, AppRoutes.postAddedScreenRoute,
+                              arguments: const PostAdded(
+                                isEvent: true,
+                                title: AppStrings.eventPosted,
+                                subTitle: AppStrings.sideHustlePostedSubTitle,
+                                buttonName: AppStrings.viewEvent,
+                              ));
+                          return;
+                        }
+                      },
+                      name: AppStrings.continueText,
+                      color: AppColors.whiteColor,
+                      textColor: AppColors.primaryColor),
+                ),
+                // height(14.w),
+              ],
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 20.0, right: 20, bottom: 16),
-              child: CustomMaterialButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    if (widget.isJob) {
-                      return;
-                    } else if (widget.isProduct) {
-                      Navigator.pushNamed(
-                          context, AppRoutes.postAddedScreenRoute,
-                          arguments: const PostAdded(
-                            isProduct: true,
-                            title: AppStrings.sideHustlePosted,
-                            subTitle: AppStrings.sideHustlePostedSubTitle,
-                            buttonName: AppStrings.viewSideHustle,
-                          ));
-                      return;
-                    } else if (widget.isService) {
-                      Navigator.pushNamed(
-                          context, AppRoutes.postAddedScreenRoute,
-                          arguments: const PostAdded(
-                            isService: true,
-                            title: AppStrings.sideHustlePosted,
-                            subTitle: AppStrings.sideHustlePostedSubTitle,
-                            buttonName: AppStrings.viewSideHustle,
-                          ));
-                      return;
-                    } else if (widget.isEvent) {
-                      Navigator.pushNamed(
-                          context, AppRoutes.postAddedScreenRoute,
-                          arguments: const PostAdded(
-                            isEvent: true,
-                            title: AppStrings.eventPosted,
-                            subTitle: AppStrings.sideHustlePostedSubTitle,
-                            buttonName: AppStrings.viewEvent,
-                          ));
-                      return;
-                    }
-                  },
-                  name: AppStrings.continueText,
-                  color: AppColors.whiteColor,
-                  textColor: AppColors.primaryColor),
-            ),
-            // height(0.5.sh),
-          ],
-        ),
+          ),
+          // height(0.5.sh),
+        ],
       );
     });
   }

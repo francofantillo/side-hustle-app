@@ -51,7 +51,10 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       child: Container(
         width: 1.sw,
         // height: 0.53.sh,
-        height: 0.86.sw,
+        // height: 0.86.sw,
+        // height: 0.76.sw,
+        // height: 0.86.sw,
+        // height: 310.w,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(
           right: 8.0,
@@ -66,8 +69,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 bottomLeft: Radius.circular(12),
                 bottomRight: Radius.circular(4)),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(
@@ -94,7 +97,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 10.0, right: 8.0, bottom: 8, top: 8),
+                    left: 10.0, right: 8.0, bottom: 8, top: 0),
                 child: Row(
                   children: [
                     const Icon(
@@ -111,7 +114,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                   ],
                 ),
               ),
-              const Spacer(),
+              // const Spacer(),
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
@@ -144,7 +147,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
         width: 1.sw,
         // height: 0.67.sw,
         // height: 0.79.sw,
-        height: 0.77.sw,
+        // height: 0.77.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(
           right: 8.0,
@@ -159,8 +162,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 bottomLeft: Radius.circular(12),
                 bottomRight: Radius.circular(4)),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(
@@ -188,7 +191,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 10.0, right: 8.0, bottom: 8, top: 8),
+                    left: 10.0, right: 8.0, bottom: 8, top: 0),
                 child: Row(
                   children: [
                     const Icon(
@@ -205,7 +208,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                   ],
                 ),
               ),
-              const Spacer(),
+              // const Spacer(),
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(

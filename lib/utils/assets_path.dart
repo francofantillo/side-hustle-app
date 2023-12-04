@@ -57,6 +57,7 @@ class AssetsPath {
   static const check = "${iconsPath}check.png";
   static const checkFill = "${iconsPath}check_fill.png";
   static const attendees = "${iconsPath}attendees.png";
+  static const sideHustlePosted = "${iconsPath}side_hustle_posted.png";
 
   /// Images
   static const continueWith = "${imagePath}continue_with.png";

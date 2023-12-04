@@ -52,10 +52,11 @@ class EventItemsWidget extends StatelessWidget {
         ),
         child: Material(
           shadowColor: Colors.transparent,
+          elevation: AppDimensions.cardElevation,
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: InkWell(
             onTap: onTap,
@@ -131,8 +132,8 @@ class EventItemsWidget extends StatelessWidget {
                           // height(imageHeight! * .04),
                           const Spacer(),
                           Divider(
-                            height: 1.h,
-                            color: AppColors.greyColor,
+                            height: 1,
+                            color: Colors.grey.withOpacity(0.8),
                           ),
                           const Spacer(),
                           Row(

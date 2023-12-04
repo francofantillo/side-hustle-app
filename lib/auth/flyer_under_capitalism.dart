@@ -33,7 +33,7 @@ class _FlyerUnderCapitalismScreenState extends State<FlyerUnderCapitalismScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 2.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                     text: AppStrings.unitedCapitalism,
                     color: AppColors.blackColor,
@@ -49,60 +49,59 @@ class _FlyerUnderCapitalismScreenState extends State<FlyerUnderCapitalismScreen>
                     fontSize: AppDimensions.textSizeSmall),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 5,
                   text: AppStrings.flyerUnderCapitalismTextOne,
-                  color: AppColors.greyColor,
+                  color: AppColors.authContentColor,
                   fontSize: AppDimensions.textSizeVerySmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.flyerUnderCapitalismTextTwo,
-                  color: AppColors.greyColor,
+                  color: AppColors.authContentColor,
                   fontSize: AppDimensions.textSizeVerySmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.flyerUnderCapitalismTextThree,
-                  color: AppColors.greyColor,
+                  color: AppColors.authContentColor,
                   fontSize: AppDimensions.textSizeVerySmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.flyerUnderCapitalismTextFour,
-                  color: AppColors.greyColor,
+                  color: AppColors.authContentColor,
                   fontSize: AppDimensions.textSizeVerySmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.flyerUnderCapitalismTextFive,
-                  color: AppColors.greyColor,
+                  color: AppColors.authContentColor,
                   fontSize: AppDimensions.textSizeVerySmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.flyerUnderCapitalismTextSix,
-                  color: AppColors.greyColor,
+                  color: AppColors.authContentColor,
                   fontSize: AppDimensions.textSizeVerySmall,
                 ),
               ),
-              height(0.1.sw)
             ],
           ),
         ),

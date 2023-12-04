@@ -8,6 +8,7 @@ class AppDimensions {
   static double buttonDefaultWidth = 0;
   // static const double buttonDefaultHeight = 12;
   static const double buttonDefaultHeight = 16;
+  // static final double buttonDefaultHeight = 16.w;
 
   /// Text Size
   static double textSizeSmall = 14.sp;
@@ -83,10 +84,12 @@ class AppDimensions {
 
   /// Tab bar Height
 
-  static double tabBarHeight = 0.1.sw;
+  // static double tabBarHeight = 0.1.sw;
+  static double tabBarHeight = 45.w;
   static double tabBarWantedTabsHeight = .030.sw;
   static double tabBarWidth = 90;
-  static double tabBarFontSize = 12.sp;
+  // static double tabBarFontSize = 12.sp;
+  static double tabBarFontSize = 11.sp;
 
   /// Elevation
   static double defaultCardElevation = 0.02.sw;
@@ -154,7 +157,7 @@ class AppDimensions {
   // static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
   static double listItemHeight = 135.w; // 353339563061758, 352879323061755
   // static double listItemFavEventsHeight = 0.4.sw;
-  static double listItemFavEventsHeight = 132.w;
+  static double listItemFavEventsHeight = 134.w;
   // static double listItemFavJobHeight = 0.39.sw;
   static double listItemFavJobHeight = 130.w;
   // static double listItemFavShopsHeight = 0.39.sw;
@@ -231,10 +234,17 @@ class AppDimensions {
   static double textSizeBottomSheet = 22.sp;
 
   /// Shop
-  static double imageWidthShop = 0.28.sw;
+  // static double imageWidthShop = 0.28.sw;
+  static double imageWidthShop = 85.w;
+  static double imageWidthYourShop = 95.w;
   static double imageWidthShopEdit = 0.4.sw;
-  static double imageHeightShopEdit = 0.26.sh;
-  static double imageHeightShop = 0.16.sh;
+  // static double imageHeightShopEdit = 0.26.sh;
+  // static double imageHeightShopEdit = 0.34.sw;
+  static double imageHeightShopEdit = 150.w;
+  // static double imageHeightShop = 0.16.sw;
+  // static double imageHeightShop = 0.2.sw;
+  static double imageHeightShop = 80.w;
+  static double imageHeightYourShop = 80.w;
   // static double imageHeightShop = 80.h;
 
   /// Favourites
@@ -248,12 +258,15 @@ class AppDimensions {
   // static double listItemEventScheduledHeight = 0.40.sw;
   static double listItemEventScheduledHeight = 130.w;
   // static double listItemJobScheduledHeight = 0.41.sw;
-  static double listItemJobScheduledHeight = 135.w;
+  // static double listItemJobScheduledHeight = 135.w;
+  static double listItemJobScheduledHeight = 140.w;
   // static double listItemOnGoingHeight = 0.57.sw;
-  static double listItemOnGoingHeight = 178.w;
+  // static double listItemOnGoingHeight = 178.w;
+  static double listItemOnGoingHeight = 180.w;
   // static double listItemCompletedJobHeight = 0.57.sw;
-  static double listItemCompletedJobHeight = 182.w;
-  static double listItemJobRequestHeight = 0.38.sw;
+  static double listItemCompletedJobHeight = 187.w;
+  // static double listItemJobRequestHeight = 0.38.sw;
+  static double listItemJobRequestHeight = 180.w;
 
   /// Button Border Radius
   static double buttonBorderRadius = 0.04.sw;

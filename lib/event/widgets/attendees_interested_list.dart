@@ -76,7 +76,10 @@ class _AttendeesInterestedListState extends State<AttendeesInterestedList> {
                 ],
               ),
             ]),
-            const Divider()
+            Divider(
+              height: 1,
+              color: Colors.grey.withOpacity(0.8),
+            )
           ],
         );
       },

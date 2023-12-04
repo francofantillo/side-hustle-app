@@ -63,7 +63,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return BackgroundWidget(
         showAppBar: true,
-        appBarTitle: AppStrings.shop,
+        appBarTitle:  isEdit ? AppStrings.editShop: AppStrings.shop,
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
@@ -102,14 +102,15 @@ class _YourShopScreenState extends State<YourShopScreen> {
                   Stack(
                     children: [
                       RoundedCornersImage(
+
                         // imageHeight: 80.h,
                         imageHeight: isEdit
                             ? AppDimensions.imageHeightShopEdit
-                            : AppDimensions.imageHeightShop,
+                            : AppDimensions.imageHeightYourShop,
                         // imageWidth: AppDimensions.imageSizeShop,
                         imageWidth: isEdit
                             ? AppDimensions.imageWidthShopEdit
-                            : AppDimensions.imageWidthShop,
+                            : AppDimensions.imageWidthYourShop,
                         // imageWidth: 0.22.sh,
                         assetImage: AssetsPath.yourShop,
                         boarderColor: AppColors.whiteColor,
@@ -146,14 +147,19 @@ class _YourShopScreenState extends State<YourShopScreen> {
                   isEdit
                       ? Expanded(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Expanded(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               const CustomTextFormField(
                                 hintText: AppStrings.shopName,
                                 maxLines: 1,
                               ),
+                              height(6.w),
                               CustomTextFormField(
                                 hintText: AppStrings.zipCode,
                                 maxLines: 2,

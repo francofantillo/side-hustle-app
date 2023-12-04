@@ -30,8 +30,8 @@ class ProfileItemListTile extends StatelessWidget {
         children: [
           Image.asset(
             iconPath,
-            // color: iconColor ?? AppColors.whiteColor,
-            color: AppColors.drawerItemColor,
+            color: iconColor ?? AppColors.drawerItemColor,
+            // color: AppColors.drawerItemColor,
             width: AppDimensions.drawerIconSize,
             height: AppDimensions.drawerIconSize,
           ),
@@ -48,8 +48,8 @@ class ProfileItemListTile extends StatelessWidget {
             }),*/
             child: textWidget(
                 text: title,
-                // color: textColor ?? AppColors.drawerItemColor,
-                color: AppColors.drawerItemColor,
+                color: textColor ?? AppColors.drawerItemColor,
+                // color: AppColors.drawerItemColor,
                 textAlign: TextAlign.start,
                 fontFamily: AppFont.gilroySemiBold,
                 fontSize: AppDimensions.drawerItemTextSize,

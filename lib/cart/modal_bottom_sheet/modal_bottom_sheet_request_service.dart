@@ -90,10 +90,10 @@ class _BottomModalSheetRequestServiceState
                     color: AppColors.textWhiteColor,
                     fontSize: AppDimensions.textSize10),
               ),
-              height(0.02.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.only(left: 10.0, right: 10, top: 8),
                 child: CustomTextFormField(
+                  isShowBoarder: false,
                   controller: dateTextController,
                   height: 45.h,
                   hintText: AppStrings.selectTheDate,
@@ -109,12 +109,8 @@ class _BottomModalSheetRequestServiceState
                   },
                 ),
               ),
-              height(0.02.sh),
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                ),
+                padding: const EdgeInsets.only(left: 16.0, right: 16, top: 8),
                 child: textWidget(
                     text: AppStrings.serviceDuration,
                     color: AppColors.textWhiteColor,
@@ -130,25 +126,12 @@ class _BottomModalSheetRequestServiceState
                     color: AppColors.textWhiteColor,
                     fontSize: AppDimensions.textSize10),
               ),
-              height(0.02.sh),
-              // SizedBox(
-              //   width: 1.sh,
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              //     child: CustomDropDown(
-              //       items: items,
-              //       hintText: AppStrings.paymentTypeHint,
-              //       selectedValue: (v) {
-              //         print("selectedValue: $v");
-              //       },
-              //     ),
-              //   ),
-              // ),
               SizedBox(
                 width: 1.sh,
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: const EdgeInsets.only(left: 10.0, right: 10, top: 8),
                     child: CustomTextFormField(
+                        isShowBoarder: false,
                         height: 40.h,
                         hintText: AppStrings.totalHoursRequired,
                         suffixIcon: const Icon(
@@ -161,13 +144,13 @@ class _BottomModalSheetRequestServiceState
                         // keyboardType: TextInputType.number,
                         )),
               ),
-              height(0.02.sh),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 4),
+                padding: const EdgeInsets.only(left: 10.0, right: 10, top: 2),
                 child: Row(
                   children: [
                     Expanded(
                       child: CustomTextFormField(
+                        isShowBoarder: false,
                         controller: firstTimeTextController,
                         height: 45.h,
                         hintText: AppStrings.startTime,
@@ -185,6 +168,7 @@ class _BottomModalSheetRequestServiceState
                     width(0.01.sw),
                     Expanded(
                       child: CustomTextFormField(
+                        isShowBoarder: false,
                         controller: secondTimeTextController,
                         height: 45.h,
                         hintText: AppStrings.endTime,
@@ -203,10 +187,8 @@ class _BottomModalSheetRequestServiceState
                   ],
                 ),
               ),
-              height(0.03.sw),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
+                padding: const EdgeInsets.only(left: 16.0, right: 16, top: 12),
                 child: CustomMaterialButton(
                     // height: 10.h,
                     onPressed: () {
@@ -229,27 +211,31 @@ class _BottomModalSheetRequestServiceState
                     color: AppColors.whiteColor,
                     textColor: AppColors.primaryColor),
               ),
-              height(0.03.sh),
-              Center(
-                child: CircularIconButton(
-                    icon: Icons.close,
-                    iconSize: .09.sw,
-                    iconColor: AppColors.primaryColor,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    backgroundColor: AppColors.whiteColor),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10, top: 12),
+                child: Center(
+                  child: CircularIconButton(
+                      icon: Icons.close,
+                      iconSize: .09.sw,
+                      iconColor: AppColors.primaryColor,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      backgroundColor: AppColors.whiteColor),
+                ),
               ),
-              height(0.02.sw),
-              Center(
-                child: textWidget(
-                    text: AppStrings.cancel,
-                    maxLines: 2,
-                    fontFamily: AppFont.gilroySemiBold,
-                    color: AppColors.textWhiteColor,
-                    fontSize: AppDimensions.textSizeSmall),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, right: 10, top: 8, bottom: 28),
+                child: Center(
+                  child: textWidget(
+                      text: AppStrings.cancel,
+                      maxLines: 2,
+                      fontFamily: AppFont.gilroySemiBold,
+                      color: AppColors.textWhiteColor,
+                      fontSize: AppDimensions.textSizeSmall),
+                ),
               ),
-              height(0.15.sw)
+              // height(0.15.sw)
             ],
           ),
         ),

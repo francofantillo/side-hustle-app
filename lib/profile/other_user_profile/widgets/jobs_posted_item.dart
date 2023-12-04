@@ -97,7 +97,8 @@ class JobsPostedItemWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .04),
                       Divider(
-                        height: 1.h,
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.8),
                       ),
                       const Spacer(),
                       Row(

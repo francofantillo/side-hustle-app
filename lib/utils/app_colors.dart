@@ -8,6 +8,7 @@ class AppColors {
   static const greyColor = Color(0xFF929292);
   static final greyColorChat = Color(0xFF9E9E9E).withOpacity(.1);
   static final bottomSheetBackgroundColor = Color(0xFF929292);
+  // static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
   static final bottomNavUnSelectedColor = Color(0xFFA5A5A5).withOpacity(.9);
   // static final textGreyColor = Color(0xFF565656).withOpacity(.85);
   static final textGreyColor = Color(0xFF565656);
@@ -43,6 +44,7 @@ class AppColors {
   static const chatNameImageBackgroundColor = Color(0xFFD461E7);
   // static const bottomNavBackgroundColor = Color(0xFFDFDFDF);
   static const bottomNavBackgroundColor = Color(0xFFFFFFFF);
+  // static final bottomNavBackgroundColor = Color(0xFFDFDFDF).withOpacity(0.5);
   // static const ratingColor = Color(0xFFECAF53);
   static const ratingColor = Color(0xFFFFA800);
   static const textFieldColor = Color(0xFF959597);
@@ -51,6 +53,7 @@ class AppColors {
   static Color appRedColor = const Color(0xFFFE6E6E);
   // static const blackColor = Color(0xFF040404);
   static const blackColor = Color(0xFF323232);
+  static const authContentColor = Color(0xFF565656);
   static const greyColorNoOpacity = Color(0xFF565656);
 
 

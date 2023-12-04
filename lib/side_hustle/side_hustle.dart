@@ -71,12 +71,15 @@ class _SideHustleState extends State<SideHustle> {
               child: SearchTextField(
                   height: AppDimensions.searchTextFieldHeight,
                   contentPaddingBottom: 8,
-                  hintText: AppStrings.searchHintText,
+                  hintText: _tabIndexBasicToggle.value == 0
+                      ? AppStrings.searchSideHustleProductsHintText
+                      : AppStrings.searchSideHustleServicesHintText,
                   onChanged: (search) {}),
             ),
             Padding(
               // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-              padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 0.02.sw),
+              padding: EdgeInsets.only(
+                  left: 0.04.sw, right: 0.0425.sw, top: 0.02.sw),
               child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(
@@ -85,7 +88,8 @@ class _SideHustleState extends State<SideHustle> {
                   animationDuration: 200,
                   isVertical: false,
                   minWidth: 90,
-                  minHeight: 0.13.sw,
+                  // minHeight: 0.13.sw,
+                  minHeight: AppDimensions.tabBarHeight,
                   cornerRadius: 12.0.w,
                   changeOnTap: true,
                   activeBgColors: const [

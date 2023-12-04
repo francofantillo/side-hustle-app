@@ -35,7 +35,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 2.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                     text: AppStrings.privacyPolicy,
                     color: AppColors.blackColor,
@@ -47,26 +47,26 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                 child: textWidget(
                   maxLines: 5,
                   text: AppStrings.aboutUsTextOne,
-                  color: AppColors.greyColor,
-                  fontSize: AppDimensions.textSizeVerySmall,
+                  color: AppColors.authContentColor,
+                  fontSize: AppDimensions.textSizeSmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.aboutUsTextTwo,
-                  color: AppColors.greyColor,
-                  fontSize: AppDimensions.textSizeVerySmall,
+                  color: AppColors.authContentColor,
+                  fontSize: AppDimensions.textSizeSmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.aboutUsTextThree,
-                  color: AppColors.greyColor,
-                  fontSize: AppDimensions.textSizeVerySmall,
+                  color: AppColors.authContentColor,
+                  fontSize: AppDimensions.textSizeSmall,
                 ),
               ),
               Padding(

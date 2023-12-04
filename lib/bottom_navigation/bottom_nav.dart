@@ -37,12 +37,17 @@ class _BottomNavState extends State<BottomNav> {
         boxShadow: [
           BoxShadow(
               color: _currentIndex == 3
-                  ? AppColors.searchIconColor
+                  ? AppColors.searchIconColor.withOpacity(.1)
+                  // ? Colors.transparent
                   : _currentIndex == 4
-                      ? AppColors.searchIconColor
-                      : AppColors.primaryColor,
+                      ? AppColors.searchIconColor.withOpacity(.1)
+                      : Colors.transparent,
               spreadRadius: 0,
-              blurRadius: 15),
+              blurRadius: 15,
+            offset: const Offset(
+              0.0, // Move to right 10  horizontally
+              -10.0, // Move to bottom 10 Vertically
+            ),),
         ],
       ),
       child: ClipRRect(

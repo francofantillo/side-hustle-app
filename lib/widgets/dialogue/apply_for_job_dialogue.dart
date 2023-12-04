@@ -51,8 +51,8 @@ class ApplyForJobDialogue extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               RoundedCornersImage(
-                imageHeight: 0.25.sw,
-                imageWidth: 0.25.sw,
+                imageHeight: 0.2.sw,
+                imageWidth: 0.2.sw,
                 boarderColor: Colors.transparent,
               ),
               width(0.02.sw),
@@ -138,7 +138,7 @@ class ApplyForJobDialogue extends StatelessWidget {
             ],
           ),
         ),
-        height(0.03.sh),
+        height(0.05.sw),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: CustomTextFormField(
@@ -153,7 +153,7 @@ class ApplyForJobDialogue extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: CustomMaterialButton(
               borderRadius: AppDimensions.defaultMaterialButtonRadiusHome,
-              height: AppDimensions.defaultMaterialButtonHeightHome,
+              // height: AppDimensions.defaultMaterialButtonHeightHome,
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pop(context);

@@ -30,7 +30,7 @@ class OrderServiceItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: imageHeight,
+      // height: imageHeight,
       width: imageWidth,
       child: Card(
         // shadowColor: Colors.transparent,
@@ -42,98 +42,103 @@ class OrderServiceItemWidget extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          child: Wrap(
             children: [
-              RoundedCornersImage(
-                imageHeight: imageHeight,
-                imageWidth: AppDimensions.sideHustleItemWidth,
-                assetImage: imagePath,
-                boarderColor: boarderColor,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 2.0, left: 8, right: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: textWidget(
-                                text: title,
-                                fontFamily: AppFont.gilroyBold,
-                                fontSize: AppDimensions.textSizeSmall,
-                                color: AppColors.blackColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          // Align(
-                          //   alignment: Alignment.topRight,
-                          //   child: Padding(
-                          //     padding: const EdgeInsets.only(right: 4.0),
-                          //     child: textWidget(
-                          //         text: price,
-                          //         color: AppColors.blackColor,
-                          //         fontWeight: FontWeight.bold),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                      height(imageHeight! * .01),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: textWidget(
-                                  text: subTitle,
-                                  maxLines: 3,
-                                  fontSize: AppDimensions.textSizeTiny)),
-                          width(0.02.sw),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: textWidget(
-                                  text: price,
-                                  color: AppColors.blackColor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      height(imageHeight! * .042),
-                      Row(
-                        children: [
-                          textWidget(
-                              text: "${AppStrings.serviceDate}: ",
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeTiny),
-                          textWidget(
-                              text: serviceTime,
-                              maxLines: 1,
-                              fontSize: AppDimensions.textSizeTiny),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          textWidget(
-                              text: "${AppStrings.serviceTime}: ",
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeTiny),
-                          textWidget(
-                              text: serviceTime,
-                              maxLines: 1,
-                              fontSize: AppDimensions.textSizeTiny),
-                        ],
-                      )
-                    ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  RoundedCornersImage(
+                    // imageHeight: imageHeight,
+                    imageHeight: 0.22.sw,
+                    imageWidth: AppDimensions.sideHustleItemWidth,
+                    assetImage: imagePath,
+                    boarderColor: boarderColor,
                   ),
-                ),
-              )
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 2.0, left: 8, right: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: textWidget(
+                                    text: title,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontSize: AppDimensions.textSizeSmall,
+                                    color: AppColors.blackColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              // Align(
+                              //   alignment: Alignment.topRight,
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.only(right: 4.0),
+                              //     child: textWidget(
+                              //         text: price,
+                              //         color: AppColors.blackColor,
+                              //         fontWeight: FontWeight.bold),
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                          height(imageHeight! * .01),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: textWidget(
+                                      text: subTitle,
+                                      maxLines: 3,
+                                      fontSize: AppDimensions.textSizeTiny)),
+                              width(0.02.sw),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 4.0),
+                                  child: textWidget(
+                                      text: price,
+                                      color: AppColors.blackColor,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                          height(imageHeight! * .042),
+                          Row(
+                            children: [
+                              textWidget(
+                                  text: "${AppStrings.serviceDate}: ",
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppDimensions.textSizeTiny),
+                              textWidget(
+                                  text: serviceTime,
+                                  maxLines: 1,
+                                  fontSize: AppDimensions.textSizeTiny),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              textWidget(
+                                  text: "${AppStrings.serviceTime}: ",
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppDimensions.textSizeTiny),
+                              textWidget(
+                                  text: serviceTime,
+                                  maxLines: 1,
+                                  fontSize: AppDimensions.textSizeTiny),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),

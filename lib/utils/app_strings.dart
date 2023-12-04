@@ -119,6 +119,8 @@ class AppStrings {
 
   /// Home
   static const String searchHintText = "Search Product, Services or event";
+  static const String searchSideHustleServicesHintText = "Search Side Hustle Service";
+  static const String searchSideHustleProductsHintText = "Search Side Hustle Products";
   static const String blessTheseBusinesses = "Let's Bless These Businesses";
   static const String jobsAroundYou = "Jobs around you";
   static const String eventsAroundYou = "Events around you";
@@ -304,6 +306,7 @@ class AppStrings {
   static const String getDirectionToMyLocation = "Get Direction to my location";
   static const String watch = "Watch";
   static const String editProduct = "Edit Product";
+  static const String editShop = "Edit Shop";
   static const String editService = "Edit Service";
   static const String editEvent = "Edit an Event";
   static const String serviceAdded = "Service added";

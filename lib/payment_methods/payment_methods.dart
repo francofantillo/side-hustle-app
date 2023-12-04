@@ -90,6 +90,7 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
                           padding: const EdgeInsets.only(
                               left: 12.0, right: 12.0, top: 12),
                           child: CustomTextFormField(
+                            isShowBoarder: false,
                             height: 40.h,
                             hintText: AppStrings.nameOnCard,
                           ),
@@ -98,6 +99,7 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
                           padding: const EdgeInsets.only(
                               left: 12.0, right: 12.0, top: 4),
                           child: CustomTextFormField(
+                            isShowBoarder: false,
                             height: 40.h,
                             hintText: AppStrings.cardNumber,
                           ),
@@ -111,6 +113,7 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(right: 4.0),
                                   child: CustomTextFormField(
+                                    isShowBoarder: false,
                                     height: 40.h,
                                     hintText: AppStrings.expiry,
                                   ),
@@ -120,6 +123,7 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 4.0),
                                   child: CustomTextFormField(
+                                    isShowBoarder: false,
                                     height: 40.h,
                                     hintText: AppStrings.cVV,
                                   ),

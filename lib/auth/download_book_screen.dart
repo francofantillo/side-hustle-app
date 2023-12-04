@@ -76,7 +76,7 @@ class _DownloadBookScreenState extends State<DownloadBookScreen> {
                   )),
             )),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 24, right: 24),
+              padding: const EdgeInsets.only(top: 8.0, left: 32, right: 32),
               child: textWidget(
                   text: AppStrings.howToHustlerPdf,
                   textAlign: TextAlign.center,

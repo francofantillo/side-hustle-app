@@ -22,6 +22,7 @@ class _CustomPinCodeTextFieldState extends State<CustomPinCodeTextField> {
   Widget build(BuildContext context) {
     return PinCodeTextField(
       keyboardType: TextInputType.number,
+      // backgroundColor: AppColors.backgroundColor,
       appContext: context,
       length: 6,
       obscureText: false,

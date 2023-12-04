@@ -102,11 +102,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               height(0.01.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimensions.defaultHorizontalPadding + 4),
+                padding: EdgeInsets.symmetric(
+                    // horizontal: 28.w),
+                    horizontal: 0.05.sw),
                 child: SizedBox(
                   width: 1.sw,
-                  height: 36.h,
+                  height: 47.w,
                   child: CustomButtonWithIcon(
                       // borderRadius: 12,
                       onPressed: () {
@@ -121,10 +122,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               // height(0.01.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimensions.defaultHorizontalPadding + 4),
+                padding: EdgeInsets.only(
+                    // left: 28.w, right: 28.w, top: 8.w),
+                    left: 0.05.sw, right:0.05.sw, top: 8.w),
                 child: CustomMaterialButton(
-                    height: 6,
+                    // height: 6,
                     borderRadius: 12,
                     fontSize: AppDimensions.textSizeVerySmall,
                     color: AppColors.primaryColor,
@@ -137,10 +139,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     name: AppStrings.yourResume),
               ),
-              height(0.03.sh),
+              // height(0.03.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                // padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
+                padding: EdgeInsets.only(left: 0.05.sw, right: 0.05.sw, top: 12, bottom: 12),
                 child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ProfileJobsWidget(
@@ -150,8 +154,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Navigator.pushNamed(
                               context, AppRoutes.myJobsScreenRoute);
                         }),
+                    // width(8.w),
                     const ProfileJobsWidget(
                         name: AppStrings.jobsCompleted, myJobsCount: "12"),
+                    // width(8.w),
                     ProfileJobsWidget(
                         name: AppStrings.myEvents,
                         myJobsCount: "28",
@@ -162,11 +168,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
-              height(0.01.sh),
-              const Padding(
+              // const Padding(
+              //   padding: EdgeInsets.symmetric(
+              //       horizontal: AppDimensions.defaultHorizontalPadding + 4),
+              //   child: Divider(),
+              // ),
+              Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: AppDimensions.defaultHorizontalPadding + 4),
-                child: Divider(),
+                    horizontal: AppDimensions.defaultHorizontalPadding + 4, vertical: 8),
+                child: Divider(
+                  height: 1,
+                  color: Colors.grey.withOpacity(0.8),
+                ),
               ),
               height(0.01.sw),
               Padding(
@@ -178,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: const Color(0xFF3896EE),
                     fontFamily: AppFont.gilroyBold,
                     fontSize: AppDimensions.textSizeSmall,
-                    fontWeight: AppDimensions.headingFontWeight),
+                    fontWeight: FontWeight.bold),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(

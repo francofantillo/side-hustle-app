@@ -170,43 +170,53 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                 ),
               ),
               height(0.01.sw),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Divider(
-                  color: AppColors.greyColor,
+                  height: 1,
+                  color: Colors.grey.withOpacity(0.8),
                 ),
               ),
               height(0.02.sw),
-              SizedBox(
-                width: 1.sw,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Add your button click logic here
-                    Navigator.pushNamed(
-                        context, AppRoutes.attendeesEventScreenRoute);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                    // Set the background color
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(25.0), // Make it round
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const ImageIcon(
-                        AssetImage(AssetsPath.attendees),
-                        color: Colors.white, // Set the icon color
-                        size: 17,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: SizedBox(
+                  width: 1.sw,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Add your button click logic here
+                      Navigator.pushNamed(
+                          context, AppRoutes.attendeesEventScreenRoute);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryColor,
+                      // Set the background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(16.0), // Make it round
                       ),
-                      width(0.02.sw),
-                      textWidget(
-                          text: AppStrings.viewAttendees,
-                          fontFamily: AppFont.gilroyBold,
-                          color: AppColors.textWhiteColor),
-                    ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 14,
+                        bottom: 14,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const ImageIcon(
+                            AssetImage(AssetsPath.attendees),
+                            color: Colors.white, // Set the icon color
+                            size: 17,
+                          ),
+                          width(0.02.sw),
+                          textWidget(
+                              text: AppStrings.viewAttendees,
+                              fontFamily: AppFont.gilroyBold,
+                              color: AppColors.textWhiteColor),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -310,7 +320,8 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                       child: textWidget(
                           text: PaymentTypeEnum.Cash.name,
                           color: AppColors.textBlackColor,
-                          fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
+                          fontSize:
+                              AppDimensions.textSubHeadingTextSizeViewForms),
                     ),
                   ],
                 ),

@@ -5,6 +5,7 @@ import 'package:side_hustle/favourites/widgets/fav_list_jobs.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_shops.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -74,7 +75,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                 child: ToggleSwitch(
                   customWidths: [.3.sw, .3.sw, .305.sw],
                   animate: true,
-                  minHeight: 50.h,
+                  minHeight: AppDimensions.tabBarHeight,
                   animationDuration: 200,
                   isVertical: false,
                   // minWidth: 90,

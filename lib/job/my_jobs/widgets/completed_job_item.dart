@@ -117,7 +117,8 @@ class CompletedJobItemWidget extends StatelessWidget {
                         fontSize: AppDimensions.textSizeSmall),
                       height(imageHeight! * .02),
                       Divider(
-                        height: 1.h,
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.8),
                       ),
                       height(imageHeight! * .04),
                       Row(

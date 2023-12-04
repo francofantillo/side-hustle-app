@@ -208,9 +208,12 @@ class _ViewProductState extends State<ViewProduct> {
                   ),
                 ),
                 height(0.02.sh),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Divider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Divider(
+                    height: 1,
+                    color: Colors.grey.withOpacity(0.8),
+                  ),
                 ),
                 height(0.02.sh),
                 widget.isMyProduct
@@ -310,9 +313,12 @@ class _ViewProductState extends State<ViewProduct> {
                                       isEdit: true,
                                     ));
                               } else {
-                                Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
-
+                                // Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
+                                setState(() {
+                                  isAddToCart = true;
+                                });
                               }
+
                             },
                             name: widget.isMyProduct
                                 ? AppStrings.editProduct

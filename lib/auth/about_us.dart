@@ -31,7 +31,7 @@ class _AboutUsState extends State<AboutUs> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 2.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                     text: AppStrings.aboutUs,
                     color: AppColors.blackColor,
@@ -43,26 +43,26 @@ class _AboutUsState extends State<AboutUs> {
                 child: textWidget(
                   maxLines: 5,
                   text: AppStrings.aboutUsTextOne,
-                  color: AppColors.greyColor,
-                  fontSize: AppDimensions.textSizeVerySmall,
+                  color: AppColors.authContentColor,
+                  fontSize: AppDimensions.textSizeSmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.aboutUsTextTwo,
-                  color: AppColors.greyColor,
-                  fontSize: AppDimensions.textSizeVerySmall,
+                  color: AppColors.authContentColor,
+                  fontSize: AppDimensions.textSizeSmall,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                 child: textWidget(
                   maxLines: 15,
                   text: AppStrings.aboutUsTextThree,
-                  color: AppColors.greyColor,
-                  fontSize: AppDimensions.textSizeVerySmall,
+                  color: AppColors.authContentColor,
+                  fontSize: AppDimensions.textSizeSmall,
                 ),
               ),
             ],

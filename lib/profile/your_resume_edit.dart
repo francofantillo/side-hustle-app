@@ -11,6 +11,7 @@ import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
+import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
@@ -45,6 +46,23 @@ class _YourResumeEditState extends State<YourResumeEdit> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 12.0, top: 8),
+          child: CircularIconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            width: 0.10.sw,
+            height: 0.10.sw,
+            // icon: Icons.check,
+            icon: CustomIcon.ok,
+            backgroundColor: AppColors.backIconBackgroundColor,
+            iconSize: 14,
+            iconColor: AppColors.primaryColor,
+          ),
+        )
+      ],
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const AlwaysScrollableScrollPhysics(

@@ -118,7 +118,8 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .04),
                       Divider(
-                        height: 1.h,
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.8),
                       ),
                       // height(imageHeight! * .03),
                       // const Spacer(),

@@ -4,6 +4,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
@@ -22,8 +23,8 @@ class HomeAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         IconButtonWithBackground(
-          height: .12.sw,
-          width: .12.sw,
+          height: 40.w,
+          width: 40.w,
           borderRadius: 40,
           backgroundColor: AppColors.backIconBackgroundColor,
           iconColor: AppColors.primaryColor,
@@ -37,8 +38,8 @@ class HomeAppBar extends StatelessWidget {
         CircularCacheImageWidget(
           showLoading: true,
           boarderColor: AppColors.primaryColor,
-          imageHeight: 42.h,
-          imageWidth: 42.h,
+          imageHeight: 42.w,
+          imageWidth: 42.w,
           assetImage: AssetsPath.brandonProfile,
           // image: AlphaAppData.dpProfile,
         ),
@@ -55,6 +56,7 @@ class HomeAppBar extends StatelessWidget {
               textWidget(
                   text: AppStrings.userName,
                   color: AppColors.textBlackColor,
+                  fontFamily: AppFont.gilroyBold,
                   fontSize: AppDimensions.profileEmailTextSize,
                   fontWeight: FontWeight.w500,
                   maxLines: 1),

@@ -133,10 +133,11 @@ class _ApplyForJobState extends State<ApplyForJob> {
                   ),
                 ),
                 height(0.01.sh),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Divider(
-                    color: AppColors.greyColor,
+                    height: 1,
+                    color: Colors.grey.withOpacity(0.8),
                   ),
                 ),
                 height(0.02.sh),
@@ -202,7 +203,15 @@ class _ApplyForJobState extends State<ApplyForJob> {
                     ],
                   ),
                 ),
-                height(0.02.sh),
+                height(0.03.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Divider(
+                    height: 1,
+                    color: Colors.grey.withOpacity(0.8),
+                  ),
+                ),
+                height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
@@ -213,7 +222,7 @@ class _ApplyForJobState extends State<ApplyForJob> {
                       color: AppColors.textBlackColor,
                       fontWeight: FontWeight.bold),
                 ),
-                height(0.01.sw),
+                height(0.015.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
@@ -233,7 +242,7 @@ class _ApplyForJobState extends State<ApplyForJob> {
                       color: AppColors.textBlackColor,
                       fontWeight: FontWeight.bold),
                 ),
-                height(0.01.sw),
+                height(0.015.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 8.0,

@@ -75,6 +75,7 @@ class _BottomModalSheetDeliveryAddressState
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
                   child: CustomTextFormField(
+                    isShowBoarder: false,
                     height: 40.h,
                     hintText: AppStrings.enterCompleteAddress,
                   ),
@@ -86,6 +87,7 @@ class _BottomModalSheetDeliveryAddressState
                       child: Padding(
                         padding: const EdgeInsets.only(left: 12.0, right: 4.0),
                         child: CustomTextFormField(
+                          isShowBoarder: false,
                           height: 40.h,
                           hintText: AppStrings.street,
                         ),
@@ -95,6 +97,7 @@ class _BottomModalSheetDeliveryAddressState
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4.0, right: 12.0),
                         child: CustomTextFormField(
+                          isShowBoarder: false,
                           height: 40.h,
                           hintText: AppStrings.suitApartment,
                         ),
@@ -150,14 +153,16 @@ class _BottomModalSheetDeliveryAddressState
                       backgroundColor: AppColors.whiteColor),
                 ),
                 height(0.02.sw),
-                Center(
-                  child: textWidget(
-                      text: AppStrings.cancel,
-                      maxLines: 2,
-                      color: AppColors.textWhiteColor,
-                      fontSize: AppDimensions.textSizeSmall),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 28.0),
+                  child: Center(
+                    child: textWidget(
+                        text: AppStrings.cancel,
+                        maxLines: 2,
+                        color: AppColors.textWhiteColor,
+                        fontSize: AppDimensions.textSizeSmall),
+                  ),
                 ),
-                height(0.15.sw),
               ],
             ),
           ),

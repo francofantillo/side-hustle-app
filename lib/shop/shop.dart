@@ -70,7 +70,7 @@ class _ShopScreenState extends State<ShopScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   RoundedCornersImage(
-                    imageHeight: 80.h,
+                    imageHeight: AppDimensions.imageHeightShop,
                     imageWidth: AppDimensions.imageWidthShop,
                     assetImage: AssetsPath.social,
                     boarderColor: AppColors.whiteColor,

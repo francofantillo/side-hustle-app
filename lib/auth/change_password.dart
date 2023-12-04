@@ -113,7 +113,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                     },
                     textColor: AppColors.whiteColor,
                     name: AppStrings.changPassword,
-                    borderRadius: AppDimensions.buttonBorderRadius),
+                    // borderRadius: AppDimensions.buttonBorderRadius
+                ),
               ),
               height(0.04.sh),
             ],

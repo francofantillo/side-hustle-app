@@ -134,7 +134,7 @@ class HomeItemsWidget extends StatelessWidget {
                             // height(imageHeight! * .04),
                             const Spacer(),
                             Divider(
-                              height: 1.h,
+                              height: 1,
                               color: Colors.grey.withOpacity(0.8),
                             ),
                             height(imageHeight! * .04),

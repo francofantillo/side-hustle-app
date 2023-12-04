@@ -143,10 +143,11 @@ class _ViewEventState extends State<ViewEvent> {
                 ),
               ),
               height(0.01.sh),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Divider(
-                  color: AppColors.greyColor,
+                  height: 1,
+                  color: Colors.grey.withOpacity(0.8),
                 ),
               ),
               height(0.02.sh),
