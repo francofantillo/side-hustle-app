@@ -85,7 +85,7 @@ class _ViewServiceState extends State<ViewService> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       textWidget(
-                          text: AppStrings.watch,
+                          text: AppStrings.plumber,
                           fontFamily: AppFont.gilroyBold,
                           fontWeight: FontWeight.bold,
                           fontSize: AppDimensions.textHeadingSizeViewForms,
@@ -111,18 +111,9 @@ class _ViewServiceState extends State<ViewService> {
                 ),
                 height(0.02.sw),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                  child: CustomMaterialButton(
-                      onPressed: () {},
-                      name: AppStrings.getDirectionToShop,
-                      borderRadius: AppDimensions.boarderRadiusViewProduct,
-                      color: AppColors.greenColor),
-                ),
-                height(0.03.sw),
-                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
-                      text: AppStrings.productDescription,
+                      text: AppStrings.serviceDescription,
                       maxLines: 2,
                       fontFamily: AppFont.gilroyBold,
                       fontSize: AppDimensions.textSubHeadingSizeViewForms,
@@ -142,7 +133,7 @@ class _ViewServiceState extends State<ViewService> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
-                      text: AppStrings.zipCode,
+                      text: AppStrings.additionalInformation,
                       maxLines: 2,
                       fontFamily: AppFont.gilroyBold,
                       fontSize: AppDimensions.textSubHeadingSizeViewForms,
@@ -150,67 +141,24 @@ class _ViewServiceState extends State<ViewService> {
                       fontWeight: FontWeight.bold),
                 ),
                 height(0.01.sw),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.check,
-                        color: AppColors.primaryColor,
-                        size: 16,
-                      ),
-                      width(0.02.sw),
-                      Expanded(
-                        child: textWidget(
-                            text: AppStrings.zipCodeText,
-                            maxLines: 1,
-                            fontFamily: AppFont.gilroyBold,
-                            color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
-                      ),
-                    ],
-                  ),
-                ),
-                height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(
-                      text: AppStrings.deliveryOptions,
-                      maxLines: 2,
-                      fontFamily: AppFont.gilroyBold,
+                      text: AppStrings.productDescViewProduct,
+                      maxLines: 30,
                       color: AppColors.textBlackColor,
-                      fontSize: AppDimensions.textSubHeadingSizeViewForms,
-                      fontWeight: FontWeight.bold),
+                      fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
                 ),
-                height(0.01.sw),
+                height(0.03.sw),
+                // const Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.check,
-                        color: AppColors.primaryColor,
-                        size: 16,
-                      ),
-                      width(0.02.sw),
-                      Expanded(
-                        child: textWidget(
-                            text: AppStrings.pickUpViewProduct,
-                            maxLines: 1,
-                            fontFamily: AppFont.gilroyBold,
-                            color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms
-                        ),
-                      ),
-                    ],
+                  child: Divider(
+                    height: 1,
+                    color: AppColors.greyColor.withOpacity(0.8),
                   ),
                 ),
-                height(0.02.sw),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Divider(),
-                ),
-                height(0.02.sw),
+                height(0.04.sw),
                 widget.isMyService
                     ? const SizedBox.shrink()
                     : widget.isViewingServiceFromOthersShop
@@ -337,8 +285,9 @@ class _ViewServiceState extends State<ViewService> {
                                 child: InkWell(
                               onTap: () {},
                               child: Container(
-                                height: 48.h,
+                                // height: 48.h,
                                 // width: imageWidth!,
+                                padding: EdgeInsets.symmetric(vertical: AppDimensions.buttonDefaultHeight - 2),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       color: AppColors.primaryColor,

@@ -23,16 +23,19 @@ class ApplyForJobDialogue extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            width(0.18.sw),
-            textWidget(
-                text: AppStrings.applyForJob,
-                fontFamily: AppFont.gilroyBold,
-                fontSize: AppDimensions.textSizeNormal + 2.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.blackColor),
-            const Spacer(),
+            width(45.w),
+            Expanded(
+              child: textWidget(
+                  text: AppStrings.applyForJob,
+                  fontFamily: AppFont.gilroyBold,
+                  textAlign: TextAlign.center,
+                  fontSize: AppDimensions.textSizeNormal + 2.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.blackColor),
+            ),
+            // const Spacer(),
             IconButton(
               padding: EdgeInsets.zero,
               onPressed: () {
@@ -46,13 +49,15 @@ class ApplyForJobDialogue extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               RoundedCornersImage(
-                imageHeight: 0.2.sw,
-                imageWidth: 0.2.sw,
+                // imageHeight: 0.2.sw,
+                // imageWidth: 0.2.sw,
+                imageHeight: 80.w,
+                imageWidth: 80.w,
                 boarderColor: Colors.transparent,
               ),
               width(0.02.sw),
@@ -77,9 +82,9 @@ class ApplyForJobDialogue extends StatelessWidget {
             ],
           ),
         ),
-        height(0.02.sh),
+        // height(0.02.sh),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.only(left: 16.0, right: 16, top: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -98,9 +103,9 @@ class ApplyForJobDialogue extends StatelessWidget {
             ],
           ),
         ),
-        height(0.02.sh),
+        // height(0.02.sh),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.only(left: 16.0, right: 16, top: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -118,16 +123,16 @@ class ApplyForJobDialogue extends StatelessWidget {
             ],
           ),
         ),
-        height(0.02.sh),
+        // height(0.02.sh),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.only(left: 16.0, right: 16, top: 8),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ImageIcon(
-                const AssetImage(AssetsPath.time),
+              Icon(
+                Icons.access_time_filled_rounded,
+                size: AppDimensions.imageIconSizeTextFormField,
                 color: const Color(0xFF565656),
-                size: 0.025.sh,
               ),
               width(0.02.sw),
               Expanded(
@@ -138,9 +143,9 @@ class ApplyForJobDialogue extends StatelessWidget {
             ],
           ),
         ),
-        height(0.05.sw),
+        // height(0.05.sw),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
           child: CustomTextFormField(
               hintText: AppStrings.enterTheBidAmount,
               keyboardType:
@@ -148,9 +153,9 @@ class ApplyForJobDialogue extends StatelessWidget {
               // keyboardType: TextInputType.numberWithOptions(signed: false),
               ),
         ),
-        height(0.02.sh),
+        // height(0.02.sh),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: CustomMaterialButton(
               borderRadius: AppDimensions.defaultMaterialButtonRadiusHome,
               // height: AppDimensions.defaultMaterialButtonHeightHome,

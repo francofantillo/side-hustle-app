@@ -34,7 +34,7 @@ class _YourServiceCartState extends State<YourServiceCart> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      floatingActionButton: const DeliveryAddressYourCart(isDelivery: true, isOrderService: true,),
+      // floatingActionButton: const DeliveryAddressYourCart(isDelivery: true, isOrderService: true,),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -42,7 +42,11 @@ class _YourServiceCartState extends State<YourServiceCart> {
           const YourCartAppBar(itemsCount: 4),
           height(0.02.sw),
           const ServicesCartList(),
-          height(0.7.sw),
+          const DeliveryAddressYourCart(
+            isDelivery: true,
+            isOrderService: true,
+          ),
+          // height(0.7.sw),
         ],
       ),
     );

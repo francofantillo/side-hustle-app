@@ -111,9 +111,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
       children: [
         Card(
           shadowColor: Colors.transparent,
-          elevation: _isFocused
-              ? AppDimensions.defaultFocusedTextFieldElevation
-              : AppDimensions.defaultUnFocusedTextFieldElevation,
+          elevation: 0,
           // Adjust the elevation as needed
           shape: RoundedRectangleBorder(
             borderRadius:

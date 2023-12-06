@@ -71,6 +71,7 @@ class AppDimensions {
   static double rootPadding = 10.w;
   // static double orContinueWithPadding = 24;
   static double orContinueWithPadding = 36;
+  static double imageIconSizeTextFormField = 18;
   static double defaultRoundedImageWidth = .3.sw;
   static double defaultRoundedImageHeight = .3.sw;
   static double socialButtonBackgroundSize = .05.sw;
@@ -93,10 +94,12 @@ class AppDimensions {
 
   /// Elevation
   static double defaultCardElevation = 0.02.sw;
-  static double defaultFocusedTextFieldElevation = 0.02.sw;
+  // static double defaultFocusedTextFieldElevation = 0.02.sw;
+  static double defaultFocusedTextFieldElevation = 2;
   // static double defaultFocusedTextFieldElevation = 2;
   // static double defaultUnFocusedTextFieldElevation = 2;
-  static double defaultUnFocusedTextFieldElevation = 0.02.sw;
+  // static double defaultUnFocusedTextFieldElevation = 0.02.sw;
+  static double defaultUnFocusedTextFieldElevation = 2;
   static double defaultSearchTextFieldElevation = 0.01.sw;
   static double defaultButtonElevation = 0.02.sw;
   static double cardElevation = 6;
@@ -159,10 +162,11 @@ class AppDimensions {
   // static double listItemFavEventsHeight = 0.4.sw;
   static double listItemFavEventsHeight = 134.w;
   // static double listItemFavJobHeight = 0.39.sw;
-  static double listItemFavJobHeight = 130.w;
+  static double listItemFavJobHeight = 134.w;
   // static double listItemFavShopsHeight = 0.39.sw;
   static double listItemFavShopsHeight = 130.w;
-  static double listItemHeightJobCompleted = 0.41.sw;
+  // static double listItemHeightJobCompleted = 0.41.sw;
+  static double listItemHeightJobCompleted = 135.w;
   static double listItemWidth = 0.21.sw;
   static double listItemElevation = 0.02.sh;
   static double listItemImageRoundedBorder = 15.w;
@@ -171,7 +175,7 @@ class AppDimensions {
   // static double sideHustleItemHeight = 0.41.sw;
   // static double sideHustleItemHeight = 0.40.sw;
   // static double sideHustleItemHeight = 0.40.sw;
-  static double sideHustleItemHeight = 118.w;
+  static double sideHustleItemHeight = 120.w;
   static double sideHustleItemWidth = 0.24.sw;
 
   /// Product Image Slider
@@ -197,7 +201,8 @@ class AppDimensions {
   static double checkBoxRadius = 6;
 
   /// Apply For a Jo
-  static double applyForJobIconSize = 0.03.sh;
+  // static double applyForJobIconSize = 0.03.sh;
+  static double applyForJobIconSize = 15.w;
 
   /// Event
   static double eventWidgetIconSize = 0.02.sh;
@@ -216,12 +221,15 @@ class AppDimensions {
   static double boarderRadiusCartPlaceOrder = 12.0.h;
   // static double cartItemProductHeight = 0.39.sw;
   // static double cartItemProductHeight = 0.37.sw;
-  static double cartItemProductHeight = 0.32.sw;
+  // static double cartItemProductHeight = 0.32.sw;
+  static double cartItemProductHeight = 120.w;
   // static double orderDetailHeight = 0.26.sw;
   static double orderDetailHeight = 90.w;
-  static double cartItemProductImageWidth = 0.22.sw;
+  static double cartItemProductImageWidth = 100.w;
+  static double cartItemOrderDetailImageWidth = 0.22.sw;
   // static double cartItemServiceHeight = 0.50.sw;
-  static double cartItemServiceHeight = 0.39.sw;
+  // static double cartItemServiceHeight = 0.39.sw;
+  static double cartItemServiceHeight = 135.w;
   // static double modelSheetDeliveryHeight = .63.sh;
   static double modelSheetDeliveryHeight = .48.sh;
   // static double modelSheetProductsHeight = .7.sh;
@@ -262,11 +270,11 @@ class AppDimensions {
   static double listItemJobScheduledHeight = 140.w;
   // static double listItemOnGoingHeight = 0.57.sw;
   // static double listItemOnGoingHeight = 178.w;
-  static double listItemOnGoingHeight = 180.w;
+  static double listItemOnGoingHeight = 183.w;
   // static double listItemCompletedJobHeight = 0.57.sw;
   static double listItemCompletedJobHeight = 187.w;
   // static double listItemJobRequestHeight = 0.38.sw;
-  static double listItemJobRequestHeight = 180.w;
+  static double listItemJobRequestHeight = 134.w;
 
   /// Button Border Radius
   static double buttonBorderRadius = 0.04.sw;

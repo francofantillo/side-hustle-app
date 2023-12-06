@@ -38,10 +38,10 @@ class OrderServiceItemWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(18),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
           child: Wrap(
             children: [
               Row(
@@ -101,6 +101,8 @@ class OrderServiceItemWidget extends StatelessWidget {
                                   child: textWidget(
                                       text: price,
                                       color: AppColors.blackColor,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontSize: AppDimensions.textSizeSmall,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),

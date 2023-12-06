@@ -23,6 +23,7 @@ class AssetsPath {
   static const notification = "${iconsPath}notification.png";
   static const changePassword = "${iconsPath}change_password.png";
   static const messages = "${iconsPath}messages.png";
+  static const drawerMessages = "${iconsPath}drawer_message.png";
   static const paymentMethod = "${iconsPath}payment_method.png";
   static const delete = "${iconsPath}delete.png";
   static const minus = "${iconsPath}minus.png";
@@ -67,6 +68,15 @@ class AssetsPath {
   // static const placeHolderProfileImage = "${iconsPath}place_holder.png";
   static const drawerBg = "${imagePath}drawer_bg.png";
   static const downloadBook = "${imagePath}download_book.png";
+
+  static const shanaya = "${alphaPath}shanaya.png";
+  static const angelina = "${alphaPath}angelina.png";
+  static const natasha = "${alphaPath}natasha.png";
+  static const jane = "${alphaPath}jane.png";
+  static const angelina_2 = "${alphaPath}angelina_2.png";
+  static const katty = "${alphaPath}katty.png";
+  static const johnny = "${alphaPath}johnny.png";
+  static const rose = "${alphaPath}rose.png";
 
   /// Alpha Images
   static const carpenter = "${alphaPath}carpenter.png";

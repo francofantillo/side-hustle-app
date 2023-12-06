@@ -38,7 +38,8 @@ class BackgroundWidget extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         appBar: showAppBar
             ? AppBar(
-                backgroundColor: Colors.white,
+                // backgroundColor: backgroundColor ?? AppColors.backgroundColor,
+                backgroundColor: AppColors.backgroundColor,
                 elevation: 0,
                 title: textWidget(
                     text: appBarTitle,
@@ -54,7 +55,8 @@ class BackgroundWidget extends StatelessWidget {
               )
             : null,
         bottomNavigationBar: bottomNavBar,
-        backgroundColor: backgroundColor ?? AppColors.backgroundColor,
+        // backgroundColor: backgroundColor ?? AppColors.backgroundColor,
+        backgroundColor: AppColors.backgroundColor,
         // backgroundColor: backgroundColor ?? AppColors.backgroundColor,
         body: body ?? Container(),
       ),

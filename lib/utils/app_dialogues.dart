@@ -11,6 +11,7 @@ class AppDialogues {
       bool? dismissOnTouchOutside}) {
     return AwesomeDialog(
         // width: 1.sw,
+        // dialogBorderRadius: BorderRadius.circular(30), // Set the desired border radius
         dialogBackgroundColor: backgroundColor ?? Colors.white,
         context: context,
         dismissOnTouchOutside: dismissOnTouchOutside ?? false,

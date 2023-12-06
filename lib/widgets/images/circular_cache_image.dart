@@ -31,14 +31,14 @@ class CircularCacheImageWidget extends StatelessWidget {
           // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg',
           image == null ? "https://www.example.com/non_existent_image.jpg" : image!,
       imageBuilder: (context, imageProvider) => Container(
-        width: imageWidth ?? 60.h, // Set your desired width
-        height: imageHeight ?? 60.h, // Set your desired height
+        width: imageWidth ?? 60.w, // Set your desired width
+        height: imageHeight ?? 60.w, // Set your desired height
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
             color: boarderColor ?? AppColors.whiteColor,
             // Change the border color as needed
-            width: borderWidth ?? 2.h, // Use the provided border width
+            width: borderWidth ?? 2.w, // Use the provided border width
           ),
           image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
         ),
@@ -47,14 +47,14 @@ class CircularCacheImageWidget extends StatelessWidget {
         baseColor: Colors.grey.shade300,
         highlightColor: Colors.grey.shade100,
         child: Container(
-          width: imageWidth ?? 60.h, // Set your desired width
-          height: imageHeight ?? 60.h, // Set your desired height
+          width: imageWidth ?? 60.w, // Set your desired width
+          height: imageHeight ?? 60.w, // Set your desired height
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
               color: boarderColor ?? AppColors.whiteColor,
               // Change the border color as needed
-              width: borderWidth ?? 2.h, // Use the provided border width
+              width: borderWidth ?? 2.w, // Use the provided border width
             ),
             image: const DecorationImage(
                 image: AssetImage(AssetsPath.placeHolderProfileImage),
@@ -102,14 +102,14 @@ class CircularCacheImageWidget extends StatelessWidget {
       //     )
       // : null,
       errorWidget: (context, url, error) => Container(
-        width: imageWidth ?? 60.h, // Set your desired width
-        height: imageHeight ?? 60.h, // Set your desired height
+        width: imageWidth ?? 60.w, // Set your desired width
+        height: imageHeight ?? 60.w, // Set your desired height
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
               color: boarderColor ?? AppColors.whiteColor,
               // Change the border color as needed
-              width: borderWidth ?? 2.h, // Use the provided border width
+              width: borderWidth ?? 2.w, // Use the provided border width
             ),
             image: DecorationImage(
                 image: AssetImage(

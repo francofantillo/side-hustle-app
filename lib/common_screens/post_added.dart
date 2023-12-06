@@ -32,7 +32,7 @@ class PostAdded extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          height(0.2.sh),
+          // height(0.2.sh),
           // Padding(
           //   padding: const EdgeInsets.all(32.0),
           //   child: CustomCacheImage(
@@ -42,15 +42,14 @@ class PostAdded extends StatelessWidget {
           //     assetImage: AssetsPath.logo,
           //   ),
           // ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: CustomCacheImage(
-                showLoading: false,
-                imageHeight: AppDimensions.loginLogoSize,
-                imageWidth: 1.sw,
-                assetImage: AssetsPath.sideHustlePosted,
-              ),
+          Padding(
+            padding: EdgeInsets.only(top: 48.w),
+            child: CustomCacheImage(
+              showLoading: false,
+              // imageHeight: 300.w,
+              imageHeight: 0.6.sw,
+              imageWidth: 1.sw,
+              assetImage: AssetsPath.sideHustlePosted,
             ),
           ),
           height(0.01.sh),
@@ -65,7 +64,7 @@ class PostAdded extends StatelessWidget {
           ),
           height(0.02.sw),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 48.0),
             child: textWidget(
                 text: subTitle,
                 color: AppColors.textBlackColor,

@@ -89,53 +89,61 @@ class BookedJobsWidget extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.8),
                       ),
                       height(0.01.sw),
-                      const Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              height: imageHeight! * .21,
-                              width: .55.sw,
-                              decoration: BoxDecoration(
-                                color: AppColors.greenColor,
-                                borderRadius: BorderRadius.circular(
-                                    AppDimensions.buttonBorderRadius),
-                              ),
-                              child: Material(
-                                color: AppColors.greenColor,
-                                borderRadius: BorderRadius.circular(
-                                    AppDimensions.bookedJobRoundedBorder),
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Center(
-                                    child: textWidget(
-                                      text: AppStrings.startJob,
-                                      color: AppColors.textWhiteColor,
-                                      fontFamily: AppFont.gilroyBold,
-                                      fontWeight: FontWeight.bold,
-                                      maxLines: 2,
-                                      fontSize: 12.sp,
-                                      textAlign: TextAlign.center,
+                      // const Spacer(),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Container(
+                                  // height: imageHeight! * .21,
+                                  width: .55.sw,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.greenColor,
+                                    borderRadius: BorderRadius.circular(
+                                        AppDimensions.buttonBorderRadius),
+                                  ),
+                                  child: Material(
+                                    color: AppColors.greenColor,
+                                    borderRadius: BorderRadius.circular(
+                                        AppDimensions.bookedJobRoundedBorder),
+                                    child: InkWell(
+                                      onTap: () {},
+                                      child: Center(
+                                        child: textWidget(
+                                          text: AppStrings.startJob,
+                                          color: AppColors.textWhiteColor,
+                                          fontFamily: AppFont.gilroyBold,
+                                          fontWeight: FontWeight.bold,
+                                          maxLines: 2,
+                                          fontSize: 12.sp,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          width(0.02.sw),
-                          IconButtonWithBackground(
-                            onTap: () {
-                              print("Clicked");
-                            },
-                            iconPath: AssetsPath.message,
-                            height: imageHeight! * .22,
-                            width: imageHeight! * .22,
-                            backgroundColor: AppColors.primaryColor,
-                            iconColor: AppColors.whiteColor,
-                          ),
-                        ],
+                            width(0.02.sw),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: IconButtonWithBackground(
+                                onTap: () {
+                                  print("Clicked");
+                                },
+                                iconPath: AssetsPath.message,
+                                height: imageHeight! * .22,
+                                width: imageHeight! * .22,
+                                backgroundColor: AppColors.primaryColor,
+                                iconColor: AppColors.whiteColor,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

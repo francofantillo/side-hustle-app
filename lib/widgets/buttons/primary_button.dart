@@ -27,6 +27,7 @@ class PrimaryPostButton extends StatelessWidget {
             topLeft: Radius.circular(AppDimensions.bottomButtonBGCurve)),
       ),
       child: MaterialButton(
+        elevation: 0,
         minWidth: 1.sw,
         onPressed: onPressed,
         color: Colors.white,

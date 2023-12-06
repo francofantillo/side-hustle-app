@@ -75,25 +75,28 @@ class ProductsItemsWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: textWidget(
-                                      text: subTitle,
-                                      maxLines: 2,
-                                      fontSize:
-                                          AppDimensions.textSize10)),
-                              width(imageWidth! * .01),
-                              IconButtonWithBackground(
-                                iconPath: AssetsPath.add,
-                                width: imageHeight! * .28,
-                                height: imageHeight! * .28,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
-                              )
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: textWidget(
+                                        text: subTitle,
+                                        maxLines: 2,
+                                        fontSize:
+                                            AppDimensions.textSize10)),
+                                width(imageWidth! * .01),
+                                IconButtonWithBackground(
+                                  iconPath: AssetsPath.add,
+                                  width: imageHeight! * .28,
+                                  height: imageHeight! * .28,
+                                  backgroundColor: AppColors.primaryColor,
+                                  iconColor: AppColors.whiteColor,
+                                )
+                              ],
+                            ),
                           ),
                           height(imageHeight! * .042),
                           Row(

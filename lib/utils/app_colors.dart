@@ -25,7 +25,8 @@ class AppColors {
   static final itemBGColor = Color(0xFFF3F3F3);
   // static const itemBGColor = Colors.white;
   static const dialogueSelected = Color(0x0FFF3F3F3);
-  static const textFieldBackgroundColor = Color(0x0FFFDFDFD);
+  // static const textFieldBackgroundColor = Color(0x0FFFDFDFD);
+  static const textFieldBackgroundColor = Color(0xffFDFDFD);
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
   static const textBlackColor = Color(0xFF323232);
   static const appTextBlackColor = Color(0xFF6B6B6B);
@@ -36,7 +37,9 @@ class AppColors {
   static const jobRequestTextBoarderColor = Color(0xFFE76161);
   static final productTextFieldColor = const Color(0xFFE2E2E2).withOpacity(.3);
   // static const backgroundColor = Color(0xFFEEEEF0);
+  // static const backgroundColor = Color(0xFFFCFCFC);
   static const backgroundColor = Color(0xFFFCFCFC);
+  // static const backgroundColor = Color(0xfff3f3f3);
   // static const backgroundColor = Color(0xFFFFFFFF);
   static const chatMessageTimeColor = Color(0xFF9E9E9E);
   static const whiteColor = Colors.white;

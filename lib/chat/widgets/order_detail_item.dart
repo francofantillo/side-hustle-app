@@ -48,7 +48,7 @@ class OrderDetailItemWidget extends StatelessWidget {
             children: [
               RoundedCornersImage(
                 imageHeight: imageHeight,
-                imageWidth: AppDimensions.cartItemProductImageWidth,
+                imageWidth: AppDimensions.cartItemOrderDetailImageWidth,
                 assetImage: imagePath,
                 boarderColor: boarderColor,
               ),

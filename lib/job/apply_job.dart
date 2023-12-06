@@ -69,9 +69,9 @@ class _ApplyForJobState extends State<ApplyForJob> {
                     ],
                   ),
                 ),
-                height(0.02.sh),
+                // height(0.02.sh),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.only(left: 8.0, right: 8, top: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -91,9 +91,8 @@ class _ApplyForJobState extends State<ApplyForJob> {
                     ],
                   ),
                 ),
-                height(0.02.sh),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.only(left: 8.0, right: 8, top: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -111,14 +110,13 @@ class _ApplyForJobState extends State<ApplyForJob> {
                     ],
                   ),
                 ),
-                height(0.02.sh),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.only(left: 8.0, right: 8, top: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ImageIcon(
-                        const AssetImage(AssetsPath.time),
+                      Icon(
+                        Icons.access_time_filled_rounded,
                         color: const Color(0xFF565656),
                         size: AppDimensions.applyForJobIconSize,
                       ),
@@ -132,15 +130,13 @@ class _ApplyForJobState extends State<ApplyForJob> {
                     ],
                   ),
                 ),
-                height(0.01.sh),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
                   child: Divider(
                     height: 1,
                     color: Colors.grey.withOpacity(0.8),
                   ),
                 ),
-                height(0.02.sh),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: textWidget(

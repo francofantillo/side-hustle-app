@@ -110,8 +110,9 @@ class _PostEventState extends State<PostEvent> {
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.eventLocationHint,
-                  suffixIcon: const Icon(
+                  suffixIcon: Icon(
                     Icons.my_location,
+                    size: AppDimensions.imageIconSizeTextFormField,
                     color: AppColors.blackColor,
                   ),
                   isSuffixIcon: true,
@@ -136,7 +137,8 @@ class _PostEventState extends State<PostEvent> {
                   height: 45.h,
                   hintText: AppStrings.selectTheDate,
                   isReadonly: true,
-                  suffixIcon: const ImageIcon(AssetImage(AssetsPath.calender),
+                  suffixIcon: ImageIcon(const AssetImage(AssetsPath.calender),
+                      size: AppDimensions.imageIconSizeTextFormField,
                       color: AppColors.blackColor),
                   isSuffixIcon: true,
                   onTap: () async {
@@ -168,9 +170,10 @@ class _PostEventState extends State<PostEvent> {
                           controller: firstTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.startTime,
-                          suffixIcon: const ImageIcon(
-                            AssetImage(AssetsPath.time),
-                            color: AppColors.blackColor,
+                          suffixIcon: Icon(
+                            Icons.access_time_filled_rounded,
+                            size: AppDimensions.imageIconSizeTextFormField,
+                            color: AppColors.greyColorNoOpacity,
                           ),
                           isSuffixIcon: true,
                           isReadonly: true,
@@ -202,9 +205,10 @@ class _PostEventState extends State<PostEvent> {
                           controller: secondTimeTextController,
                           height: 45.h,
                           hintText: AppStrings.endTime,
-                          suffixIcon: const ImageIcon(
-                            AssetImage(AssetsPath.time),
-                            color: AppColors.blackColor,
+                          suffixIcon: Icon(
+                            Icons.access_time_filled_rounded,
+                            size: AppDimensions.imageIconSizeTextFormField,
+                            color: AppColors.greyColorNoOpacity,
                           ),
                           isSuffixIcon: true,
                           isReadonly: true,

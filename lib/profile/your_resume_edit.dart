@@ -247,10 +247,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                         setState(() {});
                       }
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.add,
                       color: AppColors.primaryColor,
-                      size: 33,
+                      size: AppDimensions.imageIconSizeTextFormField,
                     ),
                   ),
                 ),

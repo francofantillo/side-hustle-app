@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 
@@ -24,10 +25,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 55.w,
       decoration: BoxDecoration(
           borderRadius:
               BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-          border: Border.all(color: AppColors.fieldsOutlineColor),
+          // border: Border.all(color: AppColors.fieldsOutlineColor),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(.01),
@@ -41,12 +43,15 @@ class _CustomDropDownState extends State<CustomDropDown> {
           ]),
       child: Card(
         shadowColor: Colors.transparent,
-        elevation: AppDimensions.defaultFocusedTextFieldElevation,
+        elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius:
               BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+          side: const BorderSide(width: 1, color: AppColors.fieldsOutlineColor)
+
         ),
         child: DropdownButtonHideUnderline(
+
           child: DropdownButton2<String>(
             iconStyleData:
                 const IconStyleData(icon: Icon(Icons.keyboard_arrow_down_outlined, color: AppColors.blackColor,)),
@@ -83,6 +88,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
             ),
             menuItemStyleData: const MenuItemStyleData(
               height: 40,
+
             ),
           ),
         ),

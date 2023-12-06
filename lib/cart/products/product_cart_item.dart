@@ -48,7 +48,7 @@ class ProductCartItemWidget extends StatelessWidget {
             BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0),
+            padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -98,7 +98,8 @@ class ProductCartItemWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        height(imageHeight! * .042),
+                        // height(imageHeight! * .042),
+                        const Spacer(),
                         Row(
                           children: [
                             IconButtonWithBackground(
@@ -134,7 +135,8 @@ class ProductCartItemWidget extends StatelessWidget {
                               iconPath: AssetsPath.add,
                             ),
                           ],
-                        )
+                        ),
+                        height(imageHeight! * .042),
                       ],
                     ),
                   ),

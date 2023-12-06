@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/shop/widgets/custom_tab_bar_shop.dart';
 import 'package:side_hustle/shop/widgets/your_product_list_shop.dart';
 import 'package:side_hustle/shop/widgets/your_services_list_shop.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -63,11 +64,11 @@ class _YourShopScreenState extends State<YourShopScreen> {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return BackgroundWidget(
         showAppBar: true,
-        appBarTitle:  isEdit ? AppStrings.editShop: AppStrings.shop,
+        appBarTitle: isEdit ? AppStrings.editShop : AppStrings.shop,
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
-          backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+              backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
         ),
         actions: [
           Padding(
@@ -102,7 +103,6 @@ class _YourShopScreenState extends State<YourShopScreen> {
                   Stack(
                     children: [
                       RoundedCornersImage(
-
                         // imageHeight: 80.h,
                         imageHeight: isEdit
                             ? AppDimensions.imageHeightShopEdit
@@ -117,123 +117,124 @@ class _YourShopScreenState extends State<YourShopScreen> {
                       ),
                       isEdit
                           ? Positioned(
-                        left: AppDimensions.imageWidthShopEdit - 0.15.sw,
-                        top: AppDimensions.imageHeightShopEdit - 0.15.sw,
-                        // child: IconButtonWithBackground(
-                        //   onTap: () {
-                        //     print("Clicked");
-                        //   },
-                        //   iconPath: AssetsPath.camera,
-                        //   height: 0.12.sw,
-                        //   width: 0.12.sw,
-                        //   backgroundColor: AppColors.whiteColor,
-                        //   iconColor: AppColors.primaryColor,
-                        // ),
-                        child: CameraButton(
-                          onTap: () {
-                            print("Clicked");
-                          },
-                          iconPath: AssetsPath.camera,
-                          height: 0.12.sw,
-                          width: 0.12.sw,
-                          backgroundColor: AppColors.whiteColor,
-                          iconColor: AppColors.primaryColor,
-                        ),
-                      )
+                              left: AppDimensions.imageWidthShopEdit - 0.15.sw,
+                              top: AppDimensions.imageHeightShopEdit - 0.15.sw,
+                              // child: IconButtonWithBackground(
+                              //   onTap: () {
+                              //     print("Clicked");
+                              //   },
+                              //   iconPath: AssetsPath.camera,
+                              //   height: 0.12.sw,
+                              //   width: 0.12.sw,
+                              //   backgroundColor: AppColors.whiteColor,
+                              //   iconColor: AppColors.primaryColor,
+                              // ),
+                              child: CameraButton(
+                                onTap: () {
+                                  print("Clicked");
+                                },
+                                iconPath: AssetsPath.camera,
+                                height: 0.12.sw,
+                                width: 0.12.sw,
+                                backgroundColor: AppColors.whiteColor,
+                                iconColor: AppColors.primaryColor,
+                              ),
+                            )
                           : const SizedBox.shrink()
                     ],
                   ),
                   width(0.03.sw),
                   isEdit
                       ? Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const CustomTextFormField(
-                                hintText: AppStrings.shopName,
-                                maxLines: 1,
-                              ),
-                              height(6.w),
-                              CustomTextFormField(
-                                hintText: AppStrings.zipCode,
-                                maxLines: 2,
-                                height: 75.h,
-                                // height: 0.16.sh
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    const CustomTextFormField(
+                                      hintText: AppStrings.shopName,
+                                      maxLines: 1,
+                                    ),
+                                    height(6.w),
+                                    CustomTextFormField(
+                                      hintText: AppStrings.zipCode,
+                                      maxLines: 2,
+                                      height: 75.h,
+                                      // height: 0.16.sh
+                                    )
+                                  ],
+                                ),
                               )
                             ],
                           ),
                         )
-                      ],
-                    ),
-                  )
                       : Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 6.h),
-                          child: textWidget(
-                              text: AppStrings.shop,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeLarge + 2.sp,
-                              color: AppColors.textBlackColor),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: ImageIcon(
-                                const AssetImage(AssetsPath.location),
-                                size: 0.037.sw,
-                                color: Color(0xFF565656),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 6.h),
+                                child: textWidget(
+                                    text: AppStrings.shop,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        AppDimensions.textSizeLarge + 2.sp,
+                                    color: AppColors.textBlackColor),
                               ),
-                            ),
-                            width(0.02.sw),
-                            Expanded(
-                              child: textWidget(
-                                  text: AppStrings.locationText,
-                                  maxLines: 3,
-                                  color: Color(0xFF565656),
-                                  fontSize:
-                                  AppDimensions.textSizeVerySmall),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 2.0),
+                                    child: ImageIcon(
+                                      const AssetImage(AssetsPath.location),
+                                      size: 0.037.sw,
+                                      color: Color(0xFF565656),
+                                    ),
+                                  ),
+                                  width(0.02.sw),
+                                  Expanded(
+                                    child: textWidget(
+                                        text: AppStrings.locationText,
+                                        maxLines: 3,
+                                        color: Color(0xFF565656),
+                                        fontSize:
+                                            AppDimensions.textSizeVerySmall),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                 ],
               ),
             ),
             isEdit
                 ? Padding(
-              padding:
-              EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-              child: CustomTextFormField(
-
-                hintText: AppStrings.shopAddress,
-                maxLines: 1,
-                height: 45.h,
-                // height: 0.16.sh
-              ),
-            )
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+                    child: CustomTextFormField(
+                      hintText: AppStrings.shopAddress,
+                      maxLines: 1,
+                      height: 45.h,
+                      // height: 0.16.sh
+                    ),
+                  )
                 : const SizedBox.shrink(),
             Padding(
               // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
               padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 0.02.sw),
-              child: SizedBox(
+              /*      child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(
-                  customWidths: [.5.sw, .396.sw],
+                  // customWidths: [.5.sw, .396.sw],
+                  customWidths: [.5.sw, .41.sw],
                   animate: true,
                   animationDuration: 200,
                   isVertical: false,
@@ -260,49 +261,63 @@ class _YourShopScreenState extends State<YourShopScreen> {
                     setState(() {});
                   },
                 ),
+              ),*/
+              child: CustomTabBarShop(
+                currentTabIndex: 0,
+                tabNames: [
+                  SideHustleType.Products.name,
+                  SideHustleType.Services.name,
+                ],
+                onChanged: (index) {
+                  setState(() {
+                    _tabIndexBasicToggle.value = index;
+                  });
+                },
               ),
             ),
             _tabIndexBasicToggle.value == 0
                 ? YourProductsListShop(isEdit: isEdit)
                 : YourServicesListShop(isEdit: isEdit),
             height(0.02.sh),
-            PrimaryPostButton(
-                title: AppStrings.postASideHustle,
-                onPressed: () {
-                  AppDialogues.noHeaderDialogue(
-                      context: contextBuilder,
-                      body: PostYourSideHustleDialogueWidget(
-                        isProductSelected: (v) {
-                          isProductSelected = v;
-                          print("prodcut: $isProductSelected");
-                        },
-                        onPressed: () {
-                          print("pressed Dialogue");
-                          if (isProductSelected) {
-                            /// reset to Default Value
-                            isProductSelected = true;
-                            // Navigator.pop(contextBuilder);
-                            AppDialogues.noHeaderDialogue(
-                                context: contextBuilder)
-                                .dismiss();
-                            Navigator.pushNamed(contextBuilder,
-                                AppRoutes.postProductScreenRoute);
-                          } else {
-                            /// reset to Default Value
-                            isProductSelected = true;
-                            AppDialogues.noHeaderDialogue(
-                                context: contextBuilder)
-                                .dismiss();
-                            // Navigator.pop(contextBuilder);
-                            Navigator.pushNamed(contextBuilder,
-                                AppRoutes.postServiceScreenRoute);
-                          }
-                        },
-                        onTapClose: () {
-                          Navigator.pop(contextBuilder);
-                        },
-                      )).show();
-                }),
+            isEdit
+                ? const SizedBox.shrink()
+                : PrimaryPostButton(
+                    title: AppStrings.postASideHustle,
+                    onPressed: () {
+                      AppDialogues.noHeaderDialogue(
+                          context: contextBuilder,
+                          body: PostYourSideHustleDialogueWidget(
+                            isProductSelected: (v) {
+                              isProductSelected = v;
+                              print("prodcut: $isProductSelected");
+                            },
+                            onPressed: () {
+                              print("pressed Dialogue");
+                              if (isProductSelected) {
+                                /// reset to Default Value
+                                isProductSelected = true;
+                                // Navigator.pop(contextBuilder);
+                                AppDialogues.noHeaderDialogue(
+                                        context: contextBuilder)
+                                    .dismiss();
+                                Navigator.pushNamed(contextBuilder,
+                                    AppRoutes.postProductScreenRoute);
+                              } else {
+                                /// reset to Default Value
+                                isProductSelected = true;
+                                AppDialogues.noHeaderDialogue(
+                                        context: contextBuilder)
+                                    .dismiss();
+                                // Navigator.pop(contextBuilder);
+                                Navigator.pushNamed(contextBuilder,
+                                    AppRoutes.postServiceScreenRoute);
+                              }
+                            },
+                            onTapClose: () {
+                              Navigator.pop(contextBuilder);
+                            },
+                          )).show();
+                    }),
           ],
         ),
       );

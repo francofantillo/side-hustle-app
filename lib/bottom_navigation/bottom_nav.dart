@@ -37,10 +37,10 @@ class _BottomNavState extends State<BottomNav> {
         boxShadow: [
           BoxShadow(
               color: _currentIndex == 3
-                  ? AppColors.searchIconColor.withOpacity(.1)
+                  ? AppColors.searchIconColor.withOpacity(.04)
                   // ? Colors.transparent
                   : _currentIndex == 4
-                      ? AppColors.searchIconColor.withOpacity(.1)
+                      ? AppColors.searchIconColor.withOpacity(.04)
                       : Colors.transparent,
               spreadRadius: 0,
               blurRadius: 15,

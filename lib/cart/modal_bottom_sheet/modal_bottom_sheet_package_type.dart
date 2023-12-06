@@ -345,7 +345,14 @@ class _ModalBottomSheetPackageTypePostState
                       color: AppColors.whiteColor,
                       textColor: AppColors.primaryColor),
                 ),
-                // height(14.w),
+                height(0.02.sw),
+                Center(
+                  child: textWidget(
+                      text: "",
+                      maxLines: 2,
+                      color: AppColors.textWhiteColor,
+                      fontSize: AppDimensions.textSizeSmall),
+                ),
               ],
             ),
           ),

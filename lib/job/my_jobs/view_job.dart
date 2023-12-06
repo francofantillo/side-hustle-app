@@ -113,8 +113,8 @@ class _ViewJobState extends State<ViewJob> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    ImageIcon(
-                      const AssetImage(AssetsPath.time),
+                    Icon(
+                      Icons.access_time_filled_rounded,
                       size: AppDimensions.applyForJobIconSize,
                       color: const Color(0xFF565656),
                     ),

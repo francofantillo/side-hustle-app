@@ -91,7 +91,7 @@ class MessageOptionsBottomSheet extends StatelessWidget {
                         ),
                       ),
                     ),
-                    height(0.03.sh),
+                    height(0.05.sw),
                     Center(
                       child: CircularIconButton(
                           icon: Icons.close,

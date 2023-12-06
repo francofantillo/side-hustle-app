@@ -155,7 +155,7 @@ class OngoingJobItemWidget extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      // height(0.01.sw),
+                      height(0.01.sw),
                       Container(
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.all(0.03.sw),

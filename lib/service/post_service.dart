@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
+import 'package:side_hustle/job/my_jobs/widgets/rating_dialogue_text_field.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -117,9 +118,10 @@ class _PostServiceState extends State<PostService> {
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.enterTheLocation,
-                  suffixIcon: const Icon(
+                  suffixIcon: Icon(
                     Icons.my_location,
                     color: Colors.black,
+                    size: AppDimensions.imageIconSizeTextFormField,
                   ),
                   isSuffixIcon: true,
                   // fillColor: AppColors.productTextFieldColor,
@@ -242,6 +244,13 @@ class _PostServiceState extends State<PostService> {
                   maxLines: 2,
                   // fillColor: AppColors.productTextFieldColor,
                 ),
+                // child: RatingTextFormField(
+                //   isShowBoarder: true,
+                //   height: 60.w,
+                //   hintText: AppStrings.pleaseEnterAdditionalInformation,
+                //   fillColor: AppColors.backgroundColor,
+                //   // maxLines: 3,
+                // ),
               ),
               height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
               Padding(

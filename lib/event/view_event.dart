@@ -120,26 +120,30 @@ class _ViewEventState extends State<ViewEvent> {
                   ],
                 ),
               ),
-              height(0.02.sh),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ImageIcon(
-                      const AssetImage(AssetsPath.location),
-                      size: AppDimensions.applyForJobIconSize,
-                      color: const Color(0xFF565656),
-                    ),
-                    width(0.02.sw),
-                    Expanded(
-                      child: textWidget(
-                          text: AppStrings.locationText,
-                          maxLines: 2,
-                          color: const Color(0xFF565656),
-                          fontSize: AppDimensions.textLocationSizeViewForms),
-                    ),
-                  ],
+              // height(0.02.sh),
+              height(4.w),
+              SizedBox(
+                width: .8.sw,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ImageIcon(
+                        const AssetImage(AssetsPath.location),
+                        size: AppDimensions.applyForJobIconSize,
+                        color: const Color(0xFF565656),
+                      ),
+                      width(0.02.sw),
+                      Expanded(
+                        child: textWidget(
+                            text: AppStrings.locationText,
+                            maxLines: 2,
+                            color: const Color(0xFF565656),
+                            fontSize: AppDimensions.textLocationSizeViewForms),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               height(0.01.sh),
@@ -208,9 +212,9 @@ class _ViewEventState extends State<ViewEvent> {
                   ],
                 ),
               ),
-              height(0.02.sh),
+              height(8.w),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: textWidget(
                     text: AppStrings.eventPurpose,
                     fontWeight: FontWeight.bold,
@@ -218,17 +222,18 @@ class _ViewEventState extends State<ViewEvent> {
                     fontFamily: AppFont.gilroyBold,
                     fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
-              height(0.01.sh),
+              // height(0.01.sh),
+              // height(8.w),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: textWidget(
                     text: AppStrings.eventPurposeText,
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
               ),
-              height(0.02.sh),
+              // height(8.w),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: textWidget(
                     text: AppStrings.eventTheme,
                     fontWeight: FontWeight.bold,
@@ -236,17 +241,18 @@ class _ViewEventState extends State<ViewEvent> {
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
-              height(0.01.sh),
+              // height(0.01.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: textWidget(
                     text: AppStrings.eventThemeHint,
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
               ),
-              height(0.02.sh),
+              // height(0.02.sh),
+              // height(2.w),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: textWidget(
                     text: AppStrings.vendorsList,
                     fontWeight: FontWeight.bold,
@@ -254,17 +260,17 @@ class _ViewEventState extends State<ViewEvent> {
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
-              height(0.01.sh),
+              // height(0.01.sh),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: BulletPointList(
                   itemsList: AppList.vendorsListData,
                   color: AppColors.textBlackColor,
                 ),
               ),
-              height(0.02.sh),
+              // height(0.02.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: textWidget(
                     text: AppStrings.eventAvailableAttractions,
                     fontWeight: FontWeight.bold,
@@ -272,26 +278,26 @@ class _ViewEventState extends State<ViewEvent> {
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
-              height(0.01.sh),
+              // height(0.01.sh),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: BulletPointList(
                   itemsList: AppList.attractionList,
                   color: AppColors.textBlackColor,
                 ),
               ),
-              height(0.02.sh),
+              // height(0.02.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: textWidget(
                     text: AppStrings.paymentType,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSubHeadingSizeViewForms),
               ),
-              height(0.01.sh),
+              // height(0.01.sh),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

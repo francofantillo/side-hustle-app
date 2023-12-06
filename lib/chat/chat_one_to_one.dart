@@ -102,7 +102,8 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         )
       ],
       body: Material(
-        elevation: AppDimensions.cardElevation,
+        // elevation: AppDimensions.cardElevation,
+        elevation: 0,
         child: Column(
           children: [
             ChatOneToOneUsersList(
@@ -284,7 +285,6 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                         const Expanded(
                             child: CustomTextFieldChat(
                           hintText: AppStrings.typeAMessage,
-
                           // isSuffixIcon: true,
                           // suffixIcon: Icon(Icons.emoji_emotions_outlined),
                           // isPrefixIcon: true,
@@ -316,6 +316,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                         ),
                       ],
                     ),
+                    height(0.02.sw),
                   ],
                 ),
               ),

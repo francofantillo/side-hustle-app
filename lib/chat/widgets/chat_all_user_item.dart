@@ -23,8 +23,8 @@ class ChatAllUsersItem extends StatelessWidget {
                 top: AppDimensions.rootPadding),
             child: image == null
                 ? Container(
-                    width: 60.h, // Set your desired width
-                    height: 60.h, // Set your desired height
+                    width: 60.w, // Set your desired width
+                    height: 60.w, // Set your desired height
                     decoration: const BoxDecoration(
                       color: AppColors.chatNameImageBackgroundColor,
                       shape: BoxShape.circle,

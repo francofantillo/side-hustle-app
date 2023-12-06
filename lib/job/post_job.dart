@@ -103,7 +103,8 @@ class _PostJobState extends State<PostJob> {
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.enterTheJobTitle,
-                  // fillColor: AppColors.productTextFieldColor,
+                  // fillColor: AppColors.fieldsOutlineColor,
+                  fillColor: AppColors.textFieldBackgroundColor,
                 ),
               ),
               height(AppDimensions.formFieldsBetweenSpacing),
@@ -123,9 +124,10 @@ class _PostJobState extends State<PostJob> {
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.enterJobLocation,
-                  suffixIcon: const Icon(
+                  suffixIcon: Icon(
                     Icons.my_location,
-                    color: Colors.black,
+                    size: AppDimensions.imageIconSizeTextFormField,
+                    color: AppColors.greyColorNoOpacity,
                   ),
                   isSuffixIcon: true,
                 ),
@@ -147,7 +149,6 @@ class _PostJobState extends State<PostJob> {
                 child: CustomTextFormField(
                   height: 75.h,
                   hintText: AppStrings.enterTheJobDesc,
-                  maxLines: 2,
                 ),
               ),
               height(AppDimensions.formFieldsBetweenSpacing),
@@ -222,8 +223,9 @@ class _PostJobState extends State<PostJob> {
                   height: 45.h,
                   hintText: AppStrings.selectTheDate,
                   isReadonly: true,
-                  suffixIcon: const ImageIcon(AssetImage(AssetsPath.calender),
-                      color: Colors.black),
+                  suffixIcon: ImageIcon(const AssetImage(AssetsPath.calender),
+                      size: AppDimensions.imageIconSizeTextFormField,
+                      color: AppColors.greyColorNoOpacity),
                   isSuffixIcon: true,
                   onTap: () async {
                     formattedDate = await AppUtils.selectDate(
@@ -252,11 +254,17 @@ class _PostJobState extends State<PostJob> {
                         height(0.01.sw),
                         CustomTextFormField(
                           controller: firstTimeTextController,
-                          height: 45.h,
+                          // height: 45.h,
                           hintText: AppStrings.jobTimeHint,
-                          suffixIcon: const ImageIcon(
-                            AssetImage(AssetsPath.time),
-                            color: AppColors.blackColor,
+                          // suffixIcon: ImageIcon(
+                          //   const AssetImage(AssetsPath.time),
+                          //   size: AppDimensions.imageIconSizeTextFormField,
+                          //   color: AppColors.greyColorNoOpacity,
+                          // ),
+                          suffixIcon: Icon(
+                            Icons.access_time_filled_rounded,
+                            size: AppDimensions.imageIconSizeTextFormField,
+                            color: AppColors.greyColorNoOpacity,
                           ),
                           isSuffixIcon: true,
                           isReadonly: true,
@@ -286,11 +294,17 @@ class _PostJobState extends State<PostJob> {
                         height(0.01.sw),
                         CustomTextFormField(
                           controller: secondTimeTextController,
-                          height: 45.h,
+                          // height: 45.h,
                           hintText: AppStrings.totalHoursHint,
-                          suffixIcon: const ImageIcon(
-                            AssetImage(AssetsPath.time),
-                            color: AppColors.blackColor,
+                          // suffixIcon: ImageIcon(
+                          //   const AssetImage(AssetsPath.time),
+                          //   size: AppDimensions.imageIconSizeTextFormField,
+                          //   color: AppColors.greyColorNoOpacity,
+                          // ),
+                          suffixIcon: Icon(
+                            Icons.access_time_filled_rounded,
+                            size: AppDimensions.imageIconSizeTextFormField,
+                            color: AppColors.greyColorNoOpacity,
                           ),
                           isSuffixIcon: true,
                           isReadonly: true,
@@ -322,7 +336,7 @@ class _PostJobState extends State<PostJob> {
                 child: CustomTextFormField(
                   height: 65.h,
                   hintText: AppStrings.enterTheAdditionalInformation,
-                  maxLines: 2,
+                  // maxLines: 2,
                   // fillColor: AppColors.productTextFieldColor,
                 ),
               ),

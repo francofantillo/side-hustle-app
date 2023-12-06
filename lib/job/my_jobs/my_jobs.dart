@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/job/my_jobs/widgets/completed_job_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/ongoing_job_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/scheduled_job_list.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
+import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/custom_tab_bar/custom_tab_bar.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -48,44 +50,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
           children: [
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             Padding(
-              padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw),
-         /*     child: SizedBox(
-                width: 1.sw,
-                child: ToggleSwitch(
-                  customWidths: [.3.sw, .3.sw, .305.sw],
-                  minHeight: AppDimensions.tabBarHeight,
-                  animate: true,
-                  animationDuration: 200,
-                  isVertical: false,
-                  // minWidth: 90,
-                  cornerRadius: 12.0.w,
-                  changeOnTap: true,
-                  activeBgColors: const [
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor]
-                  ],
-                  activeFgColor: Colors.white,
-                  borderWidth: 1,
-                  borderColor: [AppColors.tabOutlineColor],
-                  fontSize: AppDimensions.tabBarFontSize + 2.sp,
-                  inactiveBgColor: AppColors.switchTabBackgroundColor,
-                  inactiveFgColor: AppColors.greyColor,
-                  initialLabelIndex: _tabIndexBasicToggle.value,
-                  totalSwitches: 3,
-                  labels: const [
-                    AppStrings.scheduled,
-                    AppStrings.ongoing,
-                    AppStrings.completed,
-                  ],
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    _tabIndexBasicToggle.value = index ?? 0;
-                    print('switched to: ${_tabIndexBasicToggle.value}');
-                    setState(() {});
-                  },
-                ),
-              ),*/
+              padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
                 child: CustomTabBar(
                   currentTabIndex: 0,
                   tabNames: const [
@@ -106,7 +71,24 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                     : _tabIndexBasicToggle.value == 2
                         ? const MyJobsCompletedList()
                         : const SizedBox.shrink(),
-            height(0.02.sh)
+            // height(0.02.sh)
+            _tabIndexBasicToggle.value == 0
+            ? Align(
+              alignment: Alignment.bottomCenter,
+              // child: _tabIndexBasicToggle.value == 0
+              //     ? PrimaryPostButton(
+              //         title: AppStrings.postJob,
+              //         onPressed: () {
+              //           Navigator.pushNamed(context, AppRoutes.postJobScreenRoute);
+              //         })
+              //     : const SizedBox.shrink(),
+              child: PrimaryPostButton(
+                  title: AppStrings.postJob,
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.postJobScreenRoute);
+                  }),
+            )
+            : const SizedBox.shrink(),
           ],
         ),
       );

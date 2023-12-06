@@ -185,6 +185,7 @@ class ItemsWidget extends StatelessWidget {
                                             width: imageHeight! * .08,
                                             color: AppColors.ratingColor,
                                           ),
+                                          // Icon(Icons.star, color: Color(0xffECAF53), size: imageHeight! * .15,),
                                           width(.01.sw),
                                           Column(
                                             crossAxisAlignment:

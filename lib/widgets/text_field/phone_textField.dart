@@ -104,7 +104,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
                       )
                     ]),
           child: Card(
-            elevation: AppDimensions.defaultUnFocusedTextFieldElevation,
+            elevation: 2,
             // shadowColor: Colors.grey.withOpacity(0.35), // Lighten shadow color
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(

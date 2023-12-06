@@ -23,14 +23,14 @@ class AppList {
     "Music"
   ];
   static List<Attendees> attendeesList = [
-    Attendees("Shanaya Kale", AssetsPath.placeHolderProfileImage),
-    Attendees("Angelina", AssetsPath.placeHolderProfileImage),
-    Attendees("Natasha", AssetsPath.placeHolderProfileImage),
-    Attendees("Jane", AssetsPath.placeHolderProfileImage),
-    Attendees("Angelina", AssetsPath.placeHolderProfileImage),
-    Attendees("Katty", AssetsPath.placeHolderProfileImage),
-    Attendees("Johnny", AssetsPath.placeHolderProfileImage),
-    Attendees("Rose", AssetsPath.placeHolderProfileImage)
+    Attendees("Shanaya Kale", AssetsPath.shanaya),
+    Attendees("Angelina", AssetsPath.angelina),
+    Attendees("Natasha", AssetsPath.natasha),
+    Attendees("Jane", AssetsPath.jane),
+    Attendees("Angelina", AssetsPath.angelina_2),
+    Attendees("Katty", AssetsPath.katty),
+    Attendees("Johnny", AssetsPath.johnny),
+    Attendees("Rose", AssetsPath.rose)
   ];
 
 }

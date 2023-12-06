@@ -86,8 +86,8 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                             onTap: () {
                               print("onClicked Filter");
                             },
-                            child: const ImageIcon(
-                                AssetImage(AssetsPath.searchFilter), size: 18,))),
+                            child: ImageIcon(
+                                const AssetImage(AssetsPath.searchFilter), size: AppDimensions.imageIconSizeTextFormField,))),
                   ),
                   onChanged: (search) {}),
             ),

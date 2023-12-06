@@ -71,12 +71,15 @@ class FavItemJobsWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                              child: textWidget(
-                                  text: title,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: AppDimensions.textSizeSmall,
-                                  color: AppColors.textBlackColor)),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 0.03.sw),
+                                child: textWidget(
+                                    text: title,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: AppDimensions.textSizeSmall,
+                                    color: AppColors.textBlackColor),
+                              )),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -95,6 +98,7 @@ class FavItemJobsWidget extends StatelessWidget {
                           ),
                         ],
                       ),
+                      height(imageHeight! * .02),
                       SizedBox(
                         width: .5.sw,
                         child: textWidget(

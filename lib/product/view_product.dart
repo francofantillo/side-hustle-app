@@ -106,23 +106,24 @@ class _ViewProductState extends State<ViewProduct> {
                   ),
                 ),
                 height(0.02.sh),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                  // child: customMaterialButton(
-                  //     onPressed: () {},
-                  //     name: AppStrings.getDirectionToShop,
-                  //     borderRadius: AppDimensions.boarderRadiusViewProduct,
-                  //     color: AppColors.greenColor),
-                  child: CustomMaterialButton(
-                      // height: 6,
-                      borderRadius: 12,
-                      fontSize: AppDimensions.boarderRadiusViewProduct,
-                      color: AppColors.greenColor,
-                      textColor: AppColors.whiteColor,
-                      onPressed: () {
-                      },
-                      name: AppStrings.getDirectionToShop),
-                ),
+                widget.isMyProduct
+                    ? const SizedBox.shrink()
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                        // child: customMaterialButton(
+                        //     onPressed: () {},
+                        //     name: AppStrings.getDirectionToShop,
+                        //     borderRadius: AppDimensions.boarderRadiusViewProduct,
+                        //     color: AppColors.greenColor),
+                        child: CustomMaterialButton(
+                            // height: 6,
+                            borderRadius: 12,
+                            fontSize: AppDimensions.boarderRadiusViewProduct,
+                            color: AppColors.greenColor,
+                            textColor: AppColors.whiteColor,
+                            onPressed: () {},
+                            name: AppStrings.getDirectionToShop),
+                      ),
                 height(0.03.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -170,7 +171,8 @@ class _ViewProductState extends State<ViewProduct> {
                             text: AppStrings.zipCodeText,
                             maxLines: 1,
                             color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
+                            fontSize:
+                                AppDimensions.textSubHeadingTextSizeViewForms),
                       ),
                     ],
                   ),
@@ -202,12 +204,14 @@ class _ViewProductState extends State<ViewProduct> {
                             text: AppStrings.pickUpViewProduct,
                             maxLines: 1,
                             color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSubHeadingTextSizeViewForms),
+                            fontSize:
+                                AppDimensions.textSubHeadingTextSizeViewForms),
                       ),
                     ],
                   ),
                 ),
-                height(0.02.sh),
+                height(0.02.sw),
+                // const Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Divider(
@@ -227,7 +231,8 @@ class _ViewProductState extends State<ViewProduct> {
                                 text: AppStrings.productPostBy,
                                 maxLines: 2,
                                 fontFamily: AppFont.gilroyBold,
-                                fontSize: AppDimensions.textSubHeadingSizeViewForms,
+                                fontSize:
+                                    AppDimensions.textSubHeadingSizeViewForms,
                                 color: AppColors.textBlackColor,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -305,24 +310,24 @@ class _ViewProductState extends State<ViewProduct> {
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6.0),
                         child: CustomMaterialButton(
-                            onPressed: () {
-                              if (widget.isMyProduct) {
-                                Navigator.pushNamed(
-                                    context, AppRoutes.postProductScreenRoute,
-                                    arguments: const PostProduct(
-                                      isEdit: true,
-                                    ));
-                              } else {
-                                // Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
-                                setState(() {
-                                  isAddToCart = true;
-                                });
-                              }
-
-                            },
-                            name: widget.isMyProduct
-                                ? AppStrings.editProduct
-                                : AppStrings.addToCart,),
+                          onPressed: () {
+                            if (widget.isMyProduct) {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.postProductScreenRoute,
+                                  arguments: const PostProduct(
+                                    isEdit: true,
+                                  ));
+                            } else {
+                              // Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
+                              setState(() {
+                                isAddToCart = true;
+                              });
+                            }
+                          },
+                          name: widget.isMyProduct
+                              ? AppStrings.editProduct
+                              : AppStrings.addToCart,
+                        ),
                       ),
                 height(0.02.sh),
                 isAddToCart
@@ -331,8 +336,10 @@ class _ViewProductState extends State<ViewProduct> {
                         child: Row(
                           children: [
                             IconButtonWithBackground(
-                              height: .074.sh,
-                              width: .13.sw,
+                              // height: .074.sh,
+                              // width: .13.sw,
+                              height: 40.w,
+                              width: 40.w,
                               borderRadius: 10,
                               backgroundColor:
                                   AppColors.backIconBackgroundColor,
@@ -341,6 +348,7 @@ class _ViewProductState extends State<ViewProduct> {
                                 print("clicked minus");
                               },
                               iconPath: AssetsPath.minus,
+                              iconSize: 16,
                             ),
                             Padding(
                               padding:
@@ -352,9 +360,12 @@ class _ViewProductState extends State<ViewProduct> {
                                   color: AppColors.textBlackColor),
                             ),
                             IconButtonWithBackground(
-                              height: .07.sh,
-                              width: .13.sw,
+                              // height: .07.sh,
+                              // width: .13.sw,
+                              height: 40.w,
+                              width: 40.w,
                               borderRadius: 10,
+                              iconSize: 16,
                               backgroundColor:
                                   AppColors.backIconBackgroundColor,
                               onTap: () {
@@ -373,7 +384,10 @@ class _ViewProductState extends State<ViewProduct> {
                                       //         const ModalBottomSheetProducts()
                                       //     // const BottomModalSheetDeliveryAddress()
                                       //     );
-                                      Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
+                                      Navigator.pushNamed(
+                                          context,
+                                          AppRoutes
+                                              .yourProductsCartScreenRoute);
                                     },
                                     name: AppStrings.viewCartText,
                                     borderRadius:

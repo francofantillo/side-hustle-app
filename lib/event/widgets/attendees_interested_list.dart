@@ -6,6 +6,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
+import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -32,55 +33,68 @@ class _AttendeesInterestedListState extends State<AttendeesInterestedList> {
       // Replace with your item count
       itemBuilder: (context, index) {
         // Replace with your horizontal list item
-        return Column(
-          children: [
-            Row(children: [
-              CircularCacheImageWidget(
-                showLoading: true,
-                assetImage: widget.itemsList?[index].image,
-                imageWidth: .15.sw,
-              ),
-              //bullet text
-              width(
-                0.02.sw,
-              ),
-              //space between bullet and text
-              Expanded(
-                child: textWidget(
-                    text: widget.itemsList?[index].name,
-                    color: AppColors.blackColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppDimensions.textSizeSmall),
-              ),
-              Row(
-                children: [
-                  CircularIconButton(
-                    width: 0.08.sw,
-                    height: 0.08.sw,
-                    onPressed: () {},
-                    icon: CustomIcon.cross,
-                    backgroundColor: AppColors.backIconBackgroundColor,
-                    iconSize: 0.050.sw,
-                    iconColor: AppColors.blackColor,
-                  ),
-                  width(0.07.sw),
-                  CircularIconButton(
-                    width: 0.08.sw,
-                    height: 0.08.sw,
-                    onPressed: () {},
-                    icon: CustomIcon.ok,
-                    backgroundColor: AppColors.primaryColor,
-                    iconSize: 0.050.sw,
-                    iconColor: AppColors.whiteColor,
-                  ),
-                ],
-              ),
-            ]),
-            Divider(
-              height: 1,
-              color: Colors.grey.withOpacity(0.8),
-            )
-          ],
+        print("assetPath: ${widget.itemsList?[index].image}");
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Column(
+            children: [
+              Row(children: [
+                CircularCacheImageWidget(
+                  showLoading: true,
+                  imageHeight: .15.sw,
+                  // imageWidth: AppDimensions.sideHustleItemWidth,
+                  assetImage: widget.itemsList?[index].image,
+                  imageWidth: .15.sw,
+                ),
+                // RoundedCornersImage(
+                //   imageHeight:  .15.sw,
+                //   imageWidth: AppDimensions.sideHustleItemWidth,
+                //   assetImage: widget.itemsList?[index].image,
+                //   // boarderColor: boarderColor,
+                // ),
+                //bullet text
+                width(
+                  0.02.sw,
+                ),
+                //space between bullet and text
+                Expanded(
+                  child: textWidget(
+                      text: widget.itemsList?[index].name,
+                      color: AppColors.blackColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: AppDimensions.textSizeSmall),
+                ),
+                Row(
+                  children: [
+                    CircularIconButton(
+                      width: 0.08.sw,
+                      height: 0.08.sw,
+                      onPressed: () {},
+                      icon: CustomIcon.cross,
+                      backgroundColor: AppColors.backIconBackgroundColor,
+                      iconSize: 0.050.sw,
+                      iconColor: AppColors.blackColor,
+                    ),
+                    width(0.07.sw),
+                    CircularIconButton(
+                      width: 0.08.sw,
+                      height: 0.08.sw,
+                      onPressed: () {},
+                      icon: CustomIcon.ok,
+                      backgroundColor: AppColors.primaryColor,
+                      iconSize: 0.050.sw,
+                      iconColor: AppColors.whiteColor,
+                    ),
+                  ],
+                ),
+              ]),
+              height(5.w),
+              Divider(
+                height: 1,
+                color: Colors.grey.withOpacity(0.8),
+              )
+            ],
+          ),
         );
       },
     );

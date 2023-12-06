@@ -166,7 +166,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                         padding: EdgeInsets.all(0.03.sw),
                         decoration: BoxDecoration(
                           color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                         child: Material(
                           color: AppColors.greenColor,

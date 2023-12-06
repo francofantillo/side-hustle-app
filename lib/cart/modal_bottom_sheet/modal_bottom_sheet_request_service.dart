@@ -98,7 +98,8 @@ class _BottomModalSheetRequestServiceState
                   height: 45.h,
                   hintText: AppStrings.selectTheDate,
                   isReadonly: true,
-                  suffixIcon: const ImageIcon(AssetImage(AssetsPath.calender),
+                  suffixIcon: ImageIcon(const AssetImage(AssetsPath.calender),
+                      size: AppDimensions.imageIconSizeTextFormField,
                       color: AppColors.greyColorNoOpacity),
                   suffixIconScale: 0.4,
                   isSuffixIcon: true,
@@ -134,9 +135,9 @@ class _BottomModalSheetRequestServiceState
                         isShowBoarder: false,
                         height: 40.h,
                         hintText: AppStrings.totalHoursRequired,
-                        suffixIcon: const Icon(
+                        suffixIcon: Icon(
                           Icons.keyboard_arrow_down,
-                          size: 30,
+                          size: AppDimensions.imageIconSizeTextFormField,
                         ),
                         isSuffixIcon: true,
                         keyboardType: const TextInputType.numberWithOptions(
@@ -149,39 +150,59 @@ class _BottomModalSheetRequestServiceState
                 child: Row(
                   children: [
                     Expanded(
-                      child: CustomTextFormField(
-                        isShowBoarder: false,
-                        controller: firstTimeTextController,
-                        height: 45.h,
-                        hintText: AppStrings.startTime,
-                        isReadonly: true,
-                        isSuffixIcon: true,
-                        suffixIcon: const ImageIcon(AssetImage(AssetsPath.time),
-                            color: AppColors.greyColorNoOpacity),
-                        suffixIconScale: 0.4,
-                        onTap: () async {
-                          await AppUtils.selectTime(context, true);
-                          setState(() {});
-                        },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: CustomTextFormField(
+                          isShowBoarder: false,
+                          elevation: 0,
+                          controller: firstTimeTextController,
+                          height: 45.h,
+                          hintText: AppStrings.startTime,
+                          isReadonly: true,
+                          isSuffixIcon: true,
+                          // suffixIcon: ImageIcon(const AssetImage(AssetsPath.time),
+                          //     size: AppDimensions.imageIconSizeTextFormField,
+                          //     color: AppColors.greyColorNoOpacity),
+                          suffixIcon: Icon(
+                            Icons.access_time_filled_rounded,
+                            size: AppDimensions.imageIconSizeTextFormField,
+                            color: AppColors.greyColorNoOpacity,
+                          ),
+                          suffixIconScale: 0.4,
+                          onTap: () async {
+                            await AppUtils.selectTime(context, true);
+                            setState(() {});
+                          },
+                        ),
                       ),
                     ),
                     width(0.01.sw),
                     Expanded(
-                      child: CustomTextFormField(
-                        isShowBoarder: false,
-                        controller: secondTimeTextController,
-                        height: 45.h,
-                        hintText: AppStrings.endTime,
-                        isReadonly: true,
-                        isSuffixIcon: true,
-                        suffixIcon: const ImageIcon(AssetImage(AssetsPath.time),
-                            color: AppColors.greyColorNoOpacity),
-                        suffixIconScale: 0.4,
-                        onTap: () async {
-                          await AppUtils.selectTime(context, false);
-                          setState(() {});
-                        },
-                        // fillColor: AppColors.productTextFieldColor,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: CustomTextFormField(
+                          elevation: 0,
+                          isShowBoarder: false,
+                          controller: secondTimeTextController,
+                          height: 45.h,
+                          hintText: AppStrings.endTime,
+                          isReadonly: true,
+                          isSuffixIcon: true,
+                          // suffixIcon: ImageIcon(const AssetImage(AssetsPath.time),
+                          //     size: AppDimensions.imageIconSizeTextFormField,
+                          //     color: AppColors.greyColorNoOpacity),
+                          suffixIcon: Icon(
+                            Icons.access_time_filled_rounded,
+                            size: AppDimensions.imageIconSizeTextFormField,
+                            color: AppColors.greyColorNoOpacity,
+                          ),
+                          suffixIconScale: 0.4,
+                          onTap: () async {
+                            await AppUtils.selectTime(context, false);
+                            setState(() {});
+                          },
+                          // fillColor: AppColors.productTextFieldColor,
+                        ),
                       ),
                     ),
                   ],

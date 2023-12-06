@@ -24,6 +24,12 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
+      showAppBar: true,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child:
+        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const AlwaysScrollableScrollPhysics(
@@ -33,10 +39,10 @@ class _ResetPasswordState extends State<ResetPassword> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              backButton(onPressed: () {
-                Navigator.pop(context);
-              }),
-              height(AppDimensions.fieldsVerticalSpacingBetween),
+              // backButton(onPressed: () {
+              //   Navigator.pop(context);
+              // }),
+              // height(AppDimensions.fieldsVerticalSpacingBetween),
               Padding(
                 padding: const EdgeInsets.only(left: 4.0),
                 child: textWidget(

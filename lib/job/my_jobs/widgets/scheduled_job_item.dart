@@ -60,7 +60,7 @@ class ScheduledJobItemWidget extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
+              padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0, right: 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -133,7 +133,7 @@ class ScheduledJobItemWidget extends StatelessWidget {
                             padding: EdgeInsets.all(0.03.sw),
                             decoration: BoxDecoration(
                               color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                             child: Material(
                               color: AppColors.greenColor,

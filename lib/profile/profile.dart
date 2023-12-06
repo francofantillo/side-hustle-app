@@ -124,7 +124,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: EdgeInsets.only(
                     // left: 28.w, right: 28.w, top: 8.w),
-                    left: 0.05.sw, right:0.05.sw, top: 8.w),
+                    left: 0.05.sw,
+                    right: 0.05.sw,
+                    top: 8.w),
                 child: CustomMaterialButton(
                     // height: 6,
                     borderRadius: 12,
@@ -141,30 +143,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               // height(0.03.sh),
               Padding(
-                // padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-                padding: EdgeInsets.only(left: 0.05.sw, right: 0.05.sw, top: 12, bottom: 12),
+                padding: EdgeInsets.only(
+                    left: 0.052.sw, right: 0.052.sw, top: 12, bottom: 12),
                 child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ProfileJobsWidget(
-                        name: AppStrings.myJobs,
-                        myJobsCount: "12",
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, AppRoutes.myJobsScreenRoute);
-                        }),
+                    Expanded(
+                      child: ProfileJobsWidget(
+                          name: AppStrings.myJobs,
+                          myJobsCount: "12",
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.myJobsScreenRoute);
+                          }),
+                    ),
                     // width(8.w),
-                    const ProfileJobsWidget(
-                        name: AppStrings.jobsCompleted, myJobsCount: "12"),
-                    // width(8.w),
-                    ProfileJobsWidget(
-                        name: AppStrings.myEvents,
-                        myJobsCount: "28",
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, AppRoutes.myEventsScreenRoute);
-                        }),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ProfileJobsWidget(
+                            name: AppStrings.jobsCompleted, myJobsCount: "12"),
+                      ),
+                    ),
+                    Expanded(
+                      child: ProfileJobsWidget(
+                          name: AppStrings.myEvents,
+                          myJobsCount: "28",
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.myEventsScreenRoute);
+                          }),
+                    ),
                   ],
                 ),
               ),
@@ -174,8 +183,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //   child: Divider(),
               // ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: AppDimensions.defaultHorizontalPadding + 4, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.defaultHorizontalPadding + 4,
+                    vertical: 8),
                 child: Divider(
                   height: 1,
                   color: Colors.grey.withOpacity(0.8),

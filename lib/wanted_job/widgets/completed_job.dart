@@ -128,14 +128,15 @@ class CompletedJobsWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const ImageIcon(
-                                AssetImage(
-                                  AssetsPath.star,
-                                ),
-                                size: 16,
-                                color: AppColors.ratingColor,
-                              ),
-                              height(0.02.sw),
+                              // const ImageIcon(
+                              //   AssetImage(
+                              //     AssetsPath.star,
+                              //   ),
+                              //   size: 16,
+                              //   color: Color(0xffECAF53),
+                              // ),
+                              const Icon(Icons.star, color: Color(0xffECAF53), size: 22,),
+                              // height(0.02.sw),
                               textWidget(
                                   text: userRating,
                                   fontSize: AppDimensions.textSizeUserRating),

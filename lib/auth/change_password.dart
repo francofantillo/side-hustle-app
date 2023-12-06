@@ -34,10 +34,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         physics: const AlwaysScrollableScrollPhysics(
             parent: BouncingScrollPhysics()),
         child: Padding(
-          padding: EdgeInsets.only(
-              left: AppDimensions.rootPadding,
-              right: AppDimensions.rootPadding,
-              bottom: AppDimensions.rootPadding),
+          padding: EdgeInsets.all(AppDimensions.rootPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

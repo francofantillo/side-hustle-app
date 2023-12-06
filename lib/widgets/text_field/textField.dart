@@ -31,6 +31,7 @@ class CustomTextFormField extends StatefulWidget {
   final Color? containerColor;
   final bool? isForCard;
   final double? labelFontSize;
+  final double? elevation;
   final double? errorFontSize;
 
   // final TextEditingController? controller;
@@ -42,6 +43,7 @@ class CustomTextFormField extends StatefulWidget {
     this.label,
     this.onFieldSubmitted,
     this.isPrefixIcon = false,
+    this.elevation,
     this.isShowShadow = false,
     this.isShowBoarder = true,
     this.isPasswordField = false,
@@ -110,12 +112,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           decoration: BoxDecoration(
               borderRadius:
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-              border: widget.isShowBoarder
-                  ? Border.all(color: AppColors.fieldsOutlineColor)
-                  : null,
+              // border: widget.isShowBoarder
+              //     ? Border.all(color: AppColors.fieldsOutlineColor)
+              //     : null,
               boxShadow: widget.isShowShadow
                   ? [
                       BoxShadow(
+                        // color: Colors.grey.withOpacity(.15),
                         color: Colors.grey.withOpacity(.15),
                         blurRadius: 12.0, // soften the shadow
                         spreadRadius: 0.0, //extend the shadow
@@ -135,16 +138,22 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           9.0, // Move to bottom 10 Vertically
                         ),
                       )
-                    ]),
+                    ]
+          ),
+                  // : null),
           child: Card(
-            elevation: _isFocused
-                ? AppDimensions.defaultFocusedTextFieldElevation
-                : AppDimensions.defaultUnFocusedTextFieldElevation,
+            // elevation: _isFocused
+            //     ? AppDimensions.defaultFocusedTextFieldElevation
+            //     : AppDimensions.defaultUnFocusedTextFieldElevation,
+            elevation: widget.elevation ?? 2,
             // shadowColor: Colors.grey.withOpacity(0.35), // Lighten shadow color
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+              side: widget.isShowBoarder
+                  ? const BorderSide(width: 1, color: AppColors.fieldsOutlineColor)
+                  : BorderSide.none,
             ),
             child: Container(
               // padding: EdgeInsets.only(top: 4.h),
@@ -182,6 +191,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       decoration: InputDecoration(
         border: InputBorder.none,
         fillColor: Colors.transparent,
+        // fillColor: widget.fillColor ?? Colors.transparent,
         filled: true,
         // contentPadding: EdgeInsets.only(
         //   top: 8.h,
@@ -204,7 +214,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintText: widget.label ?? widget.hintText,
         errorStyle: _errorTextStyle(),
         hintStyle: const TextStyle(
-            color: AppColors.hintTextFieldColor, fontSize: 15,),
+            color: AppColors.hintTextFieldColor,
+            fontSize: 15,
+            overflow: TextOverflow.visible),
         errorMaxLines: 3,
         suffixIcon: widget.isPasswordField!
             ? Padding(
@@ -217,10 +229,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     child: _suffixIconWidget(),
                   )
                 : null,
-        suffixIconConstraints:
-        BoxConstraints.loose(const Size.fromRadius(76)),
-        prefixIconConstraints:
-        BoxConstraints.loose(const Size.fromRadius(76)),
+        suffixIconConstraints: BoxConstraints.loose(const Size.fromRadius(76)),
+        prefixIconConstraints: BoxConstraints.loose(const Size.fromRadius(76)),
       ),
     );
   }

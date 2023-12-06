@@ -169,7 +169,17 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
                                 fontSize: AppDimensions.textSizeSmall),
                           ),
                         ),
-                        height(0.08.sw),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 24),
+                          child: Center(
+                            child: textWidget(
+                                text: "",
+                                maxLines: 2,
+                                color: AppColors.textWhiteColor,
+                                fontSize: AppDimensions.textSizeSmall),
+                          ),
+                        ),
+                        // height(0.08.sw),
                       ],
                     ),
                   )
@@ -184,11 +194,14 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PaymentList(),
+            Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: PaymentList(),
+            ),
           ],
         ),
       ),

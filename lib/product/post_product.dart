@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_request_service.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
+import 'package:side_hustle/job/my_jobs/widgets/rating_dialogue_text_field.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -96,7 +97,8 @@ class _PostProductState extends State<PostProduct> {
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.enterTheProductName,
-                  fillColor: AppColors.textFieldBackgroundColor,
+                  // fillColor: AppColors.textFieldBackgroundColor,
+                  // fillColor: Color(0xffFDFDFD),
                 ),
               ),
               height(AppDimensions.formFieldsBetweenSpacing),
@@ -116,8 +118,9 @@ class _PostProductState extends State<PostProduct> {
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.enterTheLocation,
-                  suffixIcon: const Icon(
+                  suffixIcon: Icon(
                     Icons.my_location,
+                    size: AppDimensions.imageIconSizeTextFormField,
                     color: Colors.black,
                   ),
                   isSuffixIcon: true,
@@ -251,10 +254,15 @@ class _PostProductState extends State<PostProduct> {
               height(0.01.sw),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                // child: CustomTextFormField(
+                //   height: 45.h,
+                //   hintText: AppStrings.enterTheAdditionalInformation,
+                //   // fillColor: AppColors.productTextFieldColor,
+                // ),
                 child: CustomTextFormField(
                   height: 45.h,
                   hintText: AppStrings.enterTheAdditionalInformation,
-                  // fillColor: AppColors.productTextFieldColor,
+                  fillColor: AppColors.textFieldBackgroundColor,
                 ),
               ),
               height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),

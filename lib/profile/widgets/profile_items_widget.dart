@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
 import 'package:side_hustle/drawer/widgets/logout_widget.dart';
 import 'package:side_hustle/profile/widgets/profile_list_item.dart';
@@ -42,7 +43,7 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
         ),
         height(AppDimensions.drawerItemsVerticalSpacing),
         ProfileItemListTile(
-          iconPath: AssetsPath.messages,
+          iconPath: AssetsPath.drawerMessages,
           title: AppStrings.message,
           textColor: AppColors.appTextBlackColor,
           fontWeight: FontWeight.w500,
@@ -74,7 +75,7 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
             Navigator.pushNamed(context, AppRoutes.changePasswordScreenRoute);
           },
         ),
-        height(AppDimensions.drawerItemsVerticalSpacing - 20),
+        height(AppDimensions.drawerItemsVerticalSpacing - 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -98,15 +99,45 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
                 });
               },
             ),
+            // FlutterSwitch(
+            //   value: _isToggleOn,
+            //   width: 40,
+            //   height: 20,
+            //   padding: 3.5,
+            //   // activeColor: Color(0xFFFF4747),
+            //   // inactiveColor: Color(0xff565656),
+            //   // toggleColor: Color(0xffFCFCFC),
+            //   onToggle: (val) {
+            //     setState(() {
+            //       _isToggleOn = val;
+            //     });
+            //   },
+            // ),
+            // Container(
+            //   height: 20,
+            //   width: 40,
+            //   child: FlutterSwitch(
+            //     borderRadius: 30,
+            //     value: _isToggleOn,
+            //     onToggle: (value) {
+            //       setState(() {
+            //         _isToggleOn = value;
+            //       });
+            //     },
+            //   ),
+            // ),
           ],
         ),
-        height(AppDimensions.drawerItemsVerticalSpacing),
-        textWidget(
-            text: AppStrings.supports.toUpperCase(),
-            color: AppColors.primaryColor,
-            fontFamily: AppFont.gilroyBold,
-            fontSize: AppDimensions.drawerItemTextSize,
-            fontWeight: FontWeight.bold),
+        // height(AppDimensions.drawerItemsVerticalSpacing),
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: textWidget(
+              text: AppStrings.supports.toUpperCase(),
+              color: AppColors.primaryColor,
+              fontFamily: AppFont.gilroyBold,
+              fontSize: AppDimensions.drawerItemTextSize,
+              fontWeight: FontWeight.bold),
+        ),
         height(AppDimensions.drawerItemsVerticalSpacing),
         ProfileItemListTile(
           iconPath: AssetsPath.aboutUs,
@@ -174,9 +205,9 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
           onTap: () {
             print("clicked Logout");
             AppDialogues.noHeaderDialogue(
-                context: context,
-                backgroundColor: AppColors.primaryColor,
-                body: const LogoutDialogueWidget())
+                    context: context,
+                    backgroundColor: AppColors.primaryColor,
+                    body: const LogoutDialogueWidget())
                 .show();
           },
         ),

@@ -48,7 +48,7 @@ class _MyEventsScreenState extends State<MyEventsScreen> {
           children: [
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             Padding(
-                padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw),
+                padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
                 /*        child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(

@@ -50,7 +50,7 @@ class ServiceItemsWidget extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+              padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -72,23 +72,28 @@ class ServiceItemsWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: textWidget(
-                                      text: subTitle,
-                                      maxLines: 2,
-                                      fontSize: AppDimensions.textSize10)),
-                              IconButtonWithBackground(
-                                iconPath: AssetsPath.add,
-                                width: imageHeight! * .24,
-                                height: imageHeight! * .24,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
-                              )
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 2.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: textWidget(
+                                        text: subTitle,
+                                        maxLines: 2,
+                                        fontSize:
+                                        AppDimensions.textSize10)),
+                                width(imageWidth! * .01),
+                                IconButtonWithBackground(
+                                  iconPath: AssetsPath.add,
+                                  width: imageHeight! * .28,
+                                  height: imageHeight! * .28,
+                                  backgroundColor: AppColors.primaryColor,
+                                  iconColor: AppColors.whiteColor,
+                                )
+                              ],
+                            ),
                           ),
                           height(imageHeight! * .042),
                           Row(

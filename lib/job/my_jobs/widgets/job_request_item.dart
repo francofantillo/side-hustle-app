@@ -38,7 +38,8 @@ class JobRequestItemWidget extends StatelessWidget {
               BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 12.0, right: 12.0),
+          padding: const EdgeInsets.only(
+              top: 8.0, bottom: 8.0, left: 12.0, right: 12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -58,7 +59,7 @@ class JobRequestItemWidget extends StatelessWidget {
                           imageHeight: imageHeight! * .45,
                           imageWidth: imageHeight! * .45,
                         ),
-                        width(.01.sw),
+                        width(.03.sw),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +85,8 @@ class JobRequestItemWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 4.0),
                                   child: textWidget(
                                       text: userRating,
-                                      fontSize: AppDimensions.textSizeVerySmall),
+                                      fontSize:
+                                          AppDimensions.textSizeVerySmall),
                                 ),
                               ],
                             ),
@@ -99,60 +101,59 @@ class JobRequestItemWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ],
                     ),
-                    height(0.02.sh),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              print("Clicked");
-                            },
-                            // highlightColor: AppColors.greenColor,
-                            // splashColor: AppColors.greyColor,
-                            child: Container(
-                              height: 32.h,
-                              padding: EdgeInsets.zero,
-                              margin: EdgeInsets.zero,
-                              decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(
-                                      AppDimensions.bookedJobRoundedBorder),
-                                  border: Border.all(
-                                      color: AppColors
-                                          .jobRequestTextBoarderColor)),
-                              child: Center(
-                                child: textWidget(
-                                  text: AppStrings.reject,
-                                  color: AppColors.orangeColor,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500,
-                                  textAlign: TextAlign.center,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                print("Clicked");
+                              },
+                              // highlightColor: AppColors.greenColor,
+                              // splashColor: AppColors.greyColor,
+                              child: Container(
+                                // height: 32.h,
+                                padding: const EdgeInsets.all(12),
+                                margin: EdgeInsets.zero,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(
+                                        AppDimensions.bookedJobRoundedBorder),
+                                    border: Border.all(
+                                        color: AppColors
+                                            .jobRequestTextBoarderColor)),
+                                child: Center(
+                                  child: textWidget(
+                                    text: AppStrings.reject,
+                                    color: const Color(0xffE76161),
+                                    fontSize: 12.sp,
+                                    fontFamily: AppFont.gilroySemiBold,
+                                    fontWeight: FontWeight.w700,
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        width(0.04.sw),
-                        Expanded(
-                          child: Container(
-                            height: 32.h,
-                            padding: EdgeInsets.zero,
-                            margin: EdgeInsets.zero,
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                            ),
-                            child: Material(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
+                          width(0.04.sw),
+                          Expanded(
+                            child: Container(
+                              // height: 32.h,
+                              padding: const EdgeInsets.all(13),
+                              margin: EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.bookedJobRoundedBorder),
+                              ),
                               child: InkWell(
                                 onTap: () {},
                                 child: Center(
                                   child: textWidget(
                                     text: AppStrings.hire,
                                     color: AppColors.textWhiteColor,
+                                    fontFamily: AppFont.gilroySemiBold,
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w700,
                                     textAlign: TextAlign.center,
@@ -161,8 +162,8 @@ class JobRequestItemWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

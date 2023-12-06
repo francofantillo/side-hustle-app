@@ -55,6 +55,7 @@ class _AppDrawerState extends State<AppDrawer> {
                         Navigator.pop(context);
                       },
                       backgroundColor: AppColors.whiteColor),
+                  height(10.w),
                   height(AppDimensions.fieldsVerticalSpacingBetween),
                   textWidget(
                     text: AppStrings.sideMenu,
@@ -63,6 +64,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     fontWeight: FontWeight.bold,
                     fontSize: AppDimensions.textHeadingSize,
                   ),
+                  height(10.w),
                   height(AppDimensions.fieldsVerticalSpacingBetween),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +106,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   height(AppDimensions.drawerProfileSpacingBetween),
                   // Drawer Items
                   DrawerItemListTile(
-                    iconPath: AssetsPath.messages,
+                    iconPath: AssetsPath.drawerMessages,
                     title: AppStrings.message,
                     onTap: () {
                       print("Clicked");
@@ -160,6 +162,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   textWidget(
                       text: AppStrings.supports,
                       color: AppColors.textWhiteColor,
+                      fontFamily: AppFont.gilroyBold,
                       fontSize: AppDimensions.drawerItemTextSize,
                       fontWeight: AppDimensions.headingFontWeight),
                   height(AppDimensions.drawerItemsVerticalSpacing),
