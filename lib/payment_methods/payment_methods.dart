@@ -194,14 +194,11 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, ),
+        padding: EdgeInsets.only(left: 8.0, right: 8, top: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: 8.0),
-              child: PaymentList(),
-            ),
+            PaymentList(),
           ],
         ),
       ),
