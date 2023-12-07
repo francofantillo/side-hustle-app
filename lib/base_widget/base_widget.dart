@@ -43,7 +43,7 @@ class _BaseWidgetState extends State<BaseWidget> {
         screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
     final double sh = await ScreenDesignSize.getSmallestHeight(
         screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
-    ScreenUtil.configure(designSize: Size(sw, sh));
+    // ScreenUtil.configure(designSize: Size(sw, sh));
     print("sh: ${ScreenDesignSize.sh} : $sh, sw: ${ScreenDesignSize.sw} : $sw");
   }
 
@@ -51,21 +51,25 @@ class _BaseWidgetState extends State<BaseWidget> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final mediaQueryData = MediaQuery.of(context);
-    final screenWidthInPixels =
-        mediaQueryData.size.width * mediaQueryData.devicePixelRatio;
-    final screenHeightInPixels =
-        mediaQueryData.size.height * mediaQueryData.devicePixelRatio;
-    final dpi = mediaQueryData.devicePixelRatio *
-        160.0; // 160 is the default logical DPI
+    // final mediaQueryData = MediaQuery.of(context);
+    // final screenWidthInPixels =
+    //     mediaQueryData.size.width * mediaQueryData.devicePixelRatio;
+    // final screenHeightInPixels =
+    //     mediaQueryData.size.height * mediaQueryData.devicePixelRatio;
+    // final dpi = mediaQueryData.devicePixelRatio *
+    //     160.0; // 160 is the default logical DPI
+    //
+    // print(
+    //     "screenWidthInPixels: $screenWidthInPixels, screenHeightInPixels: $screenHeightInPixels, dpi: $dpi");
 
-    print(
-        "screenWidthInPixels: $screenWidthInPixels, screenHeightInPixels: $screenHeightInPixels, dpi: $dpi");
+    print("ScreenDesignSize sh: ${ScreenDesignSize.sh}, ScreenDesignSize sw: ${ScreenDesignSize.sw}");
+    //
+    // setDesignSize(
+    //     screenHeight: screenHeightInPixels,
+    //     screenWidth: screenWidthInPixels,
+    //     dpi: dpi);
 
-    setDesignSize(
-        screenHeight: screenHeightInPixels,
-        screenWidth: screenWidthInPixels,
-        dpi: dpi);
+    ScreenDesignSize.setDesignSize(context: context);
   }
 
   @override

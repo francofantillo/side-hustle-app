@@ -122,7 +122,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.zipCode,
-                  // fillColor: AppColors.productTextFieldColor,
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 const CustomTextFormField(
