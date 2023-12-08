@@ -29,29 +29,30 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final _loginFormKey = GlobalKey<FormState>();
+  final _signupFormKey = GlobalKey<FormState>();
   late final AuthCubit bloc;
 
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  PhoneNumber? _phoneNumber;
-  final TextEditingController _zipCodeController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
-  bool isTCAndPPAccepted = false;
+  // final TextEditingController _firstNameController = TextEditingController();
+  // final TextEditingController _lastNameController = TextEditingController();
+  // final TextEditingController _emailController = TextEditingController();
+  // PhoneNumber? _phoneNumber;
+  // final TextEditingController _zipCodeController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _confirmPasswordController = TextEditingController();
+  // bool isTCAndPPAccepted = false;
 
   @override
   void initState() {
     super.initState();
     bloc = BlocProvider.of<AuthCubit>(context);
+    bloc.initControllers();
   }
 
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
       body: Form(
-        key: _loginFormKey,
+        key: _signupFormKey,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           physics: const AlwaysScrollableScrollPhysics(
@@ -92,8 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween + 0.01.sw),
                 CustomTextFormField(
-                  controller: _firstNameController,
-                  // controller: bloc.firstNameController,
+                  controller: bloc.firstNameController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.firstName,
@@ -102,7 +102,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: _lastNameController,
+                  controller: bloc.lastNameController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.lastName,
@@ -111,7 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: _emailController,
+                  controller: bloc.emailController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.emailAddress,
@@ -124,7 +124,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     return await value?.number.validateEmpty("Phone Number");
                   },
                   onChanged: (phone) {
-                    _phoneNumber = phone;
+                    bloc.phoneNumber = phone;
                     print("$phone");
                     print(
                         "countryISOCode: ${phone?.countryISOCode}, countryCode: ${phone?.countryCode}, number: ${phone?.number}");
@@ -137,7 +137,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: _zipCodeController,
+                  controller: bloc.zipCodeController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.zipCode,
@@ -146,24 +146,22 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: _passwordController,
+                  controller: bloc.passwordController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.password,
-                  isPasswordField: true,
                   // fieldValidator: (value) => value?.validatePassword,
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.password),
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: _confirmPasswordController,
+                  controller: bloc.confirmPasswordController,
                   isShowShadow: true,
                   isShowBoarder: false,
-                  isPasswordField: true,
                   label: AppStrings.confirmPassword,
                   fieldValidator: (value) => value?.validateConfirmPassword(
-                      _passwordController.text, _confirmPasswordController.text),
+                      bloc.passwordController.text, bloc.confirmPasswordController.text),
                 ),
                 height(AppDimensions.agreeToSideHustleSpacing),
                 // height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
@@ -243,24 +241,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       name: AppStrings.register,
                       onPressed: () async {
                         print('Button Pressed');
-                        if (_loginFormKey.currentState!.validate()) {
+                        if (_signupFormKey.currentState!.validate()) {
                           await bloc.signUpCubit(
                               context: context,
                               mounted: mounted,
-                              firstName: _firstNameController.text,
-                              lastName: _lastNameController.text,
-                              email: _emailController.text,
-                              phone:
-                                  "${_phoneNumber?.countryCode}${_phoneNumber?.number}",
-                              zipCode: _zipCodeController.text,
-                              password: _passwordController.text,
-                              cPassword: _confirmPasswordController.text,
-                              country: "${_phoneNumber?.countryISOCode}");
+                          );
                         }
-                        // Navigator.pushNamed(
-                        //     context, AppRoutes.otpVerificationScreenRoute,
-                        //     arguments:
-                        //         const OtpVerificationScreen(isSocial: true));
                       }),
                 ),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),

@@ -18,38 +18,44 @@ class AuthCubit extends Cubit<AuthState> {
   /**
    * TextEditing Controllers
    */
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   PhoneNumber? phoneNumber;
-  final TextEditingController zipCodeController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController zipCodeController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController otpController = TextEditingController();
+  bool isTCAndPPAccepted = false;
+
+  initControllers() {
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    emailController = TextEditingController();
+    phoneNumber = null;
+    zipCodeController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+    otpController = TextEditingController();
+    isTCAndPPAccepted = false;
+  }
 
   /// Signup
   Future signUpCubit({
     required BuildContext context,
     required bool mounted,
-    String? firstName,
-    String? lastName,
-    String? email,
-    String? phone,
-    String? zipCode,
-    String? country,
-    String? password,
-    String? cPassword,
   }) async {
     EasyLoading.show(status: AppStrings.PLEASE_WAIT);
 
     final response = await signupProvider(
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phone: phone,
-        zipCode: zipCode,
-        country: country,
-        password: password,
-        cPassword: cPassword);
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        email: emailController.text,
+        phone: "${phoneNumber?.countryCode}${phoneNumber?.number}",
+        zipCode: zipCodeController.text,
+        country: "${phoneNumber?.countryISOCode}",
+        password: passwordController.text,
+        cPassword: confirmPasswordController.text);
 
     if (response != null) {
       EasyLoading.dismiss();
@@ -139,20 +145,25 @@ class AuthCubit extends Cubit<AuthState> {
     if (response != null) {
       EasyLoading.dismiss();
 
+      /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
         emit(state.copyWith(userModel: userModel));
         // AppUtils.showToast(userModel.message);
         if (mounted) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoutes.bottomTabsScreenRoute, (route) => false);
+        }
+        if (mounted) {
           Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
               arguments: const OtpVerificationScreen(isSocial: false));
         }
-      } else if (response.data["status"] != AppValidationMessages.success) {
+      }
+      /// Failer
+      else {
         print(
             "status: ${response.data["status"]} response: ${response.data["errors"]}");
-        AppUtils.showToast(response.data["message"]);
-      } else {
         AppUtils.showToast(response.data["message"]);
       }
     } else {

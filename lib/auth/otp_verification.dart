@@ -31,7 +31,8 @@ class OtpVerificationScreen extends StatefulWidget {
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   late final AuthCubit bloc;
-  TextEditingController controller = TextEditingController();
+
+  // TextEditingController controller = TextEditingController();
 
   int secondsRemaining = 59;
   bool enableResend = false;
@@ -47,6 +48,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   void initState() {
     super.initState();
     bloc = BlocProvider.of<AuthCubit>(context);
+    bloc.phoneNumber = null;
+    bloc.otpController = TextEditingController();
     startTimer();
   }
 
@@ -135,6 +138,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     print('Button Pressed'); //
                     if (enableResend) {
                       /// Reset Timer
+                      otpText = null;
+                      bloc.otpController.clear();
                       secondsRemaining = 59;
                       enableResend = false;
                       currentSeconds = 0;
@@ -142,20 +147,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       if (widget.isSocial) {
                       } else {
                         if (otpText != null) {
-                          await bloc
-                              .otpVerificationCubit(
-                                  context: context,
-                                  mounted: mounted,
-                                  isSignUp: widget.isSignUp,
-                                  otp: otpText)
-                              .then((value) {
-                            if (value != null) {
-                              if (value == 0) {
-                                otpText = null;
-                                controller.clear();
-                              }
-                            }
-                          });
+                          await bloc.otpVerificationCubit(
+                              context: context,
+                              mounted: mounted,
+                              isSignUp: widget.isSignUp,
+                              otp: otpText);
                         } else {
                           AppUtils.showToast(AppValidationMessages.OTP_CODE);
                         }
@@ -185,7 +181,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: CustomPinCodeTextField(
-          controller: controller,
+          controller: bloc.otpController,
           onComplete: (value) async {
             FocusManager.instance.primaryFocus?.unfocus();
             otpText = value;

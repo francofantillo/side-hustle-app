@@ -28,6 +28,7 @@ class Data {
   String? firstName;
   String? lastName;
   String? name;
+  int? isVerified;
   String? email;
   String? otp;
   String? phone;
@@ -39,7 +40,6 @@ class Data {
   String? fcmToken;
   String? accessToken;
   String? isPushNotification;
-  int? status;
   String? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
@@ -61,7 +61,6 @@ class Data {
       this.fcmToken,
       this.accessToken,
       this.isPushNotification,
-      this.status,
       this.emailVerifiedAt,
       this.createdAt,
       this.updatedAt});
@@ -70,6 +69,7 @@ class Data {
     id = json['id'];
     roleId = json['role_id'];
     firstName = json['first_name'];
+    isVerified = json['is_verified'];
     lastName = json['last_name'];
     name = json['name'];
     email = json['email'];
@@ -83,7 +83,6 @@ class Data {
     fcmToken = json['fcm_token'];
     accessToken = json['access_token'];
     isPushNotification = json['is_push_notification'];
-    status = json['status'];
     emailVerifiedAt = json['email_verified_at'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -107,7 +106,6 @@ class Data {
     data['fcm_token'] = fcmToken;
     data['access_token'] = accessToken;
     data['is_push_notification'] = isPushNotification;
-    data['status'] = status;
     data['email_verified_at'] = emailVerifiedAt;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
