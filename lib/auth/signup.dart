@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/text/checkbox.dart';
@@ -30,19 +32,19 @@ class _SignupScreenState extends State<SignupScreen> {
   final _loginFormKey = GlobalKey<FormState>();
   late final AuthCubit bloc;
 
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController zipCodeController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  PhoneNumber? _phoneNumber;
+  final TextEditingController _zipCodeController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   bool isTCAndPPAccepted = false;
 
   @override
   void initState() {
-    bloc = BlocProvider.of<AuthCubit>(context);
     super.initState();
+    bloc = BlocProvider.of<AuthCubit>(context);
   }
 
   @override
@@ -89,51 +91,79 @@ class _SignupScreenState extends State<SignupScreen> {
                       color: AppColors.textBlackColor),
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween + 0.01.sw),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  controller: _firstNameController,
+                  // controller: bloc.firstNameController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.firstName,
+                  fieldValidator: (value) =>
+                      value?.validateEmpty(AppStrings.firstName),
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  controller: _lastNameController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.lastName,
+                  fieldValidator: (value) =>
+                      value?.validateEmpty(AppStrings.lastName),
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  controller: _emailController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.emailAddress,
+                  fieldValidator: (value) => value?.validateEmail,
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 PhoneNumberTextField(
                   isShowShadow: true,
+                  validator: (value) async {
+                    return await value?.number.validateEmpty("Phone Number");
+                  },
                   onChanged: (phone) {
+                    _phoneNumber = phone;
                     print("$phone");
+                    print(
+                        "countryISOCode: ${phone?.countryISOCode}, countryCode: ${phone?.countryCode}, number: ${phone?.number}");
+                    // print("${phoneNumber?.countryCode}${phoneNumber?.number}");
                   },
                   onCountryChanged: (country) {
                     print(
-                        "country: ${country?.name}, dialCode: ${country?.dialCode}, code: ${country?.code}");
+                        "countryName: ${country?.name}, dialCode: ${country?.dialCode}, code: ${country?.code}");
                   },
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  controller: _zipCodeController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.zipCode,
+                  fieldValidator: (value) =>
+                      value?.validateEmpty(AppStrings.zipCode),
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  controller: _passwordController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.password,
+                  isPasswordField: true,
+                  // fieldValidator: (value) => value?.validatePassword,
+                  fieldValidator: (value) =>
+                      value?.validateEmpty(AppStrings.password),
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  controller: _confirmPasswordController,
                   isShowShadow: true,
                   isShowBoarder: false,
+                  isPasswordField: true,
                   label: AppStrings.confirmPassword,
+                  fieldValidator: (value) => value?.validateConfirmPassword(
+                      _passwordController.text, _confirmPasswordController.text),
                 ),
                 height(AppDimensions.agreeToSideHustleSpacing),
                 // height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
@@ -213,16 +243,24 @@ class _SignupScreenState extends State<SignupScreen> {
                       name: AppStrings.register,
                       onPressed: () async {
                         print('Button Pressed');
-                        // if (_loginFormKey.currentState!.validate()) {
-                        //   // await bloc.signUpCubit(firstName: )
-                        // } else {
-                        //
-                        // }
-                        // await bloc.signUpCubit(firstName: )
-                        Navigator.pushNamed(
-                            context, AppRoutes.otpVerificationScreenRoute,
-                            arguments:
-                                const OtpVerificationScreen(isSocial: true));
+                        if (_loginFormKey.currentState!.validate()) {
+                          await bloc.signUpCubit(
+                              context: context,
+                              mounted: mounted,
+                              firstName: _firstNameController.text,
+                              lastName: _lastNameController.text,
+                              email: _emailController.text,
+                              phone:
+                                  "${_phoneNumber?.countryCode}${_phoneNumber?.number}",
+                              zipCode: _zipCodeController.text,
+                              password: _passwordController.text,
+                              cPassword: _confirmPasswordController.text,
+                              country: "${_phoneNumber?.countryISOCode}");
+                        }
+                        // Navigator.pushNamed(
+                        //     context, AppRoutes.otpVerificationScreenRoute,
+                        //     arguments:
+                        //         const OtpVerificationScreen(isSocial: true));
                       }),
                 ),
                 height(AppDimensions.loginButtonVerticalSpacingBetween),
@@ -236,7 +274,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           text: AppStrings.alreadyAMember,
                           style: TextStyle(
                               fontWeight: FontWeight.normal,
-                              fontSize: AppDimensions.textSizeTermsAndConditions,
+                              fontSize:
+                                  AppDimensions.textSizeTermsAndConditions,
                               fontFamily: AppFont.gilroyRegular,
                               color: AppColors.greyColor),
                         ),

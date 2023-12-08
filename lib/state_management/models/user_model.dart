@@ -39,7 +39,7 @@ class Data {
   String? fcmToken;
   String? accessToken;
   String? isPushNotification;
-  String? status;
+  int? status;
   String? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
@@ -73,7 +73,7 @@ class Data {
     lastName = json['last_name'];
     name = json['name'];
     email = json['email'];
-    otp = json['otp'];
+    otp = json['otp'] != null ? json['otp'].toString() : null;
     phone = json['phone'];
     zipCode = json['zip_code'];
     country = json['country'];

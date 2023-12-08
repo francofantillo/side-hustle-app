@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
+import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -16,18 +20,24 @@ import 'package:side_hustle/widgets/text_field/custom_pin_code_textField.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final bool isSocial;
+  final bool isSignUp;
 
-  const OtpVerificationScreen({super.key, required this.isSocial});
+  const OtpVerificationScreen(
+      {super.key, this.isSocial = false, this.isSignUp = true});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  late final AuthCubit bloc;
+  TextEditingController controller = TextEditingController();
+
   int secondsRemaining = 59;
   bool enableResend = false;
   Timer? timer;
   int currentSeconds = 0;
+  String? otpText;
 
   String get timerText {
     return '${((secondsRemaining - currentSeconds) ~/ 60).toString().padLeft(2, '0')} : ${((secondsRemaining - currentSeconds) % 60).toString().padLeft(2, '0')}';
@@ -36,6 +46,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   @override
   void initState() {
     super.initState();
+    bloc = BlocProvider.of<AuthCubit>(context);
     startTimer();
   }
 
@@ -100,14 +111,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             height(AppDimensions.forgotPasswordSpacingBetween),
             Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 52.0),
-                  child: textWidget(
-                      text: AppStrings.otpTextBody,
-                      color: AppColors.backIconBackgroundColor.withOpacity(0.9),
-                      fontSize: AppDimensions.textSizeSmall,
-                      textAlign: TextAlign.center,
-                      maxLines: 3),
-                )),
+              padding: const EdgeInsets.symmetric(horizontal: 52.0),
+              child: textWidget(
+                  text: AppStrings.otpTextBody,
+                  color: AppColors.backIconBackgroundColor.withOpacity(0.9),
+                  fontSize: AppDimensions.textSizeSmall,
+                  textAlign: TextAlign.center,
+                  maxLines: 3),
+            )),
             height(AppDimensions.welcomeBackSpacingBetween + 20),
             _otpPinField(context),
             height(AppDimensions.loginButtonVerticalSpacingBetween + 20),
@@ -117,9 +128,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomMaterialButton(
                   textColor: AppColors.whiteColor,
-                  name:
-                      enableResend ? AppStrings.reSend : AppStrings.continueText,
-                  onPressed: () {
+                  name: enableResend
+                      ? AppStrings.reSend
+                      : AppStrings.continueText,
+                  onPressed: () async {
                     print('Button Pressed'); //
                     if (enableResend) {
                       /// Reset Timer
@@ -128,11 +140,25 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       currentSeconds = 0;
                     } else {
                       if (widget.isSocial) {
-                        Navigator.pushReplacementNamed(
-                            context, AppRoutes.walkthroughScreenRoute);
                       } else {
-                        Navigator.pushNamed(
-                            context, AppRoutes.resetPasswordScreenRoute);
+                        if (otpText != null) {
+                          await bloc
+                              .otpVerificationCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  isSignUp: widget.isSignUp,
+                                  otp: otpText)
+                              .then((value) {
+                            if (value != null) {
+                              if (value == 0) {
+                                otpText = null;
+                                controller.clear();
+                              }
+                            }
+                          });
+                        } else {
+                          AppUtils.showToast(AppValidationMessages.OTP_CODE);
+                        }
                       }
                     }
                   }),
@@ -158,11 +184,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   Widget _otpPinField(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: CustomPinCodeTextField(onComplete: (value) async {
-        FocusManager.instance.primaryFocus?.unfocus();
-        if (widget.isSocial) {
-        } else if (!widget.isSocial) {}
-      }),
+      child: CustomPinCodeTextField(
+          controller: controller,
+          onComplete: (value) async {
+            FocusManager.instance.primaryFocus?.unfocus();
+            otpText = value;
+            if (widget.isSocial) {
+            } else if (!widget.isSocial) {}
+          }),
     );
   }
 }
@@ -188,10 +217,7 @@ class RoundedText extends StatelessWidget {
             BorderRadius.circular(20.0), // Adjust the radius as needed
       ),
       padding: const EdgeInsets.all(14.0), // Adjust the padding as needed
-      child: textWidget(
-        text: text,
-        fontSize: AppDimensions.textSizeVerySmall
-      ),
+      child: textWidget(text: text, fontSize: AppDimensions.textSizeVerySmall),
     );
   }
 }

@@ -43,7 +43,7 @@ class ScreenDesignSize {
     print(
         "screenWidth: $screenWidth x screenHeight: $screenHeight dpi: $dpi, sw: $smallestW");
 
-    // sw = smallestW;
+    sw = smallestW;
 
     return smallestW;
   }
@@ -58,7 +58,7 @@ class ScreenDesignSize {
     print(
         "screenWidth: $screenWidth x screenHeight: $screenHeight dpi: $dpi, sh: $smallestH");
 
-    // sh = smallestH;
+    sh = smallestH;
 
     return smallestH;
   }
@@ -67,6 +67,7 @@ class ScreenDesignSize {
     await getDeviceHeightAndWidthInPixels(context: context);
 
     ScreenUtil.configure(designSize: Size(sw, sh));
-    print("DPI: $dpi, ScreenDesignSize sh: ${ScreenDesignSize.sh}, calculated sh: $sh, ScreenDesignSize sw: ${ScreenDesignSize.sw}, calculated sw: $sw");
+    print(
+        "DPI: $dpi, ScreenDesignSize sh: ${ScreenDesignSize.sh}, calculated sh: $sh, ScreenDesignSize sw: ${ScreenDesignSize.sw}, calculated sw: $sw");
   }
 }

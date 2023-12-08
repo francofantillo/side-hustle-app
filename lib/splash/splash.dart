@@ -38,7 +38,8 @@ class _SplashScreenState extends State<SplashScreen> {
       floatingActionButton: AnimatedOpacity(
         opacity: _visible ? 1.0 : 0.0,
         duration: const Duration(milliseconds: 500),
-        child: Padding(
+        child: _visible
+        ? Padding(
             padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 8),
             child: CustomMaterialButton(
                 name: AppStrings.GET_STARTED,
@@ -47,7 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   print('Button Pressed');
                   Navigator.pushNamedAndRemoveUntil(
                       context, AppRoutes.loginScreenRoute, (route) => false);
-                })),
+                }))
+        : const SizedBox.shrink(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

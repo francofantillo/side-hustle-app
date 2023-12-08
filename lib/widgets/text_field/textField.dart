@@ -138,9 +138,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                           9.0, // Move to bottom 10 Vertically
                         ),
                       )
-                    ]
-          ),
-                  // : null),
+                    ]),
+          // : null),
           child: Card(
             // elevation: _isFocused
             //     ? AppDimensions.defaultFocusedTextFieldElevation
@@ -152,7 +151,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               borderRadius:
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
               side: widget.isShowBoarder
-                  ? const BorderSide(width: 1, color: AppColors.fieldsOutlineColor)
+                  ? const BorderSide(
+                      width: 1, color: AppColors.fieldsOutlineColor)
                   : BorderSide.none,
             ),
             child: Container(
@@ -261,19 +261,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   TextStyle _errorTextStyle() {
     return TextStyle(
-        fontSize: widget.errorFontSize ?? 15, color: AppColors.redColor);
+        fontSize: AppDimensions.textSizeVerySmall,
+        color: AppColors.redColor,
+        height: .05);
   }
 
   GestureDetector _passwordSuffixIconWidget() {
     return GestureDetector(
       child: Padding(
-        padding: EdgeInsets.only(top: 0.h),
-        // child: Image.asset(
-        //   isVisible ? AssetsPath.eyeClosed : AssetsPath.eyeOpen,
-        //   width: 40,
-        //   height: 40,
-        //   color: AppColors.blackColor,
-        // ),
+        padding: EdgeInsets.only(top: 0.w),
         child: ImageIcon(
           AssetImage(isVisible ? AssetsPath.eyeClosed : AssetsPath.eyeOpen),
           color: AppColors.blackColor,

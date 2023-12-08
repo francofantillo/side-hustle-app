@@ -88,7 +88,14 @@ Future<Response?> postRequestProvider(
               receiveTimeout: const Duration(milliseconds: timeout)));
     } else {
       dio.options.connectTimeout = const Duration(milliseconds: 20000);
-      response = await dio.post(path, data: data);
+      response = await dio.post(path,
+          data: data,
+          options: Options(
+              headers: {
+                "Accept": "application/json"
+              },
+              sendTimeout: const Duration(milliseconds: timeout),
+              receiveTimeout: const Duration(milliseconds: timeout)));
     }
 
     if (kDebugMode) {

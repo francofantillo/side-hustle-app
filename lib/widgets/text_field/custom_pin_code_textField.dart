@@ -7,8 +7,10 @@ import 'package:side_hustle/utils/themes.dart';
 
 class CustomPinCodeTextField extends StatefulWidget {
   final Function onComplete;
+  final TextEditingController controller;
 
-  const CustomPinCodeTextField({super.key, required this.onComplete});
+  const CustomPinCodeTextField(
+      {super.key, required this.onComplete, required this.controller});
 
   @override
   State<CustomPinCodeTextField> createState() => _CustomPinCodeTextFieldState();
@@ -16,7 +18,8 @@ class CustomPinCodeTextField extends StatefulWidget {
 
 class _CustomPinCodeTextFieldState extends State<CustomPinCodeTextField> {
   String currentText = "";
-  TextEditingController textEditingController = TextEditingController();
+
+  // TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _CustomPinCodeTextFieldState extends State<CustomPinCodeTextField> {
       animationDuration: const Duration(milliseconds: 300),
       cursorColor: Colors.white,
       enableActiveFill: true,
-      controller: textEditingController,
+      controller: widget.controller,
       onCompleted: (v) {
         widget.onComplete(v);
         // Navigator.pushANDRemoveUntil(context, MaterialPageRoute(builder: (context) => const Login()), (route) => false);

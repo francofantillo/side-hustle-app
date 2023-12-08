@@ -83,7 +83,10 @@ class AppRouter {
 
           case AppRoutes.otpVerificationScreenRoute:
             final args = routeSettings.arguments as OtpVerificationScreen?;
-            return OtpVerificationScreen(isSocial: args?.isSocial ?? false);
+            return OtpVerificationScreen(
+              isSocial: args?.isSocial ?? false,
+              isSignUp: args?.isSignUp ?? true,
+            );
 
           case AppRoutes.homeScreenRoute:
             return const HomeScreen();
