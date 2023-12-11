@@ -6,6 +6,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -40,150 +41,155 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
           onPressed: () {
             AppUtils.showBottomModalSheet(
                 context: context,
-                widget: Wrap(children: [
-                  Container(
-                    width: 1.sw,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(
-                              AppDimensions.boarderRadiusBottomSheet),
-                          topLeft: Radius.circular(
-                              AppDimensions.boarderRadiusBottomSheet)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16.0, right: 16.0, top: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              textWidget(
-                                  text: AppStrings.addCardDetails,
-                                  color: AppColors.textWhiteColor,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: AppDimensions.textSizeBottomSheet,
-                                  fontWeight: FontWeight.bold),
-                              IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(
-                                    CustomIcon.cancel,
-                                    color: AppColors.whiteColor,
-                                    size: 28,
-                                  ))
-                            ],
+                widget: Wrap(
+                  children: [
+                    Container(
+                      // height: AppDimensions.modelSheetServiceHeight,
+                      // width: 1.sw,
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryColor,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(
+                                AppDimensions.boarderRadiusBottomSheet),
+                            topLeft: Radius.circular(
+                                AppDimensions.boarderRadiusBottomSheet)),
+                        // image: const DecorationImage(
+                        //     image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16.0, right: 16.0, top: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                textWidget(
+                                    text: AppStrings.addCardDetails,
+                                    color: AppColors.textWhiteColor,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontSize: AppDimensions.textSizeBottomSheet,
+                                    fontWeight: FontWeight.bold),
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    icon: const Icon(
+                                      CustomIcon.cancel,
+                                      color: AppColors.whiteColor,
+                                      size: 28,
+                                    ))
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 16.0, right: 16.0),
-                          child: textWidget(
-                              text: AppStrings.addCardDetailsHint,
-                              color: AppColors.textWhiteColor,
-                              fontSize: AppDimensions.textSize10),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 12.0, right: 12.0, top: 12),
-                          child: CustomTextFormField(
-                            isShowBoarder: false,
-                            height: 40.h,
-                            hintText: AppStrings.nameOnCard,
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(left: 16.0, right: 16.0),
+                            child: textWidget(
+                                text: AppStrings.addCardDetailsHint,
+                                color: AppColors.textWhiteColor,
+                                fontSize: AppDimensions.textSize10),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 12.0, right: 12.0, top: 4),
-                          child: CustomTextFormField(
-                            isShowBoarder: false,
-                            height: 40.h,
-                            hintText: AppStrings.cardNumber,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12.0, right: 12.0, top: 12),
+                            child: CustomTextFormField(
+                              isShowBoarder: false,
+                              height: 40.h,
+                              hintText: AppStrings.nameOnCard,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 12.0, right: 12.0, top: 4),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 4.0),
-                                  child: CustomTextFormField(
-                                    isShowBoarder: false,
-                                    height: 40.h,
-                                    hintText: AppStrings.expiry,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12.0, right: 12.0, top: 4),
+                            child: CustomTextFormField(
+                              isShowBoarder: false,
+                              height: 40.h,
+                              hintText: AppStrings.cardNumber,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12.0, right: 12.0, top: 4),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 4.0),
+                                    child: CustomTextFormField(
+                                      isShowBoarder: false,
+                                      height: 40.h,
+                                      hintText: AppStrings.expiry,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 4.0),
-                                  child: CustomTextFormField(
-                                    isShowBoarder: false,
-                                    height: 40.h,
-                                    hintText: AppStrings.cVV,
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 4.0),
+                                    child: CustomTextFormField(
+                                      isShowBoarder: false,
+                                      height: 40.h,
+                                      hintText: AppStrings.cVV,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        height(0.02.sw),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16.0, right: 16.0, top: 8),
-                          child: CustomMaterialButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              name: AppStrings.addCard,
-                              color: AppColors.whiteColor,
-                              textColor: AppColors.primaryColor),
-                        ),
-                        // height(0.15.sw),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12.0),
-                          child: Center(
-                            child: CircularIconButton(
-                                icon: Icons.close,
-                                iconSize: .09.sw,
-                                iconColor: AppColors.primaryColor,
+                          height(0.02.sw),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16.0, right: 16.0, top: 8),
+                            child: CustomMaterialButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                backgroundColor: AppColors.whiteColor),
+                                name: AppStrings.addCard,
+                                color: AppColors.whiteColor,
+                                textColor: AppColors.primaryColor),
                           ),
-                        ),
-                        // height(0.02.sw),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0, bottom: 24),
-                          child: Center(
-                            child: textWidget(
-                                text: AppStrings.cancel,
-                                maxLines: 2,
-                                color: AppColors.textWhiteColor,
-                                fontSize: AppDimensions.textSizeSmall),
+                          // height(0.15.sw),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: Center(
+                              child: CircularIconButton(
+                                  icon: Icons.close,
+                                  iconSize: .09.sw,
+                                  iconColor: AppColors.primaryColor,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  backgroundColor: AppColors.whiteColor),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0, bottom: 24),
-                          child: Center(
-                            child: textWidget(
-                                text: "",
-                                maxLines: 2,
-                                color: AppColors.textWhiteColor,
-                                fontSize: AppDimensions.textSizeSmall),
+                          // height(0.02.sw),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0, bottom: 0),
+                            child: Center(
+                              child: textWidget(
+                                  text: AppStrings.cancel,
+                                  maxLines: 2,
+                                  color: AppColors.textWhiteColor,
+                                  fontSize: AppDimensions.textSizeSmall),
+                            ),
                           ),
-                        ),
-                        // height(0.08.sw),
-                      ],
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(top: 8.0, bottom: 24),
+                            child: Center(
+                              child: textWidget(
+                                  text: "",
+                                  maxLines: 2,
+                                  color: AppColors.textWhiteColor,
+                                  fontSize: AppDimensions.textSizeSmall),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  )
-                ]));
+                  ],
+                ));
           },
           name: AppStrings.addPaymentMethod,
         ),
@@ -191,7 +197,7 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
-            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: const Padding(
         padding: EdgeInsets.only(left: 8.0, right: 8, top: 8),

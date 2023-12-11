@@ -28,7 +28,7 @@ class YourResumeEdit extends StatefulWidget {
 
 class _YourResumeEditState extends State<YourResumeEdit> {
   final TextEditingController _textEditingControllerHobbies =
-      TextEditingController();
+  TextEditingController();
 
   final List<String> itemsList = [
     "Hobbies 1",
@@ -44,7 +44,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
-            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       actions: [
         Padding(
@@ -239,18 +239,32 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   // ],
                   hintText: AppStrings.hobbiesHint,
                   isSuffixIcon: true,
-                  suffixIcon: IconButton(
-                    onPressed: () {
+                  // suffixIcon: IconButton(
+                  //   onPressed: () {
+                  //     if (_textEditingControllerHobbies.text.isNotEmpty) {
+                  //       itemsList.add(_textEditingControllerHobbies.text);
+                  //       _textEditingControllerHobbies.clear();
+                  //       setState(() {});
+                  //     }
+                  //   },
+                  //   icon: Icon(
+                  //     Icons.add,
+                  //     color: AppColors.primaryColor,
+                  //     size: 18,
+                  //   ),
+                  // ),
+                  suffixIcon: InkWell(
+                    onTap: () {
                       if (_textEditingControllerHobbies.text.isNotEmpty) {
                         itemsList.add(_textEditingControllerHobbies.text);
                         _textEditingControllerHobbies.clear();
                         setState(() {});
                       }
                     },
-                    icon: Icon(
+                    child: const Icon(
                       Icons.add,
                       color: AppColors.primaryColor,
-                      size: AppDimensions.imageIconSizeTextFormField,
+                      size: 18,
                     ),
                   ),
                 ),
@@ -273,7 +287,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                           decoration: const BoxDecoration(
                               color: AppColors.primaryColor,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
+                              BorderRadius.all(Radius.circular(12))),
                           child: Row(
                             children: [
                               Padding(
@@ -359,7 +373,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                           arguments: const BottomTabsScreen(
                             currentIndex: 4,
                           ),
-                          (route) => false);
+                              (route) => false);
                     },
                     color: AppColors.primaryColor,
                     name: AppStrings.saveResume),

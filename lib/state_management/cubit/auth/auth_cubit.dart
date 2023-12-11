@@ -135,12 +135,11 @@ class AuthCubit extends Cubit<AuthState> {
   Future loginCubit({
     required BuildContext context,
     required bool mounted,
-    String? email,
-    String? password,
   }) async {
     EasyLoading.show(status: AppStrings.PLEASE_WAIT);
 
-    final response = await loginProvider(email: email, password: password);
+    final response = await loginProvider(
+        email: emailController.text, password: passwordController.text);
 
     if (response != null) {
       EasyLoading.dismiss();
@@ -160,6 +159,7 @@ class AuthCubit extends Cubit<AuthState> {
               arguments: const OtpVerificationScreen(isSocial: false));
         }
       }
+
       /// Failer
       else {
         print(
