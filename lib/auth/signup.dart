@@ -30,7 +30,7 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _signupFormKey = GlobalKey<FormState>();
-  late final AuthCubit bloc;
+  late final AuthCubit _bloc;
 
   // final TextEditingController _firstNameController = TextEditingController();
   // final TextEditingController _lastNameController = TextEditingController();
@@ -44,8 +44,8 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   void initState() {
     super.initState();
-    bloc = BlocProvider.of<AuthCubit>(context);
-    bloc.initControllers();
+    _bloc = BlocProvider.of<AuthCubit>(context);
+    _bloc.initControllers();
   }
 
   @override
@@ -93,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween + 0.01.sw),
                 CustomTextFormField(
-                  controller: bloc.firstNameController,
+                  controller: _bloc.firstNameController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.firstName,
@@ -102,7 +102,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: bloc.lastNameController,
+                  controller: _bloc.lastNameController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.lastName,
@@ -111,7 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: bloc.emailController,
+                  controller: _bloc.emailControllerSignup,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.emailAddress,
@@ -121,10 +121,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 PhoneNumberTextField(
                   isShowShadow: true,
                   validator: (value) async {
-                    return await value?.number.validateEmpty("Phone Number");
+                    return value?.number == ""
+                        ? "".validateEmpty("Phone Number")
+                        : null;
                   },
                   onChanged: (phone) {
-                    bloc.phoneNumber = phone;
+                    _bloc.phoneNumber = phone;
                     print("$phone");
                     print(
                         "countryISOCode: ${phone?.countryISOCode}, countryCode: ${phone?.countryCode}, number: ${phone?.number}");
@@ -137,7 +139,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: bloc.zipCodeController,
+                  controller: _bloc.zipCodeController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.zipCode,
@@ -146,7 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: bloc.passwordController,
+                  controller: _bloc.passwordControllerSignup,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.password,
@@ -156,12 +158,13 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: bloc.confirmPasswordController,
+                  controller: _bloc.confirmPasswordController,
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.confirmPassword,
                   fieldValidator: (value) => value?.validateConfirmPassword(
-                      bloc.passwordController.text, bloc.confirmPasswordController.text),
+                      _bloc.passwordControllerSignup.text,
+                      _bloc.confirmPasswordController.text),
                 ),
                 height(AppDimensions.agreeToSideHustleSpacing),
                 // height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
@@ -241,10 +244,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       name: AppStrings.register,
                       onPressed: () async {
                         print('Button Pressed');
+                        FocusManager.instance.primaryFocus?.unfocus();
                         if (_signupFormKey.currentState!.validate()) {
-                          await bloc.signUpCubit(
-                              context: context,
-                              mounted: mounted,
+                          await _bloc.signUpCubit(
+                            context: context,
+                            mounted: mounted,
                           );
                         }
                       }),

@@ -10,20 +10,26 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 
+import '../../../utils/sharedprefrences.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthState());
+
+  final prefs = SharedPreferencesHelper.instance;
 
   /**
    * TextEditing Controllers
    */
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController emailControllerSignup = TextEditingController();
+  TextEditingController emailControllerLogin = TextEditingController();
   PhoneNumber? phoneNumber;
   TextEditingController zipCodeController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordControllerSignup = TextEditingController();
+  TextEditingController passwordControllerLogin = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   bool isTCAndPPAccepted = false;
@@ -31,13 +37,49 @@ class AuthCubit extends Cubit<AuthState> {
   initControllers() {
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
-    emailController = TextEditingController();
+    emailControllerSignup = TextEditingController();
+    emailControllerLogin = TextEditingController();
     phoneNumber = null;
     zipCodeController = TextEditingController();
-    passwordController = TextEditingController();
+    passwordControllerSignup = TextEditingController();
+    passwordControllerLogin = TextEditingController();
     confirmPasswordController = TextEditingController();
     otpController = TextEditingController();
     isTCAndPPAccepted = false;
+  }
+
+  /// Save user data
+  Future saveUserData() async {
+    await prefs.saveUser(state.userModel!);
+  }
+
+  /// Get user data
+  Future getUserData() async {
+    final UserModel? userModel = await prefs.getUser();
+    emit(state.copyWith(userModel: userModel));
+  }
+
+  /// Is User Login
+  Future<bool> isLogin(
+      {required BuildContext context, required bool mounted}) async {
+    final UserModel? userModel = await prefs.getUser();
+
+    /// User already LoggedIn
+    if (userModel?.data?.apiToken != null) {
+      print("isLogin: apiToken: ${userModel?.data?.apiToken}");
+      emit(state.copyWith(userModel: userModel));
+      if (mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, AppRoutes.bottomTabsScreenRoute, (route) => false);
+      }
+      return true;
+    }
+
+    /// User not LoggedIn
+    else {
+      print("isLogin: apiToken: ${userModel?.data?.apiToken}");
+      return false;
+    }
   }
 
   /// Signup
@@ -50,11 +92,11 @@ class AuthCubit extends Cubit<AuthState> {
     final response = await signupProvider(
         firstName: firstNameController.text,
         lastName: lastNameController.text,
-        email: emailController.text,
+        email: emailControllerSignup.text,
         phone: "${phoneNumber?.countryCode}${phoneNumber?.number}",
         zipCode: zipCodeController.text,
         country: "${phoneNumber?.countryISOCode}",
-        password: passwordController.text,
+        password: passwordControllerSignup.text,
         cPassword: confirmPasswordController.text);
 
     if (response != null) {
@@ -63,11 +105,12 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
-        emit(state.copyWith(userModel: userModel));
+        emit(state.copyWith(
+            userModel: userModel, apiToken: userModel.data?.apiToken));
         // AppUtils.showToast(userModel.message);
         if (mounted) {
           Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
-              arguments: const OtpVerificationScreen(isSocial: false));
+              arguments: const OtpVerificationScreen(isSignUp: true));
         }
       } else if (response.data["status"] != AppValidationMessages.success) {
         print(
@@ -85,7 +128,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<int?> otpVerificationCubit({
     required BuildContext context,
     required bool mounted,
-    required bool isSignUp,
+    // required bool isSignUp,
     String? otp,
   }) async {
     EasyLoading.show(status: AppStrings.PLEASE_WAIT);
@@ -100,21 +143,11 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
-        emit(state.copyWith(userModel: userModel));
+        // emit(state.copyWith(userModel: userModel));
+        emit(state.copyWith(
+            userModel: userModel, apiToken: userModel.data?.apiToken));
         // AppUtils.showToast(userModel.message);
-        if (isSignUp) {
-          if (mounted) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, AppRoutes.walkthroughScreenRoute, (route) => false);
-          }
-          return 1;
-        } else {
-          if (mounted) {
-            Navigator.pushReplacementNamed(
-                context, AppRoutes.resetPasswordScreenRoute);
-          }
-          return 1;
-        }
+        return 1;
       }
 
       /// Success: False
@@ -139,7 +172,8 @@ class AuthCubit extends Cubit<AuthState> {
     EasyLoading.show(status: AppStrings.PLEASE_WAIT);
 
     final response = await loginProvider(
-        email: emailController.text, password: passwordController.text);
+        email: emailControllerLogin.text,
+        password: passwordControllerLogin.text);
 
     if (response != null) {
       EasyLoading.dismiss();
@@ -151,16 +185,56 @@ class AuthCubit extends Cubit<AuthState> {
         emit(state.copyWith(userModel: userModel));
         // AppUtils.showToast(userModel.message);
         if (mounted) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, AppRoutes.bottomTabsScreenRoute, (route) => false);
-        }
-        if (mounted) {
-          Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
-              arguments: const OtpVerificationScreen(isSocial: false));
+          if (userModel.data?.isVerified == 1) {
+            await prefs.saveUser(userModel);
+            if (mounted) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, AppRoutes.bottomTabsScreenRoute, (route) => false);
+            }
+          } else {
+            Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
+                arguments: const OtpVerificationScreen(isLogin: true));
+          }
         }
       }
 
-      /// Failer
+      /// Failed
+      else {
+        print(
+            "status: ${response.data["status"]} response: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Forgot Password
+  Future forgotPasswordCubit({
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+
+    final response = await forgotPasswordProvider(
+        phone: "${phoneNumber?.countryCode}${phoneNumber?.number}");
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final UserModel userModel = UserModel.fromJson(response.data);
+        print("status: ${userModel.status} response: ${userModel.data}");
+        emit(state.copyWith(userModel: userModel));
+        // AppUtils.showToast(userModel.message);
+        if (mounted) {
+          Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
+              arguments: const OtpVerificationScreen(isForgotPassword: true));
+        }
+      }
+
+      /// Failed
       else {
         print(
             "status: ${response.data["status"]} response: ${response.data["errors"]}");

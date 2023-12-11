@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -21,13 +23,19 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _visible = false;
+  late final AuthCubit _bloc;
 
   @override
   void initState() {
     super.initState();
+    _bloc = BlocProvider.of<AuthCubit>(context);
     _visible = false;
     _navigationTimer(seconds: 3);
     // _navigationTimerMilli(milliseconds: 300);
+  }
+
+  _isLogin() async {
+    await _bloc.isLogin(context: context, mounted: mounted);
   }
 
   @override
@@ -39,17 +47,18 @@ class _SplashScreenState extends State<SplashScreen> {
         opacity: _visible ? 1.0 : 0.0,
         duration: const Duration(milliseconds: 500),
         child: _visible
-        ? Padding(
-            padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 8),
-            child: CustomMaterialButton(
-                name: AppStrings.GET_STARTED,
-                // borderRadius: 20,
-                onPressed: () {
-                  print('Button Pressed');
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutes.loginScreenRoute, (route) => false);
-                }))
-        : const SizedBox.shrink(),
+            ? Padding(
+                padding:
+                    const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 8),
+                child: CustomMaterialButton(
+                    name: AppStrings.GET_STARTED,
+                    // borderRadius: 20,
+                    onPressed: () {
+                      print('Button Pressed');
+                      Navigator.pushNamedAndRemoveUntil(context,
+                          AppRoutes.loginScreenRoute, (route) => false);
+                    }))
+            : const SizedBox.shrink(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,13 +116,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Timer _navigationTimer({required int seconds}) {
+    _isLogin();
     return Timer(
         Duration(
           seconds: seconds,
         ), () {
-      setState(() {
-        _visible = true;
-      });
+      if (mounted) {
+        setState(() {
+          _visible = true;
+        });
+      }
     });
   }
 

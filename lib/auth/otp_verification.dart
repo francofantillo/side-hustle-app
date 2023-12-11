@@ -20,10 +20,14 @@ import 'package:side_hustle/widgets/text_field/custom_pin_code_textField.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final bool isSocial;
-  final bool isSignUp;
+  final bool isSignUp, isLogin, isForgotPassword;
 
   const OtpVerificationScreen(
-      {super.key, this.isSocial = false, this.isSignUp = true});
+      {super.key,
+      this.isSocial = false,
+      this.isSignUp = false,
+      this.isLogin = false,
+      this.isForgotPassword = false});
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -135,7 +139,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ? AppStrings.reSend
                       : AppStrings.continueText,
                   onPressed: () async {
-                    print('Button Pressed'); //
+                    print('Button Pressed');
                     if (enableResend) {
                       /// Reset Timer
                       otpText = null;
@@ -144,17 +148,65 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       enableResend = false;
                       currentSeconds = 0;
                     } else {
-                      if (widget.isSocial) {
-                      } else {
-                        if (otpText != null) {
-                          await bloc.otpVerificationCubit(
-                              context: context,
-                              mounted: mounted,
-                              isSignUp: widget.isSignUp,
-                              otp: otpText);
-                        } else {
-                          AppUtils.showToast(AppValidationMessages.OTP_CODE);
+                      if (otpText != null) {
+                        if (widget.isSocial) {
+                          print("isSocial: true");
+                          return;
+                        } else if (widget.isSignUp) {
+                          print("isSignUp: true");
+                          await bloc
+                              .otpVerificationCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  otp: otpText)
+                              .then((value) async {
+                            if (value == 1) {
+                              await bloc.saveUserData();
+                              if (mounted) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.walkthroughScreenRoute,
+                                    (route) => false);
+                              }
+                            }
+                          });
+                          return;
+                        } else if (widget.isLogin) {
+                          print("isLogin: true");
+                          await bloc
+                              .otpVerificationCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  otp: otpText)
+                              .then((value) async {
+                            if (value == 1) {
+                              await bloc.saveUserData();
+                              if (mounted) {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.walkthroughScreenRoute,
+                                    (route) => false);
+                              }
+                            }
+                          });
+                          return;
+                        } else if (widget.isForgotPassword) {
+                          print("isForgotPassword: true");
+                          await bloc
+                              .otpVerificationCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  otp: otpText)
+                              .then((value) async {
+                            if (value == 1) {
+                              Navigator.pushReplacementNamed(
+                                  context, AppRoutes.resetPasswordScreenRoute);
+                            }
+                          });
+                          return;
                         }
+                      } else {
+                        AppUtils.showToast(AppValidationMessages.OTP_CODE);
                       }
                     }
                   }),

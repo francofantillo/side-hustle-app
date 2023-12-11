@@ -85,7 +85,9 @@ class AppRouter {
             final args = routeSettings.arguments as OtpVerificationScreen?;
             return OtpVerificationScreen(
               isSocial: args?.isSocial ?? false,
-              isSignUp: args?.isSignUp ?? true,
+              isSignUp: args?.isSignUp ?? false,
+              isLogin: args?.isLogin ?? false,
+              isForgotPassword: args?.isForgotPassword ?? false,
             );
 
           case AppRoutes.homeScreenRoute:

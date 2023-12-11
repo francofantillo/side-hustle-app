@@ -463,4 +463,6 @@ class AppStrings {
   /// Dio
   static const String PLEASE_WAIT = "Please Wait";
 
+  /// Shared Prefrences Keys
+  static const String USERDATA_KEY = "UserData";
 }

@@ -36,7 +36,7 @@ Future<Response?> signupProvider({
   //   "confirm_password": "123456"
   // };
 
-  print("$data\nurl: ${API.SIGNUP}");
+  print("data: $data\nurl: ${API.SIGNUP}");
   final response = await postRequestProvider(path: API.SIGNUP, data: data);
   return response;
 }
@@ -46,7 +46,7 @@ Future<Response?> otpVerificationProvider(
     {String? otp, String? apiToken}) async {
   final data = {"otp_token": otp, "api_token": apiToken};
 
-  print("$data\nurl: ${API.VERIFIFY_OTP}");
+  print("data: $data\nurl: ${API.VERIFIFY_OTP}");
   final response =
       await postRequestProvider(path: API.VERIFIFY_OTP, data: data);
   return response;
@@ -57,9 +57,23 @@ Future<Response?> loginProvider({
   String? email,
   String? password,
 }) async {
-  final data = {"email": "test08@mail.com", "password": "123456"};
+  // final data = {"email": "test08@mail.com", "password": "123456"};
+  final data = {"email": email, "password": password};
 
-  print("$data\nurl: ${API.LOGIN}");
+  print("data: $data\nurl: ${API.LOGIN}");
   final response = await postRequestProvider(path: API.LOGIN, data: data);
+  return response;
+}
+
+/// Login
+Future<Response?> forgotPasswordProvider({
+  String? phone,
+}) async {
+  // final data = {"phone": "+15555555510"};
+  final data = {"phone": phone};
+
+  print("data: $data\nurl: ${API.FORGOT_PASSWORD}");
+  final response =
+      await postRequestProvider(path: API.FORGOT_PASSWORD, data: data);
   return response;
 }

@@ -133,7 +133,6 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 4),
       child: IntlPhoneField(
-        key: widget.key,
         initialValue: null,
         validator: widget.validator,
         dropdownTextStyle: _textStyle(),
@@ -151,17 +150,17 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
         style: _textStyle(),
         decoration: InputDecoration(
           hintStyle:
-              TextStyle(color: Colors.grey, fontFamily: AppFont.gilroyMedium),
+              const TextStyle(color: Colors.grey, fontFamily: AppFont.gilroyMedium),
 
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          counter: SizedBox.shrink(),
+          counter: const SizedBox.shrink(),
           border: InputBorder.none,
           fillColor: Colors.transparent,
           // label: _label(),
           filled: true,
           hintText: AppStrings.phoneNumber,
 
-          contentPadding: EdgeInsets.only(top: 7),
+          contentPadding: const EdgeInsets.only(top: 7),
           errorMaxLines: 2,
           // errorStyle: TextStyle(
           //   color: Colors.red,
@@ -177,7 +176,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
 
   TextStyle _errorTextStyle() {
     return TextStyle(
-        fontSize: AppDimensions.textSizeVerySmall, color: AppColors.redColor, height: 0.01);
+        fontSize: AppDimensions.textSizeVerySmall, color: AppColors.redColor, height: .01);
   }
 
   TextStyle _textStyle() {

@@ -27,12 +27,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _loginFormKey = GlobalKey<FormState>();
-  late final AuthCubit bloc;
+  late final AuthCubit _bloc;
 
   @override
   void initState() {
-    bloc = BlocProvider.of<AuthCubit>(context);
-    bloc.initControllers();
+    _bloc = BlocProvider.of<AuthCubit>(context);
+    _bloc.initControllers();
     super.initState();
   }
 
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   height(AppDimensions.welcomeBackSpacingBetween),
                   CustomTextFormField(
-                    controller: bloc.emailController,
+                    controller: _bloc.emailControllerLogin,
                     isShowShadow: true,
                     isShowBoarder: false,
                     label: AppStrings.emailAddress,
@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   height(AppDimensions.fieldsVerticalSpacingBetween),
                   CustomTextFormField(
-                      controller: bloc.passwordController,
+                      controller: _bloc.passwordControllerLogin,
                       isShowShadow: true,
                       isShowBoarder: false,
                       label: AppStrings.password,
@@ -104,8 +104,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(
-                              context, AppRoutes.forgotPasswordScreenRoute);
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          setState(() {
+                            Navigator.pushNamed(
+                                context, AppRoutes.forgotPasswordScreenRoute);
+                          });
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(right: 3.0),
@@ -123,11 +126,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         textColor: AppColors.whiteColor,
                         onPressed: () async {
                           print('Button Pressed');
+                          FocusManager.instance.primaryFocus?.unfocus();
                           // EasyLoading.show();
                           // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
                           // Navigator.pushNamed(context, AppRoutes.homeScreenRoute);
                           if (_loginFormKey.currentState!.validate()) {
-                            await bloc.loginCubit(
+                            await _bloc.loginCubit(
                               context: context,
                               mounted: mounted,
                             );
@@ -258,8 +262,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 print("Clicked");
-                                Navigator.pushNamed(
-                                    context, AppRoutes.signupScreenRoute);
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                setState(() {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.signupScreenRoute);
+                                });
                               },
                           ),
                         ],
