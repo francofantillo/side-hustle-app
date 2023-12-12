@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       label: AppStrings.password,
                       isPasswordField: true,
                       fieldValidator: (value) =>
-                          value?.validateEmpty(AppStrings.password)),
+                          value?.validateLoginPassword),
                   height(AppDimensions.fieldsVerticalSpacingBetween + 0.01.sw),
                   Align(
                       alignment: Alignment.centerRight,

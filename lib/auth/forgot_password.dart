@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
@@ -8,7 +7,6 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -26,7 +24,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _forgotPasswordFormKey = GlobalKey<FormState>();
   late final AuthCubit _bloc;
-  final _phoneNoCtrl = TextEditingController();
+  String? initialValue;
   FocusNode focusNode = FocusNode();
 
   @override
@@ -74,8 +72,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       fontSize: AppDimensions.textSizeSmall),
                   height(AppDimensions.welcomeBackSpacingBetween),
                   PhoneNumberTextField(
+                    initialValue: initialValue,
                     isShowShadow: true,
-                    controller: _phoneNoCtrl,
                     onChanged: (phone) {
                       _bloc.phoneNumber = phone;
                       print("$phone");
@@ -95,13 +93,23 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         name: AppStrings.continueText,
                         textColor: AppColors.whiteColor,
                         onPressed: () async {
-                          print('Button Pressed controller ${_phoneNoCtrl.text}');
+                          print('Button Pressed');
                           FocusManager.instance.primaryFocus?.unfocus();
                           if (_forgotPasswordFormKey.currentState!.validate()) {
                             await _bloc.forgotPasswordCubit(
                               context: context,
                               mounted: mounted,
-                            );
+                            ).then((value) {
+                              if (value == 1) {
+                                setState(() {
+                                  initialValue = null;
+                                  Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
+                                      arguments: const OtpVerificationScreen(isForgotPassword: true));
+                                });
+                                // Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
+                                //     arguments: const OtpVerificationScreen(isForgotPassword: true));
+                              }
+                            });
                           }
                           // Navigator.pushNamed(
                           //     context, AppRoutes.otpVerificationScreenRoute,

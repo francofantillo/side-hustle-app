@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/widgets/attendees_confirmed_list.dart';
 import 'package:side_hustle/event/widgets/attendees_interested_list.dart';
 import 'package:side_hustle/event/widgets/attendees_tab.dart';
-import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_list.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
-import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class AttendeesEvent extends StatefulWidget {
   const AttendeesEvent({super.key});

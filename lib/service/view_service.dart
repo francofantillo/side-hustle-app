@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_products.dart';
-import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_service.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/service/post_service.dart';

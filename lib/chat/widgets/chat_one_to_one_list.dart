@@ -6,7 +6,6 @@ import 'package:side_hustle/chat/widgets/order_product_item.dart';
 import 'package:side_hustle/chat/widgets/order_service_item.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';

@@ -2,8 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl_phone_field/phone_number.dart';
-import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -149,22 +147,22 @@ class _SignupScreenState extends State<SignupScreen> {
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
                   controller: _bloc.passwordControllerSignup,
+                  // fieldValidator: (value) =>
+                  //     value?.validateEmpty(AppStrings.password),
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.password,
-                  // fieldValidator: (value) => value?.validatePassword,
-                  fieldValidator: (value) =>
-                      value?.validateEmpty(AppStrings.password),
+                  fieldValidator: (value) => value?.validatePassword,
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                  controller: _bloc.confirmPasswordController,
+                  controller: _bloc.confirmPasswordControllerSignup,
+                  fieldValidator: (value) => value?.validateConfirmPassword(
+                      _bloc.passwordControllerSignup.text,
+                      _bloc.confirmPasswordControllerSignup.text),
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.confirmPassword,
-                  fieldValidator: (value) => value?.validateConfirmPassword(
-                      _bloc.passwordControllerSignup.text,
-                      _bloc.confirmPasswordController.text),
                 ),
                 height(AppDimensions.agreeToSideHustleSpacing),
                 // height(AppDimensions.loginButtonVerticalSpacingBetween - 4),

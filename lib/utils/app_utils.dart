@@ -16,7 +16,7 @@ class AppUtils {
       ..backgroundColor = Colors.transparent
       ..indicatorColor = AppColors.primaryColor
       ..textColor = Colors.white
-      ..indicatorSize = 35.0
+      ..indicatorSize = 45.0
       ..radius = 10.0
       ..boxShadow = <BoxShadow>[]
       ..maskColor = Colors.black.withOpacity(0.6)

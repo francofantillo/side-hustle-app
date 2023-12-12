@@ -13,6 +13,7 @@ class PhoneNumberTextField extends StatefulWidget {
   const PhoneNumberTextField({
     Key? key,
     this.controller,
+    this.initialValue,
     this.validator,
     this.backgroundColor,
     this.borderColor,
@@ -31,6 +32,7 @@ class PhoneNumberTextField extends StatefulWidget {
   }) : super(key: key);
 
   final Color? backgroundColor;
+  final String? initialValue;
   final Color? borderColor, iconColor, textColor;
   final bool? isBorder, isUnderLineBorder;
   final bool? isReadOnly;
@@ -103,6 +105,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
                         ),
                       )
                     ]),
+          height: 55.w,
           child: Card(
             elevation: 2,
             // shadowColor: Colors.grey.withOpacity(0.35), // Lighten shadow color
@@ -123,7 +126,6 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
               child: _phoneTextField(),
             ),
           ),
-          height: 55.w,
         ),
       ],
     );
@@ -131,9 +133,10 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
 
   Widget _phoneTextField() {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 4),
+      padding: const EdgeInsets.only(top: 8.0, left: 10),
       child: IntlPhoneField(
-        initialValue: null,
+        initialValue: widget.initialValue,
+
         validator: widget.validator,
         dropdownTextStyle: _textStyle(),
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -150,7 +153,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
         style: _textStyle(),
         decoration: InputDecoration(
           hintStyle:
-              const TextStyle(color: Colors.grey, fontFamily: AppFont.gilroyMedium),
+              const TextStyle(color: Colors.grey, fontFamily: AppFont.gilroyMedium, height: .9),
 
           floatingLabelBehavior: FloatingLabelBehavior.always,
           counter: const SizedBox.shrink(),
@@ -160,7 +163,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
           filled: true,
           hintText: AppStrings.phoneNumber,
 
-          contentPadding: const EdgeInsets.only(top: 7),
+          // contentPadding: const EdgeInsets.only(top: 7),
           errorMaxLines: 2,
           // errorStyle: TextStyle(
           //   color: Colors.red,
@@ -176,7 +179,7 @@ class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
 
   TextStyle _errorTextStyle() {
     return TextStyle(
-        fontSize: AppDimensions.textSizeVerySmall, color: AppColors.redColor, height: .01);
+        fontSize: AppDimensions.textSizeVerySmall, color: AppColors.redColor, height: 0.01);
   }
 
   TextStyle _textStyle() {

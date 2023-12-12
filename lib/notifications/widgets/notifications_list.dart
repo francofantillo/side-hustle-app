@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:side_hustle/chat/widgets/chat_all_user_item.dart';
 import 'package:side_hustle/notifications/widgets/notifications_item.dart';
-import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';

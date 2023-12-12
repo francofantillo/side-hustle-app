@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:side_hustle/drawer/drawer_item.dart';
 import 'package:side_hustle/drawer/widgets/logout_widget.dart';
 import 'package:side_hustle/profile/widgets/profile_list_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';

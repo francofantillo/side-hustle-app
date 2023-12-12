@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
-import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/screen_design_size.dart';
@@ -116,11 +114,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Timer _navigationTimer({required int seconds}) {
-    _isLogin();
     return Timer(
         Duration(
           seconds: seconds,
-        ), () {
+        ), () async {
+      await _isLogin();
       if (mounted) {
         setState(() {
           _visible = true;

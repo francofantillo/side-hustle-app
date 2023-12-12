@@ -6,7 +6,6 @@ import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/auth_provider.dart';
-import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 
@@ -30,7 +29,7 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController zipCodeController = TextEditingController();
   TextEditingController passwordControllerSignup = TextEditingController();
   TextEditingController passwordControllerLogin = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController confirmPasswordControllerSignup = TextEditingController();
   TextEditingController otpController = TextEditingController();
   bool isTCAndPPAccepted = false;
 
@@ -43,7 +42,7 @@ class AuthCubit extends Cubit<AuthState> {
     zipCodeController = TextEditingController();
     passwordControllerSignup = TextEditingController();
     passwordControllerLogin = TextEditingController();
-    confirmPasswordController = TextEditingController();
+    confirmPasswordControllerSignup = TextEditingController();
     otpController = TextEditingController();
     isTCAndPPAccepted = false;
   }
@@ -87,7 +86,7 @@ class AuthCubit extends Cubit<AuthState> {
     required BuildContext context,
     required bool mounted,
   }) async {
-    EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
 
     final response = await signupProvider(
         firstName: firstNameController.text,
@@ -97,7 +96,7 @@ class AuthCubit extends Cubit<AuthState> {
         zipCode: zipCodeController.text,
         country: "${phoneNumber?.countryISOCode}",
         password: passwordControllerSignup.text,
-        cPassword: confirmPasswordController.text);
+        cPassword: confirmPasswordControllerSignup.text);
 
     if (response != null) {
       EasyLoading.dismiss();
@@ -131,7 +130,8 @@ class AuthCubit extends Cubit<AuthState> {
     // required bool isSignUp,
     String? otp,
   }) async {
-    EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
 
     final response = await otpVerificationProvider(
         otp: otp, apiToken: state.userModel?.data?.apiToken);
@@ -153,7 +153,7 @@ class AuthCubit extends Cubit<AuthState> {
       /// Success: False
       else {
         print(
-            "status: ${response.data["status"]} response: ${response.data["errors"]}");
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return 0;
       }
@@ -169,7 +169,8 @@ class AuthCubit extends Cubit<AuthState> {
     required BuildContext context,
     required bool mounted,
   }) async {
-    EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
 
     final response = await loginProvider(
         email: emailControllerLogin.text,
@@ -201,7 +202,7 @@ class AuthCubit extends Cubit<AuthState> {
       /// Failed
       else {
         print(
-            "status: ${response.data["status"]} response: ${response.data["errors"]}");
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -210,11 +211,12 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   /// Forgot Password
-  Future forgotPasswordCubit({
+  Future<int> forgotPasswordCubit({
     required BuildContext context,
     required bool mounted,
   }) async {
-    EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
 
     final response = await forgotPasswordProvider(
         phone: "${phoneNumber?.countryCode}${phoneNumber?.number}");
@@ -228,16 +230,53 @@ class AuthCubit extends Cubit<AuthState> {
         print("status: ${userModel.status} response: ${userModel.data}");
         emit(state.copyWith(userModel: userModel));
         // AppUtils.showToast(userModel.message);
+        return 1;
+      }
+
+      /// Failed
+      else {
+        print(
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
+    }
+  }
+
+  /// Reset Password
+  Future resetPasswordCubit({
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
+
+    final response = await resetPasswordProvider(
+        password: passwordControllerSignup.text,
+        apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final UserModel userModel = UserModel.fromJson(response.data);
+        print("status: ${userModel.status} response: ${userModel.data}");
+        AppUtils.showToast(userModel.message);
+        emit(state.copyWith(userModel: UserModel()));
         if (mounted) {
-          Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
-              arguments: const OtpVerificationScreen(isForgotPassword: true));
+          Navigator.pushNamedAndRemoveUntil(
+              context, AppRoutes.loginScreenRoute, (route) => false);
         }
       }
 
       /// Failed
       else {
         print(
-            "status: ${response.data["status"]} response: ${response.data["errors"]}");
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {

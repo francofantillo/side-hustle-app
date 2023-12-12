@@ -36,7 +36,8 @@ Future<Response?> signupProvider({
   //   "confirm_password": "123456"
   // };
 
-  print("data: $data\nurl: ${API.SIGNUP}");
+  print("*****************\nurl: ${API.SIGNUP}\ndata: $data\n**************************");
+
   final response = await postRequestProvider(path: API.SIGNUP, data: data);
   return response;
 }
@@ -46,7 +47,8 @@ Future<Response?> otpVerificationProvider(
     {String? otp, String? apiToken}) async {
   final data = {"otp_token": otp, "api_token": apiToken};
 
-  print("data: $data\nurl: ${API.VERIFIFY_OTP}");
+  print("*****************\nurl: ${API.VERIFIFY_OTP}\ndata: $data\n**************************");
+
   final response =
       await postRequestProvider(path: API.VERIFIFY_OTP, data: data);
   return response;
@@ -60,20 +62,44 @@ Future<Response?> loginProvider({
   // final data = {"email": "test08@mail.com", "password": "123456"};
   final data = {"email": email, "password": password};
 
-  print("data: $data\nurl: ${API.LOGIN}");
+  print("*****************\nurl: ${API.LOGIN}\ndata: $data\n**************************");
+
   final response = await postRequestProvider(path: API.LOGIN, data: data);
   return response;
 }
 
-/// Login
+/// Forgot Password
 Future<Response?> forgotPasswordProvider({
   String? phone,
 }) async {
   // final data = {"phone": "+15555555510"};
   final data = {"phone": phone};
 
-  print("data: $data\nurl: ${API.FORGOT_PASSWORD}");
+  print("*****************\nurl: ${API.FORGOT_PASSWORD}\ndata: $data\n**************************");
+
   final response =
       await postRequestProvider(path: API.FORGOT_PASSWORD, data: data);
+  return response;
+}
+
+/// Reset
+Future<Response?> resetPasswordProvider({
+  String? password,
+  String? apiToken
+}) async {
+  // final data = {
+  //   "password": "123456",
+  //   "confirm_password": "123456",
+  //   "api_token": "22|woYOINsCGFq3rWuMWfuF8pp80gWwvvFyklMxL27C1eafcb49"
+  // };
+
+  final data = {
+    "password": password,
+    "confirm_password": password,
+    "api_token": apiToken
+  };
+
+  print("*****************\nurl: ${API.RESET_PASSWORD}\ndata: $data\n**************************");
+  final response = await putRequestProvider(path: API.RESET_PASSWORD, data: data);
   return response;
 }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/router/app_route_named.dart';
-import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/wanted_job/widgets/applied_tab_list.dart';
@@ -13,7 +10,6 @@ import 'package:side_hustle/wanted_job/widgets/completed_job_list.dart';
 import 'package:side_hustle/wanted_job/widgets/wanted_job_tab.dart';
 import 'package:side_hustle/wanted_job/widgets/wanted_tab_list.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
-import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 
 class WantedJobScreen extends StatefulWidget {

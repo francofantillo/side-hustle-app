@@ -20,8 +20,11 @@ class AppValidationMessages {
   static const String PASSWORD_EMPTY_ERROR = "Password field can't be empty.";
   static const String OLD_PASSWORD_EMPTY_ERROR =
       "Existing Password field can't be empty.";
+  // static const String PASSWORD_INVALID_LENGTH_ERROR =
+  //     "Existing password incorrect";
   static const String PASSWORD_INVALID_LENGTH_ERROR =
-      "Existing password incorrect";
+      "At least 12 characters long but 14 or more is better.";
+
   static const String PASSWORD_INVALID_ERROR =
       "Password must be of 8 characters long and contains at least 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
   static const String NEW_PASSWORD_EMPTY_ERROR =

@@ -125,6 +125,67 @@ Future<Response?> postRequestProvider(
   }
 }
 
+/// put Request
+Future<Response?> putRequestProvider(
+    {required String path, required data, String? token}) async {
+  late final Response response;
+  const int timeout = 20000;
+
+  try {
+    if (token != null) {
+      // if((path == API.ADD_MODULE) || path == API.EDIT_MODULE) {
+      //   timeout = 3600000;
+      // }
+      dio.options.connectTimeout = const Duration(milliseconds: timeout);
+      print("token not null $token}");
+      response = await dio.put(path,
+          data: data,
+          options: Options(
+              headers: {
+                "Authorization": "Bearer $token",
+                "Accept": "application/json"
+              },
+              sendTimeout: const Duration(milliseconds: timeout),
+              receiveTimeout: const Duration(milliseconds: timeout)));
+    } else {
+      dio.options.connectTimeout = const Duration(milliseconds: 20000);
+      response = await dio.put(path,
+          data: data,
+          options: Options(
+              headers: {
+                "Accept": "application/json"
+              },
+              sendTimeout: const Duration(milliseconds: timeout),
+              receiveTimeout: const Duration(milliseconds: timeout)));
+    }
+
+    if (kDebugMode) {
+      print("postRequestProvider response: $response");
+    }
+
+    return response;
+  } on DioException catch (e) {
+    if (kDebugMode) {
+      print("postRequestProvider error: ${e.error}");
+      print("postRequestProvider error response: ${e.response}");
+      print("postRequestProvider error statusCode: ${e.response?.statusCode}");
+    }
+    if (e.response != null) {
+      if (e.response!.statusCode == 401) {
+        return e.response;
+      } else if (e.response!.statusCode == 400) {
+        return e.response;
+      } else if (e.response!.statusCode == 500) {
+        return e.response;
+      } else {
+        return e.response;
+      }
+    } else {
+      return null;
+    }
+  }
+}
+
 /// delete Request
 Future<Response?> deleteRequestProvider(
     {required String path,

@@ -37,7 +37,6 @@ import 'package:side_hustle/product/your_cart_products.dart';
 import 'package:side_hustle/profile/other_user_profile/events_posted_other_user.dart';
 import 'package:side_hustle/profile/other_user_profile/jobs_posted_other_user.dart';
 import 'package:side_hustle/profile/other_user_profile/other_user_profile.dart';
-import 'package:side_hustle/profile/other_user_profile/other_user_shop.dart';
 import 'package:side_hustle/profile/profile.dart';
 import 'package:side_hustle/profile/your_resume.dart';
 import 'package:side_hustle/profile/your_resume_edit.dart';

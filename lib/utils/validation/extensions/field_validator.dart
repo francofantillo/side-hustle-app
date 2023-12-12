@@ -1,4 +1,5 @@
 import 'package:side_hustle/utils/app_validation_messages.dart';
+import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/validation/regular_expressions.dart';
 
 extension FieldValidator on String {
@@ -21,10 +22,9 @@ extension FieldValidator on String {
   get validatePassword {
     if (isEmpty) {
       return AppValidationMessages.PASSWORD_EMPTY_ERROR;
-    } /*else if (this.length < 8) {
+    } else if (length < Constants.passwordFieldLength) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
-    } */
-    else if (!RegularExpressions.PASSWORD_VALID_REGIX.hasMatch(this) &&
+    } else if (!RegularExpressions.PASSWORD_VALID_REGIX.hasMatch(this) &&
         isNotEmpty) {
       return AppValidationMessages.PASSWORD_INVALID_ERROR;
     }
@@ -67,7 +67,8 @@ extension FieldValidator on String {
   get validateNewPassword {
     if (isEmpty) {
       return AppValidationMessages.NEW_PASSWORD_EMPTY_ERROR;
-    } /*else if (this.length < 8) {
+    }
+    /*else if (this.length < 8) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
     }*/
     else if (!RegularExpressions.PASSWORD_VALID_REGIX.hasMatch(this) &&
@@ -80,7 +81,8 @@ extension FieldValidator on String {
   String? validateChangeNewPassword(String oldPassword, String newPassword) {
     if (newPassword.isEmpty) {
       return AppValidationMessages.NEW_PASSWORD_EMPTY_ERROR;
-    } /*else if (newPassword.length < 8) {
+    }
+    /*else if (newPassword.length < 8) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
     } */
     else if (!RegularExpressions.PASSWORD_VALID_REGIX.hasMatch(newPassword) &&
@@ -156,7 +158,8 @@ extension FieldValidator on String {
   validateName(String message) {
     if (isEmpty) {
       return "Name field can't be empty";
-    } /*else if (this.length < 8) {
+    }
+    /*else if (this.length < 8) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
     } */
     else if (message.length > 30 && isNotEmpty) {
@@ -169,7 +172,8 @@ extension FieldValidator on String {
   validateBio(String message) {
     if (isEmpty) {
       return "Bio field can't be empty";
-    } /*else if (this.length < 8) {
+    }
+    /*else if (this.length < 8) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
     } */
     else if (message.length > 275 && isNotEmpty) {
@@ -182,7 +186,8 @@ extension FieldValidator on String {
   get validateOldPassword {
     if (isEmpty) {
       return AppValidationMessages.OLD_PASSWORD_EMPTY_ERROR;
-    } /*else if (this.length < 8) {
+    }
+    /*else if (this.length < 8) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
     }*/
     else if (!RegularExpressions.PASSWORD_VALID_REGIX.hasMatch(this) &&
@@ -196,11 +201,8 @@ extension FieldValidator on String {
   get validateLoginPassword {
     if (isEmpty) {
       return AppValidationMessages.PASSWORD_EMPTY_ERROR;
-    } /*else if (this.length < 8) {
-      return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
-    }*/
-    else if (!RegularExpressions.PASSWORD_VALID_REGIX.hasMatch(this) &&
-        isNotEmpty) {
+    }
+    else if (this.length < Constants.passwordFieldLength) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
     }
     return null;

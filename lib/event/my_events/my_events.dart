@@ -3,14 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_completed_list.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_onging_list.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_scheduled_list.dart';
-import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/custom_tab_bar/custom_tab_bar.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class MyEventsScreen extends StatefulWidget {
   const MyEventsScreen({super.key});

@@ -8,5 +8,6 @@ class API {
   static const String VERIFIFY_OTP = "${BASE_URL}/auth/verify-token";
   static const String LOGIN = "${BASE_URL}/auth/login";
   static const String FORGOT_PASSWORD = "${BASE_URL}/auth/forgot-password";
+  static const String RESET_PASSWORD = "${BASE_URL}/auth/set-password";
 
 }

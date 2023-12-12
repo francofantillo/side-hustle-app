@@ -4,15 +4,11 @@ import 'package:side_hustle/job/my_jobs/widgets/completed_job_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/ongoing_job_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/scheduled_job_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
-import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/custom_tab_bar/custom_tab_bar.dart';
-import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class MyJobsScreen extends StatefulWidget {
   const MyJobsScreen({super.key});
