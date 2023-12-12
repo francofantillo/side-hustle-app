@@ -9,5 +9,7 @@ class API {
   static const String LOGIN = "${BASE_URL}/auth/login";
   static const String FORGOT_PASSWORD = "${BASE_URL}/auth/forgot-password";
   static const String RESET_PASSWORD = "${BASE_URL}/auth/set-password";
+  static const String CHANGE_PASSWORD = "${BASE_URL}/change-password";
+  static const String LOGOUT = "${BASE_URL}/logout";
 
 }

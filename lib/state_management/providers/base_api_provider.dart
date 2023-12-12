@@ -38,29 +38,32 @@ Future<Response?> getRequestProvider(
 
     return response;
   } on DioException catch (e) {
+    print("*************************");
     print("getRequestProvider error: ${e.error}");
     print("getRequestProvider response error: ${e.response}");
     print("getRequestProvider status code: ${e.response?.statusCode}");
     print("DioException: ${e.response?.statusMessage}");
-    if (e.error.toString().contains("SocketException")) {
-      print("DioException: SocketException");
-      // Utils.showToast(message: "No internet");
-      return null;
-    }
-    if (e.response != null) {
-      if (e.response!.statusCode == 401) {
-        return e.response;
-      } else if (e.response!.statusCode == 400) {
-        return e.response;
-      } else if (e.response!.statusCode == 500) {
-        return e.response;
-      } else {
-        return e.response;
-      }
-    } else {
-      print("response is no internet null");
-      return null;
-    }
+    print("*************************");
+    return null;
+    // if (e.error.toString().contains("SocketException")) {
+    //   print("DioException: SocketException");
+    //   // Utils.showToast(message: "No internet");
+    //   return null;
+    // }
+    // if (e.response != null) {
+    //   if (e.response!.statusCode == 401) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 400) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 500) {
+    //     return e.response;
+    //   } else {
+    //     return e.response;
+    //   }
+    // } else {
+    //   print("response is no internet null");
+    //   return null;
+    // }
   }
 }
 
@@ -91,9 +94,7 @@ Future<Response?> postRequestProvider(
       response = await dio.post(path,
           data: data,
           options: Options(
-              headers: {
-                "Accept": "application/json"
-              },
+              headers: {"Accept": "application/json"},
               sendTimeout: const Duration(milliseconds: timeout),
               receiveTimeout: const Duration(milliseconds: timeout)));
     }
@@ -105,23 +106,27 @@ Future<Response?> postRequestProvider(
     return response;
   } on DioException catch (e) {
     if (kDebugMode) {
+      print("*************************");
       print("postRequestProvider error: ${e.error}");
       print("postRequestProvider error response: ${e.response}");
       print("postRequestProvider error statusCode: ${e.response?.statusCode}");
+      print("DioException: ${e.response?.statusMessage}");
+      print("*************************");
     }
-    if (e.response != null) {
-      if (e.response!.statusCode == 401) {
-        return e.response;
-      } else if (e.response!.statusCode == 400) {
-        return e.response;
-      } else if (e.response!.statusCode == 500) {
-        return e.response;
-      } else {
-        return e.response;
-      }
-    } else {
-      return null;
-    }
+    return null;
+    // if (e.response != null) {
+    //   if (e.response!.statusCode == 401) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 400) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 500) {
+    //     return e.response;
+    //   } else {
+    //     return e.response;
+    //   }
+    // } else {
+    //   return null;
+    // }
   }
 }
 
@@ -152,9 +157,7 @@ Future<Response?> putRequestProvider(
       response = await dio.put(path,
           data: data,
           options: Options(
-              headers: {
-                "Accept": "application/json"
-              },
+              headers: {"Accept": "application/json"},
               sendTimeout: const Duration(milliseconds: timeout),
               receiveTimeout: const Duration(milliseconds: timeout)));
     }
@@ -166,23 +169,27 @@ Future<Response?> putRequestProvider(
     return response;
   } on DioException catch (e) {
     if (kDebugMode) {
+      print("**************************");
       print("postRequestProvider error: ${e.error}");
       print("postRequestProvider error response: ${e.response}");
       print("postRequestProvider error statusCode: ${e.response?.statusCode}");
+      print("DioException: ${e.response?.statusMessage}");
+      print("*************************");
     }
-    if (e.response != null) {
-      if (e.response!.statusCode == 401) {
-        return e.response;
-      } else if (e.response!.statusCode == 400) {
-        return e.response;
-      } else if (e.response!.statusCode == 500) {
-        return e.response;
-      } else {
-        return e.response;
-      }
-    } else {
-      return null;
-    }
+    return null;
+    // if (e.response != null) {
+    //   if (e.response!.statusCode == 401) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 400) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 500) {
+    //     return e.response;
+    //   } else {
+    //     return e.response;
+    //   }
+    // } else {
+    //   return null;
+    // }
   }
 }
 
@@ -221,22 +228,26 @@ Future<Response?> deleteRequestProvider(
     return response;
   } on DioException catch (e) {
     if (kDebugMode) {
+      print("*************************");
       print("deleteRequestProvider error: ${e.error}");
       print("deleteRequestProvider error response: ${e.response}");
       print("deleteRequestProvider status code: ${e.response?.statusCode}");
+      print("DioException: ${e.response?.statusMessage}");
+      print("*************************");
     }
-    if (e.response != null) {
-      if (e.response!.statusCode == 401) {
-        return e.response;
-      } else if (e.response!.statusCode == 400) {
-        return e.response;
-      } else if (e.response!.statusCode == 500) {
-        return e.response;
-      } else {
-        return e.response;
-      }
-    } else {
-      return null;
-    }
+    return null;
+    // if (e.response != null) {
+    //   if (e.response!.statusCode == 401) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 400) {
+    //     return e.response;
+    //   } else if (e.response!.statusCode == 500) {
+    //     return e.response;
+    //   } else {
+    //     return e.response;
+    //   }
+    // } else {
+    //   return null;
+    // }
   }
 }

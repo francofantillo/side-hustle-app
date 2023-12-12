@@ -55,10 +55,6 @@ class _ResetPasswordState extends State<ResetPassword> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // backButton(onPressed: () {
-                //   Navigator.pop(context);
-                // }),
-                // height(AppDimensions.fieldsVerticalSpacingBetween),
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0),
                   child: textWidget(
@@ -88,8 +84,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
                     controller: _bloc.passwordControllerSignup,
-                    // fieldValidator: (value) =>
-                    //     value?.validateEmpty(AppStrings.password),
                     fieldValidator: (value) => value?.validatePassword,
                     isShowShadow: true,
                     isShowBoarder: false,

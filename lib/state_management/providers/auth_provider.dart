@@ -36,7 +36,8 @@ Future<Response?> signupProvider({
   //   "confirm_password": "123456"
   // };
 
-  print("*****************\nurl: ${API.SIGNUP}\ndata: $data\n**************************");
+  print(
+      "*****************\nurl: ${API.SIGNUP}\ndata: $data\n**************************");
 
   final response = await postRequestProvider(path: API.SIGNUP, data: data);
   return response;
@@ -47,7 +48,8 @@ Future<Response?> otpVerificationProvider(
     {String? otp, String? apiToken}) async {
   final data = {"otp_token": otp, "api_token": apiToken};
 
-  print("*****************\nurl: ${API.VERIFIFY_OTP}\ndata: $data\n**************************");
+  print(
+      "*****************\nurl: ${API.VERIFIFY_OTP}\ndata: $data\n**************************");
 
   final response =
       await postRequestProvider(path: API.VERIFIFY_OTP, data: data);
@@ -62,7 +64,8 @@ Future<Response?> loginProvider({
   // final data = {"email": "test08@mail.com", "password": "123456"};
   final data = {"email": email, "password": password};
 
-  print("*****************\nurl: ${API.LOGIN}\ndata: $data\n**************************");
+  print(
+      "*****************\nurl: ${API.LOGIN}\ndata: $data\n**************************");
 
   final response = await postRequestProvider(path: API.LOGIN, data: data);
   return response;
@@ -75,18 +78,17 @@ Future<Response?> forgotPasswordProvider({
   // final data = {"phone": "+15555555510"};
   final data = {"phone": phone};
 
-  print("*****************\nurl: ${API.FORGOT_PASSWORD}\ndata: $data\n**************************");
+  print(
+      "*****************\nurl: ${API.FORGOT_PASSWORD}\ndata: $data\n**************************");
 
   final response =
       await postRequestProvider(path: API.FORGOT_PASSWORD, data: data);
   return response;
 }
 
-/// Reset
-Future<Response?> resetPasswordProvider({
-  String? password,
-  String? apiToken
-}) async {
+/// Reset Password
+Future<Response?> resetPasswordProvider(
+    {String? password, String? apiToken}) async {
   // final data = {
   //   "password": "123456",
   //   "confirm_password": "123456",
@@ -99,7 +101,39 @@ Future<Response?> resetPasswordProvider({
     "api_token": apiToken
   };
 
-  print("*****************\nurl: ${API.RESET_PASSWORD}\ndata: $data\n**************************");
-  final response = await putRequestProvider(path: API.RESET_PASSWORD, data: data);
+  print(
+      "*****************\nurl: ${API.RESET_PASSWORD}\ndata: $data\n**************************");
+  final response =
+      await putRequestProvider(path: API.RESET_PASSWORD, data: data);
+  return response;
+}
+
+/// Change Password
+Future<Response?> changePasswordProvider(
+    {String? existingPassword, String? password, String? apiToken}) async {
+  // final data = {
+  //   "old_password": "admin@1234",
+  //   "new_password": "admin@123",
+  //   "confirm_password": "admin@123"
+  // };
+
+  final data = {
+    "old_password": existingPassword,
+    "new_password": password,
+    "confirm_password": password
+  };
+
+  print(
+      "*****************\nurl: ${API.CHANGE_PASSWORD}\ndata: $data\n**************************");
+  final response = await postRequestProvider(
+      path: API.CHANGE_PASSWORD, data: data, token: apiToken);
+  return response;
+}
+
+/// Logout
+Future<Response?> logoutProvider({String? apiToken}) async {
+  print("*****************\nurl: ${API.LOGOUT}\n**************************");
+  final response =
+      await postRequestProvider(path: API.LOGOUT, data: null, token: apiToken);
   return response;
 }

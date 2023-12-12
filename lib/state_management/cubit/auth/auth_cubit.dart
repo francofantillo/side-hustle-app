@@ -4,8 +4,10 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/reset_bloc.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/auth_provider.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 
@@ -15,6 +17,10 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthState());
+
+  Future resetAuthBloc() async {
+    emit(AuthState());
+  }
 
   final prefs = SharedPreferencesHelper.instance;
 
@@ -28,14 +34,17 @@ class AuthCubit extends Cubit<AuthState> {
   PhoneNumber? phoneNumber;
   TextEditingController zipCodeController = TextEditingController();
   TextEditingController passwordControllerSignup = TextEditingController();
+  TextEditingController existingPasswordController = TextEditingController();
   TextEditingController passwordControllerLogin = TextEditingController();
-  TextEditingController confirmPasswordControllerSignup = TextEditingController();
+  TextEditingController confirmPasswordControllerSignup =
+      TextEditingController();
   TextEditingController otpController = TextEditingController();
   bool isTCAndPPAccepted = false;
 
   initControllers() {
     firstNameController = TextEditingController();
     lastNameController = TextEditingController();
+    existingPasswordController = TextEditingController();
     emailControllerSignup = TextEditingController();
     emailControllerLogin = TextEditingController();
     phoneNumber = null;
@@ -101,6 +110,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (response != null) {
       EasyLoading.dismiss();
 
+      /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
@@ -111,14 +121,16 @@ class AuthCubit extends Cubit<AuthState> {
           Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
               arguments: const OtpVerificationScreen(isSignUp: true));
         }
-      } else if (response.data["status"] != AppValidationMessages.success) {
+      }
+
+      /// Failed
+      else {
         print(
             "status: ${response.data["status"]} response: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
-      } else {
-        AppUtils.showToast(response.data["message"]);
       }
     } else {
+      EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }
@@ -139,7 +151,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (response != null) {
       EasyLoading.dismiss();
 
-      /// Success: True
+      /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
@@ -150,7 +162,7 @@ class AuthCubit extends Cubit<AuthState> {
         return 1;
       }
 
-      /// Success: False
+      /// Failed
       else {
         print(
             "status: ${response.data["status"]} errors: ${response.data["errors"]}");
@@ -206,6 +218,7 @@ class AuthCubit extends Cubit<AuthState> {
         AppUtils.showToast(response.data["message"]);
       }
     } else {
+      EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }
@@ -241,6 +254,7 @@ class AuthCubit extends Cubit<AuthState> {
         return 0;
       }
     } else {
+      EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
       return 0;
     }
@@ -280,6 +294,90 @@ class AuthCubit extends Cubit<AuthState> {
         AppUtils.showToast(response.data["message"]);
       }
     } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Change Password
+  Future changePasswordCubit({
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
+
+    final response = await changePasswordProvider(
+        existingPassword: existingPasswordController.text,
+        password: passwordControllerSignup.text,
+        apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        print(
+            "status: ${response.data["status"]} response: ${response.data["data"]}");
+        AppUtils.showToast(response.data["message"]);
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+
+      /// Failed
+      else {
+        print(
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Logout
+  Future logoutCubit({
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
+
+    final response =
+        await logoutProvider(apiToken: state.userModel?.data?.apiToken);
+
+    /// Rest EasyLoading Indicator Color
+    EasyLoading.instance.indicatorColor = AppColors.primaryColor;
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        print(
+            "status: ${response.data["status"]} response: ${response.data["data"]}");
+        AppUtils.showToast(response.data["message"]);
+        // emit(state.copyWith(userModel: UserModel()));
+        /// Reset Blocs
+        if (mounted) {
+          await RestBloc.resetBlocs(context: context).then((value) {
+            Navigator.pop(context);
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.splashScreenRoute, (route) => false);
+          });
+        }
+      }
+
+      /// Failed
+      else {
+        print(
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }
