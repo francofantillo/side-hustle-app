@@ -56,6 +56,17 @@ Future<Response?> otpVerificationProvider(
   return response;
 }
 
+/// Resend OTP
+Future<Response?> resendOTPProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.RESEND_OTP}\n**************************");
+  final data = {"api_token": apiToken};
+
+  final response = await postRequestProvider(
+      path: API.RESEND_OTP, data: data, token: apiToken);
+  return response;
+}
+
 /// Login
 Future<Response?> loginProvider({
   String? email,

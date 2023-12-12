@@ -141,11 +141,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     print('Button Pressed');
                     if (enableResend) {
                       /// Reset Timer
-                      otpText = null;
-                      bloc.otpController.clear();
-                      secondsRemaining = 59;
-                      enableResend = false;
-                      currentSeconds = 0;
+                      await bloc.resendOTPCubit(context: context).then((value) {
+                        if(value == 1) {
+                          otpText = null;
+                          bloc.otpController.clear();
+                          secondsRemaining = 59;
+                          enableResend = false;
+                          currentSeconds = 0;
+                        }
+                      });
                     } else {
                       if (otpText != null) {
                         if (widget.isSocial) {

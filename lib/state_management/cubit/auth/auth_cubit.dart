@@ -56,18 +56,24 @@ class AuthCubit extends Cubit<AuthState> {
     isTCAndPPAccepted = false;
   }
 
-  /// Save user data
+  /**
+   * Save user data
+   */
   Future saveUserData() async {
     await prefs.saveUser(state.userModel!);
   }
 
-  /// Get user data
+  /**
+   * Get user data
+   */
   Future getUserData() async {
     final UserModel? userModel = await prefs.getUser();
     emit(state.copyWith(userModel: userModel));
   }
 
-  /// Is User Login
+  /**
+   * Is User Login
+   */
   Future<bool> isLogin(
       {required BuildContext context, required bool mounted}) async {
     final UserModel? userModel = await prefs.getUser();
@@ -114,8 +120,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
-        emit(state.copyWith(
-            userModel: userModel, apiToken: userModel.data?.apiToken));
+        emit(state.copyWith(userModel: userModel));
         // AppUtils.showToast(userModel.message);
         if (mounted) {
           Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
@@ -156,9 +161,44 @@ class AuthCubit extends Cubit<AuthState> {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
         // emit(state.copyWith(userModel: userModel));
-        emit(state.copyWith(
-            userModel: userModel, apiToken: userModel.data?.apiToken));
+        emit(state.copyWith(userModel: userModel));
         // AppUtils.showToast(userModel.message);
+        return 1;
+      }
+
+      /// Failed
+      else {
+        print(
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+        return 0;
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      return null;
+    }
+  }
+
+  /// Resend OTP
+  Future<int?> resendOTPCubit({
+    required BuildContext context,
+  }) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
+
+    final response =
+        await resendOTPProvider(apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        print(
+            "status: ${response.data["status"]} response: ${response.data["data"]}");
+        // emit(state.copyWith(userModel: userModel));
+        AppUtils.showToast(response.data["message"]);
         return 1;
       }
 

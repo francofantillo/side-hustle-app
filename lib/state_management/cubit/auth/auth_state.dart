@@ -5,7 +5,7 @@ class AuthState {
 
   AuthState({this.userModel});
 
-  AuthState copyWith({UserModel? userModel, String? apiToken}) {
+  AuthState copyWith({UserModel? userModel}) {
     return AuthState(userModel: userModel ?? this.userModel);
   }
 }
