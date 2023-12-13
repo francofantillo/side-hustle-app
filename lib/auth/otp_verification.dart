@@ -142,7 +142,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     if (enableResend) {
                       /// Reset Timer
                       await bloc.resendOTPCubit(context: context).then((value) {
-                        if(value == 1) {
+                        if (value == 1) {
                           otpText = null;
                           bloc.otpController.clear();
                           secondsRemaining = 59;
