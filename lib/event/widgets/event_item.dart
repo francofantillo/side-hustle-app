@@ -68,7 +68,7 @@ class EventItemsWidget extends StatelessWidget {
                   RoundedCornersImage(
                     imageHeight: imageHeight,
                     imageWidth: AppDimensions.listItemWidth,
-                    assetImage: imagePath,
+                    image: imagePath,
                     boarderColor: boarderColor,
                   ),
                   Expanded(
@@ -110,7 +110,7 @@ class EventItemsWidget extends StatelessWidget {
                           ),
                           height(imageHeight! * .02),
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 3.0),
@@ -129,7 +129,6 @@ class EventItemsWidget extends StatelessWidget {
                               )),
                             ],
                           ),
-                          // height(imageHeight! * .04),
                           const Spacer(),
                           Divider(
                             height: 1,

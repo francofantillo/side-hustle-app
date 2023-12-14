@@ -407,7 +407,7 @@ class AuthCubit extends Cubit<AuthState> {
         // emit(state.copyWith(userModel: UserModel()));
         /// Reset Blocs
         if (mounted) {
-          await RestBloc.resetBlocs(context: context).then((value) {
+          await ClearAppData.resetBlocs(context: context).then((value) {
             Navigator.pop(context);
             Navigator.pushNamedAndRemoveUntil(
                 context, AppRoutes.splashScreenRoute, (route) => false);

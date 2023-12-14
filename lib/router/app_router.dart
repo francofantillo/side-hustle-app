@@ -132,7 +132,10 @@ class AppRouter {
             );
 
           case AppRoutes.viewEventScreenRoute:
-            return const ViewEvent();
+            final args = routeSettings.arguments as ViewEvent?;
+            return ViewEvent(
+              id: args?.id,
+            );
 
           case AppRoutes.viewEventSelfScreenRoute:
             return const ViewEventSelf();

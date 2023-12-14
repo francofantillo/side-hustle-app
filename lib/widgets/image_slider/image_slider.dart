@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -9,9 +10,14 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageSlider extends StatefulWidget {
   final List<String>? itemImages;
+  final List<Images>? responseImages;
   final bool hideCameraIcon;
 
-  const ImageSlider({super.key, this.itemImages, this.hideCameraIcon = false});
+  const ImageSlider(
+      {super.key,
+      this.itemImages,
+      this.responseImages,
+      this.hideCameraIcon = false});
 
   @override
   State<ImageSlider> createState() => _ImageSliderState();
@@ -44,7 +50,9 @@ class _ImageSliderState extends State<ImageSlider> {
       child: PageView.builder(
           scrollDirection: Axis.horizontal,
           controller: pageController,
-          itemCount: widget.itemImages?.length ?? 3,
+          itemCount: widget.responseImages != null
+              ? widget.responseImages?.length ?? 0
+              : widget.itemImages?.length ?? 3,
           itemBuilder: (context, index) {
             return pageViewChild(index);
           }),
@@ -52,24 +60,28 @@ class _ImageSliderState extends State<ImageSlider> {
   }
 
   dotIndicatorWidget() {
-    return Card(
-      elevation: 2,
-      shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
-      ),
-      child: SmoothPageIndicator(
-        controller: pageController,
-        count: widget.itemImages?.length ?? 3,
-        effect: const ExpandingDotsEffect(
-          dotHeight: 4,
-          dotWidth: 7,
-          activeDotColor: AppColors.primaryColor,
-          dotColor: Color(0xFFA5A5A5),
-        ),
-      ),
-    );
+    return widget.responseImages == null
+        ? const SizedBox.shrink()
+        : Card(
+            elevation: 2,
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  AppDimensions.listItemImageRoundedBorder),
+            ),
+            child: SmoothPageIndicator(
+              controller: pageController,
+              count: widget.responseImages != null
+                  ? widget.responseImages!.length
+                  : widget.itemImages?.length ?? 3,
+              effect: const ExpandingDotsEffect(
+                dotHeight: 4,
+                dotWidth: 7,
+                activeDotColor: AppColors.primaryColor,
+                dotColor: Color(0xFFA5A5A5),
+              ),
+            ),
+          );
   }
 
   pageViewChild(int index) {
@@ -88,7 +100,12 @@ class _ImageSliderState extends State<ImageSlider> {
             ImageSliderItem(
               imageHeight: AppDimensions.productImageSliderHeight,
               imageWidth: AppDimensions.productImageSliderWidth,
-              assetImage: widget.itemImages?[index] ?? AssetsPath.carpenterSlider,
+              assetImage: widget.responseImages == null
+                  ? widget.itemImages != null
+                      ? widget.itemImages![index]
+                      : AssetsPath.carpenterSlider
+                  : null,
+              image: widget.responseImages?[index].image,
               // image: AssetsPath.leoLubinProfile,
               boarderColor: Colors.white,
             ),

@@ -17,4 +17,12 @@ class API {
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";
 
+  /// Side Hustle
+  static const String ADD_PRODUCT_OR_SERVICE = "${BASE_URL}/add-product";
+
+  /// Events
+  static const String GET_EVENTS = "${BASE_URL}/events";
+  static const String GET_EVENT_DETAILS = "${BASE_URL}/event-detail";
+  static const String GET_INTERESTED_EVENT = "${BASE_URL}/interested-in-event";
+
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:side_hustle/state_management/providers/card/card.dart';
+import 'package:side_hustle/state_management/providers/card/card_provider.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
@@ -18,7 +18,7 @@ class CardCubit extends Cubit<CardState> {
 
   final prefs = SharedPreferencesHelper.instance;
 
-  /// Change Password
+  /// Add Card
   Future addCardCubit({
     required BuildContext context,
     required bool mounted,
