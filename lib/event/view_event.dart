@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
@@ -59,30 +60,34 @@ class _ViewEventState extends State<ViewEvent> {
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Container(
-            width: 0.09.sw, // Adjust as needed
-            height: 0.09.sw, // Adjust as needed
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.backIconBackgroundColor,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: IconButton(
-                icon: Icon(
-                  CustomIcon.forward,
-                  size: 0.05.sw,
-                  color: AppColors.primaryColor,
-                ),
-                onPressed: () {
-                  print("clicked");
-                },
-              ),
-            ),
-          ),
-        )
+        BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
+          return state.eventsDetailModel?.eventDetails == null
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Container(
+                    width: 0.09.sw, // Adjust as needed
+                    height: 0.09.sw, // Adjust as needed
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.backIconBackgroundColor,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: IconButton(
+                        icon: Icon(
+                          CustomIcon.forward,
+                          size: 0.05.sw,
+                          color: AppColors.primaryColor,
+                        ),
+                        onPressed: () {
+                          print("clicked");
+                        },
+                      ),
+                    ),
+                  ),
+                );
+        })
       ],
       body: BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
         return state.eventsDetailModel?.eventDetails == null
