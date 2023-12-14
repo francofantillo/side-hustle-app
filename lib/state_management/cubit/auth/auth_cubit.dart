@@ -6,8 +6,9 @@ import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/reset_bloc.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
-import 'package:side_hustle/state_management/providers/auth_provider.dart';
+import 'package:side_hustle/state_management/providers/auth/auth_provider.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 
@@ -60,6 +61,7 @@ class AuthCubit extends Cubit<AuthState> {
    * Save user data
    */
   Future saveUserData() async {
+    await prefs.saveToken(state.userModel!.data!.apiToken!);
     await prefs.saveUser(state.userModel!);
   }
 
@@ -240,6 +242,7 @@ class AuthCubit extends Cubit<AuthState> {
         if (mounted) {
           if (userModel.data?.isVerified == 1) {
             await prefs.saveUser(userModel);
+            await prefs.saveToken(userModel.data!.apiToken!);
             if (mounted) {
               Navigator.pushNamedAndRemoveUntil(
                   context, AppRoutes.bottomTabsScreenRoute, (route) => false);
@@ -383,16 +386,18 @@ class AuthCubit extends Cubit<AuthState> {
     required bool mounted,
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.instance.indicatorColor = AppColors.whiteColor;
     EasyLoading.show();
 
     final response =
         await logoutProvider(apiToken: state.userModel?.data?.apiToken);
 
     /// Rest EasyLoading Indicator Color
-    EasyLoading.instance.indicatorColor = AppColors.primaryColor;
+    // EasyLoading.instance.indicatorColor = AppColors.primaryColor;
 
     if (response != null) {
       EasyLoading.dismiss();
+      EasyLoading.instance.indicatorColor = AppColors.primaryColor;
 
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
@@ -418,6 +423,7 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } else {
       EasyLoading.dismiss();
+      EasyLoading.instance.indicatorColor = AppColors.primaryColor;
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }

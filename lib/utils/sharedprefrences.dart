@@ -30,6 +30,16 @@ class SharedPreferencesHelper {
     return prefs.getString(key);
   }
 
+  Future<bool> saveToken(String value) async {
+    final prefs = await instance.prefs;
+    return prefs.setString(AppStrings.TOKEN_KEY, value);
+  }
+
+  Future<String?> getToken() async {
+    final prefs = await instance.prefs;
+    return prefs.getString(AppStrings.TOKEN_KEY);
+  }
+
   Future<void> saveUser(UserModel user) async {
     final prefs = await instance.prefs;
     String userJson = jsonEncode(user.toJson());

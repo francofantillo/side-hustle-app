@@ -59,6 +59,7 @@ class AppRouter {
       builder: (BuildContext context) {
         switch (routeSettings.name) {
           //-------------- User Navigation Routes ---------------------- //
+
           case AppRoutes.splashScreenRoute:
             return const SplashScreen();
 

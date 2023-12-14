@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:side_hustle/base_widget/base_widget.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -133,14 +134,17 @@ class AppUtils {
   ];
 
   static void showToast(String? message) {
+    FToast fToast = FToast();
+    fToast.init(BaseWidget.globalKey.currentContext!);
     Fluttertoast.showToast(
-      // textColor: AppColors.whiteColor,
+      textColor: AppColors.whiteColor,
       msg: message ?? "",
       toastLength: Toast.LENGTH_SHORT,
-      // backgroundColor: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
+      webPosition: "center",
+      webBgColor: "linear-gradient(to right, #dc1c13, #dc1c13)",
     );
   }
-
 }

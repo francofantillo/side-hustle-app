@@ -47,28 +47,27 @@ class _LogoutDialogueWidgetState extends State<LogoutDialogueWidget> {
                     fontWeight: FontWeight.bold,
                     color: AppColors.whiteColor,
                     textAlign: TextAlign.center),
-                height(0.03.sh),
+                height(0.03.sw),
                 textWidget(
                     text: AppStrings.logoutMessage,
                     fontSize: AppDimensions.textSizeNormal,
                     maxLines: 2,
                     color: AppColors.whiteColor,
                     textAlign: TextAlign.center),
-                height(0.03.sh),
+                height(0.03.sw),
                 CustomMaterialButton(
                     // height: 10.h,
                     onPressed: () async {
                       // Navigator.pop(context);
                       // Navigator.pushNamedAndRemoveUntil(context,
                       //     AppRoutes.splashScreenRoute, (route) => false);
-                      EasyLoading.instance.indicatorColor = AppColors.whiteColor;
                       await _bloc.logoutCubit(
                           context: context, mounted: mounted);
                     },
                     name: AppStrings.logout,
                     textColor: AppColors.appRedColor,
                     color: AppColors.whiteColor),
-                height(0.03.sh),
+                height(0.03.sw),
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
@@ -82,7 +81,7 @@ class _LogoutDialogueWidgetState extends State<LogoutDialogueWidget> {
                         textAlign: TextAlign.center),
                   ),
                 ),
-                height(0.04.sh),
+                height(0.04.sw),
               ],
             ),
           ),

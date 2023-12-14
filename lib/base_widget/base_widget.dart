@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/router/app_router.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
+import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/my_behaviour.dart';
@@ -24,51 +25,11 @@ class BaseWidget extends StatefulWidget {
 }
 
 class _BaseWidgetState extends State<BaseWidget> {
-  // static double sh = 533.3333333333334; // Default Nexus S value
-  // static double sw = 320; // Default Nexus S value
-
-  // static double sh = 0;
-  // static double sw = 0;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  setDesignSize(
-      {required double screenWidth,
-      required double screenHeight,
-      required double dpi}) async {
-    final double sw = await ScreenDesignSize.getSmallestWidth(
-        screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
-    final double sh = await ScreenDesignSize.getSmallestHeight(
-        screenHeight: screenHeight, screenWidth: screenWidth, dpi: dpi);
-    // ScreenUtil.configure(designSize: Size(sw, sh));
-    print("sh: ${ScreenDesignSize.sh} : $sh, sw: ${ScreenDesignSize.sw} : $sw");
-  }
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    // final mediaQueryData = MediaQuery.of(context);
-    // final screenWidthInPixels =
-    //     mediaQueryData.size.width * mediaQueryData.devicePixelRatio;
-    // final screenHeightInPixels =
-    //     mediaQueryData.size.height * mediaQueryData.devicePixelRatio;
-    // final dpi = mediaQueryData.devicePixelRatio *
-    //     160.0; // 160 is the default logical DPI
-    //
-    // print(
-    //     "screenWidthInPixels: $screenWidthInPixels, screenHeightInPixels: $screenHeightInPixels, dpi: $dpi");
-
-    print("ScreenDesignSize sh: ${ScreenDesignSize.sh}, ScreenDesignSize sw: ${ScreenDesignSize.sw}");
-    //
-    // setDesignSize(
-    //     screenHeight: screenHeightInPixels,
-    //     screenWidth: screenWidthInPixels,
-    //     dpi: dpi);
-
+    print(
+        "ScreenDesignSize sh: ${ScreenDesignSize.sh}, ScreenDesignSize sw: ${ScreenDesignSize.sw}");
     ScreenDesignSize.setDesignSize(context: context);
   }
 
@@ -79,6 +40,7 @@ class _BaseWidgetState extends State<BaseWidget> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
+        BlocProvider<CardCubit>(create: (context) => CardCubit()),
       ],
       child: DevicePreview(
         enabled: false,
@@ -112,8 +74,8 @@ class _BaseWidgetState extends State<BaseWidget> {
                 }),
                 title: AppStrings.APP_TITLE,
                 debugShowCheckedModeBanner: false,
-                initialRoute: AppRoutes.splashScreenRoute,
-                // initialRoute: AppRoutes.bottomTabsScreenRoute,
+                // initialRoute: AppRoutes.splashScreenRoute,
+                // initialRoute: AppRoutes.paymentMethodScreenRoute,
                 onGenerateRoute: AppRouter().onGenerateRoute,
               );
             },

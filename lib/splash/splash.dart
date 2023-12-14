@@ -8,7 +8,6 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
-import 'package:side_hustle/utils/screen_design_size.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 
@@ -124,15 +123,6 @@ class _SplashScreenState extends State<SplashScreen> {
           _visible = true;
         });
       }
-    });
-  }
-
-  Timer _navigationTimerMilli({required int milliseconds}) {
-    ScreenUtil.configure(
-        designSize: Size(ScreenDesignSize.sw, ScreenDesignSize.sh));
-    return Timer(Duration(milliseconds: milliseconds), () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, AppRoutes.loginScreenRoute, (route) => false);
     });
   }
 }
