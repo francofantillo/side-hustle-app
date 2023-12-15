@@ -12,12 +12,12 @@ class AppUtils {
   /// Easy Loading Config
   static configEasyLoading() {
     EasyLoading.instance
-      ..indicatorType = EasyLoadingIndicatorType.ring
+      ..indicatorType = EasyLoadingIndicatorType.fadingFour
       ..loadingStyle = EasyLoadingStyle.custom
       ..backgroundColor = Colors.transparent
       ..indicatorColor = AppColors.primaryColor
       ..textColor = Colors.white
-      ..indicatorSize = 45.0
+      ..indicatorSize = 50.0
       ..radius = 10.0
       ..boxShadow = <BoxShadow>[]
       ..maskColor = Colors.black.withOpacity(0.6)

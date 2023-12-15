@@ -466,4 +466,8 @@ class AppStrings {
   /// Shared Prefrences Keys
   static const String USERDATA_KEY = "UserData";
   static const String TOKEN_KEY = "Token";
+
+  /// Error Messages
+  static const String errorMessageEvent = "No Events Found";
+
 }

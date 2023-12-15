@@ -9,6 +9,8 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
+import 'package:side_hustle/widgets/error/error_widget.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 
 class EventScreen extends StatefulWidget {
@@ -19,7 +21,7 @@ class EventScreen extends StatefulWidget {
 }
 
 class _EventScreenState extends State<EventScreen> {
-  late final _bloc;
+  late final EventsCubit _bloc;
   var index = 0;
   bool isProductSelected = true;
 
@@ -78,29 +80,35 @@ class _EventScreenState extends State<EventScreen> {
                 title: AppStrings.events,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: AppDimensions.rootPadding,
-                  right: AppDimensions.rootPadding,
-                  top: AppDimensions.rootPadding),
-              child: SearchTextField(
-                  hintText: AppStrings.searchEvent,
-                  contentPaddingBottom: 10,
-                  height: AppDimensions.searchTextFieldHeight,
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.only(right: 12.0, left: 0),
-                    child: Material(
-                        child: InkWell(
-                            onTap: () {
-                              print("onClicked Filter");
-                            },
-                            child: ImageIcon(
-                              const AssetImage(AssetsPath.searchFilter),
-                              size: AppDimensions.imageIconSizeTextFormField,
-                            ))),
-                  ),
-                  onChanged: (search) {}),
-            ),
+            BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
+              return state.eventsModel?.events?.isEmpty ?? true
+                  ? const SizedBox.shrink()
+                  : Padding(
+                      padding: EdgeInsets.only(
+                          left: AppDimensions.rootPadding,
+                          right: AppDimensions.rootPadding,
+                          top: AppDimensions.rootPadding),
+                      child: SearchTextField(
+                          hintText: AppStrings.searchEvent,
+                          contentPaddingBottom: 10,
+                          height: AppDimensions.searchTextFieldHeight,
+                          suffixIcon: Padding(
+                            padding:
+                                const EdgeInsets.only(right: 12.0, left: 0),
+                            child: Material(
+                                child: InkWell(
+                                    onTap: () {
+                                      print("onClicked Filter");
+                                    },
+                                    child: ImageIcon(
+                                      const AssetImage(AssetsPath.searchFilter),
+                                      size: AppDimensions
+                                          .imageIconSizeTextFormField,
+                                    ))),
+                          ),
+                          onChanged: (search) {}),
+                    );
+            }),
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             const EventList()
           ],

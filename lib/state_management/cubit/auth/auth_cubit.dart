@@ -224,6 +224,7 @@ class AuthCubit extends Cubit<AuthState> {
     required bool mounted,
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    // EasyLoading.instance.indicatorType = EasyLoadingIndicatorType.fadingCube;
     EasyLoading.show();
 
     final response = await loginProvider(

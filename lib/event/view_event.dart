@@ -33,7 +33,7 @@ class ViewEvent extends StatefulWidget {
 }
 
 class _ViewEventState extends State<ViewEvent> {
-  late final _bloc;
+  late final EventsCubit _bloc;
   bool _isInterestedInEvent = false;
 
   @override
@@ -384,12 +384,16 @@ class _ViewEventState extends State<ViewEvent> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: CustomMaterialButton(
-                            onPressed: () async {
-                              await _bloc.getIsInterestedEventCubit(
-                                  context: context,
-                                  mounted: mounted,
-                                  id: widget.id);
-                            },
+                            onPressed: state.eventsDetailModel?.eventDetails
+                                        ?.isInterested ==
+                                    0
+                                ? () async {
+                                    await _bloc.getIsInterestedEventCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        id: widget.id);
+                                  }
+                                : null,
                             color: state.eventsDetailModel?.eventDetails
                                         ?.isInterested ==
                                     1
