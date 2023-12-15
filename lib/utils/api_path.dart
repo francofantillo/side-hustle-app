@@ -25,4 +25,9 @@ class API {
   static const String GET_EVENT_DETAILS = "${BASE_URL}/event-detail";
   static const String GET_INTERESTED_EVENT = "${BASE_URL}/interested-in-event";
 
+  /// Favourites
+  static const String GET_FAVOURITES = "${BASE_URL}/view-favourite";
+  static const String ADD_TO_FAVOURITES = "${BASE_URL}/add-to-favourite";
+  static const String REMOVE_FROM_FAVOURITES = "${BASE_URL}/remove-from-favourite";
+
 }

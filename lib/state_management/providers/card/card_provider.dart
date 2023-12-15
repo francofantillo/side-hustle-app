@@ -4,7 +4,7 @@ import 'package:side_hustle/utils/api_path.dart';
 
 var dio = Dio();
 
-/// Change Password
+/// Add Card
 Future<Response?> addCardProvider(
     {String? cardHolder, String? last4, String? apiToken}) async {
   final data = {

@@ -63,7 +63,7 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
               vertical: AppDimensions.defaultHorizontalPadding),
           child: SizedBox(
             width: 1.sw,
-            height: 45.h,
+            height: 50.w,
             child: CustomButtonWithIcon(
                 borderRadius: 12,
                 onPressed: () {
@@ -163,12 +163,12 @@ class _OtherUserProfileScreenState extends State<OtherUserProfileScreen> {
               padding: const EdgeInsets.symmetric(
                   horizontal: AppDimensions.defaultHorizontalPadding + 4),
               child: CustomMaterialButton(
-                  height: 11.h,
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
-                  },
-                  name: AppStrings.message,
-                  ),
+                onPressed: () {
+                  Navigator.pushNamed(
+                      context, AppRoutes.chatOneToOneScreenRoute);
+                },
+                name: AppStrings.message,
+              ),
             ),
             height(0.01.sw),
             const Padding(

@@ -21,7 +21,7 @@ class EventItemsWidget extends StatelessWidget {
       imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
-  final Function()? onTap;
+  final Function()? onTap, onTapFav, onTapChat;
 
   const EventItemsWidget(
       {super.key,
@@ -29,6 +29,8 @@ class EventItemsWidget extends StatelessWidget {
       this.location,
       this.price,
       this.onTap,
+      this.onTapFav,
+      this.onTapChat,
       this.userProfile,
       this.userName,
       this.userRating,
@@ -187,9 +189,10 @@ class EventItemsWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   IconButtonWithBackground(
-                                    onTap: () {
-                                      print("Clicked");
-                                    },
+                                    // onTap: () {
+                                    //   print("Clicked");
+                                    // },
+                                    onTap: onTapFav,
                                     iconPath: AssetsPath.favUnfilled,
                                     height: imageHeight! * .2,
                                     width: imageHeight! * .2,
@@ -198,9 +201,10 @@ class EventItemsWidget extends StatelessWidget {
                                   ),
                                   width(0.025.sw),
                                   IconButtonWithBackground(
-                                    onTap: () {
-                                      print("Clicked");
-                                    },
+                                    // onTap: () {
+                                    //   print("Clicked");
+                                    // },
+                                    onTap: onTapChat,
                                     iconPath: AssetsPath.message,
                                     height: imageHeight! * .2,
                                     width: imageHeight! * .2,

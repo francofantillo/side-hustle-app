@@ -1,20 +1,9 @@
+enum PaymentTypeEnum { Cash, Card }
 
-enum PaymentTypeEnum {
-  Cash,
-  Card
-}
+enum AttendeesEnum { Interested, Confirmed }
 
-enum AttendeesEnum {
-  Interested,
-  Confirmed
-}
+enum SideHustleType { Products, Services }
 
-enum SideHustleType {
-  Products,
-  Services
-}
+enum DeliveryOptions { Pickup, DeliverToAddress_COD }
 
-enum DeliveryOptions {
-  Pickup,
-  DeliverToAddress_COD
-}
+enum Favourites { Event, Job, Shop }

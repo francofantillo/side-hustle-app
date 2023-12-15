@@ -11,15 +11,14 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: textWidget(
-            text: errorMessage,
-            color: AppColors.primaryColor,
-            fontWeight: FontWeight.w400,
-            fontFamily: AppFont.gilroyBold,
-            fontSize: AppDimensions.textSizeNormal),
-      ),
+    return Center(
+      child: textWidget(
+          text: errorMessage,
+          color: AppColors.primaryColor,
+          fontWeight: FontWeight.w400,
+          fontFamily: AppFont.gilroyBold,
+          textAlign: TextAlign.center,
+          fontSize: AppDimensions.textSizeNormal),
     );
   }
 }

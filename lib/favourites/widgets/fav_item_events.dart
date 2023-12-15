@@ -20,6 +20,7 @@ class FavItemEventsWidget extends StatelessWidget {
       userName,
       userRating,
       imagePath;
+  final Function()? onTapFav;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
@@ -27,6 +28,7 @@ class FavItemEventsWidget extends StatelessWidget {
       {super.key,
       this.title,
       this.location,
+      this.onTapFav,
       this.price,
       this.userProfile,
       this.userName,
@@ -57,7 +59,7 @@ class FavItemEventsWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.listItemWidth,
-                assetImage: imagePath,
+                image: imagePath,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -72,14 +74,14 @@ class FavItemEventsWidget extends StatelessWidget {
                         children: [
                           Expanded(
                               child: Padding(
-                                padding: EdgeInsets.only(top: 0.03.sw),
-                                child: textWidget(
-                                    text: title,
-                                    fontFamily: AppFont.gilroyBold,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: AppDimensions.textSizeSmall,
-                                    color: AppColors.textBlackColor),
-                              )),
+                            padding: EdgeInsets.only(top: 0.03.sw),
+                            child: textWidget(
+                                text: title,
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold,
+                                fontSize: AppDimensions.textSizeSmall,
+                                color: AppColors.textBlackColor),
+                          )),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -99,7 +101,7 @@ class FavItemEventsWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .02),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 3.0),
@@ -111,7 +113,9 @@ class FavItemEventsWidget extends StatelessWidget {
                           ),
                           width(0.02.sw),
                           Expanded(
-                              child: textWidget(text: location, maxLines: 2,
+                              child: textWidget(
+                                  text: location,
+                                  maxLines: 2,
                                   color: AppColors.textBlackColor,
                                   fontSize: AppDimensions.textSize10)),
                         ],
@@ -174,9 +178,7 @@ class FavItemEventsWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                },
+                                onTap: onTapFav,
                                 iconPath: AssetsPath.favourite,
                                 height: imageHeight! * .2,
                                 width: imageHeight! * .2,

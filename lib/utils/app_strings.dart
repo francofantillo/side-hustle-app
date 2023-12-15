@@ -469,5 +469,7 @@ class AppStrings {
 
   /// Error Messages
   static const String errorMessageEvent = "No Events Found";
+  static const String errorMessageFavourites = "No Items Found";
+  static const String errorMessage = "Something went wrong.";
 
 }

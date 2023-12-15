@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/favourites/widgets/fav_item_events.dart';
+import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/widgets/error/error_widget.dart';
 
 class FavouritesListEvent extends StatefulWidget {
   const FavouritesListEvent({super.key});
@@ -14,36 +18,75 @@ class FavouritesListEvent extends StatefulWidget {
 }
 
 class _FavouritesListEventState extends State<FavouritesListEvent> {
+  late final FavouritesCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of<FavouritesCubit>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-        itemCount: 3,
-        // Replace with your item count
-        itemBuilder: (context, index) {
-          // Replace with your horizontal list item
-          return Padding(
-            padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
-            child: FavItemEventsWidget(
-              imageWidth: 1.sw,
-              imageHeight: AppDimensions.listItemFavEventsHeight,
-              boarderColor: AppColors.itemBGColor,
-              title: AlphaAppData.favEventsList[index].title,
-              location: AppStrings.locationText,
-              imagePath: AlphaAppData.favEventsList[index].imagePath,
-              price: AlphaAppData.favEventsList[index].price,
-              userName: AlphaAppData.favEventsList[index].userName,
-              userRating: AlphaAppData.favEventsList[index].userRating,
-              userProfile: AlphaAppData.favEventsList[index].userProfile,
-            ),
-          );
-        },
-      ),
-    );
+    return BlocBuilder<FavouritesCubit, FavouritesState>(
+        builder: (context, state) {
+      return state.favouritesModelLoading
+          ? const SizedBox.shrink()
+          : state.favouritesModel?.favourites?.isEmpty ?? true
+              ? const Expanded(
+                  child: CustomErrorWidget(
+                      errorMessage: AppStrings.errorMessageFavourites),
+                )
+              : Expanded(
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics()),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: state.favouritesModel?.favourites?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0, left: 8.0, top: 8),
+                        child: FavItemEventsWidget(
+                          onTapFav: () async {
+                            await _bloc.removeFromFavCubit(
+                                context: context,
+                                mounted: mounted,
+                                type: Favourites.Event.name,
+                                id: state
+                                    .favouritesModel?.favourites?[index].id);
+                          },
+                          imageWidth: 1.sw,
+                          imageHeight: AppDimensions.listItemFavEventsHeight,
+                          boarderColor: AppColors.itemBGColor,
+                          // title: AlphaAppData.favEventsList[index].title,
+                          title: state.favouritesModel?.favourites?[index].name,
+                          // location: AppStrings.locationText,
+                          location: state
+                              .favouritesModel?.favourites?[index].location,
+                          imagePath:
+                              // AlphaAppData.favEventsList[index].imagePath,
+                              state.favouritesModel?.favourites?[index].image,
+                          // price: AlphaAppData.favEventsList[index].price,
+                          price:
+                              state.favouritesModel?.favourites?[index].price,
+                          // userName: AlphaAppData.favEventsList[index].userName,
+                          userName: state.favouritesModel?.favourites?[index]
+                              .ownerDetail?.name,
+                          userRating:
+                              // AlphaAppData.favEventsList[index].userRating,
+                              state.favouritesModel?.favourites?[index]
+                                  .ownerDetail?.rating,
+                          userProfile:
+                              // AlphaAppData.favEventsList[index].userProfile,
+                              state.favouritesModel?.favourites?[index]
+                                  .ownerDetail?.image,
+                        ),
+                      );
+                    },
+                  ),
+                );
+    });
   }
 }

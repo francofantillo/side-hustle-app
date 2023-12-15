@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_events.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_jobs.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_shops.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -22,6 +25,7 @@ class FavouritesScreen extends StatefulWidget {
 }
 
 class _FavouritesScreenState extends State<FavouritesScreen> {
+  late final FavouritesCubit _bloc;
   var index = 0;
   bool isProductSelected = true;
 
@@ -29,8 +33,26 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
 
   @override
   void initState() {
+    _bloc = BlocProvider.of(context);
     isProductSelected = true;
+    getEventsFav();
     super.initState();
+  }
+
+  getEventsFav() async {
+    if (_tabIndexBasicToggle.value == 0) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getFavouritesCubit(
+          context: context, mounted: mounted, type: Favourites.Event.name);
+    } else if (_tabIndexBasicToggle.value == 1) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getFavouritesCubit(
+          context: context, mounted: mounted, type: Favourites.Job.name);
+    } else if (_tabIndexBasicToggle.value == 2) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getFavouritesCubit(
+          context: context, mounted: mounted, type: Favourites.Shop.name);
+    }
   }
 
   @override
@@ -43,26 +65,26 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
-          backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+              backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0, top: 8),
-            child: IconButtonWithBackground(
-              // height: .074.sh,
-              height: .10.sw,
-              // width: .13.sw,
-              width: .10.sw,
-              borderRadius: 40,
-              backgroundColor: Colors.transparent,
-              iconColor: AppColors.greyColorNoOpacity,
-              iconSize: 20,
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.notificationsScreenRoute);
-              },
-              iconPath: AssetsPath.notificationBell,
-            )
-          )
+              padding: const EdgeInsets.only(right: 12.0, top: 8),
+              child: IconButtonWithBackground(
+                // height: .074.sh,
+                height: .10.sw,
+                // width: .13.sw,
+                width: .10.sw,
+                borderRadius: 40,
+                backgroundColor: Colors.transparent,
+                iconColor: AppColors.greyColorNoOpacity,
+                iconSize: 20,
+                onTap: () {
+                  Navigator.pushNamed(
+                      context, AppRoutes.notificationsScreenRoute);
+                },
+                iconPath: AssetsPath.notificationBell,
+              ))
         ],
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,9 +111,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                   activeFgColor: Colors.white,
                   inactiveBgColor: AppColors.whiteColor,
                   borderWidth: 1,
-                  borderColor: [
-                    AppColors.tabOutlineColor
-                  ],
+                  borderColor: [AppColors.tabOutlineColor],
                   inactiveFgColor: Colors.black,
                   initialLabelIndex: _tabIndexBasicToggle.value,
                   totalSwitches: 3,
@@ -104,6 +124,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                   onToggle: (index) {
                     _tabIndexBasicToggle.value = index ?? 0;
                     print('switched to: ${_tabIndexBasicToggle.value}');
+                    getEventsFav();
                     setState(() {});
                   },
                 ),
@@ -112,10 +133,10 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             _tabIndexBasicToggle.value == 0
                 ? const FavouritesListEvent()
                 : _tabIndexBasicToggle.value == 1
-                ? const FavouritesListJobs()
-                : _tabIndexBasicToggle.value == 2
-                ? const FavouritesListShops()
-                : const SizedBox.shrink(),
+                    ? const FavouritesListJobs()
+                    : _tabIndexBasicToggle.value == 2
+                        ? const FavouritesListShops()
+                        : const SizedBox.shrink(),
             height(0.02.sh)
           ],
         ),

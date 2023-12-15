@@ -9,6 +9,7 @@ import 'package:side_hustle/router/app_router.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
+import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/my_behaviour.dart';
@@ -43,6 +44,7 @@ class _BaseWidgetState extends State<BaseWidget> {
         BlocProvider<AuthCubit>(create: (context) => AuthCubit()),
         BlocProvider<CardCubit>(create: (context) => CardCubit()),
         BlocProvider<EventsCubit>(create: (context) => EventsCubit()),
+        BlocProvider<FavouritesCubit>(create: (context) => FavouritesCubit()),
       ],
       child: DevicePreview(
         enabled: false,

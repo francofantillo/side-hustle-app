@@ -1,49 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:side_hustle/state_management/models/events_model.dart';
-import 'package:side_hustle/state_management/providers/events/events_provider.dart';
+import 'package:side_hustle/state_management/models/favourites_model.dart';
+import 'package:side_hustle/state_management/providers/favourites/favourites_provider.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/utils/sharedprefrences.dart';
 
-part 'events_state.dart';
+part 'favourites_state.dart';
 
-class EventsCubit extends Cubit<EventsState> {
-  EventsCubit() : super(EventsState());
+class FavouritesCubit extends Cubit<FavouritesState> {
+  FavouritesCubit() : super(FavouritesState());
 
-  Future resetEventsBloc() async {
-    emit(EventsState());
+  Future resetFavouritesBloc() async {
+    emit(FavouritesState());
   }
 
   final prefs = SharedPreferencesHelper.instance;
 
-  /// Get Events
-  Future getEventsCubit({
+  /// Get Favourites
+  Future getFavouritesCubit({
     required BuildContext context,
     required bool mounted,
+    required String type,
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
-    emit(state.copyWith(eventsLoading: true, eventsModel: EventsModel()));
+    emit(state.copyWith(
+        favouritesModelLoading: true, favouritesModel: FavouritesModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
 
-    final response = await getEventsProvider(apiToken: token);
+    final response = await getFavouritesProvider(type: type, apiToken: token);
 
     EasyLoading.dismiss();
-    emit(state.copyWith(eventsLoading: false));
+    emit(state.copyWith(favouritesModelLoading: false));
+
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        EventsModel eventsModel = EventsModel.fromJson(response.data);
+        FavouritesModel favouritesModel =
+            FavouritesModel.fromJson(response.data);
         print(
-            "status: ${response.data["status"]} response: ${eventsModel.events}");
-        // AppUtils.showToast(response.data["message"]);
-        emit(state.copyWith(eventsModel: eventsModel));
-        // if (mounted) {
-        //   Navigator.pop(context);
-        // }
+            "status: ${response.data["status"]} response: ${favouritesModel.favourites}");
+        emit(state.copyWith(favouritesModel: favouritesModel));
       }
 
       /// Failed
@@ -57,51 +57,11 @@ class EventsCubit extends Cubit<EventsState> {
     }
   }
 
-  /// Get Event Details
-  Future getEventDetailsCubit({
+  /// Add To Fav
+  Future addToFavCubit({
     required BuildContext context,
     required bool mounted,
-    required int? id,
-  }) async {
-    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
-    emit(state.copyWith(eventsDetailLoading: true, eventsDetailModel: EventsModel()));
-    EasyLoading.show();
-
-    final token = await prefs.getToken();
-
-    final response = await getEventDetailsProvider(id: id, apiToken: token);
-
-    EasyLoading.dismiss();
-    emit(state.copyWith(eventsDetailLoading: false));
-
-    if (response != null) {
-      /// Success
-      if (response.data["status"] == AppValidationMessages.success) {
-        EventsModel eventsModel = EventsModel.fromJson(response.data);
-        print(
-            "status: ${response.data["status"]} response: ${eventsModel.events}");
-        // AppUtils.showToast(response.data["message"]);
-        emit(state.copyWith(eventsDetailModel: eventsModel));
-        // if (mounted) {
-        //   Navigator.pop(context);
-        // }
-      }
-
-      /// Failed
-      else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
-        AppUtils.showToast(response.data["message"]);
-      }
-    } else {
-      AppUtils.showToast(AppValidationMessages.failedMessage);
-    }
-  }
-
-  /// Get Is Interested Event
-  Future getIsInterestedEventCubit({
-    required BuildContext context,
-    required bool mounted,
+    required String type,
     required int? id,
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
@@ -110,21 +70,54 @@ class EventsCubit extends Cubit<EventsState> {
     final token = await prefs.getToken();
 
     final response =
-        await getIsInterestedEventProvider(id: id, apiToken: token);
+        await addToFavProvider(id: id, type: type, apiToken: token);
 
     EasyLoading.dismiss();
 
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        EventsModel eventsModel = EventsModel.fromJson(response.data);
+        print("status: ${response.data["status"]} response: ${response.data}");
+        AppUtils.showToast(response.data["message"]);
+      }
+
+      /// Failed
+      else {
         print(
-            "status: ${response.data["status"]} response: ${eventsModel.events}");
-        // AppUtils.showToast(response.data["message"]);
-        emit(state.copyWith(eventsDetailModel: eventsModel));
-        // if (mounted) {
-        //   Navigator.pop(context);
-        // }
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Remove From Fav
+  Future removeFromFavCubit({
+    required BuildContext context,
+    required bool mounted,
+    required String type,
+    required int? id,
+  }) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    final response =
+        await removeFromFavProvider(id: id, type: type, apiToken: token);
+
+    EasyLoading.dismiss();
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        FavouritesModel favouritesModel =
+            FavouritesModel.fromJson(response.data);
+        print(
+            "status: ${response.data["status"]} response: ${favouritesModel.favourites}");
+        AppUtils.showToast(favouritesModel.message);
+        emit(state.copyWith(favouritesModel: favouritesModel));
       }
 
       /// Failed
