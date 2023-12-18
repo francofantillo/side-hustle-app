@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:side_hustle/state_management/providers/base_api_provider.dart';
 import 'package:side_hustle/utils/api_path.dart';
+import 'package:path/path.dart' as getImagePath;
 
 var dio = Dio();
 
@@ -138,6 +142,114 @@ Future<Response?> changePasswordProvider(
       "*****************\nurl: ${API.CHANGE_PASSWORD}\ndata: $data\n**************************");
   final response = await postRequestProvider(
       path: API.CHANGE_PASSWORD, data: data, token: apiToken);
+  return response;
+}
+
+/// Your Resume Edit
+Future<Response?> updateResumeProvider({
+  String? apiToken,
+  File? profileImage,
+  File? pdfFile,
+  String? actualName,
+  String? nickName,
+  String? familyTies,
+  String? professionalBackground,
+  String? favouriteQuote,
+  String? description,
+  List? hobbies,
+}) async {
+  /*
+    profile_image,
+    file
+    actual_name:test
+    nick_name:user22
+    family_ties:xyz
+    professional_background:xyz
+    favourite_quote:abc
+    description:xyz
+    hobbies:teat, play cricket
+   */
+
+  // final Map<String, dynamic> data = {
+  //   "profile_image": await MultipartFile.fromFile(
+  //       profileImage!.path,
+  //       filename: "profileImageName"),
+  //   "file": await MultipartFile.fromFile(
+  //       pdfFile!.path,
+  //       filename: "pdfFileName"),
+  //   "actual_name": actualName,
+  //   "nick_name": nickName,
+  //   "family_ties": familyTies,
+  //   "professional_background": professionalBackground,
+  //   "favourite_quote": favouriteQuote,
+  //   "description": description,
+  //   "hobbies": hobbies,
+  // };
+
+  late String hobbiesString;
+
+  for (int i = 0; i < (hobbies?.length ?? 0); i++) {
+    print("Hobbies Length: ${hobbies?.length}");
+    if (i == 0) {
+      if ((hobbies!.length - 1) == i) {
+        hobbiesString = "${hobbies[i]}";
+      } else {
+        hobbiesString = "${hobbies[i]}, ";
+      }
+    } else {
+      if ((hobbies!.length - 1) == i) {
+        hobbiesString += "${hobbies[i]}";
+      } else {
+        hobbiesString += "${hobbies[i]}, ";
+      }
+    }
+  }
+
+  final Map<String, dynamic> data = {
+    "actual_name": actualName,
+    "nick_name": nickName,
+    "family_ties": familyTies,
+    "professional_background": professionalBackground,
+    "favourite_quote": favouriteQuote,
+    "description": description,
+  };
+
+  if (hobbies != null) {
+    data.putIfAbsent("hobbies", () => hobbiesString);
+  }
+
+  if (profileImage != null) {
+    final profileImageName = getImagePath.basename(profileImage.path);
+    final profileImageMultipart = await MultipartFile.fromFile(
+        profileImage.path,
+        filename: profileImageName);
+    data.putIfAbsent("profile_image", () => profileImageMultipart);
+  }
+
+  if (pdfFile != null) {
+    final pdfFileName = getImagePath.basename(pdfFile.path);
+    final pdfFileMultipart =
+        await MultipartFile.fromFile(pdfFile.path, filename: pdfFileName);
+    data.putIfAbsent("file", () => pdfFileMultipart);
+  }
+
+  final formData = FormData.fromMap(data);
+  print(
+      "*****************\nurl: ${API.UPDATE_RESUME}\ndata: $data\n**************************");
+
+  final response = await postRequestProvider(
+      path: API.UPDATE_RESUME, data: formData, token: apiToken);
+  return response;
+}
+
+/// Get Resume
+Future<Response?> getResumeProvider({int? id, String? apiToken}) async {
+  final data = {"id": id};
+
+  print(
+      "*****************\nurl: ${API.GET_RESUME}$id\nuserId: $id\napiToken: $apiToken\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_RESUME, queryParameter: data, token: apiToken);
   return response;
 }
 

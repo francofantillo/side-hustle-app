@@ -11,6 +11,7 @@ class AssetsPath {
   static const fb = "${iconsPath}fb.png";
   static const debit = "${iconsPath}debit.png";
   static const imageLoadError = "${iconsPath}image_load_error.png";
+  static const placeHolder = "${iconsPath}place_holder.png";
   static const google = "${iconsPath}google.png";
   static const apple = "${iconsPath}apple.png";
   static const eyeOpen = "${iconsPath}eye_open.png";

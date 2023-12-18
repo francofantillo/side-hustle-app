@@ -100,7 +100,8 @@ class AppRouter {
             );
 
           case AppRoutes.yourResumeEditScreenRoute:
-            return const YourResumeEdit();
+            final args = routeSettings.arguments as YourResumeEdit?;
+            return YourResumeEdit(itemsList: args?.itemsList,);
 
           case AppRoutes.yourResumeScreenRoute:
             return const YourResume();

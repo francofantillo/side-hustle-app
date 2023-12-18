@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -5,6 +7,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/reset_bloc.dart';
+import 'package:side_hustle/state_management/models/resume_model.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/auth/auth_provider.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -28,6 +31,29 @@ class AuthCubit extends Cubit<AuthState> {
   /**
    * TextEditing Controllers
    */
+  /*
+    String? actualName,
+  String? nickName,
+  String? familyTies,
+  String? professionalBackground,
+  String? favouriteQuote,
+  String? description,
+  List<String>? hobbies,
+   */
+
+  /// Resume Controllers
+  TextEditingController actualNameController = TextEditingController();
+  TextEditingController nickNameController = TextEditingController();
+  TextEditingController familyTiesController = TextEditingController();
+  TextEditingController professionalBackgroundController =
+      TextEditingController();
+  TextEditingController favouriteQuoteController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  List<String> hobbies = [];
+  String? profileImagePath;
+  String? pdfFilePath;
+
+  /// Auth Controllers
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailControllerSignup = TextEditingController();
@@ -41,6 +67,30 @@ class AuthCubit extends Cubit<AuthState> {
       TextEditingController();
   TextEditingController otpController = TextEditingController();
   bool isTCAndPPAccepted = false;
+
+  initResumeControllers() {
+    actualNameController = TextEditingController();
+    nickNameController = TextEditingController();
+    familyTiesController = TextEditingController();
+    professionalBackgroundController = TextEditingController();
+    favouriteQuoteController = TextEditingController();
+    descriptionController = TextEditingController();
+    hobbies = [];
+    profileImagePath = null;
+    pdfFilePath = null;
+  }
+
+  setResumeController() {
+    actualNameController.text = state.resumeModel?.data?.actualName ?? "";
+    nickNameController.text = state.resumeModel?.data?.nickName ?? "";
+    familyTiesController.text = state.resumeModel?.data?.familyTies ?? "";
+    professionalBackgroundController.text =
+        state.resumeModel?.data?.professionalBackground ?? "";
+    favouriteQuoteController.text = state.resumeModel?.data?.favouriteQuote ?? "";
+    descriptionController.text = state.resumeModel?.data?.description ?? "";
+    profileImagePath = state.resumeModel?.data?.profileImage;
+    pdfFilePath = state.resumeModel?.data?.file;
+  }
 
   initControllers() {
     firstNameController = TextEditingController();
@@ -425,6 +475,95 @@ class AuthCubit extends Cubit<AuthState> {
     } else {
       EasyLoading.dismiss();
       EasyLoading.instance.indicatorColor = AppColors.primaryColor;
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Update Resume
+  Future updateResumeCubit({
+    required BuildContext context,
+    required bool mounted,
+    required List itemsList,
+    File? profileImage,
+    File? pdfFile,
+  }) async {
+    EasyLoading.show();
+
+    final response = await updateResumeProvider(
+        apiToken: state.userModel?.data?.apiToken,
+        profileImage: profileImage,
+        pdfFile: pdfFile,
+        actualName: actualNameController.text,
+        nickName: nickNameController.text,
+        familyTies: familyTiesController.text,
+        professionalBackground: professionalBackgroundController.text,
+        favouriteQuote: favouriteQuoteController.text,
+        description: descriptionController.text,
+        hobbies: itemsList);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // final ResumeModel resumeModel = ResumeModel.fromJson(response.data);
+        // print("status: ${resumeModel.status} response: ${resumeModel.data}");
+        // emit(state.copyWith(resumeModel: resumeModel));
+        AppUtils.showToast(response.data["message"]);
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+
+      /// Failed
+      else {
+        print(
+            "status: ${response.data["status"]} response: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get Resume
+  Future getResumeCubit({
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    emit(state.copyWith(getResumeLoading: true, resumeModel: ResumeModel()));
+
+    EasyLoading.show();
+
+    final response = await getResumeProvider(
+        apiToken: state.userModel?.data?.apiToken,
+        id: state.userModel?.data?.id);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final ResumeModel resumeModel = ResumeModel.fromJson(response.data);
+        print("status: ${resumeModel.status} response: ${resumeModel.data}");
+        emit(state.copyWith(getResumeLoading: false, resumeModel: resumeModel));
+        AppUtils.showToast(resumeModel.message);
+        // if (mounted) {
+        //   Navigator.pop(context);
+        // }
+      }
+
+      /// Failed
+      else {
+        emit(state.copyWith(getResumeLoading: false));
+        print(
+            "status: ${response.data["status"]} response: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      emit(state.copyWith(getResumeLoading: false));
+      EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }

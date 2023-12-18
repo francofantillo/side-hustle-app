@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +8,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 
 class CircularCacheImageWidget extends StatelessWidget {
-  final String? image, assetImage;
+  final String? image, assetImage, fileImage;
   final double? imageHeight, imageWidth, loadingWidgetSize, borderWidth;
   final Color? boarderColor;
   final bool showLoading;
@@ -16,6 +18,7 @@ class CircularCacheImageWidget extends StatelessWidget {
       required this.showLoading,
       this.image,
       this.assetImage,
+      this.fileImage,
       this.imageHeight,
       this.borderWidth,
       this.imageWidth,
@@ -29,7 +32,9 @@ class CircularCacheImageWidget extends StatelessWidget {
       imageUrl:
           // Testing Url
           // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg',
-          image == null ? "https://www.example.com/non_existent_image.jpg" : image!,
+          image == null
+              ? "https://www.example.com/non_existent_image.jpg"
+              : image!,
       imageBuilder: (context, imageProvider) => Container(
         width: imageWidth ?? 60.w, // Set your desired width
         height: imageHeight ?? 60.w, // Set your desired height
@@ -112,8 +117,12 @@ class CircularCacheImageWidget extends StatelessWidget {
               width: borderWidth ?? 2.w, // Use the provided border width
             ),
             image: DecorationImage(
-                image: AssetImage(
-                    assetImage ?? AssetsPath.placeHolderProfileImage),
+                // image: Image.file(File(assetImage!)),
+                image: fileImage != null
+                    ? FileImage(File(fileImage!))
+                    : AssetImage(
+                            assetImage ?? AssetsPath.placeHolderProfileImage)
+                        as ImageProvider,
                 scale: 1,
                 fit: BoxFit.cover)),
       ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/profile/your_resume_edit.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -22,12 +25,24 @@ class YourResume extends StatefulWidget {
 }
 
 class _YourResumeState extends State<YourResume> {
+  late final AuthCubit _bloc;
 
   final List<String> itemsList = [
     "Hobbies 1",
     "Hobbies 2",
     "Hobbies 3",
   ];
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    getResume();
+    super.initState();
+  }
+
+  getResume() async {
+    await _bloc.getResumeCubit(context: context, mounted: mounted);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,288 +55,326 @@ class _YourResumeState extends State<YourResume> {
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 12.0, top: 8),
-          child: CircularIconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.yourResumeEditScreenRoute);
-            },
-            width: 0.10.sw,
-            height: 0.10.sw,
-            icon: Icons.edit,
-            backgroundColor: AppColors.backIconBackgroundColor,
-            iconSize: 14,
-            iconColor: AppColors.primaryColor,
-          ),
-        )
-      ],
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
-        child: Padding(
-          padding: EdgeInsets.all(AppDimensions.rootPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  CircularCacheImageWidget(
-                    showLoading: true,
-                    // image:
-                    //     AlphaAppData.dpProfile,
-                    assetImage: AssetsPath.brandonProfile,
-                    boarderColor: AppColors.primaryColor,
-                    imageHeight: 0.28.sw,
-                    imageWidth: 0.28.sw,
-                    borderWidth: .005.sw,
+        BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+          return state.getResumeLoading
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding: const EdgeInsets.only(right: 12.0, top: 8),
+                  child: CircularIconButton(
+                    onPressed: () {
+                      final List itemsList = [];
+                      if (state.resumeModel?.data?.hobbies != null) {
+                        for (int i = 0;
+                            i < (state.resumeModel?.data?.hobbies?.length ?? 0);
+                            i++) {
+                          itemsList
+                              .add(state.resumeModel?.data?.hobbies?[i].hobby);
+                        }
+                      }
+                      Navigator.pushNamed(
+                          context, AppRoutes.yourResumeEditScreenRoute,
+                          arguments: YourResumeEdit(itemsList: itemsList));
+                    },
+                    width: 0.10.sw,
+                    height: 0.10.sw,
+                    icon: Icons.edit,
+                    backgroundColor: AppColors.backIconBackgroundColor,
+                    iconSize: 14,
+                    iconColor: AppColors.primaryColor,
                   ),
-                  width(0.02.sw),
-                  Column(
+                );
+        })
+      ],
+      body: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+        return state.getResumeLoading
+            ? const SizedBox.shrink()
+            : SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics()),
+                child: Padding(
+                  padding: EdgeInsets.all(AppDimensions.rootPadding),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      textWidget(
-                          text: AppStrings.davidHan,
-                          maxLines: 1,
-                          color: AppColors.textBlackColor,
-                          fontFamily: AppFont.gilroyBold,
-                          fontSize: AppDimensions.textHeadingSize,
-                          fontWeight: FontWeight.bold),
-                      height(0.001.sw),
-                      textWidget(
-                          text: AppStrings.nickname,
-                          maxLines: 1,
-                          fontSize: AppDimensions.textSizeSmall),
-                      height(0.01.sw),
-                      textWidget(
-                          text: AppStrings.profession,
-                          maxLines: 1,
-                          fontSize: AppDimensions.textSizeSmall),
-                    ],
-                  )
-                ],
-              ),
-              height(0.08.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.familyTies,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.02.sw),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    width: 1.sw,
-                    padding: const EdgeInsets.only(
-                        left: 12, top: 12, right: 8, bottom: 12),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: Border.all(
-                            width: 1, color: AppColors.borderColorResumePage)),
-                    child: textWidget(
-                      text: AppStrings.familyTies,
-                      fontSize: AppDimensions.textSizeVerySmall,
-                      fontFamily: AppFont.gilroyMedium,
-                      maxLines: 1,
-                    ),
-                  )),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.professionalBackground,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.02.sw),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    width: 1.sw,
-                    padding: const EdgeInsets.only(
-                        left: 12, top: 12, right: 8, bottom: 12),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: Border.all(
-                            width: 1, color: AppColors.borderColorResumePage)),
-                    child: textWidget(
-                      text: AppStrings.professionalBackgroundHint,
-                      fontSize: AppDimensions.textSizeVerySmall,
-                      fontFamily: AppFont.gilroyMedium,
-                      maxLines: 1,
-                    ),
-                  )),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.hobbies,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.02.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Wrap(
-                  spacing: 8.0, // gap between adjacent chips
-                  runSpacing: 8.0, // gap between lines
-                  direction: Axis.horizontal,
-                  children: [
-                    for (int i = 0; i < itemsList.length; i++)
-                      FittedBox(
-                        fit: BoxFit.cover,
-                        child: Container(
-                          // width: .35.sw,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 8),
-                          decoration: const BoxDecoration(
-                              color: AppColors.primaryColor,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12))),
-                          child: textWidget(
-                              text: itemsList[i],
-                              maxLines: 2,
-                              color: AppColors.whiteColor,
-                              fontFamily: AppFont.gilroyMedium,
-                              fontSize: AppDimensions.textSizeVerySmall),
-                        ),
-                      )
-                  ],
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.favoriteQuote,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    width: 1.sw,
-                    padding: const EdgeInsets.only(
-                        left: 12, top: 12, right: 8, bottom: 12),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: Border.all(
-                            width: 1, color: AppColors.borderColorResumePage)),
-                    child: textWidget(
-                      text: AppStrings.favoriteQuote,
-                      fontSize: AppDimensions.textSizeVerySmall,
-                      fontFamily: AppFont.gilroyMedium,
-                      maxLines: 1,
-                    ),
-                  )),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.whatDoYou,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Container(
-                    width: 1.sw,
-                    padding: const EdgeInsets.only(
-                        left: 12, top: 12, right: 8, bottom: 12),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: Border.all(
-                            width: 1, color: AppColors.borderColorResumePage)),
-                    child: textWidget(
-                      text: AppStrings.jobDescText,
-                      fontSize: AppDimensions.textSizeVerySmall,
-                      fontFamily: AppFont.gilroyBold,
-                      maxLines: 2,
-                    ),
-                  )),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.attachedResume,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            color: AppColors.backIconBackgroundColor,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(12))),
-                        child: Center(
-                            child: Image.asset(
-                          AssetsPath.pdf,
-                          width: 24,
-                          height: 24,
-                        )),
-                      ),
-                      width(0.04.sw),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          textWidget(
-                              text: AppStrings.resumePdf,
-                              fontFamily: AppFont.gilroyBold,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.textBlackColor),
-                          height(0.002.sh),
-                          textWidget(
-                            text: AppStrings.resumePdfSize,
-                            fontFamily: AppFont.gilroyBold,
-                            fontSize: AppDimensions.textSize10,
+                          CircularCacheImageWidget(
+                            showLoading: true,
+                            // image:
+                            //     AlphaAppData.dpProfile,
+                            assetImage: AssetsPath.placeHolder,
+                            boarderColor: AppColors.primaryColor,
+                            imageHeight: 0.28.sw,
+                            imageWidth: 0.28.sw,
+                            borderWidth: .005.sw,
                           ),
+                          width(0.02.sw),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              textWidget(
+                                  text: AppStrings.davidHan,
+                                  maxLines: 1,
+                                  color: AppColors.textBlackColor,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textHeadingSize,
+                                  fontWeight: FontWeight.bold),
+                              height(0.001.sw),
+                              textWidget(
+                                  text: AppStrings.nickname,
+                                  maxLines: 1,
+                                  fontSize: AppDimensions.textSizeSmall),
+                              height(0.01.sw),
+                              textWidget(
+                                  text: AppStrings.profession,
+                                  maxLines: 1,
+                                  fontSize: AppDimensions.textSizeSmall),
+                            ],
+                          )
                         ],
                       ),
-                      const Spacer(),
-                      CustomMaterialButton(
-                          onPressed: () {},
-                          width: 4,
-                          borderRadius: 14,
-                          name: AppStrings.view,
-                          fontSize: AppDimensions.textSizeVerySmall)
+                      height(0.08.sw),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: textWidget(
+                            text: AppStrings.familyTies,
+                            maxLines: 1,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSizeSmall,
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      height(0.02.sw),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            width: 1.sw,
+                            padding: const EdgeInsets.only(
+                                left: 12, top: 12, right: 8, bottom: 12),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                border: Border.all(
+                                    width: 1,
+                                    color: AppColors.borderColorResumePage)),
+                            child: textWidget(
+                              // text: AppStrings.familyTies,
+                              text: state.resumeModel?.data?.familyTies,
+                              fontSize: AppDimensions.textSizeVerySmall,
+                              fontFamily: AppFont.gilroyMedium,
+                              maxLines: 1,
+                            ),
+                          )),
+                      height(AppDimensions.formFieldsBetweenSpacing),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: textWidget(
+                            text: AppStrings.professionalBackground,
+                            maxLines: 1,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSizeSmall,
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      height(0.02.sw),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            width: 1.sw,
+                            padding: const EdgeInsets.only(
+                                left: 12, top: 12, right: 8, bottom: 12),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                border: Border.all(
+                                    width: 1,
+                                    color: AppColors.borderColorResumePage)),
+                            child: textWidget(
+                              // text: AppStrings.professionalBackgroundHint,
+                              text: state
+                                  .resumeModel?.data?.professionalBackground,
+                              fontSize: AppDimensions.textSizeVerySmall,
+                              fontFamily: AppFont.gilroyMedium,
+                              maxLines: 1,
+                            ),
+                          )),
+                      height(AppDimensions.formFieldsBetweenSpacing),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: textWidget(
+                            text: AppStrings.hobbies,
+                            maxLines: 1,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSizeSmall,
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      height(0.02.sw),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Wrap(
+                          spacing: 8.0, // gap between adjacent chips
+                          runSpacing: 8.0, // gap between lines
+                          direction: Axis.horizontal,
+                          children: [
+                            // for (int i = 0; i < itemsList.length; i++)
+                            // for (int i = 0; i < _bloc.hobbies.length; i++)
+                            for (int i = 0;
+                                i <
+                                    (state.resumeModel?.data?.hobbies?.length ??
+                                        0);
+                                i++)
+                              FittedBox(
+                                fit: BoxFit.cover,
+                                child: Container(
+                                  // width: .35.sw,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 8),
+                                  decoration: const BoxDecoration(
+                                      color: AppColors.primaryColor,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12))),
+                                  child: textWidget(
+                                      // text: itemsList[i],
+                                      // text: _bloc.hobbies[i],
+                                      text: state
+                                          .resumeModel?.data?.hobbies?[i].hobby,
+                                      maxLines: 2,
+                                      color: AppColors.whiteColor,
+                                      fontFamily: AppFont.gilroyMedium,
+                                      fontSize:
+                                          AppDimensions.textSizeVerySmall),
+                                ),
+                              )
+                          ],
+                        ),
+                      ),
+                      height(AppDimensions.formFieldsBetweenSpacing),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: textWidget(
+                            text: AppStrings.favoriteQuote,
+                            maxLines: 1,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSizeSmall,
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      height(0.01.sw),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            width: 1.sw,
+                            padding: const EdgeInsets.only(
+                                left: 12, top: 12, right: 8, bottom: 12),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                border: Border.all(
+                                    width: 1,
+                                    color: AppColors.borderColorResumePage)),
+                            child: textWidget(
+                              // text: AppStrings.favoriteQuote,
+                              text: state.resumeModel?.data?.favouriteQuote,
+                              fontSize: AppDimensions.textSizeVerySmall,
+                              fontFamily: AppFont.gilroyMedium,
+                              maxLines: 1,
+                            ),
+                          )),
+                      height(AppDimensions.formFieldsBetweenSpacing),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: textWidget(
+                            text: AppStrings.whatDoYou,
+                            maxLines: 1,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSizeSmall,
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      height(0.01.sw),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            width: 1.sw,
+                            padding: const EdgeInsets.only(
+                                left: 12, top: 12, right: 8, bottom: 12),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                border: Border.all(
+                                    width: 1,
+                                    color: AppColors.borderColorResumePage)),
+                            child: textWidget(
+                              // text: AppStrings.jobDescText,
+                              text: state.resumeModel?.data?.description,
+                              fontSize: AppDimensions.textSizeVerySmall,
+                              fontFamily: AppFont.gilroyBold,
+                              maxLines: 2,
+                            ),
+                          )),
+                      height(AppDimensions.formFieldsBetweenSpacing),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: textWidget(
+                            text: AppStrings.attachedResume,
+                            maxLines: 1,
+                            color: AppColors.textBlackColor,
+                            fontSize: AppDimensions.textSizeSmall,
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      height(AppDimensions.formFieldsBetweenSpacing),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                    color: AppColors.backIconBackgroundColor,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(12))),
+                                child: Center(
+                                    child: Image.asset(
+                                  AssetsPath.pdf,
+                                  width: 24,
+                                  height: 24,
+                                )),
+                              ),
+                              width(0.04.sw),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  textWidget(
+                                      text: AppStrings.resumePdf,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontSize: AppDimensions.textSizeSmall,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.textBlackColor),
+                                  height(0.002.sh),
+                                  textWidget(
+                                    text: AppStrings.resumePdfSize,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontSize: AppDimensions.textSize10,
+                                  ),
+                                ],
+                              ),
+                              const Spacer(),
+                              CustomMaterialButton(
+                                  onPressed: () {},
+                                  width: 4,
+                                  borderRadius: 14,
+                                  name: AppStrings.view,
+                                  fontSize: AppDimensions.textSizeVerySmall)
+                            ],
+                          )),
                     ],
-                  )),
-            ],
-          ),
-        ),
-      ),
+                  ),
+                ),
+              );
+      }),
     );
   }
 }

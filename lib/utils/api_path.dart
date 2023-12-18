@@ -30,4 +30,8 @@ class API {
   static const String ADD_TO_FAVOURITES = "${BASE_URL}/add-to-favourite";
   static const String REMOVE_FROM_FAVOURITES = "${BASE_URL}/remove-from-favourite";
 
+  /// Resume
+  static const String UPDATE_RESUME = "${BASE_URL}/update-resume";
+  static const String GET_RESUME = "${BASE_URL}/resume";
+
 }
