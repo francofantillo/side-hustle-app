@@ -28,104 +28,79 @@ class CircularCacheImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl:
-          // Testing Url
-          // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg',
-          image == null
-              ? "https://www.example.com/non_existent_image.jpg"
-              : image!,
-      imageBuilder: (context, imageProvider) => Container(
-        width: imageWidth ?? 60.w, // Set your desired width
-        height: imageHeight ?? 60.w, // Set your desired height
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: boarderColor ?? AppColors.whiteColor,
-            // Change the border color as needed
-            width: borderWidth ?? 2.w, // Use the provided border width
-          ),
-          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-        ),
-      ),
-      placeholder: (context, url) => Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
-        child: Container(
-          width: imageWidth ?? 60.w, // Set your desired width
-          height: imageHeight ?? 60.w, // Set your desired height
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: boarderColor ?? AppColors.whiteColor,
-              // Change the border color as needed
-              width: borderWidth ?? 2.w, // Use the provided border width
+    return fileImage != null
+        ? Container(
+            width: imageWidth ?? 60.w, // Set your desired width
+            height: imageHeight ?? 60.w, // Set your desired height
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: boarderColor ?? AppColors.whiteColor,
+                  // Change the border color as needed
+                  width: borderWidth ?? 2.w, // Use the provided border width
+                ),
+                image: DecorationImage(
+                    // image: Image.file(File(assetImage!)),
+                    image: FileImage(File(fileImage!)),
+                    scale: 1,
+                    fit: BoxFit.cover)),
+          )
+        : CachedNetworkImage(
+            imageUrl:
+                // Testing Url
+                // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg',
+                image == null
+                    ? "https://www.example.com/non_existent_image.jpg"
+                    : image!,
+            imageBuilder: (context, imageProvider) => Container(
+              width: imageWidth ?? 60.w, // Set your desired width
+              height: imageHeight ?? 60.w, // Set your desired height
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: boarderColor ?? AppColors.whiteColor,
+                  // Change the border color as needed
+                  width: borderWidth ?? 2.w, // Use the provided border width
+                ),
+                image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+              ),
             ),
-            image: const DecorationImage(
-                image: AssetImage(AssetsPath.placeHolderProfileImage),
-                fit: BoxFit.cover),
-          ),
-        ),
-      ),
-      // progressIndicatorBuilder: (context, url, downloadProgress) =>
-      //     CircularProgressIndicator(value: downloadProgress.progress),
-      // placeholder: (context, url) => Container(
-      //     width: loadingWidgetSize ?? 40.h,
-      //     // Set your desired width
-      //     height: loadingWidgetSize ?? 40.h,
-      //     // Set your desired height
-      //     padding: const EdgeInsets.all(8),
-      //     child: const CircularProgressIndicator(
-      //       color: AppColors.primaryColor,
-      //     )),
-      // placeholder: showLoading
-      // ? (context, url) => Container(
-      //     width: loadingWidgetSize ?? 40.h,
-      //     // Set your desired width
-      //     height: loadingWidgetSize ?? 40.h,
-      //     // Set your desired height
-      //     padding: const EdgeInsets.all(8),
-      //     child: const CircularProgressIndicator(
-      //       color: AppColors.whiteColor,
-      //     ))
-      // ? (context, url) => Shimmer.fromColors(
-      //       baseColor: Colors.grey.shade300,
-      //       highlightColor: Colors.grey.shade100,
-      //       child: Container(
-      //         width: imageWidth ?? 60.h, // Set your desired width
-      //         height: imageHeight ?? 60.h, // Set your desired height
-      //         decoration: BoxDecoration(
-      //           shape: BoxShape.circle,
-      //           border: Border.all(
-      //             color: boarderColor ?? AppColors.whiteColor,
-      //             // Change the border color as needed
-      //             width: borderWidth ?? 2.h, // Use the provided border width
-      //           ),
-      //           // image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-      //         ),
-      //       )
-      //     )
-      // : null,
-      errorWidget: (context, url, error) => Container(
-        width: imageWidth ?? 60.w, // Set your desired width
-        height: imageHeight ?? 60.w, // Set your desired height
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: boarderColor ?? AppColors.whiteColor,
-              // Change the border color as needed
-              width: borderWidth ?? 2.w, // Use the provided border width
+            placeholder: (context, url) => Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade100,
+              child: Container(
+                width: imageWidth ?? 60.w, // Set your desired width
+                height: imageHeight ?? 60.w, // Set your desired height
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: boarderColor ?? AppColors.whiteColor,
+                    // Change the border color as needed
+                    width: borderWidth ?? 2.w, // Use the provided border width
+                  ),
+                  image: const DecorationImage(
+                      image: AssetImage(AssetsPath.placeHolderProfileImage),
+                      fit: BoxFit.cover),
+                ),
+              ),
             ),
-            image: DecorationImage(
-                // image: Image.file(File(assetImage!)),
-                image: fileImage != null
-                    ? FileImage(File(fileImage!))
-                    : AssetImage(
-                            assetImage ?? AssetsPath.placeHolderProfileImage)
-                        as ImageProvider,
-                scale: 1,
-                fit: BoxFit.cover)),
-      ),
-    );
+            errorWidget: (context, url, error) => Container(
+              width: imageWidth ?? 60.w, // Set your desired width
+              height: imageHeight ?? 60.w, // Set your desired height
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: boarderColor ?? AppColors.whiteColor,
+                    // Change the border color as needed
+                    width: borderWidth ?? 2.w, // Use the provided border width
+                  ),
+                  image: DecorationImage(
+                      // image: Image.file(File(assetImage!)),
+                      image: AssetImage(
+                          assetImage ?? AssetsPath.placeHolderProfileImage),
+                      scale: 1,
+                      fit: BoxFit.cover)),
+            ),
+          );
   }
 }

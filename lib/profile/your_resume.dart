@@ -73,7 +73,12 @@ class _YourResumeState extends State<YourResume> {
                       }
                       Navigator.pushNamed(
                           context, AppRoutes.yourResumeEditScreenRoute,
-                          arguments: YourResumeEdit(itemsList: itemsList));
+                          arguments: YourResumeEdit(
+                            itemsList: itemsList,
+                            profileImagePath:
+                                state.resumeModel?.data?.profileImage,
+                            pdfFilePath: state.resumeModel?.data?.file,
+                          ));
                     },
                     width: 0.10.sw,
                     height: 0.10.sw,
@@ -86,6 +91,7 @@ class _YourResumeState extends State<YourResume> {
         })
       ],
       body: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+        print("Profile Image: ${state.resumeModel?.data?.profileImage}");
         return state.getResumeLoading
             ? const SizedBox.shrink()
             : SingleChildScrollView(
@@ -103,6 +109,7 @@ class _YourResumeState extends State<YourResume> {
                             showLoading: true,
                             // image:
                             //     AlphaAppData.dpProfile,
+                            image: state.resumeModel?.data?.profileImage,
                             assetImage: AssetsPath.placeHolder,
                             boarderColor: AppColors.primaryColor,
                             imageHeight: 0.28.sw,
@@ -114,7 +121,8 @@ class _YourResumeState extends State<YourResume> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               textWidget(
-                                  text: AppStrings.davidHan,
+                                  // text: AppStrings.davidHan,
+                                  text: state.resumeModel?.data?.actualName,
                                   maxLines: 1,
                                   color: AppColors.textBlackColor,
                                   fontFamily: AppFont.gilroyBold,
@@ -122,12 +130,14 @@ class _YourResumeState extends State<YourResume> {
                                   fontWeight: FontWeight.bold),
                               height(0.001.sw),
                               textWidget(
-                                  text: AppStrings.nickname,
+                                  // text: AppStrings.nickname,
+                                  text: state.resumeModel?.data?.nickName,
                                   maxLines: 1,
                                   fontSize: AppDimensions.textSizeSmall),
                               height(0.01.sw),
                               textWidget(
                                   text: AppStrings.profession,
+                                  // text: state.resumeModel?.data?.professionalBackground,
                                   maxLines: 1,
                                   fontSize: AppDimensions.textSizeSmall),
                             ],
@@ -315,17 +325,25 @@ class _YourResumeState extends State<YourResume> {
                             ),
                           )),
                       height(AppDimensions.formFieldsBetweenSpacing),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: textWidget(
-                            text: AppStrings.attachedResume,
-                            maxLines: 1,
-                            color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSizeSmall,
-                            fontFamily: AppFont.gilroyBold,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      height(AppDimensions.formFieldsBetweenSpacing),
+                      state.resumeModel?.data?.file == null
+                          ? const SizedBox.shrink()
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: textWidget(
+                                      text: AppStrings.attachedResume,
+                                      maxLines: 1,
+                                      color: AppColors.textBlackColor,
+                                      fontSize: AppDimensions.textSizeSmall,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                height(AppDimensions.formFieldsBetweenSpacing),
+                              ],
+                            ),
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(

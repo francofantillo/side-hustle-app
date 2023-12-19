@@ -25,7 +25,10 @@ import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class YourResumeEdit extends StatefulWidget {
   final List? itemsList;
-  const YourResumeEdit({super.key, this.itemsList});
+  final String? profileImagePath, pdfFilePath;
+
+  const YourResumeEdit(
+      {super.key, this.itemsList, this.profileImagePath, this.pdfFilePath});
 
   @override
   State<YourResumeEdit> createState() => _YourResumeEditState();
@@ -98,8 +101,9 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                         CircularCacheImageWidget(
                           showLoading: true,
                           // image: AlphaAppData.dpProfile,
+                          image: widget.profileImagePath,
                           fileImage: _imagePath?.path,
-                          assetImage: AssetsPath.brandonProfile,
+                          assetImage: AssetsPath.placeHolder,
                           boarderColor: AppColors.primaryColor,
                           imageHeight: 0.28.sw,
                           imageWidth: 0.28.sw,
