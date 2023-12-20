@@ -104,7 +104,8 @@ class AppRouter {
             return YourResumeEdit(
                 itemsList: args?.itemsList,
                 profileImagePath: args?.profileImagePath,
-                pdfFilePath: args?.pdfFilePath);
+                pdfFilePath: args?.pdfFilePath,
+                pdfFileName: args?.pdfFileName);
 
           case AppRoutes.yourResumeScreenRoute:
             return const YourResume();

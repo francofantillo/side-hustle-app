@@ -47,6 +47,7 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController familyTiesController = TextEditingController();
   TextEditingController professionalBackgroundController =
       TextEditingController();
+  TextEditingController professionController = TextEditingController();
   TextEditingController favouriteQuoteController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   List<String> hobbies = [];
@@ -73,6 +74,7 @@ class AuthCubit extends Cubit<AuthState> {
     nickNameController = TextEditingController();
     familyTiesController = TextEditingController();
     professionalBackgroundController = TextEditingController();
+    professionController = TextEditingController();
     favouriteQuoteController = TextEditingController();
     descriptionController = TextEditingController();
     hobbies = [];
@@ -86,7 +88,9 @@ class AuthCubit extends Cubit<AuthState> {
     familyTiesController.text = state.resumeModel?.data?.familyTies ?? "";
     professionalBackgroundController.text =
         state.resumeModel?.data?.professionalBackground ?? "";
-    favouriteQuoteController.text = state.resumeModel?.data?.favouriteQuote ?? "";
+    professionController.text = state.resumeModel?.data?.profession ?? "";
+    favouriteQuoteController.text =
+        state.resumeModel?.data?.favouriteQuote ?? "";
     descriptionController.text = state.resumeModel?.data?.description ?? "";
     profileImagePath = state.resumeModel?.data?.profileImage;
     pdfFilePath = state.resumeModel?.data?.file;
@@ -485,7 +489,7 @@ class AuthCubit extends Cubit<AuthState> {
     required bool mounted,
     required List itemsList,
     File? profileImage,
-    File? pdfFile,
+    String? pdfFile,
   }) async {
     EasyLoading.show();
 
@@ -497,6 +501,7 @@ class AuthCubit extends Cubit<AuthState> {
         nickName: nickNameController.text,
         familyTies: familyTiesController.text,
         professionalBackground: professionalBackgroundController.text,
+        profession: professionController.text,
         favouriteQuote: favouriteQuoteController.text,
         description: descriptionController.text,
         hobbies: itemsList);
@@ -506,9 +511,9 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        // final ResumeModel resumeModel = ResumeModel.fromJson(response.data);
-        // print("status: ${resumeModel.status} response: ${resumeModel.data}");
-        // emit(state.copyWith(resumeModel: resumeModel));
+        final ResumeModel resumeModel = ResumeModel.fromJson(response.data);
+        print("status: ${resumeModel.status} response: ${resumeModel.data}");
+        emit(state.copyWith(resumeModel: resumeModel));
         AppUtils.showToast(response.data["message"]);
         if (mounted) {
           Navigator.pop(context);
@@ -548,7 +553,7 @@ class AuthCubit extends Cubit<AuthState> {
         final ResumeModel resumeModel = ResumeModel.fromJson(response.data);
         print("status: ${resumeModel.status} response: ${resumeModel.data}");
         emit(state.copyWith(getResumeLoading: false, resumeModel: resumeModel));
-        AppUtils.showToast(resumeModel.message);
+        // AppUtils.showToast(resumeModel.message);
         // if (mounted) {
         //   Navigator.pop(context);
         // }

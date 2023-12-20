@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
-import 'package:side_hustle/router/app_route_named.dart';
+import 'package:path/path.dart' as path;
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -12,7 +11,8 @@ import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
-import 'package:side_hustle/utils/image_picker.dart';
+import 'package:side_hustle/utils/service/file_picker_service.dart';
+import 'package:side_hustle/utils/service/image_picker_service.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
@@ -25,10 +25,14 @@ import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class YourResumeEdit extends StatefulWidget {
   final List? itemsList;
-  final String? profileImagePath, pdfFilePath;
+  final String? profileImagePath, pdfFilePath, pdfFileName;
 
   const YourResumeEdit(
-      {super.key, this.itemsList, this.profileImagePath, this.pdfFilePath});
+      {super.key,
+      this.itemsList,
+      this.profileImagePath,
+      this.pdfFilePath,
+      this.pdfFileName});
 
   @override
   State<YourResumeEdit> createState() => _YourResumeEditState();
@@ -38,6 +42,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
   final _resumeKey = GlobalKey<FormState>();
   late final AuthCubit _bloc;
   File? _imagePath;
+  String? _pdfFilePath, fileName;
   final TextEditingController _textEditingControllerHobbies =
       TextEditingController();
 
@@ -52,6 +57,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
   void initState() {
     _bloc = BlocProvider.of(context);
     itemsList = widget.itemsList ?? [];
+    fileName = widget.pdfFileName;
     _bloc.initResumeControllers();
     _bloc.setResumeController();
     super.initState();
@@ -121,8 +127,8 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                             iconSize: 14,
                             onTap: () async {
                               print("clicked minus");
-                              _imagePath =
-                                  await ImageSelector.selectImageFromGallery();
+                              _imagePath = await ImagePickerService
+                                  .selectImageFromGallery();
                               if (_imagePath != null) {
                                 print("image: ${_imagePath?.path}");
                                 setState(() {});
@@ -141,24 +147,35 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                           borderRadius: BorderRadius.all(Radius.circular(12))),
                       child: Row(
                         children: [
-                          Material(
-                            color: AppColors.greenColor,
-                            child: InkWell(
-                              onTap: () {},
-                              child: textWidget(
-                                  text: AppStrings.uploadResume,
-                                  color: AppColors.whiteColor,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: AppDimensions.textSizeVerySmall),
-                            ),
-                          ),
+                          textWidget(
+                              // text: AppStrings.uploadResume,
+                              text: fileName ?? AppStrings.uploadResume,
+                              color: AppColors.whiteColor,
+                              fontFamily: AppFont.gilroyBold,
+                              fontSize: AppDimensions.textSizeVerySmall),
                           width(0.015.sw),
                           Material(
                             color: AppColors.greenColor,
                             child: InkWell(
-                              onTap: () {},
-                              child: const Icon(
-                                CustomIcon.cancel,
+                              onTap: () async {
+                                if (fileName == null) {
+                                  _pdfFilePath =
+                                      await FilePickerService.selectPDF();
+                                  if (_pdfFilePath != null) {
+                                    fileName = path.basename(_pdfFilePath!);
+                                    setState(() {});
+                                  }
+                                } else {
+                                  setState(() {
+                                    fileName = null;
+                                  });
+                                }
+                              },
+                              child: Icon(
+                                fileName != null
+                                    ? CustomIcon.cancel
+                                    : Icons.upload,
+                                size: 24,
                                 color: AppColors.whiteColor,
                               ),
                             ),
@@ -247,6 +264,26 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     controller: _bloc.professionalBackgroundController,
                     height: 45.h,
                     hintText: AppStrings.professionalBackgroundHint,
+                  ),
+                ),
+                height(AppDimensions.formFieldsBetweenSpacing),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                      text: AppStrings.profession,
+                      maxLines: 1,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontWeight: FontWeight.bold),
+                ),
+                height(0.01.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: CustomTextFormField(
+                    controller: _bloc.professionController,
+                    height: 45.h,
+                    hintText: AppStrings.professionHint,
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing),
@@ -402,21 +439,15 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                       fontSize: AppDimensions.textSizeNormal,
                       // height: 10.h,
                       onPressed: () async {
+                        FocusManager.instance.primaryFocus?.unfocus();
                         if (_resumeKey.currentState!.validate()) {
                           await _bloc.updateResumeCubit(
                               context: context,
                               mounted: mounted,
                               itemsList: itemsList,
-                              pdfFile: _imagePath,
+                              pdfFile: _pdfFilePath,
                               profileImage: _imagePath);
                         }
-                        // Navigator.pushNamedAndRemoveUntil(
-                        //     context,
-                        //     AppRoutes.bottomTabsScreenRoute,
-                        //     arguments: const BottomTabsScreen(
-                        //       currentIndex: 4,
-                        //     ),
-                        //     (route) => false);
                       },
                       color: AppColors.primaryColor,
                       name: AppStrings.saveResume),

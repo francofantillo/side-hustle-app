@@ -149,43 +149,16 @@ Future<Response?> changePasswordProvider(
 Future<Response?> updateResumeProvider({
   String? apiToken,
   File? profileImage,
-  File? pdfFile,
+  String? pdfFile,
   String? actualName,
   String? nickName,
   String? familyTies,
   String? professionalBackground,
+  String? profession,
   String? favouriteQuote,
   String? description,
   List? hobbies,
 }) async {
-  /*
-    profile_image,
-    file
-    actual_name:test
-    nick_name:user22
-    family_ties:xyz
-    professional_background:xyz
-    favourite_quote:abc
-    description:xyz
-    hobbies:teat, play cricket
-   */
-
-  // final Map<String, dynamic> data = {
-  //   "profile_image": await MultipartFile.fromFile(
-  //       profileImage!.path,
-  //       filename: "profileImageName"),
-  //   "file": await MultipartFile.fromFile(
-  //       pdfFile!.path,
-  //       filename: "pdfFileName"),
-  //   "actual_name": actualName,
-  //   "nick_name": nickName,
-  //   "family_ties": familyTies,
-  //   "professional_background": professionalBackground,
-  //   "favourite_quote": favouriteQuote,
-  //   "description": description,
-  //   "hobbies": hobbies,
-  // };
-
   late String hobbiesString;
 
   for (int i = 0; i < (hobbies?.length ?? 0); i++) {
@@ -210,6 +183,7 @@ Future<Response?> updateResumeProvider({
     "nick_name": nickName,
     "family_ties": familyTies,
     "professional_background": professionalBackground,
+    "profession": profession,
     "favourite_quote": favouriteQuote,
     "description": description,
   };
@@ -227,9 +201,9 @@ Future<Response?> updateResumeProvider({
   }
 
   if (pdfFile != null) {
-    final pdfFileName = getImagePath.basename(pdfFile.path);
+    final pdfFileName = getImagePath.basename(pdfFile);
     final pdfFileMultipart =
-        await MultipartFile.fromFile(pdfFile.path, filename: pdfFileName);
+        await MultipartFile.fromFile(pdfFile, filename: pdfFileName);
     data.putIfAbsent("file", () => pdfFileMultipart);
   }
 

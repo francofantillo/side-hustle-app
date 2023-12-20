@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/pdf_view/pdf_view_screen.dart';
 import 'package:side_hustle/profile/your_resume_edit.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
@@ -16,6 +17,7 @@ import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class YourResume extends StatefulWidget {
   const YourResume({super.key});
@@ -32,6 +34,17 @@ class _YourResumeState extends State<YourResume> {
     "Hobbies 2",
     "Hobbies 3",
   ];
+
+  _launchURL({required String pdfPath}) async {
+    // final pdfUrl = Uri.parse('https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf');
+    final pdfUrl = Uri.parse(pdfPath);
+
+    if (await canLaunchUrl(pdfUrl)) {
+      await launchUrl(pdfUrl);
+    } else {
+      throw 'Could not launch $pdfUrl';
+    }
+  }
 
   @override
   void initState() {
@@ -77,6 +90,7 @@ class _YourResumeState extends State<YourResume> {
                             itemsList: itemsList,
                             profileImagePath:
                                 state.resumeModel?.data?.profileImage,
+                            pdfFileName: state.resumeModel?.data?.filename,
                             pdfFilePath: state.resumeModel?.data?.file,
                           ));
                     },
@@ -136,8 +150,8 @@ class _YourResumeState extends State<YourResume> {
                                   fontSize: AppDimensions.textSizeSmall),
                               height(0.01.sw),
                               textWidget(
-                                  text: AppStrings.profession,
-                                  // text: state.resumeModel?.data?.professionalBackground,
+                                  // text: AppStrings.profession,
+                                  text: state.resumeModel?.data?.profession,
                                   maxLines: 1,
                                   fontSize: AppDimensions.textSizeSmall),
                             ],
@@ -366,14 +380,16 @@ class _YourResumeState extends State<YourResume> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   textWidget(
-                                      text: AppStrings.resumePdf,
+                                      // text: AppStrings.resumePdf,
+                                      text: state.resumeModel?.data?.filename,
                                       fontFamily: AppFont.gilroyBold,
                                       fontSize: AppDimensions.textSizeSmall,
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.textBlackColor),
                                   height(0.002.sh),
                                   textWidget(
-                                    text: AppStrings.resumePdfSize,
+                                    // text: AppStrings.resumePdfSize,
+                                    text: state.resumeModel?.data?.fileSize,
                                     fontFamily: AppFont.gilroyBold,
                                     fontSize: AppDimensions.textSize10,
                                   ),
@@ -381,7 +397,19 @@ class _YourResumeState extends State<YourResume> {
                               ),
                               const Spacer(),
                               CustomMaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    print("Pdf: ${state
+                                        .resumeModel?.data?.file}");
+                                    if(state.resumeModel?.data?.file != null) {
+                                      _launchURL(pdfPath: state.resumeModel!.data!.file!);
+                                    }
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (_) => PDFScreen(
+                                    //             state
+                                    //                 .resumeModel?.data?.file)));
+                                  },
                                   width: 4,
                                   borderRadius: 14,
                                   name: AppStrings.view,

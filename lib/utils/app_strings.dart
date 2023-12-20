@@ -440,6 +440,7 @@ class AppStrings {
   static const String davidHan = "David Han";
   static const String nickname = "Nickname";
   static const String profession = "Profession";
+  static const String professionHint = "Enter Profession";
   static const String actualNameHint = "Enter the actual Name";
   static const String callSignOrNickname = "Call Sign/Nickname";
   static const String callSignOrNicknameHint = "Enter call sign/nickname";

@@ -8,13 +8,13 @@ class ResumeModel {
   ResumeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -27,69 +27,80 @@ class Data {
   int? userId;
   String? actualName;
   String? nickName;
+  String? profession;
   String? familyTies;
   String? professionalBackground;
   String? favouriteQuote;
   String? description;
+  String? filename;
+  String? fileSize;
   String? file;
   String? profileImage;
   String? createdAt;
   String? updatedAt;
   List<Hobbies>? hobbies;
 
-  Data({
-    this.id,
-    this.userId,
-    this.actualName,
-    this.nickName,
-    this.familyTies,
-    this.professionalBackground,
-    this.favouriteQuote,
-    this.description,
-    this.file,
-    this.profileImage,
-    this.createdAt,
-    this.updatedAt,
-    this.hobbies,
-  });
+  Data(
+      {this.id,
+        this.userId,
+        this.actualName,
+        this.nickName,
+        this.profession,
+        this.familyTies,
+        this.professionalBackground,
+        this.favouriteQuote,
+        this.description,
+        this.filename,
+        this.fileSize,
+        this.file,
+        this.profileImage,
+        this.createdAt,
+        this.updatedAt,
+        this.hobbies});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     actualName = json['actual_name'];
     nickName = json['nick_name'];
+    profession = json['profession'];
     familyTies = json['family_ties'];
     professionalBackground = json['professional_background'];
     favouriteQuote = json['favourite_quote'];
     description = json['description'];
+    filename = json['filename'];
+    fileSize = json['file_size'];
     file = json['file'];
     profileImage = json['profile_image'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     if (json['hobbies'] != null) {
       hobbies = <Hobbies>[];
-      json['hobbies'].forEach((dynamic v) {
-        hobbies!.add(Hobbies.fromJson(v as Map<String, dynamic>));
+      json['hobbies'].forEach((v) {
+        hobbies!.add(new Hobbies.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['actual_name'] = actualName;
-    data['nick_name'] = nickName;
-    data['family_ties'] = familyTies;
-    data['professional_background'] = professionalBackground;
-    data['favourite_quote'] = favouriteQuote;
-    data['description'] = description;
-    data['file'] = file;
-    data['profile_image'] = profileImage;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    if (hobbies != null) {
-      data['hobbies'] = hobbies!.map((Hobbies v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['actual_name'] = this.actualName;
+    data['nick_name'] = this.nickName;
+    data['profession'] = this.profession;
+    data['family_ties'] = this.familyTies;
+    data['professional_background'] = this.professionalBackground;
+    data['favourite_quote'] = this.favouriteQuote;
+    data['description'] = this.description;
+    data['filename'] = this.filename;
+    data['file_size'] = this.fileSize;
+    data['file'] = this.file;
+    data['profile_image'] = this.profileImage;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.hobbies != null) {
+      data['hobbies'] = this.hobbies!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -102,13 +113,7 @@ class Hobbies {
   String? createdAt;
   String? updatedAt;
 
-  Hobbies({
-    this.id,
-    this.resumeId,
-    this.hobby,
-    this.createdAt,
-    this.updatedAt,
-  });
+  Hobbies({this.id, this.resumeId, this.hobby, this.createdAt, this.updatedAt});
 
   Hobbies.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -119,12 +124,12 @@ class Hobbies {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['resume_id'] = resumeId;
-    data['hobby'] = hobby;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['resume_id'] = this.resumeId;
+    data['hobby'] = this.hobby;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }
