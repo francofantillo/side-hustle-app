@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/service/stripe_service.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -23,6 +24,8 @@ class AddCardModalSheet extends StatefulWidget {
 }
 
 class _AddCardModalSheetState extends State<AddCardModalSheet> {
+  CardDetails _card = CardDetails();
+
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -77,8 +80,22 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                   isShowBoarder: false,
                   height: 40.h,
                   hintText: AppStrings.nameOnCard,
+                  onChanged: (number) {
+                    setState(() {
+                      // _card = _card.copyWith(number: number);
+                    });
+                  },
+                  keyboardType: TextInputType.number,
                 ),
               ),
+              // CardField(
+              //   decoration: const InputDecoration(helperMaxLines: 2),
+              //   onCardChanged: (cardFieldInputDetails) {
+              //     // Handle card input changes
+              //     print(cardFieldInputDetails
+              //         ?.complete); // Card input completeness status
+              //   },
+              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 4),
                 child: CustomTextFormField(
@@ -98,6 +115,13 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                           isShowBoarder: false,
                           height: 40.h,
                           hintText: AppStrings.expiry,
+                          onChanged: (number) {
+                            // setState(() {
+                            //   _card = _card.copyWith(
+                            //       expirationYear: int.tryParse("2024"));
+                            // });
+                          },
+                          keyboardType: TextInputType.number,
                         ),
                       ),
                     ),
@@ -119,13 +143,15 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8),
                 child: CustomMaterialButton(
                     onPressed: () async {
-                     // final String? id = await StripeService.createCardToken(
-                     //      cardNumber: '4242424242424242',
-                     //      expMonth: "12",
-                     //      expYear: 2024,
-                     //      cvc: '123');
-                      await StripeService.handleCreateTokenPressNew();
-                     // print("stripe Token: $id");
+                      // final String? id = await StripeService.createCardToken(
+                      //      cardNumber: '4242424242424242',
+                      //      expMonth: "12",
+                      //      expYear: 2024,
+                      //      cvc: '123');
+                      final _cardToken = await StripeService.getCardToken();
+                      print("cardToken: $_cardToken");
+                      // await submitForm();
+                      // print("stripe Token: $id");
 
                       // await widget.bloc
                       //     .addCardCubit(context: context, mounted: mounted);
@@ -175,5 +201,29 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
         ),
       ],
     );
+  }
+
+  submitForm() async {
+    _card = _card.copyWith(number: "4242424242424242");
+    _card = _card.copyWith(
+        expirationMonth: int.tryParse("12"));
+    _card = _card.copyWith(
+        expirationYear: int.tryParse("2024"));
+    _card = _card.copyWith(cvc: "123");
+    try {
+      await Stripe.instance.dangerouslyUpdateCardDetails(_card);
+
+      PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
+        params: const PaymentMethodParams.card(
+          paymentMethodData: PaymentMethodData(
+              billingDetails: BillingDetails(name: "David Willy")),
+        ),
+      );
+      // Handle the obtained paymentMethod, which contains the card token
+      String cardToken = paymentMethod.id;
+      print('Card token: $cardToken');
+    } catch (error) {
+      print('Error obtaining card token: $error');
+    }
   }
 }
