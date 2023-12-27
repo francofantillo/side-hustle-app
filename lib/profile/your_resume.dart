@@ -356,66 +356,66 @@ class _YourResumeState extends State<YourResume> {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 height(AppDimensions.formFieldsBetweenSpacing),
+                                Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(16),
+                                          decoration: BoxDecoration(
+                                              color: AppColors.backIconBackgroundColor,
+                                              borderRadius: const BorderRadius.all(
+                                                  Radius.circular(12))),
+                                          child: Center(
+                                              child: Image.asset(
+                                                AssetsPath.pdf,
+                                                width: 24,
+                                                height: 24,
+                                              )),
+                                        ),
+                                        width(0.04.sw),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            textWidget(
+                                              // text: AppStrings.resumePdf,
+                                                text: state.resumeModel?.data?.filename,
+                                                fontFamily: AppFont.gilroyBold,
+                                                fontSize: AppDimensions.textSizeSmall,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.textBlackColor),
+                                            height(0.002.sh),
+                                            textWidget(
+                                              // text: AppStrings.resumePdfSize,
+                                              text: state.resumeModel?.data?.fileSize,
+                                              fontFamily: AppFont.gilroyBold,
+                                              fontSize: AppDimensions.textSize10,
+                                            ),
+                                          ],
+                                        ),
+                                        const Spacer(),
+                                        CustomMaterialButton(
+                                            onPressed: () {
+                                              print("Pdf: ${state
+                                                  .resumeModel?.data?.file}");
+                                              if(state.resumeModel?.data?.file != null) {
+                                                _launchURL(pdfPath: state.resumeModel!.data!.file!);
+                                              }
+                                              // Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //         builder: (_) => PDFScreen(
+                                              //             state
+                                              //                 .resumeModel?.data?.file)));
+                                            },
+                                            width: 4,
+                                            borderRadius: 14,
+                                            name: AppStrings.view,
+                                            fontSize: AppDimensions.textSizeVerySmall)
+                                      ],
+                                    )),
                               ],
                             ),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                    color: AppColors.backIconBackgroundColor,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(12))),
-                                child: Center(
-                                    child: Image.asset(
-                                  AssetsPath.pdf,
-                                  width: 24,
-                                  height: 24,
-                                )),
-                              ),
-                              width(0.04.sw),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  textWidget(
-                                      // text: AppStrings.resumePdf,
-                                      text: state.resumeModel?.data?.filename,
-                                      fontFamily: AppFont.gilroyBold,
-                                      fontSize: AppDimensions.textSizeSmall,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.textBlackColor),
-                                  height(0.002.sh),
-                                  textWidget(
-                                    // text: AppStrings.resumePdfSize,
-                                    text: state.resumeModel?.data?.fileSize,
-                                    fontFamily: AppFont.gilroyBold,
-                                    fontSize: AppDimensions.textSize10,
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              CustomMaterialButton(
-                                  onPressed: () {
-                                    print("Pdf: ${state
-                                        .resumeModel?.data?.file}");
-                                    if(state.resumeModel?.data?.file != null) {
-                                      _launchURL(pdfPath: state.resumeModel!.data!.file!);
-                                    }
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (_) => PDFScreen(
-                                    //             state
-                                    //                 .resumeModel?.data?.file)));
-                                  },
-                                  width: 4,
-                                  borderRadius: 14,
-                                  name: AppStrings.view,
-                                  fontSize: AppDimensions.textSizeVerySmall)
-                            ],
-                          )),
                     ],
                   ),
                 ),

@@ -22,6 +22,7 @@ class CardCubit extends Cubit<CardState> {
   Future addCardCubit({
     required BuildContext context,
     required bool mounted,
+    required String? cardToken
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.instance.indicatorColor = AppColors.whiteColor;
@@ -29,7 +30,7 @@ class CardCubit extends Cubit<CardState> {
 
     final token = await prefs.getToken();
 
-    final response = await addCardProvider(apiToken: token);
+    final response = await addCardProvider(apiToken: token, cardToken: cardToken);
 
     if (response != null) {
       EasyLoading.dismiss();

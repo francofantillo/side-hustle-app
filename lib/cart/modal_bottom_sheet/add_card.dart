@@ -25,6 +25,7 @@ class AddCardModalSheet extends StatefulWidget {
 
 class _AddCardModalSheetState extends State<AddCardModalSheet> {
   CardDetails _card = CardDetails();
+  final CardCubit _bloc = CardCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +151,9 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                       //      cvc: '123');
                       final _cardToken = await StripeService.getCardToken();
                       print("cardToken: $_cardToken");
+                      // if (mounted) {
+                      //   await _bloc.addCardCubit(context: context, mounted: mounted, cardToken: _cardToken);
+                      // }
                       // await submitForm();
                       // print("stripe Token: $id");
 

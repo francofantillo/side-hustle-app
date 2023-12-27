@@ -6,11 +6,11 @@ var dio = Dio();
 
 /// Add Card
 Future<Response?> addCardProvider(
-    {String? cardHolder, String? last4, String? apiToken}) async {
+    {String? cardHolder, String? last4, String? cardToken, String? apiToken}) async {
   final data = {
     "card_holder": "Test Card",
-    "last4": "3423",
-    "token": apiToken
+    "last4": "4242",
+    "token": cardToken
   };
 
   print(
