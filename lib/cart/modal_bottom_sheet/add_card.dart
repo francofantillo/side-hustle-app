@@ -89,14 +89,6 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                   keyboardType: TextInputType.number,
                 ),
               ),
-              // CardField(
-              //   decoration: const InputDecoration(helperMaxLines: 2),
-              //   onCardChanged: (cardFieldInputDetails) {
-              //     // Handle card input changes
-              //     print(cardFieldInputDetails
-              //         ?.complete); // Card input completeness status
-              //   },
-              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 4),
                 child: CustomTextFormField(
@@ -117,10 +109,6 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                           height: 40.h,
                           hintText: AppStrings.expiry,
                           onChanged: (number) {
-                            // setState(() {
-                            //   _card = _card.copyWith(
-                            //       expirationYear: int.tryParse("2024"));
-                            // });
                           },
                           keyboardType: TextInputType.number,
                         ),

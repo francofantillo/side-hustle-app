@@ -6,7 +6,10 @@ var dio = Dio();
 
 /// Add Card
 Future<Response?> addCardProvider(
-    {String? cardHolder, String? last4, String? cardToken, String? apiToken}) async {
+    {String? cardHolder,
+    String? last4,
+    String? cardToken,
+    String? apiToken}) async {
   final data = {
     "card_holder": "Test Card",
     "last4": "4242",
@@ -17,5 +20,13 @@ Future<Response?> addCardProvider(
       "*****************\nurl: ${API.ADD_CARD}\ndata: $data\n**************************");
   final response = await postRequestProvider(
       path: API.ADD_CARD, data: data, token: apiToken);
+  return response;
+}
+
+/// Get Cards
+Future<Response?> getCardsProvider({String? apiToken}) async {
+  print("*****************\nurl: ${API.GET_CARDS}\n**************************");
+  final response =
+      await getRequestProvider(path: API.GET_CARDS, token: apiToken);
   return response;
 }

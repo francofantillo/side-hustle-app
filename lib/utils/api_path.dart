@@ -16,6 +16,7 @@ class API {
 
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";
+  static const String GET_CARDS = "${BASE_URL}/cards";
 
   /// Side Hustle
   static const String ADD_PRODUCT_OR_SERVICE = "${BASE_URL}/add-product";
@@ -33,5 +34,8 @@ class API {
   /// Resume
   static const String UPDATE_RESUME = "${BASE_URL}/update-resume";
   static const String GET_RESUME = "${BASE_URL}/resume";
+
+  /// Wanted Job
+  // static const String POST_JOB = "${BASE_URL}/";
 
 }

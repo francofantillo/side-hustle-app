@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/state_management/providers/card/card_provider.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_utils.dart';
@@ -19,18 +20,18 @@ class CardCubit extends Cubit<CardState> {
   final prefs = SharedPreferencesHelper.instance;
 
   /// Add Card
-  Future addCardCubit({
-    required BuildContext context,
-    required bool mounted,
-    required String? cardToken
-  }) async {
+  Future addCardCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required String? cardToken}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.instance.indicatorColor = AppColors.whiteColor;
     EasyLoading.show();
 
     final token = await prefs.getToken();
 
-    final response = await addCardProvider(apiToken: token, cardToken: cardToken);
+    final response =
+        await addCardProvider(apiToken: token, cardToken: cardToken);
 
     if (response != null) {
       EasyLoading.dismiss();
@@ -55,6 +56,44 @@ class CardCubit extends Cubit<CardState> {
     } else {
       EasyLoading.dismiss();
       EasyLoading.instance.indicatorColor = AppColors.primaryColor;
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get Cards
+  Future getCardsCubit(
+      {required BuildContext context,
+      required bool mounted}) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    emit(state.copyWith(cardModel: CardModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    final response = await getCardsProvider(apiToken: token);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        print("response: ${response.data}");
+        final CardModel cardModel = CardModel.fromJson(response.data);
+        emit(state.copyWith(cardModel: cardModel));
+        AppUtils.showToast(cardModel.message);
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+
+      /// Failed
+      else {
+        print(
+            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }
