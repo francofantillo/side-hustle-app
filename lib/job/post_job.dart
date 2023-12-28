@@ -25,6 +25,7 @@ class PostJob extends StatefulWidget {
 }
 
 class _PostJobState extends State<PostJob> {
+  final _jobFormKey = GlobalKey<FormState>();
   TextEditingController dateTextController = TextEditingController();
   TextEditingController firstTimeTextController = TextEditingController();
   TextEditingController secondTimeTextController = TextEditingController();
@@ -55,305 +56,317 @@ class _PostJobState extends State<PostJob> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
-        child: Padding(
-          padding: EdgeInsets.all(AppDimensions.rootPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ImageSlider(),
-              height(0.02.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.uploadImages,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                  text: AppStrings.uploadImagesBodyService,
-                  fontSize: AppDimensions.textSizeVerySmall,
-                  fontFamily: AppFont.gilroyMedium,
-                  maxLines: 3,
+      body: Form(
+        key: _jobFormKey,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          physics: const AlwaysScrollableScrollPhysics(
+              parent: BouncingScrollPhysics()),
+          child: Padding(
+            padding: EdgeInsets.all(AppDimensions.rootPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ImageSlider(),
+                height(0.02.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                      text: AppStrings.uploadImages,
+                      maxLines: 1,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
-              height(0.04.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.postJobTitle,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.enterTheJobTitle,
-                  // fillColor: AppColors.fieldsOutlineColor,
-                  fillColor: AppColors.textFieldBackgroundColor,
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.jobLocation,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.enterJobLocation,
-                  suffixIcon: Icon(
-                    Icons.my_location,
-                    size: AppDimensions.imageIconSizeTextFormField,
-                    color: AppColors.greyColorNoOpacity,
+                height(0.01.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                    text: AppStrings.uploadImagesBodyService,
+                    fontSize: AppDimensions.textSizeVerySmall,
+                    fontFamily: AppFont.gilroyMedium,
+                    maxLines: 3,
                   ),
-                  isSuffixIcon: true,
                 ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.jobDesc,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 75.h,
-                  hintText: AppStrings.enterTheJobDesc,
+                height(0.04.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                      text: AppStrings.postJobTitle,
+                      maxLines: 1,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.jobBudget,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sw),
-                        CustomTextFormField(
-                          height: 45.h,
-                          hintText: "\$\$\$",
-                          // fillColor: AppColors.productTextFieldColor,
-                        ),
-                      ],
-                    ),
+                height(0.01.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: CustomTextFormField(
+                    height: 45.h,
+                    hintText: AppStrings.enterTheJobTitle,
+                    // fillColor: AppColors.fieldsOutlineColor,
+                    fillColor: AppColors.textFieldBackgroundColor,
                   ),
-                  width(0.01.sw),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.areaCode,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sw),
-                        CustomTextFormField(
-                          height: 45.h,
-                          hintText: "00000",
-                          // keyboardType: TextInputType.number,
-                          // fillColor: AppColors.productTextFieldColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.jobDate,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  controller: dateTextController,
-                  height: 45.h,
-                  hintText: AppStrings.selectTheDate,
-                  isReadonly: true,
-                  suffixIcon: ImageIcon(const AssetImage(AssetsPath.calender),
+                ),
+                height(AppDimensions.formFieldsBetweenSpacing),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                      text: AppStrings.jobLocation,
+                      maxLines: 1,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontWeight: FontWeight.bold),
+                ),
+                height(0.01.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: CustomTextFormField(
+                    height: 45.h,
+                    hintText: AppStrings.enterJobLocation,
+                    suffixIcon: Icon(
+                      Icons.my_location,
                       size: AppDimensions.imageIconSizeTextFormField,
-                      color: AppColors.greyColorNoOpacity),
-                  isSuffixIcon: true,
-                  onTap: () async {
-                    formattedDate = await AppUtils.selectDate(
-                        context: context, initialDate: DateTime.now());
-                    setState(() {});
-                  },
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.jobTime,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sw),
-                        CustomTextFormField(
-                          controller: firstTimeTextController,
-                          // height: 45.h,
-                          hintText: AppStrings.jobTimeHint,
-                          // suffixIcon: ImageIcon(
-                          //   const AssetImage(AssetsPath.time),
-                          //   size: AppDimensions.imageIconSizeTextFormField,
-                          //   color: AppColors.greyColorNoOpacity,
-                          // ),
-                          suffixIcon: Icon(
-                            Icons.access_time_filled_rounded,
-                            size: AppDimensions.imageIconSizeTextFormField,
-                            color: AppColors.greyColorNoOpacity,
-                          ),
-                          isSuffixIcon: true,
-                          isReadonly: true,
-                          onTap: () async {
-                            await AppUtils.selectTime(context, true);
-                            setState(() {});
-                          },
-                        ),
-                      ],
+                      color: AppColors.greyColorNoOpacity,
                     ),
+                    isSuffixIcon: true,
                   ),
-                  width(0.01.sw),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.totalHours,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sw),
-                        CustomTextFormField(
-                          controller: secondTimeTextController,
-                          // height: 45.h,
-                          hintText: AppStrings.totalHoursHint,
-                          // suffixIcon: ImageIcon(
-                          //   const AssetImage(AssetsPath.time),
-                          //   size: AppDimensions.imageIconSizeTextFormField,
-                          //   color: AppColors.greyColorNoOpacity,
-                          // ),
-                          suffixIcon: Icon(
-                            Icons.access_time_filled_rounded,
-                            size: AppDimensions.imageIconSizeTextFormField,
-                            color: AppColors.greyColorNoOpacity,
+                ),
+                height(AppDimensions.formFieldsBetweenSpacing),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                      text: AppStrings.jobDesc,
+                      maxLines: 1,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontWeight: FontWeight.bold),
+                ),
+                height(0.01.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: CustomTextFormField(
+                    height: 75.h,
+                    hintText: AppStrings.enterTheJobDesc,
+                  ),
+                ),
+                height(AppDimensions.formFieldsBetweenSpacing),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.jobBudget,
+                                maxLines: 1,
+                                color: AppColors.textBlackColor,
+                                fontSize: AppDimensions.textSizeSmall,
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold),
                           ),
-                          isSuffixIcon: true,
-                          isReadonly: true,
-                          onTap: () async {
-                            await AppUtils.selectTime(context, false);
-                            setState(() {});
-                          },
-                          // fillColor: AppColors.productTextFieldColor,
-                        ),
-                      ],
+                          height(0.01.sw),
+                          CustomTextFormField(
+                            height: 45.h,
+                            hintText: "\$\$\$",
+                            // fillColor: AppColors.productTextFieldColor,
+                          ),
+                        ],
+                      ),
                     ),
+                    width(0.01.sw),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.areaCode,
+                                maxLines: 1,
+                                color: AppColors.textBlackColor,
+                                fontSize: AppDimensions.textSizeSmall,
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          height(0.01.sw),
+                          CustomTextFormField(
+                            height: 45.h,
+                            hintText: "00000",
+                            // keyboardType: TextInputType.number,
+                            // fillColor: AppColors.productTextFieldColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                height(AppDimensions.formFieldsBetweenSpacing),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                      text: AppStrings.jobDate,
+                      maxLines: 1,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontWeight: FontWeight.bold),
+                ),
+                height(0.01.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: CustomTextFormField(
+                    controller: dateTextController,
+                    height: 45.h,
+                    hintText: AppStrings.selectTheDate,
+                    isReadonly: true,
+                    suffixIcon: ImageIcon(const AssetImage(AssetsPath.calender),
+                        size: AppDimensions.imageIconSizeTextFormField,
+                        color: AppColors.greyColorNoOpacity),
+                    isSuffixIcon: true,
+                    onTap: () async {
+                      formattedDate = await AppUtils.selectDate(
+                          context: context, initialDate: DateTime.now());
+                      setState(() {});
+                    },
                   ),
-                ],
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.additionalInformation,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 65.h,
-                  hintText: AppStrings.enterTheAdditionalInformation,
-                  // maxLines: 2,
-                  // fillColor: AppColors.productTextFieldColor,
                 ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: CustomMaterialButton(
-                  borderRadius: 14,
-                  onPressed: () {
-                    AppUtils.showBottomModalSheet(
-                        context: context,
-                        widget: const ModalBottomSheetPackageTypePost(isJob: true,));                  },
-                  color: AppColors.primaryColor,
-                  name: widget.isEdit ? AppStrings.saveChanges : AppStrings.postJob,
+                height(AppDimensions.formFieldsBetweenSpacing),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.jobTime,
+                                maxLines: 1,
+                                color: AppColors.textBlackColor,
+                                fontSize: AppDimensions.textSizeSmall,
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          height(0.01.sw),
+                          CustomTextFormField(
+                            controller: firstTimeTextController,
+                            // height: 45.h,
+                            hintText: AppStrings.jobTimeHint,
+                            // suffixIcon: ImageIcon(
+                            //   const AssetImage(AssetsPath.time),
+                            //   size: AppDimensions.imageIconSizeTextFormField,
+                            //   color: AppColors.greyColorNoOpacity,
+                            // ),
+                            suffixIcon: Icon(
+                              Icons.access_time_filled_rounded,
+                              size: AppDimensions.imageIconSizeTextFormField,
+                              color: AppColors.greyColorNoOpacity,
+                            ),
+                            isSuffixIcon: true,
+                            isReadonly: true,
+                            onTap: () async {
+                              await AppUtils.selectTime(context, true);
+                              setState(() {});
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    width(0.01.sw),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.totalHours,
+                                maxLines: 1,
+                                color: AppColors.textBlackColor,
+                                fontSize: AppDimensions.textSizeSmall,
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          height(0.01.sw),
+                          CustomTextFormField(
+                            controller: secondTimeTextController,
+                            // height: 45.h,
+                            hintText: AppStrings.totalHoursHint,
+                            // suffixIcon: ImageIcon(
+                            //   const AssetImage(AssetsPath.time),
+                            //   size: AppDimensions.imageIconSizeTextFormField,
+                            //   color: AppColors.greyColorNoOpacity,
+                            // ),
+                            suffixIcon: Icon(
+                              Icons.access_time_filled_rounded,
+                              size: AppDimensions.imageIconSizeTextFormField,
+                              color: AppColors.greyColorNoOpacity,
+                            ),
+                            isSuffixIcon: true,
+                            isReadonly: true,
+                            onTap: () async {
+                              await AppUtils.selectTime(context, false);
+                              setState(() {});
+                            },
+                            // fillColor: AppColors.productTextFieldColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              )
-            ],
+                height(AppDimensions.formFieldsBetweenSpacing),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: textWidget(
+                      text: AppStrings.additionalInformation,
+                      maxLines: 1,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeSmall,
+                      fontFamily: AppFont.gilroyBold,
+                      fontWeight: FontWeight.bold),
+                ),
+                height(0.01.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: CustomTextFormField(
+                    height: 65.h,
+                    hintText: AppStrings.enterTheAdditionalInformation,
+                    // maxLines: 2,
+                    // fillColor: AppColors.productTextFieldColor,
+                  ),
+                ),
+                height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: CustomMaterialButton(
+                    borderRadius: 14,
+                    onPressed: () {
+                      AppUtils.showBottomModalSheet(
+                          context: context,
+                          widget: const ModalBottomSheetPackageTypePost(
+                            isJob: true,
+                          ));
+                    },
+                    color: AppColors.primaryColor,
+                    name: widget.isEdit
+                        ? AppStrings.saveChanges
+                        : AppStrings.postJob,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/profile/widgets/jobs_widget.dart';
 import 'package:side_hustle/profile/widgets/profile_items_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -50,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (contextBuilder) {
+    return BlocBuilder<AuthCubit, AuthState>(builder: (contextBuilder, state) {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return Scaffold(
         body: SingleChildScrollView(
@@ -72,22 +74,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   hideEditProfileIcon: true,
                 ),
               ),
-              height(0.02.sh),
+              height(0.02.sw),
               Center(
                 child: CircularCacheImageWidget(
                   showLoading: true,
-                  // image: AlphaAppData.dpProfile,
-                  assetImage: AssetsPath.brandonProfile,
+                  // assetImage: AssetsPath.brandonProfile,
+                  // image: state.resumeModel?.data?.profileImage,
+                  image: state.userModel?.data?.image,
+                  assetImage: AssetsPath.placeHolder,
                   boarderColor: AppColors.primaryColor,
                   imageHeight: 90.w,
                   imageWidth: 90.w,
-                  borderWidth: .003.sh,
+                  borderWidth: .003.sw,
                 ),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Center(
                 child: textWidget(
-                    text: AppStrings.davidHan,
+                    // text: AppStrings.davidHan,
+                    text: state.userModel?.data?.name,
                     color: AppColors.textBlackColor,
                     fontFamily: AppFont.gilroyBold,
                     fontSize: AppDimensions.textHeadingSize,
@@ -95,11 +100,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Center(
                 child: textWidget(
-                    text: AppStrings.userEmail,
+                    // text: AppStrings.userEmail,
+                    text: state.userModel?.data?.email,
                     color: AppColors.textBlackColor,
                     fontSize: AppDimensions.textSizeVerySmall),
               ),
-              height(0.01.sh),
+              height(0.01.sw),
               Padding(
                 padding: EdgeInsets.symmetric(
                     // horizontal: 28.w),
