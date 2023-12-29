@@ -11,7 +11,5 @@ class WantedJobCubit extends Cubit<WantedJobState> {
   Future getWantedJobs(
       {required BuildContext context, required bool mounted}) async {
     EasyLoading.show();
-
-
   }
 }

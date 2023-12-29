@@ -12,11 +12,13 @@ class ImageSlider extends StatefulWidget {
   final List<String>? itemImages;
   final List<Images>? responseImages;
   final bool hideCameraIcon;
+  final Function()? onTap;
 
   const ImageSlider(
       {super.key,
       this.itemImages,
       this.responseImages,
+      this.onTap,
       this.hideCameraIcon = false});
 
   @override
@@ -117,9 +119,7 @@ class _ImageSliderState extends State<ImageSlider> {
                         // top: AppDimensions.productImageSliderHeight - 0.23.sw,
                         top: AppDimensions.productImageSliderHeight - 0.255.sw,
                         child: CameraButton(
-                          onTap: () {
-                            print("Clicked");
-                          },
+                          onTap: widget.onTap,
                           iconPath: AssetsPath.camera,
                           height: 0.12.sw,
                           width: 0.12.sw,

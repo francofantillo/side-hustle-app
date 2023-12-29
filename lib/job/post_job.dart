@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
+import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/service/image_picker_service.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -26,6 +30,7 @@ class PostJob extends StatefulWidget {
 
 class _PostJobState extends State<PostJob> {
   final _jobFormKey = GlobalKey<FormState>();
+  List<String>? images;
   TextEditingController dateTextController = TextEditingController();
   TextEditingController firstTimeTextController = TextEditingController();
   TextEditingController secondTimeTextController = TextEditingController();
@@ -67,7 +72,23 @@ class _PostJobState extends State<PostJob> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ImageSlider(),
+                ImageSlider(
+                  onTap: () async {
+                    final getImages = await ImagePickerService
+                        .selectMultipleImagesFromGallery();
+                    print("getImages: ${getImages}");
+                    if (getImages != null) {
+                      images = [];
+                      for (int i = 0; i < getImages.length; i++) {
+                        final image = getImages[i].path;
+                        images?.add(image);
+                      }
+                      print("images: ${images?[0]}");
+                      setState(() {});
+                    }
+                  },
+                  itemImages: images,
+                ),
                 height(0.02.sw),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
