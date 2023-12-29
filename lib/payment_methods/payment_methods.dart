@@ -67,9 +67,6 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PaymentList(),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0, right: 8, top: 8),
-                    )
                   ],
                 ),
               );
