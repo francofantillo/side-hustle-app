@@ -8,10 +8,14 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class PaymentItem extends StatelessWidget {
   final String? cardNumber;
-  final bool defaultCard;
-  final ValueChanged<bool?> onChanged;
+  final int defaultCard;
+  final ValueChanged<int?> onChanged;
 
-  const PaymentItem({super.key, this.cardNumber, required this.defaultCard, required this.onChanged});
+  const PaymentItem(
+      {super.key,
+      this.cardNumber,
+      required this.defaultCard,
+      required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +41,14 @@ class PaymentItem extends StatelessWidget {
               children: [
                 textWidget(text: AppStrings.debitCreditCard),
                 height(0.01.sh),
-                textWidget(text: cardNumber ?? AppStrings.debitCreditCardSecret),
+                textWidget(
+                    text: cardNumber != null
+                        ? "****  ****  ****  $cardNumber"
+                        : ""),
               ],
             ),
             const Spacer(),
-            Radio(value: defaultCard, groupValue: true, onChanged: onChanged)
+            Radio(value: defaultCard, groupValue: 1, onChanged: onChanged)
           ],
         ),
       ),

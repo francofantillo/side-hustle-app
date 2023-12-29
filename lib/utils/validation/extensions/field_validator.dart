@@ -1,3 +1,4 @@
+import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/validation/regular_expressions.dart';
@@ -32,9 +33,9 @@ extension FieldValidator on String {
   }
 
   //---------------- Empty Validator -----------------
-  validateEmpty(String message) {
+  validateEmpty(String name) {
     if (isEmpty) {
-      return '$message Field can\'t be empty.';
+      return '$name Field can\'t be empty.';
     } else {
       return null;
     }
@@ -62,6 +63,34 @@ extension FieldValidator on String {
     } else {
       return null;
     }
+  }
+
+  //---------------- Card Cvv Validator -----------------
+  String? validateCvv(cvv) {
+    if (isNotEmpty) {
+      if (cvv.length < 3) {
+        return AppStrings.cardCVVValidation;
+      } else {
+        return null;
+      }
+    } else {
+      return AppStrings.cardCVVRequired;
+    }
+  }
+
+  //---------------- Card Cvv Validator -----------------
+  String? validateCardNumber(cardNumber) {
+    print("cardNumber: $cardNumber");
+    if (cardNumber!.isNotEmpty) {
+      if (cardNumber.length < 19) {
+        return AppStrings.cardNumberValidation;
+      } else {
+        return null;
+      }
+    } else {
+      return AppStrings.cardNumberRequired;
+    }
+    return null;
   }
 
   get validateNewPassword {
@@ -201,8 +230,7 @@ extension FieldValidator on String {
   get validateLoginPassword {
     if (isEmpty) {
       return AppValidationMessages.PASSWORD_EMPTY_ERROR;
-    }
-    else if (this.length < Constants.passwordFieldLength) {
+    } else if (this.length < Constants.passwordFieldLength) {
       return AppValidationMessages.PASSWORD_INVALID_LENGTH_ERROR;
     }
     return null;

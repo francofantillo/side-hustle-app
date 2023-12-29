@@ -68,6 +68,7 @@ class FavouritesCubit extends Cubit<FavouritesState> {
     EasyLoading.show();
 
     final token = await prefs.getToken();
+    print("token: $token");
 
     final response =
         await addToFavProvider(id: id, type: type, apiToken: token);

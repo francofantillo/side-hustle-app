@@ -13,4 +13,9 @@ class RegularExpressions {
     filter: {"#": RegExp(r'[0-9]')},
     type: MaskAutoCompletionType.lazy,
   );
+
+  static MaskTextInputFormatter MASK_TEXT_FORMATTER_CARD_NO = MaskTextInputFormatter(
+      mask: '####-####-####-####',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
 }

@@ -11,8 +11,8 @@ Future<Response?> addCardProvider(
     String? cardToken,
     String? apiToken}) async {
   final data = {
-    "card_holder": "Test Card",
-    "last4": "4242",
+    "card_holder": cardHolder,
+    "last4": last4,
     "token": cardToken
   };
 

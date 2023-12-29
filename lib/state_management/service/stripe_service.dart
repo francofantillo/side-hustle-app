@@ -9,15 +9,9 @@ class StripeService {
     Stripe.publishableKey = publishableKey;
   }
 
-  static Future<String?> getCardToken() async {
-    CardDetails _card = CardDetails();
-
-    _card = _card.copyWith(number: "4242424242424242");
-    _card = _card.copyWith(expirationMonth: int.tryParse("12"));
-    _card = _card.copyWith(expirationYear: int.tryParse("2024"));
-    _card = _card.copyWith(cvc: "123");
+  static Future<String?> getCardToken({required CardDetails cardDetails}) async {
     try {
-      await Stripe.instance.dangerouslyUpdateCardDetails(_card);
+      await Stripe.instance.dangerouslyUpdateCardDetails(cardDetails);
 
       // PaymentMethod tokenData = await Stripe.instance.createPaymentMethod(
       //   params: const PaymentMethodParams.card(

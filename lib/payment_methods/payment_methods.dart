@@ -24,7 +24,7 @@ class _ManagePaymentMethodsState extends State<ManagePaymentMethods> {
   @override
   void initState() {
     _bloc = BlocProvider.of(context);
-
+    getCards();
     super.initState();
   }
 

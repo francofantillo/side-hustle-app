@@ -43,6 +43,23 @@ class AppUtils {
     return date;
   }
 
+  static Future<String?> selectCardExpiry(
+      {required BuildContext context}) async {
+    print("called select date");
+    DateTime selectedDate = DateTime.now();
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(1800),
+      lastDate: DateTime.now().add(const Duration(days: 3000)),
+    );
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked;
+      return DateFormat(AppStrings.cardExpiryFormat).format(selectedDate);
+    }
+    return null;
+  }
+
   /// Format Date
   static Future<String> formatDate({required DateTime selectedDate}) async {
     String formattedDate = DateFormat('MM/dd/yyyy').format(selectedDate);

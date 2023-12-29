@@ -400,6 +400,7 @@ class AppStrings {
   static const String expiry = "Expiry";
   static const String cVV = "CVV";
   static const String addCard = "Add Card";
+  static const String cardExpiryFormat = "MM/yyyy";
 
   /// Chat
   static const String searchChatHint = "Search Person or chat";
@@ -472,5 +473,10 @@ class AppStrings {
   static const String errorMessageEvent = "No Events Found";
   static const String errorMessageFavourites = "No Items Found";
   static const String errorMessage = "Something went wrong.";
+  static const cardCVVValidation = 'CVV is incorrect';
+  static const cardCVVRequired = 'CVV is required';
+  static const cardNameRequired = 'Card Name is required';
+  static const cardNumberValidation = 'Card Number is incorrect';
+  static const cardNumberRequired = 'Card Number is required';
 
 }
