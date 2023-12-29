@@ -13,6 +13,7 @@ class API {
   static const String RESET_PASSWORD = "${BASE_URL}/auth/set-password";
   static const String CHANGE_PASSWORD = "${BASE_URL}/change-password";
   static const String LOGOUT = "${BASE_URL}/logout";
+  static const String TERMS_AND_CONDITIONS = "${BASE_URL}/terms-and-conditions";
 
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";

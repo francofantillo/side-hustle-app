@@ -227,6 +227,15 @@ Future<Response?> getResumeProvider({int? id, String? apiToken}) async {
   return response;
 }
 
+/// Get Terms and Conditions
+Future<Response?> getTermsAndConditionsProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.TERMS_AND_CONDITIONS}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.TERMS_AND_CONDITIONS, token: apiToken);
+  return response;
+}
+
 /// Logout
 Future<Response?> logoutProvider({String? apiToken}) async {
   print("*****************\nurl: ${API.LOGOUT}\n**************************");

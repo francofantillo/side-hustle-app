@@ -483,6 +483,43 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  /// Get Terms and Condtions
+  Future getTermsAndConditionsCubit({
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    String? x;
+    emit(state.copyWith(termsAndConditions: x));
+
+    EasyLoading.show();
+
+    final response = await getTermsAndConditionsProvider(
+        apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        print("response: ${response.data}");
+        emit(state.copyWith(termsAndConditions: response.data['data']));
+        // AppUtils.showToast(resumeModel.message);
+        // if (mounted) {
+        //   Navigator.pop(context);
+        // }
+      }
+
+      /// Failed
+      else {
+        print("status: ${response.data["status"]} response: ${response.data}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
   /// Update Resume
   Future updateResumeCubit({
     required BuildContext context,
