@@ -9,6 +9,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -35,16 +36,16 @@ class _YourResumeState extends State<YourResume> {
     "Hobbies 3",
   ];
 
-  _launchURL({required String pdfPath}) async {
-    // final pdfUrl = Uri.parse('https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf');
-    final pdfUrl = Uri.parse(pdfPath);
-
-    if (await canLaunchUrl(pdfUrl)) {
-      await launchUrl(pdfUrl);
-    } else {
-      throw 'Could not launch $pdfUrl';
-    }
-  }
+  // _launchURL({required String pdfPath}) async {
+  //   // final pdfUrl = Uri.parse('https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf');
+  //   final pdfUrl = Uri.parse(pdfPath);
+  //
+  //   if (await canLaunchUrl(pdfUrl)) {
+  //     await launchUrl(pdfUrl);
+  //   } else {
+  //     throw 'Could not launch $pdfUrl';
+  //   }
+  // }
 
   @override
   void initState() {
@@ -357,49 +358,62 @@ class _YourResumeState extends State<YourResume> {
                                 ),
                                 height(AppDimensions.formFieldsBetweenSpacing),
                                 Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
                                     child: Row(
                                       children: [
                                         Container(
                                           padding: const EdgeInsets.all(16),
                                           decoration: BoxDecoration(
-                                              color: AppColors.backIconBackgroundColor,
-                                              borderRadius: const BorderRadius.all(
-                                                  Radius.circular(12))),
+                                              color: AppColors
+                                                  .backIconBackgroundColor,
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(12))),
                                           child: Center(
                                               child: Image.asset(
-                                                AssetsPath.pdf,
-                                                width: 24,
-                                                height: 24,
-                                              )),
+                                            AssetsPath.pdf,
+                                            width: 24,
+                                            height: 24,
+                                          )),
                                         ),
                                         width(0.04.sw),
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             textWidget(
-                                              // text: AppStrings.resumePdf,
-                                                text: state.resumeModel?.data?.filename,
+                                                // text: AppStrings.resumePdf,
+                                                text: state.resumeModel?.data
+                                                    ?.filename,
                                                 fontFamily: AppFont.gilroyBold,
-                                                fontSize: AppDimensions.textSizeSmall,
+                                                fontSize:
+                                                    AppDimensions.textSizeSmall,
                                                 fontWeight: FontWeight.bold,
-                                                color: AppColors.textBlackColor),
+                                                color:
+                                                    AppColors.textBlackColor),
                                             height(0.002.sh),
                                             textWidget(
                                               // text: AppStrings.resumePdfSize,
-                                              text: state.resumeModel?.data?.fileSize,
+                                              text: state
+                                                  .resumeModel?.data?.fileSize,
                                               fontFamily: AppFont.gilroyBold,
-                                              fontSize: AppDimensions.textSize10,
+                                              fontSize:
+                                                  AppDimensions.textSize10,
                                             ),
                                           ],
                                         ),
                                         const Spacer(),
                                         CustomMaterialButton(
-                                            onPressed: () {
-                                              print("Pdf: ${state
-                                                  .resumeModel?.data?.file}");
-                                              if(state.resumeModel?.data?.file != null) {
-                                                _launchURL(pdfPath: state.resumeModel!.data!.file!);
+                                            onPressed: () async {
+                                              print(
+                                                  "Pdf: ${state.resumeModel?.data?.file}");
+                                              if (state.resumeModel?.data
+                                                      ?.file !=
+                                                  null) {
+                                                await AppUtils.launchURL(
+                                                    url: state.resumeModel!
+                                                        .data!.file!);
                                               }
                                               // Navigator.push(
                                               //     context,
@@ -411,7 +425,8 @@ class _YourResumeState extends State<YourResume> {
                                             width: 4,
                                             borderRadius: 14,
                                             name: AppStrings.view,
-                                            fontSize: AppDimensions.textSizeVerySmall)
+                                            fontSize:
+                                                AppDimensions.textSizeVerySmall)
                                       ],
                                     )),
                               ],

@@ -10,16 +10,24 @@ Future<Response?> addCardProvider(
     String? last4,
     String? cardToken,
     String? apiToken}) async {
-  final data = {
-    "card_holder": cardHolder,
-    "last4": last4,
-    "token": cardToken
-  };
+  final data = {"card_holder": cardHolder, "last4": last4, "token": cardToken};
 
   print(
       "*****************\nurl: ${API.ADD_CARD}\ndata: $data\n**************************");
   final response = await postRequestProvider(
       path: API.ADD_CARD, data: data, token: apiToken);
+  return response;
+}
+
+/// Set Default Card
+Future<Response?> setDefaultCardProvider(
+    {int? cardId, String? apiToken}) async {
+  final data = {"card_id": cardId};
+
+  print(
+      "*****************\nurl: ${API.SET_DEFAULT_CARD}\ndata: $data\n**************************");
+  final response = await postRequestProvider(
+      path: API.SET_DEFAULT_CARD, data: data, token: apiToken);
   return response;
 }
 

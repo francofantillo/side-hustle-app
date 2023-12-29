@@ -7,6 +7,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppUtils {
   /// Easy Loading Config
@@ -163,5 +164,16 @@ class AppUtils {
       webPosition: "center",
       webBgColor: "linear-gradient(to right, #dc1c13, #dc1c13)",
     );
+  }
+
+  static launchURL({required String url}) async {
+    // final pdfUrl = Uri.parse('https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf');
+    final urlLaunch = Uri.parse(url);
+
+    if (await canLaunchUrl(urlLaunch)) {
+      await launchUrl(urlLaunch);
+    } else {
+      throw 'Could not launch $urlLaunch';
+    }
   }
 }

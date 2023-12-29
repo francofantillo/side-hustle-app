@@ -14,9 +14,13 @@ class API {
   static const String CHANGE_PASSWORD = "${BASE_URL}/change-password";
   static const String LOGOUT = "${BASE_URL}/logout";
   static const String TERMS_AND_CONDITIONS = "${BASE_URL}/terms-and-conditions";
+  static const String ABOUT_US = "${BASE_URL}/about-us";
+  static const String PRIVACY_POLICY = "${BASE_URL}/privacy-policy";
+  static const String HOW_TO_BE_HUSTLER = "${BASE_URL}/how-to-be-hustler";
 
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";
+  static const String SET_DEFAULT_CARD = "${BASE_URL}/set-default-card";
   static const String GET_CARDS = "${BASE_URL}/cards";
 
   /// Side Hustle

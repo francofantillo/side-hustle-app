@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -487,14 +488,25 @@ class AuthCubit extends Cubit<AuthState> {
   Future getTermsAndConditionsCubit({
     required BuildContext context,
     required bool mounted,
+    required bool isTermsAndConditions,
   }) async {
-    String? x;
-    emit(state.copyWith(termsAndConditions: x));
+    emit(state.copyWith(termsAndConditions: ""));
 
     EasyLoading.show();
 
-    final response = await getTermsAndConditionsProvider(
-        apiToken: state.userModel?.data?.apiToken);
+    late final Response? response;
+
+    if (isTermsAndConditions) {
+      // Terms and Conditions
+      print("isTermsAndConditions: $isTermsAndConditions");
+      response = await getTermsAndConditionsProvider(
+          apiToken: state.userModel?.data?.apiToken);
+    } else {
+      // Privacy Policy
+      print("isTermsAndConditions: $isTermsAndConditions");
+      response =
+          await getPrivacyProvider(apiToken: state.userModel?.data?.apiToken);
+    }
 
     if (response != null) {
       EasyLoading.dismiss();
@@ -516,6 +528,78 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } else {
       EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get About Us
+  Future getAboutUsCubit(
+      {required BuildContext context, required bool mounted}) async {
+    String? x;
+    emit(state.copyWith(termsAndConditions: x));
+
+    EasyLoading.show();
+
+    final response =
+        await getAboutUsProvider(apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        print("response: ${response.data}");
+        emit(state.copyWith(termsAndConditions: response.data['data']));
+        // AppUtils.showToast(resumeModel.message);
+        // if (mounted) {
+        //   Navigator.pop(context);
+        // }
+      }
+
+      /// Failed
+      else {
+        print("status: ${response.data["status"]} response: ${response.data}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get How To Be a Hustler
+  Future getHustlerCubit(
+      {required BuildContext context, required bool mounted}) async {
+    emit(state.copyWith(getResumeLoading: true, resumeModel: ResumeModel()));
+
+    EasyLoading.show();
+
+    final response =
+        await getHustlerProvider(apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final ResumeModel resumeModel = ResumeModel.fromJson(response.data);
+        print("status: ${resumeModel.status} response: ${resumeModel.data}");
+        emit(state.copyWith(getResumeLoading: false, resumeModel: resumeModel));
+        // AppUtils.showToast(resumeModel.message);
+        // if (mounted) {
+        //   Navigator.pop(context);
+        // }
+      }
+
+      /// Failed
+      else {
+        emit(state.copyWith(getResumeLoading: false));
+        print("status: ${response.data["status"]} response: ${response.data}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
+      emit(state.copyWith(getResumeLoading: false));
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }

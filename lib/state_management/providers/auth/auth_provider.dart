@@ -236,6 +236,33 @@ Future<Response?> getTermsAndConditionsProvider({String? apiToken}) async {
   return response;
 }
 
+/// Get Privacy Policy
+Future<Response?> getPrivacyProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.PRIVACY_POLICY}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.PRIVACY_POLICY, token: apiToken);
+  return response;
+}
+
+/// Get About Us
+Future<Response?> getAboutUsProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.ABOUT_US}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.ABOUT_US, token: apiToken);
+  return response;
+}
+
+/// Get How To Be a Hustler
+Future<Response?> getHustlerProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.HOW_TO_BE_HUSTLER}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.HOW_TO_BE_HUSTLER, token: apiToken);
+  return response;
+}
+
 /// Logout
 Future<Response?> logoutProvider({String? apiToken}) async {
   print("*****************\nurl: ${API.LOGOUT}\n**************************");
