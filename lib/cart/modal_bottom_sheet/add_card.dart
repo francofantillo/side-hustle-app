@@ -116,7 +116,8 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                         ],
                         height: 40.h,
                         hintText: AppStrings.cardNumber,
-                        keyboardType: TextInputType.phone,
+                        // keyboardType: TextInputType.phone,
+                        keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: false),
                         fieldValidator: (v) => v?.validateCardNumber(v)),
                   ),
                   Padding(
