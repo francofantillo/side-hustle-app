@@ -110,7 +110,7 @@ class EventsCubit extends Cubit<EventsState> {
     final token = await prefs.getToken();
 
     final response =
-        await getIsInterestedEventProvider(id: id, apiToken: token);
+    await getIsInterestedEventProvider(id: id, apiToken: token);
 
     EasyLoading.dismiss();
 

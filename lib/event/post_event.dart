@@ -57,11 +57,11 @@ class _PostEventState extends State<PostEvent> {
     return BackgroundWidget(
       showAppBar: true,
       appBarTitle:
-          widget.isEdit ? AppStrings.editEvent : AppStrings.postAnEvent,
+      widget.isEdit ? AppStrings.editEvent : AppStrings.postAnEvent,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
-            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

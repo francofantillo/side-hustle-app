@@ -12,11 +12,12 @@ class EventsState {
       this.eventsLoading = true,
       this.eventsDetailLoading = true});
 
-  EventsState copyWith(
-      {EventsModel? eventsModel,
-      EventsModel? eventsDetailModel,
-      bool? eventsLoading,
-      bool? eventsDetailLoading}) {
+  EventsState copyWith({
+    EventsModel? eventsModel,
+    EventsModel? eventsDetailModel,
+    bool? eventsLoading,
+    bool? eventsDetailLoading,
+  }) {
     return EventsState(
       eventsModel: eventsModel ?? this.eventsModel,
       eventsDetailModel: eventsDetailModel ?? this.eventsDetailModel,
