@@ -16,6 +16,10 @@ class EventsCubit extends Cubit<EventsState> {
     emit(EventsState());
   }
 
+  TextEditingController dateTextController = TextEditingController();
+  TextEditingController firstTimeTextController = TextEditingController();
+  TextEditingController secondTimeTextController = TextEditingController();
+
   final prefs = SharedPreferencesHelper.instance;
 
   /// Get Events

@@ -57,9 +57,10 @@ class CardCubit extends Cubit<CardState> {
 
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        print(
-            "status: ${response.data["status"]} response: ${response.data["data"]}");
-        AppUtils.showToast(response.data["message"]);
+        print("response: ${response.data}");
+        final CardModel cardModel = CardModel.fromJson(response.data);
+        emit(state.copyWith(cardModel: cardModel));
+        AppUtils.showToast(cardModel.message);
         if (mounted) {
           Navigator.pop(context);
         }

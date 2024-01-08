@@ -87,9 +87,21 @@ class AppUtils {
     );
     if (picked != null) {
       if (isFirst) {
-        firstSelectedTime = picked;
+/*        firstSelectedTime = picked;
         secondSelectedTime =
-            null; // Reset second time when selecting the first time
+            null; // Reset second time when selecting the first time*/
+        if (secondSelectedTime != null) {
+          if (secondSelectedTime!.hour > (picked.hour ?? 0) ||
+              (secondSelectedTime!.hour == (picked.hour ?? 0) &&
+                  secondSelectedTime!.minute > (picked.minute ?? 0))) {
+            firstSelectedTime = picked;
+          } else {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(AppValidationMessages.timeValidation)));
+            }
+          }
+        }
       } else {
         if (firstSelectedTime != null) {
           if (picked.hour > (firstSelectedTime?.hour ?? 0) ||
@@ -105,7 +117,7 @@ class AppUtils {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text(AppValidationMessages.timeValidation)));
             }
-            secondSelectedTime = null;
+            // secondSelectedTime = null;
           }
         } else {
           if (context.mounted) {

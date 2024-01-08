@@ -13,25 +13,25 @@ class StripeService {
     try {
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetails);
 
-      // PaymentMethod tokenData = await Stripe.instance.createPaymentMethod(
-      //   params: const PaymentMethodParams.card(
-      //     paymentMethodData: PaymentMethodData(
-      //         billingDetails: BillingDetails(name: "David Willy")),
-      //   ),
-      // );
-      TokenData tokenData = await Stripe.instance.createToken(
-          const CreateTokenParams.card(
-              params: CardTokenParams(
-                  type: TokenType.Card,
-                  name: "xyz",
-                  address: Address(
-                      city: '',
-                      country: '',
-                      line1: '',
-                      line2: '',
-                      postalCode: '',
-                      state: ''),
-                  currency: 'usd')));
+      PaymentMethod tokenData = await Stripe.instance.createPaymentMethod(
+        params: const PaymentMethodParams.card(
+          paymentMethodData: PaymentMethodData(
+              billingDetails: BillingDetails(name: "David Willy")),
+        ),
+      );
+      // TokenData tokenData = await Stripe.instance.createToken(
+      //     const CreateTokenParams.card(
+      //         params: CardTokenParams(
+      //             type: TokenType.Card,
+      //             name: "xyz",
+      //             address: Address(
+      //                 city: '',
+      //                 country: '',
+      //                 line1: '',
+      //                 line2: '',
+      //                 postalCode: '',
+      //                 state: ''),
+      //             currency: 'usd')));
 
       String cardToken = tokenData.id;
       if (kDebugMode) {
