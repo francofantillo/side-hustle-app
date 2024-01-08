@@ -111,34 +111,34 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         Container(
           decoration: BoxDecoration(
               borderRadius:
-              BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+                  BorderRadius.circular(AppDimensions.textFieldBorderRadius),
               // border: widget.isShowBoarder
               //     ? Border.all(color: AppColors.fieldsOutlineColor)
               //     : null,
               boxShadow: widget.isShowShadow
                   ? [
-                BoxShadow(
-                  // color: Colors.grey.withOpacity(.15),
-                  color: Colors.grey.withOpacity(.15),
-                  blurRadius: 12.0, // soften the shadow
-                  spreadRadius: 0.0, //extend the shadow
-                  offset: const Offset(
-                    0.0, // Move to right 10  horizontally
-                    9.0, // Move to bottom 10 Vertically
-                  ),
-                )
-              ]
+                      BoxShadow(
+                        // color: Colors.grey.withOpacity(.15),
+                        color: Colors.grey.withOpacity(.15),
+                        blurRadius: 12.0, // soften the shadow
+                        spreadRadius: 0.0, //extend the shadow
+                        offset: const Offset(
+                          0.0, // Move to right 10  horizontally
+                          9.0, // Move to bottom 10 Vertically
+                        ),
+                      )
+                    ]
                   : [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(.01),
-                  blurRadius: 12.0, // soften the shadow
-                  spreadRadius: 0.0, //extend the shadow
-                  offset: const Offset(
-                    0.0, // Move to right 10  horizontally
-                    9.0, // Move to bottom 10 Vertically
-                  ),
-                )
-              ]),
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(.01),
+                        blurRadius: 12.0, // soften the shadow
+                        spreadRadius: 0.0, //extend the shadow
+                        offset: const Offset(
+                          0.0, // Move to right 10  horizontally
+                          9.0, // Move to bottom 10 Vertically
+                        ),
+                      )
+                    ]),
           // : null),
           child: Card(
             // elevation: _isFocused
@@ -149,10 +149,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius:
-              BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+                  BorderRadius.circular(AppDimensions.textFieldBorderRadius),
               side: widget.isShowBoarder
                   ? const BorderSide(
-                  width: 1, color: AppColors.fieldsOutlineColor)
+                      width: 1, color: AppColors.fieldsOutlineColor)
                   : BorderSide.none,
             ),
             child: Container(
@@ -160,10 +160,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius:
-                BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+                    BorderRadius.circular(AppDimensions.textFieldBorderRadius),
                 border:
-                Border.all(color: widget.fillColor ?? AppColors.whiteColor),
+                    Border.all(color: widget.fillColor ?? AppColors.whiteColor),
                 color: widget.fillColor ?? AppColors.whiteColor,
+                // color: Colors.transparent,
               ),
               // height: widget.height ?? AppDimensions.textFieldHeight,
               child: textFormField(),
@@ -190,15 +191,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       style: TextStyle(fontSize: 14.sp, fontFamily: AppFont.gilroyMedium),
       decoration: InputDecoration(
         border: InputBorder.none,
+        // fillColor: Colors.transparent,
         fillColor: Colors.transparent,
         // fillColor: widget.fillColor ?? Colors.transparent,
         filled: true,
         contentPadding: const EdgeInsets.only(left: 8),
         prefixIcon: widget.isPrefixIcon!
             ? Padding(
-          padding: EdgeInsets.only(left: 8.w, right: 8.w),
-          child: _prefixIconWidget(),
-        )
+                padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                child: _prefixIconWidget(),
+              )
             : null,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         labelStyle: TextStyle(
@@ -213,15 +215,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         errorMaxLines: 3,
         suffixIcon: widget.isPasswordField!
             ? Padding(
-          padding: EdgeInsets.only(left: 8.w, right: 8.w),
-          child: _passwordSuffixIconWidget(),
-        )
+                padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                child: _passwordSuffixIconWidget(),
+              )
             : widget.isSuffixIcon!
-            ? Padding(
-          padding: EdgeInsets.only(left: 8.w, right: 8.w),
-          child: _suffixIconWidget(),
-        )
-            : null,
+                ? Padding(
+                    padding: EdgeInsets.only(left: 8.w, right: 8.w),
+                    child: _suffixIconWidget(),
+                  )
+                : null,
         suffixIconConstraints: BoxConstraints.loose(const Size.fromRadius(76)),
         prefixIconConstraints: BoxConstraints.loose(const Size.fromRadius(76)),
       ),
@@ -254,10 +256,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   TextStyle _errorTextStyle() {
     return TextStyle(
-        fontSize: AppDimensions.textSizeVerySmall,
-        color: AppColors.redColor,
-        // height: .05);
-        );
+      fontSize: AppDimensions.textSizeVerySmall,
+      color: AppColors.redColor,
+      // height: .05);
+    );
   }
 
   GestureDetector _passwordSuffixIconWidget() {

@@ -13,7 +13,7 @@ class ImagePickerService {
     }
   }
 
-  static Future<List<File>?> selectMultipleImagesFromGallery({int? maxImages}) async {
+  static Future<List<File>?> selectMultipleImagesFromGallery() async {
     List<XFile>? pickedFiles = await _picker.pickMultiImage(
       maxWidth: 1920,
       maxHeight: 1200,

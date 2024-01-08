@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
+import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -26,11 +28,8 @@ class PostEvent extends StatefulWidget {
 }
 
 class _PostEventState extends State<PostEvent> {
-  // merging branch (wanted_jobs) in master
-  TextEditingController dateTextController = TextEditingController();
-  TextEditingController firstTimeTextController = TextEditingController();
-  TextEditingController secondTimeTextController = TextEditingController();
-  String? formattedDate;
+
+  late final EventsCubit _bloc;
 
   final List<String> items = [
     PaymentTypeEnum.Cash.name,
@@ -41,18 +40,19 @@ class _PostEventState extends State<PostEvent> {
   void initState() {
     AppUtils.firstSelectedTime = null;
     AppUtils.secondSelectedTime = null;
+    _bloc = BlocProvider.of<EventsCubit>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    dateTextController.text = formattedDate ?? "";
-    firstTimeTextController.text = AppUtils.firstSelectedTime != null
-        ? AppUtils.firstSelectedTime!.format(context)
-        : "";
-    secondTimeTextController.text = AppUtils.secondSelectedTime != null
-        ? AppUtils.secondSelectedTime!.format(context)
-        : "";
+    // dateTextController.text = formattedDate ?? "";
+    // firstTimeTextController.text = AppUtils.firstSelectedTime != null
+    //     ? AppUtils.firstSelectedTime!.format(context)
+    //     : "";
+    // secondTimeTextController.text = AppUtils.secondSelectedTime != null
+    //     ? AppUtils.secondSelectedTime!.format(context)
+    //     : "";
 
     return BackgroundWidget(
       showAppBar: true,
@@ -63,313 +63,338 @@ class _PostEventState extends State<PostEvent> {
         child:
         backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
-        child: Padding(
-          padding: EdgeInsets.all(AppDimensions.rootPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ImageSlider(),
-              height(0.02.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventName,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.eventNameHint,
-                  // fillColor: AppColors.productTextFieldColor,
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventLocation,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.eventLocationHint,
-                  suffixIcon: Icon(
-                    Icons.my_location,
-                    size: AppDimensions.imageIconSizeTextFormField,
-                    color: AppColors.blackColor,
-                  ),
-                  isSuffixIcon: true,
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventDate,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  controller: dateTextController,
-                  height: 45.h,
-                  hintText: AppStrings.selectTheDate,
-                  isReadonly: true,
-                  suffixIcon: ImageIcon(const AssetImage(AssetsPath.calender),
-                      size: AppDimensions.imageIconSizeTextFormField,
-                      color: AppColors.blackColor),
-                  isSuffixIcon: true,
-                  onTap: () async {
-                    formattedDate = await AppUtils.selectDate(
-                        context: context, initialDate: DateTime.now());
-                    setState(() {});
-                  },
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Row(
+      body: BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
+        return Form(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics()),
+            child: Padding(
+              padding: EdgeInsets.all(AppDimensions.rootPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.eventTime,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sw),
-                        CustomTextFormField(
-                          controller: firstTimeTextController,
-                          height: 45.h,
-                          hintText: AppStrings.startTime,
-                          suffixIcon: Icon(
-                            Icons.access_time_filled_rounded,
-                            size: AppDimensions.imageIconSizeTextFormField,
-                            color: AppColors.greyColorNoOpacity,
-                          ),
-                          isSuffixIcon: true,
-                          isReadonly: true,
-                          onTap: () async {
-                            await AppUtils.selectTime(context, true);
-                            setState(() {});
-                          },
-                        ),
-                      ],
+                  const ImageSlider(),
+                  height(0.02.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventName,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: CustomTextFormField(
+                      height: 45.h,
+                      hintText: AppStrings.eventNameHint,
+                      // fillColor: AppColors.productTextFieldColor,
                     ),
                   ),
-                  width(0.01.sw),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: "",
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sw),
-                        CustomTextFormField(
-                          controller: secondTimeTextController,
-                          height: 45.h,
-                          hintText: AppStrings.endTime,
-                          suffixIcon: Icon(
-                            Icons.access_time_filled_rounded,
-                            size: AppDimensions.imageIconSizeTextFormField,
-                            color: AppColors.greyColorNoOpacity,
-                          ),
-                          isSuffixIcon: true,
-                          isReadonly: true,
-                          onTap: () async {
-                            await AppUtils.selectTime(context, false);
-                            setState(() {});
-                          },
-                          // fillColor: AppColors.productTextFieldColor,
-                        ),
-                      ],
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventLocation,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: CustomTextFormField(
+                      height: 45.h,
+                      hintText: AppStrings.eventLocationHint,
+                      suffixIcon: Icon(
+                        Icons.my_location,
+                        size: AppDimensions.imageIconSizeTextFormField,
+                        color: AppColors.blackColor,
+                      ),
+                      isSuffixIcon: true,
                     ),
                   ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventDate,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: CustomTextFormField(
+                      controller: _bloc.dateTextController,
+                      height: 45.h,
+                      hintText: AppStrings.selectTheDate,
+                      isReadonly: true,
+                      suffixIcon: ImageIcon(
+                          const AssetImage(AssetsPath.calender),
+                          size: AppDimensions.imageIconSizeTextFormField,
+                          color: AppColors.blackColor),
+                      isSuffixIcon: true,
+                      onTap: () async {
+                        final formattedDate = await AppUtils.selectDate(
+                            context: context, initialDate: DateTime.now());
+                        _bloc.dateTextController.text = formattedDate ?? "";
+                        // setState(() {});
+                      },
+                    ),
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: textWidget(
+                                  text: AppStrings.eventTime,
+                                  maxLines: 1,
+                                  color: AppColors.textBlackColor,
+                                  fontSize: AppDimensions.textSizeSmall,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            height(0.01.sw),
+                            CustomTextFormField(
+                              controller: _bloc.firstTimeTextController,
+                              height: 45.h,
+                              hintText: AppStrings.startTime,
+                              suffixIcon: Icon(
+                                Icons.access_time_filled_rounded,
+                                size: AppDimensions.imageIconSizeTextFormField,
+                                color: AppColors.greyColorNoOpacity,
+                              ),
+                              isSuffixIcon: true,
+                              isReadonly: true,
+                              onTap: () async {
+                                final startTime =
+                                    await AppUtils.selectTime(context, true);
+                                if (mounted) {
+                                  _bloc.firstTimeTextController.text =
+                                      AppUtils.firstSelectedTime != null
+                                          ? AppUtils.firstSelectedTime!
+                                              .format(context)
+                                          : "";
+                                }
+                                // setState(() {});
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      width(0.01.sw),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: textWidget(
+                                  text: "",
+                                  maxLines: 1,
+                                  color: AppColors.textBlackColor,
+                                  fontSize: AppDimensions.textSizeSmall,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            height(0.01.sw),
+                            CustomTextFormField(
+                              controller: _bloc.secondTimeTextController,
+                              height: 45.h,
+                              hintText: AppStrings.endTime,
+                              suffixIcon: Icon(
+                                Icons.access_time_filled_rounded,
+                                size: AppDimensions.imageIconSizeTextFormField,
+                                color: AppColors.greyColorNoOpacity,
+                              ),
+                              isSuffixIcon: true,
+                              isReadonly: true,
+                              onTap: () async {
+                                await AppUtils.selectTime(context, false);
+                                if (mounted) {
+                                  _bloc.secondTimeTextController.text =
+                                      AppUtils.secondSelectedTime != null
+                                          ? AppUtils.secondSelectedTime!
+                                              .format(context)
+                                          : "";
+                                }
+                                // setState(() {});
+                              },
+                              // fillColor: AppColors.productTextFieldColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventPurpose,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: CustomTextFormField(
+                      height: 45.h,
+                      hintText: AppStrings.eventPurposeHint,
+                      // fillColor: AppColors.productTextFieldColor,
+                    ),
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventTheme,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: CustomTextFormField(
+                      height: 45.h,
+                      hintText: AppStrings.eventThemeHint,
+                      // fillColor: AppColors.productTextFieldColor,
+                    ),
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventVendorList,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: CustomTextFormField(
+                      height: 45.h,
+                      hintText: AppStrings.eventVendorListHint,
+                      // fillColor: AppColors.productTextFieldColor,
+                    ),
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventTicketPrice,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  CustomTextFormField(
+                    height: 45.h,
+                    hintText: "\$\$\$",
+                    // fillColor: AppColors.productTextFieldColor,
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.paymentType,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  // SizedBox(
+                  //   width: 1.sh,
+                  //   child: CustomDropDown(
+                  //     items: items,
+                  //     hintText: AppStrings.paymentTypeHint,
+                  //     selectedValue: (v) {
+                  //       print("selectedValue: $v");
+                  //     },
+                  //   ),
+                  // ),
+                  CustomTextFormField(
+                    height: 45.h,
+                    hintText: AppStrings.paymentTypeHint,
+                    isReadonly: true,
+                    // fillColor: AppColors.productTextFieldColor,
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: textWidget(
+                        text: AppStrings.eventAvailableAttractions,
+                        maxLines: 1,
+                        color: AppColors.textBlackColor,
+                        fontSize: AppDimensions.textSizeSmall,
+                        fontFamily: AppFont.gilroyBold,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  height(0.01.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    child: CustomTextFormField(
+                      height: 65.h,
+                      hintText: AppStrings.eventAvailableAttractionsHint,
+                      maxLines: 3,
+                      // fillColor: AppColors.productTextFieldColor,
+                    ),
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: CustomMaterialButton(
+                        onPressed: () {
+                          if (widget.isEdit) {
+                            Navigator.pop(context);
+                          } else {
+                            AppUtils.showBottomModalSheet(
+                                context: context,
+                                widget: const ModalBottomSheetPackageTypePost(
+                                  isEvent: true,
+                                ));
+                          }
+                        },
+                        color: AppColors.primaryColor,
+                        name: widget.isEdit
+                            ? AppStrings.saveChanges
+                            : AppStrings.postAnEvent),
+                  )
                 ],
               ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventPurpose,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.eventPurposeHint,
-                  // fillColor: AppColors.productTextFieldColor,
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventTheme,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.eventThemeHint,
-                  // fillColor: AppColors.productTextFieldColor,
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventVendorList,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 45.h,
-                  hintText: AppStrings.eventVendorListHint,
-                  // fillColor: AppColors.productTextFieldColor,
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventTicketPrice,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              CustomTextFormField(
-                height: 45.h,
-                hintText: "\$\$\$",
-                // fillColor: AppColors.productTextFieldColor,
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.paymentType,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              // SizedBox(
-              //   width: 1.sh,
-              //   child: CustomDropDown(
-              //     items: items,
-              //     hintText: AppStrings.paymentTypeHint,
-              //     selectedValue: (v) {
-              //       print("selectedValue: $v");
-              //     },
-              //   ),
-              // ),
-              CustomTextFormField(
-                height: 45.h,
-                hintText: AppStrings.paymentTypeHint,
-                isReadonly: true,
-                // fillColor: AppColors.productTextFieldColor,
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: textWidget(
-                    text: AppStrings.eventAvailableAttractions,
-                    maxLines: 1,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontFamily: AppFont.gilroyBold,
-                    fontWeight: FontWeight.bold),
-              ),
-              height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: CustomTextFormField(
-                  height: 65.h,
-                  hintText: AppStrings.eventAvailableAttractionsHint,
-                  maxLines: 3,
-                  // fillColor: AppColors.productTextFieldColor,
-                ),
-              ),
-              height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: CustomMaterialButton(
-                    onPressed: () {
-                      if (widget.isEdit) {
-                        Navigator.pop(context);
-                      } else {
-                        AppUtils.showBottomModalSheet(
-                            context: context,
-                            widget: const ModalBottomSheetPackageTypePost(isEvent: true,));
-                      }
-                    },
-                    color: AppColors.primaryColor,
-                    name: widget.isEdit
-                        ? AppStrings.saveChanges
-                        : AppStrings.postAnEvent),
-              )
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

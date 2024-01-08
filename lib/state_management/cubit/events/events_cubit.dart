@@ -18,6 +18,16 @@ class EventsCubit extends Cubit<EventsState> {
 
   final prefs = SharedPreferencesHelper.instance;
 
+  TextEditingController dateTextController = TextEditingController();
+  TextEditingController firstTimeTextController = TextEditingController();
+  TextEditingController secondTimeTextController = TextEditingController();
+
+  initPostEvent() {
+    dateTextController = TextEditingController();
+    firstTimeTextController = TextEditingController();
+    secondTimeTextController = TextEditingController();
+  }
+
   /// Get Events
   Future getEventsCubit({
     required BuildContext context,
@@ -64,7 +74,8 @@ class EventsCubit extends Cubit<EventsState> {
     required int? id,
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
-    emit(state.copyWith(eventsDetailLoading: true, eventsDetailModel: EventsModel()));
+    emit(state.copyWith(
+        eventsDetailLoading: true, eventsDetailModel: EventsModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
