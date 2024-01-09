@@ -87,9 +87,6 @@ class AppUtils {
     );
     if (picked != null) {
       if (isFirst) {
-/*        firstSelectedTime = picked;
-        secondSelectedTime =
-            null; // Reset second time when selecting the first time*/
         if (secondSelectedTime != null) {
           if (secondSelectedTime!.hour > (picked.hour ?? 0) ||
               (secondSelectedTime!.hour == (picked.hour ?? 0) &&
@@ -101,6 +98,8 @@ class AppUtils {
                   content: Text(AppValidationMessages.timeValidation)));
             }
           }
+        } else {
+          firstSelectedTime = picked;
         }
       } else {
         if (firstSelectedTime != null) {
@@ -112,12 +111,10 @@ class AppUtils {
                 firstSelectedTime!, secondSelectedTime!);
           } else {
             // Display an error or handle validation in your app
-            // For this example, we reset the second time to null
             if (context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text(AppValidationMessages.timeValidation)));
             }
-            // secondSelectedTime = null;
           }
         } else {
           if (context.mounted) {

@@ -18,7 +18,7 @@ import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/error/error_widget.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/list/bullet_point_list.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -104,7 +104,7 @@ class _ViewEventState extends State<ViewEvent> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ImageSlider(
+                          ImageSliderAlpha(
                               hideCameraIcon: true,
                               // itemImages: [
                               //   AssetsPath.musical,

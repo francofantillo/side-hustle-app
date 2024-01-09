@@ -14,7 +14,7 @@ import 'package:side_hustle/utils/service/image_picker_service.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
@@ -72,7 +72,7 @@ class _PostJobState extends State<PostJob> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ImageSlider(
+                ImageSliderAlpha(
                   onTap: () async {
                     final getImages = await ImagePickerService
                         .selectMultipleImagesFromGallery();

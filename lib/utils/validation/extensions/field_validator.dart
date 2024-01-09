@@ -36,6 +36,7 @@ extension FieldValidator on String {
   validateEmpty(String name) {
     if (isEmpty) {
       return '$name Field can\'t be empty.';
+      // return '$name can\'t be empty.';
     } else {
       return null;
     }

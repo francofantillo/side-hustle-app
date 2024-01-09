@@ -13,7 +13,7 @@ import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -59,7 +59,7 @@ class _ViewProductState extends State<ViewProduct> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const ImageSlider(
+                const ImageSliderAlpha(
                   hideCameraIcon: true,
                   // itemImages: [
                   //   AssetsPath.imageLoadError, I want to implement qr code in my flutter app. How can I achieve that

@@ -103,6 +103,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     super.dispose();
   }
 
+  // The problem is when I'm validating the text field the error message shows with container inside stack and expand. How to fix this
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -167,6 +169,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 // color: Colors.transparent,
               ),
               // height: widget.height ?? AppDimensions.textFieldHeight,
+              // child: textFormField(),
               child: textFormField(),
             ),
           ),

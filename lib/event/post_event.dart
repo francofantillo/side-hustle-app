@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
@@ -10,10 +13,13 @@ import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/service/image_picker_service.dart';
+import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
@@ -28,8 +34,11 @@ class PostEvent extends StatefulWidget {
 }
 
 class _PostEventState extends State<PostEvent> {
-
+  List<File>? itemImages;
+  final _eventFormKey = GlobalKey<FormState>();
   late final EventsCubit _bloc;
+
+  // String? _errorMsgEventName;
 
   final List<String> items = [
     PaymentTypeEnum.Cash.name,
@@ -41,30 +50,24 @@ class _PostEventState extends State<PostEvent> {
     AppUtils.firstSelectedTime = null;
     AppUtils.secondSelectedTime = null;
     _bloc = BlocProvider.of<EventsCubit>(context);
+    _bloc.initPostEventControllers();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // dateTextController.text = formattedDate ?? "";
-    // firstTimeTextController.text = AppUtils.firstSelectedTime != null
-    //     ? AppUtils.firstSelectedTime!.format(context)
-    //     : "";
-    // secondTimeTextController.text = AppUtils.secondSelectedTime != null
-    //     ? AppUtils.secondSelectedTime!.format(context)
-    //     : "";
-
     return BackgroundWidget(
       showAppBar: true,
       appBarTitle:
-      widget.isEdit ? AppStrings.editEvent : AppStrings.postAnEvent,
+          widget.isEdit ? AppStrings.editEvent : AppStrings.postAnEvent,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
-        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
         return Form(
+          key: _eventFormKey,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             physics: const AlwaysScrollableScrollPhysics(
@@ -74,7 +77,13 @@ class _PostEventState extends State<PostEvent> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ImageSlider(),
+                  ImageSlider(
+                    // itemImages: itemImages,
+                    itemImages: state.itemImagesFile,
+                    onTap: () async {
+                      await _bloc.selectMultiImages();
+                    },
+                  ),
                   height(0.02.sw),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -90,11 +99,42 @@ class _PostEventState extends State<PostEvent> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
+                      controller: _bloc.eventNameTextController,
                       height: 45.h,
                       hintText: AppStrings.eventNameHint,
+                      fieldValidator: (value) =>
+                          value?.validateEmpty(AppStrings.eventName),
+                      // fieldValidator: (value) {
+                      //   final String? error = value?.validateEmpty(
+                      //     AppStrings.eventName,
+                      //   );
+                      //   if (error != null) {
+                      //     _errorMsgEventName = error;
+                      //     setState(() {});
+                      //   }
+                      //   return null;
+                      // },
+                      inputFormatter: [
+                        LengthLimitingTextInputFormatter(100),
+                      ],
                       // fillColor: AppColors.productTextFieldColor,
                     ),
                   ),
+                  // _errorMsgEventName != null
+                  //     ? height(0.01.sw)
+                  //     : const SizedBox.shrink(),
+                  // _errorMsgEventName != null
+                  //     ? Padding(
+                  //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  //         child: textWidget(
+                  //             text: _errorMsgEventName,
+                  //             maxLines: 1,
+                  //             color: AppColors.redColor,
+                  //             fontSize: AppDimensions.textSizeVerySmall,
+                  //             fontFamily: AppFont.gilroyRegular,
+                  //             fontWeight: FontWeight.w400),
+                  //       )
+                  //     : const SizedBox.shrink(),
                   height(AppDimensions.formFieldsBetweenSpacing),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -110,6 +150,7 @@ class _PostEventState extends State<PostEvent> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
+                      controller: _bloc.eventLocationTextController,
                       height: 45.h,
                       hintText: AppStrings.eventLocationHint,
                       suffixIcon: Icon(
@@ -118,6 +159,8 @@ class _PostEventState extends State<PostEvent> {
                         color: AppColors.blackColor,
                       ),
                       isSuffixIcon: true,
+                      fieldValidator: (value) =>
+                          value?.validateEmpty(AppStrings.eventLocation),
                     ),
                   ),
                   height(AppDimensions.formFieldsBetweenSpacing),
@@ -144,6 +187,9 @@ class _PostEventState extends State<PostEvent> {
                           size: AppDimensions.imageIconSizeTextFormField,
                           color: AppColors.blackColor),
                       isSuffixIcon: true,
+                      fieldValidator: (value) => value?.validateEmpty(
+                        AppStrings.eventDate,
+                      ),
                       onTap: () async {
                         final formattedDate = await AppUtils.selectDate(
                             context: context, initialDate: DateTime.now());
@@ -182,9 +228,13 @@ class _PostEventState extends State<PostEvent> {
                               ),
                               isSuffixIcon: true,
                               isReadonly: true,
+                              fieldValidator: (value) => value?.validateEmpty(
+                                AppStrings.startTime,
+                              ),
                               onTap: () async {
-                                final startTime =
-                                    await AppUtils.selectTime(context, true);
+                                await AppUtils.selectTime(context, true);
+                                print(
+                                    "selected time: ${AppUtils.firstSelectedTime}");
                                 if (mounted) {
                                   _bloc.firstTimeTextController.text =
                                       AppUtils.firstSelectedTime != null
@@ -226,6 +276,9 @@ class _PostEventState extends State<PostEvent> {
                               ),
                               isSuffixIcon: true,
                               isReadonly: true,
+                              fieldValidator: (value) => value?.validateEmpty(
+                                AppStrings.endTime,
+                              ),
                               onTap: () async {
                                 await AppUtils.selectTime(context, false);
                                 if (mounted) {
@@ -259,8 +312,11 @@ class _PostEventState extends State<PostEvent> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
+                      controller: _bloc.eventPurposeTextController,
                       height: 45.h,
                       hintText: AppStrings.eventPurposeHint,
+                      fieldValidator: (value) =>
+                          value?.validateEmpty(AppStrings.eventPurpose),
                       // fillColor: AppColors.productTextFieldColor,
                     ),
                   ),
@@ -279,9 +335,11 @@ class _PostEventState extends State<PostEvent> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
+                      controller: _bloc.eventThemeTextController,
                       height: 45.h,
                       hintText: AppStrings.eventThemeHint,
-                      // fillColor: AppColors.productTextFieldColor,
+                      fieldValidator: (value) =>
+                          value?.validateEmpty(AppStrings.eventTheme),
                     ),
                   ),
                   height(AppDimensions.formFieldsBetweenSpacing),
@@ -299,8 +357,11 @@ class _PostEventState extends State<PostEvent> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
+                      controller: _bloc.eventVendorTextController,
                       height: 45.h,
                       hintText: AppStrings.eventVendorListHint,
+                      fieldValidator: (value) =>
+                          value?.validateEmpty(AppStrings.eventVendorList),
                       // fillColor: AppColors.productTextFieldColor,
                     ),
                   ),
@@ -317,8 +378,11 @@ class _PostEventState extends State<PostEvent> {
                   ),
                   height(0.01.sw),
                   CustomTextFormField(
+                    controller: _bloc.eventPriceTextController,
                     height: 45.h,
                     hintText: "\$\$\$",
+                    fieldValidator: (value) =>
+                        value?.validateEmpty(AppStrings.eventTicketPrice),
                     // fillColor: AppColors.productTextFieldColor,
                   ),
                   height(AppDimensions.formFieldsBetweenSpacing),
@@ -363,9 +427,12 @@ class _PostEventState extends State<PostEvent> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
+                      controller: _bloc.eventAvailableTextController,
                       height: 65.h,
                       hintText: AppStrings.eventAvailableAttractionsHint,
                       maxLines: 3,
+                      fieldValidator: (value) => value
+                          ?.validateEmpty(AppStrings.eventAvailableAttractions),
                       // fillColor: AppColors.productTextFieldColor,
                     ),
                   ),
@@ -377,11 +444,13 @@ class _PostEventState extends State<PostEvent> {
                           if (widget.isEdit) {
                             Navigator.pop(context);
                           } else {
-                            AppUtils.showBottomModalSheet(
-                                context: context,
-                                widget: const ModalBottomSheetPackageTypePost(
-                                  isEvent: true,
-                                ));
+                            // AppUtils.showBottomModalSheet(
+                            //     context: context,
+                            //     widget: const ModalBottomSheetPackageTypePost(
+                            //       isEvent: true,
+                            //     ));
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            if (_eventFormKey.currentState!.validate()) {}
                           }
                         },
                         color: AppColors.primaryColor,

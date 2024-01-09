@@ -10,7 +10,7 @@ import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/checkbox.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -54,7 +54,7 @@ class _PostServiceState extends State<PostService> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageSlider(
+              ImageSliderAlpha(
                 itemImages: AlphaAppData.postServiceImagesList,
               ),
               height(0.02.sw),
