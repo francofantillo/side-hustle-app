@@ -90,20 +90,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               height(0.01.sw),
               Center(
-                child: textWidget(
-                    // text: AppStrings.davidHan,
-                    text: state.userModel?.data?.name,
-                    color: AppColors.textBlackColor,
-                    fontFamily: AppFont.gilroyBold,
-                    fontSize: AppDimensions.textHeadingSize,
-                    fontWeight: FontWeight.bold),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: textWidget(
+                      // text: AppStrings.davidHan,
+                      text: state.userModel?.data?.name,
+                      color: AppColors.textBlackColor,
+                      fontFamily: AppFont.gilroyBold,
+                      fontSize: AppDimensions.textHeadingSize,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               Center(
-                child: textWidget(
-                    // text: AppStrings.userEmail,
-                    text: state.userModel?.data?.email,
-                    color: AppColors.textBlackColor,
-                    fontSize: AppDimensions.textSizeVerySmall),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: textWidget(
+                      // text: AppStrings.userEmail,
+                      text: state.userModel?.data?.email,
+                      color: AppColors.textBlackColor,
+                      fontSize: AppDimensions.textSizeVerySmall),
+                ),
               ),
               height(0.01.sw),
               Padding(

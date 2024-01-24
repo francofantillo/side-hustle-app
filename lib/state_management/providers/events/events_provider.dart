@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:side_hustle/state_management/providers/base_api_provider.dart';
 import 'package:side_hustle/utils/api_path.dart';
+import 'package:path/path.dart' as getImagePath;
 
 var dio = Dio();
 
@@ -39,6 +42,7 @@ Future<Response?> getIsInterestedEventProvider(
 /// Post an Event
 Future<Response?> postAnEventProvider(
     {String? name,
+    List<File>? images,
     String? location,
     String? lat,
     String? lng,
@@ -53,28 +57,59 @@ Future<Response?> postAnEventProvider(
     String? availableAttractionsString,
     String? planId,
     String? apiToken}) async {
-  final data = {
-    "name": {},
-    "location": {},
-    "lat": {},
-    "lng": {},
-    "date": {},
-    "start_time": {},
-    "end_time": {},
-    "purpose": {},
-    "theme": {},
-    "vendors_list": {},
-    "price": {},
-    "payment_type": {},
-    "available_attractions": {},
-    "plan_id": {}
-  };
+  late FormData formData;
 
-  final FormData formData = FormData.fromMap(data);
+  print("images $images");
+
+  if (images != null && images.isNotEmpty) {
+    final List<MultipartFile> imageList = [];
+    for (int i = 0; i < images.length; i++) {
+      final imageNetwork = await MultipartFile.fromFile(images[i].path,
+          filename: getImagePath.basename(images[i].path));
+      imageList.add(imageNetwork);
+      print("Images Multipart $i: ${imageList[i]}\npath: ${images[i].path}");
+    }
+    print("images length: ${images.length}, Images Multipart Length: ${imageList.length}");
+
+    formData = FormData.fromMap({
+      "name": name,
+      "images[]": imageList,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "date": date,
+      "start_time": startTime,
+      "end_time": endTime,
+      "purpose": purpose,
+      "theme": theme,
+      "vendors_list": vendorsListString,
+      "price": price,
+      "payment_type": paymentType,
+      "available_attractions": availableAttractionsString,
+      "plan_id": planId
+    });
+  } else {
+    formData = FormData.fromMap({
+      "name": name,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "date": date,
+      "start_time": startTime,
+      "end_time": endTime,
+      "purpose": purpose,
+      "theme": theme,
+      "vendors_list": vendorsListString,
+      "price": price,
+      "payment_type": paymentType,
+      "available_attractions": availableAttractionsString,
+      "plan_id": planId
+    });
+  }
 
   print(
-      "*****************\nurl: ${API.ADD_EVENT}\n$data\n**************************");
+      "*****************\nurl: ${API.POST_EVENT}\n${formData.fields}\n**************************");
   final response = await postRequestProvider(
-      path: API.ADD_EVENT, data: formData, token: apiToken);
+      path: API.POST_EVENT, data: formData, token: apiToken);
   return response;
 }

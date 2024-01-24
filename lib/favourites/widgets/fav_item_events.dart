@@ -134,6 +134,7 @@ class FavItemEventsWidget extends StatelessWidget {
                           CircularCacheImageWidget(
                             showLoading: false,
                             image: userProfile,
+                            assetImage: AssetsPath.placeHolder,
                             boarderColor: AppColors.primaryColor,
                             imageHeight: imageHeight! * .2,
                             imageWidth: imageHeight! * .2,

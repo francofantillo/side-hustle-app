@@ -35,8 +35,7 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
       shadowColor: Colors.transparent,
       elevation: AppDimensions.defaultFocusedTextFieldElevation,
       shape: RoundedRectangleBorder(
-        borderRadius:
-           BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +66,8 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
               Expanded(
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton2<String>(
-                    iconStyleData: IconStyleData(icon: Icon(Icons.keyboard_arrow_down)),
+                    iconStyleData: const IconStyleData(
+                        icon: Icon(Icons.keyboard_arrow_down)),
                     isDense: true,
                     isExpanded: true,
                     hint: Text(

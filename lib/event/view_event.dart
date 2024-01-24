@@ -13,11 +13,14 @@ import 'package:side_hustle/utils/app_list.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
+import 'package:side_hustle/utils/date_time_conversions.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/error/error_widget.dart';
+import 'package:side_hustle/widgets/image_slider/camera_button.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/list/bullet_point_list.dart';
@@ -60,7 +63,7 @@ class _ViewEventState extends State<ViewEvent> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      actions: [
+/*      actions: [
         BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
           return state.eventsDetailModel?.eventDetails == null
               ? const SizedBox.shrink()
@@ -89,7 +92,7 @@ class _ViewEventState extends State<ViewEvent> {
                   ),
                 );
         })
-      ],
+      ],*/
       body: BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
         return state.eventsDetailLoading
             ? const SizedBox.shrink()
@@ -104,15 +107,81 @@ class _ViewEventState extends State<ViewEvent> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ImageSliderAlpha(
-                              hideCameraIcon: true,
-                              // itemImages: [
-                              //   AssetsPath.musical,
-                              //   AssetsPath.musical,
-                              //   AssetsPath.musical
-                              // ],
-                              responseImages: state
-                                  .eventsDetailModel?.eventDetails?.images),
+                          // ImageSliderAlpha(
+                          //     hideCameraIcon: true,
+                          //     // itemImages: [
+                          //     //   AssetsPath.musical,
+                          //     //   AssetsPath.musical,
+                          //     //   AssetsPath.musical
+                          //     // ],
+                          //     responseImages: state
+                          //         .eventsDetailModel?.eventDetails?.images),
+                          state.eventsDetailModel!.eventDetails!.images!.isEmpty
+                              ? Card(
+                                  elevation: 2,
+                                  shadowColor: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        AppDimensions
+                                            .listItemImageRoundedBorder),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      AspectRatio(
+                                        aspectRatio: 21 / 9,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(AppDimensions
+                                                      .homeFirstItemWidgetCurve)),
+                                              border: Border.all(
+                                                color: Colors.white,
+                                                // Change the border color as needed
+                                                width: 0
+                                                    .h, // Use the provided border width
+                                              ),
+                                              image: const DecorationImage(
+                                                  image: AssetImage(AssetsPath
+                                                      .imageLoadError),
+                                                  fit: BoxFit.cover)),
+                                        ),
+                                      ),
+
+                                      /// Hide Camera Icon login
+                                      // Positioned(
+                                      //   left: AppDimensions
+                                      //           .productImageSliderWidth -
+                                      //       0.24.sw,
+                                      //   // top: AppDimensions.productImageSliderHeight - 0.23.sw,
+                                      //   top: AppDimensions
+                                      //           .productImageSliderHeight -
+                                      //       0.255.sw,
+                                      //   child: CameraButton(
+                                      //     onTap: () {},
+                                      //     iconPath: AssetsPath.camera,
+                                      //     height: 0.12.sw,
+                                      //     width: 0.12.sw,
+                                      //     backgroundColor: AppColors.whiteColor,
+                                      //     iconColor: AppColors.primaryColor,
+                                      //   ),
+                                      // )
+                                    ],
+                                  ),
+                                )
+                              : ImageSlider(
+                                  hideCameraIcon: true,
+                                  indicatorLength: state.eventsDetailModel
+                                              ?.eventDetails?.images?.length ==
+                                          null
+                                      ? null
+                                      : state.eventsDetailModel!.eventDetails!
+                                              .images!.isEmpty
+                                          ? null
+                                          : state.eventsDetailModel!
+                                              .eventDetails!.images!.length,
+                                  // itemImages: itemImages,
+                                  responseImages: state
+                                      .eventsDetailModel?.eventDetails?.images),
                           height(0.02.sw),
                           Padding(
                             padding:
@@ -134,8 +203,13 @@ class _ViewEventState extends State<ViewEvent> {
                                   children: [
                                     textWidget(
                                         // text: AppStrings.eventPrice,
+                                        // text: state.eventsDetailModel
+                                        //     ?.eventDetails?.price,
                                         text: state.eventsDetailModel
-                                            ?.eventDetails?.price,
+                                                    ?.eventDetails?.price !=
+                                                null
+                                            ? "\$${state.eventsDetailModel?.eventDetails?.price}"
+                                            : "",
                                         fontFamily: AppFont.gilroyBold,
                                         fontWeight: FontWeight.bold,
                                         fontSize: AppDimensions
@@ -219,6 +293,7 @@ class _ViewEventState extends State<ViewEvent> {
                                             ?.eventDetails
                                             ?.eventOwnerDetail
                                             ?.image,
+                                        assetImage: AssetsPath.placeHolder,
                                         boarderColor: AppColors.primaryColor,
                                         imageHeight: .1.sw,
                                         imageWidth: .1.sw,

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:side_hustle/utils/api_path.dart';
 
 var dio = Dio();
 
@@ -71,14 +72,14 @@ Future<Response?> getRequestProvider(
 Future<Response?> postRequestProvider(
     {required String path, required data, String? token}) async {
   late final Response response;
-  const int timeout = 20000;
+  int timeout = 20000;
 
   try {
     if (token != null) {
-      // if((path == API.ADD_MODULE) || path == API.EDIT_MODULE) {
-      //   timeout = 3600000;
-      // }
-      dio.options.connectTimeout = const Duration(milliseconds: timeout);
+      if ((path == API.UPDATE_RESUME)) {
+        timeout = 3600000;
+      }
+      dio.options.connectTimeout = Duration(milliseconds: timeout);
       print("token not null $token}");
       response = await dio.post(path,
           data: data,
@@ -87,16 +88,16 @@ Future<Response?> postRequestProvider(
                 "Authorization": "Bearer $token",
                 "Accept": "application/json"
               },
-              sendTimeout: const Duration(milliseconds: timeout),
-              receiveTimeout: const Duration(milliseconds: timeout)));
+              sendTimeout: Duration(milliseconds: timeout),
+              receiveTimeout: Duration(milliseconds: timeout)));
     } else {
       dio.options.connectTimeout = const Duration(milliseconds: 20000);
       response = await dio.post(path,
           data: data,
           options: Options(
               headers: {"Accept": "application/json"},
-              sendTimeout: const Duration(milliseconds: timeout),
-              receiveTimeout: const Duration(milliseconds: timeout)));
+              sendTimeout: Duration(milliseconds: timeout),
+              receiveTimeout: Duration(milliseconds: timeout)));
     }
 
     if (kDebugMode) {

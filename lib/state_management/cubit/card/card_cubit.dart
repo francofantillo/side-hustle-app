@@ -133,7 +133,7 @@ class CardCubit extends Cubit<CardState> {
         print("response: ${response.data}");
         final CardModel cardModel = CardModel.fromJson(response.data);
         emit(state.copyWith(cardModel: cardModel));
-        AppUtils.showToast(cardModel.message);
+        // AppUtils.showToast(cardModel.message);
       }
 
       /// Failed

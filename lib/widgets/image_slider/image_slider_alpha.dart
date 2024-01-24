@@ -93,18 +93,31 @@ class _ImageSliderAlphaState extends State<ImageSliderAlpha> {
         borderRadius:
             BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
       ),
-      child: SmoothPageIndicator(
-        controller: pageController,
-        count: widget.responseImages != null
-            ? widget.responseImages!.length
-            : widget.itemImages?.length ?? 3,
-        effect: const ExpandingDotsEffect(
-          dotHeight: 4,
-          dotWidth: 7,
-          activeDotColor: AppColors.primaryColor,
-          dotColor: Color(0xFFA5A5A5),
-        ),
-      ),
+      child: widget.responseImages != null
+          ? widget.responseImages!.isEmpty
+              ? const SizedBox.shrink()
+              : SmoothPageIndicator(
+                  controller: pageController,
+                  count: widget.responseImages!.length,
+                  effect: const ExpandingDotsEffect(
+                    dotHeight: 4,
+                    dotWidth: 7,
+                    activeDotColor: AppColors.primaryColor,
+                    dotColor: Color(0xFFA5A5A5),
+                  ),
+                )
+          : SmoothPageIndicator(
+              controller: pageController,
+              count: widget.responseImages != null
+                  ? widget.responseImages!.length
+                  : widget.itemImages?.length ?? 3,
+              effect: const ExpandingDotsEffect(
+                dotHeight: 4,
+                dotWidth: 7,
+                activeDotColor: AppColors.primaryColor,
+                dotColor: Color(0xFFA5A5A5),
+              ),
+            ),
     );
   }
 

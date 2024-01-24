@@ -26,7 +26,7 @@ class AppValidationMessages {
       "At least 12 characters long but 14 or more is better.";
 
   static const String PASSWORD_INVALID_ERROR =
-      "Password must be of 8 characters long and contains at least 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
+      "Password at least 12 characters long and contains at least 1 uppercase, 1 lowercase, 1 digit and 1 special character.";
   static const String NEW_PASSWORD_EMPTY_ERROR =
       "New Password field can't be empty.";
 

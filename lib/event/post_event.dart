@@ -13,6 +13,7 @@ import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/service/image_picker_service.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -79,7 +80,8 @@ class _PostEventState extends State<PostEvent> {
                 children: [
                   ImageSlider(
                     // itemImages: itemImages,
-                    itemImages: state.itemImagesFile,
+                    fileImages: state.itemImagesFile,
+                    indicatorLength: state.itemImagesFile?.length,
                     onTap: () async {
                       await _bloc.selectMultiImages();
                     },
@@ -151,7 +153,10 @@ class _PostEventState extends State<PostEvent> {
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
                       controller: _bloc.eventLocationTextController,
-                      height: 45.h,
+                      onTap: () async {
+                        await _bloc.selectLocation(context: context, mounted: mounted);
+                      },
+                      isReadonly: true,
                       hintText: AppStrings.eventLocationHint,
                       suffixIcon: Icon(
                         Icons.my_location,
@@ -218,7 +223,7 @@ class _PostEventState extends State<PostEvent> {
                             ),
                             height(0.01.sw),
                             CustomTextFormField(
-                              controller: _bloc.firstTimeTextController,
+                              controller: _bloc.startTimeTextController,
                               height: 45.h,
                               hintText: AppStrings.startTime,
                               suffixIcon: Icon(
@@ -236,7 +241,7 @@ class _PostEventState extends State<PostEvent> {
                                 print(
                                     "selected time: ${AppUtils.firstSelectedTime}");
                                 if (mounted) {
-                                  _bloc.firstTimeTextController.text =
+                                  _bloc.startTimeTextController.text =
                                       AppUtils.firstSelectedTime != null
                                           ? AppUtils.firstSelectedTime!
                                               .format(context)
@@ -266,7 +271,7 @@ class _PostEventState extends State<PostEvent> {
                             ),
                             height(0.01.sw),
                             CustomTextFormField(
-                              controller: _bloc.secondTimeTextController,
+                              controller: _bloc.endTimeTextController,
                               height: 45.h,
                               hintText: AppStrings.endTime,
                               suffixIcon: Icon(
@@ -282,7 +287,7 @@ class _PostEventState extends State<PostEvent> {
                               onTap: () async {
                                 await AppUtils.selectTime(context, false);
                                 if (mounted) {
-                                  _bloc.secondTimeTextController.text =
+                                  _bloc.endTimeTextController.text =
                                       AppUtils.secondSelectedTime != null
                                           ? AppUtils.secondSelectedTime!
                                               .format(context)
@@ -383,7 +388,12 @@ class _PostEventState extends State<PostEvent> {
                     hintText: "\$\$\$",
                     fieldValidator: (value) =>
                         value?.validateEmpty(AppStrings.eventTicketPrice),
-                    // fillColor: AppColors.productTextFieldColor,
+                    keyboardType: const TextInputType.numberWithOptions(
+                        signed: false, decimal: true),
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.priceFieldCharacterLength),
+                    ],
                   ),
                   height(AppDimensions.formFieldsBetweenSpacing),
                   Padding(
@@ -424,13 +434,35 @@ class _PostEventState extends State<PostEvent> {
                         fontWeight: FontWeight.bold),
                   ),
                   height(0.01.sw),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  //   child: textWidget(
+                  //       text: AppStrings.eventVendorList,
+                  //       maxLines: 1,
+                  //       color: AppColors.textBlackColor,
+                  //       fontSize: AppDimensions.textSizeSmall,
+                  //       fontFamily: AppFont.gilroyBold,
+                  //       fontWeight: FontWeight.bold),
+                  // ),
+                  // height(0.01.sw),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  //   child: CustomTextFormField(
+                  //     controller: _bloc.eventAvailableTextController,
+                  //     height: 45.h,
+                  //     hintText: AppStrings.eventAvailableAttractionsHint,
+                  //     fieldValidator: (value) =>
+                  //         value?.validateEmpty(AppStrings.eventVendorList),
+                  //     // fillColor: AppColors.productTextFieldColor,
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
                       controller: _bloc.eventAvailableTextController,
                       height: 65.h,
                       hintText: AppStrings.eventAvailableAttractionsHint,
-                      maxLines: 3,
+                      maxLines: 1,
                       fieldValidator: (value) => value
                           ?.validateEmpty(AppStrings.eventAvailableAttractions),
                       // fillColor: AppColors.productTextFieldColor,
@@ -440,7 +472,7 @@ class _PostEventState extends State<PostEvent> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: CustomMaterialButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (widget.isEdit) {
                             Navigator.pop(context);
                           } else {
@@ -450,7 +482,10 @@ class _PostEventState extends State<PostEvent> {
                             //       isEvent: true,
                             //     ));
                             FocusManager.instance.primaryFocus?.unfocus();
-                            if (_eventFormKey.currentState!.validate()) {}
+                            if (_eventFormKey.currentState!.validate()) {
+                              await _bloc.postAnEventCubit(
+                                  context: context, mounted: mounted);
+                            }
                           }
                         },
                         color: AppColors.primaryColor,

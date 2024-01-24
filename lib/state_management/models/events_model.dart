@@ -36,6 +36,7 @@ class EventsModel {
 class Data {
   List<Images>? images;
   String? image;
+  int? isFavourite;
   String? name;
   EventOwnerDetail? eventOwnerDetail;
   int? eventId;
@@ -54,6 +55,7 @@ class Data {
 
   Data(
       {this.images,
+      this.isFavourite,
       this.image,
       this.name,
       this.eventOwnerDetail,
@@ -83,6 +85,7 @@ class Data {
         : null;
     eventId = json['event_id'];
     image = json['image'];
+    isFavourite = json['is_favourite'];
     name = json['name'];
     eventName = json['event_name'];
     price = json['price'] != null ? json['price'].toString() : json['price'];
@@ -113,6 +116,7 @@ class Data {
     }
     data['event_id'] = this.eventId;
     data['image'] = this.image;
+    data['is_favourite'] = this.isFavourite;
     data['name'] = this.name;
     data['event_name'] = this.eventName;
     data['price'] = this.price;

@@ -25,6 +25,8 @@ class ImageSliderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("ImageSliderItem Image: $image");
+    print("ImageSliderItem fileImage: $fileImage");
     return fileImage != null
         ? AspectRatio(
             aspectRatio: 21 / 9,
@@ -41,66 +43,83 @@ class ImageSliderItem extends StatelessWidget {
                       image: FileImage(fileImage!), fit: BoxFit.cover)),
             ),
           )
-        : CachedNetworkImage(
-            imageUrl:
-                // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg', // Testing Urls
-                image == null
-                    ? "https://www.example.com/non_existent_image.jpg"
-                    : image!,
-            imageBuilder: (context, imageProvider) => AspectRatio(
-              aspectRatio: 21 / 9,
-              child: Container(
-                decoration: BoxDecoration(
-                  // shape: BoxShape.circle,
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(AppDimensions.homeFirstItemWidgetCurve)),
-                  border: Border.all(
-                    color: boarderColor ?? AppColors.whiteColor,
-                    // Change the border color as needed
-                    width: 1.8.h, // Use the provided border width
-                  ),
-                  image:
-                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                ),
-              ),
-            ),
-            placeholder: (context, url) => Shimmer.fromColors(
-              baseColor: Colors.grey.shade300,
-              highlightColor: Colors.grey.shade100,
-              child: AspectRatio(
+        : image == null
+            ? AspectRatio(
                 aspectRatio: 21 / 9,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                        AppDimensions.homeFirstItemWidgetCurve)),
-                    border: Border.all(
-                      color: boarderColor ?? AppColors.whiteColor,
-                      // Change the border color as needed
-                      width: 1.8.h, // Use the provided border width
+                      borderRadius: BorderRadius.all(Radius.circular(
+                          AppDimensions.homeFirstItemWidgetCurve)),
+                      border: Border.all(
+                        color: boarderColor ?? AppColors.whiteColor,
+                        // Change the border color as needed
+                        width: 0.h, // Use the provided border width
+                      ),
+                      image: const DecorationImage(
+                          image: AssetImage(AssetsPath.imageLoadError),
+                          fit: BoxFit.cover)),
+                ),
+              )
+            : CachedNetworkImage(
+                imageUrl:
+                    // 'https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg', // Testing Urls
+                    image == null
+                        ? "https://www.example.com/non_existent_image.jpg"
+                        : image!,
+                imageBuilder: (context, imageProvider) => AspectRatio(
+                  aspectRatio: 21 / 9,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      // shape: BoxShape.circle,
+                      borderRadius: BorderRadius.all(Radius.circular(
+                          AppDimensions.homeFirstItemWidgetCurve)),
+                      border: Border.all(
+                        color: boarderColor ?? AppColors.whiteColor,
+                        // Change the border color as needed
+                        width: 1.8.h, // Use the provided border width
+                      ),
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover),
                     ),
-                    image: const DecorationImage(
-                        image: AssetImage(AssetsPath.plumber),
-                        fit: BoxFit.cover),
                   ),
                 ),
-              ),
-            ),
-            errorWidget: (context, url, error) => AspectRatio(
-              aspectRatio: 21 / 9,
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                        AppDimensions.homeFirstItemWidgetCurve)),
-                    border: Border.all(
-                      color: boarderColor ?? AppColors.whiteColor,
-                      // Change the border color as needed
-                      width: 0.h, // Use the provided border width
+                placeholder: (context, url) => Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: AspectRatio(
+                    aspectRatio: 21 / 9,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(
+                            AppDimensions.homeFirstItemWidgetCurve)),
+                        border: Border.all(
+                          color: boarderColor ?? AppColors.whiteColor,
+                          // Change the border color as needed
+                          width: 1.8.h, // Use the provided border width
+                        ),
+                        image: const DecorationImage(
+                            image: AssetImage(AssetsPath.plumber),
+                            fit: BoxFit.cover),
+                      ),
                     ),
-                    image: const DecorationImage(
-                        image: AssetImage(AssetsPath.imageLoadError),
-                        fit: BoxFit.cover)),
-              ),
-            ),
-          );
+                  ),
+                ),
+                errorWidget: (context, url, error) => AspectRatio(
+                  aspectRatio: 21 / 9,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(
+                            AppDimensions.homeFirstItemWidgetCurve)),
+                        border: Border.all(
+                          color: boarderColor ?? AppColors.whiteColor,
+                          // Change the border color as needed
+                          width: 0.h, // Use the provided border width
+                        ),
+                        image: const DecorationImage(
+                            image: AssetImage(AssetsPath.imageLoadError),
+                            fit: BoxFit.cover)),
+                  ),
+                ),
+              );
   }
 }

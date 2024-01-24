@@ -58,7 +58,7 @@ class FavouritesCubit extends Cubit<FavouritesState> {
   }
 
   /// Add To Fav
-  Future addToFavCubit({
+  Future<int> addToFavCubit({
     required BuildContext context,
     required bool mounted,
     required String type,
@@ -79,7 +79,8 @@ class FavouritesCubit extends Cubit<FavouritesState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         print("status: ${response.data["status"]} response: ${response.data}");
-        AppUtils.showToast(response.data["message"]);
+        // AppUtils.showToast(response.data["message"]);
+        return 1;
       }
 
       /// Failed
@@ -87,14 +88,16 @@ class FavouritesCubit extends Cubit<FavouritesState> {
         print(
             "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
+        return 0;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
     }
   }
 
   /// Remove From Fav
-  Future removeFromFavCubit({
+  Future<int> removeFromFavCubit({
     required BuildContext context,
     required bool mounted,
     required String type,
@@ -117,8 +120,9 @@ class FavouritesCubit extends Cubit<FavouritesState> {
             FavouritesModel.fromJson(response.data);
         print(
             "status: ${response.data["status"]} response: ${favouritesModel.favourites}");
-        AppUtils.showToast(favouritesModel.message);
+        // AppUtils.showToast(favouritesModel.message);
         emit(state.copyWith(favouritesModel: favouritesModel));
+        return 1;
       }
 
       /// Failed
@@ -126,9 +130,11 @@ class FavouritesCubit extends Cubit<FavouritesState> {
         print(
             "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
+        return 0;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
     }
   }
 }

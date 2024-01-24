@@ -77,8 +77,17 @@ class _YourResumeEditState extends State<YourResumeEdit> {
         Padding(
           padding: const EdgeInsets.only(right: 12.0, top: 8),
           child: CircularIconButton(
-            onPressed: () {
-              Navigator.pop(context);
+            onPressed: () async {
+              // Navigator.pop(context);
+              FocusManager.instance.primaryFocus?.unfocus();
+              if (_resumeKey.currentState!.validate()) {
+                await _bloc.updateResumeCubit(
+                    context: context,
+                    mounted: mounted,
+                    itemsList: itemsList,
+                    pdfFile: _pdfFilePath,
+                    profileImage: _imagePath);
+              }
             },
             width: 0.10.sw,
             height: 0.10.sw,
@@ -163,6 +172,16 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                                       await FilePickerService.selectPDF();
                                   if (_pdfFilePath != null) {
                                     fileName = path.basename(_pdfFilePath!);
+                                    // Check if the file exists
+                                    if (File(_pdfFilePath!).existsSync()) {
+                                      // File exists, proceed with operations
+                                      int fileLength =
+                                          File(_pdfFilePath!).lengthSync();
+                                      print('File length: $fileLength');
+                                    } else {
+                                      print(
+                                          'File does not exist at the specified path.');
+                                    }
                                     setState(() {});
                                   }
                                 } else {

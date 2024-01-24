@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:side_hustle/base_widget/base_widget.dart';
+import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
+import 'package:side_hustle/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:google_api_headers/google_api_headers.dart';
 
 class AppUtils {
   /// Easy Loading Config
@@ -168,7 +173,7 @@ class AppUtils {
       msg: message ?? "",
       toastLength: Toast.LENGTH_SHORT,
       backgroundColor: AppColors.primaryColor,
-      gravity: ToastGravity.BOTTOM,
+      gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
       webPosition: "center",
       webBgColor: "linear-gradient(to right, #dc1c13, #dc1c13)",
@@ -184,5 +189,73 @@ class AppUtils {
     } else {
       throw 'Could not launch $urlLaunch';
     }
+  }
+
+  /// Select Location
+  static Future<SelectLocationModel?> selectLocation(
+      {required BuildContext context, required bool mounted}) async {
+    void onError(PlacesAutocompleteResponse response) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.errorMessage ?? 'Unknown error'),
+        ),
+      );
+    }
+
+    // show input autocomplete with selected mode
+    // then get the Prediction selected
+    final p = await PlacesAutocomplete.show(
+      context: context,
+      apiKey: Constants.googlePlacesApiKey,
+      onError: onError,
+      mode: Mode.overlay,
+      language: 'en',
+      components: [const Component(Component.country, 'us')],
+      resultTextStyle: Theme.of(context).textTheme.titleMedium,
+    );
+
+    if (mounted) {
+      EasyLoading.show();
+      final PlacesDetailsResponse? detail =
+          await displayPrediction(p, ScaffoldMessenger.of(context));
+      final geometry = detail?.result.geometry!;
+      final lat = geometry?.location.lat;
+      final lng = geometry?.location.lng;
+
+      print('${p?.description} - $lat/$lng');
+      if (p?.description != null) {
+        EasyLoading.dismiss();
+        return SelectLocationModel(
+            locationAddress: p?.description, lat: lat, lng: lng);
+      }
+    }
+    EasyLoading.dismiss();
+    return null;
+  }
+
+  static Future<PlacesDetailsResponse?> displayPrediction(
+      Prediction? p, ScaffoldMessengerState messengerState) async {
+    if (p == null) {
+      return null;
+    }
+
+    // get detail (lat/lng)
+    final _places = GoogleMapsPlaces(
+      apiKey: Constants.googlePlacesApiKey,
+      apiHeaders: await const GoogleApiHeaders().getHeaders(),
+    );
+
+    final detail = await _places.getDetailsByPlaceId(p.placeId!);
+    // final geometry = detail.result.geometry!;
+    // final lat = geometry.location.lat;
+    // final lng = geometry.location.lng;
+
+    // messengerState.showSnackBar(
+    //   SnackBar(
+    //     content: Text('${p.description} - $lat/$lng'),
+    //   ),
+    // );
+
+    return detail;
   }
 }

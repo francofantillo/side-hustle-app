@@ -11,15 +11,17 @@ import 'package:side_hustle/widgets/image_slider/image_slider_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageSlider extends StatefulWidget {
-  final List<File>? itemImages;
+  final List<File>? fileImages;
   final List<Images>? responseImages;
+  final int? indicatorLength;
   final bool hideCameraIcon;
   final Function()? onTap;
 
   const ImageSlider(
       {super.key,
-      this.itemImages,
+      this.fileImages,
       this.responseImages,
+      this.indicatorLength,
       this.onTap,
       this.hideCameraIcon = false});
 
@@ -56,7 +58,7 @@ class _ImageSliderState extends State<ImageSlider> {
           controller: pageController,
           itemCount: widget.responseImages != null
               ? widget.responseImages?.length ?? 0
-              : widget.itemImages?.length ?? 1,
+              : widget.fileImages?.length ?? 1,
           itemBuilder: (context, index) {
             return pageViewChild(index);
           }),
@@ -88,29 +90,33 @@ class _ImageSliderState extends State<ImageSlider> {
           );
   }*/
   dotIndicatorWidget() {
-    return Card(
-      elevation: 2,
-      shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
-      ),
-      child: SmoothPageIndicator(
-        controller: pageController,
-        count: widget.responseImages != null
-            ? widget.responseImages!.length
-            : widget.itemImages?.length ?? 1,
-        effect: const ExpandingDotsEffect(
-          dotHeight: 4,
-          dotWidth: 7,
-          activeDotColor: AppColors.primaryColor,
-          dotColor: Color(0xFFA5A5A5),
-        ),
-      ),
-    );
+    return widget.indicatorLength == null
+        ? const SizedBox.shrink()
+        : Card(
+            elevation: 2,
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  AppDimensions.listItemImageRoundedBorder),
+            ),
+            child: SmoothPageIndicator(
+              controller: pageController,
+              // count: widget.responseImages != null
+              //     ? widget.responseImages!.length
+              //     : widget.fileImages?.length ?? 1,
+              count: widget.indicatorLength!,
+              effect: const ExpandingDotsEffect(
+                dotHeight: 4,
+                dotWidth: 7,
+                activeDotColor: AppColors.primaryColor,
+                dotColor: Color(0xFFA5A5A5),
+              ),
+            ),
+          );
   }
 
   pageViewChild(int index) {
+    print("responseImages: ${widget.responseImages?[index].image}");
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0.0),
       child: Card(
@@ -126,7 +132,7 @@ class _ImageSliderState extends State<ImageSlider> {
             ImageSliderItem(
               imageHeight: AppDimensions.productImageSliderHeight,
               imageWidth: AppDimensions.productImageSliderWidth,
-              fileImage: widget.itemImages?[index],
+              fileImage: widget.fileImages?[index],
               image: widget.responseImages?[index].image,
               boarderColor: Colors.white,
             ),

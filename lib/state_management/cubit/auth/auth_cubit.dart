@@ -459,7 +459,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.data["status"] == AppValidationMessages.success) {
         print(
             "status: ${response.data["status"]} response: ${response.data["data"]}");
-        AppUtils.showToast(response.data["message"]);
+        // AppUtils.showToast(response.data["message"]);
         // emit(state.copyWith(userModel: UserModel()));
         /// Reset Blocs
         if (mounted) {

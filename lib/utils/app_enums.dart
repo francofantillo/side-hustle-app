@@ -7,3 +7,5 @@ enum SideHustleType { Products, Services }
 enum DeliveryOptions { Pickup, DeliverToAddress_COD }
 
 enum Favourites { Event, Job, Shop }
+
+enum SubscriptionPlan { One, Two, Three }

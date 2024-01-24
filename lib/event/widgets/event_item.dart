@@ -19,6 +19,7 @@ class EventItemsWidget extends StatelessWidget {
       userName,
       userRating,
       imagePath;
+  final int isFavourite;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
   final Function()? onTap, onTapFav, onTapChat;
@@ -28,6 +29,7 @@ class EventItemsWidget extends StatelessWidget {
       this.title,
       this.location,
       this.price,
+      this.isFavourite = 0,
       this.onTap,
       this.onTapFav,
       this.onTapChat,
@@ -58,7 +60,7 @@ class EventItemsWidget extends StatelessWidget {
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: InkWell(
             onTap: onTap,
@@ -71,6 +73,7 @@ class EventItemsWidget extends StatelessWidget {
                     imageHeight: imageHeight,
                     imageWidth: AppDimensions.listItemWidth,
                     image: imagePath,
+                    assetImage: AssetsPath.imageLoadError,
                     boarderColor: boarderColor,
                   ),
                   Expanded(
@@ -85,19 +88,19 @@ class EventItemsWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 0.03.sw),
-                                    child: textWidget(
-                                        text: title,
-                                        fontFamily: AppFont.gilroyBold,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: AppDimensions.textSizeSmall,
-                                        color: AppColors.textBlackColor),
-                                  )),
+                                padding: EdgeInsets.only(top: 0.03.sw),
+                                child: textWidget(
+                                    text: title,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: AppDimensions.textSizeSmall,
+                                    color: AppColors.textBlackColor),
+                              )),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   textWidget(
-                                      text: price,
+                                      text: price != null ? "\$$price" : "",
                                       fontFamily: AppFont.gilroyBold,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppDimensions.textSizeSmall,
@@ -144,6 +147,7 @@ class EventItemsWidget extends StatelessWidget {
                               CircularCacheImageWidget(
                                 showLoading: false,
                                 image: userProfile,
+                                assetImage: AssetsPath.placeHolder,
                                 boarderColor: AppColors.primaryColor,
                                 imageHeight: imageHeight! * .2,
                                 imageWidth: imageHeight! * .2,
@@ -176,7 +180,9 @@ class EventItemsWidget extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           textWidget(
-                                              text: userRating, fontSize: AppDimensions.textSizeUserRating),
+                                              text: userRating,
+                                              fontSize: AppDimensions
+                                                  .textSizeUserRating),
                                         ],
                                       ),
                                     ],
@@ -193,7 +199,9 @@ class EventItemsWidget extends StatelessWidget {
                                     //   print("Clicked");
                                     // },
                                     onTap: onTapFav,
-                                    iconPath: AssetsPath.favUnfilled,
+                                    iconPath: isFavourite == 1
+                                        ? AssetsPath.favourite
+                                        : AssetsPath.favUnfilled,
                                     height: imageHeight! * .2,
                                     width: imageHeight! * .2,
                                     backgroundColor: AppColors.primaryColor,

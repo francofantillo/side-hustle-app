@@ -21,11 +21,13 @@ class EventList extends StatefulWidget {
 }
 
 class _EventListState extends State<EventList> {
-  late final FavouritesCubit _bloc;
+  late final FavouritesCubit _blocFav;
+  late final EventsCubit _blocEvent;
 
   @override
   void initState() {
-    _bloc = BlocProvider.of<FavouritesCubit>(context);
+    _blocFav = BlocProvider.of<FavouritesCubit>(context);
+    _blocEvent = BlocProvider.of<EventsCubit>(context);
     super.initState();
   }
 
@@ -46,10 +48,13 @@ class _EventListState extends State<EventList> {
                       physics: const AlwaysScrollableScrollPhysics(
                           parent: BouncingScrollPhysics()),
                       shrinkWrap: true,
+                      // reverse: true,
                       scrollDirection: Axis.vertical,
                       itemCount: state.eventsModel?.events?.length ?? 0,
                       itemBuilder: (context, index) {
                         // Replace with your horizontal list item
+                        print(
+                            "isFavourite: ${state.eventsModel?.events?[index].isFavourite}");
                         return Padding(
                           padding:
                               const EdgeInsets.only(right: 16.0, left: 8.0),
@@ -57,12 +62,37 @@ class _EventListState extends State<EventList> {
                             onTapFav: () async {
                               print(
                                   "Event Id: ${state.eventsModel?.events?[index].eventId}");
-                              await _bloc.addToFavCubit(
-                                  context: context,
-                                  mounted: mounted,
-                                  type: Favourites.Event.name,
-                                  id: state
-                                      .eventsModel?.events?[index].eventId);
+                              if (state.eventsModel?.events?[index]
+                                      .isFavourite ==
+                                  0) {
+                                await _blocFav
+                                    .addToFavCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        type: Favourites.Event.name,
+                                        id: state.eventsModel?.events?[index]
+                                            .eventId)
+                                    .then((value) async {
+                                  if (value == 1) {
+                                    await _blocEvent.setFave(
+                                        index: index, isFavourite: value);
+                                  }
+                                });
+                              } else {
+                                await _blocFav
+                                    .removeFromFavCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        type: Favourites.Event.name,
+                                        id: state.eventsModel?.events?[index]
+                                            .eventId)
+                                    .then((value) async {
+                                  if (value == 1) {
+                                    await _blocEvent.setFave(
+                                        index: index, isFavourite: 0); /// 0 to unFav
+                                  }
+                                });
+                              }
                             },
                             onTap: () {
                               // Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
@@ -73,6 +103,9 @@ class _EventListState extends State<EventList> {
                                         .eventId, // make a separate class for selecting an image and user
                                   ));
                             },
+                            isFavourite:
+                                state.eventsModel?.events?[index].isFavourite ??
+                                    0,
                             imageWidth: 1.sw,
                             imageHeight: AppDimensions.listItemHeight,
                             boarderColor: AppColors.itemBGColor,
