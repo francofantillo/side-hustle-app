@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/drawer/drawer_item.dart';
 import 'package:side_hustle/drawer/widgets/logout_widget.dart';
+import 'package:side_hustle/favourites/favourites.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -128,7 +129,10 @@ class _AppDrawerState extends State<AppDrawer> {
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pushNamed(
-                            context, AppRoutes.favouritesScreenRoute);
+                            context, AppRoutes.favouritesScreenRoute,
+                            arguments: const FavouritesScreen(
+                              isFromDrawer: true,
+                            ));
                       },
                     ),
                     height(AppDimensions.drawerItemsVerticalSpacing),

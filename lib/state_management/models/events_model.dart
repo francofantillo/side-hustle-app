@@ -1,8 +1,8 @@
 class EventsModel {
   bool? status;
   String? message;
-  Data? eventDetails;
-  List<Data>? events;
+  EventsData? eventDetails;
+  List<EventsData>? events;
 
   EventsModel({this.status, this.message, this.eventDetails});
 
@@ -11,13 +11,13 @@ class EventsModel {
     message = json['message'];
     if (json['data'] is List) {
       if (json['data'] != null) {
-        events = <Data>[];
+        events = <EventsData>[];
         json['data'].forEach((v) {
-          events!.add(Data.fromJson(v));
+          events!.add(EventsData.fromJson(v));
         });
       }
     } else {
-      eventDetails = json['data'] != null ? Data.fromJson(json['data']) : null;
+      eventDetails = json['data'] != null ? EventsData.fromJson(json['data']) : null;
     }
   }
 
@@ -33,7 +33,7 @@ class EventsModel {
   }
 }
 
-class Data {
+class EventsData {
   List<Images>? images;
   String? image;
   int? isFavourite;
@@ -53,7 +53,7 @@ class Data {
   String? paymentType;
   int? isInterested;
 
-  Data(
+  EventsData(
       {this.images,
       this.isFavourite,
       this.image,
@@ -73,7 +73,7 @@ class Data {
       this.isInterested,
       this.paymentType});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  EventsData.fromJson(Map<String, dynamic> json) {
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {

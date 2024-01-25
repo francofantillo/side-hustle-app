@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/event/widgets/select_payment_type_dropdown.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
+import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
+import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -30,6 +36,9 @@ enum SingingCharacter { package1, package2, package3 }
 
 class _ModalBottomSheetPackageTypePostState
     extends State<ModalBottomSheetPackageTypePost> {
+  late final CardCubit _blocCard;
+  late final EventsCubit _blocEvent;
+  int? cardId;
   SingingCharacter? _character = SingingCharacter.package1;
 
   late final ValueNotifier<bool> _packagesGroupValue;
@@ -61,7 +70,9 @@ class _ModalBottomSheetPackageTypePostState
 
   @override
   void initState() {
-    setDefaultCardList();
+    // setDefaultCardList();
+    _blocCard = BlocProvider.of<CardCubit>(context);
+    _blocEvent = BlocProvider.of<EventsCubit>(context);
     super.initState();
   }
 
@@ -74,9 +85,14 @@ class _ModalBottomSheetPackageTypePostState
     }
   }
 
+  // final List<String> items = [
+  //   "****  ****  ****  4567",
+  //   "****  ****  ****  4568",
+  // ];
+
   final List<String> items = [
-    "****  ****  ****  4567",
-    "****  ****  ****  4568",
+    "4567",
+    "4568",
   ];
 
   @override
@@ -162,8 +178,6 @@ class _ModalBottomSheetPackageTypePostState
                               onChanged: (SingingCharacter? v) {
                                 if (v! == SingingCharacter.package1) {
                                   _character = SingingCharacter.package1;
-                                } else {
-                                  // _character = SingingCharacter.lafayette;
                                 }
                                 setState(() {});
                               })
@@ -209,8 +223,6 @@ class _ModalBottomSheetPackageTypePostState
                               onChanged: (SingingCharacter? v) {
                                 if (v! == SingingCharacter.package2) {
                                   _character = SingingCharacter.package2;
-                                } else {
-                                  // _character = SingingCharacter.lafayette;
                                 }
                                 setState(() {});
                               })
@@ -256,8 +268,6 @@ class _ModalBottomSheetPackageTypePostState
                               onChanged: (SingingCharacter? v) {
                                 if (v! == SingingCharacter.package3) {
                                   _character = SingingCharacter.package3;
-                                } else {
-                                  // _character = SingingCharacter.lafayette;
                                 }
                                 setState(() {});
                               })
@@ -281,28 +291,37 @@ class _ModalBottomSheetPackageTypePostState
                       fontSize: AppDimensions.textSizeBottomSheet,
                       fontWeight: FontWeight.bold),
                 ),
-                height(0.02.sw),
-                SizedBox(
-                  width: 1.sw,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.w),
-                    child: SelectPaymentTypeDropDown(
-                      items: items,
-                      hintText: AppStrings.debitCreditCardSecret,
-                      selectedValue: (v) {
-                        print("selectedValue: $v");
-                      },
+                // height(0.02.sw),
+                BlocBuilder<CardCubit, CardState>(builder: (context, state) {
+                  return SizedBox(
+                    width: 1.sw,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.w),
+                      child: SelectPaymentTypeDropDown(
+                        // items: items,
+                        // items: items,
+                        items: state.cardModel?.data,
+                        hintText: AppStrings.debitCreditCardSecret,
+                        selectedValue: (v) {
+                          print("selectedValue: $v");
+                        },
+                        selectedItemId: (v) {
+                          print("selectedItemId: $v");
+                          cardId = v;
+                        },
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 Padding(
                   // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
-                  padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
+                  padding:
+                      const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
                   child: CustomMaterialButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
+                      onPressed: () async {
+                        // Navigator.pop(context);
+                        // Navigator.pop(context);
                         if (widget.isJob) {
                           return;
                         } else if (widget.isProduct) {
@@ -326,14 +345,74 @@ class _ModalBottomSheetPackageTypePostState
                               ));
                           return;
                         } else if (widget.isEvent) {
-                          Navigator.pushNamed(
-                              context, AppRoutes.postAddedScreenRoute,
-                              arguments: const PostAdded(
-                                isEvent: true,
-                                title: AppStrings.eventPosted,
-                                subTitle: AppStrings.sideHustlePostedSubTitle,
-                                buttonName: AppStrings.viewEvent,
-                              ));
+                          late final int planId;
+                          print(
+                              "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                          if (_character?.name ==
+                              SingingCharacter.package1.name) {
+                            planId = 1;
+                          } else if (_character?.name ==
+                              SingingCharacter.package2.name) {
+                            planId = 2;
+                          } else if (_character?.name ==
+                              SingingCharacter.package3.name) {
+                            planId = 3;
+                          }
+                          print("planId: $planId");
+                          // Navigator.pop(context);
+                          // Navigator.pop(context);
+                          if (cardId != null) {
+                            await _blocCard
+                                .defaultCardCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    hideLoader: true,
+                                    cardId: cardId)
+                                .then((value) async {
+                              if (value == 1) {
+                                await _blocEvent
+                                    .postAnEventCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        planId: planId)
+                                    .then((value) {
+                                  if (value == 1) {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.postAddedScreenRoute,
+                                        arguments: const PostAdded(
+                                          isEvent: true,
+                                          title: AppStrings.eventPosted,
+                                          subTitle: AppStrings
+                                              .sideHustlePostedSubTitle,
+                                          buttonName: AppStrings.viewEvent,
+                                        ));
+                                  }
+                                });
+                              }
+                            });
+                          } else {
+                            await _blocEvent
+                                .postAnEventCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    planId: planId)
+                                .then((value) {
+                              if (value == 1) {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.postAddedScreenRoute,
+                                    arguments: const PostAdded(
+                                      isEvent: true,
+                                      title: AppStrings.eventPosted,
+                                      subTitle:
+                                          AppStrings.sideHustlePostedSubTitle,
+                                      buttonName: AppStrings.viewEvent,
+                                    ));
+                              }
+                            });
+                          }
+
                           return;
                         }
                       },
@@ -341,7 +420,14 @@ class _ModalBottomSheetPackageTypePostState
                       color: AppColors.whiteColor,
                       textColor: AppColors.primaryColor),
                 ),
-                height(0.02.sw),
+                // height(0.02.sw),
+                Center(
+                  child: textWidget(
+                      text: "",
+                      maxLines: 2,
+                      color: AppColors.textWhiteColor,
+                      fontSize: AppDimensions.textSizeSmall),
+                ),
                 Center(
                   child: textWidget(
                       text: "",

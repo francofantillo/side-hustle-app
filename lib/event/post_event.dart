@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
+import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -38,6 +39,7 @@ class _PostEventState extends State<PostEvent> {
   List<File>? itemImages;
   final _eventFormKey = GlobalKey<FormState>();
   late final EventsCubit _bloc;
+  late final CardCubit _blocCard;
 
   // String? _errorMsgEventName;
 
@@ -51,8 +53,25 @@ class _PostEventState extends State<PostEvent> {
     AppUtils.firstSelectedTime = null;
     AppUtils.secondSelectedTime = null;
     _bloc = BlocProvider.of<EventsCubit>(context);
+    _blocCard = BlocProvider.of(context);
     _bloc.initPostEventControllers();
     super.initState();
+  }
+
+  Future getCards() async {
+    await _blocCard
+        .getCardsCubit(context: context, mounted: mounted)
+        .then((value) {
+      if (value != null && value.isEmpty) {
+        AppUtils.showToast(AppStrings.cardNotAddedError);
+      } else if (value != null) {
+        AppUtils.showBottomModalSheet(
+            context: context,
+            widget: const ModalBottomSheetPackageTypePost(
+              isEvent: true,
+            ));
+      }
+    });
   }
 
   @override
@@ -154,7 +173,8 @@ class _PostEventState extends State<PostEvent> {
                     child: CustomTextFormField(
                       controller: _bloc.eventLocationTextController,
                       onTap: () async {
-                        await _bloc.selectLocation(context: context, mounted: mounted);
+                        await _bloc.selectLocation(
+                            context: context, mounted: mounted);
                       },
                       isReadonly: true,
                       hintText: AppStrings.eventLocationHint,
@@ -196,9 +216,11 @@ class _PostEventState extends State<PostEvent> {
                         AppStrings.eventDate,
                       ),
                       onTap: () async {
-                        final formattedDate = await AppUtils.selectDate(
+                        final String? formattedDate = await AppUtils.selectDate(
                             context: context, initialDate: DateTime.now());
-                        _bloc.dateTextController.text = formattedDate ?? "";
+                        if (formattedDate != null) {
+                          _bloc.dateTextController.text = formattedDate ?? "";
+                        }
                         // setState(() {});
                       },
                     ),
@@ -476,16 +498,13 @@ class _PostEventState extends State<PostEvent> {
                           if (widget.isEdit) {
                             Navigator.pop(context);
                           } else {
-                            // AppUtils.showBottomModalSheet(
-                            //     context: context,
-                            //     widget: const ModalBottomSheetPackageTypePost(
-                            //       isEvent: true,
-                            //     ));
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            if (_eventFormKey.currentState!.validate()) {
-                              await _bloc.postAnEventCubit(
-                                  context: context, mounted: mounted);
-                            }
+                            await getCards();
+
+                            // FocusManager.instance.primaryFocus?.unfocus();
+                            // if (_eventFormKey.currentState!.validate()) {
+                            //   await _bloc.postAnEventCubit(
+                            //       context: context, mounted: mounted);
+                            // }
                           }
                         },
                         color: AppColors.primaryColor,

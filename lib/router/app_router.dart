@@ -189,7 +189,10 @@ class AppRouter {
           //   return const OtherUserShopScreen();
 
           case AppRoutes.favouritesScreenRoute:
-            return const FavouritesScreen();
+            final args = routeSettings.arguments as FavouritesScreen?;
+            return FavouritesScreen(
+              isFromDrawer: args?.isFromDrawer ?? false,
+            );
 
           case AppRoutes.myJobsScreenRoute:
             return const MyJobsScreen();

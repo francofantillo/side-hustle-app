@@ -79,9 +79,10 @@ class CardCubit extends Cubit<CardState> {
   }
 
   /// Default Card
-  Future defaultCardCubit(
+  Future<int> defaultCardCubit(
       {required BuildContext context,
       required bool mounted,
+      bool hideLoader = false,
       required int? cardId}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
@@ -92,30 +93,35 @@ class CardCubit extends Cubit<CardState> {
         await setDefaultCardProvider(apiToken: token, cardId: cardId);
 
     if (response != null) {
-      EasyLoading.dismiss();
-
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         print("response: ${response.data}");
         final CardModel cardModel = CardModel.fromJson(response.data);
         emit(state.copyWith(cardModel: cardModel));
-        AppUtils.showToast(cardModel.message);
+        // AppUtils.showToast(cardModel.message);
+        if (!hideLoader) {
+          EasyLoading.dismiss();
+        }
+        return 1;
       }
 
       /// Failed
       else {
+        EasyLoading.dismiss();
         print(
             "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
+        return 0;
       }
     } else {
       EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
     }
   }
 
   /// Get Cards
-  Future getCardsCubit(
+  Future<List<Data>?> getCardsCubit(
       {required BuildContext context, required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     emit(state.copyWith(cardModel: CardModel()));
@@ -133,6 +139,7 @@ class CardCubit extends Cubit<CardState> {
         print("response: ${response.data}");
         final CardModel cardModel = CardModel.fromJson(response.data);
         emit(state.copyWith(cardModel: cardModel));
+        return cardModel.data;
         // AppUtils.showToast(cardModel.message);
       }
 
@@ -141,10 +148,12 @@ class CardCubit extends Cubit<CardState> {
         print(
             "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
+        return null;
       }
     } else {
       EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return null;
     }
   }
 }

@@ -18,7 +18,9 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FavouritesScreen extends StatefulWidget {
-  const FavouritesScreen({super.key});
+  final bool isFromDrawer;
+
+  const FavouritesScreen({super.key, this.isFromDrawer = false});
 
   @override
   State<FavouritesScreen> createState() => _FavouritesScreenState();
@@ -65,7 +67,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
-              backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+          backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
         ),
         actions: [
           Padding(
@@ -91,7 +93,8 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
           children: [
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             Padding(
-              padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
+              padding:
+              EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
               child: SizedBox(
                 width: 1.sw,
                 child: ToggleSwitch(
@@ -133,10 +136,10 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             _tabIndexBasicToggle.value == 0
                 ? const FavouritesListEvent()
                 : _tabIndexBasicToggle.value == 1
-                    ? const FavouritesListJobs()
-                    : _tabIndexBasicToggle.value == 2
-                        ? const FavouritesListShops()
-                        : const SizedBox.shrink(),
+                ? const FavouritesListJobs()
+                : _tabIndexBasicToggle.value == 2
+                ? const FavouritesListShops()
+                : const SizedBox.shrink(),
             height(0.02.sh)
           ],
         ),

@@ -189,15 +189,17 @@ class _ViewEventState extends State<ViewEvent> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                textWidget(
-                                    // text: AppStrings.viewEventMusical,
-                                    text: state.eventsDetailModel?.eventDetails
-                                        ?.eventName,
-                                    fontFamily: AppFont.gilroyBold,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        AppDimensions.textHeadingSizeViewForms,
-                                    color: AppColors.textBlackColor),
+                                Expanded(
+                                  child: textWidget(
+                                      // text: AppStrings.viewEventMusical,
+                                      text: state.eventsDetailModel
+                                          ?.eventDetails?.eventName,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions
+                                          .textHeadingSizeViewForms,
+                                      color: AppColors.textBlackColor),
+                                ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [

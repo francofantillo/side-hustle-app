@@ -237,6 +237,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                           fontSize: AppDimensions.textSizeSmall),
                     ),
                   ),
+
                 ],
               ),
             ),

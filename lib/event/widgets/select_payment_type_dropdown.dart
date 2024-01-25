@@ -8,16 +8,21 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
+import '../../state_management/models/card_model.dart';
+
 class SelectPaymentTypeDropDown extends StatefulWidget {
-  final List<String> items;
+  // final List<String> items;
+  final List<Data>? items;
   final String? hintText;
   final int? cardNumber;
   final ValueChanged<String?> selectedValue;
+  final ValueChanged<int?> selectedItemId;
 
   const SelectPaymentTypeDropDown(
       {super.key,
       required this.items,
       required this.selectedValue,
+      required this.selectedItemId,
       this.cardNumber,
       this.hintText});
 
@@ -28,6 +33,12 @@ class SelectPaymentTypeDropDown extends StatefulWidget {
 
 class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
   String? selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedValue = widget.items?[0].last4;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,10 +92,10 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
                       ),
                     ),
                     items: widget.items
-                        .map((String item) => DropdownMenuItem<String>(
-                              value: item,
+                        ?.map((Data item) => DropdownMenuItem<String>(
+                              value: item.last4,
                               child: Text(
-                                item,
+                                "****  ****  ****  ${item.last4}",
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppFont.gilroySemiBold,
@@ -96,10 +107,20 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
                         .toList(),
                     value: selectedValue,
                     onChanged: (String? value) {
-                      widget.selectedValue(value);
-                      setState(() {
-                        selectedValue = value;
-                      });
+                      for (int i = 0; i < (widget.items?.length ?? 0); i++) {
+                        if (widget.items?[i].last4 == value) {
+                          widget.selectedValue(value);
+                          widget.selectedItemId(widget.items?[i].id);
+                          setState(() {
+                            selectedValue = value;
+                          });
+                          break;
+                        }
+                      }
+                      // widget.selectedValue(value);
+                      // setState(() {
+                      //   selectedValue = value;
+                      // });
                     },
                     buttonStyleData: const ButtonStyleData(
                       padding: EdgeInsets.symmetric(horizontal: 16),

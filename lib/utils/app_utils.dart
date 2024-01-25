@@ -211,6 +211,7 @@ class AppUtils {
       mode: Mode.overlay,
       language: 'en',
       components: [const Component(Component.country, 'us')],
+      // components: [const Component(Component.country, 'pk')],
       resultTextStyle: Theme.of(context).textTheme.titleMedium,
     );
 

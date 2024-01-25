@@ -207,8 +207,10 @@ class EventsCubit extends Cubit<EventsState> {
   }
 
   /// Post an Event
-  Future postAnEventCubit(
-      {required BuildContext context, required bool mounted}) async {
+  Future<int> postAnEventCubit(
+      {required BuildContext context,
+      required int planId,
+      required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
 
@@ -238,7 +240,8 @@ class EventsCubit extends Cubit<EventsState> {
       price: eventPriceTextController.text,
       paymentType: "card",
       availableAttractionsString: eventAvailableTextController.text,
-      planId: "1",
+      // planId: "1",
+      planId: planId.toString(),
     );
 
     EasyLoading.dismiss();
@@ -255,6 +258,7 @@ class EventsCubit extends Cubit<EventsState> {
         if (mounted) {
           Navigator.pop(context);
         }
+        return 1;
       }
 
       /// Failed
@@ -262,9 +266,11 @@ class EventsCubit extends Cubit<EventsState> {
         // print(
         //     "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
+        return 0;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
     }
   }
 }
