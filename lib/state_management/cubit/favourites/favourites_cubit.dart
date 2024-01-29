@@ -50,8 +50,6 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -87,8 +85,6 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return 0;
       }
@@ -129,8 +125,6 @@ class FavouritesCubit extends Cubit<FavouritesState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return 0;
       }

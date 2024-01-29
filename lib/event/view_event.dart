@@ -11,6 +11,7 @@ import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_list.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
@@ -22,6 +23,7 @@ import 'package:side_hustle/widgets/error/error_widget.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_no_images_found.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/list/bullet_point_list.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -117,57 +119,7 @@ class _ViewEventState extends State<ViewEvent> {
                           //     responseImages: state
                           //         .eventsDetailModel?.eventDetails?.images),
                           state.eventsDetailModel!.eventDetails!.images!.isEmpty
-                              ? Card(
-                                  elevation: 2,
-                                  shadowColor: Colors.transparent,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppDimensions
-                                            .listItemImageRoundedBorder),
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      AspectRatio(
-                                        aspectRatio: 21 / 9,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(AppDimensions
-                                                      .homeFirstItemWidgetCurve)),
-                                              border: Border.all(
-                                                color: Colors.white,
-                                                // Change the border color as needed
-                                                width: 0
-                                                    .h, // Use the provided border width
-                                              ),
-                                              image: const DecorationImage(
-                                                  image: AssetImage(AssetsPath
-                                                      .imageLoadError),
-                                                  fit: BoxFit.cover)),
-                                        ),
-                                      ),
-
-                                      /// Hide Camera Icon login
-                                      // Positioned(
-                                      //   left: AppDimensions
-                                      //           .productImageSliderWidth -
-                                      //       0.24.sw,
-                                      //   // top: AppDimensions.productImageSliderHeight - 0.23.sw,
-                                      //   top: AppDimensions
-                                      //           .productImageSliderHeight -
-                                      //       0.255.sw,
-                                      //   child: CameraButton(
-                                      //     onTap: () {},
-                                      //     iconPath: AssetsPath.camera,
-                                      //     height: 0.12.sw,
-                                      //     width: 0.12.sw,
-                                      //     backgroundColor: AppColors.whiteColor,
-                                      //     iconColor: AppColors.primaryColor,
-                                      //   ),
-                                      // )
-                                    ],
-                                  ),
-                                )
+                              ? const NoImagesFoundWidget()
                               : ImageSlider(
                                   hideCameraIcon: true,
                                   indicatorLength: state.eventsDetailModel
@@ -256,7 +208,62 @@ class _ViewEventState extends State<ViewEvent> {
                               ),
                             ),
                           ),
-                          height(0.01.sh),
+                          height(0.02.sw),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ImageIcon(
+                                  const AssetImage(AssetsPath.calender),
+                                  size: AppDimensions.applyForJobIconSize,
+                                  color: const Color(0xFF565656),
+                                ),
+                                width(0.02.sw),
+                                Expanded(
+                                  child: textWidget(
+                                      text: state.eventsDetailModel
+                                                  ?.eventDetails?.startDate !=
+                                              null
+                                          ? AppUtils.formatDateView(
+                                              selectedDate: DateTime.parse(state
+                                                  .eventsDetailModel!
+                                                  .eventDetails!
+                                                  .startDate!))
+                                          : "",
+                                      color: const Color(0xFF565656),
+                                      fontSize: AppDimensions
+                                          .textLocationSizeViewForms),
+                                ),
+                              ],
+                            ),
+                          ),
+                          height(0.02.sw),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.access_time_filled_rounded,
+                                  size: AppDimensions.applyForJobIconSize,
+                                  color: const Color(0xFF565656),
+                                ),
+                                width(0.02.sw),
+                                Expanded(
+                                  child: textWidget(
+                                      // text: AppStrings.eventTimeText,
+                                      text:
+                                          "Start at ${DateTimeConversions.convertToLocal12HourFormat(state.eventsDetailModel?.eventDetails?.startTime)} to ${DateTimeConversions.convertToLocal12HourFormat(state.eventsDetailModel?.eventDetails?.endTime)}",
+                                      fontSize: AppDimensions
+                                          .textLocationSizeViewForms),
+                                ),
+                              ],
+                            ),
+                          ),
+                          height(0.02.sw),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),
@@ -265,7 +272,7 @@ class _ViewEventState extends State<ViewEvent> {
                               color: Colors.grey.withOpacity(0.8),
                             ),
                           ),
-                          height(0.02.sh),
+                          height(0.03.sw),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),

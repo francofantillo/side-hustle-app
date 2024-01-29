@@ -34,5 +34,31 @@ class DateTimeConversions {
       print("dateTime: $dateTime");
       return dateTime.toUtc().toIso8601String();
     }
+    return null;
+  }
+
+  static String? convertToLocal12HourFormat(String? time12) {
+    // 1970-01-01T01:02:00.000Z
+    final inputFormat = DateFormat('yyyy-MM-ddTHH:mm:ss');
+    final outputFormat = DateFormat('hh:mm a');
+
+    /// Converting time to Local
+    final time = convertToLocalTime(time: time12);
+
+    final dateTime = inputFormat.parse(time!);
+    final time24 = outputFormat.format(dateTime);
+    print("convertToLocalTime: $time24");
+
+    return time24;
+  }
+
+  static String? convertToLocalTime({required String? time}) {
+    if (time != null) {
+      DateTime? dateTime = DateFormat("HH:mm:ss").parse(time, true);
+
+      print("dateTime: $dateTime");
+      return dateTime.toLocal().toIso8601String();
+    }
+    return null;
   }
 }

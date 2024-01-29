@@ -143,10 +143,14 @@ class AppRouter {
             );
 
           case AppRoutes.viewEventSelfScreenRoute:
-            return const ViewEventSelf();
+            final args = routeSettings.arguments as ViewEventSelf?;
+            return ViewEventSelf(id: args?.id);
 
           case AppRoutes.attendeesEventScreenRoute:
-            return const AttendeesEvent();
+            final args = routeSettings.arguments as AttendeesEvent?;
+            return AttendeesEvent(
+              eventId: args?.eventId,
+            );
 
           case AppRoutes.sideHustleScreenRoute:
             return const SideHustle();

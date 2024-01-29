@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/event/view_event_self.dart';
 import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -14,10 +15,12 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class PostAdded extends StatelessWidget {
   final String? title, subTitle, buttonName;
+  final int? id;
   final bool isProduct, isEvent, isService;
 
   const PostAdded(
       {super.key,
+      this.id,
       this.title,
       this.subTitle,
       this.buttonName = "",
@@ -91,7 +94,8 @@ class PostAdded extends StatelessWidget {
                         ));
                   } else if (isEvent) {
                     Navigator.pushReplacementNamed(
-                        context, AppRoutes.viewEventSelfScreenRoute);
+                        context, AppRoutes.viewEventSelfScreenRoute,
+                        arguments: ViewEventSelf(id: id));
                   }
                 },
                 name: buttonName,

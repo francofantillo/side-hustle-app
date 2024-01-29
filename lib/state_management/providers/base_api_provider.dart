@@ -162,7 +162,6 @@ Future<Response?> putRequestProvider(
               sendTimeout: const Duration(milliseconds: timeout),
               receiveTimeout: const Duration(milliseconds: timeout)));
     }
-
     if (kDebugMode) {
       print("postRequestProvider response: $response");
     }

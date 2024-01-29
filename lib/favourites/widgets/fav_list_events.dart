@@ -39,7 +39,7 @@ class _FavouritesListEventState extends State<FavouritesListEvent> {
           : state.favouritesModel?.favourites?.isEmpty ?? true
               ? const Expanded(
                   child: CustomErrorWidget(
-                      errorMessage: AppStrings.errorMessageFavourites),
+                      errorMessage: AppStrings.errorMessageNoItemsFound),
                 )
               : Expanded(
                   child: ListView.builder(

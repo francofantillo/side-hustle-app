@@ -471,7 +471,7 @@ class AppStrings {
 
   /// Error Messages
   static const String errorMessageEvent = "No Events Found";
-  static const String errorMessageFavourites = "No Items Found";
+  static const String errorMessageNoItemsFound = "No Items Found";
   static const String errorMessage = "Something went wrong.";
   static const String cardNotAddedError = "Please add card first.";
   static const cardCVVValidation = 'CVV is incorrect';

@@ -187,8 +187,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} response: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -225,8 +223,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return 0;
       }
@@ -261,8 +257,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return 0;
       }
@@ -312,8 +306,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -347,8 +339,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return 0;
       }
@@ -388,8 +378,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -426,8 +414,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -473,8 +459,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -643,8 +627,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} response: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -683,8 +665,6 @@ class AuthCubit extends Cubit<AuthState> {
       /// Failed
       else {
         emit(state.copyWith(getResumeLoading: false));
-        print(
-            "status: ${response.data["status"]} response: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
       }
     } else {

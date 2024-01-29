@@ -108,8 +108,6 @@ class CardCubit extends Cubit<CardState> {
       /// Failed
       else {
         EasyLoading.dismiss();
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return 0;
       }
@@ -145,8 +143,6 @@ class CardCubit extends Cubit<CardState> {
 
       /// Failed
       else {
-        print(
-            "status: ${response.data["status"]} errors: ${response.data["errors"]}");
         AppUtils.showToast(response.data["message"]);
         return null;
       }

@@ -69,7 +69,8 @@ Future<Response?> postAnEventProvider(
       imageList.add(imageNetwork);
       print("Images Multipart $i: ${imageList[i]}\npath: ${images[i].path}");
     }
-    print("images length: ${images.length}, Images Multipart Length: ${imageList.length}");
+    print(
+        "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
 
     formData = FormData.fromMap({
       "name": name,
@@ -111,5 +112,44 @@ Future<Response?> postAnEventProvider(
       "*****************\nurl: ${API.POST_EVENT}\n${formData.fields}\n**************************");
   final response = await postRequestProvider(
       path: API.POST_EVENT, data: formData, token: apiToken);
+  return response;
+}
+
+/// Get My Events
+Future<Response?> getMyEventsProvider(
+    {required String status, String? apiToken}) async {
+  final data = {"status": status};
+
+  print(
+      "*****************\nurl: ${API.GET_MY_EVENTS}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_MY_EVENTS, queryParameter: data, token: apiToken);
+  return response;
+}
+
+/// Get Attendees
+Future<Response?> getAttendeesProvider(
+    {String? eventId, required String type, String? apiToken}) async {
+  final data = {"event_id": eventId, "type": type};
+
+  print(
+      "*****************\nurl: ${API.GET_ATTENDEES}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_ATTENDEES, queryParameter: data, token: apiToken);
+  return response;
+}
+
+/// Update Attendees Status
+Future<Response?> updateAttendeesProvider(
+    {String? attendeesId,
+    String? eventId,
+    required String status,
+    String? apiToken}) async {
+  final data = {"id": attendeesId, "event_id": eventId, "status": status};
+
+  print(
+      "*****************\nurl: ${API.UPDATE_ATTENDEES_STATUS}\n$data\n**************************");
+  final response = await putRequestProvider(
+      path: API.UPDATE_ATTENDEES_STATUS, data: data, token: apiToken);
   return response;
 }

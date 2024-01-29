@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_completed_list.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_onging_list.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_scheduled_list.dart';
+import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -17,6 +20,7 @@ class MyEventsScreen extends StatefulWidget {
 }
 
 class _MyEventsScreenState extends State<MyEventsScreen> {
+  late final EventsCubit _bloc;
   var index = 0;
   bool isProductSelected = true;
 
@@ -25,7 +29,25 @@ class _MyEventsScreenState extends State<MyEventsScreen> {
   @override
   void initState() {
     isProductSelected = true;
+    _bloc = BlocProvider.of(context);
+    getMyEvents();
     super.initState();
+  }
+
+  getMyEvents() async {
+    if (_tabIndexBasicToggle.value == 0) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getMyEventsCubit(
+          context: context, mounted: mounted, status: Events.Scheduled.name);
+    } else if (_tabIndexBasicToggle.value == 1) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getMyEventsCubit(
+          context: context, mounted: mounted, status: Events.Ongoing.name);
+    } else if (_tabIndexBasicToggle.value == 2) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getMyEventsCubit(
+          context: context, mounted: mounted, status: Events.Completed.name);
+    }
   }
 
   @override
@@ -45,44 +67,8 @@ class _MyEventsScreenState extends State<MyEventsScreen> {
           children: [
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             Padding(
-                padding: EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
-                /*        child: SizedBox(
-                width: 1.sw,
-                child: ToggleSwitch(
-                  customWidths: [.3.sw, .3.sw, .305.sw],
-                  minHeight: AppDimensions.tabBarHeight,
-                  animate: true,
-                  animationDuration: 200,
-                  isVertical: false,
-                  // minWidth: 90,
-                  cornerRadius: 12.0.w,
-                  changeOnTap: true,
-                  activeBgColors: const [
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor]
-                  ],
-                  fontSize: AppDimensions.tabBarFontSize + 2.sp,
-                  inactiveBgColor: AppColors.switchTabBackgroundColor,
-                  inactiveFgColor: AppColors.greyColor,
-                  activeFgColor: Colors.white,
-                  borderWidth: 1,
-                  borderColor: [AppColors.tabOutlineColor],
-                  initialLabelIndex: _tabIndexBasicToggle.value,
-                  totalSwitches: 3,
-                  labels: const [
-                    AppStrings.scheduled,
-                    AppStrings.ongoing,
-                    AppStrings.completed,
-                  ],
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    _tabIndexBasicToggle.value = index ?? 0;
-                    print('switched to: ${_tabIndexBasicToggle.value}');
-                    setState(() {});
-                  },
-                ),
-              ),*/
+                padding:
+                    EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
                 child: CustomTabBar(
                   currentTabIndex: 0,
                   tabNames: const [
@@ -91,9 +77,9 @@ class _MyEventsScreenState extends State<MyEventsScreen> {
                     AppStrings.completed,
                   ],
                   onChanged: (index) {
-                    setState(() {
-                      _tabIndexBasicToggle.value = index;
-                    });
+                    _tabIndexBasicToggle.value = index;
+                    getMyEvents();
+                    setState(() {});
                   },
                 )),
             _tabIndexBasicToggle.value == 0

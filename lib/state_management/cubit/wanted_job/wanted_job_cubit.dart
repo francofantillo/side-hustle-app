@@ -7,6 +7,10 @@ part 'wanted_job_state.dart';
 class WantedJobCubit extends Cubit<WantedJobState> {
   WantedJobCubit() : super(WantedJobState());
 
+  Future resetWantedJobBloc() async {
+    emit(WantedJobState());
+  }
+
   /// Get Wanted Jobs
   Future getWantedJobs(
       {required BuildContext context, required bool mounted}) async {

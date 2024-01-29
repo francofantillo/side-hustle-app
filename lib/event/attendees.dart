@@ -1,23 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:side_hustle/event/widgets/attendees_confirmed_list.dart';
 import 'package:side_hustle/event/widgets/attendees_interested_list.dart';
 import 'package:side_hustle/event/widgets/attendees_tab.dart';
+import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_list.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 
 class AttendeesEvent extends StatefulWidget {
-  const AttendeesEvent({super.key});
+  final int? eventId;
+
+  const AttendeesEvent({super.key, this.eventId});
 
   @override
   State<AttendeesEvent> createState() => _AttendeesEventState();
 }
 
 class _AttendeesEventState extends State<AttendeesEvent> {
+  late final EventsCubit _bloc;
   final ValueNotifier<int> _tabIndexBasicToggle = ValueNotifier(0);
 
+  @override
+  void initState() {
+    super.initState();
+    _bloc = BlocProvider.of(context);
+    getAttendees();
+  }
+
+  getAttendees() async {
+    await _bloc.getAttendeesCubit(
+        context: context,
+        mounted: mounted,
+        type: _tabIndexBasicToggle.value == 0
+            ? AttendeesEnum.Interested.name
+            : AttendeesEnum.Confirmed.name,
+        eventId: widget.eventId?.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,44 +58,14 @@ class _AttendeesEventState extends State<AttendeesEvent> {
             // Padding(padding: EdgeInsets.all(8)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
-          /*    child: SizedBox(
-                width: 1.sw,
-                child: ToggleSwitch(
-                  // customWidths: [.45.sw, .47.sw],
-                  customWidths: [.5.sw, .38.sw],
-                  animate: true,
-                  animationDuration: 200,
-                  minHeight: AppDimensions.tabBarHeight,
-                  isVertical: false,
-                  minWidth: 90,
-                  cornerRadius: 20.0,
-                  changeOnTap: true,
-                  activeBgColors: const [
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor]
-                  ],
-                  activeFgColor: Colors.white,
-                    inactiveBgColor: AppColors.switchTabBackgroundColor,
-                  inactiveFgColor: Colors.black,
-                  initialLabelIndex: _tabIndexBasicToggle.value,
-                  totalSwitches: 2,
-                  labels: [
-                    AttendeesEnum.Interested.name,
-                    AttendeesEnum.Confirmed.name,
-                  ],
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    _tabIndexBasicToggle.value = index ?? 0;
-                    print('switched to: ${_tabIndexBasicToggle.value}');
-                    setState(() {});
-                  },
-                ),
-              ),*/
-              child: AttendeesTab(currentTabIndex: 0, onChanged: (index) {
-                setState(() {
+              child: AttendeesTab(
+                currentTabIndex: 0,
+                onChanged: (index) {
                   _tabIndexBasicToggle.value = index;
-                });
-              },),
+                  getAttendees();
+                  setState(() {});
+                },
+              ),
             ),
             Builder(builder: (context) {
               return Expanded(

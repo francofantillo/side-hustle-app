@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
@@ -345,6 +346,8 @@ class _ModalBottomSheetPackageTypePostState
                               ));
                           return;
                         } else if (widget.isEvent) {
+                          EasyLoading.instance.indicatorColor =
+                              AppColors.whiteColor;
                           late final int planId;
                           print(
                               "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
@@ -377,9 +380,11 @@ class _ModalBottomSheetPackageTypePostState
                                         planId: planId)
                                     .then((value) {
                                   if (value == 1) {
-                                    Navigator.pop(context);
-                                    Navigator.pop(context);
-                                    Navigator.pushNamed(
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
+                                    // Navigator.pop(context);
+                                    // Navigator.pop(context);
+                                    Navigator.pushReplacementNamed(
                                         context, AppRoutes.postAddedScreenRoute,
                                         arguments: const PostAdded(
                                           isEvent: true,
@@ -400,9 +405,11 @@ class _ModalBottomSheetPackageTypePostState
                                     planId: planId)
                                 .then((value) {
                               if (value == 1) {
-                                Navigator.pushNamed(
+                                /// Need Event ID in postAnEvent Response
+                                Navigator.pushReplacementNamed(
                                     context, AppRoutes.postAddedScreenRoute,
-                                    arguments: const PostAdded(
+                                    arguments: PostAdded(
+                                      id: 1,
                                       isEvent: true,
                                       title: AppStrings.eventPosted,
                                       subTitle:

@@ -10,13 +10,7 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class MyEventsScheduledItemsWidget extends StatelessWidget {
-  final String? title,
-      subTitle,
-      price,
-      userProfile,
-      userName,
-      userRating,
-      imagePath;
+  final String? title, location, price, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
   final Function()? onTap;
@@ -24,12 +18,9 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
   const MyEventsScheduledItemsWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.location,
       this.price,
       this.onTap,
-      this.userProfile,
-      this.userName,
-      this.userRating,
       this.imagePath,
       this.imageHeight,
       this.imageWidth,
@@ -56,7 +47,9 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.listItemWidth,
-                assetImage: imagePath,
+                // assetImage: imagePath,
+                assetImage: AssetsPath.imageLoadError,
+                image: imagePath,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -71,19 +64,23 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                         children: [
                           Expanded(
                               child: Padding(
-                                padding: EdgeInsets.only(top: 0.02.sw),
-                                child: textWidget(
-                                    text: title,
-                                    fontFamily: AppFont.gilroyBold,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: AppDimensions.textSizeSmall,
-                                    color: AppColors.textBlackColor),
-                              )),
+                            padding: EdgeInsets.only(top: 0.02.sw),
+                            child: textWidget(
+                                text: title,
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold,
+                                fontSize: AppDimensions.textSizeSmall,
+                                color: AppColors.textBlackColor),
+                          )),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               textWidget(
-                                  text: price,
+                                  // text: price,
+                                  text: price !=
+                                      null
+                                      ? "\$$price"
+                                      : "",
                                   fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
@@ -111,7 +108,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                           width(0.02.sw),
                           Expanded(
                               child: textWidget(
-                                  text: subTitle,
+                                  text: location,
                                   maxLines: 2,
                                   fontSize: AppDimensions.textSize10)),
                         ],

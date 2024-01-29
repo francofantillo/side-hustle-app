@@ -4,6 +4,7 @@ import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
+import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/utils/sharedprefrences.dart';
 
 class ClearAppData {
@@ -15,6 +16,7 @@ class ClearAppData {
     final CardCubit blocCard = BlocProvider.of<CardCubit>(context);
     final EventsCubit blocEvents = BlocProvider.of<EventsCubit>(context);
     final FavouritesCubit blocFavourites = BlocProvider.of<FavouritesCubit>(context);
+    final WantedJobCubit blocWantedJob = BlocProvider.of<WantedJobCubit>(context);
 
     /// clear shared
     await prefs.clearPreferences();
@@ -24,5 +26,6 @@ class ClearAppData {
     await blocCard.resetCardBloc();
     await blocEvents.resetEventsBloc();
     await blocFavourites.resetFavouritesBloc();
+    await blocWantedJob.resetWantedJobBloc();
   }
 }

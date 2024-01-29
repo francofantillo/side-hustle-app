@@ -69,6 +69,14 @@ class AppUtils {
   /// Format Date
   static Future<String> formatDate({required DateTime selectedDate}) async {
     String formattedDate = DateFormat('MM/dd/yyyy').format(selectedDate);
+    // String formattedDate = DateFormat('dd MMM, y').format(selectedDate);
+    return formattedDate;
+  }
+
+  /// Format Date
+  static String formatDateView({required DateTime selectedDate}) {
+    // String formattedDate = DateFormat('MM/dd/yyyy').format(selectedDate);
+    String formattedDate = DateFormat('dd MMMM, y').format(selectedDate);
     return formattedDate;
   }
 

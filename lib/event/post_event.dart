@@ -15,6 +15,7 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/constants.dart';
+import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/utils/service/image_picker_service.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -36,6 +37,8 @@ class PostEvent extends StatefulWidget {
 }
 
 class _PostEventState extends State<PostEvent> {
+  final List vendorList = [];
+  final List availableAttractionsList = [];
   List<File>? itemImages;
   final _eventFormKey = GlobalKey<FormState>();
   late final EventsCubit _bloc;
@@ -387,9 +390,78 @@ class _PostEventState extends State<PostEvent> {
                       controller: _bloc.eventVendorTextController,
                       height: 45.h,
                       hintText: AppStrings.eventVendorListHint,
-                      fieldValidator: (value) =>
-                          value?.validateEmpty(AppStrings.eventVendorList),
+                      isSuffixIcon: true,
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          if (_bloc.eventVendorTextController.text.isNotEmpty) {
+                            vendorList
+                                .add(_bloc.eventVendorTextController.text);
+                            _bloc.eventVendorTextController.clear();
+                            setState(() {});
+                          }
+                        },
+                        child: const Icon(
+                          Icons.add,
+                          color: AppColors.primaryColor,
+                          size: 18,
+                        ),
+                      ),
+                      // fieldValidator: (value) =>
+                      //     value?.validateEmpty(AppStrings.eventVendorList),
                       // fillColor: AppColors.productTextFieldColor,
+                    ),
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Wrap(
+                      spacing: 8.0, // gap between adjacent chips
+                      runSpacing: 8.0, // gap between lines
+                      direction: Axis.horizontal,
+                      children: <Widget>[
+                        for (int i = 0; i < vendorList.length; i++)
+                          FittedBox(
+                            fit: BoxFit.cover,
+                            child: Container(
+                              // width: .35.sw,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 8),
+                              decoration: const BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 1.0),
+                                    child: textWidget(
+                                        text: vendorList[i],
+                                        maxLines: 2,
+                                        color: AppColors.whiteColor,
+                                        fontFamily: AppFont.gilroyMedium,
+                                        fontSize:
+                                            AppDimensions.textSizeVerySmall),
+                                  ),
+                                  width(0.015.sw),
+                                  Material(
+                                    color: AppColors.primaryColor,
+                                    child: InkWell(
+                                      onTap: () {
+                                        vendorList.removeAt(i);
+                                        setState(() {});
+                                      },
+                                      child: const Icon(
+                                        CustomIcon.cancel,
+                                        color: AppColors.whiteColor,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
                     ),
                   ),
                   height(AppDimensions.formFieldsBetweenSpacing),
@@ -456,28 +528,6 @@ class _PostEventState extends State<PostEvent> {
                         fontWeight: FontWeight.bold),
                   ),
                   height(0.01.sw),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  //   child: textWidget(
-                  //       text: AppStrings.eventVendorList,
-                  //       maxLines: 1,
-                  //       color: AppColors.textBlackColor,
-                  //       fontSize: AppDimensions.textSizeSmall,
-                  //       fontFamily: AppFont.gilroyBold,
-                  //       fontWeight: FontWeight.bold),
-                  // ),
-                  // height(0.01.sw),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                  //   child: CustomTextFormField(
-                  //     controller: _bloc.eventAvailableTextController,
-                  //     height: 45.h,
-                  //     hintText: AppStrings.eventAvailableAttractionsHint,
-                  //     fieldValidator: (value) =>
-                  //         value?.validateEmpty(AppStrings.eventVendorList),
-                  //     // fillColor: AppColors.productTextFieldColor,
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: CustomTextFormField(
@@ -485,9 +535,81 @@ class _PostEventState extends State<PostEvent> {
                       height: 65.h,
                       hintText: AppStrings.eventAvailableAttractionsHint,
                       maxLines: 1,
-                      fieldValidator: (value) => value
-                          ?.validateEmpty(AppStrings.eventAvailableAttractions),
+                      isSuffixIcon: true,
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          if (_bloc
+                              .eventAvailableTextController.text.isNotEmpty) {
+                            availableAttractionsList
+                                .add(_bloc.eventAvailableTextController.text);
+                            _bloc.eventAvailableTextController.clear();
+                            setState(() {});
+                          }
+                        },
+                        child: const Icon(
+                          Icons.add,
+                          color: AppColors.primaryColor,
+                          size: 18,
+                        ),
+                      ),
+                      // fieldValidator: (value) => value
+                      //     ?.validateEmpty(AppStrings.eventAvailableAttractions),
                       // fillColor: AppColors.productTextFieldColor,
+                    ),
+                  ),
+                  height(AppDimensions.formFieldsBetweenSpacing),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Wrap(
+                      spacing: 8.0, // gap between adjacent chips
+                      runSpacing: 8.0, // gap between lines
+                      direction: Axis.horizontal,
+                      children: <Widget>[
+                        for (int i = 0;
+                            i < availableAttractionsList.length;
+                            i++)
+                          FittedBox(
+                            fit: BoxFit.cover,
+                            child: Container(
+                              // width: .35.sw,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 8),
+                              decoration: const BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12))),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 1.0),
+                                    child: textWidget(
+                                        text: availableAttractionsList[i],
+                                        maxLines: 2,
+                                        color: AppColors.whiteColor,
+                                        fontFamily: AppFont.gilroyMedium,
+                                        fontSize:
+                                            AppDimensions.textSizeVerySmall),
+                                  ),
+                                  width(0.015.sw),
+                                  Material(
+                                    color: AppColors.primaryColor,
+                                    child: InkWell(
+                                      onTap: () {
+                                        availableAttractionsList.removeAt(i);
+                                        setState(() {});
+                                      },
+                                      child: const Icon(
+                                        CustomIcon.cancel,
+                                        color: AppColors.whiteColor,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
                     ),
                   ),
                   height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
@@ -498,13 +620,14 @@ class _PostEventState extends State<PostEvent> {
                           if (widget.isEdit) {
                             Navigator.pop(context);
                           } else {
-                            await getCards();
-
-                            // FocusManager.instance.primaryFocus?.unfocus();
-                            // if (_eventFormKey.currentState!.validate()) {
-                            //   await _bloc.postAnEventCubit(
-                            //       context: context, mounted: mounted);
-                            // }
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            if (_eventFormKey.currentState!.validate()) {
+                              await _bloc.setVendorAndAvailableAttractionList(
+                                  vendorList: vendorList,
+                                  availableAttraction:
+                                      availableAttractionsList);
+                              await getCards();
+                            }
                           }
                         },
                         color: AppColors.primaryColor,

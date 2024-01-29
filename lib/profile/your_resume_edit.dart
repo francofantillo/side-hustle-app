@@ -327,20 +327,6 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     // ],
                     hintText: AppStrings.hobbiesHint,
                     isSuffixIcon: true,
-                    // suffixIcon: IconButton(
-                    //   onPressed: () {
-                    //     if (_textEditingControllerHobbies.text.isNotEmpty) {
-                    //       itemsList.add(_textEditingControllerHobbies.text);
-                    //       _textEditingControllerHobbies.clear();
-                    //       setState(() {});
-                    //     }
-                    //   },
-                    //   icon: Icon(
-                    //     Icons.add,
-                    //     color: AppColors.primaryColor,
-                    //     size: 18,
-                    //   ),
-                    // ),
                     suffixIcon: InkWell(
                       onTap: () {
                         if (_textEditingControllerHobbies.text.isNotEmpty) {

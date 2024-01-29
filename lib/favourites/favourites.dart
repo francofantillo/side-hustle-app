@@ -37,11 +37,11 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   void initState() {
     _bloc = BlocProvider.of(context);
     isProductSelected = true;
-    getEventsFav();
+    getFavourites();
     super.initState();
   }
 
-  getEventsFav() async {
+  getFavourites() async {
     if (_tabIndexBasicToggle.value == 0) {
       print("called API at index: ${_tabIndexBasicToggle.value}");
       await _bloc.getFavouritesCubit(
@@ -127,7 +127,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                   onToggle: (index) {
                     _tabIndexBasicToggle.value = index ?? 0;
                     print('switched to: ${_tabIndexBasicToggle.value}');
-                    getEventsFav();
+                    getFavourites();
                     setState(() {});
                   },
                 ),

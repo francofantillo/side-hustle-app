@@ -31,6 +31,9 @@ class API {
   static const String GET_EVENT_DETAILS = "${BASE_URL}/event-detail";
   static const String GET_INTERESTED_EVENT = "${BASE_URL}/interested-in-event";
   static const String POST_EVENT = "${BASE_URL}/add-event";
+  static const String GET_MY_EVENTS = "${BASE_URL}/my-events";
+  static const String GET_ATTENDEES = "${BASE_URL}/attendees";
+  static const String UPDATE_ATTENDEES_STATUS = "${BASE_URL}/update-attendees-status";
 
   /// Favourites
   static const String GET_FAVOURITES = "${BASE_URL}/view-favourite";
