@@ -48,6 +48,7 @@ class _MyEventsScheduledListState extends State<MyEventsScheduledList> {
                                 arguments: ViewEventSelf(
                                   id: state
                                       .myEventsModel?.events?[index].eventId,
+                                  index: index,
                                 ));
                           },
                           imageWidth: 1.sw,

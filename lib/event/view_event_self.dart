@@ -26,8 +26,11 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ViewEventSelf extends StatefulWidget {
   final int? id;
+  final int index;
+  final bool showEdit;
 
-  const ViewEventSelf({super.key, this.id});
+  const ViewEventSelf(
+      {super.key, this.id, this.index = 0, this.showEdit = true});
 
   @override
   State<ViewEventSelf> createState() => _ViewEventSelfState();
@@ -38,6 +41,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
 
   @override
   void initState() {
+    print("ViewEventSelf id: ${widget.id}");
     _bloc = BlocProvider.of<EventsCubit>(context);
     getEvent(id: widget.id);
     super.initState();
@@ -45,7 +49,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
 
   getEvent({required int? id}) async {
     await _bloc.getEventDetailsCubit(
-        context: context, mounted: mounted, id: id);
+        context: context, mounted: mounted, id: id, index: widget.index);
   }
 
   @override
@@ -58,37 +62,40 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Container(
-            width: 0.09.sw, // Adjust as needed
-            height: 0.09.sw, // Adjust as needed
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.backIconBackgroundColor,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  size: 0.05.sw,
-                  color: AppColors.primaryColor,
+      actions: widget.showEdit
+          ? [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  width: 0.09.sw, // Adjust as needed
+                  height: 0.09.sw, // Adjust as needed
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.backIconBackgroundColor,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        size: 0.05.sw,
+                        color: AppColors.primaryColor,
+                      ),
+                      onPressed: () {
+                        print("clicked");
+                        Navigator.pushNamed(
+                            context, AppRoutes.postEventScreenRoute,
+                            arguments: PostEvent(
+                              isEdit: true,
+                              id: widget.id,
+                            ));
+                      },
+                    ),
+                  ),
                 ),
-                onPressed: () {
-                  print("clicked");
-                  Navigator.pushReplacementNamed(
-                      context, AppRoutes.postEventScreenRoute,
-                      arguments: const PostEvent(
-                        isEdit: true,
-                      ));
-                },
-              ),
-            ),
-          ),
-        )
-      ],
+              )
+            ]
+          : null,
       body: BlocBuilder<EventsCubit, EventsState>(builder: (context, state) {
         return state.eventsDetailLoading
             ? const SizedBox.shrink()
@@ -233,7 +240,7 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                                   child: textWidget(
                                       // text: AppStrings.eventTimeText,
                                       text:
-                                          "Start at ${DateTimeConversions.convertToLocal12HourFormat(state.eventsDetailModel?.eventDetails?.startTime)} to ${DateTimeConversions.convertToLocal12HourFormat(state.eventsDetailModel?.eventDetails?.endTime)}",
+                                          "Start at ${DateTimeConversions.convertTo12HourFormat(state.eventsDetailModel?.eventDetails?.startTime)} to ${DateTimeConversions.convertTo12HourFormat(state.eventsDetailModel?.eventDetails?.endTime)}",
                                       fontSize: AppDimensions
                                           .textLocationSizeViewForms),
                                 ),
@@ -344,52 +351,69 @@ class _ViewEventSelfState extends State<ViewEventSelf> {
                                     .textSubHeadingTextSizeViewForms),
                           ),
                           // height(0.02.sw),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4),
-                            child: textWidget(
-                                text: AppStrings.vendorsList,
-                                fontFamily: AppFont.gilroyBold,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.textBlackColor,
-                                fontSize: AppDimensions.textSizeNormal),
-                          ),
+                          state.eventsDetailModel?.eventDetails?.vendorsList !=
+                                  null
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 4),
+                                  child: textWidget(
+                                      text: AppStrings.vendorsList,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.textBlackColor,
+                                      fontSize: AppDimensions.textSizeNormal),
+                                )
+                              : const SizedBox.shrink(),
                           // height(0.01.sw),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4),
-                            child: BulletPointList(
-                              itemsList: state
-                                  .eventsDetailModel?.eventDetails?.vendorsList,
-                              color: AppColors.textBlackColor,
-                              fontSize:
-                                  AppDimensions.textSubHeadingTextSizeViewForms,
-                            ),
-                          ),
+                          state.eventsDetailModel?.eventDetails?.vendorsList !=
+                                  null
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 4),
+                                  child: BulletPointList(
+                                    itemsList: state.eventsDetailModel
+                                        ?.eventDetails?.vendorsList,
+                                    color: AppColors.textBlackColor,
+                                    fontSize: AppDimensions
+                                        .textSubHeadingTextSizeViewForms,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
                           // height(0.02.sw),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4),
-                            child: textWidget(
-                                text: AppStrings.eventAvailableAttractions,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: AppFont.gilroyBold,
-                                color: AppColors.textBlackColor,
-                                fontSize:
-                                    AppDimensions.textSubHeadingSizeViewForms),
-                          ),
+                          state.eventsDetailModel?.eventDetails
+                                      ?.availableAttractions !=
+                                  null
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 4),
+                                  child: textWidget(
+                                      text:
+                                          AppStrings.eventAvailableAttractions,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: AppFont.gilroyBold,
+                                      color: AppColors.textBlackColor,
+                                      fontSize: AppDimensions
+                                          .textSubHeadingSizeViewForms),
+                                )
+                              : const SizedBox.shrink(),
                           // height(0.01.sw),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 4),
-                            child: BulletPointList(
-                              availableAttractions: state.eventsDetailModel
-                                  ?.eventDetails?.availableAttractions,
-                              color: AppColors.textBlackColor,
-                              fontSize:
-                                  AppDimensions.textSubHeadingTextSizeViewForms,
-                            ),
-                          ),
+                          state.eventsDetailModel?.eventDetails
+                                      ?.availableAttractions !=
+                                  null
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 4),
+                                  child: BulletPointList(
+                                    availableAttractions: state
+                                        .eventsDetailModel
+                                        ?.eventDetails
+                                        ?.availableAttractions,
+                                    color: AppColors.textBlackColor,
+                                    fontSize: AppDimensions
+                                        .textSubHeadingTextSizeViewForms,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
                           // height(0.02.sw),
                           Padding(
                             padding: const EdgeInsets.symmetric(

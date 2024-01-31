@@ -51,10 +51,10 @@ Future<Response?> postAnEventProvider(
     String? endTime,
     String? purpose,
     String? theme,
-    String? vendorsListString,
+    String vendorsListString = "",
     String? price,
     String? paymentType,
-    String? availableAttractionsString,
+    String availableAttractionsString = "",
     String? planId,
     String? apiToken}) async {
   late FormData formData;
@@ -72,7 +72,7 @@ Future<Response?> postAnEventProvider(
     print(
         "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
 
-    formData = FormData.fromMap({
+    final Map<String, dynamic> data = {
       "name": name,
       "images[]": imageList,
       "location": location,
@@ -83,14 +83,22 @@ Future<Response?> postAnEventProvider(
       "end_time": endTime,
       "purpose": purpose,
       "theme": theme,
-      "vendors_list": vendorsListString,
       "price": price,
       "payment_type": paymentType,
-      "available_attractions": availableAttractionsString,
       "plan_id": planId
-    });
+    };
+
+    if (vendorsListString.trim() != "") {
+      data.putIfAbsent("vendors_list", () => vendorsListString);
+    }
+    if (availableAttractionsString.trim() != "") {
+      data.putIfAbsent(
+          "available_attractions", () => availableAttractionsString);
+    }
+
+    formData = FormData.fromMap(data);
   } else {
-    formData = FormData.fromMap({
+    final Map<String, dynamic> data = {
       "name": name,
       "location": location,
       "lat": lat,
@@ -100,18 +108,123 @@ Future<Response?> postAnEventProvider(
       "end_time": endTime,
       "purpose": purpose,
       "theme": theme,
-      "vendors_list": vendorsListString,
       "price": price,
       "payment_type": paymentType,
-      "available_attractions": availableAttractionsString,
       "plan_id": planId
-    });
+    };
+
+    if (vendorsListString.trim() != "") {
+      data.putIfAbsent("vendors_list", () => vendorsListString);
+    }
+    if (availableAttractionsString.trim() != "") {
+      data.putIfAbsent(
+          "available_attractions", () => availableAttractionsString);
+    }
+
+    formData = FormData.fromMap(data);
   }
 
   print(
       "*****************\nurl: ${API.POST_EVENT}\n${formData.fields}\n**************************");
   final response = await postRequestProvider(
       path: API.POST_EVENT, data: formData, token: apiToken);
+  return response;
+}
+
+/// Edit an Event
+Future<Response?> editAnEventProvider(
+    {int? eventId,
+    String? name,
+    List<File>? images,
+    String? location,
+    String? lat,
+    String? lng,
+    String? date,
+    String? startTime,
+    String? endTime,
+    String? purpose,
+    String? theme,
+    String vendorsListString = "",
+    String? price,
+    String? paymentType,
+    String availableAttractionsString = "",
+    String? planId,
+    String? apiToken}) async {
+  late FormData formData;
+
+  print("images $images");
+
+  if (images != null && images.isNotEmpty) {
+    final List<MultipartFile> imageList = [];
+    for (int i = 0; i < images.length; i++) {
+      final imageNetwork = await MultipartFile.fromFile(images[i].path,
+          filename: getImagePath.basename(images[i].path));
+      imageList.add(imageNetwork);
+      print("Images Multipart $i: ${imageList[i]}\npath: ${images[i].path}");
+    }
+    print(
+        "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
+
+    final Map<String, dynamic> data = {
+      "event_id": eventId,
+      "name": name,
+      "images[]": imageList,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "date": date,
+      "start_time": startTime,
+      "end_time": endTime,
+      "purpose": purpose,
+      "theme": theme,
+      "price": price,
+      "payment_type": paymentType,
+      "plan_id": planId
+    };
+
+    if (vendorsListString.trim() != "") {
+      data.putIfAbsent("vendors_list", () => vendorsListString);
+    }
+    if (availableAttractionsString.trim() != "") {
+      data.putIfAbsent(
+          "available_attractions", () => availableAttractionsString);
+    }
+
+    formData = FormData.fromMap(data);
+  } else {
+    final Map<String, dynamic> data = {
+      "event_id": eventId,
+      "name": name,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "date": date,
+      "start_time": startTime,
+      "end_time": endTime,
+      "purpose": purpose,
+      "theme": theme,
+      "price": price,
+      "payment_type": paymentType,
+      "plan_id": planId
+    };
+
+    // if (vendorsListString.isNotEmpty) {
+    if (vendorsListString.trim() != "") {
+      data.putIfAbsent("vendors_list", () => vendorsListString);
+    }
+    // if (availableAttractionsString.isNotEmpty) {
+    if (availableAttractionsString.trim() != "") {
+      data.putIfAbsent(
+          "available_attractions", () => availableAttractionsString);
+    }
+
+    formData = FormData.fromMap(data);
+  }
+
+  print(
+      "*****************\nurl: ${API.EDIT_EVENT}\n${formData.fields}\n**************************");
+  final response = await postRequestProvider(
+      path: API.EDIT_EVENT, data: formData, token: apiToken);
   return response;
 }
 
@@ -151,5 +264,16 @@ Future<Response?> updateAttendeesProvider(
       "*****************\nurl: ${API.UPDATE_ATTENDEES_STATUS}\n$data\n**************************");
   final response = await putRequestProvider(
       path: API.UPDATE_ATTENDEES_STATUS, data: data, token: apiToken);
+  return response;
+}
+
+/// Get Edit Event
+Future<Response?> getEditEventProvider({int? id, String? apiToken}) async {
+  final data = {"id": id};
+
+  print(
+      "*****************\nurl: ${API.GET_EDIT_EVENT}\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_EDIT_EVENT, queryParameter: data, token: apiToken);
   return response;
 }

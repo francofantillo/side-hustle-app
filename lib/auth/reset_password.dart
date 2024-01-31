@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
@@ -6,6 +7,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -88,7 +90,11 @@ class _ResetPasswordState extends State<ResetPassword> {
                     isShowShadow: true,
                     isShowBoarder: false,
                     label: AppStrings.newPassword,
-                    isPasswordField: true),
+                    isPasswordField: true,
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.passwordFieldCharacterLength),
+                  ],
+                ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
                     controller: _bloc.confirmPasswordControllerSignup,
@@ -98,7 +104,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                     isShowShadow: true,
                     isShowBoarder: false,
                     label: AppStrings.confirmPassword,
-                    isPasswordField: true),
+                    isPasswordField: true,
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.passwordFieldCharacterLength),
+                  ],),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 BulletedListItem(
                   text: AppStrings.atLeast12,

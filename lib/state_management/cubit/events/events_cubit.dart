@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/state_management/models/attendees_model.dart';
+import 'package:side_hustle/state_management/models/edit_event_model.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/providers/events/events_provider.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
@@ -70,6 +72,11 @@ class EventsCubit extends Cubit<EventsState> {
         await ImagePickerService.selectMultipleImagesFromGallery();
     if (images != null && images.isNotEmpty) {
       emit(state.copyWith(itemImagesFile: images));
+      // if(images.length > 4) {
+      //   AppUtils.showToast(AppStrings.errorMessageMultiImagesSelectedLimit);
+      // } else {
+      //   emit(state.copyWith(itemImagesFile: images));
+      // }
     }
   }
 
@@ -88,7 +95,11 @@ class EventsCubit extends Cubit<EventsState> {
     required bool mounted,
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
-    emit(state.copyWith(eventsLoading: true, eventsModel: EventsModel()));
+    emit(state.copyWith(
+        eventsLoading: true,
+        eventsTempList: [],
+        searching: false,
+        eventsModel: EventsModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -121,15 +132,49 @@ class EventsCubit extends Cubit<EventsState> {
     }
   }
 
+  /// Search Events
+  searchEvents({
+    String? value,
+  }) {
+    emit(state.copyWith(eventsTempList: [], searching: true));
+    final List<EventsData>? originalList = state.eventsModel?.events;
+    final List<EventsData> tempList = [];
+    print("searchList: $value");
+    state.eventsTempList?.clear();
+    if (value != null) {
+      emit(state.copyWith(searching: true));
+      for (int i = 0; i < (originalList?.length ?? 0); i++) {
+        String name =
+            originalList?[i].name != null ? "${originalList![i].name}" : '';
+        if (name.toLowerCase().contains(value.toLowerCase())) {
+          tempList.add(originalList![i]);
+        }
+      }
+      if (tempList.isNotEmpty) {
+        print("searchList tempList: ${tempList[0].name}");
+        final tempSearchEventList = tempList;
+        emit(state.copyWith(eventsTempList: tempSearchEventList));
+      } else if (value.isEmpty) {
+        print("searchList tempList is empty");
+        emit(state.copyWith(eventsTempList: originalList));
+      } else {
+        emit(state.copyWith(eventsTempList: []));
+      }
+    }
+  }
+
   /// Get Event Details
   Future getEventDetailsCubit({
     required BuildContext context,
     required bool mounted,
     required int? id,
+    int index = 0,
   }) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     emit(state.copyWith(
-        eventsDetailLoading: true, eventsDetailModel: EventsModel()));
+        eventsDetailLoading: true,
+        eventsDetailModel: EventsModel(),
+        myEventsIndex: index));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -224,13 +269,13 @@ class EventsCubit extends Cubit<EventsState> {
         if ((state.vendorList!.length - 1) == i) {
           vendorListString = "${state.vendorList![i]}";
         } else {
-          vendorListString = "${state.vendorList![i]}, ";
+          vendorListString = "${state.vendorList![i]},";
         }
       } else {
         if ((state.vendorList!.length - 1) == i) {
           vendorListString += "${state.vendorList![i]}";
         } else {
-          vendorListString += "${state.vendorList![i]}, ";
+          vendorListString += "${state.vendorList![i]},";
         }
       }
     }
@@ -249,7 +294,7 @@ class EventsCubit extends Cubit<EventsState> {
               "${state.availableAttractionsList![i]}";
         } else {
           availableAttractionListString =
-              "${state.availableAttractionsList![i]}, ";
+              "${state.availableAttractionsList![i]},";
         }
       } else {
         if ((state.availableAttractionsList!.length - 1) == i) {
@@ -257,7 +302,7 @@ class EventsCubit extends Cubit<EventsState> {
               "${state.availableAttractionsList![i]}";
         } else {
           availableAttractionListString +=
-              "${state.availableAttractionsList![i]}, ";
+              "${state.availableAttractionsList![i]},";
         }
       }
     }
@@ -276,10 +321,10 @@ class EventsCubit extends Cubit<EventsState> {
       lng: lng,
       images: state.itemImagesFile,
       date: dateTextController.text,
-      startTime: DateTimeConversions.convertTo24HourFormatUTC(
+      startTime: DateTimeConversions.convertTo24HourFormat(
           startTimeTextController.text),
-      endTime: DateTimeConversions.convertTo24HourFormatUTC(
-          endTimeTextController.text),
+      endTime:
+          DateTimeConversions.convertTo24HourFormat(endTimeTextController.text),
       purpose: eventPurposeTextController.text,
       theme: eventThemeTextController.text,
       // vendorsListString: eventVendorTextController.text,
@@ -299,13 +344,152 @@ class EventsCubit extends Cubit<EventsState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         EventsModel eventsModel = EventsModel.fromJson(response.data);
-
         AppUtils.showToast(response.data["message"]);
         emit(state.copyWith(eventsDetailModel: eventsModel));
         if (mounted) {
           Navigator.pop(context);
         }
-        return 1;
+        print("id: ${response.data['data']['id']}");
+
+        return response.data['data']['id'] ?? 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
+    }
+  }
+
+  /// Edit an Event
+  Future<int> editAnEventCubit(
+      {required BuildContext context,
+      required int planId,
+      required bool mounted}) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
+
+    String? lat;
+    String? lng;
+    if (selectLocationModel != null) {
+      lat = selectLocationModel?.lat?.toString();
+      lng = selectLocationModel?.lng?.toString();
+    } else {
+      lat = state.editEventModel?.eventDetails?.lat;
+      lng = state.editEventModel?.eventDetails?.lng;
+    }
+    print("editEventModel lat: ${state.editEventModel?.eventDetails?.lat}");
+    print("editEventModel lng: ${state.editEventModel?.eventDetails?.lng}");
+    print("editAnEventCubit lat: $lat");
+    print("lng: $lng");
+    final token = await prefs.getToken();
+
+    late String vendorListString;
+
+    for (int i = 0; i < (state.vendorList?.length ?? 0); i++) {
+      print("Hobbies Length: ${state.vendorList?.length}");
+      if (i == 0) {
+        if ((state.vendorList!.length - 1) == i) {
+          vendorListString = "${state.vendorList![i]}";
+        } else {
+          vendorListString = "${state.vendorList![i]},";
+        }
+      } else {
+        if ((state.vendorList!.length - 1) == i) {
+          vendorListString += "${state.vendorList![i]}";
+        } else {
+          vendorListString += "${state.vendorList![i]},";
+        }
+      }
+    }
+
+    if ((state.vendorList?.length ?? 0) == 0) {
+      vendorListString = "";
+    }
+
+    late String availableAttractionListString;
+
+    for (int i = 0; i < (state.availableAttractionsList?.length ?? 0); i++) {
+      print("Hobbies Length: ${state.availableAttractionsList?.length}");
+      if (i == 0) {
+        if ((state.availableAttractionsList!.length - 1) == i) {
+          availableAttractionListString =
+              "${state.availableAttractionsList![i]}";
+        } else {
+          availableAttractionListString =
+              "${state.availableAttractionsList![i]},";
+        }
+      } else {
+        if ((state.availableAttractionsList!.length - 1) == i) {
+          availableAttractionListString +=
+              "${state.availableAttractionsList![i]}";
+        } else {
+          availableAttractionListString +=
+              "${state.availableAttractionsList![i]},";
+        }
+      }
+    }
+
+    if ((state.availableAttractionsList?.length ?? 0) == 0) {
+      availableAttractionListString = "";
+    }
+
+    final response = await editAnEventProvider(
+      apiToken: token,
+      eventId: state.editEventModel?.eventDetails?.eventId,
+      name: eventNameTextController.text,
+      location: eventLocationTextController.text,
+      // lat: "24.87804237639414",
+      // lng: "67.06849843858433",
+      lat: lat,
+      lng: lng,
+      images: state.itemImagesFile,
+      date: dateTextController.text,
+      startTime: DateTimeConversions.convertTo24HourFormat(
+          startTimeTextController.text),
+      endTime:
+          DateTimeConversions.convertTo24HourFormat(endTimeTextController.text),
+      purpose: eventPurposeTextController.text,
+      theme: eventThemeTextController.text,
+      // vendorsListString: eventVendorTextController.text,
+      vendorsListString: vendorListString,
+      price: eventPriceTextController.text,
+      paymentType: "card",
+      // availableAttractionsString: eventAvailableTextController.text,
+      availableAttractionsString: availableAttractionListString,
+      // planId: "1",
+      planId: planId.toString(),
+    );
+
+    EasyLoading.dismiss();
+    emit(state.copyWith(eventsDetailLoading: false));
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        EventsModel eventsModel = EventsModel.fromJson(response.data);
+        AppUtils.showToast(response.data["message"]);
+        final myEvent = state.myEventsModel?.events?[state.myEventsIndex];
+        myEvent?.name = eventsModel.eventDetails?.eventName;
+        myEvent?.location = eventsModel.eventDetails?.location;
+        myEvent?.price = eventsModel.eventDetails?.price;
+        myEvent?.image = (eventsModel.eventDetails?.images?.length == null ||
+                eventsModel.eventDetails!.images!.isEmpty)
+            ? null
+            : eventsModel.eventDetails?.images?[0].image;
+
+        final events = state.myEventsModel;
+        events?.events?[state.myEventsIndex] = myEvent!;
+
+        emit(state.copyWith(
+            eventsDetailModel: eventsModel, myEventsModel: events));
+        print("id: ${response.data['data']['id']}");
+
+        return response.data['data']['id'] ?? 1;
       }
 
       /// Failed
@@ -426,6 +610,46 @@ class EventsCubit extends Cubit<EventsState> {
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get Edit Event
+  Future<EventsModel?> getEditEventCubit({
+    required BuildContext context,
+    required bool mounted,
+    required int? id,
+  }) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    emit(state.copyWith(editEventModel: EventsModel(), editEventLoading: true));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    final response = await getEditEventProvider(id: id, apiToken: token);
+
+    EasyLoading.dismiss();
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        EventsModel eventsModel = EventsModel.fromJson(response.data);
+        emit(state.copyWith(
+            editEventModel: eventsModel, editEventLoading: false));
+        print("editEventModel lat: ${state.editEventModel?.eventDetails?.lat}");
+        print("editEventModel lng: ${state.editEventModel?.eventDetails?.lng}");
+        return eventsModel;
+      }
+
+      /// Failed
+      else {
+        emit(state.copyWith(editEventLoading: false));
+        AppUtils.showToast(response.data["message"]);
+        return null;
+      }
+    } else {
+      emit(state.copyWith(editEventLoading: false));
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      return null;
     }
   }
 }

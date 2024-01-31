@@ -77,10 +77,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                             children: [
                               textWidget(
                                   // text: price,
-                                  text: price !=
-                                      null
-                                      ? "\$$price"
-                                      : "",
+                                  text: price != null ? "\$$price" : "",
                                   fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
@@ -95,7 +92,7 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .02),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 3.0),

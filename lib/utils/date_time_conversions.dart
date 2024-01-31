@@ -11,6 +11,25 @@ class DateTimeConversions {
     return time12;
   }
 
+  static String convertTo12HourFormat(String? time12) {
+    // final inputFormat = DateFormat('HH:mm:ss');
+    final inputFormat = DateFormat('HH:mm');
+    final outputFormat = DateFormat('hh:mm a');
+
+    if(time12 == null) {
+      return "";
+    }
+
+    final dateTime = inputFormat.parse(time12);
+    final time24 = outputFormat.format(dateTime);
+    print("convertTo12HoursTime: $time24");
+
+    return time24;
+  }
+
+  /*
+  Not Needed Yet
+   */
   static String? convertTo24HourFormatUTC(String? time12) {
     // 1970-01-01T01:02:00.000Z
     final inputFormat = DateFormat('yyyy-MM-ddTHH:mm:ss');

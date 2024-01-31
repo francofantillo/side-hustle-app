@@ -7,6 +7,7 @@ class Constants {
 
   /// Characters Length
   static const int singleFieldCharacterLength = 70;
+  static const int tagsFieldCharacterLength = 20;
   static const int firstNameFieldCharacterLength = 35;
   static const int emailFieldCharacterLength = 320;
   static const int passwordFieldCharacterLength = 320;

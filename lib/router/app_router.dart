@@ -133,6 +133,7 @@ class AppRouter {
           case AppRoutes.postEventScreenRoute:
             final args = routeSettings.arguments as PostEvent?;
             return PostEvent(
+              id: args?.id,
               isEdit: args?.isEdit ?? false,
             );
 
@@ -144,7 +145,11 @@ class AppRouter {
 
           case AppRoutes.viewEventSelfScreenRoute:
             final args = routeSettings.arguments as ViewEventSelf?;
-            return ViewEventSelf(id: args?.id);
+            return ViewEventSelf(
+              id: args?.id,
+              index: args?.index ?? 0,
+              showEdit: args?.showEdit ?? true,
+            );
 
           case AppRoutes.attendeesEventScreenRoute:
             final args = routeSettings.arguments as AttendeesEvent?;
@@ -259,6 +264,7 @@ class AppRouter {
             final args = routeSettings.arguments as PostAdded?;
             return PostAdded(
                 buttonName: args?.buttonName,
+                id: args?.id,
                 title: args?.title,
                 subTitle: args?.subTitle,
                 isEvent: args?.isEvent ?? false,

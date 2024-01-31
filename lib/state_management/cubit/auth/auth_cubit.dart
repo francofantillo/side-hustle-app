@@ -635,6 +635,34 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  /// Delete Pdf File
+  Future<int> deleteResumeCubit() async {
+    EasyLoading.show();
+
+    final response =
+        await deleteResume(apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      // EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        return 1;
+      }
+
+      /// Failed
+      else {
+        EasyLoading.dismiss();
+        AppUtils.showToast(response.data["message"]);
+        return 0;
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
+    }
+  }
+
   /// Get Resume
   Future getResumeCubit({
     required BuildContext context,

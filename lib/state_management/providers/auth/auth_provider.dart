@@ -167,15 +167,19 @@ Future<Response?> updateResumeProvider({
       if ((hobbies!.length - 1) == i) {
         hobbiesString = "${hobbies[i]}";
       } else {
-        hobbiesString = "${hobbies[i]}, ";
+        hobbiesString = "${hobbies[i]},";
       }
     } else {
       if ((hobbies!.length - 1) == i) {
         hobbiesString += "${hobbies[i]}";
       } else {
-        hobbiesString += "${hobbies[i]}, ";
+        hobbiesString += "${hobbies[i]},";
       }
     }
+  }
+
+  if ((hobbies?.length ?? 0) == 0) {
+    hobbiesString = "";
   }
 
   final Map<String, dynamic> data = {
@@ -188,7 +192,7 @@ Future<Response?> updateResumeProvider({
     "description": description,
   };
 
-  if (hobbies != null) {
+  if (hobbiesString.trim() != "") {
     data.putIfAbsent("hobbies", () => hobbiesString);
   }
 
@@ -213,6 +217,15 @@ Future<Response?> updateResumeProvider({
 
   final response = await postRequestProvider(
       path: API.UPDATE_RESUME, data: formData, token: apiToken);
+  return response;
+}
+
+/// Delete Resume
+Future<Response?> deleteResume({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.DELETE_PDF}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.DELETE_PDF, token: apiToken);
   return response;
 }
 

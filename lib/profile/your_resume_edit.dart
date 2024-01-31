@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path/path.dart' as path;
@@ -10,6 +11,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/utils/service/file_picker_service.dart';
 import 'package:side_hustle/utils/service/image_picker_service.dart';
@@ -58,6 +60,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
     _bloc = BlocProvider.of(context);
     itemsList = widget.itemsList ?? [];
     fileName = widget.pdfFileName;
+    print("pdfFilePath: ${widget.pdfFilePath}");
     _bloc.initResumeControllers();
     _bloc.setResumeController();
     super.initState();
@@ -78,15 +81,27 @@ class _YourResumeEditState extends State<YourResumeEdit> {
           padding: const EdgeInsets.only(right: 12.0, top: 8),
           child: CircularIconButton(
             onPressed: () async {
-              // Navigator.pop(context);
               FocusManager.instance.primaryFocus?.unfocus();
               if (_resumeKey.currentState!.validate()) {
-                await _bloc.updateResumeCubit(
-                    context: context,
-                    mounted: mounted,
-                    itemsList: itemsList,
-                    pdfFile: _pdfFilePath,
-                    profileImage: _imagePath);
+                if (fileName == null && widget.pdfFilePath != null) {
+                  await _bloc.deleteResumeCubit().then((value) async {
+                    if (value == 1) {
+                      await _bloc.updateResumeCubit(
+                          context: context,
+                          mounted: mounted,
+                          itemsList: itemsList,
+                          pdfFile: _pdfFilePath,
+                          profileImage: _imagePath);
+                    }
+                  });
+                } else {
+                  await _bloc.updateResumeCubit(
+                      context: context,
+                      mounted: mounted,
+                      itemsList: itemsList,
+                      pdfFile: _pdfFilePath,
+                      profileImage: _imagePath);
+                }
               }
             },
             width: 0.10.sw,
@@ -158,7 +173,12 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                         children: [
                           textWidget(
                               // text: AppStrings.uploadResume,
-                              text: fileName ?? AppStrings.uploadResume,
+                              text: fileName != null
+                                  ? fileName!.length <=
+                                          AppStrings.uploadResume.length
+                                      ? fileName
+                                      : "${fileName!.substring(0, AppStrings.uploadResume.length)}.."
+                                  : AppStrings.uploadResume,
                               color: AppColors.whiteColor,
                               fontFamily: AppFont.gilroyBold,
                               fontSize: AppDimensions.textSizeVerySmall),
@@ -186,6 +206,7 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                                   }
                                 } else {
                                   setState(() {
+                                    _pdfFilePath = null;
                                     fileName = null;
                                   });
                                 }
@@ -223,6 +244,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     height: 45.h,
                     hintText: AppStrings.actualNameHint,
                     // fillColor: AppColors.productTextFieldColor,
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.singleFieldCharacterLength)
+                    ],
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing),
@@ -243,6 +268,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     controller: _bloc.nickNameController,
                     height: 45.w,
                     hintText: AppStrings.callSignOrNicknameHint,
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.singleFieldCharacterLength)
+                    ],
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing),
@@ -263,6 +292,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     controller: _bloc.familyTiesController,
                     height: 45.h,
                     hintText: AppStrings.familyTiesHint,
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.singleFieldCharacterLength)
+                    ],
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing),
@@ -283,6 +316,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     controller: _bloc.professionalBackgroundController,
                     height: 45.h,
                     hintText: AppStrings.professionalBackgroundHint,
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.singleFieldCharacterLength)
+                    ],
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing),
@@ -303,6 +340,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     controller: _bloc.professionController,
                     height: 45.h,
                     hintText: AppStrings.professionHint,
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.singleFieldCharacterLength)
+                    ],
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing),
@@ -322,15 +363,20 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                   child: CustomTextFormField(
                     controller: _textEditingControllerHobbies,
                     height: 45.h,
-                    // inputFormatter: [
-                    //   LengthLimitingTextInputFormatter(40),
-                    // ],
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.tagsFieldCharacterLength)
+                    ],
                     hintText: AppStrings.hobbiesHint,
                     isSuffixIcon: true,
                     suffixIcon: InkWell(
                       onTap: () {
-                        if (_textEditingControllerHobbies.text.isNotEmpty) {
-                          itemsList.add(_textEditingControllerHobbies.text);
+                        if (_textEditingControllerHobbies.text.isNotEmpty &&
+                            _textEditingControllerHobbies.text.trim() != "") {
+                          final textLef =
+                              _textEditingControllerHobbies.text.trimLeft();
+                          final text = textLef.trimRight();
+                          itemsList.add(text);
                           _textEditingControllerHobbies.clear();
                           setState(() {});
                         }
@@ -414,6 +460,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     controller: _bloc.favouriteQuoteController,
                     height: 45.h,
                     hintText: AppStrings.favoriteQuoteHint,
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.singleFieldCharacterLength)
+                    ],
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing),
@@ -434,6 +484,10 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                     controller: _bloc.descriptionController,
                     height: 45.h,
                     hintText: AppStrings.whatDoYouHint,
+                    inputFormatter: [
+                      LengthLimitingTextInputFormatter(
+                          Constants.descriptionFieldCharacterLength)
+                    ],
                   ),
                 ),
                 height(AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
@@ -446,12 +500,25 @@ class _YourResumeEditState extends State<YourResumeEdit> {
                       onPressed: () async {
                         FocusManager.instance.primaryFocus?.unfocus();
                         if (_resumeKey.currentState!.validate()) {
-                          await _bloc.updateResumeCubit(
-                              context: context,
-                              mounted: mounted,
-                              itemsList: itemsList,
-                              pdfFile: _pdfFilePath,
-                              profileImage: _imagePath);
+                          if (fileName == null && widget.pdfFilePath != null) {
+                            await _bloc.deleteResumeCubit().then((value) async {
+                              if (value == 1) {
+                                await _bloc.updateResumeCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    itemsList: itemsList,
+                                    pdfFile: _pdfFilePath,
+                                    profileImage: _imagePath);
+                              }
+                            });
+                          } else {
+                            await _bloc.updateResumeCubit(
+                                context: context,
+                                mounted: mounted,
+                                itemsList: itemsList,
+                                pdfFile: _pdfFilePath,
+                                profileImage: _imagePath);
+                          }
                         }
                       },
                       color: AppColors.primaryColor,

@@ -107,6 +107,7 @@ class _YourResumeState extends State<YourResume> {
       ],
       body: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
         print("Profile Image: ${state.resumeModel?.data?.profileImage}");
+        print("actual Name Length: ${state.resumeModel?.data?.actualName?.length}");
         return state.getResumeLoading
             ? const SizedBox.shrink()
             : SingleChildScrollView(
@@ -132,30 +133,32 @@ class _YourResumeState extends State<YourResume> {
                             borderWidth: .005.sw,
                           ),
                           width(0.02.sw),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              textWidget(
-                                  // text: AppStrings.davidHan,
-                                  text: state.resumeModel?.data?.actualName,
-                                  maxLines: 1,
-                                  color: AppColors.textBlackColor,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: AppDimensions.textHeadingSize,
-                                  fontWeight: FontWeight.bold),
-                              height(0.001.sw),
-                              textWidget(
-                                  // text: AppStrings.nickname,
-                                  text: state.resumeModel?.data?.nickName,
-                                  maxLines: 1,
-                                  fontSize: AppDimensions.textSizeSmall),
-                              height(0.01.sw),
-                              textWidget(
-                                  // text: AppStrings.profession,
-                                  text: state.resumeModel?.data?.profession,
-                                  maxLines: 1,
-                                  fontSize: AppDimensions.textSizeSmall),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                textWidget(
+                                    // text: AppStrings.davidHan,
+                                    text: state.resumeModel?.data?.actualName,
+                                    maxLines: 1,
+                                    color: AppColors.textBlackColor,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontSize: AppDimensions.textHeadingSize,
+                                    fontWeight: FontWeight.bold),
+                                height(0.001.sw),
+                                textWidget(
+                                    // text: AppStrings.nickname,
+                                    text: state.resumeModel?.data?.nickName,
+                                    maxLines: 1,
+                                    fontSize: AppDimensions.textSizeSmall),
+                                height(0.01.sw),
+                                textWidget(
+                                    // text: AppStrings.profession,
+                                    text: state.resumeModel?.data?.profession,
+                                    maxLines: 1,
+                                    fontSize: AppDimensions.textSizeSmall),
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -225,17 +228,22 @@ class _YourResumeState extends State<YourResume> {
                             ),
                           )),
                       height(AppDimensions.formFieldsBetweenSpacing),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: textWidget(
-                            text: AppStrings.hobbies,
-                            maxLines: 1,
-                            color: AppColors.textBlackColor,
-                            fontSize: AppDimensions.textSizeSmall,
-                            fontFamily: AppFont.gilroyBold,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      height(0.02.sw),
+                      (state.resumeModel?.data?.hobbies?.length ?? 0) > 1
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: textWidget(
+                                  text: AppStrings.hobbies,
+                                  maxLines: 1,
+                                  color: AppColors.textBlackColor,
+                                  fontSize: AppDimensions.textSizeSmall,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          : const SizedBox.shrink(),
+                      (state.resumeModel?.data?.hobbies?.length ?? 0) > 1
+                          ? height(0.02.sw)
+                          : const SizedBox.shrink(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Wrap(
@@ -243,8 +251,6 @@ class _YourResumeState extends State<YourResume> {
                           runSpacing: 8.0, // gap between lines
                           direction: Axis.horizontal,
                           children: [
-                            // for (int i = 0; i < itemsList.length; i++)
-                            // for (int i = 0; i < _bloc.hobbies.length; i++)
                             for (int i = 0;
                                 i <
                                     (state.resumeModel?.data?.hobbies?.length ??
@@ -275,7 +281,9 @@ class _YourResumeState extends State<YourResume> {
                           ],
                         ),
                       ),
-                      height(AppDimensions.formFieldsBetweenSpacing),
+                      (state.resumeModel?.data?.hobbies?.length ?? 0) > 1
+                          ? height(AppDimensions.formFieldsBetweenSpacing)
+                          : const SizedBox.shrink(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: textWidget(
@@ -378,30 +386,33 @@ class _YourResumeState extends State<YourResume> {
                                           )),
                                         ),
                                         width(0.04.sw),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            textWidget(
-                                                // text: AppStrings.resumePdf,
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              textWidget(
+                                                  // text: AppStrings.resumePdf + "djfj ssdjkjdksjkdjs kdjksjdkjskd jskdjksjd ksjdkjs",
+                                                  text: state.resumeModel?.data
+                                                      ?.filename,
+                                                  fontFamily:
+                                                      AppFont.gilroyBold,
+                                                  fontSize: AppDimensions
+                                                      .textSizeSmall,
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      AppColors.textBlackColor),
+                                              height(0.002.sh),
+                                              textWidget(
+                                                // text: AppStrings.resumePdfSize,
                                                 text: state.resumeModel?.data
-                                                    ?.filename,
+                                                    ?.fileSize,
                                                 fontFamily: AppFont.gilroyBold,
                                                 fontSize:
-                                                    AppDimensions.textSizeSmall,
-                                                fontWeight: FontWeight.bold,
-                                                color:
-                                                    AppColors.textBlackColor),
-                                            height(0.002.sh),
-                                            textWidget(
-                                              // text: AppStrings.resumePdfSize,
-                                              text: state
-                                                  .resumeModel?.data?.fileSize,
-                                              fontFamily: AppFont.gilroyBold,
-                                              fontSize:
-                                                  AppDimensions.textSize10,
-                                            ),
-                                          ],
+                                                    AppDimensions.textSize10,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                         const Spacer(),
                                         CustomMaterialButton(

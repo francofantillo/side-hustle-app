@@ -12,6 +12,11 @@ class EventsState {
   List<File>? itemImagesFile;
   List? vendorList;
   List? availableAttractionsList;
+  EventsModel? editEventModel;
+  bool editEventLoading;
+  int myEventsIndex;
+  List<EventsData>? eventsTempList;
+  bool searching;
 
   EventsState(
       {this.eventsModel,
@@ -24,7 +29,12 @@ class EventsState {
       this.attendeesModelLoading = true,
       this.itemImagesFile,
       this.vendorList,
-      this.availableAttractionsList});
+      this.availableAttractionsList,
+      this.editEventModel,
+      this.eventsTempList,
+      this.searching = false,
+      this.myEventsIndex = 0,
+      this.editEventLoading = false});
 
   EventsState copyWith(
       {EventsModel? eventsModel,
@@ -37,7 +47,12 @@ class EventsState {
       AttendeesModel? attendeesModel,
       bool? attendeesModelLoading,
       List? vendorList,
-      List? availableAttractionsList}) {
+      List? availableAttractionsList,
+      EventsModel? editEventModel,
+      bool? editEventLoading,
+      List<EventsData>? eventsTempList,
+      bool? searching,
+      int? myEventsIndex}) {
     return EventsState(
         eventsModel: eventsModel ?? this.eventsModel,
         eventsDetailModel: eventsDetailModel ?? this.eventsDetailModel,
@@ -51,6 +66,11 @@ class EventsState {
             attendeesModelLoading ?? this.attendeesModelLoading,
         vendorList: vendorList ?? this.vendorList,
         availableAttractionsList:
-            availableAttractionsList ?? this.availableAttractionsList);
+            availableAttractionsList ?? this.availableAttractionsList,
+        editEventModel: editEventModel ?? this.editEventModel,
+        editEventLoading: editEventLoading ?? this.editEventLoading,
+        myEventsIndex: myEventsIndex ?? this.myEventsIndex,
+        eventsTempList: eventsTempList ?? this.eventsTempList,
+        searching: searching ?? this.searching);
   }
 }

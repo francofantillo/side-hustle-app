@@ -160,7 +160,8 @@ class AppDimensions {
   // static double listItemHeight = 0.42.sw; // 353339563061758, 352879323061755
   static double listItemHeight = 135.w; // 353339563061758, 352879323061755
   // static double listItemFavEventsHeight = 0.4.sw;
-  static double listItemFavEventsHeight = 134.w;
+  // static double listItemFavEventsHeight = 134.w;
+  static double listItemFavEventsHeight = 138.w;
   // static double listItemFavJobHeight = 0.39.sw;
   static double listItemFavJobHeight = 134.w;
   // static double listItemFavShopsHeight = 0.39.sw;
@@ -262,18 +263,11 @@ class AppDimensions {
   static double textSizeProfileJobs = 10.sp;
 
   /// My Jobs
-  // static double listItemScheduledHeight = 0.45.sw;
-  // static double listItemEventScheduledHeight = 0.40.sw;
-  static double listItemEventScheduledHeight = 130.w;
-  // static double listItemJobScheduledHeight = 0.41.sw;
-  // static double listItemJobScheduledHeight = 135.w;
+  // static double listItemEventScheduledHeight = 130.w;
+  static double listItemEventScheduledHeight = 134.w;
   static double listItemJobScheduledHeight = 140.w;
-  // static double listItemOnGoingHeight = 0.57.sw;
-  // static double listItemOnGoingHeight = 178.w;
   static double listItemOnGoingHeight = 183.w;
-  // static double listItemCompletedJobHeight = 0.57.sw;
   static double listItemCompletedJobHeight = 187.w;
-  // static double listItemJobRequestHeight = 0.38.sw;
   static double listItemJobRequestHeight = 134.w;
 
   /// Button Border Radius

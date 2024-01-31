@@ -17,7 +17,8 @@ class EventsModel {
         });
       }
     } else {
-      eventDetails = json['data'] != null ? EventsData.fromJson(json['data']) : null;
+      eventDetails =
+          json['data'] != null ? EventsData.fromJson(json['data']) : null;
     }
   }
 
@@ -37,6 +38,8 @@ class EventsData {
   List<Images>? images;
   String? image;
   int? isFavourite;
+  String? lat;
+  String? lng;
   String? name;
   EventOwnerDetail? eventOwnerDetail;
   int? eventId;
@@ -58,6 +61,8 @@ class EventsData {
       this.isFavourite,
       this.image,
       this.name,
+      this.lat,
+      this.lng,
       this.eventOwnerDetail,
       this.eventId,
       this.eventName,
@@ -87,6 +92,8 @@ class EventsData {
     image = json['image'];
     isFavourite = json['is_favourite'];
     name = json['name'];
+    lat = json['lat'];
+    lng = json['lng'];
     eventName = json['event_name'];
     price = json['price'] != null ? json['price'].toString() : json['price'];
     location = json['location'];
@@ -119,6 +126,8 @@ class EventsData {
     data['is_favourite'] = this.isFavourite;
     data['name'] = this.name;
     data['event_name'] = this.eventName;
+    data['lat'] = this.lat;
+    data['lng'] = this.lng;
     data['price'] = this.price;
     data['location'] = this.location;
     data['start_date'] = this.startDate;

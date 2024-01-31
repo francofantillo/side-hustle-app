@@ -85,7 +85,7 @@ class _AppDrawerState extends State<AppDrawer> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               textWidget(
-                                  // text: AppStrings.userName,
+                                  // text: AppStrings.userName + "kfjkdjs kdjskdjk",
                                   text: state.userModel?.data?.name,
                                   color: const Color(0xFFFCFCFC),
                                   fontFamily: AppFont.gilroyBold,

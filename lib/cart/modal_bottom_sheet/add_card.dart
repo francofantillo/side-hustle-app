@@ -9,6 +9,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
+import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/utils/validation/regular_expressions.dart';
@@ -95,6 +96,10 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                         const EdgeInsets.only(left: 12.0, right: 12.0, top: 12),
                     child: CustomTextFormField(
                       controller: _cardNameController,
+                      inputFormatter: [
+                        LengthLimitingTextInputFormatter(
+                            Constants.firstNameFieldCharacterLength),
+                      ],
                       isShowBoarder: false,
                       height: 40.h,
                       hintText: AppStrings.nameOnCard,
@@ -117,7 +122,8 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                         height: 40.h,
                         hintText: AppStrings.cardNumber,
                         // keyboardType: TextInputType.phone,
-                        keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: false),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            signed: true, decimal: false),
                         fieldValidator: (v) => v?.validateCardNumber(v)),
                   ),
                   Padding(
@@ -237,7 +243,6 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                           fontSize: AppDimensions.textSizeSmall),
                     ),
                   ),
-
                 ],
               ),
             ),

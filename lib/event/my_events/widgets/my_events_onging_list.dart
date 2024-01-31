@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/my_events/widgets/my_events_scheduled_item.dart';
+import 'package:side_hustle/event/view_event_self.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
@@ -45,7 +46,13 @@ class _MyEventsOngoingListState extends State<MyEventsOngoingList> {
                         child: MyEventsScheduledItemsWidget(
                           onTap: () {
                             Navigator.pushNamed(
-                                context, AppRoutes.viewEventSelfScreenRoute);
+                                context, AppRoutes.viewEventSelfScreenRoute,
+                                arguments: ViewEventSelf(
+                                  id: state
+                                      .myEventsModel?.events?[index].eventId,
+                                  index: index,
+                                  // showEdit: false,
+                                ));
                           },
                           imageWidth: 1.sw,
                           imageHeight:

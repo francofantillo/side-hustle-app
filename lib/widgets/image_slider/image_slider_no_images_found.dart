@@ -7,8 +7,9 @@ import 'package:side_hustle/widgets/image_slider/camera_button.dart';
 
 class NoImagesFoundWidget extends StatelessWidget {
   final bool showCameraAttachment;
+  final Function()? onTap;
 
-  const NoImagesFoundWidget({super.key, this.showCameraAttachment = false});
+  const NoImagesFoundWidget({super.key, this.showCameraAttachment = false, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class NoImagesFoundWidget extends StatelessWidget {
                   // top: AppDimensions.productImageSliderHeight - 0.23.sw,
                   top: AppDimensions.productImageSliderHeight - 0.255.sw,
                   child: CameraButton(
-                    onTap: () {},
+                    onTap: onTap,
                     iconPath: AssetsPath.camera,
                     height: 0.12.sw,
                     width: 0.12.sw,

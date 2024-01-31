@@ -60,7 +60,9 @@ class BulletPointList extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-            itemCount: vendorList != null ? vendorList?.length ?? 0 : itemsList?.length ?? 0,
+            itemCount: vendorList != null
+                ? vendorList?.length ?? 0
+                : itemsList?.length ?? 0,
             // Replace with your item count
             itemBuilder: (context, index) {
               // Replace with your horizontal list item

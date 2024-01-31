@@ -31,6 +31,8 @@ class API {
   static const String GET_EVENT_DETAILS = "${BASE_URL}/event-detail";
   static const String GET_INTERESTED_EVENT = "${BASE_URL}/interested-in-event";
   static const String POST_EVENT = "${BASE_URL}/add-event";
+  static const String EDIT_EVENT = "${BASE_URL}/update-event";
+  static const String GET_EDIT_EVENT = "${BASE_URL}/edit-event";
   static const String GET_MY_EVENTS = "${BASE_URL}/my-events";
   static const String GET_ATTENDEES = "${BASE_URL}/attendees";
   static const String UPDATE_ATTENDEES_STATUS = "${BASE_URL}/update-attendees-status";
@@ -43,6 +45,7 @@ class API {
   /// Resume
   static const String UPDATE_RESUME = "${BASE_URL}/update-resume";
   static const String GET_RESUME = "${BASE_URL}/resume";
+  static const String DELETE_PDF = "${BASE_URL}/delete-resume";
 
   /// Wanted Job
   // static const String POST_JOB = "${BASE_URL}/";

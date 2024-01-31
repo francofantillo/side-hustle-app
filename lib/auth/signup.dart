@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
@@ -9,6 +10,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -97,6 +99,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   label: AppStrings.firstName,
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.firstName),
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.firstNameFieldCharacterLength),
+                  ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
@@ -106,6 +111,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   label: AppStrings.lastName,
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.lastName),
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.firstNameFieldCharacterLength),
+                  ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
@@ -114,6 +122,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   isShowBoarder: false,
                   label: AppStrings.emailAddress,
                   fieldValidator: (value) => value?.validateEmail,
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.emailFieldCharacterLength),
+                  ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 PhoneNumberTextField(
@@ -143,6 +154,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   label: AppStrings.zipCode,
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.zipCode),
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.firstNameFieldCharacterLength),
+                  ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
@@ -153,6 +167,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   isShowBoarder: false,
                   label: AppStrings.password,
                   fieldValidator: (value) => value?.validatePassword,
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.passwordFieldCharacterLength),
+                  ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
@@ -160,6 +177,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   fieldValidator: (value) => value?.validateConfirmPassword(
                       _bloc.passwordControllerSignup.text,
                       _bloc.confirmPasswordControllerSignup.text),
+                  inputFormatter: [
+                    LengthLimitingTextInputFormatter(Constants.passwordFieldCharacterLength),
+                  ],
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.confirmPassword,

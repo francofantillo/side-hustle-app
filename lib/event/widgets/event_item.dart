@@ -153,41 +153,37 @@ class EventItemsWidget extends StatelessWidget {
                                 imageWidth: imageHeight! * .2,
                               ),
                               width(.01.sw),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // place RoundedImageWithBackgroundColor at end
-                                  textWidget(
-                                      text: userName,
-                                      fontSize: AppDimensions.textSize10,
-                                      fontFamily: AppFont.gilroySemiBold,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColors.textBlackColor),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        AssetsPath.star,
-                                        height: imageHeight! * .08,
-                                        width: imageHeight! * .08,
-                                        color: AppColors.ratingColor,
-                                      ),
-                                      width(.01.sw),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          textWidget(
-                                              text: userRating,
-                                              fontSize: AppDimensions
-                                                  .textSizeUserRating),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    // place RoundedImageWithBackgroundColor at end
+                                    textWidget(
+                                        text: userName,
+                                        fontSize: AppDimensions.textSize10,
+                                        fontFamily: AppFont.gilroySemiBold,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.textBlackColor),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Image.asset(
+                                          AssetsPath.star,
+                                          height: imageHeight! * .08,
+                                          width: imageHeight! * .08,
+                                          color: AppColors.ratingColor,
+                                        ),
+                                        width(.01.sw),
+                                        textWidget(
+                                            text: userRating,
+                                            fontSize: AppDimensions
+                                                .textSizeUserRating),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                               const Spacer(),
                               Row(

@@ -256,7 +256,7 @@ class _ViewEventState extends State<ViewEvent> {
                                   child: textWidget(
                                       // text: AppStrings.eventTimeText,
                                       text:
-                                          "Start at ${DateTimeConversions.convertToLocal12HourFormat(state.eventsDetailModel?.eventDetails?.startTime)} to ${DateTimeConversions.convertToLocal12HourFormat(state.eventsDetailModel?.eventDetails?.endTime)}",
+                                          "Start at ${DateTimeConversions.convertTo12HourFormat(state.eventsDetailModel?.eventDetails?.startTime)} to ${DateTimeConversions.convertTo12HourFormat(state.eventsDetailModel?.eventDetails?.endTime)}",
                                       fontSize: AppDimensions
                                           .textLocationSizeViewForms),
                                 ),
