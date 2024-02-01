@@ -437,8 +437,14 @@ class _ModalBottomSheetPackageTypePostState
                                                   .sideHustlePostedSubTitle,
                                               buttonName: AppStrings.viewEvent,
                                             ));
+                                      } else {
+                                        EasyLoading.instance.indicatorColor =
+                                            AppColors.primaryColor;
                                       }
                                     });
+                                  } else {
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
                                   }
                                 });
                               } else {
@@ -462,6 +468,9 @@ class _ModalBottomSheetPackageTypePostState
                                               .sideHustlePostedSubTitle,
                                           buttonName: AppStrings.viewEvent,
                                         ));
+                                  } else {
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
                                   }
                                 });
                               }
@@ -522,8 +531,14 @@ class _ModalBottomSheetPackageTypePostState
                                         Navigator.pushReplacementNamed(context,
                                             AppRoutes.myEventsScreenRoute);
                                         print("value: $value");
+                                      } else {
+                                        EasyLoading.instance.indicatorColor =
+                                            AppColors.primaryColor;
                                       }
                                     });
+                                  } else {
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
                                   }
                                 });
                               } else {
@@ -543,6 +558,9 @@ class _ModalBottomSheetPackageTypePostState
                                     Navigator.pushReplacementNamed(
                                         context, AppRoutes.myEventsScreenRoute);
                                     print("value: $value");
+                                  } else {
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
                                   }
                                 });
                               }
