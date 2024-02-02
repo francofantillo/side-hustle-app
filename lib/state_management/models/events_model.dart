@@ -44,7 +44,7 @@ class EventsData {
   EventOwnerDetail? eventOwnerDetail;
   int? eventId;
   String? eventName;
-  String? price;
+  double? price;
   String? location;
   String? startDate;
   String? startTime;
@@ -95,7 +95,8 @@ class EventsData {
     lat = json['lat'];
     lng = json['lng'];
     eventName = json['event_name'];
-    price = json['price'] != null ? json['price'].toString() : json['price'];
+    // price = json['price'] != null ? json['price'].toString() : json['price'];
+    price = json['price']?.toDouble();
     location = json['location'];
     startDate = json['start_date'];
     startTime = json['start_time'];

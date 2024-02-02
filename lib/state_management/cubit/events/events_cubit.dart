@@ -471,25 +471,26 @@ class EventsCubit extends Cubit<EventsState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        EventsModel eventsModel = EventsModel.fromJson(response.data);
-        AppUtils.showToast(response.data["message"]);
-        final myEvent = state.myEventsModel?.events?[state.myEventsIndex];
-        myEvent?.name = eventsModel.eventDetails?.eventName;
-        myEvent?.location = eventsModel.eventDetails?.location;
-        myEvent?.price = eventsModel.eventDetails?.price;
-        myEvent?.image = (eventsModel.eventDetails?.images?.length == null ||
-                eventsModel.eventDetails!.images!.isEmpty)
-            ? null
-            : eventsModel.eventDetails?.images?[0].image;
-
-        final events = state.myEventsModel;
-        events?.events?[state.myEventsIndex] = myEvent!;
-
-        emit(state.copyWith(
-            eventsDetailModel: eventsModel, myEventsModel: events));
-        print("id: ${response.data['data']['id']}");
-
-        return response.data['data']['id'] ?? 1;
+        // EventsModel eventsModel = EventsModel.fromJson(response.data);
+        // AppUtils.showToast(response.data["message"]);
+        // final myEvent = state.myEventsModel?.events?[state.myEventsIndex];
+        // myEvent?.name = eventsModel.eventDetails?.eventName;
+        // myEvent?.location = eventsModel.eventDetails?.location;
+        // myEvent?.price = eventsModel.eventDetails?.price;
+        // myEvent?.image = (eventsModel.eventDetails?.images?.length == null ||
+        //         eventsModel.eventDetails!.images!.isEmpty)
+        //     ? null
+        //     : eventsModel.eventDetails?.images?[0].image;
+        //
+        // final events = state.myEventsModel;
+        // events?.events?[state.myEventsIndex] = myEvent!;
+        //
+        // emit(state.copyWith(
+        //     eventsDetailModel: eventsModel, myEventsModel: events));
+        // print("id: ${response.data['data']['id']}");
+        //
+        // return response.data['data']['id'] ?? 1;
+        return 1;
       }
 
       /// Failed

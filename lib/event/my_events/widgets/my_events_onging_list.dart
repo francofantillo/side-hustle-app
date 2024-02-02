@@ -51,7 +51,7 @@ class _MyEventsOngoingListState extends State<MyEventsOngoingList> {
                                   id: state
                                       .myEventsModel?.events?[index].eventId,
                                   index: index,
-                                  // showEdit: false,
+                                  showEdit: false,
                                 ));
                           },
                           imageWidth: 1.sw,
@@ -66,7 +66,7 @@ class _MyEventsOngoingListState extends State<MyEventsOngoingList> {
                           // imagePath: AlphaAppData.favEventsList[index].imagePath,
                           imagePath: state.myEventsModel?.events?[index].image,
                           // price: AlphaAppData.favEventsList[index].price,
-                          price: state.myEventsModel?.events?[index].price,
+                          price: state.myEventsModel?.events?[index].price?.toStringAsFixed(2),
                         ),
                       );
                     },

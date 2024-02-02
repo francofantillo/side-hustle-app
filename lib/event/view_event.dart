@@ -162,7 +162,7 @@ class _ViewEventState extends State<ViewEvent> {
                                         text: state.eventsDetailModel
                                                     ?.eventDetails?.price !=
                                                 null
-                                            ? "\$${state.eventsDetailModel?.eventDetails?.price}"
+                                            ? "\$${state.eventsDetailModel?.eventDetails?.price?.toStringAsFixed(2)}"
                                             : "",
                                         fontFamily: AppFont.gilroyBold,
                                         fontWeight: FontWeight.bold,

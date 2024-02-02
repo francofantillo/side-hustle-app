@@ -12,6 +12,6 @@ class Constants {
   static const int emailFieldCharacterLength = 320;
   static const int passwordFieldCharacterLength = 320;
   static const int phoneFieldCharacterLength = 40;
-  static const int priceFieldCharacterLength = 4;
+  static const int priceFieldCharacterLength = 7;
   static const int descriptionFieldCharacterLength = 500;
 }

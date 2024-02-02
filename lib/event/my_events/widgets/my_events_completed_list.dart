@@ -60,7 +60,7 @@ class _MyEventsCompletedListState extends State<MyEventsCompletedList> {
                           location:
                               state.myEventsModel?.events?[index].location,
                           imagePath: state.myEventsModel?.events?[index].image,
-                          price: state.myEventsModel?.events?[index].price,
+                          price: state.myEventsModel?.events?[index].price?.toStringAsFixed(2),
                         ),
                       );
                     },

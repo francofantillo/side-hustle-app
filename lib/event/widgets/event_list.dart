@@ -212,7 +212,7 @@ class _EventListState extends State<EventList> {
                 // imagePath: AlphaAppData.eventsList[index].imagePath,
                 imagePath: itemList?[index].image,
                 // price: AlphaAppData.eventsList[index].price,
-                price: itemList?[index].price,
+                price: itemList?[index].price?.toStringAsFixed(2),
                 userName:
                     // AlphaAppData.eventsList[index].userName,
                     itemList?[index].eventOwnerDetail?.name,

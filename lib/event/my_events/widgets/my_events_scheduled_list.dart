@@ -65,7 +65,7 @@ class _MyEventsScheduledListState extends State<MyEventsScheduledList> {
                               state.myEventsModel?.events?[index].image,
                           // imagePath: AssetsPath.imageLoadError,
                           // price: AlphaAppData.favEventsList[index].price,
-                          price: state.myEventsModel?.events?[index].price,
+                          price: state.myEventsModel?.events?[index].price?.toStringAsFixed(2),
                           // userName: AlphaAppData.favEventsList[index].userName,
                           // userRating:
                           //     AlphaAppData.favEventsList[index].userRating,

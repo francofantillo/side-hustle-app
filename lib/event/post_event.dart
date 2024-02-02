@@ -93,8 +93,7 @@ class _PostEventState extends State<PostEvent> {
             value.eventDetails?.purpose ?? "";
         _bloc.eventThemeTextController.text = value.eventDetails?.theme ?? "";
         _bloc.eventPriceTextController.text =
-            value.eventDetails?.price?.toString() ?? "";
-
+            value.eventDetails?.price?.toStringAsFixed(2) ?? "";
         if (value.eventDetails?.vendorsList?.length != null &&
             value.eventDetails!.vendorsList!.isNotEmpty) {
           for (int i = 0; i < value.eventDetails!.vendorsList!.length; i++) {
