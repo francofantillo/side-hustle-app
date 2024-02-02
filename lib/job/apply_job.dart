@@ -55,323 +55,324 @@ class _ApplyForJobState extends State<ApplyForJob> {
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
-        backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
       body: BlocBuilder<JobsCubit, JobsState>(builder: (contextBuilder, state) {
         return state.jobsDetailLoading
             ? const SizedBox.shrink()
             : state.jobsDetailModel?.jobsDetailData == null
-            ? const CustomErrorWidget(errorMessage: AppStrings.errorMessage)
-            : SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics()),
-          child: Padding(
-            padding: EdgeInsets.all(AppDimensions.rootPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // const ImageSliderAlpha(
-                //   hideCameraIcon: true,
-                // ),
-                state.jobsDetailModel!.jobsDetailData!.images!.isEmpty
-                    ? const NoImagesFoundWidget()
-                    : ImageSlider(
-                    hideCameraIcon: true,
-                    indicatorLength: state
-                        .jobsDetailModel
-                        ?.jobsDetailData
-                        ?.images
-                        ?.length ==
-                        null
-                        ? null
-                        : state.jobsDetailModel!.jobsDetailData!
-                        .images!.isEmpty
-                        ? null
-                        : state.jobsDetailModel!
-                        .jobsDetailData!.images!.length,
-                    // itemImages: itemImages,
-                    responseImages: state
-                        .jobsDetailModel?.jobsDetailData?.images),
-                height(0.02.sh),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: textWidget(
-                          // text: AppStrings.carpenter,
-                            text: state.jobsDetailModel
-                                ?.jobsDetailData?.title,
-                            fontFamily: AppFont.gilroyBold,
-                            fontWeight: FontWeight.bold,
-                            fontSize: AppDimensions
-                                .textHeadingSizeViewForms,
-                            color: AppColors.textBlackColor),
-                      ),
-                      textWidget(
-                        // text: AppStrings.productPricingNumeric,
-                          text: state.jobsDetailModel?.jobsDetailData
-                              ?.budget !=
-                              null
-                              ? "\$${state.jobsDetailModel?.jobsDetailData?.budget?.toStringAsFixed(2)}"
-                              : "",
-                          fontFamily: AppFont.gilroyBold,
-                          fontWeight: FontWeight.bold,
-                          fontSize:
-                          AppDimensions.textPriceSizeViewForms,
-                          color: AppColors.textBlackColor),
-                    ],
-                  ),
-                ),
-                // height(0.02.sh),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8.0, right: 8, top: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ImageIcon(
-                        const AssetImage(AssetsPath.location),
-                        color: const Color(0xFF565656),
-                        size: AppDimensions.applyForJobIconSize,
-                      ),
-                      width(0.02.sw),
-                      Expanded(
-                        child: textWidget(
-                            text: state.jobsDetailModel
-                                ?.jobsDetailData?.location,
-                            maxLines: 2,
-                            color: const Color(0xFF565656),
-                            fontSize: AppDimensions
-                                .textLocationSizeViewForms),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8.0, right: 8, top: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ImageIcon(
-                        const AssetImage(AssetsPath.calender),
-                        color: const Color(0xFF565656),
-                        size: AppDimensions.applyForJobIconSize,
-                      ),
-                      width(0.02.sw),
-                      Expanded(
-                        child: textWidget(
-                            text: state.jobsDetailModel
-                                ?.jobsDetailData?.jobDate !=
-                                null
-                                ? AppUtils.formatDateView(
-                                selectedDate: DateTime.parse(state
-                                    .jobsDetailModel!
-                                    .jobsDetailData!
-                                    .jobDate!))
-                                : "",
-                            fontSize: AppDimensions
-                                .textLocationSizeViewForms),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8.0, right: 8, top: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.access_time_filled_rounded,
-                        color: const Color(0xFF565656),
-                        size: AppDimensions.applyForJobIconSize,
-                      ),
-                      width(0.02.sw),
-                      Expanded(
-                        child: textWidget(
-                          // text: AppStrings.jobTimeText,
-                            text:
-                            "Start at ${DateTimeConversions.convertTo12HourFormat(state.jobsDetailModel?.jobsDetailData?.jobTime)} to ${DateTimeConversions.convertTo12HourFormat(state.jobsDetailModel?.jobsDetailData?.endTime)}",
-                            color: const Color(0xFF565656),
-                            fontSize: AppDimensions
-                                .textLocationSizeViewForms),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 12),
-                  child: Divider(
-                    height: 1,
-                    color: Colors.grey.withOpacity(0.8),
-                  ),
-                ),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: textWidget(
-                      text: AppStrings.jobPostBy,
-                      maxLines: 1,
-                      fontFamily: AppFont.gilroyBold,
-                      fontSize:
-                      AppDimensions.textSubHeadingSizeViewForms,
-                      color: AppColors.textBlackColor,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context,
-                                  AppRoutes
-                                      .otherUserProfileScreenRoute);
-                            },
+                ? const CustomErrorWidget(errorMessage: AppStrings.errorMessage)
+                : SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    physics: const AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics()),
+                    child: Padding(
+                      padding: EdgeInsets.all(AppDimensions.rootPadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // const ImageSliderAlpha(
+                          //   hideCameraIcon: true,
+                          // ),
+                          state.jobsDetailModel!.jobsDetailData!.images!.isEmpty
+                              ? const NoImagesFoundWidget()
+                              : ImageSlider(
+                                  hideCameraIcon: true,
+                                  indicatorLength: state
+                                              .jobsDetailModel
+                                              ?.jobsDetailData
+                                              ?.images
+                                              ?.length ==
+                                          null
+                                      ? null
+                                      : state.jobsDetailModel!.jobsDetailData!
+                                              .images!.isEmpty
+                                          ? null
+                                          : state.jobsDetailModel!
+                                              .jobsDetailData!.images!.length,
+                                  // itemImages: itemImages,
+                                  responseImages: state
+                                      .jobsDetailModel?.jobsDetailData?.images),
+                          height(0.02.sh),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CircularCacheImageWidget(
-                                  showLoading: false,
-                                  // image: AssetsPath.userProfileJob,
-                                  image: state
-                                      .jobsDetailModel
-                                      ?.jobsDetailData
-                                      ?.userDetail
-                                      ?.image,
-                                  assetImage: AssetsPath.placeHolder,
-                                  boarderColor:
-                                  AppColors.primaryColor,
-                                  imageHeight: .1.sw,
-                                  imageWidth: .1.sw,
-                                ),
-                                width(.02.sw),
                                 Expanded(
                                   child: textWidget(
-                                      text: state
-                                          .jobsDetailModel
-                                          ?.jobsDetailData
-                                          ?.userDetail
-                                          ?.name,
-                                      fontFamily:
-                                      AppFont.gilroySemiBold,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color:
-                                      AppColors.textBlackColor),
+                                      // text: AppStrings.carpenter,
+                                      text: state.jobsDetailModel
+                                          ?.jobsDetailData?.title,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions
+                                          .textHeadingSizeViewForms,
+                                      color: AppColors.textBlackColor),
+                                ),
+                                textWidget(
+                                    // text: AppStrings.productPricingNumeric,
+                                    text: state.jobsDetailModel?.jobsDetailData
+                                                ?.budget !=
+                                            null
+                                        ? "\$${state.jobsDetailModel?.jobsDetailData?.budget?.toStringAsFixed(2)}"
+                                        : "",
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        AppDimensions.textPriceSizeViewForms,
+                                    color: AppColors.textBlackColor),
+                              ],
+                            ),
+                          ),
+                          // height(0.02.sh),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, right: 8, top: 12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ImageIcon(
+                                  const AssetImage(AssetsPath.location),
+                                  color: const Color(0xFF565656),
+                                  size: AppDimensions.applyForJobIconSize,
+                                ),
+                                width(0.02.sw),
+                                Expanded(
+                                  child: textWidget(
+                                      text: state.jobsDetailModel
+                                          ?.jobsDetailData?.location,
+                                      maxLines: 2,
+                                      color: const Color(0xFF565656),
+                                      fontSize: AppDimensions
+                                          .textLocationSizeViewForms),
                                 ),
                               ],
                             ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, right: 8, top: 12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ImageIcon(
+                                  const AssetImage(AssetsPath.calender),
+                                  color: const Color(0xFF565656),
+                                  size: AppDimensions.applyForJobIconSize,
+                                ),
+                                width(0.02.sw),
+                                Expanded(
+                                  child: textWidget(
+                                      text: state.jobsDetailModel
+                                                  ?.jobsDetailData?.jobDate !=
+                                              null
+                                          ? AppUtils.formatDateView(
+                                              selectedDate: DateTime.parse(state
+                                                  .jobsDetailModel!
+                                                  .jobsDetailData!
+                                                  .jobDate!))
+                                          : "",
+                                      fontSize: AppDimensions
+                                          .textLocationSizeViewForms),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0, right: 8, top: 12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.access_time_filled_rounded,
+                                  color: const Color(0xFF565656),
+                                  size: AppDimensions.applyForJobIconSize,
+                                ),
+                                width(0.02.sw),
+                                Expanded(
+                                  child: textWidget(
+                                      // text: AppStrings.jobTimeText,
+                                      text:
+                                          "Start at ${DateTimeConversions.convertTo12HourFormat(state.jobsDetailModel?.jobsDetailData?.jobTime)} to ${DateTimeConversions.convertTo12HourFormat(state.jobsDetailModel?.jobsDetailData?.endTime)}",
+                                      color: const Color(0xFF565656),
+                                      fontSize: AppDimensions
+                                          .textLocationSizeViewForms),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 12),
+                            child: Divider(
+                              height: 1,
+                              color: Colors.grey.withOpacity(0.8),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.jobPostBy,
+                                maxLines: 1,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize:
+                                    AppDimensions.textSubHeadingSizeViewForms,
+                                color: AppColors.textBlackColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context,
+                                            AppRoutes
+                                                .otherUserProfileScreenRoute);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          CircularCacheImageWidget(
+                                            showLoading: false,
+                                            // image: AssetsPath.userProfileJob,
+                                            image: state
+                                                .jobsDetailModel
+                                                ?.jobsDetailData
+                                                ?.userDetail
+                                                ?.image,
+                                            assetImage: AssetsPath.placeHolder,
+                                            boarderColor:
+                                                AppColors.primaryColor,
+                                            imageHeight: .1.sw,
+                                            imageWidth: .1.sw,
+                                          ),
+                                          width(.02.sw),
+                                          Expanded(
+                                            child: textWidget(
+                                                text: state
+                                                    .jobsDetailModel
+                                                    ?.jobsDetailData
+                                                    ?.userDetail
+                                                    ?.name,
+                                                fontFamily:
+                                                    AppFont.gilroySemiBold,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color:
+                                                    AppColors.textBlackColor),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                IconButtonWithBackground(
+                                  onTap: () {
+                                    Navigator.pushNamed(context,
+                                        AppRoutes.chatOneToOneScreenRoute);
+                                  },
+                                  iconPath: AssetsPath.message,
+                                  height: 0.12.sw,
+                                  width: 0.12.sw,
+                                  iconSize: 20,
+                                  backgroundColor: AppColors.primaryColor,
+                                  iconColor: AppColors.whiteColor,
+                                )
+                              ],
+                            ),
+                          ),
+                          height(0.03.sw),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Divider(
+                              height: 1,
+                              color: Colors.grey.withOpacity(0.8),
+                            ),
+                          ),
+                          height(0.02.sw),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.jobDesc,
+                                maxLines: 1,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize:
+                                    AppDimensions.textSubHeadingSizeViewForms,
+                                color: AppColors.textBlackColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          height(0.015.sw),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                // text: AppStrings.jobDescText,
+                                text: state.jobsDetailModel?.jobsDetailData
+                                    ?.description,
+                                maxLines: 100,
+                                color: AppColors.textBlackColor,
+                                fontSize: AppDimensions
+                                    .textSubHeadingTextSizeViewForms),
+                          ),
+                          height(0.03.sw),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: textWidget(
+                                text: AppStrings.additionalInformation,
+                                maxLines: 1,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize:
+                                    AppDimensions.textSubHeadingSizeViewForms,
+                                color: AppColors.textBlackColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          height(0.015.sw),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                            ),
+                            child: textWidget(
+                                // text: AppStrings.additionalTextDesc,
+                                text: state.jobsDetailModel?.jobsDetailData
+                                    ?.additionalInformation,
+                                maxLines: 100,
+                                color: AppColors.textBlackColor,
+                                fontSize: AppDimensions
+                                    .textSubHeadingTextSizeViewForms),
+                          ),
+                          height(0.05.sw),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: CustomMaterialButton(
+                                  // height: AppDimensions.defaultMaterialButtonHeightHome,
+                                  borderRadius: AppDimensions
+                                      .defaultMaterialButtonRadiusHome,
+                                  onPressed: () {
+                                    AppDialogues.noHeaderDialogue(
+                                        context: contextBuilder,
+                                        body: ApplyForJobDialogue(
+                                          jobId: widget.jobId
+                                        )).show();
+                                  },
+                                  name: AppStrings.applyForJob)),
+                        ],
                       ),
-                      IconButtonWithBackground(
-                        onTap: () {
-                          Navigator.pushNamed(context,
-                              AppRoutes.chatOneToOneScreenRoute);
-                        },
-                        iconPath: AssetsPath.message,
-                        height: 0.12.sw,
-                        width: 0.12.sw,
-                        iconSize: 20,
-                        backgroundColor: AppColors.primaryColor,
-                        iconColor: AppColors.whiteColor,
-                      )
-                    ],
-                  ),
-                ),
-                height(0.03.sw),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Divider(
-                    height: 1,
-                    color: Colors.grey.withOpacity(0.8),
-                  ),
-                ),
-                height(0.02.sw),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: textWidget(
-                      text: AppStrings.jobDesc,
-                      maxLines: 1,
-                      fontFamily: AppFont.gilroyBold,
-                      fontSize:
-                      AppDimensions.textSubHeadingSizeViewForms,
-                      color: AppColors.textBlackColor,
-                      fontWeight: FontWeight.bold),
-                ),
-                height(0.015.sw),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: textWidget(
-                    // text: AppStrings.jobDescText,
-                      text: state.jobsDetailModel?.jobsDetailData
-                          ?.description,
-                      maxLines: 100,
-                      color: AppColors.textBlackColor,
-                      fontSize: AppDimensions
-                          .textSubHeadingTextSizeViewForms),
-                ),
-                height(0.03.sw),
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: textWidget(
-                      text: AppStrings.additionalInformation,
-                      maxLines: 1,
-                      fontFamily: AppFont.gilroyBold,
-                      fontSize:
-                      AppDimensions.textSubHeadingSizeViewForms,
-                      color: AppColors.textBlackColor,
-                      fontWeight: FontWeight.bold),
-                ),
-                height(0.015.sw),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8.0,
-                  ),
-                  child: textWidget(
-                    // text: AppStrings.additionalTextDesc,
-                      text: state.jobsDetailModel?.jobsDetailData
-                          ?.additionalInformation,
-                      maxLines: 100,
-                      color: AppColors.textBlackColor,
-                      fontSize: AppDimensions
-                          .textSubHeadingTextSizeViewForms),
-                ),
-                height(0.05.sw),
-                Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomMaterialButton(
-                      // height: AppDimensions.defaultMaterialButtonHeightHome,
-                        borderRadius: AppDimensions
-                            .defaultMaterialButtonRadiusHome,
-                        onPressed: () {
-                          AppDialogues.noHeaderDialogue(
-                              context: contextBuilder,
-                              body: const ApplyForJobDialogue())
-                              .show();
-                        },
-                        name: AppStrings.applyForJob)),
-              ],
-            ),
-          ),
-        );
+                    ),
+                  );
       }),
     );
   }

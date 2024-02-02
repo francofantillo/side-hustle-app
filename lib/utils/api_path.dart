@@ -51,5 +51,7 @@ class API {
   static const String GET_WANTED_JOBS = "${BASE_URL}/wanted-jobs";
   static const String GET_JOBS_DETAIL = "${BASE_URL}/job-detail";
   static const String POST_JOB = "${BASE_URL}/add-job";
+  static const String GET_EDIT_JOB = "${BASE_URL}/edit-job";
+  static const String APPLYFOR_JOB = "${BASE_URL}/apply-for-job";
 
 }

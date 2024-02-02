@@ -14,8 +14,15 @@ class RegularExpressions {
     type: MaskAutoCompletionType.lazy,
   );
 
+  // MaskTextInputFormatter for price field allow only numbers and  decimal points
   static MaskTextInputFormatter MASK_TEXT_FORMATTER_CARD_NO = MaskTextInputFormatter(
       mask: '####-####-####-####',
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
+
+  static MaskTextInputFormatter MASK_TEXT_FORMATTER_PRICE = MaskTextInputFormatter(
+    mask: '###.###.###.###', // You can adjust the mask as needed
+    filter: {"#": RegExp(r'[0-9]')}, // Allow only digits (0-9)
+    type: MaskAutoCompletionType.lazy,
+  );
 }

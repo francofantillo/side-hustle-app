@@ -8,6 +8,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/models/jobs_model.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/providers/wanted_jobs/wanted_job_provider.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
@@ -56,7 +57,7 @@ class JobsCubit extends Cubit<JobsState> {
   Future selectLocation(
       {required BuildContext context, required bool mounted}) async {
     final SelectLocationModel? location =
-    await AppUtils.selectLocation(context: context, mounted: mounted);
+        await AppUtils.selectLocation(context: context, mounted: mounted);
 
     if (location != null) {
       locationTextController.text = location.locationAddress ?? "";
@@ -67,7 +68,7 @@ class JobsCubit extends Cubit<JobsState> {
   /// Select Multiple Images
   Future selectMultiImages() async {
     List<File>? images =
-    await ImagePickerService.selectMultipleImagesFromGallery();
+        await ImagePickerService.selectMultipleImagesFromGallery();
     if (images != null && images.isNotEmpty) {
       emit(state.copyWith(itemImagesFile: images));
       // if(images.length > 4) {
@@ -81,8 +82,8 @@ class JobsCubit extends Cubit<JobsState> {
   /// Get Wanted Jobs
   Future getWantedJobsCubit(
       {required BuildContext context,
-        required bool mounted,
-        required String type}) async {
+      required bool mounted,
+      required String type}) async {
     emit(state.copyWith(
         jobsLoading: true,
         wantedJobsTempList: [],
@@ -129,7 +130,7 @@ class JobsCubit extends Cubit<JobsState> {
       emit(state.copyWith(searching: true));
       for (int i = 0; i < (originalList?.length ?? 0); i++) {
         String name =
-        originalList?[i].title != null ? "${originalList![i].title}" : '';
+            originalList?[i].title != null ? "${originalList![i].title}" : '';
         if (name.toLowerCase().contains(value.toLowerCase())) {
           tempList.add(originalList![i]);
         }
@@ -150,8 +151,8 @@ class JobsCubit extends Cubit<JobsState> {
   /// Get Jobs Detail
   Future getJobsDetailCubit(
       {required BuildContext context,
-        required bool mounted,
-        required String? jobId}) async {
+      required bool mounted,
+      required String? jobId}) async {
     emit(state.copyWith(jobsDetailLoading: true, jobsDetailModel: JobsModel()));
     EasyLoading.show();
 
@@ -184,8 +185,8 @@ class JobsCubit extends Cubit<JobsState> {
   /// Post an Job
   Future<int> postJobCubit(
       {required BuildContext context,
-        required int planId,
-        required bool mounted}) async {
+      required int planId,
+      required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
 
@@ -235,6 +236,77 @@ class JobsCubit extends Cubit<JobsState> {
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       return 0;
+    }
+  }
+
+  /// Get Edot Job
+  Future getEditJobCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int? jobId}) async {
+    // emit(state.copyWith(jobsDetailLoading: true, jobsDetailModel: JobsModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await getEditJobProvider(jobId: jobId, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // AppUtils.showToast(response.data['message']);
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Apply For Job
+  Future applyForJobCubit({
+    required BuildContext context,
+    required bool mounted,
+    required int? jobId,
+    required String? bidAmount,
+  }) async {
+    // emit(state.copyWith(jobsDetailLoading: true, jobsDetailModel: JobsModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await applyForJobProvider(
+        jobId: jobId, bidAmount: bidAmount, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        AppUtils.showToast(response.data['message']);
+        if (mounted) {
+          // Navigator.pop(context);
+          Navigator.pop(context);
+        }
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
     }
   }
 }
