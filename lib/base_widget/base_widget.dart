@@ -45,7 +45,7 @@ class _BaseWidgetState extends State<BaseWidget> {
         BlocProvider<CardCubit>(create: (context) => CardCubit()),
         BlocProvider<EventsCubit>(create: (context) => EventsCubit()),
         BlocProvider<FavouritesCubit>(create: (context) => FavouritesCubit()),
-        BlocProvider<WantedJobCubit>(create: (context) => WantedJobCubit()),
+        BlocProvider<JobsCubit>(create: (context) => JobsCubit()),
       ],
       child: DevicePreview(
         enabled: false,

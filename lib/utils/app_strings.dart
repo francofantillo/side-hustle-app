@@ -174,6 +174,8 @@ class AppStrings {
   static const String uploadImages = "Upload Images";
   static const String uploadImagesBodyProduct =
       "Upload 2-3 relevant images of your product, so anyone can understand about your product";
+  static const String uploadImagesBodyJob =
+      "Upload 2-3 relevant images, so hustler can understand what you are looking for";
   static const String enterTheProductName = "Enter the product name";
   static const String addProduct = "Add Product";
 
@@ -471,6 +473,7 @@ class AppStrings {
 
   /// Error Messages
   static const String errorMessageEvent = "No Events Found";
+  static const String errorMessageJobs = "No Jobs Found";
   static const String errorMessageNoItemsFound = "No Items Found";
   static const String errorMessage = "Something went wrong.";
   static const String errorMessageMultiImagesSelectedLimit = "5 images max";

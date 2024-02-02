@@ -155,7 +155,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.zipCode),
                   inputFormatter: [
-                    LengthLimitingTextInputFormatter(Constants.firstNameFieldCharacterLength),
+                    LengthLimitingTextInputFormatter(Constants.zipCodeFieldCharacterLength),
                   ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),

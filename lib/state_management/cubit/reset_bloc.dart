@@ -16,7 +16,7 @@ class ClearAppData {
     final CardCubit blocCard = BlocProvider.of<CardCubit>(context);
     final EventsCubit blocEvents = BlocProvider.of<EventsCubit>(context);
     final FavouritesCubit blocFavourites = BlocProvider.of<FavouritesCubit>(context);
-    final WantedJobCubit blocWantedJob = BlocProvider.of<WantedJobCubit>(context);
+    final JobsCubit blocWantedJob = BlocProvider.of<JobsCubit>(context);
 
     /// clear shared
     await prefs.clearPreferences();

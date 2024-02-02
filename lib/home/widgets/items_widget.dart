@@ -12,9 +12,9 @@ import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class ItemsWidget extends StatelessWidget {
+class WantedJobsItemWidget extends StatelessWidget {
   final String? title,
-      subTitle,
+      desc,
       price,
       userProfile,
       userName,
@@ -26,10 +26,10 @@ class ItemsWidget extends StatelessWidget {
   final bool isEvent;
   final Function()? onTap;
 
-  const ItemsWidget(
+  const WantedJobsItemWidget(
       {super.key,
         this.title,
-        this.subTitle,
+        this.desc,
         this.onTap,
         this.price,
         this.userProfile,
@@ -73,7 +73,8 @@ class ItemsWidget extends StatelessWidget {
                   RoundedCornersImage(
                     imageHeight: imageHeight,
                     imageWidth: AppDimensions.listItemWidth,
-                    assetImage: imagePath,
+                    assetImage: AssetsPath.placeHolder,
+                    image: imagePath,
                     boarderColor: boarderColor,
                   ),
                   Expanded(
@@ -101,7 +102,7 @@ class ItemsWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   textWidget(
-                                      text: price,
+                                      text: price != null ? "\$$price" : "",
                                       fontFamily: AppFont.gilroyBold,
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppDimensions.textSizeSmall,
@@ -121,7 +122,7 @@ class ItemsWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: textWidget(
-                                  text: subTitle,
+                                  text: desc,
                                   maxLines: 2,
                                   fontSize: AppDimensions.textSize10,
                                 ),
@@ -150,7 +151,7 @@ class ItemsWidget extends StatelessWidget {
                                   child: CircularCacheImageWidget(
                                     showLoading: false,
                                     image: userProfile,
-                                    // assetImage: userProfile,
+                                    assetImage: AssetsPath.placeHolder,
                                     boarderColor: AppColors.primaryColor,
                                     imageHeight: imageHeight! * .2,
                                     imageWidth: imageHeight! * .2,
@@ -158,49 +159,52 @@ class ItemsWidget extends StatelessWidget {
                                 ),
                               ),
                               width(.01.sw),
-                              Material(
-                                color: boarderColor,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(context,
-                                        AppRoutes.otherUserProfileScreenRoute);
-                                  },
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      // place RoundedImageWithBackgroundColor at end
-                                      textWidget(
-                                          text: userName,
-                                          fontSize: AppDimensions.textSize10,
-                                          fontFamily: AppFont.gilroySemiBold,
-                                          fontWeight: FontWeight.w500,
-                                          color: AppColors.textBlackColor),
-                                      Row(
-                                        children: [
-                                          Image.asset(
-                                            AssetsPath.star,
-                                            height: imageHeight! * .08,
-                                            width: imageHeight! * .08,
-                                            color: AppColors.ratingColor,
-                                          ),
-                                          // Icon(Icons.star, color: Color(0xffECAF53), size: imageHeight! * .15,),
-                                          width(.01.sw),
-                                          Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            children: [
-                                              textWidget(
-                                                  text: userRating,
-                                                  fontSize: AppDimensions.textSizeUserRating),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                              Expanded(
+                                child: Material(
+                                  color: boarderColor,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(context,
+                                          AppRoutes.otherUserProfileScreenRoute);
+                                    },
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        // place RoundedImageWithBackgroundColor at end
+                                        textWidget(
+                                            text: userName,
+                                            fontSize: AppDimensions.textSize10,
+                                            fontFamily: AppFont.gilroySemiBold,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.textBlackColor),
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              AssetsPath.star,
+                                              height: imageHeight! * .08,
+                                              width: imageHeight! * .08,
+                                              color: AppColors.ratingColor,
+                                            ),
+                                            // Icon(Icons.star, color: Color(0xffECAF53), size: imageHeight! * .15,),
+                                            width(.01.sw),
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              children: [
+                                                textWidget(
+                                                    text: userRating,
+                                                    fontSize: AppDimensions
+                                                        .textSizeUserRating),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -250,6 +254,3 @@ class ItemsWidget extends StatelessWidget {
     );
   }
 }
-
-
-

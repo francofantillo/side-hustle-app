@@ -15,6 +15,10 @@ class CompletedTabList extends StatefulWidget {
 class _CompletedTabListState extends State<CompletedTabList> {
   @override
   Widget build(BuildContext context) {
+    return completedJobs();
+  }
+
+  Widget completedJobs({itemList}) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(bottom: 0.14.sh, top: 8),
@@ -35,17 +39,12 @@ class _CompletedTabListState extends State<CompletedTabList> {
                 imageHeight: AppDimensions.listItemHeightJobCompleted,
                 boarderColor: AppColors.itemBGColor,
                 title: AlphaAppData.wantedJobList[index].title,
-                subTitle:
-                AlphaAppData.wantedJobList[index].subTitle,
-                imagePath:
-                AlphaAppData.wantedJobList[index].imagePath,
+                subTitle: AlphaAppData.wantedJobList[index].subTitle,
+                imagePath: AlphaAppData.wantedJobList[index].imagePath,
                 price: AlphaAppData.wantedJobList[index].price,
-                userName:
-                AlphaAppData.wantedJobList[index].userName,
-                userRating:
-                AlphaAppData.wantedJobList[index].userRating,
-                userProfile:
-                AlphaAppData.wantedJobList[index].userProfile,
+                userName: AlphaAppData.wantedJobList[index].userName,
+                userRating: AlphaAppData.wantedJobList[index].userRating,
+                userProfile: AlphaAppData.wantedJobList[index].userProfile,
               ),
             );
           },

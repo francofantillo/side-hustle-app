@@ -48,6 +48,8 @@ class API {
   static const String DELETE_PDF = "${BASE_URL}/delete-resume";
 
   /// Wanted Job
-  // static const String POST_JOB = "${BASE_URL}/";
+  static const String GET_WANTED_JOBS = "${BASE_URL}/wanted-jobs";
+  static const String GET_JOBS_DETAIL = "${BASE_URL}/job-detail";
+  static const String POST_JOB = "${BASE_URL}/add-job";
 
 }

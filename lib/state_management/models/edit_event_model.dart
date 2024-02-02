@@ -1,3 +1,5 @@
+import 'package:side_hustle/state_management/models/events_model.dart';
+
 class EditEventModel {
   bool? status;
   String? message;
@@ -102,7 +104,7 @@ class Data {
   }
 }
 
-class Images {
+/*class Images {
   String? image;
 
   Images({this.image});
@@ -116,7 +118,7 @@ class Images {
     data['image'] = this.image;
     return data;
   }
-}
+}*/
 
 class AvailableAttractions {
   String? attr;

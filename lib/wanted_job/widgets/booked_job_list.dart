@@ -15,6 +15,10 @@ class BookedTabList extends StatefulWidget {
 class _BookedTabListState extends State<BookedTabList> {
   @override
   Widget build(BuildContext context) {
+    return bookedJobs();
+  }
+
+  Widget bookedJobs({itemList}) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(bottom: 0.14.sh, top: 8),

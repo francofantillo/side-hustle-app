@@ -58,7 +58,7 @@ class AppRouter {
       settings: routeSettings,
       builder: (BuildContext context) {
         switch (routeSettings.name) {
-          //-------------- User Navigation Routes ---------------------- //
+        //-------------- User Navigation Routes ---------------------- //
 
           case AppRoutes.splashScreenRoute:
             return const SplashScreen();
@@ -121,7 +121,10 @@ class AppRouter {
             );
 
           case AppRoutes.applyForJobScreenRoute:
-            return const ApplyForJob();
+            final args = routeSettings.arguments as ApplyForJob?;
+            return ApplyForJob(
+              jobId: args?.jobId,
+            );
 
           case AppRoutes.wantedJobScreenRoute:
             final args = routeSettings.arguments as WantedJobScreen?;
@@ -165,7 +168,7 @@ class AppRouter {
             return ViewProduct(
               isMyProduct: args?.isMyProduct ?? false,
               isViewingProductFromOthersShop:
-                  args?.isViewingProductFromOthersShop ?? false,
+              args?.isViewingProductFromOthersShop ?? false,
             );
 
           case AppRoutes.viewServiceScreenRoute:
@@ -173,7 +176,7 @@ class AppRouter {
             return ViewService(
               isMyService: args?.isMyService ?? false,
               isViewingServiceFromOthersShop:
-                  args?.isViewingServiceFromOthersShop ?? false,
+              args?.isViewingServiceFromOthersShop ?? false,
             );
 
           case AppRoutes.shopScreenRoute:
@@ -194,8 +197,8 @@ class AppRouter {
           case AppRoutes.yourShopScreenRoute:
             return const YourShopScreen();
 
-          // case AppRoutes.otherUserShopScreenRoute:
-          //   return const OtherUserShopScreen();
+        // case AppRoutes.otherUserShopScreenRoute:
+        //   return const OtherUserShopScreen();
 
           case AppRoutes.favouritesScreenRoute:
             final args = routeSettings.arguments as FavouritesScreen?;

@@ -8,6 +8,7 @@ import 'package:side_hustle/event/widgets/select_payment_type_dropdown.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
+import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -40,6 +41,8 @@ class _ModalBottomSheetPackageTypePostState
     extends State<ModalBottomSheetPackageTypePost> {
   late final CardCubit _blocCard;
   late final EventsCubit _blocEvent;
+  late final JobsCubit _blocJobs;
+
   int? cardId;
   SingingCharacter? _character = SingingCharacter.package1;
 
@@ -75,6 +78,7 @@ class _ModalBottomSheetPackageTypePostState
     // setDefaultCardList();
     _blocCard = BlocProvider.of<CardCubit>(context);
     _blocEvent = BlocProvider.of<EventsCubit>(context);
+    _blocJobs = BlocProvider.of<JobsCubit>(context);
     super.initState();
   }
 
@@ -323,8 +327,78 @@ class _ModalBottomSheetPackageTypePostState
                             left: 20.0, right: 20, bottom: 20),
                         child: CustomMaterialButton(
                             onPressed: () async {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
+                              EasyLoading.instance.indicatorColor =
+                                  AppColors.whiteColor;
+                              late final int planId;
+                              print(
+                                  "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                              if (_character?.name ==
+                                  SingingCharacter.package1.name) {
+                                planId = 1;
+                              } else if (_character?.name ==
+                                  SingingCharacter.package2.name) {
+                                planId = 2;
+                              } else if (_character?.name ==
+                                  SingingCharacter.package3.name) {
+                                planId = 3;
+                              }
+                              print("planId: $planId");
+                              // Navigator.pop(context);
+                              // Navigator.pop(context);
+                              if (cardId != null) {
+                                await _blocCard
+                                    .defaultCardCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        hideLoader: true,
+                                        cardId: cardId)
+                                    .then((value) async {
+                                  if (value == 1) {
+                                    await _blocJobs
+                                        .postJobCubit(
+                                            context: context,
+                                            mounted: mounted,
+                                            planId: planId)
+                                        .then((value) {
+                                      EasyLoading.instance.indicatorColor =
+                                          AppColors.primaryColor;
+                                    });
+                                  } else {
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
+                                  }
+                                });
+                              } else {
+                                await _blocJobs
+                                    .postJobCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        planId: planId)
+                                    .then((value) {
+                                  EasyLoading.instance.indicatorColor =
+                                      AppColors.primaryColor;
+                                  if (value == 1) {}
+                                });
+                                //     .then((value) {
+                                //   if (value != 0) {
+                                //     print("value: $value");
+                                //     EasyLoading.instance.indicatorColor =
+                                //         AppColors.primaryColor;
+                                //     Navigator.pushReplacementNamed(
+                                //         context, AppRoutes.postAddedScreenRoute,
+                                //         arguments: PostAdded(
+                                //           id: value,
+                                //           isEvent: true,
+                                //           title: AppStrings.eventPosted,
+                                //           subTitle: AppStrings
+                                //               .sideHustlePostedSubTitle,
+                                //           buttonName: AppStrings.viewEvent,
+                                //         ));
+                                //   }
+                                // });
+                              }
+
+                              return;
                             },
                             name: AppStrings.continueText,
                             color: AppColors.whiteColor,

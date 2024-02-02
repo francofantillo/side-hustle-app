@@ -15,6 +15,10 @@ class AppliedTabList extends StatefulWidget {
 class _AppliedTabListState extends State<AppliedTabList> {
   @override
   Widget build(BuildContext context) {
+    return appliedJobs();
+  }
+
+  Widget appliedJobs({itemList}) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(bottom: 0.14.sh),
