@@ -97,7 +97,7 @@ class _FavouritesListEventState extends State<FavouritesListEvent> {
                               state.favouritesModel?.favourites?[index].image,
                           // price: AlphaAppData.favEventsList[index].price,
                           price:
-                              state.favouritesModel?.favourites?[index].price,
+                              "\$${state.favouritesModel?.favourites?[index].price?.toStringAsFixed(2)}",
                           // userName: AlphaAppData.favEventsList[index].userName,
                           userName: state.favouritesModel?.favourites?[index]
                               .ownerDetail?.name,

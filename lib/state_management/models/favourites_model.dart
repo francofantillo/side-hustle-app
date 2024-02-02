@@ -31,7 +31,7 @@ class Data {
   int? id;
   String? name;
   String? image;
-  String? price;
+  double? price;
   String? location;
   OwnerDetail? ownerDetail;
 
@@ -44,10 +44,12 @@ class Data {
       this.ownerDetail});
 
   Data.fromJson(Map<String, dynamic> json) {
+
     id = json['id'];
     name = json['name'];
     image = json['image'];
-    price = json['price'] != null ? json['price'].toString() : json['price'];
+    // price = json['price'] != null ? json['price'].toString() : json['price'];
+    price = json['price']?.toDouble();
     location = json['location'];
     ownerDetail = json['owner_detail'] != null
         ? new OwnerDetail.fromJson(json['owner_detail'])

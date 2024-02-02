@@ -132,32 +132,41 @@ class _YourResumeState extends State<YourResume> {
                             imageWidth: 0.28.sw,
                             borderWidth: .005.sw,
                           ),
-                          width(0.02.sw),
+                          // width(0.02.sw),
                           Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                textWidget(
-                                    // text: AppStrings.davidHan,
-                                    text: state.resumeModel?.data?.actualName,
-                                    maxLines: 1,
-                                    color: AppColors.textBlackColor,
-                                    fontFamily: AppFont.gilroyBold,
-                                    fontSize: AppDimensions.textHeadingSize,
-                                    fontWeight: FontWeight.bold),
-                                height(0.001.sw),
-                                textWidget(
-                                    // text: AppStrings.nickname,
-                                    text: state.resumeModel?.data?.nickName,
-                                    maxLines: 1,
-                                    fontSize: AppDimensions.textSizeSmall),
-                                height(0.01.sw),
-                                textWidget(
-                                    // text: AppStrings.profession,
-                                    text: state.resumeModel?.data?.profession,
-                                    maxLines: 1,
-                                    fontSize: AppDimensions.textSizeSmall),
-                              ],
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  textWidget(
+                                      // text: AppStrings.davidHan,
+                                      text: state.resumeModel?.data?.actualName,
+                                      maxLines: 1,
+                                      color: AppColors.textBlackColor,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontSize: AppDimensions.textHeadingSize,
+                                      fontWeight: FontWeight.bold),
+                                  // height(0.001.sw),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4.0, left: 1),
+                                    child: textWidget(
+                                        // text: AppStrings.nickname,
+                                        text: state.resumeModel?.data?.nickName,
+                                        maxLines: 1,
+                                        fontSize: AppDimensions.textSizeSmall),
+                                  ),
+                                  // height(0.01.sw),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4.0, left: 1),
+                                    child: textWidget(
+                                        // text: AppStrings.profession,
+                                        text: state.resumeModel?.data?.profession,
+                                        maxLines: 1,
+                                        fontSize: AppDimensions.textSizeSmall),
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         ],
