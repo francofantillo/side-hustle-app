@@ -67,11 +67,18 @@ class _WantedTabListState extends State<WantedTabList> {
                 imagePath: jobsItemList?[index].image,
                 price: jobsItemList?[index].budget?.toStringAsFixed(2),
                 userName: jobsItemList?[index].user?.name,
-                userRating: (jobsItemList?[index].user?.rating != null)
-                    ? (jobsItemList![index].user!.rating! == 0.0)
+                // userRating: (jobsItemList?[index].user?.rating != null)
+                //     ? (jobsItemList![index].user!.rating! == 0.0)
+                //         ? "0"
+                //         : "${jobsItemList[index].user?.rating?.toStringAsFixed(1)}"
+                //     : "",
+                // userRating:
+                //     jobsItemList?[index].user?.rating?.toStringAsFixed(1),
+                userRating:
+                    jobsItemList?[index].user?.rating?.toStringAsFixed(1) ==
+                            "0.0"
                         ? "0"
-                        : "${jobsItemList[index].user?.rating?.toStringAsFixed(2)}"
-                    : "",
+                        : jobsItemList?[index].user?.rating?.toStringAsFixed(1),
                 userProfile: jobsItemList?[index].user?.image,
               ),
             );

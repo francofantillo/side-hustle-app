@@ -354,21 +354,23 @@ class _ApplyForJobState extends State<ApplyForJob> {
                                     .textSubHeadingTextSizeViewForms),
                           ),
                           height(0.05.sw),
-                          Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: CustomMaterialButton(
-                                  // height: AppDimensions.defaultMaterialButtonHeightHome,
-                                  borderRadius: AppDimensions
-                                      .defaultMaterialButtonRadiusHome,
-                                  onPressed: () {
-                                    AppDialogues.noHeaderDialogue(
-                                            context: contextBuilder,
-                                            body: ApplyForJobDialogue(
-                                                jobId: widget.jobId))
-                                        .show();
-                                  },
-                                  name: AppStrings.applyForJob)),
+                          state.jobsDetailModel?.jobsDetailData?.isApplied == 1
+                              ? const SizedBox.shrink()
+                              : Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: CustomMaterialButton(
+                                      // height: AppDimensions.defaultMaterialButtonHeightHome,
+                                      borderRadius: AppDimensions
+                                          .defaultMaterialButtonRadiusHome,
+                                      onPressed: () {
+                                        AppDialogues.noHeaderDialogue(
+                                                context: contextBuilder,
+                                                body: ApplyForJobDialogue(
+                                                    jobId: widget.jobId))
+                                            .show();
+                                      },
+                                      name: AppStrings.applyForJob)),
                         ],
                       ),
                     ),

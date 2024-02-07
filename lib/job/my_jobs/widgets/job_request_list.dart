@@ -47,10 +47,19 @@ class _JobRequestListState extends State<JobRequestList> {
                           boarderColor: AppColors.itemBGColor,
                           // price: AlphaAppData
                           //     .jobsAndEventsList[0].itemList?[0].price,
-                          price: state.jobRequestModel?.data?[index].bidAmount?.toStringAsFixed(2),
-                          userName: state.jobRequestModel?.data?[index].username,
-                          userRating: state.jobRequestModel?.data?[index].rating?.toStringAsFixed(1),
-                          userProfile: state.jobRequestModel?.data?[index].image,
+                          price: state.jobRequestModel?.data?[index].bidAmount
+                              ?.toStringAsFixed(2),
+                          userName:
+                              state.jobRequestModel?.data?[index].username,
+                          // userRating: state.jobRequestModel?.data?[index].rating?.toStringAsFixed(1),
+                          userRating: state.jobRequestModel?.data?[index].rating
+                                      ?.toStringAsFixed(1) ==
+                                  "0.0"
+                              ? "0"
+                              : state.jobRequestModel?.data?[index].rating
+                                  ?.toStringAsFixed(1),
+                          userProfile:
+                              state.jobRequestModel?.data?[index].image,
                         ),
                       );
                     },

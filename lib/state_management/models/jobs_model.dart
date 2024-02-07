@@ -105,6 +105,7 @@ class User {
 
 class JobsDetail {
   String? title;
+  int? isApplied;
   String? id;
   String? userId;
   String? assignedUserId;
@@ -125,6 +126,7 @@ class JobsDetail {
 
   JobsDetail(
       {this.title,
+        this.isApplied,
       this.id,
       this.userId,
       this.assignedUserId,
@@ -145,6 +147,7 @@ class JobsDetail {
 
   JobsDetail.fromJson(Map<String, dynamic> json) {
     title = json['title'];
+    isApplied = json['is_applied'];
     id = json['id'];
     userId = json['user_id'];
     assignedUserId = json['assigned_user_id'];
@@ -173,6 +176,7 @@ class JobsDetail {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['title'] = this.title;
+    data['is_applied'] = this.isApplied;
     data['id'] = this.id;
     data['user_id'] = this.userId;
     data['assigned_user_id'] = this.assignedUserId;
