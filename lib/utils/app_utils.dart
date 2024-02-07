@@ -150,6 +150,22 @@ class AppUtils {
     return '$hours hours and $minutes minutes';
   }
 
+  static String formatTimeOfDay(TimeOfDay timeOfDay) {
+    final now = DateTime.now();
+    final dateTime = DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+    final outputFormat = DateFormat('h:mm a');
+    final time12 = outputFormat.format(dateTime);
+    return time12;
+  }
+
+  static TimeOfDay convertToTimeOfDay(String time24) {
+    final inputFormat = DateFormat('HH:mm:ss');
+    final dateTime = inputFormat.parse(time24);
+
+    return TimeOfDay.fromDateTime(dateTime);
+  }
+
   static showBottomModalSheet(
       {required BuildContext context, required Widget widget}) {
     showModalBottomSheet(
@@ -226,7 +242,7 @@ class AppUtils {
     if (mounted) {
       EasyLoading.show();
       final PlacesDetailsResponse? detail =
-          await displayPrediction(p, ScaffoldMessenger.of(context));
+      await displayPrediction(p, ScaffoldMessenger.of(context));
       final geometry = detail?.result.geometry!;
       final lat = geometry?.location.lat;
       final lng = geometry?.location.lng;

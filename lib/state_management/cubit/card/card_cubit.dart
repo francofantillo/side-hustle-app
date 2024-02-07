@@ -24,16 +24,16 @@ class CardCubit extends Cubit<CardState> {
   /// Add Card
   Future addCardCubit(
       {required BuildContext context,
-      required bool mounted,
-      required String? cardHolder,
-      required String? last4,
-      required CardDetails cardDetails}) async {
+        required bool mounted,
+        required String? cardHolder,
+        required String? last4,
+        required CardDetails cardDetails}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.instance.indicatorColor = AppColors.whiteColor;
     EasyLoading.show();
 
     final _cardToken =
-        await StripeService.getCardToken(cardDetails: cardDetails);
+    await StripeService.getCardToken(cardDetails: cardDetails);
     print("cardToken: $_cardToken");
     if (_cardToken == null) {
       EasyLoading.dismiss();
@@ -81,16 +81,16 @@ class CardCubit extends Cubit<CardState> {
   /// Default Card
   Future<int> defaultCardCubit(
       {required BuildContext context,
-      required bool mounted,
-      bool hideLoader = false,
-      required int? cardId}) async {
+        required bool mounted,
+        bool hideLoader = false,
+        required int? cardId}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
 
     final token = await prefs.getToken();
 
     final response =
-        await setDefaultCardProvider(apiToken: token, cardId: cardId);
+    await setDefaultCardProvider(apiToken: token, cardId: cardId);
 
     if (response != null) {
       /// Success
@@ -119,7 +119,7 @@ class CardCubit extends Cubit<CardState> {
   }
 
   /// Get Cards
-  Future<List<Data>?> getCardsCubit(
+  Future<List<DataCard>?> getCardsCubit(
       {required BuildContext context, required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     emit(state.copyWith(cardModel: CardModel()));

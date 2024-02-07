@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
+import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -19,6 +20,7 @@ import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
+import 'package:side_hustle/utils/validation/regular_expressions.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -29,10 +31,14 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class PostEvent extends StatefulWidget {
-  final bool isEdit;
+  final bool isEdit, isEventEditFromPostAdded;
   final int? id;
 
-  const PostEvent({super.key, this.isEdit = false, this.id});
+  const PostEvent(
+      {super.key,
+      this.isEdit = false,
+      this.isEventEditFromPostAdded = false,
+      this.id});
 
   @override
   State<PostEvent> createState() => _PostEventState();
@@ -85,6 +91,16 @@ class _PostEventState extends State<PostEvent> {
         _bloc.dateTextController.text = date;
         _bloc.startTimeTextController.text = startTime;
         _bloc.endTimeTextController.text = endTime;
+        if (value.eventDetails?.startTime != null) {
+          TimeOfDay _startTime =
+              AppUtils.convertToTimeOfDay(value.eventDetails!.startTime!);
+          AppUtils.firstSelectedTime = _startTime;
+        }
+        if (value.eventDetails?.endTime != null) {
+          TimeOfDay _endTime =
+              AppUtils.convertToTimeOfDay(value.eventDetails!.endTime!);
+          AppUtils.secondSelectedTime = _endTime;
+        }
         _bloc.eventNameTextController.text =
             value.eventDetails?.eventName ?? "";
         _bloc.eventLocationTextController.text =
@@ -120,18 +136,29 @@ class _PostEventState extends State<PostEvent> {
       if (value != null && value.isEmpty) {
         AppUtils.showToast(AppStrings.cardNotAddedError);
       } else if (value != null) {
+        int? cardId;
+        DataCard? dataCard;
+        for (int i = 0;
+            i < (_blocCard.state.cardModel?.data?.length ?? 0);
+            i++) {
+          if (_blocCard.state.cardModel?.data?[i].isDefault == 1) {
+            cardId = _blocCard.state.cardModel?.data?[i].id;
+            dataCard = _blocCard.state.cardModel?.data?[i];
+          }
+        }
+        print("cardId: $cardId isDefault: ${dataCard?.isDefault}");
         if (isEdit) {
           AppUtils.showBottomModalSheet(
               context: context,
-              widget: const ModalBottomSheetPackageTypePost(
-                isEventEdit: true,
-              ));
+              widget: ModalBottomSheetPackageTypePost(
+                  isEventEdit: true,
+                  isEventEditFromPostAdded: widget.isEventEditFromPostAdded,
+                  defaultCardId: cardId));
         } else {
           AppUtils.showBottomModalSheet(
               context: context,
-              widget: const ModalBottomSheetPackageTypePost(
-                isEventPost: true,
-              ));
+              widget: ModalBottomSheetPackageTypePost(
+                  isEventPost: true, defaultCardId: cardId));
         }
       }
     });
@@ -388,11 +415,16 @@ class _PostEventState extends State<PostEvent> {
                                       print(
                                           "selected time: ${AppUtils.firstSelectedTime}");
                                       if (mounted) {
-                                        _bloc.startTimeTextController.text =
-                                            AppUtils.firstSelectedTime != null
-                                                ? AppUtils.firstSelectedTime!
-                                                    .format(context)
-                                                : "";
+                                        if (AppUtils.firstSelectedTime !=
+                                            null) {
+                                          final String firstTime =
+                                              AppUtils.formatTimeOfDay(
+                                                  AppUtils.firstSelectedTime!);
+                                          _bloc.startTimeTextController.text =
+                                              firstTime;
+                                          print(
+                                              "Start Time: ${_bloc.startTimeTextController.text}");
+                                        }
                                       }
                                       // setState(() {});
                                     },
@@ -436,11 +468,16 @@ class _PostEventState extends State<PostEvent> {
                                     onTap: () async {
                                       await AppUtils.selectTime(context, false);
                                       if (mounted) {
-                                        _bloc.endTimeTextController.text =
-                                            AppUtils.secondSelectedTime != null
-                                                ? AppUtils.secondSelectedTime!
-                                                    .format(context)
-                                                : "";
+                                        if (AppUtils.secondSelectedTime !=
+                                            null) {
+                                          final String endTime =
+                                              AppUtils.formatTimeOfDay(
+                                                  AppUtils.secondSelectedTime!);
+                                          _bloc.endTimeTextController.text =
+                                              endTime;
+                                          print(
+                                              "End Time: ${_bloc.endTimeTextController.text}");
+                                        }
                                       }
                                       // setState(() {});
                                     },
@@ -627,10 +664,11 @@ class _PostEventState extends State<PostEvent> {
                           fieldValidator: (value) =>
                               value?.validateEmpty(AppStrings.eventTicketPrice),
                           keyboardType: const TextInputType.numberWithOptions(
-                              signed: false, decimal: true),
+                              signed: true, decimal: true),
                           inputFormatter: [
                             LengthLimitingTextInputFormatter(
                                 Constants.priceFieldCharacterLength),
+                            RegularExpressions.PRICE_FORMATTER
                           ],
                         ),
                         height(AppDimensions.formFieldsBetweenSpacing),
@@ -760,6 +798,7 @@ class _PostEventState extends State<PostEvent> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CustomMaterialButton(
                               onPressed: () async {
+                                // await getCards(isEdit: true);
                                 if (widget.isEdit) {
                                   // Navigator.pop(context);
                                   FocusManager.instance.primaryFocus?.unfocus();

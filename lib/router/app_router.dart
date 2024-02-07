@@ -136,9 +136,10 @@ class AppRouter {
           case AppRoutes.postEventScreenRoute:
             final args = routeSettings.arguments as PostEvent?;
             return PostEvent(
-              id: args?.id,
-              isEdit: args?.isEdit ?? false,
-            );
+                id: args?.id,
+                isEdit: args?.isEdit ?? false,
+                isEventEditFromPostAdded:
+                    args?.isEventEditFromPostAdded ?? false);
 
           case AppRoutes.viewEventScreenRoute:
             final args = routeSettings.arguments as ViewEvent?;
@@ -152,6 +153,7 @@ class AppRouter {
               id: args?.id,
               index: args?.index ?? 0,
               showEdit: args?.showEdit ?? true,
+              isEventEditFromPostAdded: args?.isEventEditFromPostAdded ?? false,
             );
 
           case AppRoutes.attendeesEventScreenRoute:

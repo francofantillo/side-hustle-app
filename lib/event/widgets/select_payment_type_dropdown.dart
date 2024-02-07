@@ -12,7 +12,7 @@ import '../../state_management/models/card_model.dart';
 
 class SelectPaymentTypeDropDown extends StatefulWidget {
   // final List<String> items;
-  final List<Data>? items;
+  final List<DataCard>? items;
   final String? hintText;
   final int? cardNumber;
   final ValueChanged<String?> selectedValue;
@@ -20,11 +20,11 @@ class SelectPaymentTypeDropDown extends StatefulWidget {
 
   const SelectPaymentTypeDropDown(
       {super.key,
-      required this.items,
-      required this.selectedValue,
-      required this.selectedItemId,
-      this.cardNumber,
-      this.hintText});
+        required this.items,
+        required this.selectedValue,
+        required this.selectedItemId,
+        this.cardNumber,
+        this.hintText});
 
   @override
   State<SelectPaymentTypeDropDown> createState() =>
@@ -92,18 +92,18 @@ class _SelectPaymentTypeDropDownState extends State<SelectPaymentTypeDropDown> {
                       ),
                     ),
                     items: widget.items
-                        ?.map((Data item) => DropdownMenuItem<String>(
-                              value: item.last4,
-                              child: Text(
-                                "****  ****  ****  ${item.last4}",
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppFont.gilroySemiBold,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.blackColor,
-                                ),
-                              ),
-                            ))
+                        ?.map((DataCard item) => DropdownMenuItem<String>(
+                      value: item.last4,
+                      child: Text(
+                        "****  ****  ****  ${item.last4}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppFont.gilroySemiBold,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.blackColor,
+                        ),
+                      ),
+                    ))
                         .toList(),
                     value: selectedValue,
                     onChanged: (String? value) {

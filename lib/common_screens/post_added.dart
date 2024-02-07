@@ -20,13 +20,13 @@ class PostAdded extends StatelessWidget {
 
   const PostAdded(
       {super.key,
-      this.id,
-      this.title,
-      this.subTitle,
-      this.buttonName = "",
-      this.isProduct = false,
-      this.isService = false,
-      this.isEvent = false});
+        this.id,
+        this.title,
+        this.subTitle,
+        this.buttonName = "",
+        this.isProduct = false,
+        this.isService = false,
+        this.isEvent = false});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,10 @@ class PostAdded extends StatelessWidget {
                   } else if (isEvent) {
                     Navigator.pushReplacementNamed(
                         context, AppRoutes.viewEventSelfScreenRoute,
-                        arguments: ViewEventSelf(id: id));
+                        arguments: ViewEventSelf(
+                          id: id,
+                          isEventEditFromPostAdded: true,
+                        ));
                   }
                 },
                 name: buttonName,

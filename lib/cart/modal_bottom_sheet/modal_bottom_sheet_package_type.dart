@@ -8,7 +8,6 @@ import 'package:side_hustle/event/widgets/select_payment_type_dropdown.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
-import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -20,15 +19,23 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ModalBottomSheetPackageTypePost extends StatefulWidget {
-  final bool isEventPost, isEventEdit, isProduct, isService, isJob;
+  final bool isEventPost,
+      isEventEdit,
+      isEventEditFromPostAdded,
+      isProduct,
+      isService,
+      isJob;
+  final int? defaultCardId;
 
   const ModalBottomSheetPackageTypePost(
       {super.key,
-      this.isEventPost = false,
-      this.isEventEdit = false,
-      this.isProduct = false,
-      this.isService = false,
-      this.isJob = false});
+        this.isEventPost = false,
+        this.isEventEdit = false,
+        this.isEventEditFromPostAdded = false,
+        this.isProduct = false,
+        this.isService = false,
+        this.defaultCardId,
+        this.isJob = false});
 
   @override
   State<ModalBottomSheetPackageTypePost> createState() =>
@@ -41,17 +48,17 @@ class _ModalBottomSheetPackageTypePostState
     extends State<ModalBottomSheetPackageTypePost> {
   late final CardCubit _blocCard;
   late final EventsCubit _blocEvent;
-  late final JobsCubit _blocJobs;
-
   int? cardId;
+  int? defaultCard;
   SingingCharacter? _character = SingingCharacter.package1;
 
   late final ValueNotifier<bool> _packagesGroupValue;
 
   int defaultCardIndex = 2;
-  Map<String, List> defaultCard = {
-    "x": [false, false, false],
-  };
+
+  // Map<String, List> defaultCard = {
+  //   "x": [false, false, false],
+  // };
 
   Map<String, List> packages = {
     "packages": [
@@ -78,18 +85,22 @@ class _ModalBottomSheetPackageTypePostState
     // setDefaultCardList();
     _blocCard = BlocProvider.of<CardCubit>(context);
     _blocEvent = BlocProvider.of<EventsCubit>(context);
-    _blocJobs = BlocProvider.of<JobsCubit>(context);
+    cardId = _blocCard.state.cardModel?.data?[0].id;
+    defaultCard = widget.defaultCardId;
+    print("ModalBottomSheetPackageTypePost cardId: $cardId");
+    print(
+        "isEventPost: ${widget.isEventPost}, isEventEdit: ${widget.isEventEdit}");
     super.initState();
   }
 
-  setDefaultCardList() {
-    for (int i = 0; i < packages["packages"]!.length; i++) {
-      defaultCard["x"]![i] = packages["packages"]![i]["default"];
-      if (packages["packages"]![i]["default"]) {
-        defaultCardIndex = i;
-      }
-    }
-  }
+  // setDefaultCardList() {
+  //   for (int i = 0; i < packages["packages"]!.length; i++) {
+  //     defaultCard["x"]![i] = packages["packages"]![i]["default"];
+  //     if (packages["packages"]![i]["default"]) {
+  //       defaultCardIndex = i;
+  //     }
+  //   }
+  // }
 
   // final List<String> items = [
   //   "****  ****  ****  4567",
@@ -112,9 +123,9 @@ class _ModalBottomSheetPackageTypePostState
               color: AppColors.primaryColor,
               borderRadius: BorderRadius.only(
                   topRight:
-                      Radius.circular(AppDimensions.boarderRadiusBottomSheet),
+                  Radius.circular(AppDimensions.boarderRadiusBottomSheet),
                   topLeft:
-                      Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
+                  Radius.circular(AppDimensions.boarderRadiusBottomSheet)),
               // image: const DecorationImage(
               //     image: AssetImage(AssetsPath.drawerBg), fit: BoxFit.cover)
             ),
@@ -149,7 +160,7 @@ class _ModalBottomSheetPackageTypePostState
                 // height(0.06.sw),
                 Padding(
                   padding:
-                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                  EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -157,13 +168,13 @@ class _ModalBottomSheetPackageTypePostState
                         borderRadius: BorderRadius.circular(18)),
                     child: Padding(
                       padding:
-                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                      const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           textWidget(
                               text:
-                                  "\$${packages["packages"]?[0]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                              "\$${packages["packages"]?[0]["packagePrice"].toStringAsFixed(2) ?? ""}",
                               color: AppColors.textBlackColor,
                               fontFamily: AppFont.gilroyBold,
                               fontSize: AppDimensions.textSizeNormal,
@@ -194,7 +205,7 @@ class _ModalBottomSheetPackageTypePostState
                 ),
                 Padding(
                   padding:
-                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                  EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -202,13 +213,13 @@ class _ModalBottomSheetPackageTypePostState
                         borderRadius: BorderRadius.circular(18)),
                     child: Padding(
                       padding:
-                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                      const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           textWidget(
                               text:
-                                  "\$${packages["packages"]?[1]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                              "\$${packages["packages"]?[1]["packagePrice"].toStringAsFixed(2) ?? ""}",
                               color: AppColors.textBlackColor,
                               fontFamily: AppFont.gilroyBold,
                               fontSize: AppDimensions.textSizeNormal,
@@ -239,7 +250,7 @@ class _ModalBottomSheetPackageTypePostState
                 ),
                 Padding(
                   padding:
-                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                  EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -247,13 +258,13 @@ class _ModalBottomSheetPackageTypePostState
                         borderRadius: BorderRadius.circular(18)),
                     child: Padding(
                       padding:
-                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
+                      const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           textWidget(
                               text:
-                                  "\$${packages["packages"]?[2]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                              "\$${packages["packages"]?[2]["packagePrice"].toStringAsFixed(2) ?? ""}",
                               color: AppColors.textBlackColor,
                               fontFamily: AppFont.gilroyBold,
                               fontSize: AppDimensions.textSizeNormal,
@@ -303,7 +314,7 @@ class _ModalBottomSheetPackageTypePostState
                     width: 1.sw,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.w),
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.w),
                       child: SelectPaymentTypeDropDown(
                         // items: items,
                         // items: items,
@@ -322,329 +333,285 @@ class _ModalBottomSheetPackageTypePostState
                 }),
                 widget.isJob
                     ? Padding(
-                        // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20, bottom: 20),
-                        child: CustomMaterialButton(
-                            onPressed: () async {
-                              EasyLoading.instance.indicatorColor =
-                                  AppColors.whiteColor;
-                              late final int planId;
-                              print(
-                                  "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
-                              if (_character?.name ==
-                                  SingingCharacter.package1.name) {
-                                planId = 1;
-                              } else if (_character?.name ==
-                                  SingingCharacter.package2.name) {
-                                planId = 2;
-                              } else if (_character?.name ==
-                                  SingingCharacter.package3.name) {
-                                planId = 3;
-                              }
-                              print("planId: $planId");
-                              // Navigator.pop(context);
-                              // Navigator.pop(context);
-                              if (cardId != null) {
-                                await _blocCard
-                                    .defaultCardCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        hideLoader: true,
-                                        cardId: cardId)
-                                    .then((value) async {
-                                  if (value == 1) {
-                                    await _blocJobs
-                                        .postJobCubit(
-                                            context: context,
-                                            mounted: mounted,
-                                            planId: planId)
-                                        .then((value) {
-                                      EasyLoading.instance.indicatorColor =
-                                          AppColors.primaryColor;
-                                    });
-                                  } else {
-                                    EasyLoading.instance.indicatorColor =
-                                        AppColors.primaryColor;
-                                  }
-                                });
-                              } else {
-                                await _blocJobs
-                                    .postJobCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        planId: planId)
-                                    .then((value) {
-                                  EasyLoading.instance.indicatorColor =
-                                      AppColors.primaryColor;
-                                  if (value == 1) {}
-                                });
-                                //     .then((value) {
-                                //   if (value != 0) {
-                                //     print("value: $value");
-                                //     EasyLoading.instance.indicatorColor =
-                                //         AppColors.primaryColor;
-                                //     Navigator.pushReplacementNamed(
-                                //         context, AppRoutes.postAddedScreenRoute,
-                                //         arguments: PostAdded(
-                                //           id: value,
-                                //           isEvent: true,
-                                //           title: AppStrings.eventPosted,
-                                //           subTitle: AppStrings
-                                //               .sideHustlePostedSubTitle,
-                                //           buttonName: AppStrings.viewEvent,
-                                //         ));
-                                //   }
-                                // });
-                              }
-
-                              return;
-                            },
-                            name: AppStrings.continueText,
-                            color: AppColors.whiteColor,
-                            textColor: AppColors.primaryColor),
-                      )
+                  // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
+                  padding: const EdgeInsets.only(
+                      left: 20.0, right: 20, bottom: 20),
+                  child: CustomMaterialButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                      name: AppStrings.continueText,
+                      color: AppColors.whiteColor,
+                      textColor: AppColors.primaryColor),
+                )
                     : const SizedBox.shrink(),
                 widget.isProduct
                     ? Padding(
-                        // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20, bottom: 20),
-                        child: CustomMaterialButton(
-                            onPressed: () async {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                              Navigator.pushNamed(
-                                  context, AppRoutes.postAddedScreenRoute,
-                                  arguments: const PostAdded(
-                                    isProduct: true,
-                                    title: AppStrings.sideHustlePosted,
-                                    subTitle:
-                                        AppStrings.sideHustlePostedSubTitle,
-                                    buttonName: AppStrings.viewSideHustle,
-                                  ));
-                              return;
-                            },
-                            name: AppStrings.continueText,
-                            color: AppColors.whiteColor,
-                            textColor: AppColors.primaryColor),
-                      )
+                  // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
+                  padding: const EdgeInsets.only(
+                      left: 20.0, right: 20, bottom: 20),
+                  child: CustomMaterialButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pushNamed(
+                            context, AppRoutes.postAddedScreenRoute,
+                            arguments: const PostAdded(
+                              isProduct: true,
+                              title: AppStrings.sideHustlePosted,
+                              subTitle:
+                              AppStrings.sideHustlePostedSubTitle,
+                              buttonName: AppStrings.viewSideHustle,
+                            ));
+                        return;
+                      },
+                      name: AppStrings.continueText,
+                      color: AppColors.whiteColor,
+                      textColor: AppColors.primaryColor),
+                )
                     : const SizedBox.shrink(),
                 widget.isService
                     ? Padding(
-                        // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20, bottom: 20),
-                        child: CustomMaterialButton(
-                            onPressed: () async {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                              Navigator.pushNamed(
-                                  context, AppRoutes.postAddedScreenRoute,
-                                  arguments: const PostAdded(
-                                    isService: true,
-                                    title: AppStrings.sideHustlePosted,
-                                    subTitle:
-                                        AppStrings.sideHustlePostedSubTitle,
-                                    buttonName: AppStrings.viewSideHustle,
-                                  ));
-                              return;
-                            },
-                            name: AppStrings.continueText,
-                            color: AppColors.whiteColor,
-                            textColor: AppColors.primaryColor),
-                      )
+                  // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
+                  padding: const EdgeInsets.only(
+                      left: 20.0, right: 20, bottom: 20),
+                  child: CustomMaterialButton(
+                      onPressed: () async {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pushNamed(
+                            context, AppRoutes.postAddedScreenRoute,
+                            arguments: const PostAdded(
+                              isService: true,
+                              title: AppStrings.sideHustlePosted,
+                              subTitle:
+                              AppStrings.sideHustlePostedSubTitle,
+                              buttonName: AppStrings.viewSideHustle,
+                            ));
+                        return;
+                      },
+                      name: AppStrings.continueText,
+                      color: AppColors.whiteColor,
+                      textColor: AppColors.primaryColor),
+                )
                     : const SizedBox.shrink(),
                 widget.isEventPost
                     ? Padding(
-                        // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20, bottom: 20),
-                        child: CustomMaterialButton(
-                            onPressed: () async {
+                  // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
+                  padding: const EdgeInsets.only(
+                      left: 20.0, right: 20, bottom: 20),
+                  child: CustomMaterialButton(
+                      onPressed: () async {
+                        EasyLoading.instance.indicatorColor =
+                            AppColors.whiteColor;
+                        late final int planId;
+                        print(
+                            "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                        if (_character?.name ==
+                            SingingCharacter.package1.name) {
+                          planId = 1;
+                        } else if (_character?.name ==
+                            SingingCharacter.package2.name) {
+                          planId = 2;
+                        } else if (_character?.name ==
+                            SingingCharacter.package3.name) {
+                          planId = 3;
+                        }
+                        print("planId: $planId");
+                        // Navigator.pop(context);
+                        // Navigator.pop(context);
+                        if (cardId != defaultCard) {
+                          await _blocCard
+                              .defaultCardCubit(
+                              context: context,
+                              mounted: mounted,
+                              hideLoader: true,
+                              cardId: cardId)
+                              .then((value) async {
+                            if (value == 1) {
+                              defaultCard = cardId;
+                              await _blocEvent
+                                  .postAnEventCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  planId: planId)
+                                  .then((value) {
+                                if (value != 0) {
+                                  EasyLoading.instance.indicatorColor =
+                                      AppColors.primaryColor;
+                                  // Navigator.pop(context);
+                                  // Navigator.pop(context);
+                                  print("value: $value");
+                                  Navigator.pushReplacementNamed(context,
+                                      AppRoutes.postAddedScreenRoute,
+                                      arguments: PostAdded(
+                                        id: value,
+                                        isEvent: true,
+                                        title: AppStrings.eventPosted,
+                                        subTitle: AppStrings
+                                            .sideHustlePostedSubTitle,
+                                        buttonName: AppStrings.viewEvent,
+                                      ));
+                                } else {
+                                  EasyLoading.instance.indicatorColor =
+                                      AppColors.primaryColor;
+                                }
+                              });
+                            } else {
                               EasyLoading.instance.indicatorColor =
-                                  AppColors.whiteColor;
-                              late final int planId;
-                              print(
-                                  "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
-                              if (_character?.name ==
-                                  SingingCharacter.package1.name) {
-                                planId = 1;
-                              } else if (_character?.name ==
-                                  SingingCharacter.package2.name) {
-                                planId = 2;
-                              } else if (_character?.name ==
-                                  SingingCharacter.package3.name) {
-                                planId = 3;
-                              }
-                              print("planId: $planId");
-                              // Navigator.pop(context);
-                              // Navigator.pop(context);
-                              if (cardId != null) {
-                                await _blocCard
-                                    .defaultCardCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        hideLoader: true,
-                                        cardId: cardId)
-                                    .then((value) async {
-                                  if (value == 1) {
-                                    await _blocEvent
-                                        .postAnEventCubit(
-                                            context: context,
-                                            mounted: mounted,
-                                            planId: planId)
-                                        .then((value) {
-                                      if (value != 0) {
-                                        EasyLoading.instance.indicatorColor =
-                                            AppColors.primaryColor;
-                                        // Navigator.pop(context);
-                                        // Navigator.pop(context);
-                                        print("value: $value");
-                                        Navigator.pushReplacementNamed(context,
-                                            AppRoutes.postAddedScreenRoute,
-                                            arguments: PostAdded(
-                                              id: value,
-                                              isEvent: true,
-                                              title: AppStrings.eventPosted,
-                                              subTitle: AppStrings
-                                                  .sideHustlePostedSubTitle,
-                                              buttonName: AppStrings.viewEvent,
-                                            ));
-                                      } else {
-                                        EasyLoading.instance.indicatorColor =
-                                            AppColors.primaryColor;
-                                      }
-                                    });
-                                  } else {
-                                    EasyLoading.instance.indicatorColor =
-                                        AppColors.primaryColor;
-                                  }
-                                });
-                              } else {
-                                await _blocEvent
-                                    .postAnEventCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        planId: planId)
-                                    .then((value) {
-                                  if (value != 0) {
-                                    print("value: $value");
-                                    EasyLoading.instance.indicatorColor =
-                                        AppColors.primaryColor;
-                                    Navigator.pushReplacementNamed(
-                                        context, AppRoutes.postAddedScreenRoute,
-                                        arguments: PostAdded(
-                                          id: value,
-                                          isEvent: true,
-                                          title: AppStrings.eventPosted,
-                                          subTitle: AppStrings
-                                              .sideHustlePostedSubTitle,
-                                          buttonName: AppStrings.viewEvent,
-                                        ));
-                                  } else {
-                                    EasyLoading.instance.indicatorColor =
-                                        AppColors.primaryColor;
-                                  }
-                                });
-                              }
+                                  AppColors.primaryColor;
+                            }
+                          });
+                        } else {
+                          await _blocEvent
+                              .postAnEventCubit(
+                              context: context,
+                              mounted: mounted,
+                              planId: planId)
+                              .then((value) {
+                            if (value != 0) {
+                              print("value: $value");
+                              EasyLoading.instance.indicatorColor =
+                                  AppColors.primaryColor;
+                              Navigator.pushReplacementNamed(
+                                  context, AppRoutes.postAddedScreenRoute,
+                                  arguments: PostAdded(
+                                    id: value,
+                                    isEvent: true,
+                                    title: AppStrings.eventPosted,
+                                    subTitle: AppStrings
+                                        .sideHustlePostedSubTitle,
+                                    buttonName: AppStrings.viewEvent,
+                                  ));
+                            } else {
+                              EasyLoading.instance.indicatorColor =
+                                  AppColors.primaryColor;
+                            }
+                          });
+                        }
 
-                              return;
-                            },
-                            name: AppStrings.continueText,
-                            color: AppColors.whiteColor,
-                            textColor: AppColors.primaryColor),
-                      )
+                        return;
+                      },
+                      name: AppStrings.continueText,
+                      color: AppColors.whiteColor,
+                      textColor: AppColors.primaryColor),
+                )
                     : const SizedBox.shrink(),
                 widget.isEventEdit
                     ? Padding(
-                        // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
-                        padding: const EdgeInsets.only(
-                            left: 20.0, right: 20, bottom: 20),
-                        child: CustomMaterialButton(
-                            onPressed: () async {
-                              EasyLoading.instance.indicatorColor =
-                                  AppColors.whiteColor;
-                              late final int planId;
-                              print(
-                                  "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
-                              if (_character?.name ==
-                                  SingingCharacter.package1.name) {
-                                planId = 1;
-                              } else if (_character?.name ==
-                                  SingingCharacter.package2.name) {
-                                planId = 2;
-                              } else if (_character?.name ==
-                                  SingingCharacter.package3.name) {
-                                planId = 3;
-                              }
-                              print("planId: $planId");
-                              // Navigator.pop(context);
-                              // Navigator.pop(context);
-                              if (cardId != null) {
-                                await _blocCard
-                                    .defaultCardCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        hideLoader: true,
-                                        cardId: cardId)
-                                    .then((value) async {
-                                  if (value == 1) {
-                                    await _blocEvent
-                                        .editAnEventCubit(
-                                            context: context,
-                                            mounted: mounted,
-                                            planId: planId)
-                                        .then((value) {
-                                      if (value != 0) {
-                                        EasyLoading.instance.indicatorColor =
-                                            AppColors.primaryColor;
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                        Navigator.pushReplacementNamed(context,
-                                            AppRoutes.myEventsScreenRoute);
-                                        print("value: $value");
-                                      } else {
-                                        EasyLoading.instance.indicatorColor =
-                                            AppColors.primaryColor;
-                                      }
-                                    });
-                                  } else {
+                  // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
+                  padding: const EdgeInsets.only(
+                      left: 20.0, right: 20, bottom: 20),
+                  child: CustomMaterialButton(
+                      onPressed: () async {
+                        print(
+                            "isEventEditFromPostAdded: ${widget.isEventEditFromPostAdded}");
+                        EasyLoading.instance.indicatorColor =
+                            AppColors.whiteColor;
+                        late final int planId;
+                        print(
+                            "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                        if (_character?.name ==
+                            SingingCharacter.package1.name) {
+                          planId = 1;
+                        } else if (_character?.name ==
+                            SingingCharacter.package2.name) {
+                          planId = 2;
+                        } else if (_character?.name ==
+                            SingingCharacter.package3.name) {
+                          planId = 3;
+                        }
+                        print("planId: $planId");
+                        // Navigator.pop(context);
+                        // Navigator.pop(context);
+                        if (cardId != defaultCard) {
+                          await _blocCard
+                              .defaultCardCubit(
+                              context: context,
+                              mounted: mounted,
+                              hideLoader: true,
+                              cardId: cardId)
+                              .then((value) async {
+                            if (value == 1) {
+                              defaultCard = cardId;
+                              await _blocEvent
+                                  .editAnEventCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  planId: planId)
+                                  .then((value) {
+                                if (value != 0) {
+                                  if (widget.isEventEditFromPostAdded) {
                                     EasyLoading.instance.indicatorColor =
                                         AppColors.primaryColor;
-                                  }
-                                });
-                              } else {
-                                await _blocEvent
-                                    .editAnEventCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        planId: planId)
-                                    .then((value) {
-                                  if (value != 0) {
-                                    print("value: $value");
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                    // Navigator.pop(context);
+                                    Navigator.pushReplacementNamed(
+                                        context,
+                                        AppRoutes.myEventsScreenRoute);
+                                  } else {
                                     EasyLoading.instance.indicatorColor =
                                         AppColors.primaryColor;
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                     Navigator.pushReplacementNamed(
-                                        context, AppRoutes.myEventsScreenRoute);
-                                    print("value: $value");
-                                  } else {
-                                    EasyLoading.instance.indicatorColor =
-                                        AppColors.primaryColor;
+                                        context,
+                                        AppRoutes.myEventsScreenRoute);
                                   }
-                                });
-                              }
 
-                              return;
-                            },
-                            name: AppStrings.continueText,
-                            color: AppColors.whiteColor,
-                            textColor: AppColors.primaryColor),
-                      )
+                                  print("value: $value");
+                                } else {
+                                  EasyLoading.instance.indicatorColor =
+                                      AppColors.primaryColor;
+                                }
+                              });
+                            } else {
+                              EasyLoading.instance.indicatorColor =
+                                  AppColors.primaryColor;
+                            }
+                          });
+                        } else {
+                          await _blocEvent
+                              .editAnEventCubit(
+                              context: context,
+                              mounted: mounted,
+                              planId: planId)
+                              .then((value) {
+                            if (value != 0) {
+                              if (widget.isEventEditFromPostAdded) {
+                                EasyLoading.instance.indicatorColor =
+                                    AppColors.primaryColor;
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                // Navigator.pop(context);
+                                Navigator.pushReplacementNamed(context,
+                                    AppRoutes.myEventsScreenRoute);
+                              } else {
+                                EasyLoading.instance.indicatorColor =
+                                    AppColors.primaryColor;
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pushReplacementNamed(context,
+                                    AppRoutes.myEventsScreenRoute);
+                              }
+                              print("value: $value");
+                            } else {
+                              EasyLoading.instance.indicatorColor =
+                                  AppColors.primaryColor;
+                            }
+                          });
+                        }
+
+                        return;
+                      },
+                      name: AppStrings.continueText,
+                      color: AppColors.whiteColor,
+                      textColor: AppColors.primaryColor),
+                )
                     : const SizedBox.shrink(),
                 // height(0.02.sw),
                 Center(

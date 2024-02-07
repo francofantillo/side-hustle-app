@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegularExpressions {
@@ -25,4 +26,7 @@ class RegularExpressions {
     filter: {"#": RegExp(r'[0-9]')}, // Allow only digits (0-9)
     type: MaskAutoCompletionType.lazy,
   );
+
+  static FilteringTextInputFormatter PRICE_FORMATTER = FilteringTextInputFormatter.allow(RegExp(r"[0-9.]"));
+
 }

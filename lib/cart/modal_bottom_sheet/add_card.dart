@@ -43,7 +43,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
       key: _cardFormKey,
       child: Padding(
         padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -53,7 +53,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.only(
                     topRight:
-                        Radius.circular(AppDimensions.boarderRadiusBottomSheet),
+                    Radius.circular(AppDimensions.boarderRadiusBottomSheet),
                     topLeft: Radius.circular(
                         AppDimensions.boarderRadiusBottomSheet)),
               ),
@@ -62,7 +62,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16.0, right: 16.0, top: 16),
+                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -93,7 +93,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 12.0, right: 12.0, top: 12),
+                    const EdgeInsets.only(left: 12.0, right: 12.0, top: 12),
                     child: CustomTextFormField(
                       controller: _cardNameController,
                       inputFormatter: [
@@ -110,7 +110,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 12.0, right: 12.0, top: 4),
+                    const EdgeInsets.only(left: 12.0, right: 12.0, top: 4),
                     child: CustomTextFormField(
                         controller: _cardNumberController,
                         isShowBoarder: false,
@@ -128,7 +128,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 12.0, right: 12.0, top: 4),
+                    const EdgeInsets.only(left: 12.0, right: 12.0, top: 4),
                     child: Row(
                       children: [
                         Expanded(
@@ -142,8 +142,8 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                               hintText: AppStrings.expiry,
                               onTap: () async {
                                 final String? date =
-                                    await AppUtils.selectCardExpiry(
-                                        context: context);
+                                await AppUtils.selectCardExpiry(
+                                    context: context);
                                 if (date != null) {
                                   print("date: ${date}");
                                   _cardExpiryController.text = date;
@@ -177,7 +177,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                   height(0.02.sw),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16.0, right: 16.0, top: 8),
+                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 8),
                     child: CustomMaterialButton(
                         onPressed: () async {
                           FocusManager.instance.primaryFocus?.unfocus();
@@ -200,7 +200,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                                   cardDetails: _card,
                                   cardHolder: _cardNameController.text,
                                   last4:
-                                      _cardNumberController.text.substring(15));
+                                  _cardNumberController.text.substring(15));
                             }
                           }
                         },
@@ -233,6 +233,13 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                           fontSize: AppDimensions.textSizeSmall),
                     ),
                   ),
+                  Center(
+                    child: textWidget(
+                        text: "",
+                        maxLines: 2,
+                        color: AppColors.textWhiteColor,
+                        fontSize: AppDimensions.textSizeSmall),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 16),
                     child: Center(
@@ -250,27 +257,5 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
         ),
       ),
     );
-  }
-
-  submitForm() async {
-    _card = _card.copyWith(number: "4242424242424242");
-    _card = _card.copyWith(expirationMonth: int.tryParse("12"));
-    _card = _card.copyWith(expirationYear: int.tryParse("2024"));
-    _card = _card.copyWith(cvc: "123");
-    try {
-      await Stripe.instance.dangerouslyUpdateCardDetails(_card);
-
-      PaymentMethod paymentMethod = await Stripe.instance.createPaymentMethod(
-        params: const PaymentMethodParams.card(
-          paymentMethodData: PaymentMethodData(
-              billingDetails: BillingDetails(name: "David Willy")),
-        ),
-      );
-      // Handle the obtained paymentMethod, which contains the card token
-      String cardToken = paymentMethod.id;
-      print('Card token: $cardToken');
-    } catch (error) {
-      print('Error obtaining card token: $error');
-    }
   }
 }
