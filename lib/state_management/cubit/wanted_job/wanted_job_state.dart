@@ -9,6 +9,11 @@ class JobsState {
   bool searching;
   List<File>? itemImagesFile;
   bool editJobLoading;
+  String? totalHours;
+  MyJobsModel? myJobsModel;
+  bool myJobsLoading;
+  JobRequestModel? jobRequestModel;
+  bool jobRequestLoading;
 
   JobsState(
       {this.jobsModel,
@@ -18,7 +23,12 @@ class JobsState {
       this.wantedJobsTempList,
       this.searching = false,
       this.itemImagesFile,
-      this.editJobLoading = false});
+      this.editJobLoading = false,
+      this.totalHours,
+      this.myJobsModel,
+      this.myJobsLoading = false,
+      this.jobRequestModel,
+      this.jobRequestLoading = true});
 
   JobsState copyWith(
       {JobsModel? jobsModel,
@@ -28,7 +38,12 @@ class JobsState {
       List<File>? itemImagesFile,
       JobsModel? jobsDetailModel,
       bool? jobsDetailLoading,
-      bool? editJobLoading}) {
+      bool? editJobLoading,
+      String? totalHours,
+      MyJobsModel? myJobsModel,
+      bool? myJobsLoading,
+      JobRequestModel? jobRequestModel,
+      bool? jobRequestLoading}) {
     return JobsState(
         jobsModel: jobsModel ?? this.jobsModel,
         jobsLoading: jobsLoading ?? this.jobsLoading,
@@ -37,6 +52,11 @@ class JobsState {
         wantedJobsTempList: wantedJobsTempList ?? this.wantedJobsTempList,
         searching: searching ?? this.searching,
         itemImagesFile: itemImagesFile ?? this.itemImagesFile,
-        editJobLoading: editJobLoading ?? this.editJobLoading);
+        editJobLoading: editJobLoading ?? this.editJobLoading,
+        totalHours: totalHours ?? this.totalHours,
+        myJobsModel: myJobsModel ?? this.myJobsModel,
+        myJobsLoading: myJobsLoading ?? this.myJobsLoading,
+        jobRequestModel: jobRequestModel ?? this.jobRequestModel,
+        jobRequestLoading: jobRequestLoading ?? this.jobRequestLoading);
   }
 }

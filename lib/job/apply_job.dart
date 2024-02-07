@@ -363,10 +363,10 @@ class _ApplyForJobState extends State<ApplyForJob> {
                                       .defaultMaterialButtonRadiusHome,
                                   onPressed: () {
                                     AppDialogues.noHeaderDialogue(
-                                        context: contextBuilder,
-                                        body: ApplyForJobDialogue(
-                                          jobId: widget.jobId
-                                        )).show();
+                                            context: contextBuilder,
+                                            body: ApplyForJobDialogue(
+                                                jobId: widget.jobId))
+                                        .show();
                                   },
                                   name: AppStrings.applyForJob)),
                         ],

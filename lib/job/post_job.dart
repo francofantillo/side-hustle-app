@@ -57,65 +57,52 @@ class _PostJobState extends State<PostJob> {
     _bloc = BlocProvider.of(context);
     _blocCard = BlocProvider.of(context);
     _bloc.initPostJobControllers();
+    print("Job id: ${widget.id}");
+    widget.id != null
+        ? getJob()
+        // : _bloc.state.editEventModel = EventsModel();
+        : null;
     super.initState();
   }
 
-/*  Future getEvent() async {
+  Future getJob() async {
     await _bloc
         .getEditJobCubit(context: context, mounted: mounted, jobId: widget.id)
         .then((value) {
       if (value != null) {
-        final date = value.eventDetails?.startDate != null
+        final date = value.jobDate != null
             ? AppUtils.formatDateView(
-            selectedDate: DateTime.parse(value.eventDetails!.startDate!))
+                selectedDate: DateTime.parse(value.jobDate!))
             : "";
-        final startTime = DateTimeConversions.convertTo12HourFormat(
-            value.eventDetails?.startTime);
-        final endTime = DateTimeConversions.convertTo12HourFormat(
-            value.eventDetails?.endTime);
+        final startTime =
+            DateTimeConversions.convertTo12HourFormat(value.jobTime);
+        final endTime =
+            DateTimeConversions.convertTo12HourFormat(value.endTime);
 
-        print("getEvent lat: ${value.eventDetails?.lat}");
-        print("getEvent lng: ${value.eventDetails?.lng}");
+        print("getEvent lat: ${value.lat}");
+        print("getEvent lng: ${value.lng}");
         _bloc.dateTextController.text = date;
         _bloc.startTimeTextController.text = startTime;
         _bloc.endTimeTextController.text = endTime;
-        if (value.eventDetails?.startTime != null) {
-          TimeOfDay _startTime =
-          AppUtils.convertToTimeOfDay(value.eventDetails!.startTime!);
+        if (value.jobTime != null) {
+          TimeOfDay _startTime = AppUtils.convertToTimeOfDay(value.jobTime!);
           AppUtils.firstSelectedTime = _startTime;
         }
-        if (value.eventDetails?.endTime != null) {
-          TimeOfDay _endTime =
-          AppUtils.convertToTimeOfDay(value.eventDetails!.endTime!);
+        if (value.endTime != null) {
+          TimeOfDay _endTime = AppUtils.convertToTimeOfDay(value.endTime!);
           AppUtils.secondSelectedTime = _endTime;
         }
-        _bloc.eventNameTextController.text =
-            value.eventDetails?.eventName ?? "";
-        _bloc.eventLocationTextController.text =
-            value.eventDetails?.location ?? "";
-        _bloc.eventPurposeTextController.text =
-            value.eventDetails?.purpose ?? "";
-        _bloc.eventThemeTextController.text = value.eventDetails?.theme ?? "";
-        _bloc.eventPriceTextController.text =
-            value.eventDetails?.price?.toStringAsFixed(2) ?? "";
-        if (value.eventDetails?.vendorsList?.length != null &&
-            value.eventDetails!.vendorsList!.isNotEmpty) {
-          for (int i = 0; i < value.eventDetails!.vendorsList!.length; i++) {
-            vendorList.add(value.eventDetails!.vendorsList![i]);
-          }
-        }
-        if (value.eventDetails?.availableAttractions?.length != null &&
-            value.eventDetails!.availableAttractions!.isNotEmpty) {
-          for (int i = 0;
-          i < value.eventDetails!.availableAttractions!.length;
-          i++) {
-            availableAttractionsList
-                .add(value.eventDetails!.availableAttractions![i].attr);
-          }
-        }
+        _bloc.titleTextController.text = value.title ?? "";
+        _bloc.locationTextController.text = value.location ?? "";
+        _bloc.descriptionTextController.text = value.description ?? "";
+        _bloc.additionalInfoTextController.text =
+            value.additionalInformation ?? "";
+        _bloc.areaCodeTextController.text = value.areaCode ?? "";
+        _bloc.priceTextController.text = value.budget?.toStringAsFixed(2) ?? "";
+        _bloc.totalHour();
       }
     });
-  }*/
+  }
 
   Future getCards({required bool isEdit}) async {
     await _blocCard
@@ -473,11 +460,16 @@ class _PostJobState extends State<PostJob> {
                                 print(
                                     "selected time: ${AppUtils.firstSelectedTime}");
                                 if (mounted) {
-                                  _bloc.startTimeTextController.text =
-                                      AppUtils.firstSelectedTime != null
-                                          ? AppUtils.firstSelectedTime!
-                                              .format(context)
-                                          : "";
+                                  if (AppUtils.firstSelectedTime != null) {
+                                    final String firstTime =
+                                        AppUtils.formatTimeOfDay(
+                                            AppUtils.firstSelectedTime!);
+                                    _bloc.startTimeTextController.text =
+                                        firstTime;
+                                    print(
+                                        "Start Time: ${_bloc.startTimeTextController.text}");
+                                  }
+                                  _bloc.totalHour();
                                 }
                                 // setState(() {});
                               },
@@ -490,17 +482,21 @@ class _PostJobState extends State<PostJob> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
+                            /*             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                               child: textWidget(
-                                  text: AppStrings.totalHours,
+                                  // text: AppStrings.totalHours,
+                                  text:
+                                      "Total Hours: ${state.totalHours != null ? "${state.totalHours} Hours" : ""}",
                                   maxLines: 1,
                                   color: AppColors.textBlackColor,
                                   fontSize: AppDimensions.textSizeSmall,
                                   fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold),
                             ),
+                            height(0.01.sw),*/
+                            Text(""),
                             height(0.01.sw),
                             CustomTextFormField(
                               // height: 45.h,
@@ -523,11 +519,15 @@ class _PostJobState extends State<PostJob> {
                               onTap: () async {
                                 await AppUtils.selectTime(context, false);
                                 if (mounted) {
-                                  _bloc.endTimeTextController.text =
-                                      AppUtils.secondSelectedTime != null
-                                          ? AppUtils.secondSelectedTime!
-                                              .format(context)
-                                          : "";
+                                  if (AppUtils.secondSelectedTime != null) {
+                                    final String endTime =
+                                        AppUtils.formatTimeOfDay(
+                                            AppUtils.secondSelectedTime!);
+                                    _bloc.endTimeTextController.text = endTime;
+                                    print(
+                                        "End Time: ${_bloc.endTimeTextController.text}");
+                                  }
+                                  _bloc.totalHour();
                                 }
                               },
                               // fillColor: AppColors.productTextFieldColor,

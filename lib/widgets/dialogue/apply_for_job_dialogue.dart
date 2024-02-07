@@ -41,6 +41,7 @@ class _ApplyForJobDialogueState extends State<ApplyForJobDialogue> {
   @override
   void initState() {
     _bloc = BlocProvider.of(context);
+    print("Apply Job Dialogue jobID: ${widget.jobId}");
     super.initState();
   }
 
@@ -219,6 +220,7 @@ class _ApplyForJobDialogueState extends State<ApplyForJobDialogue> {
               inputFormatter: [
                 LengthLimitingTextInputFormatter(
                     Constants.priceFieldCharacterLength),
+                RegularExpressions.PRICE_FORMATTER
               ],
               // keyboardType: TextInputType.numberWithOptions(signed: false),
             ),

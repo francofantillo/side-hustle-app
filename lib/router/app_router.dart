@@ -217,10 +217,14 @@ class AppRouter {
             return const MyEventsScreen();
 
           case AppRoutes.jobRequestScreenRoute:
-            return const JobRequest();
+            final args = routeSettings.arguments as JobRequest?;
+            return JobRequest(jobId: args?.jobId);
 
           case AppRoutes.viewJobScreenRoute:
-            return const ViewJob();
+            final args = routeSettings.arguments as ViewJob?;
+            return ViewJob(
+              jobId: args?.jobId,
+            );
 
           case AppRoutes.paymentMethodScreenRoute:
             return const ManagePaymentMethods();

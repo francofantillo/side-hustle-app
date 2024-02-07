@@ -13,26 +13,18 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ScheduledJobItemWidget extends StatelessWidget {
-  final String? title,
-      subTitle,
-      price,
-      userProfile,
-      userName,
-      userRating,
-      imagePath;
-  final Function()? onTap;
+  final String? title, desc, price, imagePath;
+  final Function()? onTap, onTapViewRequest;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
   const ScheduledJobItemWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.desc,
       this.onTap,
+      this.onTapViewRequest,
       this.price,
-      this.userProfile,
-      this.userName,
-      this.userRating,
       this.imagePath,
       this.imageHeight,
       this.imageWidth,
@@ -60,14 +52,16 @@ class ScheduledJobItemWidget extends StatelessWidget {
           child: InkWell(
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0, right: 6),
+              padding: const EdgeInsets.only(
+                  top: 6.0, bottom: 6.0, left: 6.0, right: 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   RoundedCornersImage(
                     imageHeight: imageHeight,
                     imageWidth: AppDimensions.listItemWidth,
-                    assetImage: imagePath,
+                    assetImage: AssetsPath.imageLoadError,
+                    image: imagePath,
                     boarderColor: boarderColor,
                   ),
                   Expanded(
@@ -98,7 +92,7 @@ class ScheduledJobItemWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: textWidget(
-                                      text: subTitle,
+                                      text: desc,
                                       maxLines: 2,
                                       fontSize: AppDimensions.textSize10)),
                               width(0.02.sw),
@@ -121,29 +115,26 @@ class ScheduledJobItemWidget extends StatelessWidget {
                           ),
                           height(imageHeight! * .04),
                           textWidget(
-                              text: price,
+                              text: price != null ? "\$$price" : "",
                               fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
                           const Spacer(),
                           height(0.01.sw),
-                          Container(
-                            margin: EdgeInsets.zero,
-                            padding: EdgeInsets.all(0.03.sw),
-                            decoration: BoxDecoration(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Material(
-                              color: AppColors.greenColor,
-                              borderRadius: BorderRadius.circular(
-                                  AppDimensions.bookedJobRoundedBorder),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.jobRequestScreenRoute);
-                                },
+                          InkWell(
+                            onTap: onTapViewRequest,
+                            child: Container(
+                              margin: EdgeInsets.zero,
+                              padding: EdgeInsets.all(0.03.sw),
+                              decoration: BoxDecoration(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Material(
+                                color: AppColors.greenColor,
+                                borderRadius: BorderRadius.circular(
+                                    AppDimensions.bookedJobRoundedBorder),
                                 child: Center(
                                   child: textWidget(
                                     text: AppStrings.viewRequest,

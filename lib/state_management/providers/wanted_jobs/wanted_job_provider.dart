@@ -245,3 +245,26 @@ Future<Response?> applyForJobProvider(
       path: API.APPLYFOR_JOB, data: data, token: apiToken);
   return response;
 }
+
+/// Get My Job
+Future<Response?> getMyJobProvider({String? type, String? apiToken}) async {
+  final data = {"type": type};
+
+  print(
+      "*****************\nurl: ${API.GET_MY_JOBS}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_MY_JOBS, queryParameter: data, token: apiToken);
+  return response;
+}
+
+/// Get Job Request
+Future<Response?> getJobRequestsProvider(
+    {int? jobId, String? apiToken}) async {
+  final data = {"job_id": jobId};
+
+  print(
+      "*****************\nurl: ${API.GET_JOB_REQUESTS}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_JOB_REQUESTS, queryParameter: data, token: apiToken);
+  return response;
+}

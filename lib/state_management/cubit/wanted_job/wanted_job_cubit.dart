@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/models/job_request_model.dart';
 import 'package:side_hustle/state_management/models/jobs_model.dart';
+import 'package:side_hustle/state_management/models/my_jobs.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/providers/wanted_jobs/wanted_job_provider.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -36,7 +38,6 @@ class JobsCubit extends Cubit<JobsState> {
   TextEditingController priceTextController = TextEditingController();
   TextEditingController areaCodeTextController = TextEditingController();
   TextEditingController additionalInfoTextController = TextEditingController();
-  String? totalHours;
 
   initPostJobControllers() {
     dateTextController = TextEditingController();
@@ -50,7 +51,7 @@ class JobsCubit extends Cubit<JobsState> {
     additionalInfoTextController = TextEditingController();
     state.itemImagesFile = null;
     selectLocationModel = null;
-    totalHours = null;
+    state.totalHours = null;
   }
 
   /// Select Location
@@ -76,6 +77,13 @@ class JobsCubit extends Cubit<JobsState> {
       // } else {
       //   emit(state.copyWith(itemImagesFile: images));
       // }
+    }
+  }
+
+  totalHour() {
+    final totalHours = AppUtils.calculateTotalHours();
+    if (totalHours != null) {
+      emit(state.copyWith(totalHours: totalHours));
     }
   }
 
@@ -194,6 +202,7 @@ class JobsCubit extends Cubit<JobsState> {
     final String? lng = selectLocationModel?.lng?.toString();
     print("lat: $lat");
     print("lng: $lng");
+
     final token = await prefs.getToken();
 
     final response = await postJobProvider(
@@ -213,7 +222,7 @@ class JobsCubit extends Cubit<JobsState> {
         budget: priceTextController.text,
         planId: planId.toString(),
         areaCode: areaCodeTextController.text,
-        totalHours: totalHours);
+        totalHours: state.totalHours);
 
     EasyLoading.dismiss();
 
@@ -240,7 +249,7 @@ class JobsCubit extends Cubit<JobsState> {
   }
 
   /// Get Edot Job
-  Future getEditJobCubit(
+  Future<JobsDetail?> getEditJobCubit(
       {required BuildContext context,
       required bool mounted,
       required int? jobId}) async {
@@ -259,15 +268,19 @@ class JobsCubit extends Cubit<JobsState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
+        JobsDetail jobsDetail = JobsDetail.fromJson(response.data);
         // AppUtils.showToast(response.data['message']);
+        return jobsDetail;
       }
 
       /// Failed
       else {
         AppUtils.showToast(response.data["message"]);
+        return null;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return null;
     }
   }
 
@@ -307,6 +320,82 @@ class JobsCubit extends Cubit<JobsState> {
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get My Jobs
+  Future getMYJobSCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required String type}) async {
+    emit(state.copyWith(myJobsLoading: true, myJobsModel: MyJobsModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await getMyJobProvider(type: type, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        MyJobsModel myJobsModel = MyJobsModel.fromJson(response.data);
+        // AppUtils.showToast(response.data['message']);
+        emit(state.copyWith(myJobsLoading: false, myJobsModel: myJobsModel));
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(myJobsLoading: false));
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(myJobsLoading: false));
+    }
+  }
+
+  /// Get Job Requests
+  Future getJobRequestsCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int? jobId}) async {
+    emit(state.copyWith(
+        jobRequestLoading: true, jobRequestModel: JobRequestModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response =
+        await getJobRequestsProvider(jobId: jobId, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        JobRequestModel jobRequestModel =
+            JobRequestModel.fromJson(response.data);
+        // AppUtils.showToast(response.data['message']);
+        emit(state.copyWith(
+            jobRequestLoading: false, jobRequestModel: jobRequestModel));
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(jobRequestLoading: false));
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(jobRequestLoading: false));
     }
   }
 }

@@ -27,3 +27,5 @@ enum SubscriptionPlanEnum { One, Two, Three }
 enum EventsEnum { Scheduled, Ongoing, Completed }
 
 enum JobsEnum { WantedJobs, Applied, Booked, Completed }
+
+enum MyJobsEnum { Pending, Ongoing, Completed }

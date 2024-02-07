@@ -150,6 +150,24 @@ class AppUtils {
     return '$hours hours and $minutes minutes';
   }
 
+  static String? calculateTotalHours() {
+    if (firstSelectedTime != null && secondSelectedTime != null) {
+      DateTime dateTime1 = DateTime(
+          2022, 1, 1, firstSelectedTime!.hour, firstSelectedTime!.minute);
+      DateTime dateTime2 = DateTime(
+          2022, 1, 1, secondSelectedTime!.hour, secondSelectedTime!.minute);
+
+      Duration difference = dateTime2.difference(dateTime1);
+      double hoursDifference = difference.inMinutes / 60;
+
+      // Display the total difference in hours with minutes as decimal points
+      print('Total time difference: $hoursDifference hours');
+      return hoursDifference.toStringAsFixed(2);
+    } else {
+      return null;
+    }
+  }
+
   static String formatTimeOfDay(TimeOfDay timeOfDay) {
     final now = DateTime.now();
     final dateTime = DateTime(
@@ -242,7 +260,7 @@ class AppUtils {
     if (mounted) {
       EasyLoading.show();
       final PlacesDetailsResponse? detail =
-      await displayPrediction(p, ScaffoldMessenger.of(context));
+          await displayPrediction(p, ScaffoldMessenger.of(context));
       final geometry = detail?.result.geometry!;
       final lat = geometry?.location.lat;
       final lng = geometry?.location.lng;

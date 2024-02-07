@@ -21,7 +21,7 @@ class JobsModel {
       }
     } else {
       jobsDetailData =
-      json['data'] != null ? JobsDetail.fromJson(json['data']) : null;
+          json['data'] != null ? JobsDetail.fromJson(json['data']) : null;
     }
   }
 
@@ -49,11 +49,11 @@ class JobsData {
 
   JobsData(
       {this.jobId,
-        this.title,
-        this.description,
-        this.budget,
-        this.image,
-        this.user});
+      this.title,
+      this.description,
+      this.budget,
+      this.image,
+      this.user});
 
   JobsData.fromJson(Map<String, dynamic> json) {
     jobId = json['job_id'];
@@ -105,6 +105,9 @@ class User {
 
 class JobsDetail {
   String? title;
+  String? id;
+  String? userId;
+  String? assignedUserId;
   double? budget;
   String? areaCode;
   String? jobDate;
@@ -122,23 +125,29 @@ class JobsDetail {
 
   JobsDetail(
       {this.title,
-        this.budget,
-        this.areaCode,
-        this.jobDate,
-        this.jobTime,
-        this.endTime,
-        this.totalHours,
-        this.location,
-        this.lat,
-        this.lng,
-        this.description,
-        this.additionalInformation,
-        this.status,
-        this.userDetail,
-        this.images});
+      this.id,
+      this.userId,
+      this.assignedUserId,
+      this.budget,
+      this.areaCode,
+      this.jobDate,
+      this.jobTime,
+      this.endTime,
+      this.totalHours,
+      this.location,
+      this.lat,
+      this.lng,
+      this.description,
+      this.additionalInformation,
+      this.status,
+      this.userDetail,
+      this.images});
 
   JobsDetail.fromJson(Map<String, dynamic> json) {
     title = json['title'];
+    id = json['id'];
+    userId = json['user_id'];
+    assignedUserId = json['assigned_user_id'];
     budget = json['budget']?.toDouble();
     areaCode = json['area_code'];
     jobDate = json['job_date'];
@@ -152,7 +161,7 @@ class JobsDetail {
     additionalInformation = json['additional_information'];
     status = json['status'];
     userDetail =
-    json['user_detail'] != null ? User.fromJson(json['user_detail']) : null;
+        json['user_detail'] != null ? User.fromJson(json['user_detail']) : null;
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
@@ -162,8 +171,11 @@ class JobsDetail {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['title'] = this.title;
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['assigned_user_id'] = this.assignedUserId;
     data['budget'] = this.budget;
     data['area_code'] = this.areaCode;
     data['job_date'] = this.jobDate;

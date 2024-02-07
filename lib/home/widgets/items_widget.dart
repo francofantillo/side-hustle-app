@@ -73,7 +73,7 @@ class WantedJobsItemWidget extends StatelessWidget {
                   RoundedCornersImage(
                     imageHeight: imageHeight,
                     imageWidth: AppDimensions.listItemWidth,
-                    assetImage: AssetsPath.placeHolder,
+                    assetImage: AssetsPath.imageLoadError,
                     image: imagePath,
                     boarderColor: boarderColor,
                   ),

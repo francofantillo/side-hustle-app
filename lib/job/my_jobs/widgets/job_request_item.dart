@@ -53,6 +53,8 @@ class JobRequestItemWidget extends StatelessWidget {
                       children: [
                         CircularCacheImageWidget(
                           showLoading: false,
+                          // image: userProfile,
+                          assetImage: AssetsPath.placeHolder,
                           image: userProfile,
                           borderWidth: 1,
                           boarderColor: AppColors.primaryColor,
@@ -94,7 +96,7 @@ class JobRequestItemWidget extends StatelessWidget {
                         ),
                         const Spacer(),
                         textWidget(
-                            text: price,
+                            text: price != null ? "\$$price" : "",
                             color: AppColors.textBlackColor,
                             fontFamily: AppFont.gilroyBold,
                             fontSize: 18.sp,
