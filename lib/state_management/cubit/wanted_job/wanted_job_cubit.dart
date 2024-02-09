@@ -241,8 +241,7 @@ class JobsCubit extends Cubit<JobsState> {
           } else {
             Navigator.pop(context);
             Navigator.pop(context);
-            Navigator.pushNamed(
-                context, AppRoutes.myJobsScreenRoute);
+            Navigator.pushNamed(context, AppRoutes.myJobsScreenRoute);
           }
         }
         return 1;
@@ -394,8 +393,15 @@ class JobsCubit extends Cubit<JobsState> {
         emit(state.copyWith(jobsDetailModel: jobsModel));
         AppUtils.showToast(response.data['message']);
         if (mounted) {
-          // Navigator.pop(context);
           Navigator.pop(context);
+          // Navigator.pushNamedAndRemoveUntil(
+          //     context,
+          //     AppRoutes.bottomTabsScreenRoute,
+          //     arguments: const BottomTabsScreen(
+          //       currentIndex: 1,
+          //       wantedTabCurrentIndex: 1,
+          //     ),
+          //     (route) => false);
         }
       }
 
@@ -468,7 +474,6 @@ class JobsCubit extends Cubit<JobsState> {
       if (response.data["status"] == AppValidationMessages.success) {
         JobRequestModel jobRequestModel =
             JobRequestModel.fromJson(response.data);
-        // AppUtils.showToast(response.data['message']);
         emit(state.copyWith(
             jobRequestLoading: false, jobRequestModel: jobRequestModel));
       }
@@ -512,6 +517,10 @@ class JobsCubit extends Cubit<JobsState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
+        JobRequestModel jobRequestModel =
+            JobRequestModel.fromJson(response.data);
+        emit(state.copyWith(
+            jobRequestLoading: false, jobRequestModel: jobRequestModel));
         AppUtils.showToast(response.data['message']);
         EasyLoading.dismiss();
         return 1;

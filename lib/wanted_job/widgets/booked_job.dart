@@ -11,14 +11,14 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class BookedJobsWidget extends StatelessWidget {
-  final String? title, subTitle, price, imagePath;
+  final String? title, desc, price, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
   const BookedJobsWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.desc,
       this.price,
       this.imagePath,
       this.imageHeight,
@@ -46,7 +46,8 @@ class BookedJobsWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight! + 2.h,
                 imageWidth: AppDimensions.listItemWidth,
-                assetImage: imagePath,
+                assetImage: AssetsPath.imageLoadError,
+                image: imagePath,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -67,7 +68,7 @@ class BookedJobsWidget extends StatelessWidget {
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
                           textWidget(
-                              text: price,
+                              text: price != null ? "\$$price" : "",
                               fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
@@ -78,72 +79,73 @@ class BookedJobsWidget extends StatelessWidget {
                       SizedBox(
                         width: .5.sw,
                         child: textWidget(
-                          text: subTitle,
+                          text: desc,
+                          // text: "kdfdj fsjks jdkjskdj ksjdksjdkjskd jskdjksjd ksjdksjdkjskdjskdj ksjdsjdk sjdksdk",
                           maxLines: 2,
                           fontSize: AppDimensions.textSize10,
                         ),
                       ),
                       height(imageHeight! * .04),
-                      Divider(
-                        height: 1,
-                        color: Colors.grey.withOpacity(0.8),
+                      Expanded(
+                        child: Divider(
+                          height: 1,
+                          color: Colors.grey.withOpacity(0.8),
+                        ),
                       ),
                       height(0.01.sw),
                       // const Spacer(),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Container(
-                                  // height: imageHeight! * .21,
-                                  width: .55.sw,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.greenColor,
-                                    borderRadius: BorderRadius.circular(
-                                        AppDimensions.buttonBorderRadius),
-                                  ),
-                                  child: Material(
-                                    color: AppColors.greenColor,
-                                    borderRadius: BorderRadius.circular(
-                                        AppDimensions.bookedJobRoundedBorder),
-                                    child: InkWell(
-                                      onTap: () {},
-                                      child: Center(
-                                        child: textWidget(
-                                          text: AppStrings.startJob,
-                                          color: AppColors.textWhiteColor,
-                                          fontFamily: AppFont.gilroyBold,
-                                          fontWeight: FontWeight.bold,
-                                          maxLines: 2,
-                                          fontSize: 12.sp,
-                                          textAlign: TextAlign.center,
-                                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Container(
+                                height: imageHeight! * .25,
+                                width: .55.sw,
+                                decoration: BoxDecoration(
+                                  color: AppColors.greenColor,
+                                  borderRadius: BorderRadius.circular(
+                                      AppDimensions.buttonBorderRadius),
+                                ),
+                                child: Material(
+                                  color: AppColors.greenColor,
+                                  borderRadius: BorderRadius.circular(
+                                      AppDimensions.bookedJobRoundedBorder),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Center(
+                                      child: textWidget(
+                                        text: AppStrings.startJob,
+                                        color: AppColors.textWhiteColor,
+                                        fontFamily: AppFont.gilroyBold,
+                                        fontWeight: FontWeight.bold,
+                                        maxLines: 2,
+                                        fontSize: 12.sp,
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            width(0.02.sw),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                },
-                                iconPath: AssetsPath.message,
-                                height: imageHeight! * .22,
-                                width: imageHeight! * .22,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
-                              ),
+                          ),
+                          width(0.02.sw),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: IconButtonWithBackground(
+                              onTap: () {
+                                print("Clicked");
+                              },
+                              iconPath: AssetsPath.message,
+                              height: imageHeight! * .22,
+                              width: imageHeight! * .22,
+                              backgroundColor: AppColors.primaryColor,
+                              iconColor: AppColors.whiteColor,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -79,43 +79,51 @@ class AppliedJobsWidget extends StatelessWidget {
                         width: .5.sw,
                         child: textWidget(
                           text: desc,
-                          maxLines: 2,
+                          // text: "kdfdj fsjks jdkjskdj ksjdksjdkjskd jskdjksjd ksjdksjdkjskdjskdj ksjdsjdk sjdksdk",
+                        maxLines: 2,
                           fontSize: AppDimensions.textSize10,
                         ),
                       ),
                       height(imageHeight! * .04),
-                      Divider(
-                        height: 1,
-                        color: Colors.grey.withOpacity(0.8),
+                      Expanded(
+                        child: Divider(
+                          height: 1,
+                          color: Colors.grey.withOpacity(0.8),
+                        ),
                       ),
                       // const Spacer(),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: InkWell(
-                            // onTap: () {},
-                            child: Container(
-                              height: imageHeight! * .21,
-                              width: imageWidth!,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: AppColors.greenColor, width: 2),
-                                borderRadius: BorderRadius.circular(
-                                    AppDimensions.appliedJobRoundedBorder),
-                              ),
-                              child: Center(
-                                child: textWidget(
-                                  text: AppStrings.jobApplied,
-                                  color: AppColors.greenColor,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: 12.sp,
-                                  // fontSize: AppDimensions.textSizeNormal,
-                                  textAlign: TextAlign.center,
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Container(
+                                    height: imageHeight! * .27,
+                                    width: imageWidth!,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: AppColors.greenColor, width: 2),
+                                      borderRadius: BorderRadius.circular(
+                                          AppDimensions.appliedJobRoundedBorder),
+                                    ),
+                                    child: Center(
+                                      child: textWidget(
+                                        text: AppStrings.jobApplied,
+                                        color: AppColors.greenColor,
+                                        fontFamily: AppFont.gilroyBold,
+                                        fontSize: 12.sp,
+                                        // fontSize: AppDimensions.textSizeNormal,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),

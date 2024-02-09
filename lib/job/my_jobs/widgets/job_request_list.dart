@@ -68,18 +68,18 @@ class _JobRequestListState extends State<JobRequestList> {
                                 if (widget.isViewRequestFromJobDetail) {
                                   Navigator.pop(context);
                                   Navigator.pop(context);
-                                  Navigator.pushReplacementNamed(
-                                      context, AppRoutes.myJobsScreenRoute,
-                                      arguments: const MyJobsScreen(
-                                        selectedIndex: 1,
-                                      ));
+                                  // Navigator.pushReplacementNamed(
+                                  //     context, AppRoutes.myJobsScreenRoute,
+                                  //     arguments: const MyJobsScreen(
+                                  //       selectedIndex: 1,
+                                  //     ));
                                 } else {
                                   Navigator.pop(context);
-                                  Navigator.pushReplacementNamed(
-                                      context, AppRoutes.myJobsScreenRoute,
-                                      arguments: const MyJobsScreen(
-                                        selectedIndex: 1,
-                                      ));
+                                  // Navigator.pushReplacementNamed(
+                                  //     context, AppRoutes.myJobsScreenRoute,
+                                  //     arguments: const MyJobsScreen(
+                                  //       selectedIndex: 1,
+                                  //     ));
                                 }
                               }
                             });
