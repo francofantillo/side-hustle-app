@@ -148,8 +148,8 @@ class JobsDetail {
   JobsDetail.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     isApplied = json['is_applied'];
-    id = json['id'];
-    userId = json['user_id'];
+    id = json['id']?.toString();
+    userId = json['user_id']?.toString();
     assignedUserId = json['assigned_user_id'];
     budget = json['budget']?.toDouble();
     areaCode = json['area_code'];

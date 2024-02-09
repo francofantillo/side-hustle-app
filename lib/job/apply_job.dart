@@ -355,7 +355,16 @@ class _ApplyForJobState extends State<ApplyForJob> {
                           ),
                           height(0.05.sw),
                           state.jobsDetailModel?.jobsDetailData?.isApplied == 1
-                              ? const SizedBox.shrink()
+                              // ? const SizedBox.shrink()
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: CustomMaterialButton(
+                                      // height: AppDimensions.defaultMaterialButtonHeightHome,
+                                      borderRadius: AppDimensions
+                                          .defaultMaterialButtonRadiusHome,
+                                      onPressed: (){},
+                                      name: AppStrings.applied))
                               : Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),

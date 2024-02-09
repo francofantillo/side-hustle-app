@@ -13,9 +13,12 @@ class JobRequestItemWidget extends StatelessWidget {
   final String? price, userProfile, userName, userRating;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final Function()? onTapHire, onTapReject;
 
   const JobRequestItemWidget(
       {super.key,
+      this.onTapHire,
+      this.onTapReject,
       this.price,
       this.userProfile,
       this.userName,
@@ -109,11 +112,7 @@ class JobRequestItemWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: () {
-                                print("Clicked");
-                              },
-                              // highlightColor: AppColors.greenColor,
-                              // splashColor: AppColors.greyColor,
+                              onTap: onTapReject,
                               child: Container(
                                 // height: 32.h,
                                 padding: const EdgeInsets.all(12),
@@ -150,7 +149,7 @@ class JobRequestItemWidget extends StatelessWidget {
                                     AppDimensions.bookedJobRoundedBorder),
                               ),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: onTapHire,
                                 child: Center(
                                   child: textWidget(
                                     text: AppStrings.hire,

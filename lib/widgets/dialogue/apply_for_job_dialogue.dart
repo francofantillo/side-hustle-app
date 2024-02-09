@@ -91,6 +91,7 @@ class _ApplyForJobDialogueState extends State<ApplyForJobDialogue> {
                               .isNotEmpty)
                       ? state.jobsDetailModel!.jobsDetailData!.images![0].image
                       : null,
+                  assetImage: AssetsPath.imageLoadError,
                   imageHeight: 80.w,
                   imageWidth: 80.w,
                   boarderColor: Colors.transparent,

@@ -118,7 +118,7 @@ class AppRouter {
             final args = routeSettings.arguments as PostJob?;
             return PostJob(
               isEdit: args?.isEdit ?? false,
-              isJobEditFromPostAdded: args?.isJobEditFromPostAdded ?? false,
+              isJobFromMyJobs: args?.isJobFromMyJobs ?? false,
               id: args?.id,
             );
 
@@ -211,14 +211,19 @@ class AppRouter {
             );
 
           case AppRoutes.myJobsScreenRoute:
-            return const MyJobsScreen();
+            final args = routeSettings.arguments as MyJobsScreen?;
+            return MyJobsScreen(selectedIndex: args?.selectedIndex ?? 0,);
 
           case AppRoutes.myEventsScreenRoute:
             return const MyEventsScreen();
 
           case AppRoutes.jobRequestScreenRoute:
             final args = routeSettings.arguments as JobRequest?;
-            return JobRequest(jobId: args?.jobId);
+            return JobRequest(
+              jobId: args?.jobId,
+              isViewRequestFromJobDetail:
+                  args?.isViewRequestFromJobDetail ?? false
+            );
 
           case AppRoutes.viewJobScreenRoute:
             final args = routeSettings.arguments as ViewJob?;

@@ -28,4 +28,6 @@ enum EventsEnum { Scheduled, Ongoing, Completed }
 
 enum JobsEnum { WantedJobs, Applied, Booked, Completed }
 
+enum JobsRequestEnum { Approved, Rejected }
+
 enum MyJobsEnum { Pending, Ongoing, Completed }

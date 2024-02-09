@@ -25,7 +25,9 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
       isEventEditFromPostAdded,
       isProduct,
       isService,
-      isJob;
+      isJob,
+      isJobFromMyJobs,
+      isJobEdit;
   final int? defaultCardId;
 
   const ModalBottomSheetPackageTypePost(
@@ -36,7 +38,9 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
       this.isProduct = false,
       this.isService = false,
       this.defaultCardId,
-      this.isJob = false});
+      this.isJob = false,
+      this.isJobFromMyJobs = false,
+      this.isJobEdit = false});
 
   @override
   State<ModalBottomSheetPackageTypePost> createState() =>
@@ -58,6 +62,7 @@ class _ModalBottomSheetPackageTypePostState
   late final ValueNotifier<bool> _packagesGroupValue;
 
   int defaultCardIndex = 2;
+
   // Map<String, List> defaultCard = {
   //   "x": [false, false, false],
   // };
@@ -93,6 +98,7 @@ class _ModalBottomSheetPackageTypePostState
     print("ModalBottomSheetPackageTypePost cardId: $cardId");
     print(
         "isEventPost: ${widget.isEventPost}, isEventEdit: ${widget.isEventEdit}");
+    print("ModalBottomSheetPackageType isJobFromMyJobs: ${widget.isJobFromMyJobs}");
     super.initState();
   }
 
@@ -341,6 +347,7 @@ class _ModalBottomSheetPackageTypePostState
                             left: 20.0, right: 20, bottom: 20),
                         child: CustomMaterialButton(
                             onPressed: () async {
+                              print("Post Job Called");
                               EasyLoading.instance.indicatorColor =
                                   AppColors.whiteColor;
                               late final int planId;
@@ -373,6 +380,8 @@ class _ModalBottomSheetPackageTypePostState
                                         .postJobCubit(
                                             context: context,
                                             mounted: mounted,
+                                            isFromMyJobs:
+                                                widget.isJobFromMyJobs,
                                             planId: planId)
                                         .then((value) {
                                       EasyLoading.instance.indicatorColor =
@@ -388,6 +397,7 @@ class _ModalBottomSheetPackageTypePostState
                                     .postJobCubit(
                                         context: context,
                                         mounted: mounted,
+                                        isFromMyJobs: widget.isJobFromMyJobs,
                                         planId: planId)
                                     .then((value) {
                                   EasyLoading.instance.indicatorColor =
@@ -411,6 +421,76 @@ class _ModalBottomSheetPackageTypePostState
                                 //         ));
                                 //   }
                                 // });
+                              }
+
+                              return;
+                            },
+                            name: AppStrings.continueText,
+                            color: AppColors.whiteColor,
+                            textColor: AppColors.primaryColor),
+                      )
+                    : const SizedBox.shrink(),
+                widget.isJobEdit
+                    ? Padding(
+                        // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
+                        padding: const EdgeInsets.only(
+                            left: 20.0, right: 20, bottom: 20),
+                        child: CustomMaterialButton(
+                            onPressed: () async {
+                              print("edit Job Called");
+                              EasyLoading.instance.indicatorColor =
+                                  AppColors.whiteColor;
+                              late final int planId;
+                              print(
+                                  "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                              if (_character?.name ==
+                                  SingingCharacter.package1.name) {
+                                planId = 1;
+                              } else if (_character?.name ==
+                                  SingingCharacter.package2.name) {
+                                planId = 2;
+                              } else if (_character?.name ==
+                                  SingingCharacter.package3.name) {
+                                planId = 3;
+                              }
+                              print("planId: $planId");
+                              // Navigator.pop(context);
+                              // Navigator.pop(context);
+                              if (cardId != defaultCard) {
+                                await _blocCard
+                                    .defaultCardCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        hideLoader: true,
+                                        cardId: cardId)
+                                    .then((value) async {
+                                  if (value == 1) {
+                                    defaultCard = cardId;
+                                    await _blocJobs
+                                        .editJobCubit(
+                                            context: context,
+                                            mounted: mounted,
+                                            planId: planId)
+                                        .then((value) {
+                                      EasyLoading.instance.indicatorColor =
+                                          AppColors.primaryColor;
+                                    });
+                                  } else {
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
+                                  }
+                                });
+                              } else {
+                                await _blocJobs
+                                    .editJobCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        planId: planId)
+                                    .then((value) {
+                                  EasyLoading.instance.indicatorColor =
+                                      AppColors.primaryColor;
+                                  if (value == 1) {}
+                                });
                               }
 
                               return;

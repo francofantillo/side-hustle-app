@@ -4,19 +4,20 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class AppliedJobsWidget extends StatelessWidget {
-  final String? title, subTitle, price, imagePath;
+  final String? title, desc, price, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
   const AppliedJobsWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.desc,
       this.price,
       this.imagePath,
       this.imageHeight,
@@ -44,7 +45,8 @@ class AppliedJobsWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.listItemWidth,
-                assetImage: imagePath,
+                assetImage: AssetsPath.imageLoadError,
+                image: imagePath,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -65,7 +67,7 @@ class AppliedJobsWidget extends StatelessWidget {
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
                           textWidget(
-                              text: price,
+                              text: price != null ? "\$$price" : "",
                               fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
@@ -76,7 +78,7 @@ class AppliedJobsWidget extends StatelessWidget {
                       SizedBox(
                         width: .5.sw,
                         child: textWidget(
-                          text: subTitle,
+                          text: desc,
                           maxLines: 2,
                           fontSize: AppDimensions.textSize10,
                         ),
@@ -96,7 +98,8 @@ class AppliedJobsWidget extends StatelessWidget {
                               height: imageHeight! * .21,
                               width: imageWidth!,
                               decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.greenColor, width: 2),
+                                border: Border.all(
+                                    color: AppColors.greenColor, width: 2),
                                 borderRadius: BorderRadius.circular(
                                     AppDimensions.appliedJobRoundedBorder),
                               ),

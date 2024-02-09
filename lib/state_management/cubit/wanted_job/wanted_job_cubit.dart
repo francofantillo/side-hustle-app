@@ -10,6 +10,7 @@ import 'package:side_hustle/state_management/models/jobs_model.dart';
 import 'package:side_hustle/state_management/models/my_jobs.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/providers/wanted_jobs/wanted_job_provider.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
@@ -190,10 +191,11 @@ class JobsCubit extends Cubit<JobsState> {
     }
   }
 
-  /// Post an Job
+  /// Post a Job
   Future<int> postJobCubit(
       {required BuildContext context,
       required int planId,
+      required bool isFromMyJobs,
       required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
@@ -231,8 +233,86 @@ class JobsCubit extends Cubit<JobsState> {
       if (response.data["status"] == AppValidationMessages.success) {
         AppUtils.showToast(response.data["message"]);
         if (mounted) {
+          if (isFromMyJobs) {
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pushReplacementNamed(
+                context, AppRoutes.myJobsScreenRoute);
+          } else {
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pushNamed(
+                context, AppRoutes.myJobsScreenRoute);
+          }
+        }
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
+    }
+  }
+
+  /// Edit a Job
+  Future<int> editJobCubit(
+      {required BuildContext context,
+      required int planId,
+      required bool mounted}) async {
+    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+    EasyLoading.show();
+
+    String? lat;
+    String? lng;
+    if (selectLocationModel != null) {
+      lat = selectLocationModel?.lat?.toString();
+      lng = selectLocationModel?.lng?.toString();
+    } else {
+      lat = state.jobsModel?.jobsDetailData?.lat;
+      lng = state.jobsModel?.jobsDetailData?.lng;
+    }
+    print("editJobModel lat: ${state.jobsModel?.jobsDetailData?.lat}");
+    print("editJobModel lng: ${state.jobsModel?.jobsDetailData?.lng}");
+    print("editJobCubit lat: $lat");
+    print("editJobCubit lng: $lng");
+
+    final token = await prefs.getToken();
+
+    final response = await editJobProvider(
+        apiToken: token,
+        jobId: state.jobsModel?.jobsDetailData?.id,
+        title: titleTextController.text,
+        location: locationTextController.text,
+        lat: lat,
+        lng: lng,
+        images: state.itemImagesFile,
+        jobDate: dateTextController.text,
+        jobTime: DateTimeConversions.convertTo24HourFormat(
+            startTimeTextController.text),
+        endTime: DateTimeConversions.convertTo24HourFormat(
+            endTimeTextController.text),
+        description: descriptionTextController.text,
+        additionalInformation: additionalInfoTextController.text,
+        budget: priceTextController.text,
+        planId: planId.toString(),
+        areaCode: areaCodeTextController.text,
+        totalHours: state.totalHours);
+
+    EasyLoading.dismiss();
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        AppUtils.showToast(response.data["message"]);
+        if (mounted) {
           Navigator.pop(context);
           Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, AppRoutes.myJobsScreenRoute);
         }
         return 1;
       }
@@ -249,11 +329,11 @@ class JobsCubit extends Cubit<JobsState> {
   }
 
   /// Get Edot Job
-  Future<JobsDetail?> getEditJobCubit(
+  Future<JobsModel?> getEditJobCubit(
       {required BuildContext context,
       required bool mounted,
       required int? jobId}) async {
-    // emit(state.copyWith(jobsDetailLoading: true, jobsDetailModel: JobsModel()));
+    emit(state.copyWith(editJobLoading: true, jobsModel: JobsModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -268,18 +348,21 @@ class JobsCubit extends Cubit<JobsState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        JobsDetail jobsDetail = JobsDetail.fromJson(response.data);
+        JobsModel jobsDetail = JobsModel.fromJson(response.data);
         // AppUtils.showToast(response.data['message']);
+        emit(state.copyWith(editJobLoading: false, jobsModel: jobsDetail));
         return jobsDetail;
       }
 
       /// Failed
       else {
         AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(editJobLoading: false));
         return null;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(editJobLoading: false));
       return null;
     }
   }
@@ -307,6 +390,8 @@ class JobsCubit extends Cubit<JobsState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
+        JobsModel jobsModel = JobsModel.fromJson(response.data);
+        emit(state.copyWith(jobsDetailModel: jobsModel));
         AppUtils.showToast(response.data['message']);
         if (mounted) {
           // Navigator.pop(context);
@@ -396,6 +481,52 @@ class JobsCubit extends Cubit<JobsState> {
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       emit(state.copyWith(jobRequestLoading: false));
+    }
+  }
+
+  /// Update Job Requests
+  Future<int> updateJobRequestsCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int index,
+      required String status}) async {
+    // emit(state.copyWith(
+    //     jobRequestLoading: true, jobRequestModel: JobRequestModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await updateJobRequestsProvider(
+        jobId: state.jobRequestModel?.data?[index].jobId,
+        jobRequestId: state.jobRequestModel?.data?[index].jobRequestId,
+        applierId: state.jobRequestModel?.data?[index].userId,
+        status: status,
+        bidAmount:
+            state.jobRequestModel?.data?[index].bidAmount?.toStringAsFixed(2),
+        apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        AppUtils.showToast(response.data['message']);
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
     }
   }
 }

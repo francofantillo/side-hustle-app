@@ -9,8 +9,10 @@ import '../../utils/app_strings.dart';
 
 class JobRequest extends StatefulWidget {
   final int? jobId;
+  final bool isViewRequestFromJobDetail;
 
-  const JobRequest({super.key, this.jobId});
+  const JobRequest(
+      {super.key, this.jobId, this.isViewRequestFromJobDetail = false});
 
   @override
   State<JobRequest> createState() => _JobRequestState();
@@ -41,9 +43,10 @@ class _JobRequestState extends State<JobRequest> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      body: const Column(
+      body: Column(
         children: [
-          JobRequestList(),
+          JobRequestList(
+              isViewRequestFromJobDetail: widget.isViewRequestFromJobDetail),
         ],
       ),
     );

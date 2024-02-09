@@ -46,9 +46,10 @@ class JobRequestData {
         this.image});
 
   JobRequestData.fromJson(Map<String, dynamic> json) {
+
     jobRequestId = json['job_request_id'];
     jobId = json['job_id'];
-    bidAmount = json['bid_amount'];
+    bidAmount = json['bid_amount']?.toDouble();
     userId = json['user_id'];
     username = json['username'];
     rating = json['rating'];

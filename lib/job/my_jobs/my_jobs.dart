@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/job/my_jobs/widgets/completed_job_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/ongoing_job_list.dart';
 import 'package:side_hustle/job/my_jobs/widgets/scheduled_job_list.dart';
+import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -15,7 +16,9 @@ import 'package:side_hustle/widgets/custom_tab_bar/custom_tab_bar.dart';
 import '../../utils/app_enums.dart';
 
 class MyJobsScreen extends StatefulWidget {
-  const MyJobsScreen({super.key});
+  final int selectedIndex;
+
+  const MyJobsScreen({super.key, this.selectedIndex = 0});
 
   @override
   State<MyJobsScreen> createState() => _MyJobsScreenState();
@@ -26,12 +29,14 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
   var index = 0;
   bool isProductSelected = true;
 
-  final ValueNotifier<int> _tabIndexBasicToggle = ValueNotifier(0);
+  // final ValueNotifier<int> _tabIndexBasicToggle = ValueNotifier(0);
+  late final ValueNotifier<int> _tabIndexBasicToggle;
 
   @override
   void initState() {
     isProductSelected = true;
     _bloc = BlocProvider.of(context);
+    _tabIndexBasicToggle = ValueNotifier(widget.selectedIndex);
     getMyJobs();
     super.initState();
   }
@@ -72,7 +77,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                 padding:
                     EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
                 child: CustomTabBar(
-                  currentTabIndex: 0,
+                  currentTabIndex: _tabIndexBasicToggle.value,
                   tabNames: const [
                     AppStrings.scheduled,
                     AppStrings.ongoing,
@@ -102,7 +107,10 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                                 title: AppStrings.postJob,
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                      context, AppRoutes.postJobScreenRoute);
+                                      context, AppRoutes.postJobScreenRoute,
+                                      arguments: const PostJob(
+                                        isJobFromMyJobs: true,
+                                      ));
                                 }),
                           );
                   })

@@ -63,21 +63,6 @@ Future<Response?> postJobProvider(
     print(
         "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
 
-    /*
-    title:Test Job 2
-location:Test location
-lat:124.251475
-lng:200.021547
-description:Test description
-budget:200
-area_code:125487
-job_date:2023/10/05
-job_time:06:30
-total_hours:6
-additional_information:Additional Test Information
-plan_id:2
-end_time:07:30
-     */
     final Map<String, dynamic> data = {
       "title": title,
       "images[]": imageList,
@@ -133,8 +118,8 @@ Future<Response?> getEditJobProvider({int? jobId, String? apiToken}) async {
 
   print(
       "*****************\nurl: ${API.GET_EDIT_JOB}\n$data\n**************************");
-  final response = await postRequestProvider(
-      path: API.GET_EDIT_JOB, data: data, token: apiToken);
+  final response = await getRequestProvider(
+      path: API.GET_EDIT_JOB, queryParameter: data, token: apiToken);
   return response;
 }
 
@@ -143,6 +128,7 @@ Future<Response?> editJobProvider(
     {String? title,
     List<File>? images,
     String? location,
+    String? jobId,
     String? lat,
     String? lng,
     String? jobDate,
@@ -170,22 +156,8 @@ Future<Response?> editJobProvider(
     print(
         "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
 
-    /*
-    title:Test Job 2
-location:Test location
-lat:124.251475
-lng:200.021547
-description:Test description
-budget:200
-area_code:125487
-job_date:2023/10/05
-job_time:06:30
-total_hours:6
-additional_information:Additional Test Information
-plan_id:2
-end_time:07:30
-     */
     final Map<String, dynamic> data = {
+      "job_id": jobId,
       "title": title,
       "images[]": imageList,
       "location": location,
@@ -203,11 +175,12 @@ end_time:07:30
     };
 
     print(
-        "*****************\nurl: ${API.GET_EDIT_JOB}\n${data}\n**************************");
+        "*****************\nurl: ${API.EDIT_JOB}\n$data\n**************************");
 
     formData = FormData.fromMap(data);
   } else {
     final Map<String, dynamic> data = {
+      "job_id": jobId,
       "title": title,
       "location": location,
       "lat": lat,
@@ -224,13 +197,13 @@ end_time:07:30
     };
 
     print(
-        "*****************\nurl: ${API.GET_EDIT_JOB}\n${data}\n**************************");
+        "*****************\nurl: ${API.EDIT_JOB}\n$data\n**************************");
 
     formData = FormData.fromMap(data);
   }
 
   final response = await postRequestProvider(
-      path: API.GET_EDIT_JOB, data: formData, token: apiToken);
+      path: API.EDIT_JOB, data: formData, token: apiToken);
   return response;
 }
 
@@ -258,13 +231,35 @@ Future<Response?> getMyJobProvider({String? type, String? apiToken}) async {
 }
 
 /// Get Job Request
-Future<Response?> getJobRequestsProvider(
-    {int? jobId, String? apiToken}) async {
+Future<Response?> getJobRequestsProvider({int? jobId, String? apiToken}) async {
   final data = {"job_id": jobId};
 
   print(
       "*****************\nurl: ${API.GET_JOB_REQUESTS}\n$data\n**************************");
   final response = await getRequestProvider(
       path: API.GET_JOB_REQUESTS, queryParameter: data, token: apiToken);
+  return response;
+}
+
+/// Update Job Request
+Future<Response?> updateJobRequestsProvider(
+    {int? jobId,
+    int? jobRequestId,
+    int? applierId,
+    String? status,
+    String? bidAmount,
+    String? apiToken}) async {
+  final data = {
+    "job_request_id": jobRequestId,
+    "job_id": jobId,
+    "applier_id": applierId,
+    "status": status,
+    "bid_amount": bidAmount
+  };
+
+  print(
+      "*****************\nurl: ${API.UPDATE_JOB_REQUESTS}\n$data\n**************************");
+  final response = await putRequestProvider(
+      path: API.UPDATE_JOB_REQUESTS, data: data, token: apiToken);
   return response;
 }

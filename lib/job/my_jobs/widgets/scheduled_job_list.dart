@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/job/my_jobs/job_request.dart';
 import 'package:side_hustle/job/my_jobs/view_job.dart';
 import 'package:side_hustle/job/my_jobs/widgets/scheduled_job_item.dart';
+import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -61,6 +62,15 @@ class _MyJobsScheduledListState extends State<MyJobsScheduledList> {
                                 arguments: JobRequest(
                                   jobId:
                                       state.myJobsModel?.myJobs?[index].jobId,
+                                ));
+                          },
+                          onTapEditJob: () {
+                            print("Clicked");
+                            Navigator.pushNamed(
+                                context, AppRoutes.postJobScreenRoute,
+                                arguments: PostJob(
+                                  isEdit: true,
+                                  id: state.myJobsModel?.myJobs?[index].jobId,
                                 ));
                           },
                           imageWidth: 1.sw,

@@ -14,21 +14,21 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ScheduledJobItemWidget extends StatelessWidget {
   final String? title, desc, price, imagePath;
-  final Function()? onTap, onTapViewRequest;
+  final Function()? onTap, onTapViewRequest, onTapEditJob;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ScheduledJobItemWidget(
-      {super.key,
-      this.title,
-      this.desc,
-      this.onTap,
-      this.onTapViewRequest,
-      this.price,
-      this.imagePath,
-      this.imageHeight,
-      this.imageWidth,
-      this.boarderColor});
+  const ScheduledJobItemWidget({super.key,
+    this.title,
+    this.desc,
+    this.onTap,
+    this.onTapViewRequest,
+    this.onTapEditJob,
+    this.price,
+    this.imagePath,
+    this.imageHeight,
+    this.imageWidth,
+    this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class ScheduledJobItemWidget extends StatelessWidget {
                     child: Padding(
                       // padding: const EdgeInsets.all(8.0),
                       padding:
-                          const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+                      const EdgeInsets.only(top: 8.0, left: 8, right: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -97,14 +97,7 @@ class ScheduledJobItemWidget extends StatelessWidget {
                                       fontSize: AppDimensions.textSize10)),
                               width(0.02.sw),
                               IconButtonWithBackground(
-                                onTap: () {
-                                  print("Clicked");
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.postJobScreenRoute,
-                                      arguments: const PostJob(
-                                        isEdit: true,
-                                      ));
-                                },
+                                onTap: onTapEditJob,
                                 iconPath: AssetsPath.edit,
                                 height: imageHeight! * .20,
                                 width: imageHeight! * .20,

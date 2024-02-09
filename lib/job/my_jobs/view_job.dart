@@ -268,6 +268,7 @@ class _ViewJobState extends State<ViewJob> {
                                       context, AppRoutes.jobRequestScreenRoute,
                                       arguments: JobRequest(
                                         jobId: widget.jobId,
+                                        isViewRequestFromJobDetail: true,
                                       ));
                                 },
                                 name: AppStrings.viewRequest,
