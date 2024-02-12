@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/state_management/models/job_request_model.dart';
 import 'package:side_hustle/state_management/models/jobs_model.dart';
 import 'package:side_hustle/state_management/models/my_jobs.dart';
@@ -53,6 +54,7 @@ class JobsCubit extends Cubit<JobsState> {
     state.itemImagesFile = null;
     selectLocationModel = null;
     state.totalHours = null;
+    emit(state.copyWith(images: []));
   }
 
   /// Select Location
@@ -67,12 +69,31 @@ class JobsCubit extends Cubit<JobsState> {
     }
   }
 
+  // /// Select Multiple Images
+  // Future selectMultiImages() async {
+  //   List<File>? images =
+  //       await ImagePickerService.selectMultipleImagesFromGallery();
+  //   if (images != null && images.isNotEmpty) {
+  //     emit(state.copyWith(itemImagesFile: images));
+  //     // if(images.length > 4) {
+  //     //   AppUtils.showToast(AppStrings.errorMessageMultiImagesSelectedLimit);
+  //     // } else {
+  //     //   emit(state.copyWith(itemImagesFile: images));
+  //     // }
+  //   }
+  // }
+
   /// Select Multiple Images
   Future selectMultiImages() async {
     List<File>? images =
         await ImagePickerService.selectMultipleImagesFromGallery();
     if (images != null && images.isNotEmpty) {
-      emit(state.copyWith(itemImagesFile: images));
+      final List<Images>? imagesList = state.images;
+      for (int i = 0; i < images.length; i++) {
+        imagesList!.add(Images(image: images[i].path));
+      }
+      emit(state.copyWith(images: imagesList));
+      // emit(state.copyWith(itemImagesFile: images));
       // if(images.length > 4) {
       //   AppUtils.showToast(AppStrings.errorMessageMultiImagesSelectedLimit);
       // } else {
@@ -207,13 +228,23 @@ class JobsCubit extends Cubit<JobsState> {
 
     final token = await prefs.getToken();
 
+    List<File> itemImagesFile = [];
+    for (int i = 0; i < state.images!.length; i++) {
+      if (state.images![i].image != null &&
+          !(state.images![i].image!.contains("http"))) {
+        itemImagesFile.add(File(state.images![i].image!));
+        print("postJobCubit itemImagesFile: ${state.images![i].image}");
+      }
+    }
+
     final response = await postJobProvider(
         apiToken: token,
         title: titleTextController.text,
         location: locationTextController.text,
         lat: lat,
         lng: lng,
-        images: state.itemImagesFile,
+        // images: state.itemImagesFile,
+        images: itemImagesFile,
         jobDate: dateTextController.text,
         jobTime: DateTimeConversions.convertTo24HourFormat(
             startTimeTextController.text),
@@ -282,6 +313,15 @@ class JobsCubit extends Cubit<JobsState> {
 
     final token = await prefs.getToken();
 
+    List<File> itemImagesFile = [];
+    for (int i = 0; i < state.images!.length; i++) {
+      if (state.images![i].image != null &&
+          !(state.images![i].image!.contains("http"))) {
+        itemImagesFile.add(File(state.images![i].image!));
+        print("editJobCubit itemImagesFile: ${state.images![i].image}");
+      }
+    }
+
     final response = await editJobProvider(
         apiToken: token,
         jobId: state.jobsModel?.jobsDetailData?.id,
@@ -289,7 +329,8 @@ class JobsCubit extends Cubit<JobsState> {
         location: locationTextController.text,
         lat: lat,
         lng: lng,
-        images: state.itemImagesFile,
+        // images: state.itemImagesFile,
+        images: itemImagesFile,
         jobDate: dateTextController.text,
         jobTime: DateTimeConversions.convertTo24HourFormat(
             startTimeTextController.text),
@@ -349,7 +390,10 @@ class JobsCubit extends Cubit<JobsState> {
       if (response.data["status"] == AppValidationMessages.success) {
         JobsModel jobsDetail = JobsModel.fromJson(response.data);
         // AppUtils.showToast(response.data['message']);
-        emit(state.copyWith(editJobLoading: false, jobsModel: jobsDetail));
+        emit(state.copyWith(
+            editJobLoading: false,
+            jobsModel: jobsDetail,
+            images: jobsDetail.jobsDetailData?.images ?? []));
         return jobsDetail;
       }
 

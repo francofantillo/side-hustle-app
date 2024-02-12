@@ -203,46 +203,61 @@ class _PostJobState extends State<PostJob> {
                         //     await _bloc.selectMultiImages();
                         //   },
                         // ),
-                        state.itemImagesFile != null &&
-                                state.itemImagesFile!.isNotEmpty
-                            ? ImageSlider(
-                                // itemImages: itemImages,
-                                fileImages: state.itemImagesFile,
-                                indicatorLength: state.itemImagesFile?.length,
+                        // state.itemImagesFile != null &&
+                        //         state.itemImagesFile!.isNotEmpty
+                        //     ? ImageSlider(
+                        //         // itemImages: itemImages,
+                        //         fileImages: state.itemImagesFile,
+                        //         indicatorLength: state.itemImagesFile?.length,
+                        //         onTap: () async {
+                        //           await _bloc.selectMultiImages();
+                        //         },
+                        //       )
+                        //     : state.jobsModel?.jobsDetailData?.images != null &&
+                        //             state.jobsModel!.jobsDetailData!.images!
+                        //                 .isEmpty
+                        //         ? NoImagesFoundWidget(
+                        //             showCameraAttachment: true,
+                        //             onTap: () async {
+                        //               await _bloc.selectMultiImages();
+                        //             },
+                        //           )
+                        //         : ImageSlider(
+                        //             hideCameraIcon: false,
+                        //             indicatorLength: state
+                        //                         .jobsModel
+                        //                         ?.jobsDetailData
+                        //                         ?.images
+                        //                         ?.length ==
+                        //                     null
+                        //                 ? null
+                        //                 : state.jobsModel!.jobsDetailData!
+                        //                         .images!.isEmpty
+                        //                     ? null
+                        //                     : state.jobsModel?.jobsDetailData!
+                        //                         .images!.length,
+                        //             // itemImages: itemImages,
+                        //             responseImages:
+                        //                 state.jobsModel?.jobsDetailData?.images,
+                        //             onTap: () async {
+                        //               await _bloc.selectMultiImages();
+                        //             },
+                        //           ),
+                        state.images!.isEmpty
+                            ? NoImagesFoundWidget(
+                                showCameraAttachment: true,
                                 onTap: () async {
                                   await _bloc.selectMultiImages();
                                 },
                               )
-                            : state.jobsModel?.jobsDetailData?.images != null &&
-                                    state.jobsModel!.jobsDetailData!.images!
-                                        .isEmpty
-                                ? NoImagesFoundWidget(
-                                    showCameraAttachment: true,
-                                    onTap: () async {
-                                      await _bloc.selectMultiImages();
-                                    },
-                                  )
-                                : ImageSlider(
-                                    hideCameraIcon: false,
-                                    indicatorLength: state
-                                                .jobsModel
-                                                ?.jobsDetailData
-                                                ?.images
-                                                ?.length ==
-                                            null
-                                        ? null
-                                        : state.jobsModel!.jobsDetailData!
-                                                .images!.isEmpty
-                                            ? null
-                                            : state.jobsModel?.jobsDetailData!
-                                                .images!.length,
-                                    // itemImages: itemImages,
-                                    responseImages:
-                                        state.jobsModel?.jobsDetailData?.images,
-                                    onTap: () async {
-                                      await _bloc.selectMultiImages();
-                                    },
-                                  ),
+                            : ImageSlider(
+                                hideCameraIcon: false,
+                                indicatorLength: state.images?.length,
+                                responseImages: state.images,
+                                onTap: () async {
+                                  await _bloc.selectMultiImages();
+                                },
+                              ),
                         height(0.02.sw),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
