@@ -10,6 +10,7 @@ class EventsState {
   AttendeesModel? attendeesModel;
   bool attendeesModelLoading;
   List<File>? itemImagesFile;
+  List<Images>? images;
   List? vendorList;
   List? availableAttractionsList;
   EventsModel? editEventModel;
@@ -20,39 +21,41 @@ class EventsState {
 
   EventsState(
       {this.eventsModel,
-      this.eventsDetailModel,
-      this.myEventsModel,
-      this.myEventsLoading = true,
-      this.eventsLoading = true,
-      this.eventsDetailLoading = true,
-      this.attendeesModel,
-      this.attendeesModelLoading = true,
-      this.itemImagesFile,
-      this.vendorList,
-      this.availableAttractionsList,
-      this.editEventModel,
-      this.eventsTempList,
-      this.searching = false,
-      this.myEventsIndex = 0,
-      this.editEventLoading = false});
+        this.eventsDetailModel,
+        this.myEventsModel,
+        this.myEventsLoading = true,
+        this.eventsLoading = true,
+        this.eventsDetailLoading = true,
+        this.attendeesModel,
+        this.attendeesModelLoading = true,
+        this.itemImagesFile,
+        this.vendorList,
+        this.availableAttractionsList,
+        this.editEventModel,
+        this.eventsTempList,
+        this.searching = false,
+        this.myEventsIndex = 0,
+        this.editEventLoading = false,
+        this.images});
 
   EventsState copyWith(
       {EventsModel? eventsModel,
-      EventsModel? eventsDetailModel,
-      bool? eventsLoading,
-      bool? eventsDetailLoading,
-      List<File>? itemImagesFile,
-      EventsModel? myEventsModel,
-      bool? myEventsLoading,
-      AttendeesModel? attendeesModel,
-      bool? attendeesModelLoading,
-      List? vendorList,
-      List? availableAttractionsList,
-      EventsModel? editEventModel,
-      bool? editEventLoading,
-      List<EventsData>? eventsTempList,
-      bool? searching,
-      int? myEventsIndex}) {
+        EventsModel? eventsDetailModel,
+        bool? eventsLoading,
+        bool? eventsDetailLoading,
+        List<File>? itemImagesFile,
+        EventsModel? myEventsModel,
+        bool? myEventsLoading,
+        AttendeesModel? attendeesModel,
+        bool? attendeesModelLoading,
+        List? vendorList,
+        List? availableAttractionsList,
+        EventsModel? editEventModel,
+        bool? editEventLoading,
+        List<EventsData>? eventsTempList,
+        bool? searching,
+        int? myEventsIndex,
+        List<Images>? images}) {
     return EventsState(
         eventsModel: eventsModel ?? this.eventsModel,
         eventsDetailModel: eventsDetailModel ?? this.eventsDetailModel,
@@ -63,14 +66,15 @@ class EventsState {
         myEventsLoading: myEventsLoading ?? this.myEventsLoading,
         attendeesModel: attendeesModel ?? this.attendeesModel,
         attendeesModelLoading:
-            attendeesModelLoading ?? this.attendeesModelLoading,
+        attendeesModelLoading ?? this.attendeesModelLoading,
         vendorList: vendorList ?? this.vendorList,
         availableAttractionsList:
-            availableAttractionsList ?? this.availableAttractionsList,
+        availableAttractionsList ?? this.availableAttractionsList,
         editEventModel: editEventModel ?? this.editEventModel,
         editEventLoading: editEventLoading ?? this.editEventLoading,
         myEventsIndex: myEventsIndex ?? this.myEventsIndex,
         eventsTempList: eventsTempList ?? this.eventsTempList,
-        searching: searching ?? this.searching);
+        searching: searching ?? this.searching,
+        images: images ?? this.images);
   }
 }
