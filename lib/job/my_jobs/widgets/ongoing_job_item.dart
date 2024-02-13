@@ -12,24 +12,19 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class OngoingJobItemWidget extends StatelessWidget {
-  final String? title,
-      subTitle,
-      price,
-      userProfile,
-      userName,
-      userRating,
-      imagePath;
+  final String? title, desc, price, userProfile, userName, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final Function()? onTapMarkAsComplete;
 
   const OngoingJobItemWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.desc,
+      this.onTapMarkAsComplete,
       this.price,
       this.userProfile,
       this.userName,
-      this.userRating,
       this.imagePath,
       this.imageHeight,
       this.imageWidth,
@@ -56,7 +51,8 @@ class OngoingJobItemWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.listItemWidth + .02.sw,
-                assetImage: imagePath,
+                image: imagePath,
+                assetImage: AssetsPath.imageLoadError,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -97,14 +93,14 @@ class OngoingJobItemWidget extends StatelessWidget {
                         children: [
                           Expanded(
                               child: textWidget(
-                                  text: subTitle,
+                                  text: desc,
                                   maxLines: 2,
                                   fontSize: AppDimensions.textSize10)),
                         ],
                       ),
                       height(imageHeight! * .01),
                       textWidget(
-                        text: price,
+                        text: price != null ? "\$$price" : "",
                         color: AppColors.textBlackColor,
                         fontFamily: AppFont.gilroyBold,
                         fontWeight: FontWeight.bold,
@@ -123,6 +119,7 @@ class OngoingJobItemWidget extends StatelessWidget {
                           CircularCacheImageWidget(
                             showLoading: false,
                             image: userProfile,
+                            assetImage: AssetsPath.placeHolder,
                             boarderColor: AppColors.primaryColor,
                             imageHeight: imageHeight! * .16,
                             imageWidth: imageHeight! * .16,
@@ -156,29 +153,23 @@ class OngoingJobItemWidget extends StatelessWidget {
                       ),
                       const Spacer(),
                       height(0.01.sw),
-                      Container(
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.all(0.03.sw),
-                        decoration: BoxDecoration(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Material(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(
-                              AppDimensions.bookedJobRoundedBorder),
-                          child: InkWell(
-                            onTap: () {
-                            },
-                            child: Center(
-                              child: textWidget(
-                                text: AppStrings.markAsComplete,
-                                color: AppColors.textWhiteColor,
-                                fontFamily: AppFont.gilroyBold,
-                                fontSize: AppDimensions.textSize10,
-                                fontWeight: FontWeight.bold,
-                                textAlign: TextAlign.center,
-                              ),
+                      InkWell(
+                        onTap: onTapMarkAsComplete,
+                        child: Container(
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.all(0.03.sw),
+                          decoration: BoxDecoration(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: textWidget(
+                              text: AppStrings.markAsComplete,
+                              color: AppColors.textWhiteColor,
+                              fontFamily: AppFont.gilroyBold,
+                              fontSize: AppDimensions.textSize10,
+                              fontWeight: FontWeight.bold,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),

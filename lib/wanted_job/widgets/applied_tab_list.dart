@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/job/apply_job.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/state_management/models/jobs_model.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
@@ -52,6 +54,12 @@ class _AppliedTabListState extends State<AppliedTabList> {
             return Padding(
               padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
               child: AppliedJobsWidget(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.applyForJobScreenRoute,
+                      arguments: ApplyForJob(
+                        jobId: jobsItemList?[index].jobId,
+                      ));
+                },
                 imageWidth: 1.sw,
                 imageHeight: AppDimensions.listItemHeight,
                 boarderColor: AppColors.itemBGColor,

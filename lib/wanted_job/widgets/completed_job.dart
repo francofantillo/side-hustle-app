@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -53,7 +54,8 @@ class CompletedJobsWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.listItemWidth,
-                assetImage: imagePath,
+                assetImage: AssetsPath.imageLoadError,
+                image: imagePath,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -74,7 +76,7 @@ class CompletedJobsWidget extends StatelessWidget {
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor)),
                           textWidget(
-                              text: price,
+                              text: price != null ? "\$$price" : "",
                               fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
@@ -91,12 +93,14 @@ class CompletedJobsWidget extends StatelessWidget {
                         ),
                       ),
                       height(imageHeight! * .04),
-                      Divider(
-                        height: 1,
-                        color: Colors.grey.withOpacity(0.8),
+                      Expanded(
+                        child: Divider(
+                          height: 1,
+                          color: Colors.grey.withOpacity(0.8),
+                        ),
                       ),
                       height(imageHeight! * .03),
-                      const Spacer(),
+                      // const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,6 +111,7 @@ class CompletedJobsWidget extends StatelessWidget {
                                 CircularCacheImageWidget(
                                   showLoading: false,
                                   image: userProfile,
+                                  assetImage: AssetsPath.placeHolder,
                                   boarderColor: AppColors.primaryColor,
                                   imageHeight: imageHeight! * .2,
                                   imageWidth: imageHeight! * .2,
@@ -114,7 +119,7 @@ class CompletedJobsWidget extends StatelessWidget {
                                 width(.02.sw),
                                 Expanded(
                                   child: textWidget(
-                                      text: userName!,
+                                      text: userName,
                                       fontSize: AppDimensions.textSize10,
                                       fontFamily: AppFont.gilroySemiBold,
                                       fontWeight: FontWeight.w500,

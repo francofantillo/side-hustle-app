@@ -14,24 +14,19 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class CompletedJobItemWidget extends StatelessWidget {
-  final String? title,
-      subTitle,
-      price,
-      userProfile,
-      userName,
-      userRating,
-      imagePath;
+  final String? title, desc, price, userProfile, userName, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final Function()? onTapRate;
 
   const CompletedJobItemWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.desc,
       this.price,
       this.userProfile,
+      this.onTapRate,
       this.userName,
-      this.userRating,
       this.imagePath,
       this.imageHeight,
       this.imageWidth,
@@ -58,7 +53,8 @@ class CompletedJobItemWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.listItemWidth + .02.sw,
-                assetImage: imagePath,
+                image: imagePath,
+                assetImage: AssetsPath.imageLoadError,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -101,7 +97,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                           children: [
                             Expanded(
                                 child: textWidget(
-                                    text: subTitle,
+                                    text: desc,
                                     maxLines: 2,
                                     fontSize: AppDimensions.textSize10)),
                           ],
@@ -109,11 +105,11 @@ class CompletedJobItemWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .015),
                       textWidget(
-                          text: price,
+                          text: price != null ? "\$$price" : "",
                           color: AppColors.textBlackColor,
-                        fontFamily: AppFont.gilroyBold,
-                        fontWeight: FontWeight.bold,
-                        fontSize: AppDimensions.textSizeSmall),
+                          fontFamily: AppFont.gilroyBold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppDimensions.textSizeSmall),
                       height(imageHeight! * .02),
                       Divider(
                         height: 1,
@@ -127,6 +123,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                           CircularCacheImageWidget(
                             showLoading: false,
                             image: userProfile,
+                            assetImage: AssetsPath.placeHolder,
                             boarderColor: AppColors.primaryColor,
                             imageHeight: imageHeight! * .16,
                             imageWidth: imageHeight! * .16,
@@ -160,33 +157,23 @@ class CompletedJobItemWidget extends StatelessWidget {
                       ),
                       const Spacer(),
                       height(0.01.sw),
-                      Container(
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.all(0.03.sw),
-                        decoration: BoxDecoration(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Material(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(
-                              AppDimensions.bookedJobRoundedBorder),
-                          child: InkWell(
-                            onTap: () {
-                              AppDialogues.noHeaderDialogue(
-                                  context: context,
-                                  body: const RateAndReviewDialogue())
-                                  .show();
-                            },
-                            child: Center(
-                              child: textWidget(
-                                text: AppStrings.rateAndReview,
-                                color: AppColors.textWhiteColor,
-                                fontFamily: AppFont.gilroyBold,
-                                fontSize: AppDimensions.textSize10,
-                                fontWeight: FontWeight.bold,
-                                textAlign: TextAlign.center,
-                              ),
+                      InkWell(
+                        onTap: onTapRate,
+                        child: Container(
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.all(0.03.sw),
+                          decoration: BoxDecoration(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: textWidget(
+                              text: AppStrings.rateAndReview,
+                              color: AppColors.textWhiteColor,
+                              fontFamily: AppFont.gilroyBold,
+                              fontSize: AppDimensions.textSize10,
+                              fontWeight: FontWeight.bold,
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),

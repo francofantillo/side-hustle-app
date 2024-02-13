@@ -275,3 +275,21 @@ Future<Response?> updateJobStatusProvider(
       path: API.UPDATE_JOB_STATUS, data: data, token: apiToken);
   return response;
 }
+
+/// Add Review
+Future<Response?> addReviewProvider(
+    {int? taskerId, String? rating, String? review, String? apiToken}) async {
+  final data = {
+    "model_id": "1",
+    "model_name": "Job",
+    "tasker": taskerId,
+    "rating": rating,
+    "review": review
+  };
+
+  print(
+      "*****************\nurl: ${API.ADD_JOB_REVIEW}\n$data\n**************************");
+  final response = await postRequestProvider(
+      path: API.ADD_JOB_REVIEW, data: data, token: apiToken);
+  return response;
+}

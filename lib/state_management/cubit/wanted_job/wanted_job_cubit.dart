@@ -582,11 +582,10 @@ class JobsCubit extends Cubit<JobsState> {
   }
 
   /// Update Job Status
-  Future<int> updateJobStatusCubit(
+  Future<int> startJobCubit(
       {required BuildContext context,
       required bool mounted,
-      required int? jobId,
-      required String status}) async {
+      required int? jobId}) async {
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -594,23 +593,101 @@ class JobsCubit extends Cubit<JobsState> {
     print("token: $token");
 
     final response = await updateJobStatusProvider(
-        jobId: jobId, status: status, apiToken: token);
+        jobId: jobId, status: JobStatusEnum.Ongoing.name, apiToken: token);
 
     print("status code: ${response?.statusCode}");
 
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        // JobRequestModel jobRequestModel =
-        //     JobRequestModel.fromJson(response.data);
-        // emit(state.copyWith(
-        //     jobRequestLoading: false, jobRequestModel: jobRequestModel));
-
         JobsModel jobsModel = JobsModel.fromJson(response.data);
         emit(state.copyWith(
-          jobsModel: jobsModel,
-          wantedJobsTempList: [],
-          searching: false));
+            jobsModel: jobsModel, wantedJobsTempList: [], searching: false));
+        AppUtils.showToast(response.data['message']);
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
+    }
+  }
+
+  /// Update Job Status
+  Future<int> completeJobCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int index,
+      required int? jobId}) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await updateJobStatusProvider(
+        jobId: jobId, status: JobStatusEnum.Completed.name, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final ongoingJobs = state.myJobsModel;
+        ongoingJobs?.myJobs?.removeAt(index);
+        AppUtils.showToast(response.data['message']);
+        EasyLoading.dismiss();
+        emit(state.copyWith(myJobsModel: ongoingJobs));
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
+    }
+  }
+
+  /// Add Review
+  Future<int> reviewCubit({
+    required BuildContext context,
+    required bool mounted,
+    required int? taskerId,
+    required double rating,
+    String? review,
+  }) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await addReviewProvider(
+        taskerId: taskerId,
+        rating: rating.toString(),
+        review: review,
+        apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // rate and review disabled or Text reviewed
         AppUtils.showToast(response.data['message']);
         EasyLoading.dismiss();
         return 1;
