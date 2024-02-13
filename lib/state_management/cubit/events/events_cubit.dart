@@ -412,9 +412,6 @@ class EventsCubit extends Cubit<EventsState> {
       }
     }
 
-    // print(
-    //     "editEventModel itemImagesFile Length: ${itemImagesFile?.length} ${itemImagesFile?[0].path}");
-
     late String vendorListString;
 
     for (int i = 0; i < (state.vendorList?.length ?? 0); i++) {
