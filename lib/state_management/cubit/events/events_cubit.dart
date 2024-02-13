@@ -59,7 +59,7 @@ class EventsCubit extends Cubit<EventsState> {
   Future selectLocation(
       {required BuildContext context, required bool mounted}) async {
     final SelectLocationModel? location =
-    await AppUtils.selectLocation(context: context, mounted: mounted);
+        await AppUtils.selectLocation(context: context, mounted: mounted);
 
     if (location != null) {
       eventLocationTextController.text = location.locationAddress ?? "";
@@ -70,7 +70,7 @@ class EventsCubit extends Cubit<EventsState> {
   /// Select Multiple Images
   Future selectMultiImages() async {
     List<File>? images =
-    await ImagePickerService.selectMultipleImagesFromGallery();
+        await ImagePickerService.selectMultipleImagesFromGallery();
     if (images != null && images.isNotEmpty) {
       final List<Images>? imagesList = state.images;
       for (int i = 0; i < images.length; i++) {
@@ -151,7 +151,7 @@ class EventsCubit extends Cubit<EventsState> {
       emit(state.copyWith(searching: true));
       for (int i = 0; i < (originalList?.length ?? 0); i++) {
         String name =
-        originalList?[i].name != null ? "${originalList![i].name}" : '';
+            originalList?[i].name != null ? "${originalList![i].name}" : '';
         if (name.toLowerCase().contains(value.toLowerCase())) {
           tempList.add(originalList![i]);
         }
@@ -222,7 +222,7 @@ class EventsCubit extends Cubit<EventsState> {
     final token = await prefs.getToken();
 
     final response =
-    await getIsInterestedEventProvider(id: id, apiToken: token);
+        await getIsInterestedEventProvider(id: id, apiToken: token);
 
     EasyLoading.dismiss();
 
@@ -256,8 +256,8 @@ class EventsCubit extends Cubit<EventsState> {
   /// Post an Event
   Future<int> postAnEventCubit(
       {required BuildContext context,
-        required int planId,
-        required bool mounted}) async {
+      required int planId,
+      required bool mounted}) async {
     EasyLoading.show();
 
     final String? lat = selectLocationModel?.lat?.toString();
@@ -305,18 +305,18 @@ class EventsCubit extends Cubit<EventsState> {
       if (i == 0) {
         if ((state.availableAttractionsList!.length - 1) == i) {
           availableAttractionListString =
-          "${state.availableAttractionsList![i]}";
+              "${state.availableAttractionsList![i]}";
         } else {
           availableAttractionListString =
-          "${state.availableAttractionsList![i]},";
+              "${state.availableAttractionsList![i]},";
         }
       } else {
         if ((state.availableAttractionsList!.length - 1) == i) {
           availableAttractionListString +=
-          "${state.availableAttractionsList![i]}";
+              "${state.availableAttractionsList![i]}";
         } else {
           availableAttractionListString +=
-          "${state.availableAttractionsList![i]},";
+              "${state.availableAttractionsList![i]},";
         }
       }
     }
@@ -339,7 +339,7 @@ class EventsCubit extends Cubit<EventsState> {
       startTime: DateTimeConversions.convertTo24HourFormat(
           startTimeTextController.text),
       endTime:
-      DateTimeConversions.convertTo24HourFormat(endTimeTextController.text),
+          DateTimeConversions.convertTo24HourFormat(endTimeTextController.text),
       purpose: eventPurposeTextController.text,
       theme: eventThemeTextController.text,
       // vendorsListString: eventVendorTextController.text,
@@ -383,8 +383,8 @@ class EventsCubit extends Cubit<EventsState> {
   /// Edit an Event
   Future<int> editAnEventCubit(
       {required BuildContext context,
-        required int planId,
-        required bool mounted}) async {
+      required int planId,
+      required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
 
@@ -412,8 +412,8 @@ class EventsCubit extends Cubit<EventsState> {
       }
     }
 
-    print(
-        "editEventModel itemImagesFile Length: ${itemImagesFile?.length} ${itemImagesFile?[0].path}");
+    // print(
+    //     "editEventModel itemImagesFile Length: ${itemImagesFile?.length} ${itemImagesFile?[0].path}");
 
     late String vendorListString;
 
@@ -445,18 +445,18 @@ class EventsCubit extends Cubit<EventsState> {
       if (i == 0) {
         if ((state.availableAttractionsList!.length - 1) == i) {
           availableAttractionListString =
-          "${state.availableAttractionsList![i]}";
+              "${state.availableAttractionsList![i]}";
         } else {
           availableAttractionListString =
-          "${state.availableAttractionsList![i]},";
+              "${state.availableAttractionsList![i]},";
         }
       } else {
         if ((state.availableAttractionsList!.length - 1) == i) {
           availableAttractionListString +=
-          "${state.availableAttractionsList![i]}";
+              "${state.availableAttractionsList![i]}";
         } else {
           availableAttractionListString +=
-          "${state.availableAttractionsList![i]},";
+              "${state.availableAttractionsList![i]},";
         }
       }
     }
@@ -480,7 +480,7 @@ class EventsCubit extends Cubit<EventsState> {
       startTime: DateTimeConversions.convertTo24HourFormat(
           startTimeTextController.text),
       endTime:
-      DateTimeConversions.convertTo24HourFormat(endTimeTextController.text),
+          DateTimeConversions.convertTo24HourFormat(endTimeTextController.text),
       purpose: eventPurposeTextController.text,
       theme: eventThemeTextController.text,
       // vendorsListString: eventVendorTextController.text,
