@@ -33,7 +33,7 @@ class JobRequestData {
   double? bidAmount;
   int? userId;
   String? username;
-  int? rating;
+  double? rating;
   String? image;
 
   JobRequestData(
@@ -52,7 +52,7 @@ class JobRequestData {
     bidAmount = json['bid_amount']?.toDouble();
     userId = json['user_id'];
     username = json['username'];
-    rating = json['rating'];
+    rating = json['rating']?.toDouble();
     image = json['image'];
   }
 

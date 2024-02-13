@@ -50,6 +50,8 @@ class _MyJobsCompletedListState extends State<MyJobsCompletedList> {
                                     body: RateAndReviewDialogue(index: index))
                                 .show();
                           },
+                          isReviewed:
+                              state.myJobsModel?.myJobs?[index].isReviewed ?? 0,
                           imageWidth: 1.sw,
                           imageHeight: AppDimensions.listItemCompletedJobHeight,
                           boarderColor: AppColors.itemBGColor,

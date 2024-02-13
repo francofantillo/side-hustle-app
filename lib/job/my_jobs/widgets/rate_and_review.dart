@@ -132,13 +132,20 @@ class _RateAndReviewDialogueState extends State<RateAndReviewDialogue> {
             child: CustomMaterialButton(
                 onPressed: () async {
                   FocusManager.instance.primaryFocus!.unfocus();
-                  await _bloc.reviewCubit(
-                      context: context,
-                      mounted: mounted,
-                      taskerId: state.myJobsModel?.myJobs?[widget.index]
-                          .userDetail?.userid,
-                      rating: userRating,
-                      review: additionalComments.text);
+                  await _bloc
+                      .reviewCubit(
+                          context: context,
+                          mounted: mounted,
+                          jobId: state.myJobsModel?.myJobs?[widget.index].jobId,
+                          taskerId: state.myJobsModel?.myJobs?[widget.index]
+                              .userDetail?.userid,
+                          rating: userRating,
+                          review: additionalComments.text)
+                      .then((value) {
+                    if (value == 1) {
+                      Navigator.pop(context);
+                    }
+                  });
                 },
                 name: AppStrings.submitReview,
                 fontSize: AppDimensions.textSizeSmall,

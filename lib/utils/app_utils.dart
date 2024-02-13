@@ -163,6 +163,7 @@ class AppUtils {
       // Display the total difference in hours with minutes as decimal points
       print('Total time difference: $hoursDifference hours');
       return hoursDifference.toStringAsFixed(2);
+      // return hoursDifference.toString();
     } else {
       return null;
     }

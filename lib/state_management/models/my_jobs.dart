@@ -29,6 +29,7 @@ class MyJobsModel {
 
 class MyJobsData {
   int? jobId;
+  int? isReviewed;
   String? image;
   String? title;
   String? description;
@@ -37,15 +38,16 @@ class MyJobsData {
 
   MyJobsData(
       {this.jobId,
-        this.image,
-        this.title,
-        this.description,
-        this.budget,
-        this.userDetail});
+      this.isReviewed,
+      this.image,
+      this.title,
+      this.description,
+      this.budget,
+      this.userDetail});
 
   MyJobsData.fromJson(Map<String, dynamic> json) {
-
     jobId = json['job_id'];
+    isReviewed = json['is_reviewed'];
     image = json['image'];
     title = json['title'];
     description = json['description'];
@@ -58,6 +60,7 @@ class MyJobsData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['job_id'] = this.jobId;
+    data['is_reviewed'] = this.isReviewed;
     data['image'] = this.image;
     data['title'] = this.title;
     data['description'] = this.description;

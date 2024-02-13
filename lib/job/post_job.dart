@@ -554,21 +554,21 @@ class _PostJobState extends State<PostJob> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  /*             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: textWidget(
-                                  // text: AppStrings.totalHours,
-                                  text:
-                                      "Total Hours: ${state.totalHours != null ? "${state.totalHours} Hours" : ""}",
-                                  maxLines: 1,
-                                  color: AppColors.textBlackColor,
-                                  fontSize: AppDimensions.textSizeSmall,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            height(0.01.sw),*/
-                                  Text(""),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: textWidget(
+                                        // text: AppStrings.totalHours,
+                                        text:
+                                            "Total Hours: ${state.totalHours != null ? "${state.totalHours} Hours" : ""}",
+                                        maxLines: 1,
+                                        color: AppColors.textBlackColor,
+                                        fontSize: AppDimensions.textSizeSmall,
+                                        fontFamily: AppFont.gilroyBold,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  // height(0.01.sw),
+                                  // Text(""),
                                   height(0.01.sw),
                                   CustomTextFormField(
                                     // height: 45.h,

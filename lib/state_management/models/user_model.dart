@@ -35,7 +35,7 @@ class Data {
   String? zipCode;
   String? country;
   String? image;
-  int? rating;
+  double? rating;
   String? apiToken;
   String? fcmToken;
   String? accessToken;
@@ -78,7 +78,7 @@ class Data {
     zipCode = json['zip_code'];
     country = json['country'];
     image = json['image'];
-    rating = json['rating'];
+    rating = json['rating']?.toDouble();
     apiToken = json['api_token'];
     fcmToken = json['fcm_token'];
     accessToken = json['access_token'];

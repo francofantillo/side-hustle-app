@@ -17,11 +17,13 @@ class CompletedJobItemWidget extends StatelessWidget {
   final String? title, desc, price, userProfile, userName, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final int isReviewed;
   final Function()? onTapRate;
 
   const CompletedJobItemWidget(
       {super.key,
       this.title,
+      this.isReviewed = 0,
       this.desc,
       this.price,
       this.userProfile,
@@ -111,9 +113,11 @@ class CompletedJobItemWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: AppDimensions.textSizeSmall),
                       height(imageHeight! * .02),
-                      Divider(
-                        height: 1,
-                        color: Colors.grey.withOpacity(0.8),
+                      Expanded(
+                        child: Divider(
+                          height: 1,
+                          color: Colors.grey.withOpacity(0.8),
+                        ),
                       ),
                       height(imageHeight! * .04),
                       Row(
@@ -158,7 +162,7 @@ class CompletedJobItemWidget extends StatelessWidget {
                       const Spacer(),
                       height(0.01.sw),
                       InkWell(
-                        onTap: onTapRate,
+                        onTap: isReviewed == 0 ? onTapRate : null,
                         child: Container(
                           margin: EdgeInsets.zero,
                           padding: EdgeInsets.all(0.03.sw),
@@ -168,7 +172,9 @@ class CompletedJobItemWidget extends StatelessWidget {
                           ),
                           child: Center(
                             child: textWidget(
-                              text: AppStrings.rateAndReview,
+                              text: isReviewed == 0
+                                  ? AppStrings.rateAndReview
+                                  : AppStrings.reviewed,
                               color: AppColors.textWhiteColor,
                               fontFamily: AppFont.gilroyBold,
                               fontSize: AppDimensions.textSize10,

@@ -278,9 +278,9 @@ Future<Response?> updateJobStatusProvider(
 
 /// Add Review
 Future<Response?> addReviewProvider(
-    {int? taskerId, String? rating, String? review, String? apiToken}) async {
+    {int? taskerId, String? rating, String? review, int? jobId, String? apiToken}) async {
   final data = {
-    "model_id": "1",
+    "model_id": jobId,
     "model_name": "Job",
     "tasker": taskerId,
     "rating": rating,

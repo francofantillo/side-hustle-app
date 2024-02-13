@@ -376,6 +376,7 @@ class AppStrings {
   static const String viewRequest = "View Request";
   static const String markAsComplete = "Mark as Complete";
   static const String rateAndReview = "Rate and Review ";
+  static const String reviewed = "Reviewed";
   static const String reject = "Reject";
   static const String hire = "Hire";
   static const String viewJob = "View Job";

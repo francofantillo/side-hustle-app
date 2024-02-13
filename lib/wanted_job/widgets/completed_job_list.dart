@@ -47,6 +47,7 @@ class _CompletedTabListState extends State<CompletedTabList> {
           itemCount: jobsItemList?.length ?? 0,
           itemBuilder: (context, index) {
             // Replace with your horizontal list item
+            print("rating: ${jobsItemList?[index].user?.rating}");
             return Padding(
               padding: const EdgeInsets.only(right: 16.0, left: 8.0),
               child: CompletedJobsWidget(
@@ -57,11 +58,11 @@ class _CompletedTabListState extends State<CompletedTabList> {
                 subTitle: jobsItemList?[index].description,
                 imagePath: jobsItemList?[index].image,
                 price: jobsItemList?[index].budget?.toStringAsFixed(2),
-                userName: jobsItemList?[index].user?.name,
-                userRating: jobsItemList?[index].user?.rating == 0.0
+                userName: jobsItemList?[index].reviewName,
+                userRating: jobsItemList?[index].rating == 0.0
                     ? "0"
-                    : jobsItemList?[index].user?.rating?.toString(),
-                userProfile: jobsItemList?[index].user?.image,
+                    : jobsItemList?[index].rating?.toString(),
+                userProfile: jobsItemList?[index].reviewImage,
               ),
             );
           },

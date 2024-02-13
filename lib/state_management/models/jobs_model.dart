@@ -46,6 +46,9 @@ class JobsData {
   double? budget;
   String? image;
   User? user;
+  String? reviewImage;
+  String? reviewName;
+  double? rating;
 
   JobsData(
       {this.jobId,
@@ -53,6 +56,9 @@ class JobsData {
       this.description,
       this.budget,
       this.image,
+      this.reviewImage,
+      this.reviewName,
+      this.rating,
       this.user});
 
   JobsData.fromJson(Map<String, dynamic> json) {
@@ -61,6 +67,9 @@ class JobsData {
     description = json['description'];
     budget = json['budget']?.toDouble();
     image = json['image'];
+    reviewImage = json['review_image'];
+    reviewName = json['review_name'];
+    rating = json['rating']?.toDouble();
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
@@ -71,6 +80,9 @@ class JobsData {
     data['description'] = this.description;
     data['budget'] = this.budget;
     data['image'] = this.image;
+    data['review_image'] = this.reviewImage;
+    data['review_name'] = this.reviewName;
+    data['rating'] = this.rating;
     if (this.user != null) {
       data['user'] = this.user!.toJson();
     }
@@ -126,7 +138,7 @@ class JobsDetail {
 
   JobsDetail(
       {this.title,
-        this.isApplied,
+      this.isApplied,
       this.id,
       this.userId,
       this.assignedUserId,

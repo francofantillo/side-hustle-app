@@ -667,6 +667,7 @@ class JobsCubit extends Cubit<JobsState> {
     required BuildContext context,
     required bool mounted,
     required int? taskerId,
+    required int? jobId,
     required double rating,
     String? review,
   }) async {
@@ -678,6 +679,7 @@ class JobsCubit extends Cubit<JobsState> {
 
     final response = await addReviewProvider(
         taskerId: taskerId,
+        jobId: jobId,
         rating: rating.toString(),
         review: review,
         apiToken: token);
@@ -687,7 +689,8 @@ class JobsCubit extends Cubit<JobsState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        // rate and review disabled or Text reviewed
+        MyJobsModel myJobsModel = MyJobsModel.fromJson(response.data);
+        emit(state.copyWith(myJobsLoading: false, myJobsModel: myJobsModel));
         AppUtils.showToast(response.data['message']);
         EasyLoading.dismiss();
         return 1;
