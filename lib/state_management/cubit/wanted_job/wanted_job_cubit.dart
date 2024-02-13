@@ -272,7 +272,7 @@ class JobsCubit extends Cubit<JobsState> {
           } else {
             Navigator.pop(context);
             Navigator.pop(context);
-            Navigator.pushNamed(context, AppRoutes.myJobsScreenRoute);
+            // Navigator.pushNamed(context, AppRoutes.myJobsScreenRoute);
           }
         }
         return 1;
@@ -539,8 +539,6 @@ class JobsCubit extends Cubit<JobsState> {
       required bool mounted,
       required int index,
       required String status}) async {
-    // emit(state.copyWith(
-    //     jobRequestLoading: true, jobRequestModel: JobRequestModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -565,6 +563,54 @@ class JobsCubit extends Cubit<JobsState> {
             JobRequestModel.fromJson(response.data);
         emit(state.copyWith(
             jobRequestLoading: false, jobRequestModel: jobRequestModel));
+        AppUtils.showToast(response.data['message']);
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
+    }
+  }
+
+  /// Update Job Status
+  Future<int> updateJobStatusCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int? jobId,
+      required String status}) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await updateJobStatusProvider(
+        jobId: jobId, status: status, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // JobRequestModel jobRequestModel =
+        //     JobRequestModel.fromJson(response.data);
+        // emit(state.copyWith(
+        //     jobRequestLoading: false, jobRequestModel: jobRequestModel));
+
+        JobsModel jobsModel = JobsModel.fromJson(response.data);
+        emit(state.copyWith(
+          jobsModel: jobsModel,
+          wantedJobsTempList: [],
+          searching: false));
         AppUtils.showToast(response.data['message']);
         EasyLoading.dismiss();
         return 1;

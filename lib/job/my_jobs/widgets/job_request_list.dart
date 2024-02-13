@@ -57,32 +57,31 @@ class _JobRequestListState extends State<JobRequestList> {
                             right: 16.0, left: 8.0, top: 4),
                         child: JobRequestItemWidget(
                           onTapHire: () async {
-                            await _bloc
-                                .updateJobRequestsCubit(
-                                    context: context,
-                                    mounted: mounted,
-                                    index: index,
-                                    status: JobsRequestEnum.Approved.name)
-                                .then((value) {
-                              if (value == 1) {
-                                if (widget.isViewRequestFromJobDetail) {
-                                  Navigator.pop(context);
-                                  Navigator.pop(context);
-                                  // Navigator.pushReplacementNamed(
-                                  //     context, AppRoutes.myJobsScreenRoute,
-                                  //     arguments: const MyJobsScreen(
-                                  //       selectedIndex: 1,
-                                  //     ));
-                                } else {
-                                  Navigator.pop(context);
-                                  // Navigator.pushReplacementNamed(
-                                  //     context, AppRoutes.myJobsScreenRoute,
-                                  //     arguments: const MyJobsScreen(
-                                  //       selectedIndex: 1,
-                                  //     ));
-                                }
-                              }
-                            });
+                            await _bloc.updateJobRequestsCubit(
+                                context: context,
+                                mounted: mounted,
+                                index: index,
+                                status: JobsRequestEnum.Approved.name);
+                            //     .then((value) {
+                            //   if (value == 1) {
+                            //     if (widget.isViewRequestFromJobDetail) {
+                            //       Navigator.pop(context);
+                            //       Navigator.pop(context);
+                            //       // Navigator.pushReplacementNamed(
+                            //       //     context, AppRoutes.myJobsScreenRoute,
+                            //       //     arguments: const MyJobsScreen(
+                            //       //       selectedIndex: 1,
+                            //       //     ));
+                            //     } else {
+                            //       Navigator.pop(context);
+                            //       // Navigator.pushReplacementNamed(
+                            //       //     context, AppRoutes.myJobsScreenRoute,
+                            //       //     arguments: const MyJobsScreen(
+                            //       //       selectedIndex: 1,
+                            //       //     ));
+                            //     }
+                            //   }
+                            // });
                           },
                           onTapReject: () async {
                             await _bloc.updateJobRequestsCubit(

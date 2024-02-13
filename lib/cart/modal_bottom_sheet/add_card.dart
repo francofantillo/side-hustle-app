@@ -163,6 +163,7 @@ class _AddCardModalSheetState extends State<AddCardModalSheet> {
                               isShowBoarder: false,
                               height: 40.h,
                               hintText: AppStrings.cVV,
+                              keyboardType: TextInputType.number,
                               inputFormatter: [
                                 FilteringTextInputFormatter.digitsOnly,
                                 LengthLimitingTextInputFormatter(4),

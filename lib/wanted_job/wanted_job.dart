@@ -100,7 +100,7 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
                   right: AppDimensions.rootPadding,
                   top: AppDimensions.rootPadding),
               child: SearchTextField(
-                // height: AppDimensions.searchTextFieldHeight,
+                  // height: AppDimensions.searchTextFieldHeight,
                   contentPaddingBottom: 8,
                   hintText: AppStrings.searchJob,
                   onChanged: (search) {
@@ -121,12 +121,12 @@ class _WantedJobScreenState extends State<WantedJobScreen> {
             _tabIndexBasicToggle.value == 0
                 ? const WantedTabList()
                 : _tabIndexBasicToggle.value == 1
-                ? const AppliedTabList()
-                : _tabIndexBasicToggle.value == 2
-                ? const BookedTabList()
-                : _tabIndexBasicToggle.value == 3
-                ? const CompletedTabList()
-                : const SizedBox.shrink()
+                    ? const AppliedTabList()
+                    : _tabIndexBasicToggle.value == 2
+                        ? const BookedTabList()
+                        : _tabIndexBasicToggle.value == 3
+                            ? const CompletedTabList()
+                            : const SizedBox.shrink()
           ],
         ),
       );

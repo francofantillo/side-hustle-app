@@ -57,5 +57,6 @@ class API {
   static const String GET_MY_JOBS = "${BASE_URL}/my-jobs";
   static const String GET_JOB_REQUESTS = "${BASE_URL}/job-requests";
   static const String UPDATE_JOB_REQUESTS = "${BASE_URL}/update-job-request-status";
+  static const String UPDATE_JOB_STATUS = "${BASE_URL}/update-job-status";
 
 }

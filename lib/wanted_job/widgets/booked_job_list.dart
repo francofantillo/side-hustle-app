@@ -6,6 +6,7 @@ import 'package:side_hustle/state_management/models/jobs_model.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/wanted_job/widgets/booked_job.dart';
 import 'package:side_hustle/widgets/error/error_widget.dart';
@@ -18,6 +19,14 @@ class BookedTabList extends StatefulWidget {
 }
 
 class _BookedTabListState extends State<BookedTabList> {
+  late final JobsCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobsCubit, JobsState>(builder: (context, state) {
@@ -52,6 +61,13 @@ class _BookedTabListState extends State<BookedTabList> {
             return Padding(
               padding: const EdgeInsets.only(right: 16.0, left: 8.0),
               child: BookedJobsWidget(
+                  onTapStartJob: () async {
+                    await _bloc.updateJobStatusCubit(
+                        context: context,
+                        mounted: mounted,
+                        jobId: jobsItemList?[index].jobId,
+                        status: JobStatusEnum.Start.name);
+                  },
                   imageWidth: 1.sw,
                   imageHeight: AppDimensions.listItemHeight,
                   boarderColor: AppColors.itemBGColor,

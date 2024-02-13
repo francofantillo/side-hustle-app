@@ -14,16 +14,17 @@ class BookedJobsWidget extends StatelessWidget {
   final String? title, desc, price, imagePath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final Function()? onTapStartJob;
 
-  const BookedJobsWidget(
-      {super.key,
-      this.title,
-      this.desc,
-      this.price,
-      this.imagePath,
-      this.imageHeight,
-      this.imageWidth,
-      this.boarderColor});
+  const BookedJobsWidget({super.key,
+    this.title,
+    this.desc,
+    this.onTapStartJob,
+    this.price,
+    this.imagePath,
+    this.imageHeight,
+    this.imageWidth,
+    this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class BookedJobsWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
@@ -114,7 +115,7 @@ class BookedJobsWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(
                                       AppDimensions.bookedJobRoundedBorder),
                                   child: InkWell(
-                                    onTap: () {},
+                                    onTap: onTapStartJob,
                                     child: Center(
                                       child: textWidget(
                                         text: AppStrings.startJob,

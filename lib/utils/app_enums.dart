@@ -30,4 +30,6 @@ enum JobsEnum { WantedJobs, Applied, Booked, Completed }
 
 enum JobsRequestEnum { Approved, Rejected }
 
+enum JobStatusEnum { Start, Completed }
+
 enum MyJobsEnum { Pending, Ongoing, Completed }

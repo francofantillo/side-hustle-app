@@ -263,3 +263,15 @@ Future<Response?> updateJobRequestsProvider(
       path: API.UPDATE_JOB_REQUESTS, data: data, token: apiToken);
   return response;
 }
+
+/// Update Job Status
+Future<Response?> updateJobStatusProvider(
+    {int? jobId, String? status, String? apiToken}) async {
+  final data = {"job_id": jobId, "status": status};
+
+  print(
+      "*****************\nurl: ${API.UPDATE_JOB_STATUS}\n$data\n**************************");
+  final response = await putRequestProvider(
+      path: API.UPDATE_JOB_STATUS, data: data, token: apiToken);
+  return response;
+}
