@@ -329,7 +329,6 @@ class JobsCubit extends Cubit<JobsState> {
         location: locationTextController.text,
         lat: lat,
         lng: lng,
-        // images: state.itemImagesFile,
         images: itemImagesFile,
         jobDate: dateTextController.text,
         jobTime: DateTimeConversions.convertTo24HourFormat(
