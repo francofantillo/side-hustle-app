@@ -29,8 +29,9 @@ import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class PostProduct extends StatefulWidget {
   final bool isEdit;
+  final int? id;
 
-  const PostProduct({super.key, this.isEdit = false});
+  const PostProduct({super.key, this.isEdit = false, this.id});
 
   @override
   State<PostProduct> createState() => _PostProductState();
@@ -43,7 +44,7 @@ class _PostProductState extends State<PostProduct> {
 
   @override
   void initState() {
-    _bloc = BlocProvider.of(context);
+    _bloc = BlocProvider.of<SideHustleCubit>(context);
     _blocCard = BlocProvider.of(context);
     _bloc.initControllers();
     _bloc.type = DeliveryTypeEnum.Pickup.name;
@@ -286,8 +287,9 @@ class _PostProductState extends State<PostProduct> {
                                     height: 45.h,
                                     hintText: "\$\$\$",
                                     controller: _bloc.priceTextController,
-                                    fieldValidator: (value) => value
-                                        ?.validateEmpty(AppStrings.jobBudget),
+                                    fieldValidator: (value) =>
+                                        value?.validateEmpty(
+                                            AppStrings.productPricing),
                                     keyboardType:
                                         const TextInputType.numberWithOptions(
                                             signed: true, decimal: true),

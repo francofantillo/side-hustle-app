@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/view_event_self.dart';
@@ -20,16 +21,19 @@ class PostAdded extends StatelessWidget {
 
   const PostAdded(
       {super.key,
-        this.id,
-        this.title,
-        this.subTitle,
-        this.buttonName = "",
-        this.isProduct = false,
-        this.isService = false,
-        this.isEvent = false});
+      this.id,
+      this.title,
+      this.subTitle,
+      this.buttonName = "",
+      this.isProduct = false,
+      this.isService = false,
+      this.isEvent = false});
 
   @override
   Widget build(BuildContext context) {
+    if (kDebugMode) {
+      print("PostAdded: $id");
+    }
     return BackgroundWidget(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

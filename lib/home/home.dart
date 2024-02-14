@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/home/widgets/home_appbar.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_location_widget.dart';
 import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -22,11 +24,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final SideHustleCubit _bloc;
+
   var index = 0;
   bool isProductSelected = true;
 
   @override
   void initState() {
+    _bloc = BlocProvider.of<SideHustleCubit>(context);
     isProductSelected = true;
     super.initState();
   }
@@ -97,9 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               onPressed: () {
                                 print("pressed Dialogue");
                                 if (isProductSelected) {
+                                  _bloc.setIsProductFromYourShop(
+                                      isProductFromYourShop: false);
+
                                   /// reset to Default Value
                                   isProductSelected = true;
                                   // Navigator.pop(contextBuilder);
+
                                   AppDialogues.noHeaderDialogue(
                                           context: contextBuilder)
                                       .dismiss();

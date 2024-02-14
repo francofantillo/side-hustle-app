@@ -97,6 +97,7 @@ class AppRouter {
             final args = routeSettings.arguments as PostProduct?;
             return PostProduct(
               isEdit: args?.isEdit ?? false,
+              id: args?.id,
             );
 
           case AppRoutes.yourResumeEditScreenRoute:

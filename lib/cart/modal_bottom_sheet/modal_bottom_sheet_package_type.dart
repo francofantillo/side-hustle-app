@@ -15,6 +15,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -24,6 +25,7 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
   final bool isEventPost,
       isEventEdit,
       isEventEditFromPostAdded,
+      isProductFromYourShop,
       isProduct,
       isEditProduct,
       isService,
@@ -38,6 +40,7 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
       this.isEventPost = false,
       this.isEventEdit = false,
       this.isEventEditFromPostAdded = false,
+      this.isProductFromYourShop = false,
       this.isProduct = false,
       this.isEditProduct = false,
       this.isEditService = false,
@@ -570,8 +573,38 @@ class _ModalBottomSheetPackageTypePostState
                                         .then((value) {
                                       EasyLoading.instance.indicatorColor =
                                           AppColors.primaryColor;
-                                      Navigator.pop(context);
-                                      Navigator.pop(context);
+                               /*       if (value != 0) {
+                                        if (widget.isProductFromYourShop) {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        } else {
+                                          // Navigator.pushReplacementNamed(
+                                          //     context,
+                                          //     AppRoutes.postAddedScreenRoute,
+                                          //     arguments: PostAdded(
+                                          //       id: value,
+                                          //       isEvent: true,
+                                          //       title: AppStrings.eventPosted,
+                                          //       subTitle: AppStrings
+                                          //           .sideHustlePostedSubTitle,
+                                          //       buttonName:
+                                          //           AppStrings.viewEvent,
+                                          //     ));
+                                          Navigator.pushReplacementNamed(
+                                              context,
+                                              AppRoutes.postAddedScreenRoute,
+                                              arguments: PostAdded(
+                                                id: value,
+                                                isProduct: true,
+                                                title:
+                                                    AppStrings.sideHustlePosted,
+                                                subTitle: AppStrings
+                                                    .sideHustlePostedSubTitle,
+                                                buttonName:
+                                                    AppStrings.viewSideHustle,
+                                              ));
+                                        }
+                                      }*/
                                     });
                                   } else {
                                     EasyLoading.instance.indicatorColor =
@@ -587,10 +620,10 @@ class _ModalBottomSheetPackageTypePostState
                                     .then((value) {
                                   EasyLoading.instance.indicatorColor =
                                       AppColors.primaryColor;
-                                  if (value == 1) {
-                                    Navigator.pop(context);
-                                    Navigator.pop(context);
-                                  }
+                                  // if (value == 1) {
+                                  //   Navigator.pop(context);
+                                  //   Navigator.pop(context);
+                                  // }
                                 });
                                 //     .then((value) {
                                 //   if (value != 0) {

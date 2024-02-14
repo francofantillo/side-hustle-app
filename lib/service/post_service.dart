@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
@@ -12,6 +13,9 @@ import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
+import 'package:side_hustle/utils/constants.dart';
+import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
+import 'package:side_hustle/utils/validation/regular_expressions.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -42,6 +46,7 @@ class _PostServiceState extends State<PostService> {
     _bloc = BlocProvider.of(context);
     _blocCard = BlocProvider.of(context);
     _bloc.initControllers();
+    _bloc.type = ServiceTypeEnum.Hourly.name;
     super.initState();
   }
 
@@ -161,7 +166,13 @@ class _PostServiceState extends State<PostService> {
                           child: CustomTextFormField(
                             height: 45.h,
                             hintText: AppStrings.enterTheServiceName,
-                            // fillColor: AppColors.productTextFieldColor,
+                            controller: _bloc.titleTextController,
+                            fieldValidator: (value) =>
+                                value?.validateEmpty(AppStrings.serviceName),
+                            inputFormatter: [
+                              LengthLimitingTextInputFormatter(
+                                  Constants.singleFieldCharacterLength),
+                            ],
                           ),
                         ),
                         height(AppDimensions.formFieldsBetweenSpacing),
@@ -181,13 +192,24 @@ class _PostServiceState extends State<PostService> {
                           child: CustomTextFormField(
                             height: 45.h,
                             hintText: AppStrings.enterTheLocation,
+                            isReadonly: true,
+                            onTap: () async {
+                              await _bloc.selectLocation(
+                                  context: context, mounted: mounted);
+                            },
                             suffixIcon: Icon(
                               Icons.my_location,
                               color: Colors.black,
                               size: AppDimensions.imageIconSizeTextFormField,
                             ),
                             isSuffixIcon: true,
-                            // fillColor: AppColors.productTextFieldColor,
+                            controller: _bloc.locationTextController,
+                            fieldValidator: (value) =>
+                                value?.validateEmpty(AppStrings.location),
+                            inputFormatter: [
+                              LengthLimitingTextInputFormatter(
+                                  Constants.singleFieldCharacterLength),
+                            ],
                           ),
                         ),
                         Row(
@@ -196,7 +218,13 @@ class _PostServiceState extends State<PostService> {
                           children: [
                             CheckboxWidget(
                               onChanged: (newValue) {
-                                print('Checkbox value changed: $newValue');
+                                if (newValue!) {
+                                  _bloc.isShopLocation = 1;
+                                } else {
+                                  _bloc.isShopLocation = 0;
+                                }
+                                print(
+                                    'Checkbox value changed: $newValue, _bloc.isShopLocation: ${_bloc.isShopLocation}');
                               },
                             ),
                             Expanded(
@@ -226,6 +254,13 @@ class _PostServiceState extends State<PostService> {
                           child: CustomTextFormField(
                             height: 45.h,
                             hintText: AppStrings.enterServiceDescription,
+                            controller: _bloc.descriptionTextController,
+                            fieldValidator: (value) => value
+                                ?.validateEmpty(AppStrings.serviceDescription),
+                            inputFormatter: [
+                              LengthLimitingTextInputFormatter(
+                                  Constants.descriptionFieldCharacterLength),
+                            ],
                           ),
                         ),
                         height(AppDimensions.formFieldsBetweenSpacing),
@@ -242,8 +277,13 @@ class _PostServiceState extends State<PostService> {
                         Row(
                           children: [
                             CheckboxWidget(
+                              isChecked: true,
                               onChanged: (newValue) {
-                                print('Checkbox value changed: $newValue');
+                                if (newValue!) {
+                                  _bloc.type = ServiceTypeEnum.Hourly.name;
+                                }
+                                print(
+                                    'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
                               },
                             ),
                             Expanded(
@@ -257,7 +297,11 @@ class _PostServiceState extends State<PostService> {
                             )),
                             CheckboxWidget(
                               onChanged: (newValue) {
-                                print('Checkbox value changed: $newValue');
+                                if (newValue!) {
+                                  _bloc.type = ServiceTypeEnum.Fixed.name;
+                                }
+                                print(
+                                    'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
                               },
                             ),
                             Expanded(
@@ -286,7 +330,16 @@ class _PostServiceState extends State<PostService> {
                         CustomTextFormField(
                           height: 45.h,
                           hintText: "\$\$\$",
-                          // fillColor: AppColors.productTextFieldColor,
+                          controller: _bloc.priceTextController,
+                          fieldValidator: (value) => value
+                              ?.validateEmpty(AppStrings.serviceHourlyRate),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
+                          inputFormatter: [
+                            LengthLimitingTextInputFormatter(
+                                Constants.priceFieldCharacterLength),
+                            RegularExpressions.PRICE_FORMATTER
+                          ],
                         ),
                         height(AppDimensions.formFieldsBetweenSpacing),
                         Padding(
@@ -306,25 +359,29 @@ class _PostServiceState extends State<PostService> {
                             hintText:
                                 AppStrings.pleaseEnterAdditionalInformation,
                             maxLines: 2,
-                            // fillColor: AppColors.productTextFieldColor,
+                            controller: _bloc.additionalInfoTextController,
+                            fieldValidator: (value) => value?.validateEmpty(
+                                AppStrings.additionalInformation),
+                            inputFormatter: [
+                              LengthLimitingTextInputFormatter(
+                                  Constants.descriptionFieldCharacterLength),
+                            ],
                           ),
-                          // child: RatingTextFormField(
-                          //   isShowBoarder: true,
-                          //   height: 60.w,
-                          //   hintText: AppStrings.pleaseEnterAdditionalInformation,
-                          //   fillColor: AppColors.backgroundColor,
-                          //   // maxLines: 3,
-                          // ),
                         ),
                         height(
                             AppDimensions.formFieldsBetweenSpacing + 0.02.sw),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CustomMaterialButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (widget.isEdit) {
                                   Navigator.pop(context);
                                 } else {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  if (_servicesFormKey.currentState!
+                                      .validate()) {
+                                    await getCards(isEdit: widget.isEdit);
+                                  }
                                   // Navigator.pushReplacementNamed(
                                   //     context, AppRoutes.postAddedScreenRoute,
                                   //     arguments: const PostAdded(
@@ -333,12 +390,14 @@ class _PostServiceState extends State<PostService> {
                                   //       subTitle: AppStrings.sideHustlePostedSubTitle,
                                   //       buttonName: AppStrings.viewSideHustle,
                                   //     ));
-                                  AppUtils.showBottomModalSheet(
-                                      context: context,
-                                      widget:
-                                          const ModalBottomSheetPackageTypePost(
-                                        isService: true,
-                                      ));
+                                  // _bloc.type
+
+                                  // AppUtils.showBottomModalSheet(
+                                  //     context: context,
+                                  //     widget:
+                                  //         const ModalBottomSheetPackageTypePost(
+                                  //       isService: true,
+                                  //     ));
                                 }
                               },
                               color: AppColors.primaryColor,
