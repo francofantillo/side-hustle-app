@@ -23,9 +23,6 @@ class API {
   static const String SET_DEFAULT_CARD = "${BASE_URL}/set-default-card";
   static const String GET_CARDS = "${BASE_URL}/cards";
 
-  /// Side Hustle
-  static const String ADD_PRODUCT_OR_SERVICE = "${BASE_URL}/add-product";
-
   /// Events
   static const String GET_EVENTS = "${BASE_URL}/events";
   static const String GET_EVENT_DETAILS = "${BASE_URL}/event-detail";
@@ -59,5 +56,9 @@ class API {
   static const String UPDATE_JOB_REQUESTS = "${BASE_URL}/update-job-request-status";
   static const String UPDATE_JOB_STATUS = "${BASE_URL}/update-job-status";
   static const String ADD_JOB_REVIEW = "${BASE_URL}/add-review";
+
+  /// Side Hustle
+  static const String ADD_PRODUCT_OR_SERVICE = "${BASE_URL}/add-product";
+  static const String GET_YOUR_SHOP = "${BASE_URL}/your-shop";
 
 }

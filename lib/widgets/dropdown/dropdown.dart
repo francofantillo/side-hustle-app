@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_strings.dart';
 
 class CustomDropDown extends StatefulWidget {
   final List<String> items;
@@ -20,7 +21,7 @@ class CustomDropDown extends StatefulWidget {
 }
 
 class _CustomDropDownState extends State<CustomDropDown> {
-  String? selectedValue;
+  String? selectedValue = AppStrings.deliveryOptionPickup;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +46,17 @@ class _CustomDropDownState extends State<CustomDropDown> {
         shadowColor: Colors.transparent,
         elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(AppDimensions.textFieldBorderRadius),
-          side: const BorderSide(width: 1, color: AppColors.fieldsOutlineColor)
-
-        ),
+            borderRadius:
+                BorderRadius.circular(AppDimensions.textFieldBorderRadius),
+            side: const BorderSide(
+                width: 1, color: AppColors.fieldsOutlineColor)),
         child: DropdownButtonHideUnderline(
-
           child: DropdownButton2<String>(
-            iconStyleData:
-                const IconStyleData(icon: Icon(Icons.keyboard_arrow_down_outlined, color: AppColors.blackColor,)),
+            iconStyleData: const IconStyleData(
+                icon: Icon(
+              Icons.keyboard_arrow_down_outlined,
+              color: AppColors.blackColor,
+            )),
             isExpanded: true,
             hint: Text(
               widget.hintText ?? 'Select Item',
@@ -88,7 +90,6 @@ class _CustomDropDownState extends State<CustomDropDown> {
             ),
             menuItemStyleData: const MenuItemStyleData(
               height: 40,
-
             ),
           ),
         ),

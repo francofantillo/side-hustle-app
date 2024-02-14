@@ -16,9 +16,6 @@ enum Events { Scheduled, Ongoing, Completed }
 
 /// New added here
 
-enum SideHustleTypeEnum { Products, Services }
-
-enum DeliveryOptionsEnum { Pickup, DeliverToAddress_COD }
 
 enum FavouritesEnum { Event, Job, Shop }
 
@@ -33,3 +30,8 @@ enum JobsRequestEnum { Approved, Rejected }
 enum JobStatusEnum { Ongoing, Completed }
 
 enum MyJobsEnum { Pending, Ongoing, Completed }
+
+/// Products or Services
+enum ServiceTypeEnum { Fixed, Hourly }
+enum DeliveryTypeEnum { Pickup, Fixed }
+enum SideHustleTypeEnum { Product, Service }
