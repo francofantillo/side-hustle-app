@@ -69,20 +69,6 @@ class JobsCubit extends Cubit<JobsState> {
     }
   }
 
-  // /// Select Multiple Images
-  // Future selectMultiImages() async {
-  //   List<File>? images =
-  //       await ImagePickerService.selectMultipleImagesFromGallery();
-  //   if (images != null && images.isNotEmpty) {
-  //     emit(state.copyWith(itemImagesFile: images));
-  //     // if(images.length > 4) {
-  //     //   AppUtils.showToast(AppStrings.errorMessageMultiImagesSelectedLimit);
-  //     // } else {
-  //     //   emit(state.copyWith(itemImagesFile: images));
-  //     // }
-  //   }
-  // }
-
   /// Select Multiple Images
   Future selectMultiImages() async {
     List<File>? images =
@@ -93,12 +79,6 @@ class JobsCubit extends Cubit<JobsState> {
         imagesList!.add(Images(image: images[i].path));
       }
       emit(state.copyWith(images: imagesList));
-      // emit(state.copyWith(itemImagesFile: images));
-      // if(images.length > 4) {
-      //   AppUtils.showToast(AppStrings.errorMessageMultiImagesSelectedLimit);
-      // } else {
-      //   emit(state.copyWith(itemImagesFile: images));
-      // }
     }
   }
 
