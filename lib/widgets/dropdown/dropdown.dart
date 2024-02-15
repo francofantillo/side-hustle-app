@@ -7,13 +7,14 @@ import 'package:side_hustle/utils/app_strings.dart';
 
 class CustomDropDown extends StatefulWidget {
   final List<String> items;
-  final String? hintText;
+  final String? hintText, dropdownValue;
   final ValueChanged<String?> selectedValue;
 
   const CustomDropDown(
       {super.key,
       required this.items,
       required this.selectedValue,
+      this.dropdownValue,
       this.hintText});
 
   @override
@@ -21,7 +22,14 @@ class CustomDropDown extends StatefulWidget {
 }
 
 class _CustomDropDownState extends State<CustomDropDown> {
-  String? selectedValue = AppStrings.deliveryOptionPickup;
+  String? dropdownValue;
+
+  @override
+  void initState() {
+    dropdownValue = widget.dropdownValue;
+    print("CustomDropDown dropdownValue: $dropdownValue");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +84,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
                       ),
                     ))
                 .toList(),
-            value: selectedValue,
+            value: dropdownValue,
             onChanged: (String? value) {
               widget.selectedValue(value);
               setState(() {
-                selectedValue = value;
+                dropdownValue = value;
               });
             },
             buttonStyleData: const ButtonStyleData(

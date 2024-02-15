@@ -69,9 +69,16 @@ class ShopDetail {
   String? location;
   String? lat;
   String? lng;
+  String? deliveryType;
 
   ShopDetail(
-      {this.id, this.name, this.image, this.location, this.lat, this.lng});
+      {this.id,
+      this.name,
+      this.image,
+      this.location,
+      this.lat,
+      this.lng,
+      this.deliveryType});
 
   ShopDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -80,6 +87,7 @@ class ShopDetail {
     location = json['location'];
     lat = json['lat'];
     lng = json['lng'];
+    deliveryType = json['delivery_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -90,6 +98,7 @@ class ShopDetail {
     data['location'] = this.location;
     data['lat'] = this.lat;
     data['lng'] = this.lng;
+    data['delivery_type'] = this.deliveryType;
     return data;
   }
 }
@@ -99,24 +108,33 @@ class ServicesProductsData {
   int? userId;
   String? name;
   double? price;
+  double? hourlyRate;
   String? description;
   String? image;
+  String? serviceType;
+  String? deliveryType;
 
   ServicesProductsData(
       {this.id,
       this.userId,
       this.name,
       this.price,
+        this.hourlyRate,
       this.description,
-      this.image});
+      this.image,
+      this.serviceType,
+      this.deliveryType});
 
   ServicesProductsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     name = json['name'];
-    price = json['price'];
+    price = json['price']?.toDouble();
+    hourlyRate = json['hourly_rate']?.toDouble();
     description = json['description'];
     image = json['image'];
+    serviceType = json['service_type'];
+    deliveryType = json['delivery_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -125,8 +143,11 @@ class ServicesProductsData {
     data['user_id'] = this.userId;
     data['name'] = this.name;
     data['price'] = this.price;
+    data['hourly_rate'] = this.hourlyRate;
     data['description'] = this.description;
     data['image'] = this.image;
+    data['service_type'] = this.serviceType;
+    data['delivery_type'] = this.deliveryType;
     return data;
   }
 }

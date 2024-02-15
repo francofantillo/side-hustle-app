@@ -7,6 +7,8 @@ class SideHustleState {
   YourShopModel? yourShopModel;
   bool yourShopLoading;
   bool isProductOrServiceFromHome;
+  GetEditSideHustleModel? editSideHustleModel;
+  bool editSideHustleLoading;
 
   SideHustleState(
       {this.images,
@@ -14,7 +16,9 @@ class SideHustleState {
       this.editServiceLoading = false,
       this.yourShopModel,
       this.yourShopLoading = true,
-      this.isProductOrServiceFromHome = false});
+      this.isProductOrServiceFromHome = false,
+      this.editSideHustleModel,
+      this.editSideHustleLoading = false});
 
   SideHustleState copyWith(
       {List<Images>? images,
@@ -22,7 +26,9 @@ class SideHustleState {
       bool? editServiceLoading,
       YourShopModel? yourShopModel,
       bool? yourShopLoading,
-      bool? isProductOrServiceFromHome}) {
+      bool? isProductOrServiceFromHome,
+      GetEditSideHustleModel? editSideHustleModel,
+      bool? editSideHustleLoading}) {
     return SideHustleState(
         images: images ?? this.images,
         editProductLoading: editProductLoading ?? this.editProductLoading,
@@ -30,6 +36,9 @@ class SideHustleState {
         yourShopModel: yourShopModel ?? this.yourShopModel,
         yourShopLoading: yourShopLoading ?? this.yourShopLoading,
         isProductOrServiceFromHome:
-            isProductOrServiceFromHome ?? this.isProductOrServiceFromHome);
+            isProductOrServiceFromHome ?? this.isProductOrServiceFromHome,
+        editSideHustleModel: editSideHustleModel ?? this.editSideHustleModel,
+        editSideHustleLoading:
+            editSideHustleLoading ?? this.editSideHustleLoading);
   }
 }

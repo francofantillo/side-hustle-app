@@ -7,6 +7,7 @@ import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_t
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
+import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -40,6 +41,7 @@ class PostProduct extends StatefulWidget {
 class _PostProductState extends State<PostProduct> {
   late final SideHustleCubit _bloc;
   late final CardCubit _blocCard;
+  String? dropdownValue;
   final _productsFormKey = GlobalKey<FormState>();
 
   @override
@@ -47,8 +49,48 @@ class _PostProductState extends State<PostProduct> {
     _bloc = BlocProvider.of<SideHustleCubit>(context);
     _blocCard = BlocProvider.of(context);
     _bloc.initControllers();
+    dropdownValue = AppStrings.deliveryOptionPickup;
     _bloc.type = DeliveryTypeEnum.Pickup.name;
+    widget.id != null
+        ? getProduct()
+        : _bloc.state.editSideHustleModel = GetEditSideHustleModel();
     super.initState();
+  }
+
+  Future getProduct() async {
+    await _bloc
+        .getEditProductOrServiceCubit(
+            context: context, mounted: mounted, id: widget.id)
+        // context: context,
+        // mounted: mounted,
+        // id: 17)
+        .then((value) {
+      if (value != null) {
+        final data = value.editSideHustleData;
+        print("getEvent lat: ${data?.lat}");
+        print("getEvent lng: ${data?.lng}");
+        _bloc.titleTextController.text = data?.name ?? "";
+        _bloc.locationTextController.text = data?.location ?? "";
+        _bloc.descriptionTextController.text = data?.description ?? "";
+        _bloc.additionalInfoTextController.text =
+            data?.additionalInformation ?? "";
+        _bloc.zipCodeTextController.text = data?.zipCode ?? "";
+        _bloc.priceTextController.text = data?.price?.toStringAsFixed(2) ?? "";
+        if (data?.deliveryType != null) {
+          if (data!.deliveryType == DeliveryTypeEnum.Pickup.name) {
+            _bloc.type = data.deliveryType;
+            dropdownValue = AppStrings.deliveryOptionPickup;
+            print(
+                "deliveryType: ${data?.deliveryType}, dropdownValue: $dropdownValue");
+          } else if (data.deliveryType == DeliveryTypeEnum.Fixed.name) {
+            _bloc.type = data.deliveryType;
+            dropdownValue = AppStrings.deliveryOptionCOD;
+            print(
+                "deliveryType: ${data?.deliveryType}, dropdownValue: $dropdownValue");
+          }
+        }
+      }
+    });
   }
 
   Future getCards({required bool isEdit}) async {
@@ -98,7 +140,7 @@ class _PostProductState extends State<PostProduct> {
       ),
       body: BlocBuilder<SideHustleCubit, SideHustleState>(
           builder: (context, state) {
-        return state.editProductLoading
+        return state.editSideHustleLoading
             ? const SizedBox.shrink()
             : Form(
                 key: _productsFormKey,
@@ -207,10 +249,6 @@ class _PostProductState extends State<PostProduct> {
                             controller: _bloc.locationTextController,
                             fieldValidator: (value) =>
                                 value?.validateEmpty(AppStrings.location),
-                            inputFormatter: [
-                              LengthLimitingTextInputFormatter(
-                                  Constants.singleFieldCharacterLength),
-                            ],
                           ),
                         ),
                         Row(
@@ -322,7 +360,7 @@ class _PostProductState extends State<PostProduct> {
                                   CustomTextFormField(
                                     height: 45.h,
                                     hintText: "00000",
-                                    controller: _bloc.areaCodeTextController,
+                                    controller: _bloc.zipCodeTextController,
                                     keyboardType: TextInputType.phone,
                                     fieldValidator: (value) => value
                                         ?.validateEmpty(AppStrings.zipCode),
@@ -355,6 +393,7 @@ class _PostProductState extends State<PostProduct> {
                           child: CustomDropDown(
                             items: AppUtils.items,
                             hintText: AppStrings.pickUp,
+                            dropdownValue: dropdownValue,
                             selectedValue: (v) {
                               print("selectedValue: $v");
                               if (v != null) {

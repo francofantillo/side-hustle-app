@@ -148,17 +148,20 @@ class EventsData {
 }
 
 class Images {
+  int? id;
   String? image;
 
-  Images({this.image});
+  Images({this.image, this.id});
 
   Images.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['image'] = this.image;
+    data['id'] = this.id;
     return data;
   }
 }

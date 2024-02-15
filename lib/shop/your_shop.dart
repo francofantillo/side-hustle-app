@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
@@ -13,6 +14,8 @@ import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/constants.dart';
+import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
@@ -20,6 +23,7 @@ import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
+import 'package:side_hustle/widgets/images/rounded_corners_image_beta.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
@@ -44,22 +48,13 @@ class _YourShopScreenState extends State<YourShopScreen> {
     _bloc = BlocProvider.of<SideHustleCubit>(context);
     isProductSelected = true;
     isEdit = false;
+    getYourShop();
     super.initState();
   }
 
-  List<List<Color>?>? bgColorsZero = [
-    [AppColors.primaryColor],
-    [Colors.transparent],
-    [Colors.transparent],
-    [Colors.transparent],
-  ];
-
-  List<List<Color>?>? bgColorsOne = [
-    [Colors.transparent],
-    [AppColors.primaryColor],
-    [Colors.transparent],
-    [Colors.transparent],
-  ];
+  getYourShop() async {
+    await _bloc.getYourShopCubit(context: context, mounted: mounted);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,257 +69,262 @@ class _YourShopScreenState extends State<YourShopScreen> {
               backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12.0, top: 8),
-            child: CircularIconButton(
-              onPressed: () {
-                if (isEdit) {
-                  isEdit = false;
-                  setState(() {});
-                } else {
-                  isEdit = true;
-                  setState(() {});
-                }
-              },
-              width: 0.10.sw,
-              height: 0.10.sw,
-              icon: isEdit ? Icons.check : Icons.edit,
-              backgroundColor: AppColors.backIconBackgroundColor,
-              iconSize: 14,
-              iconColor: AppColors.primaryColor,
-            ),
-          )
-        ],
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      RoundedCornersImage(
-                        // imageHeight: 80.h,
-                        imageHeight: isEdit
-                            ? AppDimensions.imageHeightShopEdit
-                            : AppDimensions.imageHeightYourShop,
-                        // imageWidth: AppDimensions.imageSizeShop,
-                        imageWidth: isEdit
-                            ? AppDimensions.imageWidthShopEdit
-                            : AppDimensions.imageWidthYourShop,
-                        // imageWidth: 0.22.sh,
-                        assetImage: AssetsPath.yourShop,
-                        boarderColor: AppColors.whiteColor,
-                      ),
-                      isEdit
-                          ? Positioned(
-                              left: AppDimensions.imageWidthShopEdit - 0.15.sw,
-                              top: AppDimensions.imageHeightShopEdit - 0.15.sw,
-                              // child: IconButtonWithBackground(
-                              //   onTap: () {
-                              //     print("Clicked");
-                              //   },
-                              //   iconPath: AssetsPath.camera,
-                              //   height: 0.12.sw,
-                              //   width: 0.12.sw,
-                              //   backgroundColor: AppColors.whiteColor,
-                              //   iconColor: AppColors.primaryColor,
-                              // ),
-                              child: CameraButton(
-                                onTap: () {
-                                  print("Clicked");
-                                },
-                                iconPath: AssetsPath.camera,
-                                height: 0.12.sw,
-                                width: 0.12.sw,
-                                backgroundColor: AppColors.whiteColor,
-                                iconColor: AppColors.primaryColor,
-                              ),
-                            )
-                          : const SizedBox.shrink()
-                    ],
-                  ),
-                  width(0.03.sw),
-                  isEdit
-                      ? Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    const CustomTextFormField(
-                                      hintText: AppStrings.shopName,
-                                      maxLines: 1,
-                                    ),
-                                    height(6.w),
-                                    CustomTextFormField(
-                                      hintText: AppStrings.zipCode,
-                                      maxLines: 2,
-                                      height: 75.h,
-                                      // height: 0.16.sh
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      : Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 6.h),
-                                child: textWidget(
-                                    text: AppStrings.shop,
-                                    fontFamily: AppFont.gilroyBold,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                        AppDimensions.textSizeLarge + 2.sp,
-                                    color: AppColors.textBlackColor),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 2.0),
-                                    child: ImageIcon(
-                                      const AssetImage(AssetsPath.location),
-                                      size: 0.037.sw,
-                                      color: Color(0xFF565656),
-                                    ),
-                                  ),
-                                  width(0.02.sw),
-                                  Expanded(
-                                    child: textWidget(
-                                        text: AppStrings.locationText,
-                                        maxLines: 3,
-                                        color: Color(0xFF565656),
-                                        fontSize:
-                                            AppDimensions.textSizeVerySmall),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                ],
-              ),
-            ),
-            isEdit
-                ? Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-                    child: CustomTextFormField(
-                      hintText: AppStrings.shopAddress,
-                      maxLines: 1,
-                      height: 45.h,
-                      // height: 0.16.sh
-                    ),
-                  )
-                : const SizedBox.shrink(),
-            Padding(
-              // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-              padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 0.02.sw),
-              /*      child: SizedBox(
-                width: 1.sw,
-                child: ToggleSwitch(
-                  // customWidths: [.5.sw, .396.sw],
-                  customWidths: [.5.sw, .41.sw],
-                  animate: true,
-                  animationDuration: 200,
-                  isVertical: false,
-                  minWidth: 90,
-                  cornerRadius: 12.0.w,
-                  changeOnTap: true,
-                  activeBgColors: const [
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor]
-                  ],
-                  activeFgColor: Colors.white,
-                  inactiveBgColor: AppColors.switchTabBackgroundColor,
-                  inactiveFgColor: Colors.black,
-                  initialLabelIndex: _tabIndexBasicToggle.value,
-                  totalSwitches: 2,
-                  labels: [
-                    SideHustleType.Products.name,
-                    SideHustleType.Services.name,
-                  ],
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    _tabIndexBasicToggle.value = index ?? 0;
-                    print('switched to: ${_tabIndexBasicToggle.value}');
-                    setState(() {});
-                  },
-                ),
-              ),*/
-              child: CustomTabBarShop(
-                currentTabIndex: 0,
-                tabNames: [
-                  SideHustleType.Products.name,
-                  SideHustleType.Services.name,
-                ],
-                onChanged: (index) {
-                  setState(() {
-                    _tabIndexBasicToggle.value = index;
-                  });
-                },
-              ),
-            ),
-            _tabIndexBasicToggle.value == 0
-                ? YourProductsListShop(isEdit: isEdit)
-                : YourServicesListShop(isEdit: isEdit),
-            height(0.02.sh),
-            isEdit
+          BlocBuilder<SideHustleCubit, SideHustleState>(
+              builder: (context, state) {
+            return state.yourShopLoading
                 ? const SizedBox.shrink()
-                : PrimaryPostButton(
-                    title: AppStrings.postASideHustle,
-                    onPressed: () {
-                      AppDialogues.noHeaderDialogue(
-                          context: contextBuilder,
-                          body: PostYourSideHustleDialogueWidget(
-                            isProductSelected: (v) {
-                              isProductSelected = v;
-                              print("prodcut: $isProductSelected");
-                            },
+                : Padding(
+                    padding: const EdgeInsets.only(right: 12.0, top: 8),
+                    child: CircularIconButton(
+                      onPressed: () {
+                        if (isEdit) {
+                          isEdit = false;
+                          setState(() {});
+                        } else {
+                          isEdit = true;
+                          setState(() {});
+                        }
+                      },
+                      width: 0.10.sw,
+                      height: 0.10.sw,
+                      icon: isEdit ? Icons.check : Icons.edit,
+                      backgroundColor: AppColors.backIconBackgroundColor,
+                      iconSize: 14,
+                      iconColor: AppColors.primaryColor,
+                    ),
+                  );
+          })
+        ],
+        body: BlocBuilder<SideHustleCubit, SideHustleState>(
+            builder: (context, state) {
+          return state.yourShopLoading
+              ? const SizedBox.shrink()
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Stack(
+                            children: [
+                              RoundedCornersImageBeta(
+                                // imageHeight: 80.h,
+                                imageHeight: isEdit
+                                    ? AppDimensions.imageHeightShopEdit
+                                    : AppDimensions.imageHeightYourShop,
+                                // imageWidth: AppDimensions.imageSizeShop,
+                                imageWidth: isEdit
+                                    ? AppDimensions.imageWidthShopEdit
+                                    : AppDimensions.imageWidthYourShop,
+                                // imageWidth: 0.22.sh,
+                                // assetImage: AssetsPath.yourShop,
+                                assetImage: AssetsPath.imageLoadError,
+                                image: state
+                                    .yourShopModel?.shopData?.shopDetail?.image,
+                                boarderColor: AppColors.whiteColor,
+                              ),
+                              isEdit
+                                  ? Positioned(
+                                      left: AppDimensions.imageWidthShopEdit -
+                                          0.15.sw,
+                                      top: AppDimensions.imageHeightShopEdit -
+                                          0.15.sw,
+                                      child: CameraButton(
+                                        onTap: () {
+                                          print("Clicked");
+                                        },
+                                        iconPath: AssetsPath.camera,
+                                        height: 0.12.sw,
+                                        width: 0.12.sw,
+                                        backgroundColor: AppColors.whiteColor,
+                                        iconColor: AppColors.primaryColor,
+                                      ),
+                                    )
+                                  : const SizedBox.shrink()
+                            ],
+                          ),
+                          width(0.03.sw),
+                          isEdit
+                              ? Expanded(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            CustomTextFormField(
+                                              controller:
+                                                  _bloc.titleTextController,
+                                              hintText: AppStrings.shopName,
+                                              maxLines: 1,
+                                            ),
+                                            height(6.w),
+                                            CustomTextFormField(
+                                              controller:
+                                                  _bloc.zipCodeTextController,
+                                              hintText: AppStrings.zipCode,
+                                              maxLines: 2,
+                                              height: 75.h,
+                                              // height: 0.16.sh
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              : Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 6.h),
+                                        child: textWidget(
+                                            // text: AppStrings.shop,
+                                            text: state.yourShopModel?.shopData
+                                                ?.shopDetail?.name,
+                                            fontFamily: AppFont.gilroyBold,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                AppDimensions.textSizeLarge +
+                                                    2.sp,
+                                            color: AppColors.textBlackColor),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          state.yourShopModel?.shopData
+                                                      ?.shopDetail?.location ==
+                                                  null
+                                              ? const SizedBox.shrink()
+                                              : Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 2.0),
+                                                  child: ImageIcon(
+                                                    const AssetImage(
+                                                        AssetsPath.location),
+                                                    size: 0.037.sw,
+                                                    color: Color(0xFF565656),
+                                                  ),
+                                                ),
+                                          width(0.02.sw),
+                                          Expanded(
+                                            child: textWidget(
+                                                // text: AppStrings.locationText,
+                                                text: state
+                                                    .yourShopModel
+                                                    ?.shopData
+                                                    ?.shopDetail
+                                                    ?.location,
+                                                maxLines: 3,
+                                                color: const Color(0xFF565656),
+                                                fontSize: AppDimensions
+                                                    .textSizeVerySmall),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+                    isEdit
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 8.w),
+                            child: CustomTextFormField(
+                              hintText: AppStrings.shopAddress,
+                              maxLines: 1,
+                              height: 45.h,
+                              isReadonly: true,
+                              onTap: () async {
+                                await _bloc.selectLocation(
+                                    context: context, mounted: mounted);
+                              },
+                              controller: _bloc.locationTextController,
+                              // height: 0.16.sh
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    Padding(
+                      // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+                      padding: EdgeInsets.only(
+                          left: 16.w, right: 16.w, top: 0.02.sw),
+                      child: CustomTabBarShop(
+                        currentTabIndex: 0,
+                        tabNames: [
+                          SideHustleType.Products.name,
+                          SideHustleType.Services.name,
+                        ],
+                        onChanged: (index) {
+                          setState(() {
+                            _tabIndexBasicToggle.value = index;
+                          });
+                        },
+                      ),
+                    ),
+                    _tabIndexBasicToggle.value == 0
+                        ? YourProductsListShop(isEdit: isEdit)
+                        : YourServicesListShop(isEdit: isEdit),
+                    height(0.02.sh),
+                    isEdit
+                        ? const SizedBox.shrink()
+                        : PrimaryPostButton(
+                            title: AppStrings.postASideHustle,
                             onPressed: () {
-                              print("pressed Dialogue");
-                              if (isProductSelected) {
-                                _bloc.setIsProductFromYourShop(
-                                    isProductFromYourShop: true);
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                // Navigator.pop(contextBuilder);
-                                AppDialogues.noHeaderDialogue(
-                                        context: contextBuilder)
-                                    .dismiss();
-                                Navigator.pushNamed(contextBuilder,
-                                    AppRoutes.postProductScreenRoute);
-                              } else {
-                                /// reset to Default Value
-                                isProductSelected = true;
-                                AppDialogues.noHeaderDialogue(
-                                        context: contextBuilder)
-                                    .dismiss();
-                                // Navigator.pop(contextBuilder);
-                                Navigator.pushNamed(contextBuilder,
-                                    AppRoutes.postServiceScreenRoute);
-                              }
-                            },
-                            onTapClose: () {
-                              Navigator.pop(contextBuilder);
-                            },
-                          )).show();
-                    }),
-          ],
-        ),
+                              AppDialogues.noHeaderDialogue(
+                                  context: contextBuilder,
+                                  body: PostYourSideHustleDialogueWidget(
+                                    isProductSelected: (v) {
+                                      isProductSelected = v;
+                                      print("prodcut: $isProductSelected");
+                                    },
+                                    onPressed: () {
+                                      print("pressed Dialogue");
+                                      _bloc.setIsProductOrServiceFromYourShop(
+                                          isProductOrServiceFromHome: true);
+                                      if (isProductSelected) {
+                                        /// reset to Default Value
+                                        isProductSelected = true;
+                                        // Navigator.pop(contextBuilder);
+                                        AppDialogues.noHeaderDialogue(
+                                                context: contextBuilder)
+                                            .dismiss();
+                                        Navigator.pushNamed(contextBuilder,
+                                            AppRoutes.postProductScreenRoute);
+                                      } else {
+                                        /// reset to Default Value
+                                        isProductSelected = true;
+                                        AppDialogues.noHeaderDialogue(
+                                                context: contextBuilder)
+                                            .dismiss();
+                                        // Navigator.pop(contextBuilder);
+                                        Navigator.pushNamed(contextBuilder,
+                                            AppRoutes.postServiceScreenRoute);
+                                      }
+                                    },
+                                    onTapClose: () {
+                                      Navigator.pop(contextBuilder);
+                                    },
+                                  )).show();
+                            }),
+                  ],
+                );
+        }),
       );
     });
   }

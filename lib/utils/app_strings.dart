@@ -322,6 +322,7 @@ class AppStrings {
   static const String viewProduct = "View Product";
   static const String viewService = "View Service";
   static const String deliveryType = "Delivery Type: ";
+  static const String serviceType = "Service Type: ";
   static const String requestService = "Request Service";
 
   /// Cart

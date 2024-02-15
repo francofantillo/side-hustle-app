@@ -59,6 +59,8 @@ class API {
 
   /// Side Hustle
   static const String ADD_PRODUCT_OR_SERVICE = "${BASE_URL}/add-product";
+  static const String GET_EDIT_PRODUCT_OR_SERVICE = "${BASE_URL}/edit-product";
   static const String GET_YOUR_SHOP = "${BASE_URL}/your-shop";
+  static const String EDIT_YOUR_SHOP = "${BASE_URL}/edit-shop";
 
 }

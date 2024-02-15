@@ -25,7 +25,6 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
   final bool isEventPost,
       isEventEdit,
       isEventEditFromPostAdded,
-      isProductFromYourShop,
       isProduct,
       isEditProduct,
       isService,
@@ -40,7 +39,6 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
       this.isEventPost = false,
       this.isEventEdit = false,
       this.isEventEditFromPostAdded = false,
-      this.isProductFromYourShop = false,
       this.isProduct = false,
       this.isEditProduct = false,
       this.isEditService = false,
@@ -516,24 +514,6 @@ class _ModalBottomSheetPackageTypePostState
                         // padding: EdgeInsets.only(left: 20.0, right: 20, bottom: 0.08.sw),
                         padding: const EdgeInsets.only(
                             left: 20.0, right: 20, bottom: 20),
-                        // child: CustomMaterialButton(
-                        //     onPressed: () async {
-                        //       Navigator.pop(context);
-                        //       Navigator.pop(context);
-                        //       Navigator.pushNamed(
-                        //           context, AppRoutes.postAddedScreenRoute,
-                        //           arguments: const PostAdded(
-                        //             isProduct: true,
-                        //             title: AppStrings.sideHustlePosted,
-                        //             subTitle:
-                        //                 AppStrings.sideHustlePostedSubTitle,
-                        //             buttonName: AppStrings.viewSideHustle,
-                        //           ));
-                        //       return;
-                        //     },
-                        //     name: AppStrings.continueText,
-                        //     color: AppColors.whiteColor,
-                        //     textColor: AppColors.primaryColor),
                         child: CustomMaterialButton(
                             onPressed: () async {
                               print("Post Job Called");
@@ -553,8 +533,6 @@ class _ModalBottomSheetPackageTypePostState
                                 planId = 3;
                               }
                               print("planId: $planId");
-                              // Navigator.pop(context);
-                              // Navigator.pop(context);
                               if (cardId != defaultCard) {
                                 await _blocCard
                                     .defaultCardCubit(
@@ -573,38 +551,6 @@ class _ModalBottomSheetPackageTypePostState
                                         .then((value) {
                                       EasyLoading.instance.indicatorColor =
                                           AppColors.primaryColor;
-                               /*       if (value != 0) {
-                                        if (widget.isProductFromYourShop) {
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                        } else {
-                                          // Navigator.pushReplacementNamed(
-                                          //     context,
-                                          //     AppRoutes.postAddedScreenRoute,
-                                          //     arguments: PostAdded(
-                                          //       id: value,
-                                          //       isEvent: true,
-                                          //       title: AppStrings.eventPosted,
-                                          //       subTitle: AppStrings
-                                          //           .sideHustlePostedSubTitle,
-                                          //       buttonName:
-                                          //           AppStrings.viewEvent,
-                                          //     ));
-                                          Navigator.pushReplacementNamed(
-                                              context,
-                                              AppRoutes.postAddedScreenRoute,
-                                              arguments: PostAdded(
-                                                id: value,
-                                                isProduct: true,
-                                                title:
-                                                    AppStrings.sideHustlePosted,
-                                                subTitle: AppStrings
-                                                    .sideHustlePostedSubTitle,
-                                                buttonName:
-                                                    AppStrings.viewSideHustle,
-                                              ));
-                                        }
-                                      }*/
                                     });
                                   } else {
                                     EasyLoading.instance.indicatorColor =
@@ -620,28 +566,7 @@ class _ModalBottomSheetPackageTypePostState
                                     .then((value) {
                                   EasyLoading.instance.indicatorColor =
                                       AppColors.primaryColor;
-                                  // if (value == 1) {
-                                  //   Navigator.pop(context);
-                                  //   Navigator.pop(context);
-                                  // }
                                 });
-                                //     .then((value) {
-                                //   if (value != 0) {
-                                //     print("value: $value");
-                                //     EasyLoading.instance.indicatorColor =
-                                //         AppColors.primaryColor;
-                                //     Navigator.pushReplacementNamed(
-                                //         context, AppRoutes.postAddedScreenRoute,
-                                //         arguments: PostAdded(
-                                //           id: value,
-                                //           isEvent: true,
-                                //           title: AppStrings.eventPosted,
-                                //           subTitle: AppStrings
-                                //               .sideHustlePostedSubTitle,
-                                //           buttonName: AppStrings.viewEvent,
-                                //         ));
-                                //   }
-                                // });
                               }
 
                               return;
@@ -683,17 +608,59 @@ class _ModalBottomSheetPackageTypePostState
                             left: 20.0, right: 20, bottom: 20),
                         child: CustomMaterialButton(
                             onPressed: () async {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                              Navigator.pushNamed(
-                                  context, AppRoutes.postAddedScreenRoute,
-                                  arguments: const PostAdded(
-                                    isService: true,
-                                    title: AppStrings.sideHustlePosted,
-                                    subTitle:
-                                        AppStrings.sideHustlePostedSubTitle,
-                                    buttonName: AppStrings.viewSideHustle,
-                                  ));
+                              print("Post Job Called");
+                              EasyLoading.instance.indicatorColor =
+                                  AppColors.whiteColor;
+                              late final int planId;
+                              print(
+                                  "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                              if (_character?.name ==
+                                  SingingCharacter.package1.name) {
+                                planId = 1;
+                              } else if (_character?.name ==
+                                  SingingCharacter.package2.name) {
+                                planId = 2;
+                              } else if (_character?.name ==
+                                  SingingCharacter.package3.name) {
+                                planId = 3;
+                              }
+                              print("planId: $planId");
+                              if (cardId != defaultCard) {
+                                await _blocCard
+                                    .defaultCardCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        hideLoader: true,
+                                        cardId: cardId)
+                                    .then((value) async {
+                                  if (value == 1) {
+                                    defaultCard = cardId;
+                                    await _blocSideHustle
+                                        .addServiceCubit(
+                                            context: context,
+                                            mounted: mounted,
+                                            planId: planId)
+                                        .then((value) {
+                                      EasyLoading.instance.indicatorColor =
+                                          AppColors.primaryColor;
+                                    });
+                                  } else {
+                                    EasyLoading.instance.indicatorColor =
+                                        AppColors.primaryColor;
+                                  }
+                                });
+                              } else {
+                                await _blocSideHustle
+                                    .addServiceCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        planId: planId)
+                                    .then((value) {
+                                  EasyLoading.instance.indicatorColor =
+                                      AppColors.primaryColor;
+                                });
+                              }
+
                               return;
                             },
                             name: AppStrings.continueText,

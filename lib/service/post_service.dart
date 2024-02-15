@@ -72,12 +72,12 @@ class _PostServiceState extends State<PostService> {
           AppUtils.showBottomModalSheet(
               context: context,
               widget: ModalBottomSheetPackageTypePost(
-                  isProduct: true, defaultCardId: cardId));
+                  isService: true, defaultCardId: cardId));
         } else {
           AppUtils.showBottomModalSheet(
               context: context,
               widget: ModalBottomSheetPackageTypePost(
-                  isProduct: true, defaultCardId: cardId));
+                  isService: true, defaultCardId: cardId));
         }
       }
     });
@@ -358,7 +358,7 @@ class _PostServiceState extends State<PostService> {
                             height: 65.h,
                             hintText:
                                 AppStrings.pleaseEnterAdditionalInformation,
-                            maxLines: 2,
+                            maxLines: 1,
                             controller: _bloc.additionalInfoTextController,
                             fieldValidator: (value) => value?.validateEmpty(
                                 AppStrings.additionalInformation),

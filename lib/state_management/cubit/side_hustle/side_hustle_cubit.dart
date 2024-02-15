@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
+import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/models/your_shop_model.dart';
 import 'package:side_hustle/state_management/providers/side_hustle/side_hustle_provider.dart';
@@ -27,8 +28,11 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   TextEditingController locationTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
   TextEditingController priceTextController = TextEditingController();
-  TextEditingController areaCodeTextController = TextEditingController();
+  TextEditingController zipCodeTextController = TextEditingController();
   TextEditingController additionalInfoTextController = TextEditingController();
+  TextEditingController yourShopNameTextController = TextEditingController();
+  TextEditingController yourZipCodeTextController = TextEditingController();
+  TextEditingController yourAddressTextController = TextEditingController();
   String? type;
   int isShopLocation = 0;
 
@@ -37,12 +41,22 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     locationTextController = TextEditingController();
     descriptionTextController = TextEditingController();
     priceTextController = TextEditingController();
-    areaCodeTextController = TextEditingController();
+    zipCodeTextController = TextEditingController();
     additionalInfoTextController = TextEditingController();
+    yourShopNameTextController = TextEditingController();
+    yourZipCodeTextController = TextEditingController();
+    yourAddressTextController = TextEditingController();
     selectLocationModel = null;
     type = null;
     isShopLocation = 0;
     emit(state.copyWith(images: []));
+  }
+
+  initShopControllers() {
+    yourShopNameTextController = TextEditingController();
+    yourZipCodeTextController = TextEditingController();
+    yourAddressTextController = TextEditingController();
+    selectLocationModel = null;
   }
 
   /// Select Multiple Images
@@ -58,8 +72,10 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     }
   }
 
-  setIsProductFromYourShop({required bool isProductFromYourShop}) {
-    emit(state.copyWith(isProductOrServiceFromHome: isProductFromYourShop));
+  setIsProductOrServiceFromYourShop(
+      {required bool isProductOrServiceFromHome}) {
+    emit(
+        state.copyWith(isProductOrServiceFromHome: isProductOrServiceFromHome));
   }
 
   /// Select Location
@@ -111,7 +127,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
         additionalInformation: additionalInfoTextController.text,
         price: priceTextController.text,
         planId: planId.toString(),
-        zipCode: areaCodeTextController.text);
+        zipCode: zipCodeTextController.text);
 
     EasyLoading.dismiss();
 
@@ -127,6 +143,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
             Navigator.pop(context);
             Navigator.pop(context);
           } else {
+            Navigator.pop(context);
             Navigator.pushReplacementNamed(
                 context, AppRoutes.postAddedScreenRoute,
                 arguments: PostAdded(
@@ -198,18 +215,19 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       if (response.data["status"] == AppValidationMessages.success) {
         YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
         emit(state.copyWith(yourShopModel: yourShopModel));
-        final id = yourShopModel.shopData?.products?.last.id;
+        final id = yourShopModel.shopData?.services?.last.id;
         AppUtils.showToast(response.data["message"]);
         if (mounted) {
           if (state.isProductOrServiceFromHome) {
             Navigator.pop(context);
             Navigator.pop(context);
           } else {
+            Navigator.pop(context);
             Navigator.pushReplacementNamed(
                 context, AppRoutes.postAddedScreenRoute,
                 arguments: PostAdded(
                   id: id,
-                  isProduct: true,
+                  isService: true,
                   title: AppStrings.sideHustlePosted,
                   subTitle: AppStrings.sideHustlePostedSubTitle,
                   buttonName: AppStrings.viewSideHustle,
@@ -227,6 +245,146 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       return 0;
+    }
+  }
+
+  /// Get Edit Product or Service
+  Future<GetEditSideHustleModel?> getEditProductOrServiceCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int? id}) async {
+    emit(state.copyWith(
+        editSideHustleLoading: true,
+        editSideHustleModel: GetEditSideHustleModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response =
+        await getEditProductOrServiceProvider(id: id, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        GetEditSideHustleModel getEditSideHustleModeljobsDetail =
+            GetEditSideHustleModel.fromJson(response.data);
+        // AppUtils.showToast(response.data['message']);
+        emit(state.copyWith(
+            editSideHustleLoading: false,
+            editSideHustleModel: getEditSideHustleModeljobsDetail,
+            images: getEditSideHustleModeljobsDetail
+                    .editSideHustleData?.productImages ??
+                []));
+        return getEditSideHustleModeljobsDetail;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(editSideHustleLoading: false));
+        return null;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(editSideHustleLoading: false));
+      return null;
+    }
+  }
+
+  /// Get Your Shop
+  Future getYourShopCubit(
+      {required BuildContext context, required bool mounted}) async {
+    emit(state.copyWith(yourShopLoading: true, yourShopModel: YourShopModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await getYourShopProvider(apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
+        titleTextController.text =
+            yourShopModel.shopData?.shopDetail?.name ?? "";
+        // zipCodeTextController.text = yourShopModel.shopData?.shopDetail?. ?? "";
+        locationTextController.text =
+            yourShopModel.shopData?.shopDetail?.location ?? "";
+        emit(state.copyWith(
+            yourShopLoading: false, yourShopModel: yourShopModel));
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(yourShopLoading: false));
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(yourShopLoading: false));
+    }
+  }
+
+  /// Edit Your Shop
+  Future editYourShopCubit(
+      {required BuildContext context,
+      required bool mounted,
+      String? image}) async {
+    EasyLoading.show();
+
+    final String? lat = selectLocationModel?.lat?.toString();
+    final String? lng = selectLocationModel?.lng?.toString();
+    print("lat: $lat");
+    print("lng: $lng");
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await editYourShopProvider(
+        shopId: state.yourShopModel?.shopData?.shopDetail?.id,
+        name: titleTextController.text,
+        zipCode: zipCodeTextController.text,
+        location: locationTextController.text,
+        image: image,
+        lat: lat,
+        lng: lng,
+        apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
+        titleTextController.text =
+            yourShopModel.shopData?.shopDetail?.name ?? "";
+        // zipCodeTextController.text = yourShopModel.shopData?.shopDetail?. ?? "";
+        locationTextController.text =
+            yourShopModel.shopData?.shopDetail?.location ?? "";
+        emit(state.copyWith(
+            yourShopLoading: false, yourShopModel: yourShopModel));
+        EasyLoading.dismiss();
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
     }
   }
 }

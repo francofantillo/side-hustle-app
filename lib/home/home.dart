@@ -101,10 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               onPressed: () {
                                 print("pressed Dialogue");
+                                _bloc.setIsProductOrServiceFromYourShop(
+                                    isProductOrServiceFromHome: false);
                                 if (isProductSelected) {
-                                  _bloc.setIsProductFromYourShop(
-                                      isProductFromYourShop: false);
-
                                   /// reset to Default Value
                                   isProductSelected = true;
                                   // Navigator.pop(contextBuilder);

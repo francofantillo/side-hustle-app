@@ -50,7 +50,8 @@ class YourProductsItemWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.sideHustleItemWidth,
-                assetImage: imagePath,
+                assetImage: AssetsPath.imageLoadError,
+                image: imagePath,
                 boarderColor: boarderColor,
               ),
               Expanded(
@@ -76,32 +77,37 @@ class YourProductsItemWidget extends StatelessWidget {
                                   fontSize: AppDimensions.textSize10)),
                           IconButtonWithBackground(
                             onTap: onTap,
-                            iconPath: isDelete ? AssetsPath.delete : AssetsPath.edit,
+                            iconPath:
+                                isDelete ? AssetsPath.delete : AssetsPath.edit,
                             width: imageHeight! * .24,
                             height: imageHeight! * .24,
-                            backgroundColor: isDelete ? AppColors.appRedColor : AppColors.primaryColor,
+                            backgroundColor: isDelete
+                                ? AppColors.appRedColor
+                                : AppColors.primaryColor,
                             iconColor: AppColors.whiteColor,
                           )
                         ],
                       ),
                       height(imageHeight! * .042),
-                      Row(
-                        children: [
-                          textWidget(
-                              text: AppStrings.deliveryType,
-                              fontFamily: AppFont.gilroyBold,
-                              fontSize: AppDimensions.textSize10,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.textBlackColor),
-                          textWidget(
-                              text: deliveryType,
-                              maxLines: 2,
-                              fontSize: AppDimensions.textSize10)
-                        ],
+                      Expanded(
+                        child: Row(
+                          children: [
+                            textWidget(
+                                text: AppStrings.deliveryType,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSize10,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textBlackColor),
+                            textWidget(
+                                text: deliveryType,
+                                maxLines: 2,
+                                fontSize: AppDimensions.textSize10)
+                          ],
+                        ),
                       ),
                       height(imageHeight! * .042),
                       textWidget(
-                          text: price,
+                          text: "\$$price",
                           fontFamily: AppFont.gilroyBold,
                           fontWeight: FontWeight.bold,
                           fontSize: AppDimensions.textSizeSmall,

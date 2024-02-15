@@ -23,19 +23,6 @@ Future<Response?> addProductProvider(
     String? additionalInformation,
     String? planId,
     String? apiToken}) async {
-/*  type:Service
-  name:My NEW Service
-//price:14.99
-//delivery_type:fixed
-  location:"test location"
-  lat:124.021548754
-  lng:245.365845
-  description:Test Description
-  zip_code:75950
-  additional_information:Additional information
-  plan_id:3
-  service_type:Hourly
-  hourly_rate:14.99*/
   late final Map<String, dynamic> productData;
 
   print("images $images");
@@ -158,11 +145,61 @@ Future<Response?> addServiceProvider(
   return response;
 }
 
+/// Get Product or Service Edit
+Future<Response?> getEditProductOrServiceProvider(
+    {int? id, String? apiToken}) async {
+  final data = {"id": id};
+  print(
+      "*****************\nurl: ${API.GET_EDIT_PRODUCT_OR_SERVICE}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_EDIT_PRODUCT_OR_SERVICE,
+      queryParameter: data,
+      token: apiToken);
+  return response;
+}
+
 /// Get Your Shop
 Future<Response?> getYourShopProvider({String? apiToken}) async {
   print(
       "*****************\nurl: ${API.GET_YOUR_SHOP}\n**************************");
   final response =
       await getRequestProvider(path: API.GET_YOUR_SHOP, token: apiToken);
+  return response;
+}
+
+/// Edit Your Shop
+Future<Response?> editYourShopProvider(
+    {int? shopId,
+    String? image,
+    String? name,
+    String? location,
+    String? lat,
+    String? lng,
+    String? zipCode,
+    String? apiToken}) async {
+  // final data = {
+  //   "shop_id": 1,
+  //   "name":"New shop name",
+  //   "location": "My new shop location",
+  //   "lat":12.15247,
+  //   "lng":123.3698,
+  //   "zip_code": "12345"
+  // };
+  final dataShop = {
+    "shop_id": shopId,
+    "name": name,
+    "image": image,
+    "location": location,
+    "lat": lat,
+    "lng": lng,
+    "zip_code": zipCode
+  };
+
+  final data = FormData.fromMap(dataShop);
+
+  print(
+      "*****************\nurl: ${API.EDIT_YOUR_SHOP}\n$data\n**************************");
+  final response = await postRequestProvider(
+      path: API.EDIT_YOUR_SHOP, data: data, token: apiToken);
   return response;
 }
