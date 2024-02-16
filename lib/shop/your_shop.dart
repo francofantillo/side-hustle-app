@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +17,7 @@ import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/constants.dart';
+import 'package:side_hustle/utils/service/image_picker_service.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -37,6 +40,7 @@ class YourShopScreen extends StatefulWidget {
 
 class _YourShopScreenState extends State<YourShopScreen> {
   late final SideHustleCubit _bloc;
+  File? _imagePath;
   var index = 0;
   bool isProductSelected = true;
   bool isEdit = false;
@@ -76,10 +80,19 @@ class _YourShopScreenState extends State<YourShopScreen> {
                 : Padding(
                     padding: const EdgeInsets.only(right: 12.0, top: 8),
                     child: CircularIconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (isEdit) {
-                          isEdit = false;
-                          setState(() {});
+                          await _bloc
+                              .editYourShopCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  image: _imagePath)
+                              .then((value) {
+                            if (value == 1) {
+                              isEdit = false;
+                              setState(() {});
+                            }
+                          });
                         } else {
                           isEdit = true;
                           setState(() {});
@@ -122,8 +135,9 @@ class _YourShopScreenState extends State<YourShopScreen> {
                                 // imageWidth: 0.22.sh,
                                 // assetImage: AssetsPath.yourShop,
                                 assetImage: AssetsPath.imageLoadError,
-                                image: state
-                                    .yourShopModel?.shopData?.shopDetail?.image,
+                                image: _imagePath?.path ??
+                                    state.yourShopModel?.shopData?.shopDetail
+                                        ?.image,
                                 boarderColor: AppColors.whiteColor,
                               ),
                               isEdit
@@ -133,8 +147,15 @@ class _YourShopScreenState extends State<YourShopScreen> {
                                       top: AppDimensions.imageHeightShopEdit -
                                           0.15.sw,
                                       child: CameraButton(
-                                        onTap: () {
+                                        onTap: () async {
                                           print("Clicked");
+                                          final image = await ImagePickerService
+                                              .selectImageFromGallery();
+                                          if (image != null) {
+                                            _imagePath = image;
+                                            print("image: ${_imagePath?.path}");
+                                            setState(() {});
+                                          }
                                         },
                                         iconPath: AssetsPath.camera,
                                         height: 0.12.sw,
@@ -203,7 +224,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           state.yourShopModel?.shopData
                                                       ?.shopDetail?.location ==
@@ -217,7 +238,8 @@ class _YourShopScreenState extends State<YourShopScreen> {
                                                     const AssetImage(
                                                         AssetsPath.location),
                                                     size: 0.037.sw,
-                                                    color: Color(0xFF565656),
+                                                    color:
+                                                        const Color(0xFF565656),
                                                   ),
                                                 ),
                                           width(0.02.sw),
@@ -265,7 +287,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                       padding: EdgeInsets.only(
                           left: 16.w, right: 16.w, top: 0.02.sw),
                       child: CustomTabBarShop(
-                        currentTabIndex: 0,
+                        currentTabIndex: _tabIndexBasicToggle.value,
                         tabNames: [
                           SideHustleType.Products.name,
                           SideHustleType.Services.name,

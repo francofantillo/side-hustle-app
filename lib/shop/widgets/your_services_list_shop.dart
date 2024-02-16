@@ -23,6 +23,14 @@ class YourServicesListShop extends StatefulWidget {
 }
 
 class _YourServicesListShopState extends State<YourServicesListShop> {
+  late final SideHustleCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SideHustleCubit, SideHustleState>(
@@ -66,7 +74,7 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                             boarderColor: AppColors.itemBGColor,
                             title: state
                                 .yourShopModel?.shopData?.services?[index].name,
-                            subTitle: state.yourShopModel?.shopData
+                            desc: state.yourShopModel?.shopData
                                 ?.services?[index].description,
                             serviceType: state.yourShopModel?.shopData
                                         ?.services?[index].serviceType !=
@@ -82,8 +90,13 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                             price: state
                                 .yourShopModel?.shopData?.services?[index].price
                                 ?.toStringAsFixed(2),
-                            onTap: () {
+                            onTap: () async {
                               if (widget.isEdit) {
+                                await _bloc.deleteSideHustleCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    id: state.yourShopModel?.shopData
+                                        ?.services?[index].id);
                               } else {
                                 Navigator.pushNamed(
                                     context, AppRoutes.postServiceScreenRoute,

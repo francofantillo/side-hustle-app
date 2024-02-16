@@ -65,6 +65,7 @@ class ShopData {
 class ShopDetail {
   int? id;
   String? name;
+  String? zipCode;
   String? image;
   String? location;
   String? lat;
@@ -74,6 +75,7 @@ class ShopDetail {
   ShopDetail(
       {this.id,
       this.name,
+      this.zipCode,
       this.image,
       this.location,
       this.lat,
@@ -83,6 +85,7 @@ class ShopDetail {
   ShopDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    zipCode = json['zip_code'];
     image = json['image'];
     location = json['location'];
     lat = json['lat'];
@@ -94,6 +97,7 @@ class ShopDetail {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
+    data['zip_code'] = this.zipCode;
     data['image'] = this.image;
     data['location'] = this.location;
     data['lat'] = this.lat;
@@ -119,7 +123,7 @@ class ServicesProductsData {
       this.userId,
       this.name,
       this.price,
-        this.hourlyRate,
+      this.hourlyRate,
       this.description,
       this.image,
       this.serviceType,

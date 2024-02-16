@@ -170,30 +170,28 @@ Future<Response?> getYourShopProvider({String? apiToken}) async {
 /// Edit Your Shop
 Future<Response?> editYourShopProvider(
     {int? shopId,
-    String? image,
+    File? image,
     String? name,
     String? location,
     String? lat,
     String? lng,
     String? zipCode,
     String? apiToken}) async {
-  // final data = {
-  //   "shop_id": 1,
-  //   "name":"New shop name",
-  //   "location": "My new shop location",
-  //   "lat":12.15247,
-  //   "lng":123.3698,
-  //   "zip_code": "12345"
-  // };
   final dataShop = {
     "shop_id": shopId,
     "name": name,
-    "image": image,
     "location": location,
     "lat": lat,
     "lng": lng,
     "zip_code": zipCode
   };
+
+  if (image != null) {
+    final imageName = getImagePath.basename(image.path);
+    final imageShopMultipart =
+        await MultipartFile.fromFile(image.path, filename: imageName);
+    dataShop.putIfAbsent("image", () => imageShopMultipart);
+  }
 
   final data = FormData.fromMap(dataShop);
 
@@ -201,5 +199,26 @@ Future<Response?> editYourShopProvider(
       "*****************\nurl: ${API.EDIT_YOUR_SHOP}\n$data\n**************************");
   final response = await postRequestProvider(
       path: API.EDIT_YOUR_SHOP, data: data, token: apiToken);
+  return response;
+}
+
+/// Delete Product or Service
+Future<Response?> deleteSideHustleProvider({int? id, String? apiToken}) async {
+  final data = {"id": id};
+  print(
+      "*****************\nurl: ${API.GET_DELETE_SIDEHUSTLE}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_DELETE_SIDEHUSTLE, queryParameter: data, token: apiToken);
+  return response;
+}
+
+/// Get Side Hustle
+Future<Response?> getSideHustleProvider(
+    {required String type, String? apiToken}) async {
+  final data = {"type": type};
+  print(
+      "*****************\nurl: ${API.GET_SIDEHUSTLE}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_SIDEHUSTLE, queryParameter: data, token: apiToken);
   return response;
 }

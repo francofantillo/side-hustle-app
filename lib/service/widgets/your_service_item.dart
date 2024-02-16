@@ -10,7 +10,7 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class YourServiceItemWidget extends StatelessWidget {
-  final String? title, subTitle, price, imagePath, serviceType;
+  final String? title, desc, price, imagePath, serviceType;
   final Function()? onTap;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
@@ -19,7 +19,7 @@ class YourServiceItemWidget extends StatelessWidget {
   const YourServiceItemWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.desc,
       this.isDelete = false,
       this.price,
       this.serviceType,
@@ -72,7 +72,7 @@ class YourServiceItemWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: textWidget(
-                                text: subTitle,
+                                text: desc,
                                 // text: "jfdfjd kfjdkjfkd jfkdjkfjdkfjkjf kfkj kffjf ks kdfkdjf dfdkf dfkjdkfjkjf kjfk fk fkj   s",
                                 maxLines: 2,
                                 fontSize: AppDimensions.textSize10),
@@ -109,7 +109,7 @@ class YourServiceItemWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .042),
                       textWidget(
-                          text: "\$$price",
+                          text: price != null ? "\$$price" : null,
                           fontFamily: AppFont.gilroyBold,
                           fontSize: AppDimensions.textSizeSmall,
                           fontWeight: FontWeight.bold,

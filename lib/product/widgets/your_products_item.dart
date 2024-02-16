@@ -10,7 +10,7 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class YourProductsItemWidget extends StatelessWidget {
-  final String? title, subTitle, price, imagePath, deliveryType;
+  final String? title, desc, price, imagePath, deliveryType;
   final Function()? onTap;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
@@ -19,7 +19,7 @@ class YourProductsItemWidget extends StatelessWidget {
   const YourProductsItemWidget(
       {super.key,
       this.title,
-      this.subTitle,
+      this.desc,
       this.isDelete = false,
       this.price,
       this.deliveryType,
@@ -72,7 +72,7 @@ class YourProductsItemWidget extends StatelessWidget {
                         children: [
                           Expanded(
                               child: textWidget(
-                                  text: subTitle,
+                                  text: desc,
                                   maxLines: 2,
                                   fontSize: AppDimensions.textSize10)),
                           IconButtonWithBackground(
@@ -107,7 +107,7 @@ class YourProductsItemWidget extends StatelessWidget {
                       ),
                       height(imageHeight! * .042),
                       textWidget(
-                          text: "\$$price",
+                          text: price != null ? "\$$price" : null,
                           fontFamily: AppFont.gilroyBold,
                           fontWeight: FontWeight.bold,
                           fontSize: AppDimensions.textSizeSmall,

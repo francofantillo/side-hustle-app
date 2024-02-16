@@ -23,6 +23,14 @@ class YourProductsListShop extends StatefulWidget {
 }
 
 class _YourProductsListShopState extends State<YourProductsListShop> {
+  late final SideHustleCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SideHustleCubit, SideHustleState>(
@@ -64,11 +72,8 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
                             boarderColor: AppColors.itemBGColor,
                             title: state
                                 .yourShopModel?.shopData?.products?[index].name,
-                            subTitle: state.yourShopModel?.shopData
+                            desc: state.yourShopModel?.shopData
                                 ?.products?[index].description,
-                            // subTitle: AlphaAppData
-                            //     .sideHustleProductsList[1].subTitle,
-                            // deliveryType: AppStrings.pickUpViewProduct,
                             deliveryType: state.yourShopModel?.shopData
                                         ?.products?[index].deliveryType !=
                                     null
@@ -83,13 +88,20 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
                             price: state
                                 .yourShopModel?.shopData?.products?[index].price
                                 ?.toStringAsFixed(2),
-                            onTap: () {
+                            onTap: () async {
                               if (widget.isEdit) {
+                                await _bloc.deleteSideHustleCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    id: state.yourShopModel?.shopData
+                                        ?.products?[index].id);
                               } else {
                                 Navigator.pushNamed(
                                     context, AppRoutes.postProductScreenRoute,
-                                    arguments: const PostProduct(
+                                    arguments: PostProduct(
                                       isEdit: true,
+                                      id: state.yourShopModel?.shopData
+                                          ?.products?[index].id,
                                     ));
                               }
                             },

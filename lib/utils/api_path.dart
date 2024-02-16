@@ -62,5 +62,7 @@ class API {
   static const String GET_EDIT_PRODUCT_OR_SERVICE = "${BASE_URL}/edit-product";
   static const String GET_YOUR_SHOP = "${BASE_URL}/your-shop";
   static const String EDIT_YOUR_SHOP = "${BASE_URL}/edit-shop";
+  static const String GET_DELETE_SIDEHUSTLE = "${BASE_URL}/delete-product";
+  static const String GET_SIDEHUSTLE = "${BASE_URL}/products";
 
 }
