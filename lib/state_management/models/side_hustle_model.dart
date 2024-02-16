@@ -1,17 +1,17 @@
 class SideHustleModel {
   bool? status;
   String? message;
-  List<Data>? data;
+  List<SideHustleData>? sideHustleData;
 
-  SideHustleModel({this.status, this.message, this.data});
+  SideHustleModel({this.status, this.message, this.sideHustleData});
 
   SideHustleModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      sideHustleData = <SideHustleData>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        sideHustleData!.add(new SideHustleData.fromJson(v));
       });
     }
   }
@@ -20,23 +20,23 @@ class SideHustleModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    if (this.sideHustleData != null) {
+      data['data'] = this.sideHustleData!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Data {
+class SideHustleData {
   int? id;
   String? name;
   double? price;
   String? description;
   String? image;
 
-  Data({this.id, this.name, this.price, this.description, this.image});
+  SideHustleData({this.id, this.name, this.price, this.description, this.image});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  SideHustleData.fromJson(Map<String, dynamic> json) {
 
     id = json['id'];
     name = json['name'];

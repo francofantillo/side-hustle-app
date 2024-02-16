@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/bottom_tabs/widget/custom_home_app_bar.dart';
 import 'package:side_hustle/side_hustle/widgets/products_list.dart';
 import 'package:side_hustle/side_hustle/widgets/services_list.dart';
+import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -18,6 +20,7 @@ class SideHustle extends StatefulWidget {
 }
 
 class _SideHustleState extends State<SideHustle> {
+  late final SideHustleCubit _bloc;
   var index = 0;
   bool isProductSelected = true;
 
@@ -25,23 +28,28 @@ class _SideHustleState extends State<SideHustle> {
 
   @override
   void initState() {
+    _bloc = BlocProvider.of(context);
     isProductSelected = true;
+    getSideHustle();
     super.initState();
   }
 
-  List<List<Color>?>? bgColorsZero = [
-    [AppColors.primaryColor],
-    [Colors.transparent],
-    [Colors.transparent],
-    [Colors.transparent],
-  ];
-
-  List<List<Color>?>? bgColorsOne = [
-    [Colors.transparent],
-    [AppColors.primaryColor],
-    [Colors.transparent],
-    [Colors.transparent],
-  ];
+  getSideHustle() async {
+    print("called SideHustle");
+    if (_tabIndexBasicToggle.value == 0) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getSideHustleCubit(
+          context: context,
+          mounted: mounted,
+          type: SideHustleTypeEnum.Product.name);
+    } else if (_tabIndexBasicToggle.value == 1) {
+      print("called API at index: ${_tabIndexBasicToggle.value}");
+      await _bloc.getSideHustleCubit(
+          context: context,
+          mounted: mounted,
+          type: SideHustleTypeEnum.Service.name);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +82,9 @@ class _SideHustleState extends State<SideHustle> {
                   hintText: _tabIndexBasicToggle.value == 0
                       ? AppStrings.searchSideHustleProductsHintText
                       : AppStrings.searchSideHustleServicesHintText,
-                  onChanged: (search) {}),
+                  onChanged: (search) {
+                    _bloc.searchSideHustles(value: search);
+                  }),
             ),
             Padding(
               // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
@@ -109,12 +119,12 @@ class _SideHustleState extends State<SideHustle> {
                   onToggle: (index) {
                     _tabIndexBasicToggle.value = index ?? 0;
                     print('switched to: ${_tabIndexBasicToggle.value}');
+                    getSideHustle();
                     setState(() {});
                   },
                 ),
               ),
             ),
-            // height(0.02.sw),
             _tabIndexBasicToggle.value == 0
                 ? const ProductsList()
                 : const ServicesList()

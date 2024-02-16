@@ -62,8 +62,10 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                           onTap: () {
                             Navigator.pushNamed(
                                 context, AppRoutes.viewServiceScreenRoute,
-                                arguments: const ViewService(
+                                arguments: ViewService(
                                   isMyService: true,
+                                  id: state.yourShopModel?.shopData
+                                      ?.services?[index].id,
                                 ));
                           },
                           // I need 2 horizontal Listview builders inside a vertical scrollview flutter

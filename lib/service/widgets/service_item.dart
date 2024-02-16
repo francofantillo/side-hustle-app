@@ -10,21 +10,22 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ServiceItemsWidget extends StatelessWidget {
-  final String? title, subTitle, price, imagePath, deliveryType;
+  final String? title, subTitle, price, imagePath, serviceType;
   final Function()? onTap;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ServiceItemsWidget({super.key,
-    this.title,
-    this.subTitle,
-    this.price,
-    this.deliveryType,
-    this.onTap,
-    this.imagePath,
-    this.imageHeight,
-    this.imageWidth,
-    this.boarderColor});
+  const ServiceItemsWidget(
+      {super.key,
+      this.title,
+      this.subTitle,
+      this.price,
+      this.serviceType,
+      this.onTap,
+      this.imagePath,
+      this.imageHeight,
+      this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class ServiceItemsWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Material(
           shadowColor: Colors.transparent,
@@ -45,7 +46,7 @@ class ServiceItemsWidget extends StatelessWidget {
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: InkWell(
             onTap: onTap,
@@ -57,12 +58,14 @@ class ServiceItemsWidget extends StatelessWidget {
                   RoundedCornersImage(
                     imageHeight: imageHeight,
                     imageWidth: AppDimensions.sideHustleItemWidth,
-                    assetImage: imagePath,
+                    image: imagePath,
+                    assetImage: AssetsPath.imageLoadError,
                     boarderColor: boarderColor,
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+                      padding:
+                          const EdgeInsets.only(top: 8.0, left: 8, right: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -82,8 +85,7 @@ class ServiceItemsWidget extends StatelessWidget {
                                     child: textWidget(
                                         text: subTitle,
                                         maxLines: 2,
-                                        fontSize:
-                                        AppDimensions.textSize10)),
+                                        fontSize: AppDimensions.textSize10)),
                                 width(imageWidth! * .01),
                                 IconButtonWithBackground(
                                   iconPath: AssetsPath.add,
@@ -99,20 +101,20 @@ class ServiceItemsWidget extends StatelessWidget {
                           Row(
                             children: [
                               textWidget(
-                                  text: AppStrings.deliveryType,
+                                  text: AppStrings.serviceType,
                                   fontFamily: AppFont.gilroyBold,
                                   fontSize: AppDimensions.textSize10,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textBlackColor),
                               textWidget(
-                                  text: deliveryType,
+                                  text: serviceType,
                                   maxLines: 2,
                                   fontSize: AppDimensions.textSize10)
                             ],
                           ),
                           height(imageHeight! * .042),
                           textWidget(
-                              text: price,
+                              text: price != null ? "\$$price" : null,
                               fontFamily: AppFont.gilroyBold,
                               fontSize: AppDimensions.textSizeSmall,
                               fontWeight: FontWeight.bold,

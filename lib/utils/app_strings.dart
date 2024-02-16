@@ -476,6 +476,8 @@ class AppStrings {
   /// Error Messages
   static const String errorMessageEvent = "No Events Found";
   static const String errorMessageJobs = "No Jobs Found";
+  static const String errorMessageProducts = "No Products Found";
+  static const String errorMessageServices = "No Services Found";
   static const String errorMessageNoItemsFound = "No Items Found";
   static const String errorMessage = "Something went wrong.";
   static const String errorMessageMultiImagesSelectedLimit = "5 images max";

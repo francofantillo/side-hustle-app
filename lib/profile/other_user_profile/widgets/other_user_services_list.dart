@@ -46,7 +46,7 @@ class _OtherUserServicesListShopState extends State<OtherUserServicesListShop> {
                 title: AlphaAppData.jobsAndEventsList[0].itemList?[0].title,
                 subTitle:
                 AlphaAppData.jobsAndEventsList[0].itemList?[0].subTitle,
-                deliveryType: AppStrings.pickUpViewProduct,
+                serviceType: AppStrings.pickUpViewProduct,
                 imagePath:
                 AlphaAppData.jobsAndEventsList[0].itemList?[0].imagePath,
                 price: AlphaAppData.jobsAndEventsList[0].itemList?[0].price,

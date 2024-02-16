@@ -171,6 +171,7 @@ class AppRouter {
           case AppRoutes.viewProductScreenRoute:
             final args = routeSettings.arguments as ViewProduct?;
             return ViewProduct(
+              id: args?.id,
               isMyProduct: args?.isMyProduct ?? false,
               isViewingProductFromOthersShop:
                   args?.isViewingProductFromOthersShop ?? false,
@@ -179,6 +180,7 @@ class AppRouter {
           case AppRoutes.viewServiceScreenRoute:
             final args = routeSettings.arguments as ViewService?;
             return ViewService(
+              id: args?.id,
               isMyService: args?.isMyService ?? false,
               isViewingServiceFromOthersShop:
                   args?.isViewingServiceFromOthersShop ?? false,

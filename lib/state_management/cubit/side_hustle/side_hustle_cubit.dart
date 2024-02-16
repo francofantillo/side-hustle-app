@@ -8,6 +8,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
+import 'package:side_hustle/state_management/models/side_hustle_detail_model.dart';
 import 'package:side_hustle/state_management/models/side_hustle_model.dart';
 import 'package:side_hustle/state_management/models/your_shop_model.dart';
 import 'package:side_hustle/state_management/providers/side_hustle/side_hustle_provider.dart';
@@ -31,11 +32,10 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   TextEditingController priceTextController = TextEditingController();
   TextEditingController zipCodeTextController = TextEditingController();
   TextEditingController additionalInfoTextController = TextEditingController();
-  TextEditingController yourShopNameTextController = TextEditingController();
-  TextEditingController yourZipCodeTextController = TextEditingController();
-  TextEditingController yourAddressTextController = TextEditingController();
   String? type;
   int isShopLocation = 0;
+  bool isHourly = true;
+  bool isFixed = false;
 
   initControllers() {
     titleTextController = TextEditingController();
@@ -44,20 +44,12 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     priceTextController = TextEditingController();
     zipCodeTextController = TextEditingController();
     additionalInfoTextController = TextEditingController();
-    yourShopNameTextController = TextEditingController();
-    yourZipCodeTextController = TextEditingController();
-    yourAddressTextController = TextEditingController();
     selectLocationModel = null;
     type = null;
     isShopLocation = 0;
+    isHourly = true;
+    isFixed = false;
     emit(state.copyWith(images: []));
-  }
-
-  initShopControllers() {
-    yourShopNameTextController = TextEditingController();
-    yourZipCodeTextController = TextEditingController();
-    yourAddressTextController = TextEditingController();
-    selectLocationModel = null;
   }
 
   /// Select Multiple Images
@@ -516,13 +508,16 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     }
   }
 
-  /// Get Products
-  Future getProductsCubit(
+  /// Get SideHustle
+  Future getSideHustleCubit(
       {required BuildContext context,
       required bool mounted,
       required String type}) async {
     emit(state.copyWith(
-        sideHustleLoading: true, sideHustleModel: SideHustleModel()));
+        sideHustleTempList: [],
+        searching: false,
+        sideHustleLoading: true,
+        sideHustleModel: SideHustleModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -551,6 +546,76 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       emit(state.copyWith(sideHustleLoading: false));
+    }
+  }
+
+  /// Get SideHustle Detail
+  Future getSideHustleDetailCubit(
+      {required BuildContext context, required bool mounted, int? id}) async {
+    emit(state.copyWith(
+        sideHustleDetailLoading: true,
+        sideHustleDetailModel: SideHustleDetailModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await getSideHustleDetailProvider(apiToken: token, id: id);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        SideHustleDetailModel sideHustleDetailModel =
+            SideHustleDetailModel.fromJson(response.data);
+        emit(state.copyWith(
+            sideHustleDetailLoading: false,
+            sideHustleDetailModel: sideHustleDetailModel));
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(sideHustleDetailLoading: false));
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(sideHustleDetailLoading: false));
+    }
+  }
+
+  /// Search SideHustle
+  searchSideHustles({
+    String? value,
+  }) {
+    emit(state.copyWith(sideHustleTempList: [], searching: true));
+    final List<SideHustleData>? originalList =
+        state.sideHustleModel?.sideHustleData;
+    final List<SideHustleData> tempList = [];
+    print("searchList: $value");
+    state.sideHustleTempList?.clear();
+    if (value != null) {
+      emit(state.copyWith(searching: true));
+      for (int i = 0; i < (originalList?.length ?? 0); i++) {
+        String name =
+            originalList?[i].name != null ? "${originalList![i].name}" : '';
+        if (name.toLowerCase().contains(value.toLowerCase())) {
+          tempList.add(originalList![i]);
+        }
+      }
+      if (tempList.isNotEmpty) {
+        print("searchList tempList: ${tempList[0].name}");
+        final tempSearchSideHustleList = tempList;
+        emit(state.copyWith(sideHustleTempList: tempSearchSideHustleList));
+      } else if (value.isEmpty) {
+        print("searchList tempList is empty");
+        emit(state.copyWith(sideHustleTempList: originalList));
+      } else {
+        emit(state.copyWith(sideHustleTempList: []));
+      }
     }
   }
 }

@@ -11,6 +11,10 @@ class SideHustleState {
   bool editSideHustleLoading;
   SideHustleModel? sideHustleModel;
   bool sideHustleLoading;
+  List<SideHustleData>? sideHustleTempList;
+  bool searching;
+  SideHustleDetailModel? sideHustleDetailModel;
+  bool sideHustleDetailLoading;
 
   SideHustleState(
       {this.images,
@@ -22,7 +26,11 @@ class SideHustleState {
       this.editSideHustleModel,
       this.editSideHustleLoading = false,
       this.sideHustleModel,
-      this.sideHustleLoading = true});
+      this.sideHustleLoading = true,
+      this.sideHustleTempList,
+      this.searching = false,
+      this.sideHustleDetailModel,
+      this.sideHustleDetailLoading = true});
 
   SideHustleState copyWith(
       {List<Images>? images,
@@ -34,7 +42,11 @@ class SideHustleState {
       GetEditSideHustleModel? editSideHustleModel,
       bool? editSideHustleLoading,
       SideHustleModel? sideHustleModel,
-      bool? sideHustleLoading}) {
+      bool? sideHustleLoading,
+      List<SideHustleData>? sideHustleTempList,
+      bool? searching,
+      SideHustleDetailModel? sideHustleDetailModel,
+      bool? sideHustleDetailLoading}) {
     return SideHustleState(
         images: images ?? this.images,
         editProductLoading: editProductLoading ?? this.editProductLoading,
@@ -47,6 +59,12 @@ class SideHustleState {
         editSideHustleLoading:
             editSideHustleLoading ?? this.editSideHustleLoading,
         sideHustleModel: sideHustleModel ?? this.sideHustleModel,
-        sideHustleLoading: sideHustleLoading ?? this.sideHustleLoading);
+        sideHustleLoading: sideHustleLoading ?? this.sideHustleLoading,
+        sideHustleTempList: sideHustleTempList ?? this.sideHustleTempList,
+        searching: searching ?? this.searching,
+        sideHustleDetailModel:
+            sideHustleDetailModel ?? this.sideHustleDetailModel,
+        sideHustleDetailLoading:
+            sideHustleDetailLoading ?? this.sideHustleDetailLoading);
   }
 }

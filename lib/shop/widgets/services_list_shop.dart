@@ -38,7 +38,7 @@ class _ServicesListShopState extends State<ServicesListShop> {
               boarderColor: AppColors.itemBGColor,
               title: AlphaAppData.sideHustleServicesList[index].title,
               subTitle: AlphaAppData.sideHustleServicesList[index].subTitle,
-              deliveryType: AppStrings.pickUpViewProduct,
+              serviceType: AppStrings.pickUpViewProduct,
               imagePath: AlphaAppData.sideHustleServicesList[index].imagePath,
               price: AlphaAppData.sideHustleServicesList[index].price,
               onTap: () {

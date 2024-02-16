@@ -181,8 +181,6 @@ Future<Response?> editYourShopProvider(
     "shop_id": shopId,
     "name": name,
     "location": location,
-    "lat": lat,
-    "lng": lng,
     "zip_code": zipCode
   };
 
@@ -191,6 +189,14 @@ Future<Response?> editYourShopProvider(
     final imageShopMultipart =
         await MultipartFile.fromFile(image.path, filename: imageName);
     dataShop.putIfAbsent("image", () => imageShopMultipart);
+  }
+
+  if (lat != null) {
+    dataShop.putIfAbsent("lat", () => lat);
+  }
+
+  if (lng != null) {
+    dataShop.putIfAbsent("lng", () => lng);
   }
 
   final data = FormData.fromMap(dataShop);
@@ -220,5 +226,16 @@ Future<Response?> getSideHustleProvider(
       "*****************\nurl: ${API.GET_SIDEHUSTLE}\n$data\n**************************");
   final response = await getRequestProvider(
       path: API.GET_SIDEHUSTLE, queryParameter: data, token: apiToken);
+  return response;
+}
+
+/// Get Side Hustle Detail
+Future<Response?> getSideHustleDetailProvider(
+    {int? id, String? apiToken}) async {
+  final data = {"id": id};
+  print(
+      "*****************\nurl: ${API.GET_SIDEHUSTLE_DETAIL}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.GET_SIDEHUSTLE_DETAIL, queryParameter: data, token: apiToken);
   return response;
 }

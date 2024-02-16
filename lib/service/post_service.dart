@@ -276,12 +276,51 @@ class _PostServiceState extends State<PostService> {
                         ),
                         Row(
                           children: [
+                            Radio(
+                                value: _bloc.isHourly,
+                                groupValue: true,
+                                onChanged: (newValue) {
+                                  print("newValue: $newValue");
+                                  if (!newValue!) {
+                                    _bloc.isFixed = false;
+                                    _bloc.isHourly = true;
+                                    _bloc.type = ServiceTypeEnum.Hourly.name;
+                                  }
+                                  setState(() {});
+                                }),
+                            Radio(
+                                value: _bloc.isFixed,
+                                groupValue: true,
+                                onChanged: (newValue) {
+                                  print("newValue: $newValue");
+                                  if (!newValue!) {
+                                    _bloc.isHourly = false;
+                                    _bloc.isFixed = true;
+
+                                    _bloc.type = ServiceTypeEnum.Fixed.name;
+                                  }
+                                  setState(() {});
+                                }),
+                            Container(
+                              height: 18,
+                              width: 18,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: Colors.transparent,
+                                border: Border.all(width: 2, color: Colors.grey.shade700),
+                              ),
+                              child: Icon(Icons.check, color: Colors.blue,),
+                            ),
                             CheckboxWidget(
-                              isChecked: true,
+                              isChecked: _bloc.isHourly,
                               onChanged: (newValue) {
                                 if (newValue!) {
+                                  _bloc.isFixed = false;
                                   _bloc.type = ServiceTypeEnum.Hourly.name;
+                                } else {
+                                  _bloc.isFixed = true;
                                 }
+                                setState(() {});
                                 print(
                                     'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
                               },
@@ -296,10 +335,15 @@ class _PostServiceState extends State<PostService> {
                               ),
                             )),
                             CheckboxWidget(
+                              isChecked: _bloc.isFixed,
                               onChanged: (newValue) {
                                 if (newValue!) {
+                                  _bloc.isHourly = false;
                                   _bloc.type = ServiceTypeEnum.Fixed.name;
+                                } else {
+                                  _bloc.isHourly = true;
                                 }
+                                setState(() {});
                                 print(
                                     'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
                               },

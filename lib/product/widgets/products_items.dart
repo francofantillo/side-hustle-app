@@ -58,7 +58,8 @@ class ProductsItemsWidget extends StatelessWidget {
                   RoundedCornersImage(
                     imageHeight: imageHeight,
                     imageWidth: AppDimensions.sideHustleItemWidth,
-                    assetImage: imagePath,
+                    image: imagePath,
+                    assetImage: AssetsPath.imageLoadError,
                     boarderColor: boarderColor,
                   ),
                   Expanded(
@@ -114,7 +115,7 @@ class ProductsItemsWidget extends StatelessWidget {
                           ),
                           height(imageHeight! * .042),
                           textWidget(
-                              text: price,
+                              text: price != null ? "\$$price" : null,
                               fontFamily: AppFont.gilroyBold,
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
