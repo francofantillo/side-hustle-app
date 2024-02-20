@@ -299,6 +299,7 @@ class AppStrings {
   static const String eventPrice = "\$12.46";
   static const String perHead = "per head";
   static const String perHour = "per hour";
+  static const String fixed = "fixed";
   static const String eventTimeText = "Start at 10:00am to 5:00pm";
   static const String eventPostedBy = "Event Posted by";
   static const String eventPostedProfileName = "Leo Lubin";

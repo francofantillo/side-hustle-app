@@ -66,6 +66,7 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                                   isMyService: true,
                                   id: state.yourShopModel?.shopData
                                       ?.services?[index].id,
+                                  isEditFromShop: true,
                                 ));
                           },
                           // I need 2 horizontal Listview builders inside a vertical scrollview flutter
@@ -102,8 +103,11 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                               } else {
                                 Navigator.pushNamed(
                                     context, AppRoutes.postServiceScreenRoute,
-                                    arguments: const PostService(
+                                    arguments: PostService(
                                       isEdit: true,
+                                      id: state.yourShopModel?.shopData
+                                          ?.services?[index].id,
+                                      isEditFromShop: true,
                                     ));
                               }
                             },

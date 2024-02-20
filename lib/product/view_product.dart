@@ -24,13 +24,14 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ViewProduct extends StatefulWidget {
-  final bool isMyProduct, isViewingProductFromOthersShop;
+  final bool isMyProduct, isViewingProductFromOthersShop, isEditFromShop;
   final int? id;
 
   const ViewProduct(
       {super.key,
       this.id,
       this.isMyProduct = false,
+      this.isEditFromShop = false,
       this.isViewingProductFromOthersShop = false});
 
   @override
@@ -96,13 +97,19 @@ class _ViewProductState extends State<ViewProduct> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            textWidget(
-                                text: state.sideHustleDetailModel?.data?.name,
-                                fontFamily: AppFont.gilroyBold,
-                                fontWeight: FontWeight.bold,
-                                fontSize:
-                                    AppDimensions.textHeadingSizeViewForms,
-                                color: AppColors.textBlackColor),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 4.0),
+                                child: textWidget(
+                                    text:
+                                        state.sideHustleDetailModel?.data?.name,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        AppDimensions.textHeadingSizeViewForms,
+                                    color: AppColors.textBlackColor),
+                              ),
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
@@ -116,11 +123,11 @@ class _ViewProductState extends State<ViewProduct> {
                                     fontSize:
                                         AppDimensions.textPriceSizeViewForms,
                                     color: AppColors.textBlackColor),
-                                textWidget(
-                                  text: AppStrings.perHead,
-                                  color: AppColors.textBlackColor,
-                                  fontSize: AppDimensions.textSize10,
-                                ),
+                                // textWidget(
+                                //   text: AppStrings.perHead,
+                                //   color: AppColors.textBlackColor,
+                                //   fontSize: AppDimensions.textSize10,
+                                // ),
                               ],
                             ),
                           ],
@@ -349,31 +356,42 @@ class _ViewProductState extends State<ViewProduct> {
                       isAddToCart ? const SizedBox.shrink() : height(0.02.sh),
                       isAddToCart
                           ? const SizedBox.shrink()
-                          : widget.isMyProduct
-                              ? const SizedBox.shrink()
-                              : Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 6.0),
-                                  child: CustomMaterialButton(
-                                    onPressed: () {
-                                      if (widget.isMyProduct) {
-                                        Navigator.pushNamed(context,
-                                            AppRoutes.postProductScreenRoute,
-                                            arguments: const PostProduct(
-                                              isEdit: true,
-                                            ));
-                                      } else {
-                                        // Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
-                                        setState(() {
-                                          isAddToCart = true;
-                                        });
-                                      }
-                                    },
-                                    name: widget.isMyProduct
-                                        ? AppStrings.editProduct
-                                        : AppStrings.addToCart,
-                                  ),
-                                ),
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6.0),
+                              child: CustomMaterialButton(
+                                onPressed: () {
+                                  if (widget.isMyProduct) {
+                                    if(widget.isEditFromShop) {
+                                      Navigator.pushReplacementNamed(context,
+                                          AppRoutes.postProductScreenRoute,
+                                          arguments: PostProduct(
+                                            isEdit: true,
+                                            id: widget.id,
+                                            isEditFromShop: true,
+                                          ));
+                                    } else {
+                                      Navigator.pushNamed(context,
+                                          AppRoutes.postProductScreenRoute,
+                                          arguments: PostProduct(
+                                            isEdit: true,
+                                            id: widget.id,
+                                            isEditFromShop: false,
+                                          ));
+                                    }
+
+                                  } else {
+                                    // Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
+                                    setState(() {
+                                      isAddToCart = true;
+                                    });
+                                  }
+                                },
+                                name: widget.isMyProduct
+                                    ? AppStrings.editProduct
+                                    : AppStrings.addToCart,
+                              ),
+                            ),
                       height(0.02.sh),
                       isAddToCart
                           ? Padding(

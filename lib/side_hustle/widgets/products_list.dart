@@ -9,6 +9,7 @@ import 'package:side_hustle/state_management/models/side_hustle_model.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/error/error_widget.dart';
 
@@ -72,7 +73,13 @@ class _ProductsListState extends State<ProductsList> {
                     boarderColor: AppColors.itemBGColor,
                     title: sideHustleItemList?[index].name,
                     subTitle: sideHustleItemList?[index].description,
-                    deliveryType: AppStrings.pickUpViewProduct,
+                    deliveryType:
+                        sideHustleItemList?[index].deliveryType != null
+                            ? sideHustleItemList![index].deliveryType ==
+                                    DeliveryTypeEnum.Pickup.name
+                                ? AppStrings.deliveryOptionPickup
+                                : AppStrings.deliveryOptionCOD
+                            : "",
                     imagePath: sideHustleItemList?[index].image,
                     price: sideHustleItemList?[index].price?.toStringAsFixed(2),
                   ),

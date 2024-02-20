@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/event/view_event_self.dart';
 import 'package:side_hustle/product/view_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/service/view_service.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -86,15 +87,17 @@ class PostAdded extends StatelessWidget {
                 onPressed: () {
                   if (isProduct) {
                     Navigator.pushReplacementNamed(
-                        context, AppRoutes.yourShopScreenRoute,
-                        arguments: const ViewProduct(
+                        context, AppRoutes.viewProductScreenRoute,
+                        arguments: ViewProduct(
                           isMyProduct: true,
+                          id: id,
                         ));
                   } else if (isService) {
                     Navigator.pushReplacementNamed(
-                        context, AppRoutes.yourShopScreenRoute,
-                        arguments: const ViewProduct(
-                          isMyProduct: true,
+                        context, AppRoutes.viewServiceScreenRoute,
+                        arguments: ViewService(
+                          isMyService: true,
+                          id: id,
                         ));
                   } else if (isEvent) {
                     Navigator.pushReplacementNamed(

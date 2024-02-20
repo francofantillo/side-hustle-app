@@ -241,27 +241,19 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     }
   }
 
-  /// Edit a Job
-/*  Future<int> editProductCubit(
-      {required BuildContext context,
-        required int planId,
-        required bool mounted}) async {
-    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
+  /// Edit Product
+  Future<int> editProductCubit({
+    required BuildContext context,
+    required int? id,
+    required bool mounted,
+    required bool isEditFromShop,
+  }) async {
     EasyLoading.show();
 
-    String? lat;
-    String? lng;
-    if (selectLocationModel != null) {
-      lat = selectLocationModel?.lat?.toString();
-      lng = selectLocationModel?.lng?.toString();
-    } else {
-      lat = state.jobsModel?.jobsDetailData?.lat;
-      lng = state.jobsModel?.jobsDetailData?.lng;
-    }
-    print("editJobModel lat: ${state.jobsModel?.jobsDetailData?.lat}");
-    print("editJobModel lng: ${state.jobsModel?.jobsDetailData?.lng}");
-    print("editJobCubit lat: $lat");
-    print("editJobCubit lng: $lng");
+    final String? lat = selectLocationModel?.lat?.toString();
+    final String? lng = selectLocationModel?.lng?.toString();
+    print("lat: $lat");
+    print("lng: $lng");
 
     final token = await prefs.getToken();
 
@@ -270,42 +262,44 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       if (state.images![i].image != null &&
           !(state.images![i].image!.contains("http"))) {
         itemImagesFile.add(File(state.images![i].image!));
-        print("editJobCubit itemImagesFile: ${state.images![i].image}");
+        print("postJobCubit itemImagesFile: ${state.images![i].image}");
       }
     }
 
-    final response = await editJobProvider(
+    final response = await editProductProvider(
         apiToken: token,
-        jobId: state.jobsModel?.jobsDetailData?.id,
-        title: titleTextController.text,
+        id: id,
+        name: titleTextController.text,
         location: locationTextController.text,
         lat: lat,
         lng: lng,
         images: itemImagesFile,
-        jobDate: dateTextController.text,
-        jobTime: DateTimeConversions.convertTo24HourFormat(
-            startTimeTextController.text),
-        endTime: DateTimeConversions.convertTo24HourFormat(
-            endTimeTextController.text),
+        isShopLocation: isShopLocation,
+        deliveryType: type,
         description: descriptionTextController.text,
         additionalInformation: additionalInfoTextController.text,
-        budget: priceTextController.text,
-        planId: planId.toString(),
-        areaCode: areaCodeTextController.text,
-        totalHours: state.totalHours);
+        price: priceTextController.text,
+        zipCode: zipCodeTextController.text);
 
     EasyLoading.dismiss();
 
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
+        YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
+        emit(state.copyWith(yourShopModel: yourShopModel));
+        final id = yourShopModel.shopData?.products?.last.id;
         AppUtils.showToast(response.data["message"]);
         if (mounted) {
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pushReplacementNamed(context, AppRoutes.myJobsScreenRoute);
+          if (isEditFromShop) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pop(context);
+            Navigator.pushReplacementNamed(
+                context, AppRoutes.yourShopScreenRoute);
+          }
         }
-        return 1;
+        return id ?? 1;
       }
 
       /// Failed
@@ -317,7 +311,79 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       return 0;
     }
-  }*/
+  }
+
+  /// Edit Service
+  Future<int> editServiceCubit({
+    required BuildContext context,
+    required int? id,
+    required bool isEditFromShop,
+    required bool mounted,
+  }) async {
+    EasyLoading.show();
+
+    final String? lat = selectLocationModel?.lat?.toString();
+    final String? lng = selectLocationModel?.lng?.toString();
+    print("lat: $lat");
+    print("lng: $lng");
+
+    final token = await prefs.getToken();
+
+    List<File> itemImagesFile = [];
+    for (int i = 0; i < state.images!.length; i++) {
+      if (state.images![i].image != null &&
+          !(state.images![i].image!.contains("http"))) {
+        itemImagesFile.add(File(state.images![i].image!));
+        print("postJobCubit itemImagesFile: ${state.images![i].image}");
+      }
+    }
+
+    final response = await editServiceProvider(
+        apiToken: token,
+        id: id,
+        name: titleTextController.text,
+        location: locationTextController.text,
+        lat: lat,
+        lng: lng,
+        images: itemImagesFile,
+        isShopLocation: isShopLocation,
+        serviceType: type,
+        description: descriptionTextController.text,
+        additionalInformation: additionalInfoTextController.text,
+        hourlyRate: priceTextController.text);
+    // zipCode: areaCodeTextController.text);
+
+    EasyLoading.dismiss();
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
+        emit(state.copyWith(yourShopModel: yourShopModel));
+        final id = yourShopModel.shopData?.products?.last.id;
+        AppUtils.showToast(response.data["message"]);
+        if (mounted) {
+          if (isEditFromShop) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pop(context);
+            Navigator.pushReplacementNamed(
+                context, AppRoutes.yourShopScreenRoute);
+          }
+        }
+        return id ?? 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
+    }
+  }
 
   /// Get Edit Product or Service
   Future<GetEditSideHustleModel?> getEditProductOrServiceCubit(
@@ -481,12 +547,6 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
-        // titleTextController.text =
-        //     yourShopModel.shopData?.shopDetail?.name ?? "";
-        // zipCodeTextController.text =
-        //     yourShopModel.shopData?.shopDetail?.zipCode ?? "";
-        // locationTextController.text =
-        //     yourShopModel.shopData?.shopDetail?.location ?? "";
         emit(state.copyWith(yourShopModel: yourShopModel));
         AppUtils.showToast(response.data["message"]);
         EasyLoading.dismiss();

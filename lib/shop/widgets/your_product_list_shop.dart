@@ -60,16 +60,13 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
                             right: 16.0.w, left: 16.0.w, top: 8),
                         child: InkWell(
                           onTap: () {
-                            // Navigator.pushNamed(
-                            //     context, AppRoutes.viewProductScreenRoute,
-                            //     arguments:
-                            //         const ViewProduct(isMyProduct: true));
                             Navigator.pushNamed(
                                 context, AppRoutes.viewProductScreenRoute,
                                 arguments: ViewProduct(
                                   isMyProduct: true,
-                                  id: state
-                                      .yourShopModel?.shopData?.products?[index].id,
+                                  id: state.yourShopModel?.shopData
+                                      ?.products?[index].id,
+                                  isEditFromShop: true,
                                 ));
                           },
                           child: YourProductsItemWidget(
@@ -109,6 +106,7 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
                                       isEdit: true,
                                       id: state.yourShopModel?.shopData
                                           ?.products?[index].id,
+                                      isEditFromShop: true,
                                     ));
                               }
                             },

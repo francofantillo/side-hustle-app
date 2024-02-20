@@ -31,6 +31,7 @@ class Data {
   String? name;
   double? price;
   String? description;
+  String? additionalInformation;
   String? zipCode;
   String? deliveryType;
   String? serviceType;
@@ -43,6 +44,7 @@ class Data {
         this.name,
         this.price,
         this.description,
+        this.additionalInformation,
         this.zipCode,
         this.deliveryType,
         this.serviceType,
@@ -58,8 +60,9 @@ class Data {
     productId = json['product_id'];
     shopId = json['shop_id'];
     name = json['name'];
-    price = json['price'];
+    price = json['price']?.toDouble();
     description = json['description'];
+    additionalInformation = json['additional_information'];
     zipCode = json['zip_code'];
     deliveryType = json['delivery_type'];
     serviceType = json['service_type'];
@@ -78,6 +81,7 @@ class Data {
     data['name'] = this.name;
     data['price'] = this.price;
     data['description'] = this.description;
+    data['additional_information'] = this.additionalInformation;
     data['zip_code'] = this.zipCode;
     data['delivery_type'] = this.deliveryType;
     data['service_type'] = this.serviceType;

@@ -9,6 +9,7 @@ import 'package:side_hustle/state_management/models/side_hustle_model.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/error/error_widget.dart';
 
@@ -65,7 +66,12 @@ class _ServicesListState extends State<ServicesList> {
                     boarderColor: AppColors.itemBGColor,
                     title: sideHustleItemList?[index].name,
                     subTitle: sideHustleItemList?[index].description,
-                    serviceType: AppStrings.pickUpViewProduct,
+                    serviceType: sideHustleItemList?[index].serviceType != null
+                        ? sideHustleItemList![index].serviceType ==
+                                ServiceTypeEnum.Hourly.name
+                            ? ServiceTypeEnum.Hourly.name
+                            : ServiceTypeEnum.Fixed.name
+                        : "",
                     imagePath: sideHustleItemList?[index].image,
                     price: sideHustleItemList?[index].price?.toStringAsFixed(2),
                     onTap: () {

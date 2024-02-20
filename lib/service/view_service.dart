@@ -7,6 +7,7 @@ import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
@@ -17,7 +18,6 @@ import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider_no_images_found.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -26,13 +26,14 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import '../cart/modal_bottom_sheet/modal_bottom_sheet_request_service.dart';
 
 class ViewService extends StatefulWidget {
-  final bool isMyService, isViewingServiceFromOthersShop;
+  final bool isMyService, isViewingServiceFromOthersShop, isEditFromShop;
   final int? id;
 
   const ViewService(
       {super.key,
       this.id,
       this.isMyService = false,
+      this.isEditFromShop = false,
       this.isViewingServiceFromOthersShop = false});
 
   @override
@@ -48,6 +49,7 @@ class _ViewServiceState extends State<ViewService> {
   void initState() {
     isAddToCart = false;
     _bloc = BlocProvider.of(context);
+    print("isEditFromShop: ${widget.isEditFromShop}");
     getSideHustleDetail();
     super.initState();
   }
@@ -74,6 +76,7 @@ class _ViewServiceState extends State<ViewService> {
       ),
       body: BlocBuilder<SideHustleCubit, SideHustleState>(
           builder: (contextBuilder, state) {
+        print("serviceType: ${state.sideHustleDetailModel?.data?.serviceType}");
         return state.sideHustleDetailLoading
             ? const SizedBox.shrink()
             : SingleChildScrollView(
@@ -104,13 +107,15 @@ class _ViewServiceState extends State<ViewService> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            textWidget(
-                                text: state.sideHustleDetailModel?.data?.name,
-                                fontFamily: AppFont.gilroyBold,
-                                fontWeight: FontWeight.bold,
-                                fontSize:
-                                    AppDimensions.textHeadingSizeViewForms,
-                                color: AppColors.textBlackColor),
+                            Expanded(
+                              child: textWidget(
+                                  text: state.sideHustleDetailModel?.data?.name,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      AppDimensions.textHeadingSizeViewForms,
+                                  color: AppColors.textBlackColor),
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
@@ -126,7 +131,12 @@ class _ViewServiceState extends State<ViewService> {
                                         AppDimensions.textPriceSizeViewForms,
                                     color: AppColors.textBlackColor),
                                 textWidget(
-                                    text: AppStrings.perHour,
+                                    // text: AppStrings.perHour,
+                                    text: state.sideHustleDetailModel?.data
+                                                ?.serviceType ==
+                                            ServiceTypeEnum.Hourly.name
+                                        ? AppStrings.perHour
+                                        : AppStrings.fixed,
                                     fontSize: AppDimensions.textSize10,
                                     color: AppColors.textBlackColor),
                               ],
@@ -171,7 +181,8 @@ class _ViewServiceState extends State<ViewService> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: textWidget(
-                            text: AppStrings.productDescViewProduct,
+                            text: state.sideHustleDetailModel?.data
+                                ?.additionalInformation,
                             maxLines: 30,
                             color: AppColors.textBlackColor,
                             fontSize:
@@ -288,32 +299,47 @@ class _ViewServiceState extends State<ViewService> {
                       isAddToCart ? const SizedBox.shrink() : height(0.02.sw),
                       isAddToCart
                           ? const SizedBox.shrink()
-                          : widget.isMyService
-                              ? const SizedBox.shrink()
-                              : Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 6.0),
-                                  child: CustomMaterialButton(
-                                      onPressed: () {
-                                        if (widget.isMyService) {
-                                          Navigator.pushNamed(context,
-                                              AppRoutes.postServiceScreenRoute,
-                                              arguments: const PostService(
-                                                isEdit: true,
-                                              ));
-                                        } else {
-                                          AppUtils.showBottomModalSheet(
-                                              context: context,
-                                              widget:
-                                                  BottomModalSheetRequestService(
-                                                onItemAdded: onItemAdded,
-                                              ));
-                                        }
-                                      },
-                                      name: widget.isMyService
-                                          ? AppStrings.editService
-                                          : AppStrings.requestService),
-                                ),
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6.0),
+                              child: CustomMaterialButton(
+                                  onPressed: () {
+                                    if (widget.isMyService) {
+                                      // Navigator.pushNamed(context,
+                                      //     AppRoutes.postServiceScreenRoute,
+                                      //     arguments: const PostService(
+                                      //       isEdit: true,
+                                      //     ));
+                                      if (widget.isEditFromShop) {
+                                        Navigator.pushReplacementNamed(context,
+                                            AppRoutes.postServiceScreenRoute,
+                                            arguments: PostService(
+                                              isEdit: true,
+                                              id: widget.id,
+                                              isEditFromShop: true,
+                                            ));
+                                      } else {
+                                        Navigator.pushNamed(context,
+                                            AppRoutes.postServiceScreenRoute,
+                                            arguments: PostService(
+                                              isEdit: true,
+                                              id: widget.id,
+                                              isEditFromShop: false,
+                                            ));
+                                      }
+                                    } else {
+                                      AppUtils.showBottomModalSheet(
+                                          context: context,
+                                          widget:
+                                              BottomModalSheetRequestService(
+                                            onItemAdded: onItemAdded,
+                                          ));
+                                    }
+                                  },
+                                  name: widget.isMyService
+                                      ? AppStrings.editService
+                                      : AppStrings.requestService),
+                            ),
                       height(0.02.sw),
                       isAddToCart
                           ? Padding(

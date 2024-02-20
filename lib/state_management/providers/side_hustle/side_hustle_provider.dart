@@ -72,9 +72,9 @@ Future<Response?> addProductProvider(
   final data = FormData.fromMap(productData);
 
   print(
-      "*****************\nurl: ${API.ADD_PRODUCT_OR_SERVICE}\ndata: $productData\n**************************");
+      "*****************\nurl: ${API.ADD_SIDE_HUSTLE}\ndata: $productData\n**************************");
   final response = await postRequestProvider(
-      path: API.ADD_PRODUCT_OR_SERVICE, data: data, token: apiToken);
+      path: API.ADD_SIDE_HUSTLE, data: data, token: apiToken);
   return response;
 }
 
@@ -139,9 +139,149 @@ Future<Response?> addServiceProvider(
   final data = FormData.fromMap(serviceData);
 
   print(
-      "*****************\nurl: ${API.ADD_PRODUCT_OR_SERVICE}\ndata: $data\n**************************");
+      "*****************\nurl: ${API.ADD_SIDE_HUSTLE}\ndata: $data\n**************************");
   final response = await postRequestProvider(
-      path: API.ADD_PRODUCT_OR_SERVICE, data: data, token: apiToken);
+      path: API.ADD_SIDE_HUSTLE, data: data, token: apiToken);
+  return response;
+}
+
+/// Edit Product
+Future<Response?> editProductProvider(
+    {int? id,
+    String? name,
+    List<File>? images,
+    String? price,
+    int? isShopLocation,
+    String? deliveryType,
+    String? location,
+    String? lat,
+    String? lng,
+    String? description,
+    String? zipCode,
+    String? additionalInformation,
+    String? apiToken}) async {
+  late final Map<String, dynamic> productData;
+
+  print("images $images");
+  if (images != null && images.isNotEmpty) {
+    final List<MultipartFile> imageList = [];
+    for (int i = 0; i < images.length; i++) {
+      final imageNetwork = await MultipartFile.fromFile(images[i].path,
+          filename: getImagePath.basename(images[i].path));
+      imageList.add(imageNetwork);
+      print("Images Multipart $i: ${imageList[i]}\npath: ${images[i].path}");
+    }
+    print(
+        "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
+
+    productData = {
+      "type": SideHustleTypeEnum.Product.name,
+      "id": id,
+      "images[]": imageList,
+      "is_shop_location": isShopLocation,
+      "name": name,
+      "price": price,
+      "delivery_type": deliveryType,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "description": description,
+      "zip_code": zipCode,
+      "additional_information": additionalInformation,
+    };
+  } else {
+    productData = {
+      "type": SideHustleTypeEnum.Product.name,
+      "id": id,
+      "is_shop_location": isShopLocation,
+      "name": name,
+      "price": price,
+      "delivery_type": deliveryType,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "description": description,
+      "zip_code": zipCode,
+      "additional_information": additionalInformation,
+    };
+  }
+
+  final data = FormData.fromMap(productData);
+
+  print(
+      "*****************\nurl: ${API.UPDATE_SIDE_HUSTLE}\ndata: $productData\n**************************");
+  final response = await postRequestProvider(
+      path: API.UPDATE_SIDE_HUSTLE, data: data, token: apiToken);
+  return response;
+}
+
+/// Edit Service
+Future<Response?> editServiceProvider(
+    {int? id,
+    List<File>? images,
+    int? isShopLocation,
+    String? name,
+    String? hourlyRate,
+    String? serviceType,
+    String? location,
+    String? lat,
+    String? lng,
+    String? description,
+    String? additionalInformation,
+    String? planId,
+    String? apiToken}) async {
+  late final Map<String, dynamic> serviceData;
+
+  print("images $images");
+  if (images != null && images.isNotEmpty) {
+    final List<MultipartFile> imageList = [];
+    for (int i = 0; i < images.length; i++) {
+      final imageNetwork = await MultipartFile.fromFile(images[i].path,
+          filename: getImagePath.basename(images[i].path));
+      imageList.add(imageNetwork);
+      print("Images Multipart $i: ${imageList[i]}\npath: ${images[i].path}");
+    }
+    print(
+        "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
+
+    serviceData = {
+      "type": SideHustleTypeEnum.Service.name,
+      "id": id,
+      "images[]": imageList,
+      "is_shop_location": isShopLocation,
+      "name": name,
+      "hourly_rate": hourlyRate,
+      "service_type": serviceType,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "description": description,
+      "additional_information": additionalInformation,
+      "plan_id": planId
+    };
+  } else {
+    serviceData = {
+      "type": SideHustleTypeEnum.Service.name,
+      "id": id,
+      "is_shop_location": isShopLocation,
+      "name": name,
+      "hourly_rate": hourlyRate,
+      "service_type": serviceType,
+      "location": location,
+      "lat": lat,
+      "lng": lng,
+      "description": description,
+      "additional_information": additionalInformation,
+      "plan_id": planId
+    };
+  }
+
+  final data = FormData.fromMap(serviceData);
+
+  print(
+      "*****************\nurl: ${API.UPDATE_SIDE_HUSTLE}\ndata: $data\n**************************");
+  final response = await postRequestProvider(
+      path: API.UPDATE_SIDE_HUSTLE, data: data, token: apiToken);
   return response;
 }
 

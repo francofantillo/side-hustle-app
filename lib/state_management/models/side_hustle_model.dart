@@ -33,8 +33,10 @@ class SideHustleData {
   double? price;
   String? description;
   String? image;
+  String? deliveryType;
+  String? serviceType;
 
-  SideHustleData({this.id, this.name, this.price, this.description, this.image});
+  SideHustleData({this.id, this.name, this.price, this.description, this.image, this.deliveryType, this.serviceType});
 
   SideHustleData.fromJson(Map<String, dynamic> json) {
 
@@ -43,6 +45,8 @@ class SideHustleData {
     price = json['price']?.toDouble();
     description = json['description'];
     image = json['image'];
+    deliveryType = json['delivery_type'];
+    serviceType = json['service_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +56,8 @@ class SideHustleData {
     data['price'] = this.price;
     data['description'] = this.description;
     data['image'] = this.image;
+    data['delivery_type'] = this.deliveryType;
+    data['service_type'] = this.serviceType;
     return data;
   }
 }

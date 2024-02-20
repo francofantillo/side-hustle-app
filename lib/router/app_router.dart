@@ -98,6 +98,7 @@ class AppRouter {
             return PostProduct(
               isEdit: args?.isEdit ?? false,
               id: args?.id,
+              isEditFromShop: args?.isEditFromShop ?? false,
             );
 
           case AppRoutes.yourResumeEditScreenRoute:
@@ -113,7 +114,11 @@ class AppRouter {
 
           case AppRoutes.postServiceScreenRoute:
             final args = routeSettings.arguments as PostService?;
-            return PostService(isEdit: args?.isEdit ?? false);
+            return PostService(
+              isEdit: args?.isEdit ?? false,
+              id: args?.id,
+              isEditFromShop: args?.isEditFromShop ?? false,
+            );
 
           case AppRoutes.postJobScreenRoute:
             final args = routeSettings.arguments as PostJob?;
@@ -182,6 +187,7 @@ class AppRouter {
             return ViewService(
               id: args?.id,
               isMyService: args?.isMyService ?? false,
+              isEditFromShop: args?.isEditFromShop ?? false,
               isViewingServiceFromOthersShop:
                   args?.isViewingServiceFromOthersShop ?? false,
             );
@@ -215,7 +221,9 @@ class AppRouter {
 
           case AppRoutes.myJobsScreenRoute:
             final args = routeSettings.arguments as MyJobsScreen?;
-            return MyJobsScreen(selectedIndex: args?.selectedIndex ?? 0,);
+            return MyJobsScreen(
+              selectedIndex: args?.selectedIndex ?? 0,
+            );
 
           case AppRoutes.myEventsScreenRoute:
             return const MyEventsScreen();
@@ -223,10 +231,9 @@ class AppRouter {
           case AppRoutes.jobRequestScreenRoute:
             final args = routeSettings.arguments as JobRequest?;
             return JobRequest(
-              jobId: args?.jobId,
-              isViewRequestFromJobDetail:
-                  args?.isViewRequestFromJobDetail ?? false
-            );
+                jobId: args?.jobId,
+                isViewRequestFromJobDetail:
+                    args?.isViewRequestFromJobDetail ?? false);
 
           case AppRoutes.viewJobScreenRoute:
             final args = routeSettings.arguments as ViewJob?;

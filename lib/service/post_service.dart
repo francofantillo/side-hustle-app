@@ -6,6 +6,7 @@ import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_t
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
+import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -28,9 +29,11 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 
 class PostService extends StatefulWidget {
-  final bool isEdit;
+  final bool isEdit, isEditFromShop;
+  final int? id;
 
-  const PostService({super.key, this.isEdit = false});
+  const PostService(
+      {super.key, this.isEdit = false, this.isEditFromShop = false, this.id});
 
   @override
   State<PostService> createState() => _PostServiceState();
@@ -47,7 +50,52 @@ class _PostServiceState extends State<PostService> {
     _blocCard = BlocProvider.of(context);
     _bloc.initControllers();
     _bloc.type = ServiceTypeEnum.Hourly.name;
+    widget.id != null
+        ? getService()
+        : _bloc.state.editSideHustleModel = GetEditSideHustleModel();
     super.initState();
+  }
+
+  Future getService() async {
+    await _bloc
+        .getEditProductOrServiceCubit(
+            context: context, mounted: mounted, id: widget.id)
+        // context: context,
+        // mounted: mounted,
+        // id: 17)
+        .then((value) {
+      if (value != null) {
+        final data = value.editSideHustleData;
+        print("getEvent lat: ${data?.lat}");
+        print("getEvent lng: ${data?.lng}");
+        _bloc.titleTextController.text = data?.name ?? "";
+        _bloc.locationTextController.text = data?.location ?? "";
+        _bloc.descriptionTextController.text = data?.description ?? "";
+        _bloc.additionalInfoTextController.text =
+            data?.additionalInformation ?? "";
+        _bloc.zipCodeTextController.text = data?.zipCode ?? "";
+        _bloc.priceTextController.text = data?.hourlyRate?.toStringAsFixed(2) ?? "";
+        if (data?.serviceType != null) {
+          if (data!.serviceType == ServiceTypeEnum.Hourly.name) {
+            _bloc.isHourly = true;
+            _bloc.isFixed = false;
+
+            // _bloc.type = ServiceTypeEnum.Hourly.name;
+            _bloc.type = data.deliveryType;
+            print(
+                "serviceType: ${data.serviceType}, _bloc.type: ${_bloc.type}");
+          } else if (data.serviceType == ServiceTypeEnum.Fixed.name) {
+            _bloc.isHourly = false;
+            _bloc.isFixed = true;
+
+            // _bloc.type = ServiceTypeEnum.Hourly.name;
+            _bloc.type = data.deliveryType;
+            print(
+                "serviceType: ${data.serviceType}, _bloc.type: ${_bloc.type}");
+          }
+        }
+      }
+    });
   }
 
   Future getCards({required bool isEdit}) async {
@@ -97,7 +145,7 @@ class _PostServiceState extends State<PostService> {
       ),
       body: BlocBuilder<SideHustleCubit, SideHustleState>(
           builder: (context, state) {
-        return state.editServiceLoading
+        return state.editSideHustleLoading
             ? const SizedBox.shrink()
             : Form(
                 key: _servicesFormKey,
@@ -288,6 +336,29 @@ class _PostServiceState extends State<PostService> {
                                   }
                                   setState(() {});
                                 }),
+                            // CheckboxWidget(
+                            //   isChecked: _bloc.isHourly,
+                            //   onChanged: (newValue) {
+                            //     if (newValue!) {
+                            //       _bloc.isFixed = false;
+                            //       _bloc.type = ServiceTypeEnum.Hourly.name;
+                            //     } else {
+                            //       _bloc.isFixed = true;
+                            //     }
+                            //     setState(() {});
+                            //     print(
+                            //         'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
+                            //   },
+                            // ),
+                            Expanded(
+                                child: Padding(
+                              padding: const EdgeInsets.only(top: 2.0),
+                              child: textWidget(
+                                text: AppStrings.hourlyRate,
+                                fontSize: AppDimensions.textSizeSmall,
+                                fontFamily: AppFont.gilroySemiBold,
+                              ),
+                            )),
                             Radio(
                                 value: _bloc.isFixed,
                                 groupValue: true,
@@ -301,53 +372,21 @@ class _PostServiceState extends State<PostService> {
                                   }
                                   setState(() {});
                                 }),
-                            Container(
-                              height: 18,
-                              width: 18,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                color: Colors.transparent,
-                                border: Border.all(width: 2, color: Colors.grey.shade700),
-                              ),
-                              child: Icon(Icons.check, color: Colors.blue,),
-                            ),
-                            CheckboxWidget(
-                              isChecked: _bloc.isHourly,
-                              onChanged: (newValue) {
-                                if (newValue!) {
-                                  _bloc.isFixed = false;
-                                  _bloc.type = ServiceTypeEnum.Hourly.name;
-                                } else {
-                                  _bloc.isFixed = true;
-                                }
-                                setState(() {});
-                                print(
-                                    'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
-                              },
-                            ),
-                            Expanded(
-                                child: Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: textWidget(
-                                text: AppStrings.hourlyRate,
-                                fontSize: AppDimensions.textSizeSmall,
-                                fontFamily: AppFont.gilroySemiBold,
-                              ),
-                            )),
-                            CheckboxWidget(
-                              isChecked: _bloc.isFixed,
-                              onChanged: (newValue) {
-                                if (newValue!) {
-                                  _bloc.isHourly = false;
-                                  _bloc.type = ServiceTypeEnum.Fixed.name;
-                                } else {
-                                  _bloc.isHourly = true;
-                                }
-                                setState(() {});
-                                print(
-                                    'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
-                              },
-                            ),
+
+                            // CheckboxWidget(
+                            //   isChecked: _bloc.isFixed,
+                            //   onChanged: (newValue) {
+                            //     if (newValue!) {
+                            //       _bloc.isHourly = false;
+                            //       _bloc.type = ServiceTypeEnum.Fixed.name;
+                            //     } else {
+                            //       _bloc.isHourly = true;
+                            //     }
+                            //     setState(() {});
+                            //     print(
+                            //         'Checkbox value changed: $newValue, _bloc.type: ${_bloc.type}');
+                            //   },
+                            // ),
                             Expanded(
                                 child: Padding(
                               padding: const EdgeInsets.only(top: 2.0),
@@ -418,30 +457,18 @@ class _PostServiceState extends State<PostService> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CustomMaterialButton(
                               onPressed: () async {
+                                FocusManager.instance.primaryFocus!.unfocus();
                                 if (widget.isEdit) {
-                                  Navigator.pop(context);
+                                  await _bloc.editServiceCubit(
+                                      context: context,
+                                      id: widget.id,
+                                      mounted: mounted,
+                                      isEditFromShop: widget.isEditFromShop);
                                 } else {
-                                  FocusManager.instance.primaryFocus?.unfocus();
                                   if (_servicesFormKey.currentState!
                                       .validate()) {
                                     await getCards(isEdit: widget.isEdit);
                                   }
-                                  // Navigator.pushReplacementNamed(
-                                  //     context, AppRoutes.postAddedScreenRoute,
-                                  //     arguments: const PostAdded(
-                                  //       isService: true,
-                                  //       title: AppStrings.sideHustlePosted,
-                                  //       subTitle: AppStrings.sideHustlePostedSubTitle,
-                                  //       buttonName: AppStrings.viewSideHustle,
-                                  //     ));
-                                  // _bloc.type
-
-                                  // AppUtils.showBottomModalSheet(
-                                  //     context: context,
-                                  //     widget:
-                                  //         const ModalBottomSheetPackageTypePost(
-                                  //       isService: true,
-                                  //     ));
                                 }
                               },
                               color: AppColors.primaryColor,

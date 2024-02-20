@@ -31,8 +31,10 @@ import 'package:side_hustle/widgets/text_field/textField.dart';
 class PostProduct extends StatefulWidget {
   final bool isEdit;
   final int? id;
+  final bool isEditFromShop;
 
-  const PostProduct({super.key, this.isEdit = false, this.id});
+  const PostProduct(
+      {super.key, this.isEdit = false, this.id, this.isEditFromShop = false});
 
   @override
   State<PostProduct> createState() => _PostProductState();
@@ -442,27 +444,17 @@ class _PostProductState extends State<PostProduct> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CustomMaterialButton(
                             onPressed: () async {
+                              FocusManager.instance.primaryFocus!.unfocus();
                               if (widget.isEdit) {
-                                Navigator.pop(context);
+                                await _bloc.editProductCubit(
+                                    context: context,
+                                    id: widget.id,
+                                    mounted: mounted,
+                                    isEditFromShop: widget.isEditFromShop);
                               } else {
-                                FocusManager.instance.primaryFocus?.unfocus();
                                 if (_productsFormKey.currentState!.validate()) {
                                   await getCards(isEdit: widget.isEdit);
                                 }
-                                // AppUtils.showBottomModalSheet(
-                                //     context: context,
-                                //     widget: const ModalBottomSheetPackageTypePost(
-                                //       isProduct: true,
-                                //     ));
-
-                                // Navigator.pushReplacementNamed(
-                                //     context, AppRoutes.postAddedScreenRoute,
-                                //     arguments: const PostAdded(
-                                //       isProduct: true,
-                                //       title: AppStrings.sideHustlePosted,
-                                //       subTitle: AppStrings.sideHustlePostedSubTitle,
-                                //       buttonName: AppStrings.viewSideHustle,
-                                //     ));
                               }
                             },
                             color: AppColors.primaryColor,
