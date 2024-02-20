@@ -11,7 +11,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ProductsItemsWidget extends StatelessWidget {
   final String? title, subTitle, price, imagePath, deliveryType;
-  final Function()? onTap;
+  final Function()? onTap, onTapAdd;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
@@ -22,6 +22,7 @@ class ProductsItemsWidget extends StatelessWidget {
       this.price,
       this.deliveryType,
       this.onTap,
+      this.onTapAdd,
       this.imagePath,
       this.imageHeight,
       this.imageWidth,
@@ -85,10 +86,10 @@ class ProductsItemsWidget extends StatelessWidget {
                                     child: textWidget(
                                         text: subTitle,
                                         maxLines: 2,
-                                        fontSize:
-                                            AppDimensions.textSize10)),
+                                        fontSize: AppDimensions.textSize10)),
                                 width(imageWidth! * .01),
                                 IconButtonWithBackground(
+                                  onTap: onTapAdd,
                                   iconPath: AssetsPath.add,
                                   width: imageHeight! * .28,
                                   height: imageHeight! * .28,

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/models/cart_model.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
@@ -676,6 +677,56 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       } else {
         emit(state.copyWith(sideHustleTempList: []));
       }
+    }
+  }
+
+  /// Add To Cart
+  Future addToCartCubit(
+      {required BuildContext context,
+      required bool mounted,
+      int? shopId,
+      int? productId,
+      int qty = 1,
+      String? date,
+      String? startTime,
+      String? endTime,
+      int? totalHours}) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await addToCartProvider(
+        apiToken: token,
+        shopId: shopId,
+        productId: productId,
+        qty: qty,
+        date: date,
+        startTime: startTime,
+        endTime: endTime,
+        totalHours: totalHours);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        CartModel cartModel = CartModel.fromJson(response.data);
+        emit(state.copyWith(cartLoading: false, cartModel: cartModel));
+        EasyLoading.dismiss();
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(cartLoading: false));
+        EasyLoading.dismiss();
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(cartLoading: false));
+      EasyLoading.dismiss();
     }
   }
 }

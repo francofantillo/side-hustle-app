@@ -21,6 +21,14 @@ class ProductsList extends StatefulWidget {
 }
 
 class _ProductsListState extends State<ProductsList> {
+  late final SideHustleCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SideHustleCubit, SideHustleState>(
@@ -67,6 +75,14 @@ class _ProductsListState extends State<ProductsList> {
                           arguments: ViewProduct(
                             id: sideHustleItemList?[index].id,
                           ));
+                    },
+                    onTapAdd: () async {
+                      print("Clicked");
+                      _bloc.addToCartCubit(
+                          context: context,
+                          mounted: mounted,
+                          shopId: sideHustleItemList?[index].shopId,
+                          productId: sideHustleItemList?[index].id);
                     },
                     imageWidth: 1.sw,
                     imageHeight: AppDimensions.sideHustleItemHeight,

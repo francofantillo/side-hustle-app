@@ -379,3 +379,34 @@ Future<Response?> getSideHustleDetailProvider(
       path: API.GET_SIDEHUSTLE_DETAIL, queryParameter: data, token: apiToken);
   return response;
 }
+
+/// Add to Cart
+Future<Response?> addToCartProvider(
+    {String? apiToken,
+    int? shopId,
+    int? productId,
+    int qty = 1,
+    String? date,
+    String? startTime,
+    String? endTime,
+    int? totalHours}) async {
+  final data = {
+    "shop_id": shopId,
+    "product_id": productId,
+    "qty": qty,
+    "address": "",
+    "street": "",
+    "appartment": "",
+    "lat": "",
+    "lng": "",
+    "service_date": date ?? "",
+    "hours_required": totalHours ?? "",
+    "start_time": startTime ?? "",
+    "end_time": endTime ?? ""
+  };
+  print(
+      "*****************\nurl: ${API.ADD_TO_CART}\n$data\n**************************");
+  final response = await postRequestProvider(
+      path: API.ADD_TO_CART, token: apiToken, data: data);
+  return response;
+}

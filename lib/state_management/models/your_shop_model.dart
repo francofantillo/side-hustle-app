@@ -109,6 +109,7 @@ class ShopDetail {
 
 class ServicesProductsData {
   int? id;
+  int? shopId;
   int? userId;
   String? name;
   double? price;
@@ -120,6 +121,7 @@ class ServicesProductsData {
 
   ServicesProductsData(
       {this.id,
+      this.shopId,
       this.userId,
       this.name,
       this.price,
@@ -131,6 +133,7 @@ class ServicesProductsData {
 
   ServicesProductsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    shopId = json['shop_id'];
     userId = json['user_id'];
     name = json['name'];
     price = json['price']?.toDouble();
@@ -144,6 +147,7 @@ class ServicesProductsData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['shop_id'] = this.shopId;
     data['user_id'] = this.userId;
     data['name'] = this.name;
     data['price'] = this.price;
