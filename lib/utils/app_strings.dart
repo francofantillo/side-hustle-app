@@ -332,6 +332,7 @@ class AppStrings {
   static const String done = "Done";
   static const String downloadThisBook = "Download this Book";
   static const String viewCartText = "View Cart (1)";
+  static const String viewCart = "View Cart";
   static const String deliveryAddress = "Delivery Address";
   static const String deliveryAddressHint =
       "Please enter the delivery address";

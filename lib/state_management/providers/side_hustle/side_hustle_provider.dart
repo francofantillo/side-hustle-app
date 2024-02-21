@@ -403,3 +403,12 @@ Future<Response?> addToCartProvider(
       path: API.ADD_TO_CART, token: apiToken, data: data);
   return response;
 }
+
+/// Get Side Hustle Cart
+Future<Response?> getSideHustleCartProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.GET_SIDEHUSTLE_CART}\n**************************");
+  final response =
+      await getRequestProvider(path: API.GET_SIDEHUSTLE_CART, token: apiToken);
+  return response;
+}

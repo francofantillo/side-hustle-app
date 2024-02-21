@@ -1,20 +1,14 @@
 class CartModel {
   bool? status;
   String? message;
-  List<Data>? data;
+  DataCart? data;
 
   CartModel({this.status, this.message, this.data});
 
   CartModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    // data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? DataCart.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,13 +16,13 @@ class CartModel {
     data['status'] = this.status;
     data['message'] = this.message;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
 }
 
-class Data {
+class DataCart {
   int? id;
   int? userId;
   int? ownerId;
@@ -41,20 +35,20 @@ class Data {
   String? updatedAt;
   List<CartDetails>? cartDetails;
 
-  Data(
+  DataCart(
       {this.id,
-      this.userId,
-      this.ownerId,
-      this.shopId,
-      this.subTotal,
-      this.totalItems,
-      this.status,
-      this.isAddress,
-      this.createdAt,
-      this.updatedAt,
-      this.cartDetails});
+        this.userId,
+        this.ownerId,
+        this.shopId,
+        this.subTotal,
+        this.totalItems,
+        this.status,
+        this.isAddress,
+        this.createdAt,
+        this.updatedAt,
+        this.cartDetails});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataCart.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     ownerId = json['owner_id'];
@@ -114,23 +108,23 @@ class CartDetails {
 
   CartDetails(
       {this.id,
-      this.cartId,
-      this.type,
-      this.productId,
-      this.productName,
-      this.deliveryType,
-      this.serviceType,
-      this.price,
-      this.qty,
-      this.productImage,
-      this.description,
-      this.address,
-      this.street,
-      this.apartment,
-      this.lat,
-      this.lng,
-      this.createdAt,
-      this.updatedAt});
+        this.cartId,
+        this.type,
+        this.productId,
+        this.productName,
+        this.deliveryType,
+        this.serviceType,
+        this.price,
+        this.qty,
+        this.productImage,
+        this.description,
+        this.address,
+        this.street,
+        this.apartment,
+        this.lat,
+        this.lng,
+        this.createdAt,
+        this.updatedAt});
 
   CartDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -140,7 +134,7 @@ class CartDetails {
     productName = json['product_name'];
     deliveryType = json['delivery_type'];
     serviceType = json['service_type'];
-    price = json['price'];
+    price = json['price']?.toDouble();
     qty = json['qty'];
     productImage = json['product_image'];
     description = json['description'];

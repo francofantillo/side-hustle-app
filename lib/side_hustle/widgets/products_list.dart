@@ -77,25 +77,39 @@ class _ProductsListState extends State<ProductsList> {
                           ));
                     },
                     onTapAdd: () async {
-                      print("Clicked");
-                      _bloc.addToCartCubit(
-                          context: context,
-                          mounted: mounted,
-                          shopId: sideHustleItemList?[index].shopId,
-                          productId: sideHustleItemList?[index].id);
+                      _bloc
+                          .checkIsOtherShop(
+                          shopId: sideHustleItemList?[index].shopId)
+                          .then((value) async {
+                        if (value == 1) {
+                          /// Show Cart Clear Dialog
+                          await _bloc.addToCartCubit(
+                              context: context,
+                              mounted: mounted,
+                              shopId: sideHustleItemList?[index].shopId,
+                              productId: sideHustleItemList?[index].id);
+                        } else {
+                          /// Add Product
+                          await _bloc.addToCartCubit(
+                              context: context,
+                              mounted: mounted,
+                              shopId: sideHustleItemList?[index].shopId,
+                              productId: sideHustleItemList?[index].id);
+                        }
+                      });
                     },
                     imageWidth: 1.sw,
                     imageHeight: AppDimensions.sideHustleItemHeight,
                     boarderColor: AppColors.itemBGColor,
                     title: sideHustleItemList?[index].name,
                     subTitle: sideHustleItemList?[index].description,
-                    deliveryType:
-                        sideHustleItemList?[index].deliveryType != null
-                            ? sideHustleItemList![index].deliveryType ==
-                                    DeliveryTypeEnum.Pickup.name
-                                ? AppStrings.deliveryOptionPickup
-                                : AppStrings.deliveryOptionCOD
-                            : "",
+                    // deliveryType:
+                    //     sideHustleItemList?[index].deliveryType != null
+                    //         ? sideHustleItemList![index].deliveryType ==
+                    //                 DeliveryTypeEnum.Pickup.name
+                    //             ? AppStrings.deliveryOptionPickup
+                    //             : AppStrings.deliveryOptionCOD
+                    //         : "",
                     imagePath: sideHustleItemList?[index].image,
                     price: sideHustleItemList?[index].price?.toStringAsFixed(2),
                   ),

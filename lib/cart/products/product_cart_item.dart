@@ -55,7 +55,8 @@ class ProductCartItemWidget extends StatelessWidget {
                 RoundedCornersImage(
                   imageHeight: imageHeight,
                   imageWidth: AppDimensions.cartItemProductImageWidth,
-                  assetImage: imagePath,
+                  image: imagePath,
+                  assetImage: AssetsPath.imageLoadError,
                   boarderColor: boarderColor,
                 ),
                 Expanded(
@@ -89,7 +90,7 @@ class ProductCartItemWidget extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 0.0),
                                 child: textWidget(
-                                    text: price,
+                                    text: "\$$price",
                                     fontFamily: AppFont.gilroyBold,
                                     fontWeight: FontWeight.bold,
                                     fontSize: AppDimensions.textSizeSmall,

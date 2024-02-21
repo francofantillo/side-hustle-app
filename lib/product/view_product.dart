@@ -24,7 +24,7 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ViewProduct extends StatefulWidget {
-  final bool isMyProduct, isViewingProductFromOthersShop, isEditFromShop;
+  final bool isMyProduct, isViewingProductFromOthersShop, isEditFromShop, viewCart;
   final int? id;
 
   const ViewProduct(
@@ -32,6 +32,7 @@ class ViewProduct extends StatefulWidget {
       this.id,
       this.isMyProduct = false,
       this.isEditFromShop = false,
+      this.viewCart = false,
       this.isViewingProductFromOthersShop = false});
 
   @override
@@ -392,7 +393,7 @@ class _ViewProductState extends State<ViewProduct> {
                                     : AppStrings.addToCart,
                               ),
                             ),
-                      height(0.02.sh),
+                      height(0.03.sw),
                       isAddToCart
                           ? Padding(
                               padding:
@@ -456,7 +457,7 @@ class _ViewProductState extends State<ViewProduct> {
                                                 AppRoutes
                                                     .yourProductsCartScreenRoute);
                                           },
-                                          name: AppStrings.viewCartText,
+                                          name:  AppStrings.viewCartText,
                                           borderRadius: AppDimensions
                                               .boarderRadiusViewProduct))
                                 ],

@@ -21,6 +21,14 @@ class ServicesList extends StatefulWidget {
 }
 
 class _ServicesListState extends State<ServicesList> {
+  late final SideHustleCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SideHustleCubit, SideHustleState>(
@@ -66,12 +74,12 @@ class _ServicesListState extends State<ServicesList> {
                     boarderColor: AppColors.itemBGColor,
                     title: sideHustleItemList?[index].name,
                     subTitle: sideHustleItemList?[index].description,
-                    serviceType: sideHustleItemList?[index].serviceType != null
-                        ? sideHustleItemList![index].serviceType ==
-                                ServiceTypeEnum.Hourly.name
-                            ? ServiceTypeEnum.Hourly.name
-                            : ServiceTypeEnum.Fixed.name
-                        : "",
+                    // serviceType: sideHustleItemList?[index].serviceType != null
+                    //     ? sideHustleItemList![index].serviceType ==
+                    //             ServiceTypeEnum.Hourly.name
+                    //         ? ServiceTypeEnum.Hourly.name
+                    //         : ServiceTypeEnum.Fixed.name
+                    //     : "",
                     imagePath: sideHustleItemList?[index].image,
                     price: sideHustleItemList?[index].price?.toStringAsFixed(2),
                     onTap: () {
@@ -80,6 +88,28 @@ class _ServicesListState extends State<ServicesList> {
                           arguments: ViewService(
                             id: sideHustleItemList?[index].id,
                           ));
+                    },
+                    onTapAdd: () async {
+                      _bloc
+                          .checkIsOtherShop(
+                              shopId: sideHustleItemList?[index].shopId)
+                          .then((value) async {
+                        if (value == 1) {
+                          /// Show Cart Clear Dialog
+                          await _bloc.addToCartCubit(
+                              context: context,
+                              mounted: mounted,
+                              shopId: sideHustleItemList?[index].shopId,
+                              productId: sideHustleItemList?[index].id);
+                        } else {
+                          /// Add Product
+                          await _bloc.addToCartCubit(
+                              context: context,
+                              mounted: mounted,
+                              shopId: sideHustleItemList?[index].shopId,
+                              productId: sideHustleItemList?[index].id);
+                        }
+                      });
                     },
                   ),
                 );

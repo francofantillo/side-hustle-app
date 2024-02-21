@@ -56,7 +56,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   /// Select Multiple Images
   Future selectMultiImages() async {
     List<File>? images =
-        await ImagePickerService.selectMultipleImagesFromGallery();
+    await ImagePickerService.selectMultipleImagesFromGallery();
     if (images != null && images.isNotEmpty) {
       final List<Images>? imagesList = state.images;
       for (int i = 0; i < images.length; i++) {
@@ -76,7 +76,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   Future selectLocation(
       {required BuildContext context, required bool mounted}) async {
     final SelectLocationModel? location =
-        await AppUtils.selectLocation(context: context, mounted: mounted);
+    await AppUtils.selectLocation(context: context, mounted: mounted);
 
     if (location != null) {
       locationTextController.text = location.locationAddress ?? "";
@@ -371,8 +371,8 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   /// Get Edit Product or Service
   Future<GetEditSideHustleModel?> getEditProductOrServiceCubit(
       {required BuildContext context,
-      required bool mounted,
-      required int? id}) async {
+        required bool mounted,
+        required int? id}) async {
     emit(state.copyWith(
         editSideHustleLoading: true,
         editSideHustleModel: GetEditSideHustleModel()));
@@ -383,7 +383,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     print("token: $token");
 
     final response =
-        await getEditProductOrServiceProvider(id: id, apiToken: token);
+    await getEditProductOrServiceProvider(id: id, apiToken: token);
 
     print("status code: ${response?.statusCode}");
 
@@ -392,13 +392,13 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         GetEditSideHustleModel getEditSideHustleModeljobsDetail =
-            GetEditSideHustleModel.fromJson(response.data);
+        GetEditSideHustleModel.fromJson(response.data);
         // AppUtils.showToast(response.data['message']);
         emit(state.copyWith(
             editSideHustleLoading: false,
             editSideHustleModel: getEditSideHustleModeljobsDetail,
             images: getEditSideHustleModeljobsDetail
-                    .editSideHustleData?.productImages ??
+                .editSideHustleData?.productImages ??
                 []));
         return getEditSideHustleModeljobsDetail;
       }
@@ -457,10 +457,9 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   }
 
   /// Edit Your Shop
-  Future<int> editYourShopCubit(
-      {required BuildContext context,
-      required bool mounted,
-      File? image}) async {
+  Future<int> editYourShopCubit({required BuildContext context,
+    required bool mounted,
+    File? image}) async {
     EasyLoading.show();
 
     final String? lat = selectLocationModel?.lat?.toString();
@@ -552,10 +551,9 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   }
 
   /// Get SideHustle
-  Future getSideHustleCubit(
-      {required BuildContext context,
-      required bool mounted,
-      required String type}) async {
+  Future<int> getSideHustleCubit({required BuildContext context,
+    required bool mounted,
+    required String type}) async {
     emit(state.copyWith(
         sideHustleTempList: [],
         searching: false,
@@ -576,19 +574,26 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         SideHustleModel sideHustleModel =
-            SideHustleModel.fromJson(response.data);
+        SideHustleModel.fromJson(response.data);
         emit(state.copyWith(
             sideHustleLoading: false, sideHustleModel: sideHustleModel));
+        return sideHustleModel.sideHustleData?.length != null
+            ? sideHustleModel.sideHustleData!.isNotEmpty
+            ? 1
+            : 0
+            : 0;
       }
 
       /// Failed
       else {
         AppUtils.showToast(response.data["message"]);
         emit(state.copyWith(sideHustleLoading: false));
+        return 0;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       emit(state.copyWith(sideHustleLoading: false));
+      return 0;
     }
   }
 
@@ -613,7 +618,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         SideHustleDetailModel sideHustleDetailModel =
-            SideHustleDetailModel.fromJson(response.data);
+        SideHustleDetailModel.fromJson(response.data);
         emit(state.copyWith(
             sideHustleDetailLoading: false,
             sideHustleDetailModel: sideHustleDetailModel));
@@ -644,7 +649,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       emit(state.copyWith(searching: true));
       for (int i = 0; i < (originalList?.length ?? 0); i++) {
         String name =
-            originalList?[i].name != null ? "${originalList![i].name}" : '';
+        originalList?[i].name != null ? "${originalList![i].name}" : '';
         if (name.toLowerCase().contains(value.toLowerCase())) {
           tempList.add(originalList![i]);
         }
@@ -663,16 +668,15 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   }
 
   /// Add To Cart
-  Future addToCartCubit(
-      {required BuildContext context,
-      required bool mounted,
-      int? shopId,
-      int? productId,
-      int qty = 1,
-      String? date,
-      String? startTime,
-      String? endTime,
-      int? totalHours}) async {
+  Future addToCartCubit({required BuildContext context,
+    required bool mounted,
+    int? shopId,
+    int? productId,
+    int qty = 1,
+    String? date,
+    String? startTime,
+    String? endTime,
+    int? totalHours}) async {
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -709,6 +713,75 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       emit(state.copyWith(cartLoading: false));
       EasyLoading.dismiss();
+    }
+  }
+
+  /// Get Cart
+  Future getSideHustleCartCubit(
+      {required BuildContext context, required bool mounted}) async {
+    emit(state.copyWith(cartLoading: true, cartModel: CartModel()));
+    // EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await getSideHustleCartProvider(apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    // EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // AppUtils.showToast(response.data["message"]);
+        CartModel cartModel = CartModel.fromJson(response.data);
+        emit(state.copyWith(cartLoading: false, cartModel: cartModel));
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(cartLoading: false));
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(cartLoading: false));
+    }
+  }
+
+  /// Check if user add from different shop
+  Future<int> checkIsOtherShop({required shopId}) async {
+    final DataCart? dataCart = state.cartModel?.data;
+    if (dataCart?.shopId != null) {
+      print("shopId: $shopId cartShopId: ${dataCart!.shopId}");
+      if (dataCart.shopId != shopId) {
+        AppUtils.showToast("User try to add other shop product");
+        return 1;
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
+  }
+
+  /// Get Product Quantity
+  Future getProductQuantity({required int? productId}) async {
+    if (state.cartModel?.data?.cartDetails?.isEmpty ?? false) {
+
+    } else {
+      final List isProductExist = state.cartModel!.data!.cartDetails!.where((element) {
+        if(element.productId == productId) {
+          return true;
+        } else {
+          return false;
+        }
+      }).toList();
+      if (isProductExist.isNotEmpty) {
+        /// Complete the condition
+
+      }
     }
   }
 }

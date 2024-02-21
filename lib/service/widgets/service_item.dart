@@ -11,7 +11,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ServiceItemsWidget extends StatelessWidget {
   final String? title, subTitle, price, imagePath, serviceType;
-  final Function()? onTap;
+  final Function()? onTap, onTapAdd;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
@@ -22,6 +22,7 @@ class ServiceItemsWidget extends StatelessWidget {
       this.price,
       this.serviceType,
       this.onTap,
+      this.onTapAdd,
       this.imagePath,
       this.imageHeight,
       this.imageWidth,
@@ -88,6 +89,7 @@ class ServiceItemsWidget extends StatelessWidget {
                                         fontSize: AppDimensions.textSize10)),
                                 width(imageWidth! * .01),
                                 IconButtonWithBackground(
+                                  onTap: onTapAdd,
                                   iconPath: AssetsPath.add,
                                   width: imageHeight! * .28,
                                   height: imageHeight! * .28,
@@ -97,21 +99,21 @@ class ServiceItemsWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          height(imageHeight! * .042),
-                          Row(
-                            children: [
-                              textWidget(
-                                  text: AppStrings.serviceType,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: AppDimensions.textSize10,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textBlackColor),
-                              textWidget(
-                                  text: serviceType,
-                                  maxLines: 2,
-                                  fontSize: AppDimensions.textSize10)
-                            ],
-                          ),
+                          // height(imageHeight! * .042),
+                          // Row(
+                          //   children: [
+                          //     textWidget(
+                          //         text: AppStrings.serviceType,
+                          //         fontFamily: AppFont.gilroyBold,
+                          //         fontSize: AppDimensions.textSize10,
+                          //         fontWeight: FontWeight.bold,
+                          //         color: AppColors.textBlackColor),
+                          //     textWidget(
+                          //         text: serviceType,
+                          //         maxLines: 2,
+                          //         fontSize: AppDimensions.textSize10)
+                          //   ],
+                          // ),
                           height(imageHeight! * .042),
                           textWidget(
                               text: price != null ? "\$$price" : null,

@@ -178,6 +178,7 @@ class AppRouter {
             return ViewProduct(
               id: args?.id,
               isMyProduct: args?.isMyProduct ?? false,
+              viewCart: args?.viewCart ?? false,
               isViewingProductFromOthersShop:
                   args?.isViewingProductFromOthersShop ?? false,
             );

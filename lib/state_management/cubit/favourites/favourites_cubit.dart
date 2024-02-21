@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
-import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/state_management/models/favourites_model.dart';
 import 'package:side_hustle/state_management/providers/favourites/favourites_provider.dart';
 import 'package:side_hustle/utils/app_utils.dart';
@@ -64,7 +62,6 @@ class FavouritesCubit extends Cubit<FavouritesState> {
     required String type,
     required int? id,
   }) async {
-    // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
 
     final token = await prefs.getToken();

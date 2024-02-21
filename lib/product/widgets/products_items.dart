@@ -99,21 +99,21 @@ class ProductsItemsWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          height(imageHeight! * .042),
-                          Row(
-                            children: [
-                              textWidget(
-                                  text: AppStrings.deliveryType,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: AppDimensions.textSize10,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textBlackColor),
-                              textWidget(
-                                  text: deliveryType,
-                                  maxLines: 2,
-                                  fontSize: AppDimensions.textSize10)
-                            ],
-                          ),
+                          // height(imageHeight! * .042),
+                          // Row(
+                          //   children: [
+                          //     textWidget(
+                          //         text: AppStrings.deliveryType,
+                          //         fontFamily: AppFont.gilroyBold,
+                          //         fontSize: AppDimensions.textSize10,
+                          //         fontWeight: FontWeight.bold,
+                          //         color: AppColors.textBlackColor),
+                          //     textWidget(
+                          //         text: deliveryType,
+                          //         maxLines: 2,
+                          //         fontSize: AppDimensions.textSize10)
+                          //   ],
+                          // ),
                           height(imageHeight! * .042),
                           textWidget(
                               text: price != null ? "\$$price" : null,
