@@ -13,11 +13,10 @@ Future<Response?> addProductProvider(
     {List<File>? images,
     String? name,
     String? price,
-    int? isShopLocation,
     String? deliveryType,
-    String? location,
-    String? lat,
-    String? lng,
+    // String? location,
+    // String? lat,
+    // String? lng,
     String? description,
     String? zipCode,
     String? additionalInformation,
@@ -40,13 +39,9 @@ Future<Response?> addProductProvider(
     productData = {
       "type": SideHustleTypeEnum.Product.name,
       "images[]": imageList,
-      "is_shop_location": isShopLocation,
       "name": name,
       "price": price,
       "delivery_type": deliveryType,
-      "location": location,
-      "lat": lat,
-      "lng": lng,
       "description": description,
       "zip_code": zipCode,
       "additional_information": additionalInformation,
@@ -55,13 +50,9 @@ Future<Response?> addProductProvider(
   } else {
     productData = {
       "type": SideHustleTypeEnum.Product.name,
-      "is_shop_location": isShopLocation,
       "name": name,
       "price": price,
       "delivery_type": deliveryType,
-      "location": location,
-      "lat": lat,
-      "lng": lng,
       "description": description,
       "zip_code": zipCode,
       "additional_information": additionalInformation,
@@ -81,13 +72,9 @@ Future<Response?> addProductProvider(
 /// Add Service
 Future<Response?> addServiceProvider(
     {List<File>? images,
-    int? isShopLocation,
     String? name,
     String? hourlyRate,
     String? serviceType,
-    String? location,
-    String? lat,
-    String? lng,
     String? description,
     String? additionalInformation,
     String? planId,
@@ -109,13 +96,9 @@ Future<Response?> addServiceProvider(
     serviceData = {
       "type": SideHustleTypeEnum.Service.name,
       "images[]": imageList,
-      "is_shop_location": isShopLocation,
       "name": name,
       "hourly_rate": hourlyRate,
       "service_type": serviceType,
-      "location": location,
-      "lat": lat,
-      "lng": lng,
       "description": description,
       "additional_information": additionalInformation,
       "plan_id": planId
@@ -123,13 +106,9 @@ Future<Response?> addServiceProvider(
   } else {
     serviceData = {
       "type": SideHustleTypeEnum.Service.name,
-      "is_shop_location": isShopLocation,
       "name": name,
       "hourly_rate": hourlyRate,
       "service_type": serviceType,
-      "location": location,
-      "lat": lat,
-      "lng": lng,
       "description": description,
       "additional_information": additionalInformation,
       "plan_id": planId
@@ -404,6 +383,20 @@ Future<Response?> addToCartProvider(
     "start_time": startTime ?? "",
     "end_time": endTime ?? ""
   };
+  // final data = {
+  //   "shop_id": 1,
+  //   "product_id": 19,
+  //   "qty": 1,
+  //   "address": "",
+  //   "street": "",
+  //   "appartment": "",
+  //   "lat": "",
+  //   "lng": "",
+  //   "service_date": "",
+  //   "hours_required": "",
+  //   "start_time": "",
+  //   "end_time": ""
+  // };
   print(
       "*****************\nurl: ${API.ADD_TO_CART}\n$data\n**************************");
   final response = await postRequestProvider(

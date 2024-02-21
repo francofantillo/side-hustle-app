@@ -92,11 +92,6 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   }) async {
     EasyLoading.show();
 
-    final String? lat = selectLocationModel?.lat?.toString();
-    final String? lng = selectLocationModel?.lng?.toString();
-    print("lat: $lat");
-    print("lng: $lng");
-
     final token = await prefs.getToken();
 
     List<File> itemImagesFile = [];
@@ -111,11 +106,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     final response = await addProductProvider(
         apiToken: token,
         name: titleTextController.text,
-        location: locationTextController.text,
-        lat: lat,
-        lng: lng,
         images: itemImagesFile,
-        isShopLocation: isShopLocation,
         deliveryType: type,
         description: descriptionTextController.text,
         additionalInformation: additionalInfoTextController.text,
@@ -171,11 +162,6 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   }) async {
     EasyLoading.show();
 
-    final String? lat = selectLocationModel?.lat?.toString();
-    final String? lng = selectLocationModel?.lng?.toString();
-    print("lat: $lat");
-    print("lng: $lng");
-
     final token = await prefs.getToken();
 
     List<File> itemImagesFile = [];
@@ -190,11 +176,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     final response = await addServiceProvider(
         apiToken: token,
         name: titleTextController.text,
-        location: locationTextController.text,
-        lat: lat,
-        lng: lng,
         images: itemImagesFile,
-        isShopLocation: isShopLocation,
         serviceType: type,
         description: descriptionTextController.text,
         additionalInformation: additionalInfoTextController.text,

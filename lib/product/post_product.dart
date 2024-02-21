@@ -69,10 +69,10 @@ class _PostProductState extends State<PostProduct> {
         .then((value) {
       if (value != null) {
         final data = value.editSideHustleData;
-        print("getEvent lat: ${data?.lat}");
-        print("getEvent lng: ${data?.lng}");
+        // print("getEvent lat: ${data?.lat}");
+        // print("getEvent lng: ${data?.lng}");
         _bloc.titleTextController.text = data?.name ?? "";
-        _bloc.locationTextController.text = data?.location ?? "";
+        // _bloc.locationTextController.text = data?.location ?? "";
         _bloc.descriptionTextController.text = data?.description ?? "";
         _bloc.additionalInfoTextController.text =
             data?.additionalInformation ?? "";
@@ -221,63 +221,63 @@ class _PostProductState extends State<PostProduct> {
                           ),
                         ),
                         height(AppDimensions.formFieldsBetweenSpacing),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: textWidget(
-                              text: AppStrings.location,
-                              maxLines: 1,
-                              color: AppColors.textBlackColor,
-                              fontSize: AppDimensions.textSizeSmall,
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        height(0.01.sw),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                          child: CustomTextFormField(
-                            height: 45.h,
-                            hintText: AppStrings.enterTheLocation,
-                            isReadonly: true,
-                            onTap: () async {
-                              await _bloc.selectLocation(
-                                  context: context, mounted: mounted);
-                            },
-                            suffixIcon: Icon(
-                              Icons.my_location,
-                              size: AppDimensions.imageIconSizeTextFormField,
-                              color: Colors.black,
-                            ),
-                            isSuffixIcon: true,
-                            controller: _bloc.locationTextController,
-                            fieldValidator: (value) =>
-                                value?.validateEmpty(AppStrings.location),
-                          ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            CheckboxWidget(
-                              onChanged: (newValue) {
-                                if (newValue!) {
-                                  _bloc.isShopLocation = 1;
-                                } else {
-                                  _bloc.isShopLocation = 0;
-                                }
-                                print(
-                                    'Checkbox value changed: $newValue, _bloc.isShopLocation: ${_bloc.isShopLocation}');
-                              },
-                            ),
-                            Expanded(
-                                child: Padding(
-                              padding: const EdgeInsets.only(top: 2.0),
-                              child: textWidget(
-                                  text: AppStrings.useYourShopLocation,
-                                  fontFamily: AppFont.gilroyMedium,
-                                  fontSize: AppDimensions.textSizeVerySmall),
-                            )),
-                          ],
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        //   child: textWidget(
+                        //       text: AppStrings.location,
+                        //       maxLines: 1,
+                        //       color: AppColors.textBlackColor,
+                        //       fontSize: AppDimensions.textSizeSmall,
+                        //       fontFamily: AppFont.gilroyBold,
+                        //       fontWeight: FontWeight.bold),
+                        // ),
+                        // height(0.01.sw),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        //   child: CustomTextFormField(
+                        //     height: 45.h,
+                        //     hintText: AppStrings.enterTheLocation,
+                        //     isReadonly: true,
+                        //     onTap: () async {
+                        //       await _bloc.selectLocation(
+                        //           context: context, mounted: mounted);
+                        //     },
+                        //     suffixIcon: Icon(
+                        //       Icons.my_location,
+                        //       size: AppDimensions.imageIconSizeTextFormField,
+                        //       color: Colors.black,
+                        //     ),
+                        //     isSuffixIcon: true,
+                        //     controller: _bloc.locationTextController,
+                        //     fieldValidator: (value) =>
+                        //         value?.validateEmpty(AppStrings.location),
+                        //   ),
+                        // ),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.center,
+                        //   mainAxisAlignment: MainAxisAlignment.start,
+                        //   children: [
+                        //     CheckboxWidget(
+                        //       onChanged: (newValue) {
+                        //         if (newValue!) {
+                        //           _bloc.isShopLocation = 1;
+                        //         } else {
+                        //           _bloc.isShopLocation = 0;
+                        //         }
+                        //         print(
+                        //             'Checkbox value changed: $newValue, _bloc.isShopLocation: ${_bloc.isShopLocation}');
+                        //       },
+                        //     ),
+                        //     Expanded(
+                        //         child: Padding(
+                        //       padding: const EdgeInsets.only(top: 2.0),
+                        //       child: textWidget(
+                        //           text: AppStrings.useYourShopLocation,
+                        //           fontFamily: AppFont.gilroyMedium,
+                        //           fontSize: AppDimensions.textSizeVerySmall),
+                        //     )),
+                        //   ],
+                        // ),
                         // height(AppDimensions.formFieldsBetweenSpacing),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),

@@ -15,8 +15,8 @@ class YourShopModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = this.status;
     data['message'] = this.message;
-    if (this.shopData != null) {
-      data['data'] = this.shopData!.toJson();
+    if (shopData != null) {
+      data['data'] = shopData!.toJson();
     }
     return data;
   }
@@ -31,18 +31,18 @@ class ShopData {
 
   ShopData.fromJson(Map<String, dynamic> json) {
     shopDetail = json['shop_detail'] != null
-        ? new ShopDetail.fromJson(json['shop_detail'])
+        ? ShopDetail.fromJson(json['shop_detail'])
         : null;
     if (json['services'] != null) {
       services = <ServicesProductsData>[];
       json['services'].forEach((v) {
-        services!.add(new ServicesProductsData.fromJson(v));
+        services!.add(ServicesProductsData.fromJson(v));
       });
     }
     if (json['products'] != null) {
       products = <ServicesProductsData>[];
       json['products'].forEach((v) {
-        products!.add(new ServicesProductsData.fromJson(v));
+        products!.add(ServicesProductsData.fromJson(v));
       });
     }
   }
@@ -94,7 +94,7 @@ class ShopDetail {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['name'] = this.name;
     data['zip_code'] = this.zipCode;
@@ -145,7 +145,7 @@ class ServicesProductsData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['shop_id'] = this.shopId;
     data['user_id'] = this.userId;
