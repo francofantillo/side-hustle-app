@@ -24,7 +24,10 @@ import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ViewProduct extends StatefulWidget {
-  final bool isMyProduct, isViewingProductFromOthersShop, isEditFromShop, viewCart;
+  final bool isMyProduct,
+      isViewingProductFromOthersShop,
+      isEditFromShop,
+      viewCart;
   final int? id;
 
   const ViewProduct(
@@ -42,11 +45,13 @@ class ViewProduct extends StatefulWidget {
 class _ViewProductState extends State<ViewProduct> {
   late final SideHustleCubit _bloc;
   bool isAddToCart = false;
+  int index = 0;
 
   @override
   void initState() {
     isAddToCart = false;
     _bloc = BlocProvider.of(context);
+    isProductExistInCart();
     getSideHustleDetail();
     super.initState();
   }
@@ -54,6 +59,15 @@ class _ViewProductState extends State<ViewProduct> {
   getSideHustleDetail() async {
     await _bloc.getSideHustleDetailCubit(
         context: context, mounted: mounted, id: widget.id);
+  }
+
+  isProductExistInCart() async {
+    await _bloc.isProductExist(productId: widget.id).then((value) {
+      if (value != -1) {
+        isAddToCart = true;
+        index = value;
+      }
+    });
   }
 
   @override
@@ -363,7 +377,7 @@ class _ViewProductState extends State<ViewProduct> {
                               child: CustomMaterialButton(
                                 onPressed: () {
                                   if (widget.isMyProduct) {
-                                    if(widget.isEditFromShop) {
+                                    if (widget.isEditFromShop) {
                                       Navigator.pushReplacementNamed(context,
                                           AppRoutes.postProductScreenRoute,
                                           arguments: PostProduct(
@@ -380,7 +394,6 @@ class _ViewProductState extends State<ViewProduct> {
                                             isEditFromShop: false,
                                           ));
                                     }
-
                                   } else {
                                     // Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
                                     setState(() {
@@ -420,7 +433,12 @@ class _ViewProductState extends State<ViewProduct> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 12.0),
                                     child: textWidget(
-                                        text: "1",
+                                        // text: "1",
+                                        text: state.cartModel?.data
+                                                    ?.cartDetails !=
+                                                null
+                                            ? "${state.cartModel?.data?.cartDetails?[index].qty}"
+                                            : "",
                                         fontSize:
                                             AppDimensions.textSizeCartText,
                                         fontWeight: FontWeight.bold,
@@ -457,7 +475,9 @@ class _ViewProductState extends State<ViewProduct> {
                                                 AppRoutes
                                                     .yourProductsCartScreenRoute);
                                           },
-                                          name:  AppStrings.viewCartText,
+                                          // name: AppStrings.viewCartText,
+                                          name:
+                                              "View Cart (${state.cartModel?.data?.cartDetails?[index].qty})",
                                           borderRadius: AppDimensions
                                               .boarderRadiusViewProduct))
                                 ],
