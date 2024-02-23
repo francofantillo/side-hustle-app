@@ -92,6 +92,8 @@ class AppDimensions {
   // static double tabBarFontSize = 12.sp;
   static double tabBarFontSize = 11.sp;
 
+  static double bannerRadius = 30.w;
+
   /// Elevation
   static double defaultCardElevation = 0.02.sw;
   // static double defaultFocusedTextFieldElevation = 0.02.sw;

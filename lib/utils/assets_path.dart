@@ -85,6 +85,7 @@ class AssetsPath {
   static const brandonProfile = "${alphaPath}brandon_profile.png";
   static const designer = "${alphaPath}designer.png";
   static const carpenterSlider = "${alphaPath}carpenter_slider.png";
+  static const banner = "${alphaPath}banner.png";
   static const driver = "${alphaPath}driver.png";
   static const cleaner = "${alphaPath}wanted_job_1.png";
   static const mouse = "${alphaPath}mouse.png";

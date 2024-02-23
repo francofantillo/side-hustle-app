@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/home/widgets/banner_slider.dart';
 import 'package:side_hustle/home/widgets/home_appbar.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_location_widget.dart';
 import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
-import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,14 +28,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late final SideHustleCubit _bloc;
-
   var index = 0;
   bool isProductSelected = true;
 
   @override
   void initState() {
-    _bloc = BlocProvider.of<SideHustleCubit>(context);
     isProductSelected = true;
     super.initState();
   }
@@ -60,14 +61,29 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(
+                    left: AppDimensions.rootPadding + 10.w,
+                    right: AppDimensions.rootPadding,
+                    top: AppDimensions.rootPadding + 0),
+                child: textWidget(
+                    text: AppStrings.blessTheseBusinesses,
+                    fontSize: AppDimensions.textSizeNormal,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: AppFont.gilroyBold,
+                    color: AppColors.textBlackColor),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
                     left: AppDimensions.rootPadding,
                     right: AppDimensions.rootPadding,
                     top: AppDimensions.rootPadding - 8.w),
-                child: SearchTextField(
-                    height: AppDimensions.searchTextFieldHeight,
-                    contentPaddingBottom: 8,
-                    hintText: AppStrings.searchHintText,
-                    onChanged: (search) {}),
+                child: const BannerSliderAlpha(
+                  hideCameraIcon: true,
+                  itemImages: [
+                    AssetsPath.banner,
+                    AssetsPath.banner,
+                    AssetsPath.banner
+                  ],
+                ),
               ),
               // Horizontal ListView
               Padding(
@@ -93,42 +109,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: AppStrings.postASideHustle,
                   onPressed: () {
                     AppDialogues.noHeaderDialogue(
-                            context: contextBuilder,
-                            body: PostYourSideHustleDialogueWidget(
-                              isProductSelected: (v) {
-                                isProductSelected = v;
-                                print("prodcut: $isProductSelected");
-                              },
-                              onPressed: () {
-                                print("pressed Dialogue");
-                                _bloc.setIsProductOrServiceFromYourShop(
-                                    isProductOrServiceFromHome: false);
-                                if (isProductSelected) {
-                                  /// reset to Default Value
-                                  isProductSelected = true;
-                                  // Navigator.pop(contextBuilder);
-
-                                  AppDialogues.noHeaderDialogue(
-                                          context: contextBuilder)
-                                      .dismiss();
-                                  Navigator.pushNamed(contextBuilder,
-                                      AppRoutes.postProductScreenRoute);
-                                } else {
-                                  /// reset to Default Value
-                                  isProductSelected = true;
-                                  AppDialogues.noHeaderDialogue(
-                                          context: contextBuilder)
-                                      .dismiss();
-                                  // Navigator.pop(contextBuilder);
-                                  Navigator.pushNamed(contextBuilder,
-                                      AppRoutes.postServiceScreenRoute);
-                                }
-                              },
-                              onTapClose: () {
-                                Navigator.pop(contextBuilder);
-                              },
-                            ))
-                        // ..show()
+                        context: contextBuilder,
+                        body: PostYourSideHustleDialogueWidget(
+                          isProductSelected: (v) {
+                            isProductSelected = v;
+                            print("prodcut: $isProductSelected");
+                          },
+                          onPressed: () {
+                            print("pressed Dialogue");
+                            if (isProductSelected) {
+                              /// reset to Default Value
+                              isProductSelected = true;
+                              // Navigator.pop(contextBuilder);
+                              AppDialogues.noHeaderDialogue(
+                                  context: contextBuilder)
+                                  .dismiss();
+                              Navigator.pushNamed(contextBuilder,
+                                  AppRoutes.postProductScreenRoute);
+                            } else {
+                              /// reset to Default Value
+                              isProductSelected = true;
+                              AppDialogues.noHeaderDialogue(
+                                  context: contextBuilder)
+                                  .dismiss();
+                              // Navigator.pop(contextBuilder);
+                              Navigator.pushNamed(contextBuilder,
+                                  AppRoutes.postServiceScreenRoute);
+                            }
+                          },
+                          onTapClose: () {
+                            Navigator.pop(contextBuilder);
+                          },
+                        ))
+                    // ..show()
                         .show();
                   }),
             ],

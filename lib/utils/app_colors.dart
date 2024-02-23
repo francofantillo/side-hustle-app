@@ -25,6 +25,8 @@ class AppColors {
   static final itemBGColor = Color(0xFFF3F3F3);
   // static const itemBGColor = Colors.white;
   static const dialogueSelected = Color(0x0FFF3F3F3);
+  static const bannerTextColor = Color(0xffFCFCFC);
+
   // static const textFieldBackgroundColor = Color(0x0FFFDFDFD);
   static const textFieldBackgroundColor = Color(0xffFDFDFD);
   static final homeFirstItemOutlineColor = Color(0xFFD9D9D9);
