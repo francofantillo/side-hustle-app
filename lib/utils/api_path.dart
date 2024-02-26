@@ -62,11 +62,14 @@ class API {
   static const String UPDATE_SIDE_HUSTLE = "${BASE_URL}/update-product";
   static const String GET_EDIT_PRODUCT_OR_SERVICE = "${BASE_URL}/edit-product";
   static const String GET_YOUR_SHOP = "${BASE_URL}/your-shop";
+  static const String VIEW_SHOP = "${BASE_URL}/view-shop";
   static const String EDIT_YOUR_SHOP = "${BASE_URL}/edit-shop";
   static const String GET_DELETE_SIDEHUSTLE = "${BASE_URL}/delete-product";
   static const String GET_SIDEHUSTLE = "${BASE_URL}/products";
   static const String GET_SIDEHUSTLE_DETAIL = "${BASE_URL}/product-detail";
-  static const String GET_SIDEHUSTLE_CART = "${BASE_URL}/view-cart";
   /// Side Hustle Cart
   static const String ADD_TO_CART = "${BASE_URL}/add-cart";
+  static const String UPDATE_CART = "${BASE_URL}/update-cart";
+  static const String GET_SIDEHUSTLE_CART = "${BASE_URL}/view-cart";
+
 }

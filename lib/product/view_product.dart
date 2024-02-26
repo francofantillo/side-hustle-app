@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/shop/shop.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -337,9 +338,15 @@ class _ViewProductState extends State<ViewProduct> {
                                         child: CustomButtonWithIcon(
                                           onPressed: () {
                                             print("pressed Elevated Button");
-                                            Navigator.pushReplacementNamed(
+                                            Navigator.pushNamed(
                                                 context,
-                                                AppRoutes.shopScreenRoute);
+                                                AppRoutes.shopScreenRoute,
+                                                arguments: ShopScreen(
+                                                  shopId: state
+                                                      .sideHustleDetailModel
+                                                      ?.data
+                                                      ?.shopId,
+                                                ));
                                           },
                                           borderRadius: 10,
                                           backgroundColor: AppColors.greenColor,
@@ -477,7 +484,7 @@ class _ViewProductState extends State<ViewProduct> {
                                           },
                                           // name: AppStrings.viewCartText,
                                           name:
-                                              "View Cart (${state.cartModel?.data?.cartDetails?[index].qty})",
+                                              "View Cart (${state.cartModel?.data?.totalItems})",
                                           borderRadius: AppDimensions
                                               .boarderRadiusViewProduct))
                                 ],

@@ -11,7 +11,7 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class ProductCartItemWidget extends StatelessWidget {
   final String? title, subTitle, price, imagePath;
-  final Function()? onTap;
+  final Function()? onTap, onTapIncrement, onTapDecrement;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
@@ -21,6 +21,8 @@ class ProductCartItemWidget extends StatelessWidget {
       this.subTitle,
       this.price,
       this.onTap,
+      this.onTapIncrement,
+      this.onTapDecrement,
       this.imagePath,
       this.imageHeight,
       this.imageWidth,
@@ -45,7 +47,7 @@ class ProductCartItemWidget extends StatelessWidget {
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
@@ -108,9 +110,7 @@ class ProductCartItemWidget extends StatelessWidget {
                               width: .08.sw,
                               borderRadius: 10,
                               backgroundColor: AppColors.whiteColor,
-                              onTap: () {
-                                print("clicked minus");
-                              },
+                              onTap: onTapDecrement,
                               iconPath: AssetsPath.minus,
                               iconSize: 10,
                             ),
@@ -130,9 +130,7 @@ class ProductCartItemWidget extends StatelessWidget {
                               iconSize: 50,
                               borderRadius: 10,
                               backgroundColor: AppColors.whiteColor,
-                              onTap: () {
-                                print("clicked add");
-                              },
+                              onTap: onTapIncrement,
                               iconPath: AssetsPath.add,
                             ),
                           ],

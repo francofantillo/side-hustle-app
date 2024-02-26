@@ -194,7 +194,10 @@ class AppRouter {
             );
 
           case AppRoutes.shopScreenRoute:
-            return const ShopScreen();
+            final args = routeSettings.arguments as ShopScreen?;
+            return ShopScreen(
+              shopId: args?.shopId,
+            );
 
           case AppRoutes.profileScreenRoute:
             return const ProfileScreen();

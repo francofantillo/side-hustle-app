@@ -17,6 +17,14 @@ class ProductsCartList extends StatefulWidget {
 }
 
 class _ProductsCartListState extends State<ProductsCartList> {
+  late final SideHustleCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SideHustleCubit, SideHustleState>(
@@ -43,15 +51,49 @@ class _ProductsCartListState extends State<ProductsCartList> {
                         padding: const EdgeInsets.only(
                             left: 16.0, right: 16.0, bottom: 8),
                         child: ProductCartItemWidget(
+                          onTapDecrement: () async {
+                            if (state
+                                    .cartModel?.data?.cartDetails?[index].qty !=
+                                null) {
+                              int qty = state
+                                  .cartModel!.data!.cartDetails![index].qty!;
+                              if (qty > 1) {
+                                await _bloc.updateQuantityCartCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    cartDetailId: state.cartModel?.data
+                                        ?.cartDetails?[index].id,
+                                    qty: qty--);
+                              }
+                            }
+                          },
+                          onTapIncrement: () async {
+                            if (state
+                                    .cartModel?.data?.cartDetails?[index].qty !=
+                                null) {
+                              int qty = state
+                                  .cartModel!.data!.cartDetails![index].qty!;
+                              await _bloc.updateQuantityCartCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  cartDetailId: state
+                                      .cartModel?.data?.cartDetails?[index].id,
+                                  qty: qty++);
+                            }
+                          },
                           imageWidth: 1.sw,
                           imageHeight: AppDimensions.cartItemProductHeight,
                           boarderColor: AppColors.itemBGColor,
-                          title: state.cartModel?.data?.cartDetails?[index].productName,
-                          subTitle:
-                          state.cartModel?.data?.cartDetails?[index].description,
-                          imagePath:
-                          state.cartModel?.data?.cartDetails?[index].productImage,
-                          price: state.cartModel?.data?.cartDetails?[index].price?.toStringAsFixed(2) ?? "0",
+                          title: state
+                              .cartModel?.data?.cartDetails?[index].productName,
+                          subTitle: state
+                              .cartModel?.data?.cartDetails?[index].description,
+                          imagePath: state.cartModel?.data?.cartDetails?[index]
+                              .productImage,
+                          price: state
+                                  .cartModel?.data?.cartDetails?[index].price
+                                  ?.toStringAsFixed(2) ??
+                              "0",
                           onTap: () {},
                         ),
                       );

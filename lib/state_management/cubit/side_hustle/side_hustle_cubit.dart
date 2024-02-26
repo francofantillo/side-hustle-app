@@ -456,6 +456,45 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     }
   }
 
+  /// View Shop
+  Future viewShopCubit(
+      {required BuildContext context,
+      required bool mounted,
+      int? shopId}) async {
+    emit(state.copyWith(
+        otherUserShopLoading: true, otherUserShopModel: YourShopModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await viewShopProvider(shopId: shopId, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        YourShopModel otherUserShopModel =
+            YourShopModel.fromJson(response.data);
+        emit(state.copyWith(
+            otherUserShopLoading: false,
+            otherUserShopModel: otherUserShopModel));
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(otherUserShopLoading: false));
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(otherUserShopLoading: false));
+    }
+  }
+
   /// Edit Your Shop
   Future<int> editYourShopCubit(
       {required BuildContext context,
@@ -715,6 +754,45 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       emit(state.copyWith(cartLoading: false));
+      EasyLoading.dismiss();
+    }
+  }
+
+  /// Update Cart
+  Future updateQuantityCartCubit({
+    required BuildContext context,
+    required bool mounted,
+    int? cartDetailId,
+    int qty = 1,
+  }) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await updateQuantityCartProvider(
+        cartDetailId: cartDetailId, qty: qty, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    // EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // AppUtils.showToast(response.data["message"]);
+        CartModel cartModel = CartModel.fromJson(response.data);
+        emit(state.copyWith(cartLoading: false, cartModel: cartModel));
+        EasyLoading.dismiss();
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
       EasyLoading.dismiss();
     }
   }

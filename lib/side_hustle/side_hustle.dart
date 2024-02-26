@@ -11,6 +11,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
+import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -162,7 +163,8 @@ class _SideHustleState extends State<SideHustle> {
             ),
             _tabIndexBasicToggle.value == 0
                 ? const ProductsList()
-                : const ServicesList()
+                : const ServicesList(),
+            height(80.w)
           ],
         ),
       );

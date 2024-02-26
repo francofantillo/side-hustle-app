@@ -103,13 +103,6 @@ class _ProductsListState extends State<ProductsList> {
                     boarderColor: AppColors.itemBGColor,
                     title: sideHustleItemList?[index].name,
                     subTitle: sideHustleItemList?[index].description,
-                    // deliveryType:
-                    //     sideHustleItemList?[index].deliveryType != null
-                    //         ? sideHustleItemList![index].deliveryType ==
-                    //                 DeliveryTypeEnum.Pickup.name
-                    //             ? AppStrings.deliveryOptionPickup
-                    //             : AppStrings.deliveryOptionCOD
-                    //         : "",
                     imagePath: sideHustleItemList?[index].image,
                     price: sideHustleItemList?[index].price?.toStringAsFixed(2),
                   ),

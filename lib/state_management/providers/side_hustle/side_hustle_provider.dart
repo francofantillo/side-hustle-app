@@ -286,6 +286,16 @@ Future<Response?> getYourShopProvider({String? apiToken}) async {
   return response;
 }
 
+/// Get Your Shop
+Future<Response?> viewShopProvider({int? shopId, String? apiToken}) async {
+  final data = {"shop_id": shopId};
+  print(
+      "*****************\nurl: ${API.VIEW_SHOP}\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.VIEW_SHOP, queryParameter: data, token: apiToken);
+  return response;
+}
+
 /// Edit Your Shop
 Future<Response?> editYourShopProvider(
     {int? shopId,
@@ -401,6 +411,17 @@ Future<Response?> addToCartProvider(
       "*****************\nurl: ${API.ADD_TO_CART}\n$data\n**************************");
   final response = await postRequestProvider(
       path: API.ADD_TO_CART, token: apiToken, data: data);
+  return response;
+}
+
+/// Update Side Hustle Cart Quantity
+Future<Response?> updateQuantityCartProvider(
+    {int? cartDetailId, int qty = 1, String? apiToken}) async {
+  final data = {"cart_detail_id": cartDetailId, "qty": qty};
+  print(
+      "*****************\nurl: ${API.UPDATE_CART}\n$data\n**************************");
+  final response = await putRequestProvider(
+      path: API.UPDATE_CART, data: data, token: apiToken);
   return response;
 }
 
