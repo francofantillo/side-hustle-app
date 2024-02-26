@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/router/app_router.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
@@ -82,7 +83,7 @@ class _BaseWidgetState extends State<BaseWidget> {
                 title: AppStrings.APP_TITLE,
                 debugShowCheckedModeBanner: false,
                 // initialRoute: AppRoutes.splashScreenRoute,
-                // initialRoute: AppRoutes.paymentMethodScreenRoute,
+                initialRoute: AppRoutes.postEventScreenRoute,
                 onGenerateRoute: AppRouter().onGenerateRoute,
               );
             },

@@ -27,6 +27,8 @@ class RegularExpressions {
     type: MaskAutoCompletionType.lazy,
   );
 
-  static FilteringTextInputFormatter PRICE_FORMATTER = FilteringTextInputFormatter.allow(RegExp(r"[0-9.]"));
+  // static FilteringTextInputFormatter PRICE_FORMATTER = FilteringTextInputFormatter.allow(RegExp(r"[0-9.]"));
+
+  static FilteringTextInputFormatter PRICE_FORMATTER = FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,5}$'));
 
 }
