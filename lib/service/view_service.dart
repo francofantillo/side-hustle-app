@@ -7,6 +7,7 @@ import 'package:side_hustle/service/post_service.dart';
 import 'package:side_hustle/shop/shop.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -345,12 +346,52 @@ class _ViewServiceState extends State<ViewService> {
                                             ));
                                       }
                                     } else {
-                                      AppUtils.showBottomModalSheet(
-                                          context: context,
-                                          widget:
-                                              BottomModalSheetRequestService(
-                                            onItemAdded: onItemAdded,
-                                          ));
+                                      _bloc
+                                          .checkIsOtherShop(
+                                              shopId: state
+                                                  .sideHustleDetailModel
+                                                  ?.data
+                                                  ?.shopId)
+                                          .then((value) async {
+                                        if (value == 1) {
+                                          /// Show Cart Clear Dialog
+                                          AppDialogues.showCartClearInfo(
+                                              context: context,
+                                              onPressedOk: () async {
+                                                /// Clear Cart
+                                                AppUtils.showBottomModalSheet(
+                                                    context: context,
+                                                    widget:
+                                                        BottomModalSheetRequestService(
+                                                      onItemAdded: onItemAdded,
+                                                      productId: state
+                                                          .sideHustleDetailModel
+                                                          ?.data
+                                                          ?.productId,
+                                                      shopId: state
+                                                          .sideHustleDetailModel
+                                                          ?.data
+                                                          ?.shopId,
+                                                    ));
+                                              }).show();
+                                        } else {
+                                          /// Request Service
+                                          AppUtils.showBottomModalSheet(
+                                              context: context,
+                                              widget:
+                                                  BottomModalSheetRequestService(
+                                                onItemAdded: onItemAdded,
+                                                productId: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.productId,
+                                                shopId: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.shopId,
+                                              ));
+                                        }
+                                      });
                                     }
                                   },
                                   name: widget.isMyService

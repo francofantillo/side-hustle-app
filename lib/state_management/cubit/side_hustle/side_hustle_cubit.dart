@@ -24,19 +24,37 @@ part 'side_hustle_state.dart';
 class SideHustleCubit extends Cubit<SideHustleState> {
   SideHustleCubit() : super(SideHustleState());
 
+  Future resetSideHustleBloc() async {
+    emit(SideHustleState());
+  }
+
   final prefs = SharedPreferencesHelper.instance;
 
   SelectLocationModel? selectLocationModel;
   TextEditingController titleTextController = TextEditingController();
   TextEditingController locationTextController = TextEditingController();
+  final TextEditingController deliveryAddressTextController =
+      TextEditingController();
+  final TextEditingController streetTextController = TextEditingController();
+  final TextEditingController apartmentTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
   TextEditingController priceTextController = TextEditingController();
   TextEditingController zipCodeTextController = TextEditingController();
   TextEditingController additionalInfoTextController = TextEditingController();
+  TextEditingController shopNameTextController = TextEditingController();
+  TextEditingController shopZipCodeTextController = TextEditingController();
+  TextEditingController shopLocationTextController = TextEditingController();
+
   String? type;
   int isShopLocation = 0;
   bool isHourly = true;
   bool isFixed = false;
+
+  TextEditingController serviceDateTextController = TextEditingController();
+  TextEditingController serviceHoursTextController = TextEditingController();
+  TextEditingController serviceStartTimeTextController =
+      TextEditingController();
+  TextEditingController serviceEndTimeTextController = TextEditingController();
 
   initControllers() {
     titleTextController = TextEditingController();
@@ -51,6 +69,24 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     isHourly = true;
     isFixed = false;
     emit(state.copyWith(images: []));
+  }
+
+  initShopControllers() {
+    shopNameTextController = TextEditingController();
+    shopZipCodeTextController = TextEditingController();
+    shopLocationTextController = TextEditingController();
+  }
+
+  initRequestServiceControllers() {
+    serviceDateTextController = TextEditingController();
+    serviceHoursTextController = TextEditingController();
+    serviceStartTimeTextController = TextEditingController();
+    serviceEndTimeTextController = TextEditingController();
+  }
+
+  setDeliveryAddressCart() {
+    emit(state.copyWith(
+        deliveryAddressCart: deliveryAddressTextController.text));
   }
 
   /// Select Multiple Images
@@ -80,6 +116,18 @@ class SideHustleCubit extends Cubit<SideHustleState> {
 
     if (location != null) {
       locationTextController.text = location.locationAddress ?? "";
+      selectLocationModel = location;
+    }
+  }
+
+  /// Select Shop Location
+  Future selectShopLocation(
+      {required BuildContext context, required bool mounted}) async {
+    final SelectLocationModel? location =
+        await AppUtils.selectLocation(context: context, mounted: mounted);
+
+    if (location != null) {
+      shopLocationTextController.text = location.locationAddress ?? "";
       selectLocationModel = location;
     }
   }
@@ -435,11 +483,11 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
-        titleTextController.text =
+        shopNameTextController.text =
             yourShopModel.shopData?.shopDetail?.name ?? "";
-        zipCodeTextController.text =
+        shopZipCodeTextController.text =
             yourShopModel.shopData?.shopDetail?.zipCode ?? "";
-        locationTextController.text =
+        shopLocationTextController.text =
             yourShopModel.shopData?.shopDetail?.location ?? "";
         emit(state.copyWith(
             yourShopLoading: false, yourShopModel: yourShopModel));
@@ -447,7 +495,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
 
       /// Failed
       else {
-        AppUtils.showToast(response.data["message"]);
+        // AppUtils.showToast(response.data["message"]);
         emit(state.copyWith(yourShopLoading: false));
       }
     } else {
@@ -513,9 +561,9 @@ class SideHustleCubit extends Cubit<SideHustleState> {
 
     final response = await editYourShopProvider(
         shopId: state.yourShopModel?.shopData?.shopDetail?.id,
-        name: titleTextController.text,
-        zipCode: zipCodeTextController.text,
-        location: locationTextController.text,
+        name: shopNameTextController.text,
+        zipCode: shopZipCodeTextController.text,
+        location: shopLocationTextController.text,
         image: image,
         lat: lat,
         lng: lng,
@@ -527,11 +575,11 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         YourShopModel yourShopModel = YourShopModel.fromJson(response.data);
-        titleTextController.text =
+        shopNameTextController.text =
             yourShopModel.shopData?.shopDetail?.name ?? "";
-        zipCodeTextController.text =
+        shopZipCodeTextController.text =
             yourShopModel.shopData?.shopDetail?.zipCode ?? "";
-        locationTextController.text =
+        shopLocationTextController.text =
             yourShopModel.shopData?.shopDetail?.location ?? "";
         emit(state.copyWith(
             yourShopLoading: false, yourShopModel: yourShopModel));
@@ -709,7 +757,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   }
 
   /// Add To Cart
-  Future addToCartCubit(
+  Future<int> addToCartCubit(
       {required BuildContext context,
       required bool mounted,
       int? shopId,
@@ -743,6 +791,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
         CartModel cartModel = CartModel.fromJson(response.data);
         emit(state.copyWith(cartLoading: false, cartModel: cartModel));
         EasyLoading.dismiss();
+        return 1;
       }
 
       /// Failed
@@ -750,11 +799,13 @@ class SideHustleCubit extends Cubit<SideHustleState> {
         AppUtils.showToast(response.data["message"]);
         emit(state.copyWith(cartLoading: false));
         EasyLoading.dismiss();
+        return 0;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       emit(state.copyWith(cartLoading: false));
       EasyLoading.dismiss();
+      return 0;
     }
   }
 
@@ -837,7 +888,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     if (dataCart?.shopId != null) {
       print("shopId: $shopId cartShopId: ${dataCart!.shopId}");
       if (dataCart.shopId != shopId) {
-        AppUtils.showToast("User try to add other shop product");
+        // AppUtils.showToast("User try to add other shop product");
         return 1;
       } else {
         return 0;
@@ -862,6 +913,45 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       } else {
         return -1;
       }
+    }
+  }
+
+  /// Checkout
+  Future<int> checkoutCubit(
+      {required BuildContext context, required bool mounted}) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await checkoutProvider(
+        cartId: state.cartModel?.data?.id, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // AppUtils.showToast(response.data["message"]);
+        deliveryAddressTextController.clear();
+        streetTextController.clear();
+        apartmentTextController.clear();
+        emit(state.copyWith(cartModel: CartModel(), deliveryAddressCart: ""));
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
     }
   }
 }

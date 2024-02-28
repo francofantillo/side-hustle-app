@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_delivery_address.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -14,11 +16,25 @@ import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class DeliveryAddressYourCart extends StatelessWidget {
+class DeliveryAddressYourCart extends StatefulWidget {
   final bool isDelivery, isOrderService;
 
   const DeliveryAddressYourCart(
       {super.key, this.isDelivery = false, this.isOrderService = false});
+
+  @override
+  State<DeliveryAddressYourCart> createState() =>
+      _DeliveryAddressYourCartState();
+}
+
+class _DeliveryAddressYourCartState extends State<DeliveryAddressYourCart> {
+  late final SideHustleCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +54,7 @@ class DeliveryAddressYourCart extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                isDelivery
+                widget.isDelivery
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -66,8 +82,8 @@ class DeliveryAddressYourCart extends StatelessWidget {
                         ],
                       )
                     : const SizedBox.shrink(),
-                isDelivery ? height(0.02.sw) : const SizedBox.shrink(),
-                isDelivery
+                widget.isDelivery ? height(0.02.sw) : const SizedBox.shrink(),
+                widget.isDelivery
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         // crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,19 +94,23 @@ class DeliveryAddressYourCart extends StatelessWidget {
                             size: 0.037.sw,
                           ),
                           width(0.02.sw),
-                          Expanded(
-                            child: textWidget(
-                                // text: AppStrings.locationText,
-                                text: AppStrings.deliveryAddressHint,
-                                maxLines: 2,
-                                color: const Color(0xFFFCFCFC),
-                                fontSize: AppDimensions.textSizeVerySmall),
-                          ),
+                          BlocBuilder<SideHustleCubit, SideHustleState>(
+                              builder: (context, state) {
+                            return Expanded(
+                              child: textWidget(
+                                  // text: AppStrings.locationText,
+                                  // text: AppStrings.deliveryAddressHint,
+                                  text: state.deliveryAddressCart,
+                                  maxLines: 2,
+                                  color: const Color(0xFFFCFCFC),
+                                  fontSize: AppDimensions.textSizeVerySmall),
+                            );
+                          }),
                         ],
                       )
                     : const SizedBox.shrink(),
-                isDelivery ? height(0.01.sw) : const SizedBox.shrink(),
-                isDelivery
+                widget.isDelivery ? height(0.01.sw) : const SizedBox.shrink(),
+                widget.isDelivery
                     ? const Divider(
                         color: AppColors.whiteColor,
                       )
@@ -122,26 +142,58 @@ class DeliveryAddressYourCart extends StatelessWidget {
                         ],
                       ),
                     ),
-                    textWidget(
-                        // text: AppStrings.productPricingNumeric,
-                        text: "\$98.24",
-                        fontFamily: AppFont.gilroyBold,
-                        fontWeight: FontWeight.bold,
-                        fontSize: AppDimensions.textPriceSizeViewForms + 2.sp,
-                        color: AppColors.textWhiteColor),
+                    BlocBuilder<SideHustleCubit, SideHustleState>(
+                        builder: (context, state) {
+                      return textWidget(
+                          // text: "\$98.24",
+                          text:
+                              "\$${state.cartModel?.data?.subTotal?.toStringAsFixed(2)}",
+                          fontFamily: AppFont.gilroyBold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: AppDimensions.textPriceSizeViewForms + 2.sp,
+                          color: AppColors.textWhiteColor);
+                    }),
                   ],
                 ),
                 height(0.01.sw),
                 CustomMaterialButton(
                     // height: 8,
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.pushNamed(
-                          context, AppRoutes.chatOneToOneScreenRoute,
-                          arguments: ChatOneToOne(
-                            isOrderChat: true,
-                            isOrderService: isOrderService,
-                          ));
+                    onPressed: () async {
+                      if (widget.isDelivery) {
+                        if (_bloc.deliveryAddressTextController.text
+                                .trim()
+                                .isEmpty &&
+                            _bloc.streetTextController.text.trim().isEmpty &&
+                            _bloc.apartmentTextController.text.trim().isEmpty) {
+                          AppUtils.showToast(
+                              AppStrings.errorCartDeliveryAddress);
+                          return;
+                        } else {
+                          await _bloc
+                              .checkoutCubit(context: context, mounted: mounted)
+                              .then((value) async {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(
+                                context, AppRoutes.chatOneToOneScreenRoute,
+                                arguments: ChatOneToOne(
+                                  isOrderChat: true,
+                                  isOrderService: widget.isOrderService,
+                                ));
+                          });
+                        }
+                      } else {
+                        await _bloc
+                            .checkoutCubit(context: context, mounted: mounted)
+                            .then((value) async {
+                          Navigator.pop(context);
+                          Navigator.pushNamed(
+                              context, AppRoutes.chatOneToOneScreenRoute,
+                              arguments: ChatOneToOne(
+                                isOrderChat: true,
+                                isOrderService: widget.isOrderService,
+                              ));
+                        });
+                      }
                     },
                     name: AppStrings.placeOrder,
                     borderRadius: AppDimensions.boarderRadiusCartPlaceOrder,

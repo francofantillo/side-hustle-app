@@ -40,7 +40,7 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
           : state.yourShopModel?.shopData?.products?.isEmpty ?? true
               ? const Expanded(
                   child: CustomErrorWidget(
-                      errorMessage: AppStrings.errorMessageJobs),
+                      errorMessage: AppStrings.errorMessageNoItemsFound),
                 )
               : Expanded(
                   child: ListView.builder(

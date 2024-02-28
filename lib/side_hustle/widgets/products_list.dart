@@ -8,6 +8,7 @@ import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit
 import 'package:side_hustle/state_management/models/side_hustle_model.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -79,15 +80,20 @@ class _ProductsListState extends State<ProductsList> {
                     onTapAdd: () async {
                       _bloc
                           .checkIsOtherShop(
-                          shopId: sideHustleItemList?[index].shopId)
+                              shopId: sideHustleItemList?[index].shopId)
                           .then((value) async {
                         if (value == 1) {
                           /// Show Cart Clear Dialog
-                          await _bloc.addToCartCubit(
+                          AppDialogues.showCartClearInfo(
                               context: context,
-                              mounted: mounted,
-                              shopId: sideHustleItemList?[index].shopId,
-                              productId: sideHustleItemList?[index].id);
+                              onPressedOk: () async {
+                                /// Clear Cart
+                                await _bloc.addToCartCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    shopId: sideHustleItemList?[index].shopId,
+                                    productId: sideHustleItemList?[index].id);
+                              }).show();
                         } else {
                           /// Add Product
                           await _bloc.addToCartCubit(

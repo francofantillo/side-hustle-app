@@ -31,8 +31,10 @@ class _SideHustleState extends State<SideHustle> {
 
   @override
   void initState() {
-    _bloc = BlocProvider.of(context);
+    print("initState SideHustle");
+    _bloc = BlocProvider.of<SideHustleCubit>(context);
     isProductSelected = true;
+    _tabIndexBasicToggle.value = 0;
     getSideHustle();
     super.initState();
   }

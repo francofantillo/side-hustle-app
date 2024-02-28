@@ -6,6 +6,7 @@ import 'package:side_hustle/profile/widgets/jobs_widget.dart';
 import 'package:side_hustle/profile/widgets/profile_items_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
+import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -25,6 +26,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late final AuthCubit _bloc;
   var index = 0;
   bool isProductSelected = true;
 
@@ -32,8 +34,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+    _bloc = BlocProvider.of(context);
     isProductSelected = true;
+    getProfile();
     super.initState();
+  }
+
+  getProfile() async {
+    await _bloc.getProfileCubit(context: context, mounted: mounted);
   }
 
   List<List<Color>?>? bgColorsZero = [
@@ -162,24 +170,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Expanded(
                       child: ProfileJobsWidget(
                           name: AppStrings.myJobs,
-                          myJobsCount: "12",
+                          myJobsCount: state.profileModel?.data?.myJobs?.toString(),
                           onTap: () {
                             Navigator.pushNamed(
                                 context, AppRoutes.myJobsScreenRoute);
                           }),
                     ),
                     // width(8.w),
-                    const Expanded(
+                    Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: ProfileJobsWidget(
-                            name: AppStrings.jobsCompleted, myJobsCount: "12"),
+                            name: AppStrings.jobsCompleted, myJobsCount: state.profileModel?.data?.completedJobs?.toString()),
                       ),
                     ),
                     Expanded(
                       child: ProfileJobsWidget(
                           name: AppStrings.myEvents,
-                          myJobsCount: "28",
+                          myJobsCount: state.profileModel?.data?.myEvents?.toString(),
                           onTap: () {
                             Navigator.pushNamed(
                                 context, AppRoutes.myEventsScreenRoute);

@@ -7,6 +7,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/error/error_widget.dart';
@@ -73,13 +74,18 @@ class _ProductsListShopState extends State<ProductsListShop> {
                                 .then((value) async {
                               if (value == 1) {
                                 /// Show Cart Clear Dialog
-                                await _bloc.addToCartCubit(
+                                AppDialogues.showCartClearInfo(
                                     context: context,
-                                    mounted: mounted,
-                                    shopId: state.otherUserShopModel?.shopData
-                                        ?.shopDetail?.id,
-                                    productId: state.otherUserShopModel
-                                        ?.shopData?.products?[index].id);
+                                    onPressedOk: () async {
+                                      /// Clear Cart
+                                      await _bloc.addToCartCubit(
+                                          context: context,
+                                          mounted: mounted,
+                                          shopId: state.otherUserShopModel
+                                              ?.shopData?.shopDetail?.id,
+                                          productId: state.otherUserShopModel
+                                              ?.shopData?.products?[index].id);
+                                    }).show();
                               } else {
                                 /// Add Product
                                 await _bloc.addToCartCubit(

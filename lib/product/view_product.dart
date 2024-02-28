@@ -7,6 +7,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/shop/shop.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
+import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -338,8 +339,7 @@ class _ViewProductState extends State<ViewProduct> {
                                         child: CustomButtonWithIcon(
                                           onPressed: () {
                                             print("pressed Elevated Button");
-                                            Navigator.pushNamed(
-                                                context,
+                                            Navigator.pushNamed(context,
                                                 AppRoutes.shopScreenRoute,
                                                 arguments: ShopScreen(
                                                   shopId: state
@@ -403,8 +403,59 @@ class _ViewProductState extends State<ViewProduct> {
                                     }
                                   } else {
                                     // Navigator.pushNamed(context, AppRoutes.yourProductsCartScreenRoute);
-                                    setState(() {
-                                      isAddToCart = true;
+                                    _bloc
+                                        .checkIsOtherShop(
+                                            shopId: state.sideHustleDetailModel
+                                                ?.data?.shopId)
+                                        .then((value) async {
+                                      if (value == 1) {
+                                        /// Show Cart Clear Dialog
+                                        AppDialogues.showCartClearInfo(
+                                            context: context,
+                                            onPressedOk: () async {
+                                              /// Clear Cart
+                                              await _bloc
+                                                  .addToCartCubit(
+                                                      context: context,
+                                                      mounted: mounted,
+                                                      shopId: state
+                                                          .sideHustleDetailModel
+                                                          ?.data
+                                                          ?.shopId,
+                                                      productId: state
+                                                          .sideHustleDetailModel
+                                                          ?.data
+                                                          ?.productId)
+                                                  .then((value) {
+                                                if (value == 1) {
+                                                  setState(() {
+                                                    isAddToCart = true;
+                                                  });
+                                                }
+                                              });
+                                            }).show();
+                                      } else {
+                                        /// Add Product
+                                        await _bloc
+                                            .addToCartCubit(
+                                                context: context,
+                                                mounted: mounted,
+                                                shopId: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.shopId,
+                                                productId: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.productId)
+                                            .then((value) {
+                                          if (value == 1) {
+                                            setState(() {
+                                              isAddToCart = true;
+                                            });
+                                          }
+                                        });
+                                      }
                                     });
                                   }
                                 },

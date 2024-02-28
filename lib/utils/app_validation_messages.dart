@@ -60,5 +60,4 @@ class AppValidationMessages {
     OTP
  ***/
   static const String OTP_CODE = "Please enter the complete otp";
-
 }

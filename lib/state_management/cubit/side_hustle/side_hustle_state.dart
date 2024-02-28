@@ -19,6 +19,7 @@ class SideHustleState {
   bool sideHustleDetailLoading;
   CartModel? cartModel;
   bool cartLoading;
+  String? deliveryAddressCart;
 
   SideHustleState(
       {this.images,
@@ -38,7 +39,8 @@ class SideHustleState {
       this.sideHustleDetailModel,
       this.sideHustleDetailLoading = true,
       this.cartModel,
-      this.cartLoading = false});
+      this.cartLoading = false,
+      this.deliveryAddressCart});
 
   SideHustleState copyWith(
       {List<Images>? images,
@@ -58,7 +60,8 @@ class SideHustleState {
       SideHustleDetailModel? sideHustleDetailModel,
       bool? sideHustleDetailLoading,
       CartModel? cartModel,
-      bool? cartLoading}) {
+      bool? cartLoading,
+      String? deliveryAddressCart}) {
     return SideHustleState(
         images: images ?? this.images,
         editProductLoading: editProductLoading ?? this.editProductLoading,
@@ -81,6 +84,7 @@ class SideHustleState {
         sideHustleDetailLoading:
             sideHustleDetailLoading ?? this.sideHustleDetailLoading,
         cartModel: cartModel ?? this.cartModel,
-        cartLoading: cartLoading ?? this.cartLoading);
+        cartLoading: cartLoading ?? this.cartLoading,
+        deliveryAddressCart: deliveryAddressCart ?? this.deliveryAddressCart);
   }
 }

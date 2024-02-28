@@ -8,6 +8,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/reset_bloc.dart';
+import 'package:side_hustle/state_management/models/profile_model.dart';
 import 'package:side_hustle/state_management/models/resume_model.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/auth/auth_provider.dart';
@@ -519,8 +520,7 @@ class AuthCubit extends Cubit<AuthState> {
   /// Get About Us
   Future getAboutUsCubit(
       {required BuildContext context, required bool mounted}) async {
-    String? x;
-    emit(state.copyWith(termsAndConditions: x));
+    emit(state.copyWith(termsAndConditions: ""));
 
     EasyLoading.show();
 
@@ -585,6 +585,68 @@ class AuthCubit extends Cubit<AuthState> {
       EasyLoading.dismiss();
       emit(state.copyWith(getResumeLoading: false));
       AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get Profile
+  Future getProfileCubit(
+      {required BuildContext context, required bool mounted}) async {
+    // EasyLoading.show();
+
+    final response =
+        await getProfileProvider(apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      EasyLoading.dismiss();
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final ProfileModel profileModel = ProfileModel.fromJson(response.data);
+        print("status: ${profileModel.status} response: ${profileModel.data}");
+        emit(state.copyWith(profileModel: profileModel));
+      }
+
+      /// Failed
+      else {
+        print("status: ${response.data["status"]} response: ${response.data}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Allow Push
+  Future allowPushCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int isAllow}) async {
+    EasyLoading.show();
+
+    final response = await allowPushProvider(
+        apiToken: state.userModel?.data?.apiToken, isAllow: isAllow);
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final UserModel userModel = UserModel.fromJson(response.data);
+        print("status: ${userModel.status} response: ${userModel.data}");
+        await prefs.saveUser(userModel);
+        emit(state.copyWith(userModel: userModel));
+        EasyLoading.dismiss();
+      }
+
+      /// Failed
+      else {
+        print("status: ${response.data["status"]} response: ${response.data}");
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+      }
+    } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
     }
   }
 

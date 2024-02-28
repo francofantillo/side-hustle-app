@@ -17,6 +17,8 @@ class API {
   static const String ABOUT_US = "${BASE_URL}/about-us";
   static const String PRIVACY_POLICY = "${BASE_URL}/privacy-policy";
   static const String HOW_TO_BE_HUSTLER = "${BASE_URL}/how-to-be-hustler";
+  static const String GET_PROFILE = "${BASE_URL}/your-profile";
+  static const String ALLOW_PUSH = "${BASE_URL}/is-notification";
 
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";
@@ -71,5 +73,6 @@ class API {
   static const String ADD_TO_CART = "${BASE_URL}/add-cart";
   static const String UPDATE_CART = "${BASE_URL}/update-cart";
   static const String GET_SIDEHUSTLE_CART = "${BASE_URL}/view-cart";
+  static const String CHECKOUT = "${BASE_URL}/place-order";
 
 }

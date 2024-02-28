@@ -224,8 +224,8 @@ class JobsCubit extends Cubit<JobsState> {
         // images: state.itemImagesFile,
         images: itemImagesFile,
         jobDate: dateTextController.text,
-        jobTime: DateTimeConversions.convertTo24HourFormat(
-            startTimeTextController.text),
+          jobTime: DateTimeConversions.convertTo24HourFormat(
+              startTimeTextController.text),
         endTime: DateTimeConversions.convertTo24HourFormat(
             endTimeTextController.text),
         description: descriptionTextController.text,

@@ -276,6 +276,25 @@ Future<Response?> getHustlerProvider({String? apiToken}) async {
   return response;
 }
 
+/// Get Profile
+Future<Response?> getProfileProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.GET_PROFILE}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.GET_PROFILE, token: apiToken);
+  return response;
+}
+
+/// Allow Push
+Future<Response?> allowPushProvider({String? apiToken, int isAllow = 0}) async {
+  final data = {"is_notify": isAllow};
+  print(
+      "*****************\nurl: ${API.ALLOW_PUSH}\n$data\n**************************");
+  final response = await putRequestProvider(
+      path: API.ALLOW_PUSH, data: data, token: apiToken);
+  return response;
+}
+
 /// Logout
 Future<Response?> logoutProvider({String? apiToken}) async {
   print("*****************\nurl: ${API.LOGOUT}\n**************************");

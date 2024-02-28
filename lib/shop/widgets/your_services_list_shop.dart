@@ -40,7 +40,7 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
           : state.yourShopModel?.shopData?.services?.isEmpty ?? true
               ? const Expanded(
                   child: CustomErrorWidget(
-                      errorMessage: AppStrings.errorMessageJobs),
+                      errorMessage: AppStrings.errorMessageNoItemsFound),
                 )
               : Expanded(
                   child: ListView.builder(
@@ -54,6 +54,8 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                     // Replace with your item count
                     itemBuilder: (context, index) {
                       // Replace with your horizontal list item
+                      print(
+                          "Service Price: ${state.yourShopModel?.shopData?.services?[index].price}");
                       return Padding(
                         // padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                         padding: EdgeInsets.only(

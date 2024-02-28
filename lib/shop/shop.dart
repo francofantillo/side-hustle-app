@@ -64,11 +64,14 @@ class _ShopScreenState extends State<ShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (contextBuilder) {
+    return BlocBuilder<SideHustleCubit, SideHustleState>(
+        builder: (contextBuilder, state) {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return BackgroundWidget(
         showAppBar: true,
-        appBarTitle: AppStrings.shop,
+        // appBarTitle: AppStrings.shop,
+        appBarTitle: state.otherUserShopModel?.shopData
+            ?.shopDetail?.name,
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
@@ -78,7 +81,8 @@ class _ShopScreenState extends State<ShopScreen> {
           padding: const EdgeInsets.all(24.0),
           child: BlocBuilder<SideHustleCubit, SideHustleState>(
               builder: (context, state) {
-            return (state.cartModel?.data?.cartDetails?.isEmpty ?? true) || state.otherUserShopLoading
+            return (state.cartModel?.data?.cartDetails?.isEmpty ?? true) ||
+                    state.otherUserShopLoading
                 ? const SizedBox.shrink()
                 : CustomMaterialButton(
                     borderRadius: 14,

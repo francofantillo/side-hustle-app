@@ -62,15 +62,25 @@ class _YourShopScreenState extends State<YourShopScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (contextBuilder) {
+    return BlocBuilder<SideHustleCubit, SideHustleState>(
+        builder: (contextBuilder, state) {
       print('switched to: ${_tabIndexBasicToggle.value}');
       return BackgroundWidget(
         showAppBar: true,
-        appBarTitle: isEdit ? AppStrings.editShop : AppStrings.shop,
+        // appBarTitle: isEdit ? AppStrings.editShop : AppStrings.shop,
+        appBarTitle: isEdit ? AppStrings.editShop : state.yourShopModel?.shopData?.shopDetail?.name,
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
-          child:
-              backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
+          child: backButton(
+              onPressed: () {
+                if (isEdit) {
+                  isEdit = false;
+                  setState(() {});
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+              iconSize: 16),
         ),
         actions: [
           BlocBuilder<SideHustleCubit, SideHustleState>(
@@ -183,17 +193,23 @@ class _YourShopScreenState extends State<YourShopScreen> {
                                           children: [
                                             CustomTextFormField(
                                               controller:
-                                                  _bloc.titleTextController,
+                                                  _bloc.shopNameTextController,
                                               hintText: AppStrings.shopName,
                                               maxLines: 1,
                                             ),
                                             height(6.w),
                                             CustomTextFormField(
-                                              controller:
-                                                  _bloc.zipCodeTextController,
+                                              controller: _bloc
+                                                  .shopZipCodeTextController,
                                               hintText: AppStrings.zipCode,
                                               maxLines: 2,
                                               height: 75.h,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatter: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
                                               // height: 0.16.sh
                                             )
                                           ],
@@ -274,10 +290,10 @@ class _YourShopScreenState extends State<YourShopScreen> {
                               height: 45.h,
                               isReadonly: true,
                               onTap: () async {
-                                await _bloc.selectLocation(
+                                await _bloc.selectShopLocation(
                                     context: context, mounted: mounted);
                               },
-                              controller: _bloc.locationTextController,
+                              controller: _bloc.shopLocationTextController,
                               // height: 0.16.sh
                             ),
                           )

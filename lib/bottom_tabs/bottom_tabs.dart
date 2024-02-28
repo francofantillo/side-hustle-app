@@ -28,10 +28,11 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
 
   @override
   void initState() {
-    _selectedIndex = widget.currentIndex!;
-    _pageController = PageController(initialPage: _selectedIndex);
+
     // print("selectedIndex: $_selectedIndex");
     super.initState();
+    _selectedIndex = widget.currentIndex!;
+    _pageController = PageController(initialPage: _selectedIndex);
   }
 
   @override
@@ -74,17 +75,5 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
         ],
       ),
     );
-  }
-
-  String getTitle() {
-    if (_selectedIndex == 1) {
-      return "${AppStrings.wantedJob}s";
-    } else if (_selectedIndex == 2) {
-      return "${AppStrings.wantedJob}s";
-    } else if (_selectedIndex == 3) {
-      return "${AppStrings.wantedJob}s";
-    } else {
-      return "${AppStrings.wantedJob}s";
-    }
   }
 }

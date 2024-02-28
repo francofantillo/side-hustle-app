@@ -433,3 +433,14 @@ Future<Response?> getSideHustleCartProvider({String? apiToken}) async {
       await getRequestProvider(path: API.GET_SIDEHUSTLE_CART, token: apiToken);
   return response;
 }
+
+/// Checkout
+Future<Response?> checkoutProvider(
+    {int? cartId, String? apiToken}) async {
+  final data = {"cart_id": cartId};
+  print(
+      "*****************\nurl: ${API.CHECKOUT}\n$data\n**************************");
+  final response = await postRequestProvider(
+      path: API.CHECKOUT, data: data, token: apiToken);
+  return response;
+}

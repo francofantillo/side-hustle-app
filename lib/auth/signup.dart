@@ -100,7 +100,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.firstName),
                   inputFormatter: [
-                    LengthLimitingTextInputFormatter(Constants.firstNameFieldCharacterLength),
+                    LengthLimitingTextInputFormatter(
+                        Constants.firstNameFieldCharacterLength),
                   ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
@@ -112,7 +113,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.lastName),
                   inputFormatter: [
-                    LengthLimitingTextInputFormatter(Constants.firstNameFieldCharacterLength),
+                    LengthLimitingTextInputFormatter(
+                        Constants.firstNameFieldCharacterLength),
                   ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
@@ -123,7 +125,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   label: AppStrings.emailAddress,
                   fieldValidator: (value) => value?.validateEmail,
                   inputFormatter: [
-                    LengthLimitingTextInputFormatter(Constants.emailFieldCharacterLength),
+                    LengthLimitingTextInputFormatter(
+                        Constants.emailFieldCharacterLength),
                   ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
@@ -152,10 +155,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   isShowShadow: true,
                   isShowBoarder: false,
                   label: AppStrings.zipCode,
+                  keyboardType: TextInputType.number,
                   fieldValidator: (value) =>
                       value?.validateEmpty(AppStrings.zipCode),
                   inputFormatter: [
-                    LengthLimitingTextInputFormatter(Constants.zipCodeFieldCharacterLength),
+                    LengthLimitingTextInputFormatter(
+                        Constants.zipCodeFieldCharacterLength),
+                    FilteringTextInputFormatter.digitsOnly,
                   ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
@@ -168,7 +174,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   label: AppStrings.password,
                   fieldValidator: (value) => value?.validatePassword,
                   inputFormatter: [
-                    LengthLimitingTextInputFormatter(Constants.passwordFieldCharacterLength),
+                    LengthLimitingTextInputFormatter(
+                        Constants.passwordFieldCharacterLength),
                   ],
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
@@ -178,7 +185,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       _bloc.passwordControllerSignup.text,
                       _bloc.confirmPasswordControllerSignup.text),
                   inputFormatter: [
-                    LengthLimitingTextInputFormatter(Constants.passwordFieldCharacterLength),
+                    LengthLimitingTextInputFormatter(
+                        Constants.passwordFieldCharacterLength),
                   ],
                   isShowShadow: true,
                   isShowBoarder: false,

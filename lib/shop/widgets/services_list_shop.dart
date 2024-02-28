@@ -67,7 +67,8 @@ class _ServicesListShopState extends State<ServicesListShop> {
                           imagePath: state.otherUserShopModel?.shopData
                               ?.services?[index].image,
                           price:
-                              AlphaAppData.sideHustleServicesList[index].price,
+                          state.otherUserShopModel?.shopData
+                              ?.services?[index].price?.toStringAsFixed(2),
                           onTapAdd: () async {
                             _bloc
                                 .checkIsOtherShop(
