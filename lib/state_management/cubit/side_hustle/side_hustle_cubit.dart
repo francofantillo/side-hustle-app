@@ -103,9 +103,9 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   }
 
   setIsProductOrServiceFromYourShop(
-      {required bool isProductOrServiceFromHome}) {
+      {required bool isProductOrServiceFromYourShop}) {
     emit(
-        state.copyWith(isProductOrServiceFromHome: isProductOrServiceFromHome));
+        state.copyWith(isProductOrServiceFromYourShop: isProductOrServiceFromYourShop));
   }
 
   /// Select Location
@@ -172,7 +172,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
         final id = yourShopModel.shopData?.products?.last.id;
         AppUtils.showToast(response.data["message"]);
         if (mounted) {
-          if (state.isProductOrServiceFromHome) {
+          if (state.isProductOrServiceFromYourShop) {
             Navigator.pop(context);
             Navigator.pop(context);
           } else {
@@ -242,7 +242,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
         final id = yourShopModel.shopData?.services?.last.id;
         AppUtils.showToast(response.data["message"]);
         if (mounted) {
-          if (state.isProductOrServiceFromHome) {
+          if (state.isProductOrServiceFromYourShop) {
             Navigator.pop(context);
             Navigator.pop(context);
           } else {

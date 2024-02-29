@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/home/widgets/home_first_item_widget.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/shop/shop.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -47,35 +50,45 @@ class FirstHomeListItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: horizontalListSize, // Set the desired height
-          width: 1.sw,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-            shrinkWrap: true,
-            itemCount: itemsList?.length ?? 0, // Replace with your item count
-            itemBuilder: (context, index) {
-              // Replace with your horizontal list item
-              return Material(
-                child: InkWell(
-                  onTap: (){
-                    Navigator.pushNamed(context, AppRoutes.shopScreenRoute);
-                  },
-                  child: Padding(
-                    // padding: const EdgeInsets.only(right: 2.0, left: 8.0, top: 8),
-                    padding: const EdgeInsets.only(top: 8, left: 6),
-                    child: HomeFirstItemWidget(
-                      title: itemsList?[index].name,
-                      assetImage: itemsList?[index].imagePath,
-                      boarderColor: AppColors.homeFirstItemOutlineColor,
+        BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+          return SizedBox(
+            height: horizontalListSize, // Set the desired height
+            width: 1.sw,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              physics: const AlwaysScrollableScrollPhysics(
+                  parent: BouncingScrollPhysics()),
+              shrinkWrap: true,
+              itemCount: state.dashboardModel?.data?.shops?.length ?? 0,
+              // Replace with your item count
+              itemBuilder: (context, index) {
+                // Replace with your horizontal list item
+                print("shopId: ${state
+                    .dashboardModel?.data?.shops?[index].shopId}");
+                return Material(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.shopScreenRoute,
+                          arguments: ShopScreen(
+                            shopId: state
+                                .dashboardModel?.data?.shops?[index].shopId,
+                          ));
+                    },
+                    child: Padding(
+                      // padding: const EdgeInsets.only(right: 2.0, left: 8.0, top: 8),
+                      padding: const EdgeInsets.only(top: 8, left: 6),
+                      child: HomeFirstItemWidget(
+                        title: state.dashboardModel?.data?.shops?[index].name,
+                        image: state.dashboardModel?.data?.shops?[index].image,
+                        boarderColor: AppColors.homeFirstItemOutlineColor,
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
-          ),
-        ),
+                );
+              },
+            ),
+          );
+        }),
       ],
     );
   }

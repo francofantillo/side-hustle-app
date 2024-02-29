@@ -8,7 +8,7 @@ class SideHustleState {
   bool yourShopLoading;
   YourShopModel? otherUserShopModel;
   bool otherUserShopLoading;
-  bool isProductOrServiceFromHome;
+  bool isProductOrServiceFromYourShop;
   GetEditSideHustleModel? editSideHustleModel;
   bool editSideHustleLoading;
   SideHustleModel? sideHustleModel;
@@ -29,7 +29,7 @@ class SideHustleState {
       this.otherUserShopLoading = true,
       this.yourShopModel,
       this.yourShopLoading = true,
-      this.isProductOrServiceFromHome = false,
+      this.isProductOrServiceFromYourShop = false,
       this.editSideHustleModel,
       this.editSideHustleLoading = false,
       this.sideHustleModel,
@@ -50,7 +50,7 @@ class SideHustleState {
       bool? yourShopLoading,
       YourShopModel? otherUserShopModel,
       bool? otherUserShopLoading,
-      bool? isProductOrServiceFromHome,
+      bool? isProductOrServiceFromYourShop,
       GetEditSideHustleModel? editSideHustleModel,
       bool? editSideHustleLoading,
       SideHustleModel? sideHustleModel,
@@ -70,8 +70,8 @@ class SideHustleState {
         yourShopLoading: yourShopLoading ?? this.yourShopLoading,
         otherUserShopModel: otherUserShopModel ?? this.otherUserShopModel,
         otherUserShopLoading: otherUserShopLoading ?? this.otherUserShopLoading,
-        isProductOrServiceFromHome:
-            isProductOrServiceFromHome ?? this.isProductOrServiceFromHome,
+        isProductOrServiceFromYourShop:
+            isProductOrServiceFromYourShop ?? this.isProductOrServiceFromYourShop,
         editSideHustleModel: editSideHustleModel ?? this.editSideHustleModel,
         editSideHustleLoading:
             editSideHustleLoading ?? this.editSideHustleLoading,

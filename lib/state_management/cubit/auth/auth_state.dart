@@ -8,6 +8,8 @@ class AuthState {
   String? termsAndConditions;
   String? hustlerBookUrl;
   ProfileModel? profileModel;
+  DashboardModel? dashboardModel;
+  bool dashboardLoading;
 
   AuthState(
       {this.userModel,
@@ -16,7 +18,9 @@ class AuthState {
       this.termsAndConditions,
       this.hustlerBookUrl,
       this.hobbies,
-      this.profileModel});
+      this.profileModel,
+      this.dashboardModel,
+      this.dashboardLoading = true});
 
   AuthState copyWith(
       {UserModel? userModel,
@@ -25,7 +29,9 @@ class AuthState {
       String? termsAndConditions,
       String? hustlerBookUrl,
       List<String>? hobbies,
-      ProfileModel? profileModel}) {
+      ProfileModel? profileModel,
+      DashboardModel? dashboardModel,
+      bool? dashboardLoading}) {
     return AuthState(
         userModel: userModel ?? this.userModel,
         resumeModel: resumeModel ?? this.resumeModel,
@@ -33,6 +39,8 @@ class AuthState {
         hobbies: hobbies ?? this.hobbies,
         termsAndConditions: termsAndConditions ?? this.termsAndConditions,
         hustlerBookUrl: hustlerBookUrl ?? this.hustlerBookUrl,
-        profileModel: profileModel ?? this.profileModel);
+        profileModel: profileModel ?? this.profileModel,
+        dashboardModel: dashboardModel ?? this.dashboardModel,
+        dashboardLoading: dashboardLoading ?? this.dashboardLoading);
   }
 }

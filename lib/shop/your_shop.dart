@@ -334,7 +334,7 @@ class _YourShopScreenState extends State<YourShopScreen> {
                                     onPressed: () {
                                       print("pressed Dialogue");
                                       _bloc.setIsProductOrServiceFromYourShop(
-                                          isProductOrServiceFromHome: true);
+                                          isProductOrServiceFromYourShop: true);
                                       if (isProductSelected) {
                                         /// reset to Default Value
                                         isProductSelected = true;

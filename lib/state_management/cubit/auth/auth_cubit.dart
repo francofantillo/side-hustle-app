@@ -8,6 +8,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/reset_bloc.dart';
+import 'package:side_hustle/state_management/models/dashboard_model.dart';
 import 'package:side_hustle/state_management/models/profile_model.dart';
 import 'package:side_hustle/state_management/models/resume_model.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
@@ -612,6 +613,42 @@ class AuthCubit extends Cubit<AuthState> {
         AppUtils.showToast(response.data["message"]);
       }
     } else {
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get DashBoard
+  Future getDashboardCubit(
+      {required BuildContext context, required bool mounted}) async {
+    emit(state.copyWith(
+        dashboardLoading: true, dashboardModel: DashboardModel()));
+    EasyLoading.show();
+
+    final response =
+        await getDashboardProvider(apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final DashboardModel dashboardModel =
+            DashboardModel.fromJson(response.data);
+        print(
+            "status: ${dashboardModel.status} response: ${dashboardModel.data}");
+        emit(state.copyWith(
+            dashboardLoading: false, dashboardModel: dashboardModel));
+        EasyLoading.dismiss();
+      }
+
+      /// Failed
+      else {
+        print("status: ${response.data["status"]} response: ${response.data}");
+        emit(state.copyWith(dashboardLoading: false));
+        EasyLoading.dismiss();
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      emit(state.copyWith(dashboardLoading: false));
       EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }

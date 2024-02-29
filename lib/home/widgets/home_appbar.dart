@@ -51,6 +51,7 @@ class HomeAppBar extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 textWidget(
                     text: AppStrings.welcomeHome,

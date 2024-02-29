@@ -3,6 +3,7 @@ class API {
 
   /// Base Url
   static const String BASE_URL = "https://side-hustle.trangotech.dev/api";
+  static const String BASE_URL_IMAGE = "https://side-hustle.trangotech.dev/";
 
   /// Auth
   static const String SIGNUP = "${BASE_URL}/auth/register";
@@ -19,6 +20,7 @@ class API {
   static const String HOW_TO_BE_HUSTLER = "${BASE_URL}/how-to-be-hustler";
   static const String GET_PROFILE = "${BASE_URL}/your-profile";
   static const String ALLOW_PUSH = "${BASE_URL}/is-notification";
+  static const String GET_DASHBOARD = "${BASE_URL}/dashboard";
 
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";

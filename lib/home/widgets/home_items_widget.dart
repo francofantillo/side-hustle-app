@@ -14,27 +14,27 @@ import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class HomeItemsWidget extends StatelessWidget {
   final String? title,
-      subTitle,
+      desc,
       price,
       userProfile,
       userName,
       userRating,
       imagePath,
+  jobType,
       commentIconPath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
-  final bool isEvent;
   final Function()? onTap;
 
   const HomeItemsWidget(
       {super.key,
         this.title,
-        this.subTitle,
+        this.desc,
         this.onTap,
         this.price,
         this.userProfile,
         this.userName,
-        this.isEvent = false,
+        this.jobType,
         this.userRating,
         this.imagePath,
         this.commentIconPath,
@@ -75,7 +75,8 @@ class HomeItemsWidget extends StatelessWidget {
                     RoundedCornersImage(
                       imageHeight: imageHeight,
                       imageWidth: AppDimensions.listItemWidth,
-                      assetImage: imagePath,
+                      image: imagePath,
+                      assetImage: AssetsPath.imageLoadError,
                       boarderColor: boarderColor,
                     ),
                     Expanded(
@@ -109,9 +110,7 @@ class HomeItemsWidget extends StatelessWidget {
                                         fontSize: AppDimensions.textSizeSmall,
                                         color: AppColors.textBlackColor),
                                     textWidget(
-                                        text: isEvent
-                                            ? AppStrings.perHead
-                                            : AppStrings.perHour,
+                                        text: AppStrings.perHour,
                                         textAlign: TextAlign.end,
                                         fontSize: AppDimensions.textSizeTiny),
                                   ],
@@ -124,7 +123,7 @@ class HomeItemsWidget extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: textWidget(
-                                    text: subTitle,
+                                    text: desc,
                                     maxLines: 2,
                                     fontSize: AppDimensions.textSize10,
                                   ),
@@ -154,7 +153,7 @@ class HomeItemsWidget extends StatelessWidget {
                                     child: CircularCacheImageWidget(
                                       showLoading: false,
                                       image: userProfile,
-                                      // assetImage: userProfile,
+                                      assetImage: AssetsPath.placeHolder,
                                       boarderColor: AppColors.primaryColor,
                                       imageHeight: imageHeight! * .2,
                                       imageWidth: imageHeight! * .2,

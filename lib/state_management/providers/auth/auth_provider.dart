@@ -285,6 +285,15 @@ Future<Response?> getProfileProvider({String? apiToken}) async {
   return response;
 }
 
+/// Get Dashboard
+Future<Response?> getDashboardProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.GET_DASHBOARD}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.GET_DASHBOARD, token: apiToken);
+  return response;
+}
+
 /// Allow Push
 Future<Response?> allowPushProvider({String? apiToken, int isAllow = 0}) async {
   final data = {"is_notify": isAllow};

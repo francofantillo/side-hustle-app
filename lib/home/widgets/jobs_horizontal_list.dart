@@ -76,12 +76,11 @@ class JobsHorizontalListWidget extends StatelessWidget {
                     }
                   },
                   commentIconPath: AssetsPath.comment,
-                  isEvent: isEvent,
                   imageWidth: 1.sw,
                   imageHeight: horizontalListSize,
                   boarderColor: AppColors.itemBGColor,
                   title: itemsList?[index].title,
-                  subTitle: itemsList?[index].subTitle,
+                  desc: itemsList?[index].subTitle,
                   imagePath: itemsList?[index].imagePath,
                   price: itemsList?[index].price,
                   userName: itemsList?[index].userName,

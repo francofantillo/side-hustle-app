@@ -170,7 +170,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Expanded(
                       child: ProfileJobsWidget(
                           name: AppStrings.myJobs,
-                          myJobsCount: state.profileModel?.data?.myJobs?.toString(),
+                          myJobsCount:
+                              state.profileModel?.data?.myJobs?.toString(),
                           onTap: () {
                             Navigator.pushNamed(
                                 context, AppRoutes.myJobsScreenRoute);
@@ -181,13 +182,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: ProfileJobsWidget(
-                            name: AppStrings.jobsCompleted, myJobsCount: state.profileModel?.data?.completedJobs?.toString()),
+                            name: AppStrings.jobsCompleted,
+                            myJobsCount: state.profileModel?.data?.completedJobs
+                                ?.toString()),
                       ),
                     ),
                     Expanded(
                       child: ProfileJobsWidget(
                           name: AppStrings.myEvents,
-                          myJobsCount: state.profileModel?.data?.myEvents?.toString(),
+                          myJobsCount:
+                              state.profileModel?.data?.myEvents?.toString(),
                           onTap: () {
                             Navigator.pushNamed(
                                 context, AppRoutes.myEventsScreenRoute);
