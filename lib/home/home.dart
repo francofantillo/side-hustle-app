@@ -115,85 +115,83 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: AppDimensions.rootPadding + 6,
-                                  right: AppDimensions.rootPadding,
-                                  top: AppDimensions.rootPadding),
-                              child: const HomeLocationWidget(),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: AppDimensions.rootPadding + 10.w,
-                                  right: AppDimensions.rootPadding,
-                                  top: AppDimensions.rootPadding + 0),
-                              child: textWidget(
-                                  text: AppStrings.blessTheseBusinesses,
-                                  fontSize: AppDimensions.textSizeNormal,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: AppFont.gilroyBold,
-                                  color: AppColors.textBlackColor),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: AppDimensions.rootPadding,
-                                  right: AppDimensions.rootPadding,
-                                  top: AppDimensions.rootPadding - 8.w),
-                              child: BannerSlider(
-                                hideCameraIcon: true,
-                                indicatorLength:
-                                    state.dashboardModel?.data?.banners?.length,
-                                responseImages:
-                                    state.dashboardModel?.data?.banners,
-                              ),
-                            ),
-                            // Horizontal ListView
-                            Padding(
-                              padding: EdgeInsets.only(
+                      Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: AppDimensions.rootPadding + 6,
+                                right: AppDimensions.rootPadding,
+                                top: AppDimensions.rootPadding),
+                            child: const HomeLocationWidget(),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: AppDimensions.rootPadding + 10.w,
+                                right: AppDimensions.rootPadding,
+                                top: AppDimensions.rootPadding + 0),
+                            child: textWidget(
+                                text: AppStrings.blessTheseBusinesses,
+                                fontSize: AppDimensions.textSizeNormal,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: AppFont.gilroyBold,
+                                color: AppColors.textBlackColor),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
                                 left: AppDimensions.rootPadding,
                                 right: AppDimensions.rootPadding,
-                              ),
-                              child: FirstHomeListItemWidget(
-                                horizontalListSize:
-                                    AppDimensions.homeFirstHorizontalListSize,
-                                itemsList: AlphaAppData.homeFirstList,
-                                // onTapLabel: () {
-                                //   print("Clicked");
-                                // },
-                              ),
+                                top: AppDimensions.rootPadding - 8.w),
+                            child: BannerSlider(
+                              hideCameraIcon: true,
+                              indicatorLength:
+                                  state.dashboardModel?.data?.banners?.length,
+                              responseImages:
+                                  state.dashboardModel?.data?.banners,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: AppDimensions.rootPadding,
-                                  right: AppDimensions.rootPadding,
-                                  bottom: 6),
-                              child: JobsAroundYouList(
-                                title: "Jobs around you",
-                                horizontalListSize:
-                                    AppDimensions.listItemHeight,
-                                itemsList: AlphaAppData
-                                    .jobsAndEventsList[index].itemList,
-                              ),
+                          ),
+                          // Horizontal ListView
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: AppDimensions.rootPadding,
+                              right: AppDimensions.rootPadding,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: AppDimensions.rootPadding,
-                                  right: AppDimensions.rootPadding,
-                                  bottom: 6),
-                              child: JobsAroundYouList(
-                                title: "Events around you",
-                                horizontalListSize:
-                                    AppDimensions.listItemHeight,
-                                itemsList: AlphaAppData
-                                    .jobsAndEventsList[index].itemList,
-                              ),
+                            child: FirstHomeListItemWidget(
+                              horizontalListSize:
+                                  AppDimensions.homeFirstHorizontalListSize,
+                              itemsList: AlphaAppData.homeFirstList,
+                              // onTapLabel: () {
+                              //   print("Clicked");
+                              // },
                             ),
-                            height(100),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: AppDimensions.rootPadding,
+                                right: AppDimensions.rootPadding,
+                                bottom: 6),
+                            child: JobsAroundYouList(
+                              title: "Jobs around you",
+                              horizontalListSize:
+                                  AppDimensions.listItemHeight,
+                              itemsList: AlphaAppData
+                                  .jobsAndEventsList[index].itemList,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: AppDimensions.rootPadding,
+                                right: AppDimensions.rootPadding,
+                                bottom: 6),
+                            child: JobsAroundYouList(
+                              title: "Events around you",
+                              horizontalListSize:
+                                  AppDimensions.listItemHeight,
+                              itemsList: AlphaAppData
+                                  .jobsAndEventsList[index].itemList,
+                            ),
+                          ),
+                          height(100),
+                        ],
                       ),
                     ],
                   ),

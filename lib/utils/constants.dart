@@ -16,4 +16,15 @@ class Constants {
   static const int phoneFieldCharacterLength = 40;
   static const int priceFieldCharacterLength = 7;
   static const int descriptionFieldCharacterLength = 500;
+
+  /// Notifications
+  static const String NOTIFICATION_ID = "side_hustle_1";
+  static const String NOTIFICATION_TITLE = "Title";
+  static const String NOTIFICATION_DESCRIPTION = "Description";
+
+  /// Local Notifications
+  static const String LOCAL_NOTIFICATION_ID = "side_hustle_2";
+  static const String LOCAL_NOTIFICATION_TITLE = "Title";
+  static const String LOCAL_NOTIFICATION_DESCRIPTION = "Description";
+
 }

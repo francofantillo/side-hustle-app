@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "35016346526",
+    "project_id": "side-hustle-763af",
+    "storage_bucket": "side-hustle-763af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35016346526:android:6021f22add49bcbeb1a48f",
+        "android_client_info": {
+          "package_name": "com.app.sidehustle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUpaYJUZZZrvcb7IabAgYBwJlfPHsxt7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,6 +16,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/my_behaviour.dart';
 import 'package:side_hustle/utils/screen_design_size.dart';
+import 'package:side_hustle/utils/service/firebase_service.dart';
 
 import '../utils/app_font.dart';
 
@@ -29,12 +30,27 @@ class BaseWidget extends StatefulWidget {
 }
 
 class _BaseWidgetState extends State<BaseWidget> {
+
+  @override
+  void initState() {
+    _setNotifications();
+    super.initState();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     print(
         "ScreenDesignSize sh: ${ScreenDesignSize.sh}, ScreenDesignSize sw: ${ScreenDesignSize.sw}");
     ScreenDesignSize.setDesignSize(context: context);
+  }
+
+  void _setNotifications() async {
+    await FirebaseMessagingService().initializeNotificationSettings();
+    FirebaseMessagingService().foregroundNotification();
+    FirebaseMessagingService().backgroundTapNotification();
+    final String? deviceToken = await FirebaseMessagingService().getToken();
+    print("Firebase Token: $deviceToken");
   }
 
   @override
