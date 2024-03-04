@@ -28,88 +28,97 @@ class JobsAroundYouList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 8.0, top: 4, right: 8, bottom: 8),
-          child: InkWell(
-            onTap: onTapLabel,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                textWidget(
-                    text: title,
-                    fontFamily: AppFont.gilroyBold,
-                    fontSize: AppDimensions.textSizeNormal,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textBlackColor),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: AppDimensions.itemsArrowForwardIconSize,
-                )
-              ],
-            ),
-          ),
-        ),
-        // Horizontal ListView
-        SizedBox(
-          height: horizontalListSize, // Set the desired height
-          width: 1.sw,
-          child: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
-            return ListView.builder(
-              shrinkWrap: true,
-              physics: const AlwaysScrollableScrollPhysics(
-                  parent: BouncingScrollPhysics()),
-              scrollDirection: Axis.horizontal,
-              itemCount: state.dashboardModel?.data?.jobs?.length ?? 0,
-              // Replace with your item count
-              itemBuilder: (context, index) {
-                // Replace with your horizontal list item
-                return Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: HomeItemsWidget(
-                    onTap: () {
-                      Navigator.pushNamed(
-                          context, AppRoutes.applyForJobScreenRoute,
-                          arguments: ApplyForJob(
-                            jobId:
-                                state.dashboardModel?.data?.jobs?[index].jobId,
-                          ));
-                    },
-                    commentIconPath: AssetsPath.comment,
-                    // jobType: state.dashboardModel?.data?.jobs?[index].,
-                    imageWidth: 1.sw,
-                    imageHeight: horizontalListSize,
-                    boarderColor: AppColors.itemBGColor,
-                    title: state.dashboardModel?.data?.jobs?[index].name,
-                    desc:
-                        state.dashboardModel?.data?.jobs?[index].description,
-                    imagePath: state.dashboardModel?.data?.jobs?[index].image,
-                    price: state.dashboardModel?.data?.jobs?[index].bidAmount
-                        ?.toStringAsFixed(2),
-                    userName: state
-                        .dashboardModel?.data?.jobs?[index].userDetail?.name,
-                    userRating: state.dashboardModel?.data?.jobs?[index]
-                                .userDetail?.rating !=
-                            null
-                        ? state.dashboardModel!.data!.jobs![index].userDetail!
-                                    .rating ==
-                                0.0
-                            ? "0"
-                            : (state.dashboardModel?.data?.jobs?[index]
-                                .userDetail?.rating
-                                ?.toStringAsFixed(1))
-                        : "0",
-                    userProfile: state
-                        .dashboardModel?.data?.jobs?[index].userDetail?.image,
-                  ),
+    return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+      return state.dashboardLoading
+          ? const SizedBox.shrink()
+          : state.dashboardModel?.data?.jobs?.isEmpty ?? true
+              ? const SizedBox.shrink()
+              : Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 8.0, top: 4, right: 8, bottom: 8),
+                      child: InkWell(
+                        onTap: onTapLabel,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            textWidget(
+                                text: title,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeNormal,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textBlackColor),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: AppDimensions.itemsArrowForwardIconSize,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Horizontal ListView
+                    SizedBox(
+                      height: horizontalListSize, // Set the desired height
+                      width: 1.sw,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics()),
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                            state.dashboardModel?.data?.jobs?.length ?? 0,
+                        // Replace with your item count
+                        itemBuilder: (context, index) {
+                          // Replace with your horizontal list item
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 2.0),
+                            child: HomeItemsWidget(
+                              perHourFixedOrPerHead: AppStrings.perHour,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.applyForJobScreenRoute,
+                                    arguments: ApplyForJob(
+                                      jobId: state.dashboardModel?.data
+                                          ?.jobs?[index].jobId,
+                                    ));
+                              },
+                              commentIconPath: AssetsPath.comment,
+                              // jobType: state.dashboardModel?.data?.jobs?[index].,
+                              imageWidth: 1.sw,
+                              imageHeight: horizontalListSize,
+                              boarderColor: AppColors.itemBGColor,
+                              title:
+                                  state.dashboardModel?.data?.jobs?[index].name,
+                              desc: state.dashboardModel?.data?.jobs?[index]
+                                  .description,
+                              imagePath: state
+                                  .dashboardModel?.data?.jobs?[index].image,
+                              price: state
+                                  .dashboardModel?.data?.jobs?[index].bidAmount
+                                  ?.toStringAsFixed(2),
+                              userName: state.dashboardModel?.data?.jobs?[index]
+                                  .userDetail?.name,
+                              userRating: state.dashboardModel?.data
+                                          ?.jobs?[index].userDetail?.rating !=
+                                      null
+                                  ? state.dashboardModel!.data!.jobs![index]
+                                              .userDetail!.rating ==
+                                          0.0
+                                      ? "0"
+                                      : (state.dashboardModel?.data
+                                          ?.jobs?[index].userDetail?.rating
+                                          ?.toStringAsFixed(1))
+                                  : "0",
+                              userProfile: state.dashboardModel?.data
+                                  ?.jobs?[index].userDetail?.image,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 );
-              },
-            );
-          }),
-        ),
-      ],
-    );
+    });
   }
 }

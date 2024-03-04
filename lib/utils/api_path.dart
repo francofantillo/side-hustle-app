@@ -19,6 +19,7 @@ class API {
   static const String PRIVACY_POLICY = "${BASE_URL}/privacy-policy";
   static const String HOW_TO_BE_HUSTLER = "${BASE_URL}/how-to-be-hustler";
   static const String GET_PROFILE = "${BASE_URL}/your-profile";
+  static const String UPDATE_FCM = "${BASE_URL}/update-fcm-token";
   static const String ALLOW_PUSH = "${BASE_URL}/is-notification";
   static const String GET_DASHBOARD = "${BASE_URL}/dashboard";
 

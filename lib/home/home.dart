@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/home/widgets/events_around_you_list.dart';
 import 'package:side_hustle/home/widgets/home_appbar.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_location_widget.dart';
@@ -182,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 left: AppDimensions.rootPadding,
                                 right: AppDimensions.rootPadding,
                                 bottom: 6),
-                            child: JobsAroundYouList(
+                            child: EventsAroundYouList(
                               title: "Events around you",
                               horizontalListSize:
                                   AppDimensions.listItemHeight,

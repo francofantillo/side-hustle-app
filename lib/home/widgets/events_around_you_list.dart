@@ -6,15 +6,18 @@ import 'package:side_hustle/home/widgets/home_items_widget.dart';
 import 'package:side_hustle/job/apply_job.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
+import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/widgets/error/error_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class EventsAroundYouList extends StatelessWidget {
+class EventsAroundYouList extends StatefulWidget {
   final String? title;
   final List<ItemList>? itemsList;
   final double horizontalListSize;
@@ -28,94 +31,153 @@ class EventsAroundYouList extends StatelessWidget {
       required this.horizontalListSize});
 
   @override
+  State<EventsAroundYouList> createState() => _EventsAroundYouListState();
+}
+
+class _EventsAroundYouListState extends State<EventsAroundYouList> {
+  late final FavouritesCubit _blocFav;
+  late final AuthCubit _blocAuth;
+
+  @override
+  void initState() {
+    _blocFav = BlocProvider.of<FavouritesCubit>(context);
+    _blocAuth = BlocProvider.of<AuthCubit>(context);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 8.0, top: 4, right: 8, bottom: 8),
-          child: InkWell(
-            onTap: onTapLabel,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                textWidget(
-                    text: title,
-                    fontFamily: AppFont.gilroyBold,
-                    fontSize: AppDimensions.textSizeNormal,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textBlackColor),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: AppDimensions.itemsArrowForwardIconSize,
-                )
-              ],
-            ),
-          ),
-        ),
-        // Horizontal ListView
-        SizedBox(
-          height: horizontalListSize, // Set the desired height
-          width: 1.sw,
-          child: BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
-            return ListView.builder(
-              shrinkWrap: true,
-              physics: const AlwaysScrollableScrollPhysics(
-                  parent: BouncingScrollPhysics()),
-              scrollDirection: Axis.horizontal,
-              itemCount: state.dashboardModel?.data?.events?.length ?? 0,
-              // Replace with your item count
-              itemBuilder: (context, index) {
-                // Replace with your horizontal list item
-                return Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: HomeItemsWidget(
-                    onTap: () {
-                      // Navigator.pushNamed(
-                      //     context, AppRoutes.viewEventScreenRoute,
-                      //     arguments: ApplyForJob(
-                      //       jobId:
-                      //       state.dashboardModel?.data?.jobs?[index].jobId,
-                      //     ));
-                      Navigator.pushNamed(
-                          context, AppRoutes.viewEventScreenRoute,
-                          arguments: ViewEvent(
-                            id: state.dashboardModel?.data?.jobs?[index]
-                                .jobId, // make a separate class for selecting an image and user
-                          ));
-                    },
-                    commentIconPath: AssetsPath.comment,
-                    // jobType: state.dashboardModel?.data?.jobs?[index].,
-                    imageWidth: 1.sw,
-                    imageHeight: horizontalListSize,
-                    boarderColor: AppColors.itemBGColor,
-                    title: state.dashboardModel?.data?.events?[index].name,
-                    desc: state.dashboardModel?.data?.events?[index].purpose,
-                    imagePath: state.dashboardModel?.data?.events?[index].image,
-                    price: state.dashboardModel?.data?.events?[index].price
-                        ?.toStringAsFixed(2),
-                    userName: state
-                        .dashboardModel?.data?.events?[index].userDetail?.name,
-                    userRating: state.dashboardModel?.data?.events?[index]
-                                .userDetail?.rating !=
-                            null
-                        ? state.dashboardModel!.data!.events![index].userDetail!
-                                    .rating ==
-                                0.0
-                            ? "0"
-                            : (state.dashboardModel?.data?.events?[index]
-                                .userDetail?.rating
-                                ?.toStringAsFixed(1))
-                        : "0",
-                    userProfile: state
-                        .dashboardModel?.data?.events?[index].userDetail?.image,
-                  ),
+    return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+      return state.dashboardLoading
+          ? const SizedBox.shrink()
+          : state.dashboardModel?.data?.events?.isEmpty ?? true
+              ? const SizedBox.shrink()
+              : Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 8.0, top: 4, right: 8, bottom: 8),
+                      child: InkWell(
+                        onTap: widget.onTapLabel,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            textWidget(
+                                text: widget.title,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeNormal,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textBlackColor),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: AppDimensions.itemsArrowForwardIconSize,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Horizontal ListView
+                    SizedBox(
+                      height:
+                          widget.horizontalListSize, // Set the desired height
+                      width: 1.sw,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const AlwaysScrollableScrollPhysics(
+                            parent: BouncingScrollPhysics()),
+                        scrollDirection: Axis.horizontal,
+                        itemCount:
+                            state.dashboardModel?.data?.events?.length ?? 0,
+                        // Replace with your item count
+                        itemBuilder: (context, index) {
+                          // Replace with your horizontal list item
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 2.0),
+                            child: HomeItemsWidget(
+                              perHourFixedOrPerHead: AppStrings.perHead,
+                              // isFav: itemList?[index].isFavourite ?? 0,
+                              onTapFav: () async {
+                                print(
+                                    "Event Id: ${state.dashboardModel?.data?.events?[index].eventId}");
+                                // if (itemList?[index].isFavourite == 0) {
+                                if (true) {
+                                  await _blocFav
+                                      .addToFavCubit(
+                                          context: context,
+                                          mounted: mounted,
+                                          type: Favourites.Event.name,
+                                          id: state.dashboardModel?.data
+                                              ?.events?[index].eventId)
+                                      .then((value) async {
+                                    if (value == 1) {
+                                      // await _blocEvent.setFave(
+                                      //     index: index, isFavourite: value);
+                                    }
+                                  });
+                                } else {
+                                  await _blocFav
+                                      .removeFromFavCubit(
+                                          context: context,
+                                          mounted: mounted,
+                                          type: Favourites.Event.name,
+                                          id: state.dashboardModel?.data
+                                              ?.events?[index].eventId)
+                                      .then((value) async {
+                                    if (value == 1) {
+                                      // await _blocEvent.setFave(
+                                      //     index: index, isFavourite: 0);
+
+                                      /// 0 to unFav
+                                    }
+                                  });
+                                }
+                              },
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.viewEventScreenRoute,
+                                    arguments: ViewEvent(
+                                      id: state
+                                          .dashboardModel
+                                          ?.data
+                                          ?.events?[index]
+                                          .eventId, // make a separate class for selecting an image and user
+                                    ));
+                              },
+                              commentIconPath: AssetsPath.comment,
+                              imageWidth: 1.sw,
+                              imageHeight: widget.horizontalListSize,
+                              boarderColor: AppColors.itemBGColor,
+                              title: state
+                                  .dashboardModel?.data?.events?[index].name,
+                              desc: state
+                                  .dashboardModel?.data?.events?[index].purpose,
+                              imagePath: state
+                                  .dashboardModel?.data?.events?[index].image,
+                              price: state
+                                  .dashboardModel?.data?.events?[index].price
+                                  ?.toStringAsFixed(2),
+                              userName: state.dashboardModel?.data
+                                  ?.events?[index].userDetail?.name,
+                              userRating: state.dashboardModel?.data
+                                          ?.events?[index].userDetail?.rating !=
+                                      null
+                                  ? state.dashboardModel!.data!.events![index]
+                                              .userDetail!.rating ==
+                                          0.0
+                                      ? "0"
+                                      : (state.dashboardModel?.data
+                                          ?.events?[index].userDetail?.rating
+                                          ?.toStringAsFixed(1))
+                                  : "0",
+                              userProfile: state.dashboardModel?.data
+                                  ?.events?[index].userDetail?.image,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 );
-              },
-            );
-          }),
-        ),
-      ],
-    );
+    });
   }
 }

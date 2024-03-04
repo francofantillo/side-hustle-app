@@ -294,6 +294,17 @@ Future<Response?> getDashboardProvider({String? apiToken}) async {
   return response;
 }
 
+/// Update FCM
+Future<Response?> updateFCMProvider(
+    {String? apiToken, String? fcmToken}) async {
+  final data = {"fcm_token": fcmToken};
+  print(
+      "*****************\nurl: ${API.UPDATE_FCM}\n$data\n**************************");
+  final response = await putRequestProvider(
+      path: API.UPDATE_FCM, data: data, token: apiToken);
+  return response;
+}
+
 /// Allow Push
 Future<Response?> allowPushProvider({String? apiToken, int isAllow = 0}) async {
   final data = {"is_notify": isAllow};

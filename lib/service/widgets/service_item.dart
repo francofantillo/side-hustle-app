@@ -76,44 +76,31 @@ class ServiceItemsWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               fontSize: AppDimensions.textSizeSmall,
                               color: AppColors.textBlackColor),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 2.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                    child: textWidget(
-                                        text: subTitle,
-                                        maxLines: 2,
-                                        fontSize: AppDimensions.textSize10)),
-                                width(imageWidth! * .01),
-                                IconButtonWithBackground(
-                                  onTap: onTapAdd,
-                                  iconPath: AssetsPath.add,
-                                  width: imageHeight! * .28,
-                                  height: imageHeight! * .28,
-                                  backgroundColor: AppColors.primaryColor,
-                                  iconColor: AppColors.whiteColor,
-                                )
-                              ],
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 2.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      child: textWidget(
+                                          text: subTitle,
+                                          maxLines: 2,
+                                          fontSize: AppDimensions.textSize10)),
+                                  width(imageWidth! * .01),
+                                  // IconButtonWithBackground(
+                                  //   onTap: onTapAdd,
+                                  //   iconPath: AssetsPath.add,
+                                  //   width: imageHeight! * .28,
+                                  //   height: imageHeight! * .28,
+                                  //   backgroundColor: AppColors.primaryColor,
+                                  //   iconColor: AppColors.whiteColor,
+                                  // )
+                                ],
+                              ),
                             ),
                           ),
-                          // height(imageHeight! * .042),
-                          // Row(
-                          //   children: [
-                          //     textWidget(
-                          //         text: AppStrings.serviceType,
-                          //         fontFamily: AppFont.gilroyBold,
-                          //         fontSize: AppDimensions.textSize10,
-                          //         fontWeight: FontWeight.bold,
-                          //         color: AppColors.textBlackColor),
-                          //     textWidget(
-                          //         text: serviceType,
-                          //         maxLines: 2,
-                          //         fontSize: AppDimensions.textSize10)
-                          //   ],
-                          // ),
                           height(imageHeight! * .042),
                           textWidget(
                               text: price != null ? "\$$price" : null,
@@ -121,6 +108,7 @@ class ServiceItemsWidget extends StatelessWidget {
                               fontSize: AppDimensions.textSizeSmall,
                               fontWeight: FontWeight.bold,
                               color: AppColors.textBlackColor),
+                          height(imageHeight! * .042),
                         ],
                       ),
                     ),

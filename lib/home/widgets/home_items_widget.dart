@@ -20,27 +20,33 @@ class HomeItemsWidget extends StatelessWidget {
       userName,
       userRating,
       imagePath,
-  jobType,
+      jobType,
+      perHourFixedOrPerHead,
       commentIconPath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
-  final Function()? onTap;
+  final double isFav;
+  final Function()? onTap, onTapFav, onTapMessage;
 
   const HomeItemsWidget(
       {super.key,
-        this.title,
-        this.desc,
-        this.onTap,
-        this.price,
-        this.userProfile,
-        this.userName,
-        this.jobType,
-        this.userRating,
-        this.imagePath,
-        this.commentIconPath,
-        this.imageHeight,
-        this.imageWidth,
-        this.boarderColor});
+      this.title,
+      this.desc,
+      this.perHourFixedOrPerHead,
+      this.isFav = 0,
+      this.onTap,
+      this.onTapFav,
+      this.onTapMessage,
+      this.price,
+      this.userProfile,
+      this.userName,
+      this.jobType,
+      this.userRating,
+      this.imagePath,
+      this.commentIconPath,
+      this.imageHeight,
+      this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -55,20 +61,21 @@ class HomeItemsWidget extends StatelessWidget {
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: Material(
             elevation: AppDimensions.cardElevation,
             shadowColor: Colors.transparent,
             color: boarderColor,
             shape: RoundedRectangleBorder(
-              borderRadius:
-              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              borderRadius: BorderRadius.circular(
+                  AppDimensions.listItemImageRoundedBorder),
             ),
             child: InkWell(
               onTap: onTap,
               child: Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+                padding:
+                    const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -92,14 +99,14 @@ class HomeItemsWidget extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: 0.03.sw),
-                                      child: textWidget(
-                                          text: title,
-                                          fontFamily: AppFont.gilroyBold,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: AppDimensions.textSizeSmall,
-                                          color: AppColors.textBlackColor),
-                                    )),
+                                  padding: EdgeInsets.only(top: 0.03.sw),
+                                  child: textWidget(
+                                      text: title,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: AppDimensions.textSizeSmall,
+                                      color: AppColors.textBlackColor),
+                                )),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
@@ -110,7 +117,8 @@ class HomeItemsWidget extends StatelessWidget {
                                         fontSize: AppDimensions.textSizeSmall,
                                         color: AppColors.textBlackColor),
                                     textWidget(
-                                        text: AppStrings.perHour,
+                                        // text: AppStrings.perHour,
+                                        text: perHourFixedOrPerHead,
                                         textAlign: TextAlign.end,
                                         fontSize: AppDimensions.textSizeTiny),
                                   ],
@@ -147,8 +155,10 @@ class HomeItemsWidget extends StatelessWidget {
                                   color: boarderColor,
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.pushNamed(context,
-                                          AppRoutes.otherUserProfileScreenRoute);
+                                      Navigator.pushNamed(
+                                          context,
+                                          AppRoutes
+                                              .otherUserProfileScreenRoute);
                                     },
                                     child: CircularCacheImageWidget(
                                       showLoading: false,
@@ -165,13 +175,16 @@ class HomeItemsWidget extends StatelessWidget {
                                   color: boarderColor,
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.pushNamed(context,
-                                          AppRoutes.otherUserProfileScreenRoute);
+                                      Navigator.pushNamed(
+                                          context,
+                                          AppRoutes
+                                              .otherUserProfileScreenRoute);
                                     },
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         // place RoundedImageWithBackgroundColor at end
                                         textWidget(
@@ -191,13 +204,14 @@ class HomeItemsWidget extends StatelessWidget {
                                             width(.01.sw),
                                             Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 textWidget(
                                                     text: userRating,
-                                                    fontSize: AppDimensions.textSizeUserRating),
+                                                    fontSize: AppDimensions
+                                                        .textSizeUserRating),
                                               ],
                                             ),
                                           ],
@@ -212,12 +226,10 @@ class HomeItemsWidget extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     IconButtonWithBackground(
-                                      onTap: () {
-                                        Navigator.pushNamed(context,
-                                            AppRoutes.favouritesScreenRoute);
-                                        print("Clicked");
-                                      },
-                                      iconPath: AssetsPath.favUnfilled,
+                                      onTap: onTapFav,
+                                      iconPath: isFav == 1
+                                          ? AssetsPath.favourite
+                                          : AssetsPath.favUnfilled,
                                       height: imageHeight! * .2,
                                       width: imageHeight! * .2,
                                       backgroundColor: AppColors.primaryColor,
@@ -225,11 +237,9 @@ class HomeItemsWidget extends StatelessWidget {
                                     ),
                                     width(0.025.sw),
                                     IconButtonWithBackground(
-                                      onTap: () {
-                                        print("Clicked");
-                                      },
-                                      iconPath:
-                                      commentIconPath ?? AssetsPath.messages,
+                                      onTap: onTapMessage,
+                                      iconPath: commentIconPath ??
+                                          AssetsPath.messages,
                                       height: imageHeight! * .2,
                                       width: imageHeight! * .2,
                                       backgroundColor: AppColors.primaryColor,
@@ -253,4 +263,3 @@ class HomeItemsWidget extends StatelessWidget {
     );
   }
 }
-

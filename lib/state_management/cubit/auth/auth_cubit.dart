@@ -17,6 +17,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
+import 'package:side_hustle/utils/service/firebase_service.dart';
 
 import '../../../utils/sharedprefrences.dart';
 
@@ -84,6 +85,20 @@ class AuthCubit extends Cubit<AuthState> {
     profileImagePath = null;
     pdfFilePath = null;
   }
+
+  /// Set Fav Events
+  // Future setFavEvents({required int index, required int isFavourite}) async {
+  //   final objEvent = state.dashboardModel;
+  //   objEvent?.events?[index].isFavourite = isFavourite;
+  //   emit(state.copyWith(eventsModel: objEvent));
+  // }
+
+  /// Set Fav Jobs
+  // Future setFavEvents({required int index, required int isFavourite}) async {
+  //   final objEvent = state.dashboardModel;
+  //   objEvent?.events?[index].isFavourite = isFavourite;
+  //   emit(state.copyWith(eventsModel: objEvent));
+  // }
 
   setResumeController() {
     actualNameController.text = state.resumeModel?.data?.actualName ?? "";
@@ -211,20 +226,24 @@ class AuthCubit extends Cubit<AuthState> {
         otp: otp, apiToken: state.userModel?.data?.apiToken);
 
     if (response != null) {
-      EasyLoading.dismiss();
-
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
         print("status: ${userModel.status} response: ${userModel.data}");
-        // emit(state.copyWith(userModel: userModel));
         emit(state.copyWith(userModel: userModel));
-        // AppUtils.showToast(userModel.message);
+        final String? deviceToken = await FirebaseMessagingService().getToken();
+        print("Firebase Token: $deviceToken");
+        if (mounted) {
+          await updateFCMCubit(
+              context: context, mounted: mounted, fcmToken: deviceToken);
+        }
+        EasyLoading.dismiss();
         return 1;
       }
 
       /// Failed
       else {
+        EasyLoading.dismiss();
         AppUtils.showToast(response.data["message"]);
         return 0;
       }
@@ -283,8 +302,6 @@ class AuthCubit extends Cubit<AuthState> {
         password: passwordControllerLogin.text);
 
     if (response != null) {
-      EasyLoading.dismiss();
-
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         final UserModel userModel = UserModel.fromJson(response.data);
@@ -295,11 +312,20 @@ class AuthCubit extends Cubit<AuthState> {
           if (userModel.data?.isVerified == 1) {
             await prefs.saveUser(userModel);
             await prefs.saveToken(userModel.data!.apiToken!);
+            final String? deviceToken =
+                await FirebaseMessagingService().getToken();
+            print("Firebase Token: $deviceToken");
             if (mounted) {
+              await updateFCMCubit(
+                  context: context, mounted: mounted, fcmToken: deviceToken);
+            }
+            if (mounted) {
+              EasyLoading.dismiss();
               Navigator.pushNamedAndRemoveUntil(
                   context, AppRoutes.bottomTabsScreenRoute, (route) => false);
             }
           } else {
+            EasyLoading.dismiss();
             Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
                 arguments: const OtpVerificationScreen(isLogin: true));
           }
@@ -308,6 +334,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Failed
       else {
+        EasyLoading.dismiss();
         AppUtils.showToast(response.data["message"]);
       }
     } else {
@@ -649,6 +676,34 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } else {
       emit(state.copyWith(dashboardLoading: false));
+      EasyLoading.dismiss();
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Update FCM
+  Future updateFCMCubit(
+      {required BuildContext context,
+      required bool mounted,
+      String? fcmToken}) async {
+    final response = await updateFCMProvider(
+        apiToken: state.userModel?.data?.apiToken, fcmToken: fcmToken);
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final UserModel userModel = UserModel.fromJson(response.data);
+        print("status: ${userModel.status} response: ${userModel.data}");
+        await prefs.saveUser(userModel);
+        emit(state.copyWith(userModel: userModel));
+      }
+
+      /// Failed
+      else {
+        print("status: ${response.data["status"]} response: ${response.data}");
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
       EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
     }
