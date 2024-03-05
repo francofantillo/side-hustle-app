@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
 import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:map_launcher/map_launcher.dart';
 import 'package:side_hustle/base_widget/base_widget.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -30,6 +35,60 @@ class AppUtils {
       ..maskColor = Colors.transparent
       ..userInteractions = false
       ..dismissOnTap = false;
+  }
+
+  /// Launch Map
+  static launchMap({double? lat, double? lng, String? shopName}) async {
+    if (Platform.isIOS) {
+      if (await MapLauncher.isMapAvailable(MapType.apple) ?? false) {
+        await MapLauncher.showMarker(
+          mapType: MapType.apple,
+          coords: Coords(lat ?? 37.759392, lng ?? -122.5107336),
+          title: shopName ?? "",
+        );
+      }
+    } else {
+      if (await MapLauncher.isMapAvailable(MapType.google) ?? false) {
+        await MapLauncher.showMarker(
+          mapType: MapType.google,
+          coords: Coords(37.759392, -122.5107336),
+          title: shopName ?? "",
+        );
+      }
+    }
+  }
+
+  /// Get Current Location
+  static Future<SelectLocationModel?> getCurrentLocation() async {
+    try {
+      // Request permission to access location
+      LocationPermission permission = await Geolocator.requestPermission();
+
+      if (permission == LocationPermission.denied) {
+        showToast("Permission denied");
+        return null;
+      }
+
+      // Get the current location
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      // Get the address from the current location
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+
+      return SelectLocationModel(
+          locationAddress: placemarks.first.street,
+          lat: position.latitude,
+          lng: position.longitude);
+    } catch (e) {
+      // Handle any exceptions that might occur
+      print(e.toString());
+      return null;
+    }
   }
 
   /// Date Picker

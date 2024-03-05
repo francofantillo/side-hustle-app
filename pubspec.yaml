@@ -87,6 +87,13 @@ dependencies:
   flutter_local_notifications: ^9.5.0
   firebase_messaging: ^14.6.7
 
+  # Map Launcher
+  map_launcher: ^3.1.0
+
+  # Current Location and address
+  geolocator: ^11.0.0
+  geocoding: ^2.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

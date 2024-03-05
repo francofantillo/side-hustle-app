@@ -81,7 +81,8 @@ class ServiceItemsWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 2.0),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                       child: textWidget(

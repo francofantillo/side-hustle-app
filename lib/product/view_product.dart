@@ -6,12 +6,14 @@ import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/shop/shop.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
+import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -24,6 +26,9 @@ import 'package:side_hustle/widgets/image_slider/image_slider_no_images_found.da
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
+
+import 'dart:io';
+import 'package:map_launcher/map_launcher.dart';
 
 class ViewProduct extends StatefulWidget {
   final bool isMyProduct,
@@ -163,7 +168,15 @@ class _ViewProductState extends State<ViewProduct> {
                                       AppDimensions.boarderRadiusViewProduct,
                                   color: AppColors.greenColor,
                                   textColor: AppColors.whiteColor,
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    /// Need shop name
+                                    // await AppUtils.launchMap(shopName: "xyz");
+
+                                    final SelectLocationModel? location =
+                                        await AppUtils.getCurrentLocation();
+                                    print(
+                                        "location address: ${location?.locationAddress}\nlat: ${location?.lat}, lng: ${location?.lng}");
+                                  },
                                   name: AppStrings.getDirectionToShop),
                             ),
                       height(0.03.sw),
