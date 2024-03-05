@@ -22,6 +22,7 @@ class API {
   static const String UPDATE_FCM = "${BASE_URL}/update-fcm-token";
   static const String ALLOW_PUSH = "${BASE_URL}/is-notification";
   static const String GET_DASHBOARD = "${BASE_URL}/dashboard";
+  static const String GET_Notifications = "${BASE_URL}/notifications";
 
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";

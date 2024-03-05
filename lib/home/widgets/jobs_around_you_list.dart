@@ -74,7 +74,7 @@ class JobsAroundYouList extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.only(left: 2.0),
                             child: HomeItemsWidget(
-                              perHourFixedOrPerHead: AppStrings.perHour,
+                              perHead: "",
                               onTap: () {
                                 Navigator.pushNamed(
                                     context, AppRoutes.applyForJobScreenRoute,
@@ -95,7 +95,7 @@ class JobsAroundYouList extends StatelessWidget {
                               imagePath: state
                                   .dashboardModel?.data?.jobs?[index].image,
                               price: state
-                                  .dashboardModel?.data?.jobs?[index].bidAmount
+                                  .dashboardModel?.data?.jobs?[index].price
                                   ?.toStringAsFixed(2),
                               userName: state.dashboardModel?.data?.jobs?[index]
                                   .userDetail?.name,

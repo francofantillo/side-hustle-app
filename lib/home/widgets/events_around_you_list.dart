@@ -94,7 +94,7 @@ class _EventsAroundYouListState extends State<EventsAroundYouList> {
                           return Padding(
                             padding: const EdgeInsets.only(left: 2.0),
                             child: HomeItemsWidget(
-                              perHourFixedOrPerHead: AppStrings.perHead,
+                              perHead: AppStrings.perHead,
                               // isFav: itemList?[index].isFavourite ?? 0,
                               onTapFav: () async {
                                 print(

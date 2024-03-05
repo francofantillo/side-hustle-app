@@ -146,30 +146,35 @@ class _AppDrawerState extends State<AppDrawer> {
                       },
                     ),
                     height(AppDimensions.drawerItemsVerticalSpacing - 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        DrawerItemListTile(
-                          iconPath: AssetsPath.notification,
-                          title: AppStrings.pushNotifications,
-                          onTap: () {},
-                        ),
-                        Switch(
-                          activeColor: AppColors.primaryColor,
-                          activeTrackColor: AppColors.whiteColor,
-                          // value: _isToggleOn,
-                          value: state.userModel?.data?.isPushNotification == 1
-                              ? true
-                              : false,
-                          // Set the initial value based on your toggle state
-                          onChanged: (newValue) {
-                            // Toggle the state when the switch is changed
-                            setState(() {
-                              _isToggleOn = newValue;
-                            });
-                          },
-                        ),
-                      ],
+                    BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            DrawerItemListTile(
+                              iconPath: AssetsPath.notification,
+                              title: AppStrings.pushNotifications,
+                              onTap: () {},
+                            ),
+                            Switch(
+                              activeColor: AppColors.primaryColor,
+                              activeTrackColor: AppColors.whiteColor,
+                              // value: _isToggleOn,
+                              value: state.userModel?.data?.isPushNotification! == 1
+                                  ? true
+                                  : false,
+                              // Set the initial value based on your toggle state
+                              onChanged: (newValue) async {
+                                print("New Value: $newValue");
+                                final AuthCubit _bloc = BlocProvider.of(context);
+                                await _bloc.allowPushCubit(
+                                    context: context,
+                                    mounted: mounted,
+                                    isAllow: newValue ? 1 : 0);
+                              },
+                            ),
+                          ],
+                        );
+                      }
                     ),
                     height(AppDimensions.drawerItemsVerticalSpacing),
                     textWidget(

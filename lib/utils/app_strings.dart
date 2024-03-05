@@ -49,6 +49,7 @@ class AppStrings {
   static const String privacyPolicy = "Privacy Policy";
   static const String notAMember = "Not a member? ";
   static const String notifications = "Notifications";
+  static const String notificationsNotFound = "No notifications found";
   static const String signUpNow = "Sign up now";
 
   /// Signup
@@ -122,6 +123,7 @@ class AppStrings {
   static const String searchSideHustleServicesHintText = "Search Side Hustle Service";
   static const String searchSideHustleProductsHintText = "Search Side Hustle Products";
   static const String blessTheseBusinesses = "Let's Bless These Businesses";
+  static const String productsAndServices = "Product and Services around you";
   static const String jobsAroundYou = "Jobs around you";
   static const String eventsAroundYou = "Events around you";
   static const String welcomeHome = "Welcome here!";

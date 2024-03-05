@@ -229,6 +229,15 @@ Future<Response?> deleteResume({String? apiToken}) async {
   return response;
 }
 
+/// Get Notifications
+Future<Response?> getNotificationsProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.GET_Notifications}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.GET_Notifications, token: apiToken);
+  return response;
+}
+
 /// Get Resume
 Future<Response?> getResumeProvider({int? id, String? apiToken}) async {
   final data = {"id": id};

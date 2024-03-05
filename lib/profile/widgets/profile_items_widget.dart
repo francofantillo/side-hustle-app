@@ -92,18 +92,11 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
                 activeColor: AppColors.whiteColor,
                 activeTrackColor: AppColors.primaryColor,
                 // value: _isToggleOn,
-                value: (state.userModel?.data?.isPushNotification?.isEmpty ??
-                        false)
-                    ? false
-                    : state.userModel?.data?.isPushNotification! == "1"
-                        ? true
-                        : false,
+                value: state.userModel?.data?.isPushNotification! == 1
+                    ? true
+                    : false,
                 // Set the initial value based on your toggle state
                 onChanged: (newValue) async {
-                  // Toggle the state when the switch is changed
-                  // setState(() {
-                  //   _isToggleOn = newValue;
-                  // });
                   print("New Value: $newValue");
                   final AuthCubit _bloc = BlocProvider.of(context);
                   await _bloc.allowPushCubit(

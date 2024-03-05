@@ -170,12 +170,19 @@ class _ViewProductState extends State<ViewProduct> {
                                   textColor: AppColors.whiteColor,
                                   onPressed: () async {
                                     /// Need shop name
-                                    // await AppUtils.launchMap(shopName: "xyz");
-
-                                    final SelectLocationModel? location =
-                                        await AppUtils.getCurrentLocation();
-                                    print(
-                                        "location address: ${location?.locationAddress}\nlat: ${location?.lat}, lng: ${location?.lng}");
+                                    await AppUtils.launchMap(
+                                        shopName: state.sideHustleDetailModel
+                                            ?.data?.shopName,
+                                        lat: double.parse(state
+                                                .sideHustleDetailModel
+                                                ?.data
+                                                ?.lat ??
+                                            "37.759392"),
+                                        lng: double.parse(state
+                                                .sideHustleDetailModel
+                                                ?.data
+                                                ?.lng ??
+                                            "-122.5107336"));
                                   },
                                   name: AppStrings.getDirectionToShop),
                             ),

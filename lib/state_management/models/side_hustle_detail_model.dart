@@ -29,6 +29,9 @@ class Data {
   int? productId;
   int? shopId;
   String? name;
+  String? shopName;
+  String? lat;
+  String? lng;
   double? price;
   String? description;
   String? additionalInformation;
@@ -39,16 +42,19 @@ class Data {
 
   Data(
       {this.images,
-        this.productId,
-        this.shopId,
-        this.name,
-        this.price,
-        this.description,
-        this.additionalInformation,
-        this.zipCode,
-        this.deliveryType,
-        this.serviceType,
-        this.productOwner});
+      this.productId,
+      this.shopId,
+      this.name,
+      this.shopName,
+      this.lat,
+      this.lng,
+      this.price,
+      this.description,
+      this.additionalInformation,
+      this.zipCode,
+      this.deliveryType,
+      this.serviceType,
+      this.productOwner});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['images'] != null) {
@@ -60,6 +66,9 @@ class Data {
     productId = json['product_id'];
     shopId = json['shop_id'];
     name = json['name'];
+    shopName = json['shop_name'];
+    lat = json['lat'];
+    lng = json['lng'];
     price = json['price']?.toDouble();
     description = json['description'];
     additionalInformation = json['additional_information'];
@@ -79,6 +88,9 @@ class Data {
     data['product_id'] = this.productId;
     data['shop_id'] = this.shopId;
     data['name'] = this.name;
+    data['shop_name'] = this.shopName;
+    data['lat'] = this.lat;
+    data['lng'] = this.lng;
     data['price'] = this.price;
     data['description'] = this.description;
     data['additional_information'] = this.additionalInformation;

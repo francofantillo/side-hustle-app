@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -41,7 +43,9 @@ class _HomeLocationWidgetState extends State<HomeLocationWidget> {
               width: isLocationExpended
                   ? AppDimensions.expendedLocation
                   : AppDimensions.unExpendedLocation,
-              padding: EdgeInsets.only(left: .07.sw,),
+              padding: EdgeInsets.only(
+                left: .07.sw,
+              ),
               decoration: BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.all(Radius.circular(0.12.sw))),
@@ -58,14 +62,18 @@ class _HomeLocationWidgetState extends State<HomeLocationWidget> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          child: textWidget(
-                              text: isLocationExpended
-                                  ? AppStrings.locationText
-                                  : "",
-                              color: AppColors.textWhiteColor,
-                              fontSize: AppDimensions.textSize10),
-                        ),
+                        BlocBuilder<AuthCubit, AuthState>(
+                            builder: (context, state) {
+                          return Expanded(
+                            child: textWidget(
+                                // text: isLocationExpended
+                                //     ? AppStrings.locationText
+                                //     : "",
+                                text: state.currentLocation?.locationAddress,
+                                color: AppColors.textWhiteColor,
+                                fontSize: AppDimensions.textSize10),
+                          );
+                        }),
                         Icon(
                           Icons.arrow_forward_ios,
                           // size: 0.039.sw,

@@ -39,7 +39,7 @@ class Data {
   String? apiToken;
   String? fcmToken;
   String? accessToken;
-  String? isPushNotification;
+  int? isPushNotification;
   String? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;

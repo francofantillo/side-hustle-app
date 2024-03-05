@@ -10,6 +10,9 @@ class AuthState {
   ProfileModel? profileModel;
   DashboardModel? dashboardModel;
   bool dashboardLoading;
+  SelectLocationModel? currentLocation;
+  NotificationsModel? notificationsModel;
+  bool notificationsLoading;
 
   AuthState(
       {this.userModel,
@@ -20,7 +23,10 @@ class AuthState {
       this.hobbies,
       this.profileModel,
       this.dashboardModel,
-      this.dashboardLoading = true});
+      this.currentLocation,
+      this.notificationsModel,
+      this.dashboardLoading = true,
+      this.notificationsLoading = true});
 
   AuthState copyWith(
       {UserModel? userModel,
@@ -31,7 +37,10 @@ class AuthState {
       List<String>? hobbies,
       ProfileModel? profileModel,
       DashboardModel? dashboardModel,
-      bool? dashboardLoading}) {
+      bool? dashboardLoading,
+      SelectLocationModel? currentLocation,
+      NotificationsModel? notificationsModel,
+      bool? notificationsLoading}) {
     return AuthState(
         userModel: userModel ?? this.userModel,
         resumeModel: resumeModel ?? this.resumeModel,
@@ -41,6 +50,10 @@ class AuthState {
         hustlerBookUrl: hustlerBookUrl ?? this.hustlerBookUrl,
         profileModel: profileModel ?? this.profileModel,
         dashboardModel: dashboardModel ?? this.dashboardModel,
-        dashboardLoading: dashboardLoading ?? this.dashboardLoading);
+        dashboardLoading: dashboardLoading ?? this.dashboardLoading,
+        currentLocation: currentLocation ?? this.currentLocation,
+        notificationsModel: notificationsModel ?? this.notificationsModel,
+        notificationsLoading:
+            notificationsLoading ?? this.notificationsLoading);
   }
 }

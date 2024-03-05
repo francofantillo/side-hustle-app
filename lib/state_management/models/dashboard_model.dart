@@ -102,7 +102,7 @@ class Jobs {
   String? name;
   String? image;
   String? description;
-  double? bidAmount;
+  double? price;
   UserDetail? userDetail;
 
   Jobs(
@@ -110,7 +110,7 @@ class Jobs {
         this.name,
         this.image,
         this.description,
-        this.bidAmount,
+        this.price,
         this.userDetail});
 
   Jobs.fromJson(Map<String, dynamic> json) {
@@ -118,7 +118,7 @@ class Jobs {
     name = json['name'];
     image = json['image'];
     description = json['description'];
-    bidAmount = json['bid_amount']?.toDouble();
+    price = json['price']?.toDouble();
     userDetail = json['user_detail'] != null
         ? new UserDetail.fromJson(json['user_detail'])
         : null;
@@ -130,7 +130,7 @@ class Jobs {
     data['name'] = this.name;
     data['image'] = this.image;
     data['description'] = this.description;
-    data['bid_amount'] = this.bidAmount;
+    data['bid_amount'] = this.price;
     if (this.userDetail != null) {
       data['user_detail'] = this.userDetail!.toJson();
     }

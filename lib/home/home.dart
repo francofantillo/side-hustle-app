@@ -6,8 +6,6 @@ import 'package:side_hustle/home/widgets/home_appbar.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
 import 'package:side_hustle/home/widgets/home_location_widget.dart';
 import 'package:side_hustle/home/widgets/jobs_around_you_list.dart';
-import 'package:side_hustle/home/widgets/jobs_events_item_list.dart';
-import 'package:side_hustle/home/widgets/jobs_horizontal_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
@@ -17,15 +15,11 @@ import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/image_slider/banner_slider.dart';
-import 'package:side_hustle/widgets/image_slider/banner_slider_alpha.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
-import 'package:side_hustle/widgets/text_field/search_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,12 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
     _bloc = BlocProvider.of(context);
     _blocSideHustle = BlocProvider.of<SideHustleCubit>(context);
     isProductSelected = true;
+    getCurrentLocation();
     getDashboard();
     super.initState();
   }
 
   getDashboard() async {
     await _bloc.getDashboardCubit(context: context, mounted: mounted);
+  }
+
+  getCurrentLocation() async {
+    await _bloc.getCurrentLocation();
   }
 
   @override
@@ -130,12 +129,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 left: AppDimensions.rootPadding + 10.w,
                                 right: AppDimensions.rootPadding,
                                 top: AppDimensions.rootPadding + 0),
-                            child: textWidget(
-                                text: AppStrings.blessTheseBusinesses,
-                                fontSize: AppDimensions.textSizeNormal,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: AppFont.gilroyBold,
-                                color: AppColors.textBlackColor),
+                            child: Row(
+                              children: [
+                                textWidget(
+                                    text: AppStrings.blessTheseBusinesses,
+                                    fontSize: AppDimensions.textSizeNormal,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: AppFont.gilroyBold,
+                                    color: AppColors.textBlackColor),
+                              ],
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
@@ -172,8 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 bottom: 6),
                             child: JobsAroundYouList(
                               title: "Jobs around you",
-                              horizontalListSize:
-                                  AppDimensions.listItemHeight,
+                              horizontalListSize: AppDimensions.listItemHeight,
                               itemsList: AlphaAppData
                                   .jobsAndEventsList[index].itemList,
                             ),
@@ -185,8 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 bottom: 6),
                             child: EventsAroundYouList(
                               title: "Events around you",
-                              horizontalListSize:
-                                  AppDimensions.listItemHeight,
+                              horizontalListSize: AppDimensions.listItemHeight,
                               itemsList: AlphaAppData
                                   .jobsAndEventsList[index].itemList,
                             ),

@@ -306,12 +306,15 @@ Future<Response?> editYourShopProvider(
     String? lng,
     String? zipCode,
     String? apiToken}) async {
-  final dataShop = {
-    "shop_id": shopId,
+  final Map<String, dynamic> dataShop = {
     "name": name,
     "location": location,
     "zip_code": zipCode
   };
+
+  if (shopId != null) {
+    dataShop.putIfAbsent("shop_id", () => shopId);
+  }
 
   if (image != null) {
     final imageName = getImagePath.basename(image.path);
@@ -435,8 +438,7 @@ Future<Response?> getSideHustleCartProvider({String? apiToken}) async {
 }
 
 /// Checkout
-Future<Response?> checkoutProvider(
-    {int? cartId, String? apiToken}) async {
+Future<Response?> checkoutProvider({int? cartId, String? apiToken}) async {
   final data = {"cart_id": cartId};
   print(
       "*****************\nurl: ${API.CHECKOUT}\n$data\n**************************");

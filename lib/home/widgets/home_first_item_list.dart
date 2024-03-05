@@ -43,7 +43,7 @@ class FirstHomeListItemWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             textWidget(
-                                text: title ?? AppStrings.blessTheseBusinesses,
+                                text: title ?? AppStrings.productsAndServices,
                                 fontSize: AppDimensions.textSizeNormal,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: AppFont.gilroyBold,

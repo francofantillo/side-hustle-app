@@ -21,7 +21,7 @@ class HomeItemsWidget extends StatelessWidget {
       userRating,
       imagePath,
       jobType,
-      perHourFixedOrPerHead,
+      perHead,
       commentIconPath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
@@ -32,7 +32,7 @@ class HomeItemsWidget extends StatelessWidget {
       {super.key,
       this.title,
       this.desc,
-      this.perHourFixedOrPerHead,
+      this.perHead,
       this.isFav = 0,
       this.onTap,
       this.onTapFav,
@@ -111,14 +111,14 @@ class HomeItemsWidget extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     textWidget(
-                                        text: price,
+                                        text: "\$${price}",
                                         fontFamily: AppFont.gilroyBold,
                                         fontWeight: FontWeight.bold,
                                         fontSize: AppDimensions.textSizeSmall,
                                         color: AppColors.textBlackColor),
                                     textWidget(
                                         // text: AppStrings.perHour,
-                                        text: perHourFixedOrPerHead,
+                                        text: perHead,
                                         textAlign: TextAlign.end,
                                         fontSize: AppDimensions.textSizeTiny),
                                   ],

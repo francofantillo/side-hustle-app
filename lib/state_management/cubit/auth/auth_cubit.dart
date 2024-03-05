@@ -9,8 +9,10 @@ import 'package:side_hustle/auth/otp_verification.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/reset_bloc.dart';
 import 'package:side_hustle/state_management/models/dashboard_model.dart';
+import 'package:side_hustle/state_management/models/notifications_model.dart';
 import 'package:side_hustle/state_management/models/profile_model.dart';
 import 'package:side_hustle/state_management/models/resume_model.dart';
+import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/auth/auth_provider.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -84,6 +86,15 @@ class AuthCubit extends Cubit<AuthState> {
     hobbies = [];
     profileImagePath = null;
     pdfFilePath = null;
+  }
+
+  /// Get Current Location
+  Future getCurrentLocation() async {
+    SelectLocationModel? currentLocation = await AppUtils.getCurrentLocation();
+
+    if (currentLocation != null) {
+      emit(state.copyWith(currentLocation: currentLocation));
+    }
   }
 
   /// Set Fav Events
@@ -801,6 +812,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
+        EasyLoading.dismiss();
         return 1;
       }
 
@@ -813,6 +825,45 @@ class AuthCubit extends Cubit<AuthState> {
     } else {
       EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return 0;
+    }
+  }
+
+  /// Get Notifications
+  Future<int> getNotificationsCubit() async {
+    EasyLoading.show();
+
+    emit(state.copyWith(
+        notificationsLoading: true, notificationsModel: NotificationsModel()));
+
+    final response = await getNotificationsProvider(
+        apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final NotificationsModel notificationsModel =
+            NotificationsModel.fromJson(response.data);
+        emit(state.copyWith(
+            notificationsLoading: false,
+            notificationsModel: notificationsModel));
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(notificationsLoading: false));
+        EasyLoading.dismiss();
+
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(notificationsLoading: false));
+      EasyLoading.dismiss();
       return 0;
     }
   }
