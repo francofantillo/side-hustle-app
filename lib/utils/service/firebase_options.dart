@@ -58,11 +58,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDiKDJNGdWLEpz4-RPIEbgWPdud3JR_J5g',
-    appId: '1:780914896644:ios:cb6eb7154ae0e4c86e6a51',
-    messagingSenderId: '780914896644',
-    projectId: 'construction-connect-e06d5',
-    storageBucket: 'construction-connect-e06d5.appspot.com',
-    iosBundleId: 'com.app.constructionConnect',
+    apiKey: 'AIzaSyChh5QLtXx9owwkGkLrtYqZk3lPvXdcjtA',
+    appId: '1:35016346526:ios:e51e61854b684cdbb1a48f',
+    messagingSenderId: '35016346526',
+    projectId: 'side-hustle-763af',
+    storageBucket: 'side-hustle-763af.appspot.com',
+    iosBundleId: 'com.app.sidehustle',
   );
 }

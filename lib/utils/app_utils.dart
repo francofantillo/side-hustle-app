@@ -40,7 +40,14 @@ class AppUtils {
   /// Launch Map
   static launchMap({double? lat, double? lng, String? shopName}) async {
     if (Platform.isIOS) {
-      if (await MapLauncher.isMapAvailable(MapType.apple) ?? false) {
+      if (await MapLauncher.isMapAvailable(MapType.google) ?? false) {
+        await MapLauncher.showMarker(
+          mapType: MapType.google,
+          coords: Coords(lat ?? 37.759392, lng ?? -122.5107336),
+          title: shopName ?? "",
+        );
+        return;
+      } else if (await MapLauncher.isMapAvailable(MapType.apple) ?? false) {
         await MapLauncher.showMarker(
           mapType: MapType.apple,
           coords: Coords(lat ?? 37.759392, lng ?? -122.5107336),
@@ -51,7 +58,7 @@ class AppUtils {
       if (await MapLauncher.isMapAvailable(MapType.google) ?? false) {
         await MapLauncher.showMarker(
           mapType: MapType.google,
-          coords: Coords(37.759392, -122.5107336),
+          coords: Coords(lat ?? 37.759392, lng ?? -122.5107336),
           title: shopName ?? "",
         );
       }
