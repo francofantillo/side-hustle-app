@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_block_user_list.dart';
+import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -17,6 +19,19 @@ class ChatBlockUsers extends StatefulWidget {
 }
 
 class _ChatBlockUsersState extends State<ChatBlockUsers> {
+  late final ChatCubit _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = BlocProvider.of(context);
+    getChats();
+  }
+
+  getChats() async {
+    await _bloc.getBlockedUsersChatCubit(context: context, mounted: mounted);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
@@ -27,40 +42,37 @@ class _ChatBlockUsersState extends State<ChatBlockUsers> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Padding(
-          //   padding: EdgeInsets.only(
-          //     left: AppDimensions.rootPadding,
-          //     right: AppDimensions.rootPadding,
-          //   ),
-          //   child: SearchTextField(
-          //       hintText: AppStrings.searchChatHint, onChanged: (search) {}),
-          // ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: AppDimensions.rootPadding,
-                right: AppDimensions.rootPadding),
-            child: SearchTextField(
-                height: AppDimensions.searchTextFieldHeight,
-                contentPaddingBottom: 8,
-                hintText: AppStrings.searchChatHint,
-                onChanged: (search) {}),
-          ),
-          const ChatBlockUsersList(),
-          Padding(
-            padding: EdgeInsets.only(
-              left: AppDimensions.rootPadding + 8,
-              right: AppDimensions.rootPadding + 8,
-            ),
-            child: CustomMaterialButton(
-                onPressed: () {},
-                borderRadius: 16,
-                name: AppStrings.unblockAll),
-          ),
-          height(0.02.sh),
-        ],
+      body: BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
+        return state.chatBlockedUsersLoading
+            ? const SizedBox.shrink()
+            : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    left: AppDimensions.rootPadding,
+                    right: AppDimensions.rootPadding),
+                child: SearchTextField(
+                    height: AppDimensions.searchTextFieldHeight,
+                    contentPaddingBottom: 8,
+                    hintText: AppStrings.searchChatHint,
+                    onChanged: (search) {}),
+              ),
+              const ChatBlockUsersList(),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: AppDimensions.rootPadding + 8,
+                  right: AppDimensions.rootPadding + 8,
+                ),
+                child: CustomMaterialButton(
+                    onPressed: () {},
+                    borderRadius: 16,
+                    name: AppStrings.unblockAll),
+              ),
+              height(0.02.sh),
+            ],
+          );
+        }
       ),
     );
   }

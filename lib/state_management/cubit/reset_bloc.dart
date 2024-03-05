@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
+import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
@@ -21,6 +22,7 @@ class ClearAppData {
     final JobsCubit blocWantedJob = BlocProvider.of<JobsCubit>(context);
     final SideHustleCubit blocSideHustle =
         BlocProvider.of<SideHustleCubit>(context);
+    final ChatCubit blocChat = BlocProvider.of<ChatCubit>(context);
 
     /// clear shared
     await prefs.clearPreferences();
@@ -32,5 +34,6 @@ class ClearAppData {
     await blocFavourites.resetFavouritesBloc();
     await blocWantedJob.resetWantedJobBloc();
     await blocSideHustle.resetSideHustleBloc();
+    await blocChat.resetChatBloc();
   }
 }

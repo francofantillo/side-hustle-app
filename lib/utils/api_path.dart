@@ -79,4 +79,7 @@ class API {
   static const String GET_SIDEHUSTLE_CART = "${BASE_URL}/view-cart";
   static const String CHECKOUT = "${BASE_URL}/place-order";
 
+  /// Chats
+  static const String GET_CHAT_LIST = "${BASE_URL}/getChats";
+  static const String BLOCKED_USERS_CHAT_LIST = "${BASE_URL}/blocked-users";
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_all_user_list.dart';
 import 'package:side_hustle/chat/widgets/message_options_bottomsheet.dart';
+import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -19,6 +21,19 @@ class ChatAllUsers extends StatefulWidget {
 }
 
 class _ChatAllUsersState extends State<ChatAllUsers> {
+  late final ChatCubit _bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc = BlocProvider.of(context);
+    getChats();
+  }
+
+  getChats() async {
+    await _bloc.getChatsCubit(context: context, mounted: mounted);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
@@ -55,23 +70,27 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
           ),
         )
       ],
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-                left: AppDimensions.rootPadding,
-                right: AppDimensions.rootPadding),
-            child: SearchTextField(
-                height: AppDimensions.searchTextFieldHeight,
-                contentPaddingBottom: 8,
-                hintText: AppStrings.searchChatHint,
-                onChanged: (search) {}),
-          ),
-          const ChatAllUsersList(),
-          height(0.02.sh)
-        ],
-      ),
+      body: BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
+        return state.chatAllUsersLoading
+            ? const SizedBox.shrink()
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: AppDimensions.rootPadding,
+                        right: AppDimensions.rootPadding),
+                    child: SearchTextField(
+                        height: AppDimensions.searchTextFieldHeight,
+                        contentPaddingBottom: 8,
+                        hintText: AppStrings.searchChatHint,
+                        onChanged: (search) {}),
+                  ),
+                  const ChatAllUsersList(),
+                  height(0.02.sh)
+                ],
+              );
+      }),
     );
   }
 }
