@@ -84,4 +84,5 @@ class API {
   static const String BLOCKED_USERS_CHAT_LIST = "${BASE_URL}/blocked-users";
   static const String BLOCK_USER = "${BASE_URL}/block-user";
   static const String UN_BLOCK_USER = "${BASE_URL}/unblock-user";
+  static const String GET_MESSAGES = "${BASE_URL}/getChatMessages";
 }

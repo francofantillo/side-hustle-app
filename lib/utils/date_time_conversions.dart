@@ -100,6 +100,25 @@ class DateTimeConversions {
     return time24;
   }
 
+  static String convertTo12HourFormatChat({String? timestamp}) {
+    if (timestamp != null) {
+      var dateTimeUTC = DateFormat("yyyy-MM-ddTHH:mm:ss").parse(timestamp, true);
+
+      var dateLocal = dateTimeUTC.toLocal();
+
+      final inputFormat = DateFormat("yyyy-MM-ddTHH:mm:ss");
+      final outputFormat = DateFormat('hh:mm a');
+
+      final dateTime = inputFormat.parse(dateLocal.toIso8601String());
+      final time24 = outputFormat.format(dateTime);
+      print("convertTo12HoursTime: $time24");
+
+      return time24;
+    } else {
+      return "";
+    }
+  }
+
   /*
   Not Needed Yet
    */

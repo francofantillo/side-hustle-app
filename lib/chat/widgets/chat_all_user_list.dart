@@ -54,9 +54,11 @@ class _ChatAllUsersListState extends State<ChatAllUsersList> {
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
                     arguments: ChatOneToOne(
-                      index: index,
-                      isBlockedUser: false,
-                    ));
+                        index: index,
+                        isBlockedUser: false,
+                        customerId: itemList?[index].senderId,
+                        modelId: itemList?[index].modelId,
+                        modelName: itemList?[index].modelName));
               },
               child: Padding(
                   padding: const EdgeInsets.only(right: 16.0, left: 8.0),

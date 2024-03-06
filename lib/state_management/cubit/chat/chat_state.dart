@@ -1,6 +1,7 @@
 part of 'chat_cubit.dart';
 
 class ChatState {
+  UserModel? userModel;
   ChatModel? chatAllUsersModel;
   bool chatAllUsersLoading;
   ChatModel? chatBlockedUsersModel;
@@ -9,26 +10,34 @@ class ChatState {
   List<ChatListData>? chatBlockedTempList;
   bool searchingChat;
   bool searchingChatBlocked;
+  ChatMessagesModel? chatMessagesModel;
+  bool chatMessagesLoading;
 
   ChatState(
       {this.chatAllUsersModel,
+      this.userModel,
       this.chatAllUsersLoading = true,
       this.chatBlockedUsersModel,
       this.chatBlockedUsersLoading = true,
       this.chatTempList,
       this.searchingChat = false,
       this.chatBlockedTempList,
-      this.searchingChatBlocked = false});
+      this.searchingChatBlocked = false,
+      this.chatMessagesModel,
+      this.chatMessagesLoading = true});
 
   ChatState copyWith(
-      {ChatModel? chatAllUsersModel,
+      {UserModel? userModel,
+      ChatModel? chatAllUsersModel,
       bool? chatAllUsersLoading,
       ChatModel? chatBlockedUsersModel,
       bool? chatBlockedUsersLoading,
       List<ChatListData>? chatTempList,
       List<ChatListData>? chatBlockedTempList,
       bool? searchingChat,
-      bool? searchingChatBlocked}) {
+      bool? searchingChatBlocked,
+      ChatMessagesModel? chatMessagesModel,
+      bool? chatMessagesLoading}) {
     return ChatState(
         chatAllUsersModel: chatAllUsersModel ?? this.chatAllUsersModel,
         chatAllUsersLoading: chatAllUsersLoading ?? this.chatAllUsersLoading,
@@ -39,7 +48,9 @@ class ChatState {
         chatTempList: chatTempList ?? this.chatTempList,
         chatBlockedTempList: chatBlockedTempList ?? this.chatBlockedTempList,
         searchingChat: searchingChat ?? this.searchingChat,
-        searchingChatBlocked:
-            searchingChatBlocked ?? this.searchingChatBlocked);
+        searchingChatBlocked: searchingChatBlocked ?? this.searchingChatBlocked,
+        chatMessagesModel: chatMessagesModel ?? this.chatMessagesModel,
+        chatMessagesLoading: chatMessagesLoading ?? this.chatMessagesLoading,
+        userModel: userModel ?? this.userModel);
   }
 }

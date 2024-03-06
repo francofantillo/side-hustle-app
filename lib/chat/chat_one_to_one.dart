@@ -22,9 +22,15 @@ class ChatOneToOne extends StatefulWidget {
   final bool isOrderChat, isOrderService;
   final int index;
   final String? userName;
+  final int? customerId;
+  final int? modelId;
+  final String? modelName;
 
   const ChatOneToOne(
       {super.key,
+      this.customerId,
+      this.modelId,
+      this.modelName,
       this.userName,
       this.index = 0,
       this.isBlockedUser = false,
@@ -42,6 +48,16 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
   void initState() {
     super.initState();
     _bloc = BlocProvider.of(context);
+    getChatMessages();
+  }
+
+  getChatMessages() async {
+    await _bloc.getMessagesCubit(
+        context: context,
+        mounted: mounted,
+        customerId: widget.customerId,
+        modelId: widget.modelId,
+        modelName: widget.modelName);
   }
 
   double BUBBLE_RADIUS = 16;

@@ -259,6 +259,9 @@ class AppRouter {
               isOrderChat: args?.isOrderChat ?? false,
               isOrderService: args?.isOrderService ?? false,
               index: args?.index ?? 0,
+              customerId: args?.customerId,
+              modelId: args?.modelId,
+              modelName: args?.modelName,
             );
 
           case AppRoutes.chatBlockUsersScreenRoute:

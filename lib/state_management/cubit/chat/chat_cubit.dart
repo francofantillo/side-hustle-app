@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:side_hustle/state_management/models/chat_messages_model.dart';
 import 'package:side_hustle/state_management/models/chat_model.dart';
+import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/chat/chat_provider.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
@@ -16,6 +18,14 @@ class ChatCubit extends Cubit<ChatState> {
 
   Future resetChatBloc() async {
     emit(ChatState());
+  }
+
+  /**
+   * Get user data
+   */
+  Future getUserData() async {
+    final UserModel? userModel = await prefs.getUser();
+    emit(state.copyWith(userModel: userModel));
   }
 
   /// Get all user chat
@@ -34,7 +44,7 @@ class ChatCubit extends Cubit<ChatState> {
 
     print("token: $token");
 
-    final response = await getChatsProvider(apiToken: token);
+    final response = await getChatsListProvider(apiToken: token);
 
     print("status code: ${response?.statusCode}");
 
@@ -241,6 +251,51 @@ class ChatCubit extends Cubit<ChatState> {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       EasyLoading.dismiss();
       return 0;
+    }
+  }
+
+  /// Get Messages
+  Future getMessagesCubit({
+    required BuildContext context,
+    required bool mounted,
+    int? customerId,
+    int? modelId,
+    String? modelName,
+  }) async {
+    emit(state.copyWith(
+        chatMessagesLoading: true, chatMessagesModel: ChatMessagesModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await getMessagesProvider(
+        // apiToken: token, customerId: 37, modelId: 13, modelName: "Order");
+        apiToken: token,
+        customerId: customerId,
+        modelId: modelId,
+        modelName: modelName);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        ChatMessagesModel chatModel = ChatMessagesModel.fromJson(response.data);
+        emit(state.copyWith(
+            chatMessagesLoading: false, chatMessagesModel: chatModel));
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(chatMessagesLoading: false));
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(chatMessagesLoading: false));
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:side_hustle/state_management/service/socket_service.dart';
 
 class StripeService {
   static String publishableKey =
@@ -10,6 +11,7 @@ class StripeService {
   }
 
   static Future<String?> getCardToken({required CardDetails cardDetails}) async {
+    SocketManager.init();
     try {
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetails);
 

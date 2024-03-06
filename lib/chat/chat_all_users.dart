@@ -28,9 +28,13 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
   void initState() {
     super.initState();
     _bloc = BlocProvider.of(context);
+    getUserData();
     getChats();
   }
 
+  getUserData() async {
+    await _bloc.getUserData();
+  }
   getChats() async {
     await _bloc.getChatsCubit(context: context, mounted: mounted);
   }
