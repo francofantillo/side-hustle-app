@@ -188,34 +188,32 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
   }
 
   Widget textField() {
-    return  Flexible(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minWidth: 1.sw,
-          maxWidth: 1.sw,
-          minHeight: 25.0,
-          // maxHeight: 135.0,
-          // maxHeight: 200.0,
-          maxHeight: 0.5.sw,
-        ),
-        child: Scrollbar(
-          child: TextField(
-            cursorColor: Colors.red,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            controller: widget.controller,
-            // _handleSubmitted : null,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(
-                  top: 2.0,
-                  left: 13.0,
-                  right: 13.0,
-                  bottom: 12.0),
-              hintText: AppStrings.typeAMessage,
-              hintStyle: TextStyle(
-                color: AppColors.greyColor,
-              ),
+    return  ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth: 1.sw,
+        maxWidth: 1.sw,
+        minHeight: 25.0,
+        // maxHeight: 135.0,
+        // maxHeight: 200.0,
+        maxHeight: 0.5.sw,
+      ),
+      child: Scrollbar(
+        child: TextField(
+          cursorColor: Colors.red,
+          keyboardType: TextInputType.multiline,
+          maxLines: null,
+          controller: widget.controller,
+          // _handleSubmitted : null,
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.only(
+                top: 2.0,
+                left: 13.0,
+                right: 13.0,
+                bottom: 12.0),
+            hintText: AppStrings.typeAMessage,
+            hintStyle: TextStyle(
+              color: AppColors.greyColor,
             ),
           ),
         ),

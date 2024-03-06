@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_all_user_list.dart';
 import 'package:side_hustle/chat/widgets/message_options_bottomsheet.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -64,7 +65,15 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
               onPressed: () {
                 AppUtils.showBottomModalSheet(
                     context: context,
-                    widget: const MessageOptionsBottomSheet());
+                    widget: MessageOptionsBottomSheet(
+                      onTap: () {
+                        print("clicked");
+                        Navigator.pop(context);
+                        Navigator.pushNamed(
+                            context, AppRoutes.chatBlockUsersScreenRoute);
+                      },
+                      textBlockedUserOrUnBlockedUser: AppStrings.blockedUsers,
+                    ));
               },
             ),
           ),
@@ -84,7 +93,9 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
                         height: AppDimensions.searchTextFieldHeight,
                         contentPaddingBottom: 8,
                         hintText: AppStrings.searchChatHint,
-                        onChanged: (search) {}),
+                        onChanged: (search) {
+                          _bloc.searchChatList(value: search);
+                        }),
                   ),
                   const ChatAllUsersList(),
                   height(0.02.sh)

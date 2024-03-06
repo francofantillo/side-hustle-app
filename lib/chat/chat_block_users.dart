@@ -42,38 +42,38 @@ class _ChatBlockUsersState extends State<ChatBlockUsers> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+          left: AppDimensions.rootPadding + 8,
+          right: AppDimensions.rootPadding + 8,
+          bottom: AppDimensions.rootPadding + 8,
+        ),
+        child: CustomMaterialButton(
+            onPressed: () {}, borderRadius: 16, name: AppStrings.unblockAll),
+      ),
       body: BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
         return state.chatBlockedUsersLoading
             ? const SizedBox.shrink()
             : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: AppDimensions.rootPadding,
-                    right: AppDimensions.rootPadding),
-                child: SearchTextField(
-                    height: AppDimensions.searchTextFieldHeight,
-                    contentPaddingBottom: 8,
-                    hintText: AppStrings.searchChatHint,
-                    onChanged: (search) {}),
-              ),
-              const ChatBlockUsersList(),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: AppDimensions.rootPadding + 8,
-                  right: AppDimensions.rootPadding + 8,
-                ),
-                child: CustomMaterialButton(
-                    onPressed: () {},
-                    borderRadius: 16,
-                    name: AppStrings.unblockAll),
-              ),
-              height(0.02.sh),
-            ],
-          );
-        }
-      ),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: AppDimensions.rootPadding,
+                        right: AppDimensions.rootPadding),
+                    child: SearchTextField(
+                        height: AppDimensions.searchTextFieldHeight,
+                        contentPaddingBottom: 8,
+                        hintText: AppStrings.searchChatHint,
+                        onChanged: (search) {
+                          _bloc.searchBlockedChatList(value: search);
+                        }),
+                  ),
+                  const ChatBlockUsersList(),
+                  height(0.03.sw),
+                ],
+              );
+      }),
     );
   }
 }

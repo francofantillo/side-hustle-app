@@ -258,6 +258,7 @@ class AppRouter {
               isBlockedUser: args?.isBlockedUser ?? false,
               isOrderChat: args?.isOrderChat ?? false,
               isOrderService: args?.isOrderService ?? false,
+              index: args?.index ?? 0,
             );
 
           case AppRoutes.chatBlockUsersScreenRoute:

@@ -428,6 +428,8 @@ class AppStrings {
   static const String typeAMessage = "Type a message";
   static const String chatUserName = "Talan Calzoni";
   static const String blockedUsers = "Blocked Users";
+  static const String blockUser = "Block user";
+  static const String unBlockUser = "Unblock user";
   static const String help = "Help";
   static const String unblockAll = "Unblock all";
   static const String unblockUserMessage =

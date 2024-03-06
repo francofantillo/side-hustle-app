@@ -2,6 +2,8 @@ import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:chat_bubbles/date_chips/date_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/chat/chat_send_widgets/receiver_widget.dart';
+import 'package:side_hustle/chat/chat_send_widgets/sender_widget.dart';
 import 'package:side_hustle/chat/widgets/order_product_item.dart';
 import 'package:side_hustle/chat/widgets/order_service_item.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -49,11 +51,6 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       alignment: Alignment.centerRight,
       child: Container(
         width: 1.sw,
-        // height: 0.53.sh,
-        // height: 0.86.sw,
-        // height: 0.76.sw,
-        // height: 0.86.sw,
-        // height: 310.w,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(
           right: 8.0,
@@ -242,131 +239,6 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
     );
   }
 
-  Widget receiverWidget({String? message, String? time, double? bottomWidth}) {
-    return Container(
-      constraints: BoxConstraints(maxWidth: .85.sw),
-      child: Padding(
-        padding: EdgeInsets.only(left: 8.0, bottom: bottomWidth ?? 10),
-        child: Card(
-          shadowColor: Colors.transparent,
-          color: Colors.white,
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight:
-                    Radius.circular(AppDimensions.listItemImageRoundedBorder),
-                bottomRight:
-                    Radius.circular(AppDimensions.listItemImageRoundedBorder),
-                bottomLeft:
-                    Radius.circular(AppDimensions.listItemImageRoundedBorder)),
-          ),
-          child: Material(
-            shadowColor: Colors.transparent,
-            color: Colors.white,
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  topRight:
-                      Radius.circular(AppDimensions.listItemImageRoundedBorder),
-                  bottomRight:
-                      Radius.circular(AppDimensions.listItemImageRoundedBorder),
-                  bottomLeft: Radius.circular(
-                      AppDimensions.listItemImageRoundedBorder)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                BubbleNormal(
-                  // text: AppStrings.messageReceiveOne,
-                  text: message ?? "",
-                  isSender: false,
-                  // color: Color(0xFF1B97F3),
-                  color: Colors.white,
-                  tail: true,
-                  textStyle: TextStyle(
-                    fontSize: AppDimensions.textSizeSmall,
-                    color: AppColors.textGreyColor,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0, bottom: 8),
-                  child: textWidget(
-                      // text: "03:00",
-                      text: time ?? "",
-                      fontSize: AppDimensions.textSize10,
-                      color: AppColors.appTextBlackColor),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget senderWidget({String? message, String? time}) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Container(
-        constraints: BoxConstraints(maxWidth: .85.sw),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-          child: Card(
-            color: const Color(0xFF1B97F3),
-            elevation: 2,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  topRight:
-                      Radius.circular(AppDimensions.listItemImageRoundedBorder),
-                  topLeft:
-                      Radius.circular(AppDimensions.listItemImageRoundedBorder),
-                  bottomLeft: Radius.circular(
-                      AppDimensions.listItemImageRoundedBorder)),
-            ),
-            child: Material(
-              shadowColor: Colors.transparent,
-              color: const Color(0xFF1B97F3),
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(
-                        AppDimensions.listItemImageRoundedBorder),
-                    topLeft: Radius.circular(
-                        AppDimensions.listItemImageRoundedBorder),
-                    bottomLeft: Radius.circular(
-                        AppDimensions.listItemImageRoundedBorder)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  BubbleNormal(
-                    text: message ?? "",
-                    isSender: true,
-                    // color: Color(0xFFE8E8EE),
-                    color: const Color(0xFF1B97F3),
-                    tail: true,
-                    // sent: true,
-                    textStyle: TextStyle(
-                      fontSize: AppDimensions.textSizeSmall,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0, bottom: 8),
-                    child: textWidget(
-                        text: time ?? "",
-                        fontSize: AppDimensions.textSize10,
-                        color: AppColors.whiteColor),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
@@ -414,7 +286,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     widget.isOrderService
                         ? getDirectionToMyLocation()
                         : const SizedBox.shrink(),
-                    receiverWidget(
+                    ReceiverWidget(
                         message: widget.isOrderService
                             ? AppStrings.orderMessageChatTextService
                             : AppStrings.orderMessageChatTextProduct,
@@ -426,24 +298,6 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    /*    BubbleNormalImage(
-                    id: 'id001',
-                    image: _image(),
-                    color: Colors.purpleAccent,
-                    tail: true,
-                    delivered: true,
-                  ),
-                  BubbleNormalAudio(
-                    color: Color(0xFFE8E8EE),
-                    duration: duration.inSeconds.toDouble(),
-                    position: position.inSeconds.toDouble(),
-                    isPlaying: isPlaying,
-                    isLoading: isLoading,
-                    isPause: isPause,
-                    onSeekChanged: _changeSeek,
-                    onPlayPauseButtonClick: _playAudio,
-                    sent: true,
-                  ),*/
                     Center(
                       child: DateChip(
                         date: now,
@@ -452,82 +306,16 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     ),
                     // I need to add timeStamp in next line after the end of the last letter of first line
                     // How to place text at end of last word in String then brake the line and place the text at end of the above line in new line
-                    /*Container(
-                      constraints: BoxConstraints(maxWidth: .85.sw),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0, bottom: 10),
-                        child: Card(
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(
-                                    AppDimensions.listItemImageRoundedBorder),
-                                bottomRight: Radius.circular(
-                                    AppDimensions.listItemImageRoundedBorder),
-                                bottomLeft: Radius.circular(
-                                    AppDimensions.listItemImageRoundedBorder)),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              BubbleNormal(
-                                text: AppStrings.messageReceiveOne,
-                                isSender: false,
-                                // color: Color(0xFF1B97F3),
-                                color: Colors.white,
-                                tail: true,
-                                textStyle: TextStyle(
-                                  fontSize: AppDimensions.textSizeSmall,
-                                  color: AppColors.textBlackColor,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, bottom: 8),
-                                child: textWidget(
-                                    text: "03:00",
-                                    fontSize: AppDimensions.textSizePerHead,
-                                    color: AppColors.chatMessageTimeColor),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),*/
-                    receiverWidget(
+                    const ReceiverWidget(
                         message: AppStrings.messageReceiveOne,
                         time: "03:00PM",
                         bottomWidth: 2),
-                    senderWidget(
+                    const SenderWidget(
                         message: AppStrings.messageReceiveOne, time: "03:10PM"),
-                    receiverWidget(
+                    const ReceiverWidget(
                         message: AppStrings.messageReceiveTwo,
                         time: "03:12PM",
                         bottomWidth: 2),
-                    // height(0.15.sh),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(
-                    //     top: 7,
-                    //     bottom: 20,
-                    //   ),
-                    //   child: Container(
-                    //     decoration: const BoxDecoration(
-                    //       borderRadius: BorderRadius.all(Radius.circular(6)),
-                    //       color: Color(0xFFE8E8EE),
-                    //     ),
-                    //     child: const Padding(
-                    //       padding: EdgeInsets.all(5.0),
-                    //       child: Text(AppStrings.unblockUserMessage,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // DateChip(
-                    //   date: new DateTime(now.year, now.month, now.day - 2),
-                    // ),
-                    // DateChip(
-                    //   date: now,
-                    // ),
                   ],
                 );
 

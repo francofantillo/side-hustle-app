@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/chat/widgets/chat_all_user_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
@@ -29,7 +30,10 @@ class _ChatAllUsersListState extends State<ChatAllUsersList> {
               //         errorMessage: AppStrings.errorMessageEvent),
               //   )
               ? const SizedBox.shrink()
-              : chatList(itemList: state.chatAllUsersModel?.chatList);
+              : chatList(
+                  itemList: state.searchingChat
+                      ? state.chatTempList
+                      : state.chatAllUsersModel?.chatList);
     });
   }
 
@@ -48,7 +52,11 @@ class _ChatAllUsersListState extends State<ChatAllUsersList> {
           return Material(
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute);
+                Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
+                    arguments: ChatOneToOne(
+                      index: index,
+                      isBlockedUser: false,
+                    ));
               },
               child: Padding(
                   padding: const EdgeInsets.only(right: 16.0, left: 8.0),

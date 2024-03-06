@@ -24,7 +24,10 @@ class ChatCubit extends Cubit<ChatState> {
     required bool mounted,
   }) async {
     emit(state.copyWith(
-        chatAllUsersLoading: true, chatAllUsersModel: ChatModel()));
+        chatTempList: [],
+        searchingChat: false,
+        chatAllUsersLoading: true,
+        chatAllUsersModel: ChatModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -61,7 +64,10 @@ class ChatCubit extends Cubit<ChatState> {
     required bool mounted,
   }) async {
     emit(state.copyWith(
-        chatBlockedUsersLoading: true, chatBlockedUsersModel: ChatModel()));
+        chatBlockedTempList: [],
+        searchingChatBlocked: false,
+        chatBlockedUsersLoading: true,
+        chatBlockedUsersModel: ChatModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -89,6 +95,152 @@ class ChatCubit extends Cubit<ChatState> {
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
       emit(state.copyWith(chatBlockedUsersLoading: false));
+    }
+  }
+
+  /// Search Chat List
+  searchChatList({
+    String? value,
+  }) {
+    emit(state.copyWith(chatTempList: [], searchingChat: true));
+    final List<ChatListData>? originalList = state.chatAllUsersModel?.chatList;
+    final List<ChatListData> tempList = [];
+    print("searchList: $value");
+    state.chatTempList?.clear();
+    if (value != null) {
+      emit(state.copyWith(searchingChat: true));
+      for (int i = 0; i < (originalList?.length ?? 0); i++) {
+        String name = originalList?[i].userName != null
+            ? "${originalList![i].userName}"
+            : '';
+        if (name.toLowerCase().contains(value.toLowerCase())) {
+          tempList.add(originalList![i]);
+        }
+      }
+      if (tempList.isNotEmpty) {
+        print("searchList tempList: ${tempList[0].userName}");
+        final tempSearchChatList = tempList;
+        emit(state.copyWith(chatTempList: tempSearchChatList));
+      } else if (value.isEmpty) {
+        print("searchList tempList is empty");
+        emit(state.copyWith(chatTempList: originalList));
+      } else {
+        emit(state.copyWith(chatTempList: []));
+      }
+    }
+  }
+
+  /// Search Blocked Chat List
+  searchBlockedChatList({
+    String? value,
+  }) {
+    emit(state.copyWith(chatBlockedTempList: [], searchingChatBlocked: true));
+    final List<ChatListData>? originalList =
+        state.chatBlockedUsersModel?.chatList;
+    final List<ChatListData> tempList = [];
+    print("searchList: $value");
+    state.chatBlockedTempList?.clear();
+    if (value != null) {
+      emit(state.copyWith(searchingChatBlocked: true));
+      for (int i = 0; i < (originalList?.length ?? 0); i++) {
+        String name = originalList?[i].userName != null
+            ? "${originalList![i].userName}"
+            : '';
+        if (name.toLowerCase().contains(value.toLowerCase())) {
+          tempList.add(originalList![i]);
+        }
+      }
+      if (tempList.isNotEmpty) {
+        print("searchList tempList: ${tempList[0].userName}");
+        final tempSearchChatList = tempList;
+        emit(state.copyWith(chatBlockedTempList: tempSearchChatList));
+      } else if (value.isEmpty) {
+        print("searchList tempList is empty");
+        emit(state.copyWith(chatBlockedTempList: originalList));
+      } else {
+        emit(state.copyWith(chatBlockedTempList: []));
+      }
+    }
+  }
+
+  /// block user
+  Future<int> blockUserChatCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int? chatId,
+      required int index}) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await blockUserProvider(chatId: chatId, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final ChatModel? chatModel = state.chatAllUsersModel;
+        chatModel?.chatList?.removeAt(index);
+        emit(state.copyWith(chatAllUsersModel: chatModel));
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
+    }
+  }
+
+  /// UnBlock user
+  Future<int> unBlockUserChatCubit(
+      {required BuildContext context,
+      required bool mounted,
+      required int? chatId,
+      required int index}) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await unBlockUserProvider(chatId: chatId, apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final ChatModel? chatModel = state.chatAllUsersModel;
+        chatModel?.chatList
+            ?.insert(0, state.chatBlockedUsersModel!.chatList![index]);
+        emit(state.copyWith(chatAllUsersModel: chatModel));
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
     }
   }
 }

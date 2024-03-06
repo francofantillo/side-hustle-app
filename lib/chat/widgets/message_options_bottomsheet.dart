@@ -9,9 +9,16 @@ import 'package:side_hustle/widgets/buttons/circular_icon_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-class MessageOptionsBottomSheet extends StatelessWidget {
-  const MessageOptionsBottomSheet({super.key});
+class MessageOptionsBottomSheet extends StatefulWidget {
+  final Function()? onTap;
+  final String textBlockedUserOrUnBlockedUser;
+  const MessageOptionsBottomSheet({super.key, this.onTap, required this.textBlockedUserOrUnBlockedUser});
 
+  @override
+  State<MessageOptionsBottomSheet> createState() => _MessageOptionsBottomSheetState();
+}
+
+class _MessageOptionsBottomSheetState extends State<MessageOptionsBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -53,16 +60,13 @@ class MessageOptionsBottomSheet extends StatelessWidget {
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: (){
-                          print("clicked");
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, AppRoutes.chatBlockUsersScreenRoute);
-                        },
+                        onTap: widget.onTap,
                         child: Padding(
                           padding:
                           const EdgeInsets.only(left: 16.0, right: 16.0, top: 16),
                           child: textWidget(
-                              text: AppStrings.blockedUsers,
+                              // text: AppStrings.blockedUsers,
+                              text: widget.textBlockedUserOrUnBlockedUser,
                               color: const Color(0xFFFCFCFC),
                               fontSize: AppDimensions.textSizeNormal),
                         ),
