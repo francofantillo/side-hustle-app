@@ -98,6 +98,11 @@ class _BottomModalSheetDeliveryAddressState
                           horizontal: 12.0, vertical: 0),
                       child: CustomTextFormField(
                         controller: _bloc.deliveryAddressTextController,
+                        onTap: () async {
+                          await _bloc.selectDeliveryLocation(
+                              context: context, mounted: mounted);
+                        },
+                        isReadonly: true,
                         isShowBoarder: false,
                         height: 40.h,
                         hintText: AppStrings.enterCompleteAddress,
@@ -144,14 +149,17 @@ class _BottomModalSheetDeliveryAddressState
                           horizontal: 16.0, vertical: 0),
                       child: CustomMaterialButton(
                           // height: 10.h,
-                          onPressed: () {
+                          onPressed: () async {
                             if (widget.isEdit) {
                               if (_deliveryAddressFormKey.currentState!
                                   .validate()) {
-                                _bloc.setDeliveryAddressCart();
-                                Navigator.pop(context);
+                                await _bloc.updateDeliveryAddressCartCubit(
+                                    context: context, mounted: mounted);
+                                // _bloc.setDeliveryAddressCart();
+                                // Navigator.pop(context);
                               }
-                            } else {
+                            }
+                     /*       else {
                               if (_deliveryAddressFormKey.currentState!
                                   .validate()) {
                                 widget.onItemAdded!(true);
@@ -172,7 +180,7 @@ class _BottomModalSheetDeliveryAddressState
                               //   widget.onItemAdded!(true);
                               //   Navigator.pop(context);
                               // }
-                            }
+                            }*/
                           },
                           borderRadius: 16,
                           name: widget.isEdit

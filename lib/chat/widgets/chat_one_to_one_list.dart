@@ -11,7 +11,9 @@ import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/state_management/models/chat_messages_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -139,6 +141,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       String? subTitle,
       String? price,
       String? deliveryType,
+      String? message,
       int? productsQuantity,
       String? location,
       String? messageTime}) {
@@ -186,7 +189,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 8),
                 child: textWidget(
                     maxLines: 4,
-                    text: AppStrings.orderMessageChatTextProduct,
+                    // text: AppStrings.orderMessageChatTextProduct,
+                    text: message,
                     fontSize: AppDimensions.textSizeVerySmall,
                     color: AppColors.textWhiteColor),
               ),
@@ -227,7 +231,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
     );
   }
 
-  Widget getDirectionToMyLocation() {
+  Widget getDirectionToMyLocation(
+      {double? lat, double? lng, String? shopName}) {
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(
@@ -236,7 +241,9 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
             width: 20.w,
             height: 8,
             fontSize: AppDimensions.textSizeSmall,
-            onPressed: () {},
+            onPressed: () async {
+              await AppUtils.launchMap(lng: lng, lat: lat, shopName: shopName);
+            },
             color: AppColors.greenColor,
             name: AppStrings.getDirectionToMyLocation,
             borderRadius: 12),
@@ -260,7 +267,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
         physics: const AlwaysScrollableScrollPhysics(
             parent: BouncingScrollPhysics()),
         shrinkWrap: true,
-        reverse: true,
+        // reverse: true,
+        reverse: false,
         scrollDirection: Axis.vertical,
         itemCount: itemList?.length ?? 0,
         itemBuilder: (context, index) {
@@ -273,12 +281,79 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
           final time = DateTimeConversions.convertTo12HourFormatChat(
               timestamp: itemList?[index].createdAt);
 
+          if (itemList?[index].productType != null) {
+            if (itemList?[index].productType == OrderTypeEnum.Product.name) {
+              return itemList?[index].deliveryType ==
+                      DeliveryTypeEnum.Pickup.name
+                  ? orderProductWidget(
+                      message: itemList?[index].message,
+                      image: itemList?[index].image,
+                      name: itemList?[index].name,
+                      subTitle: itemList?[index].description,
+                      deliveryType: itemList?[index].deliveryType,
+                      productsQuantity: itemList?[index].productCount != null
+                          ? int.parse(itemList![index].productCount!)
+                          : null,
+                      location: itemList?[index].location,
+                      messageTime: time)
+                  : Column(
+                      children: [
+                        orderProductWidget(
+                            message: itemList?[index].message,
+                            image: itemList?[index].image,
+                            name: itemList?[index].name,
+                            subTitle: itemList?[index].description,
+                            deliveryType: itemList?[index].deliveryType,
+                            productsQuantity:
+                                itemList?[index].productCount != null
+                                    ? int.parse(itemList![index].productCount!)
+                                    : null,
+                            location: itemList?[index].location,
+                            messageTime: time),
+                        getDirectionToMyLocation(
+                            lat: itemList?[index].lat != null
+                                ? double.parse(itemList![index].lat!)
+                                : null,
+                            lng: itemList?[index].lng != null
+                                ? double.parse(itemList![index].lng!)
+                                : null,
+                            shopName: "ShopName Needed")
+                      ],
+                    );
+            } else if (itemList?[index].productType ==
+                OrderTypeEnum.Service.name) {
+              return Column(
+                children: [
+                  orderServiceWidget(
+                      image: itemList?[index].image,
+                      name: itemList?[index].name,
+                      subTitle: itemList?[index].description,
+                      serviceDate: itemList?[index].serviceDate,
+                      serviceTime: "service time needed",
+                      location: itemList?[index].location,
+                      messageTime: time),
+                  getDirectionToMyLocation(
+                      lat: itemList?[index].lat != null
+                          ? double.parse(itemList![index].lat!)
+                          : null,
+                      lng: itemList?[index].lng != null
+                          ? double.parse(itemList![index].lng!)
+                          : null,
+                      shopName: "ShopName Needed")
+                ],
+              );
+            }
+          }
+
           if (itemList?[index].senderId == currentUserId) {
             return SenderWidget(
               message: itemList?[index].message,
               time: itemList?[index].createdAt,
             );
-          // } else if (itemList?[index].receiverId != currentUserId) {
+            // } else if (itemList?[index].receiverId != currentUserId) {
+            /*
+
+             */
           } else {
             return ReceiverWidget(
                 message: itemList?[index].message, time: time, bottomWidth: 2);

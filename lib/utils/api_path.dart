@@ -4,6 +4,15 @@ class API {
   /// Base Url
   static const String BASE_URL = "https://side-hustle.trangotech.dev/api";
   static const String BASE_URL_IMAGE = "https://side-hustle.trangotech.dev/";
+  static const String CHAT_SOCKET_API_BASE_URL = "http://socketside-hustle.trangotech.dev:3017";
+  // static const String CHAT_SOCKET_API_BASE_URL = "http://socketconstruction-connect.trangotech.dev:3014";
+
+  /////////////// SOCKET CHAT RESPONSE KEYS ////////////////
+  static const String GET_MESSAGES_KEY = "get_messages";
+  static const String GET_MESSAGE_KEY = "get_message";
+  /////////////// SOCKET CHAT EMIT EVENTS ////////////////
+  static const String GET_MESSAGES_EVENT = "get_messages";
+  static const String SEND_MESSAGE_EVENT = "send_message";
 
   /// Auth
   static const String SIGNUP = "${BASE_URL}/auth/register";
@@ -78,6 +87,7 @@ class API {
   static const String UPDATE_CART = "${BASE_URL}/update-cart";
   static const String GET_SIDEHUSTLE_CART = "${BASE_URL}/view-cart";
   static const String CHECKOUT = "${BASE_URL}/place-order";
+  static const String UPDATE_DELIVERY_ADDRESS = "${BASE_URL}/update-address";
 
   /// Chats
   static const String GET_CHAT_LIST = "${BASE_URL}/getChats";

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
+import 'package:side_hustle/state_management/service/socket_ibis_service.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
@@ -25,14 +26,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    print("Splash Screen called");
     _bloc = BlocProvider.of<AuthCubit>(context);
     _visible = false;
+    _connectSocket();
     _navigationTimer(seconds: 3);
     // _navigationTimerMilli(milliseconds: 300);
   }
 
   _isLogin() async {
     await _bloc.isLogin(context: context, mounted: mounted);
+  }
+
+  void _connectSocket() {
+    SocketService.instance?.initializeSocket();
+    SocketService.instance?.connectSocket();
+    SocketService.instance?.socketResponseMethod();
   }
 
   @override

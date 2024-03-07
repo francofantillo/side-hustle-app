@@ -100,7 +100,8 @@ class _DeliveryAddressYourCartState extends State<DeliveryAddressYourCart> {
                               child: textWidget(
                                   // text: AppStrings.locationText,
                                   // text: AppStrings.deliveryAddressHint,
-                                  text: state.deliveryAddressCart,
+                                  // text: state.deliveryAddressCart,
+                                  text: state.cartModel?.data?.address,
                                   maxLines: 2,
                                   color: const Color(0xFFFCFCFC),
                                   fontSize: AppDimensions.textSizeVerySmall),
@@ -172,26 +173,26 @@ class _DeliveryAddressYourCartState extends State<DeliveryAddressYourCart> {
                           await _bloc
                               .checkoutCubit(context: context, mounted: mounted)
                               .then((value) async {
-                            Navigator.pop(context);
-                            Navigator.pushNamed(
-                                context, AppRoutes.chatOneToOneScreenRoute,
-                                arguments: ChatOneToOne(
-                                  isOrderChat: true,
-                                  isOrderService: widget.isOrderService,
-                                ));
+                            // Navigator.pop(context);
+                            // Navigator.pushNamed(
+                            //     context, AppRoutes.chatOneToOneScreenRoute,
+                            //     arguments: ChatOneToOne(
+                            //       isOrderChat: true,
+                            //       isOrderService: widget.isOrderService,
+                            //     ));
                           });
                         }
                       } else {
                         await _bloc
                             .checkoutCubit(context: context, mounted: mounted)
                             .then((value) async {
-                          Navigator.pop(context);
-                          Navigator.pushNamed(
-                              context, AppRoutes.chatOneToOneScreenRoute,
-                              arguments: ChatOneToOne(
-                                isOrderChat: true,
-                                isOrderService: widget.isOrderService,
-                              ));
+                          // Navigator.pop(context);
+                          // Navigator.pushNamed(
+                          //     context, AppRoutes.chatOneToOneScreenRoute,
+                          //     arguments: ChatOneToOne(
+                          //       isOrderChat: true,
+                          //       isOrderService: widget.isOrderService,
+                          //     ));
                         });
                       }
                     },

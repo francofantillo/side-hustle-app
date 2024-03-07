@@ -4,6 +4,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -53,7 +54,8 @@ class OrderProductItemWidget extends StatelessWidget {
                     RoundedCornersImage(
                       imageHeight: imageHeight,
                       imageWidth: AppDimensions.sideHustleItemWidth,
-                      assetImage: imagePath,
+                      assetImage: AssetsPath.imageLoadError,
+                      image: imagePath,
                       boarderColor: boarderColor,
                     ),
                     Expanded(
@@ -137,9 +139,12 @@ class OrderProductItemWidget extends StatelessWidget {
                     color: AppColors.backIconBackgroundColor,
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                     child: InkWell(
-                      onTap: productsQuantity > 1 ? () {
-                        Navigator.pushNamed(context, AppRoutes.orderDetailScreenRoute);
-                      } : null,
+                      onTap: productsQuantity > 1
+                          ? () {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.orderDetailScreenRoute);
+                            }
+                          : null,
                       child: Center(
                         child: textWidget(
                             text: productsQuantity == 1

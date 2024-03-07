@@ -4,6 +4,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/images/rounded_corners_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
@@ -51,7 +52,8 @@ class OrderServiceItemWidget extends StatelessWidget {
                     // imageHeight: imageHeight,
                     imageHeight: 0.22.sw,
                     imageWidth: AppDimensions.sideHustleItemWidth,
-                    assetImage: imagePath,
+                    assetImage: AssetsPath.imageLoadError,
+                    image: imagePath,
                     boarderColor: boarderColor,
                   ),
                   Expanded(

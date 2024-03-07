@@ -428,6 +428,37 @@ Future<Response?> updateQuantityCartProvider(
   return response;
 }
 
+/// Update Delivery Address
+Future<Response?> updateDeliveryAddressCartProvider(
+    {int? cartId,
+    String? address,
+    String? street,
+    String? appartment,
+    String? lat,
+    String? lng,
+    String? apiToken}) async {
+  final data = {
+    "cart_id": cartId,
+    "address": address,
+    "street": street,
+    "appartment": appartment,
+  };
+
+  if (lat != null) {
+    data.putIfAbsent("lat", () => lat);
+  }
+
+  if (lng != null) {
+    data.putIfAbsent("lng", () => lng);
+  }
+
+  print(
+      "*****************\nurl: ${API.UPDATE_DELIVERY_ADDRESS}\n$data\n**************************");
+  final response = await putRequestProvider(
+      path: API.UPDATE_DELIVERY_ADDRESS, data: data, token: apiToken);
+  return response;
+}
+
 /// Get Side Hustle Cart
 Future<Response?> getSideHustleCartProvider({String? apiToken}) async {
   print(

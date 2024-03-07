@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/models/cart_model.dart';
@@ -104,8 +105,8 @@ class SideHustleCubit extends Cubit<SideHustleState> {
 
   setIsProductOrServiceFromYourShop(
       {required bool isProductOrServiceFromYourShop}) {
-    emit(
-        state.copyWith(isProductOrServiceFromYourShop: isProductOrServiceFromYourShop));
+    emit(state.copyWith(
+        isProductOrServiceFromYourShop: isProductOrServiceFromYourShop));
   }
 
   /// Select Location
@@ -128,6 +129,18 @@ class SideHustleCubit extends Cubit<SideHustleState> {
 
     if (location != null) {
       shopLocationTextController.text = location.locationAddress ?? "";
+      selectLocationModel = location;
+    }
+  }
+
+  /// Select Delivery Location
+  Future selectDeliveryLocation(
+      {required BuildContext context, required bool mounted}) async {
+    final SelectLocationModel? location =
+        await AppUtils.selectLocation(context: context, mounted: mounted);
+
+    if (location != null) {
+      deliveryAddressTextController.text = location.locationAddress ?? "";
       selectLocationModel = location;
     }
   }
@@ -848,6 +861,58 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     }
   }
 
+  /// Update Delivery Address Cart
+  Future updateDeliveryAddressCartCubit(
+      {required BuildContext context, required bool mounted}) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final String? lat = selectLocationModel?.lat?.toString();
+    final String? lng = selectLocationModel?.lng?.toString();
+    print("lat: $lat");
+    print("lng: $lng");
+
+    final response = await updateDeliveryAddressCartProvider(
+        cartId: state.cartModel?.data?.id,
+        address: deliveryAddressTextController.text,
+        street: streetTextController.text,
+        appartment: apartmentTextController.text,
+        lat: lat,
+        lng: lng,
+        apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    // EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // AppUtils.showToast(response.data["message"]);
+        CartModel cartModel = CartModel.fromJson(response.data);
+        emit(state.copyWith(
+            cartLoading: false,
+            cartModel: cartModel,
+            deliveryAddressCart: deliveryAddressTextController.text));
+        if (mounted) {
+          Navigator.pop(context);
+        }
+        EasyLoading.dismiss();
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+    }
+  }
+
   /// Get Cart
   Future getSideHustleCartCubit(
       {required BuildContext context, required bool mounted}) async {
@@ -868,6 +933,9 @@ class SideHustleCubit extends Cubit<SideHustleState> {
       if (response.data["status"] == AppValidationMessages.success) {
         // AppUtils.showToast(response.data["message"]);
         CartModel cartModel = CartModel.fromJson(response.data);
+        deliveryAddressTextController.text = cartModel.data?.address ?? "";
+        streetTextController.text = cartModel.data?.street ?? "";
+        apartmentTextController.text = cartModel.data?.apartment ?? "";
         emit(state.copyWith(cartLoading: false, cartModel: cartModel));
       }
 
@@ -937,7 +1005,22 @@ class SideHustleCubit extends Cubit<SideHustleState> {
         deliveryAddressTextController.clear();
         streetTextController.clear();
         apartmentTextController.clear();
+        //     "model_id": 29,
+        // "model_name": "Order",
+        // "customer_id": 37,
+        final modelId = response.data['data']["model_id"];
+        final modelName = response.data['data']["model_name"];
+        final customerId = response.data['data']["customer_id"];
         emit(state.copyWith(cartModel: CartModel(), deliveryAddressCart: ""));
+        if (mounted) {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
+              arguments: ChatOneToOne(
+                  isBlockedUser: false,
+                  customerId: customerId,
+                  modelId: modelId,
+                  modelName: modelName));
+        }
         EasyLoading.dismiss();
         return 1;
       }

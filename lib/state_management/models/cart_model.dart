@@ -33,20 +33,30 @@ class DataCart {
   int? isAddress;
   String? createdAt;
   String? updatedAt;
+  String? address;
+  String? street;
+  String? apartment;
+  String? lat;
+  String? lng;
   List<CartDetails>? cartDetails;
 
   DataCart(
       {this.id,
-        this.userId,
-        this.ownerId,
-        this.shopId,
-        this.subTotal,
-        this.totalItems,
-        this.status,
-        this.isAddress,
-        this.createdAt,
-        this.updatedAt,
-        this.cartDetails});
+      this.address,
+      this.street,
+      this.apartment,
+      this.lat,
+      this.lng,
+      this.userId,
+      this.ownerId,
+      this.shopId,
+      this.subTotal,
+      this.totalItems,
+      this.status,
+      this.isAddress,
+      this.createdAt,
+      this.updatedAt,
+      this.cartDetails});
 
   DataCart.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -57,6 +67,11 @@ class DataCart {
     totalItems = json['total_items'];
     status = json['status'];
     isAddress = json['is_address'];
+    address = json['address'];
+    street = json['street'];
+    apartment = json['appartment'];
+    lat = json['lat'];
+    lng = json['lng'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     if (json['cart_details'] != null) {
@@ -108,23 +123,23 @@ class CartDetails {
 
   CartDetails(
       {this.id,
-        this.cartId,
-        this.type,
-        this.productId,
-        this.productName,
-        this.deliveryType,
-        this.serviceType,
-        this.price,
-        this.qty,
-        this.productImage,
-        this.description,
-        this.address,
-        this.street,
-        this.apartment,
-        this.lat,
-        this.lng,
-        this.createdAt,
-        this.updatedAt});
+      this.cartId,
+      this.type,
+      this.productId,
+      this.productName,
+      this.deliveryType,
+      this.serviceType,
+      this.price,
+      this.qty,
+      this.productImage,
+      this.description,
+      this.address,
+      this.street,
+      this.apartment,
+      this.lat,
+      this.lng,
+      this.createdAt,
+      this.updatedAt});
 
   CartDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -35,3 +35,4 @@ enum MyJobsEnum { Pending, Ongoing, Completed }
 enum ServiceTypeEnum { Fixed, Hourly }
 enum DeliveryTypeEnum { Pickup, Fixed }
 enum SideHustleTypeEnum { Product, Service }
+enum OrderTypeEnum { Product, Service }
