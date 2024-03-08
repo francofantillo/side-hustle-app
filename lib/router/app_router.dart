@@ -262,6 +262,9 @@ class AppRouter {
               customerId: args?.customerId,
               modelId: args?.modelId,
               modelName: args?.modelName,
+              chatId: args?.chatId,
+              senderModel: args?.senderModel,
+              receiverModel: args?.receiverModel,
             );
 
           case AppRoutes.chatBlockUsersScreenRoute:

@@ -9,6 +9,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/models/cart_model.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
+import 'package:side_hustle/state_management/models/place_order.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/models/side_hustle_detail_model.dart';
 import 'package:side_hustle/state_management/models/side_hustle_model.dart';
@@ -987,6 +988,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   /// Checkout
   Future<int> checkoutCubit(
       {required BuildContext context, required bool mounted}) async {
+    emit(state.copyWith(placeOrderModel: PlaceOrderModel()));
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -1005,21 +1007,41 @@ class SideHustleCubit extends Cubit<SideHustleState> {
         deliveryAddressTextController.clear();
         streetTextController.clear();
         apartmentTextController.clear();
-        //     "model_id": 29,
-        // "model_name": "Order",
-        // "customer_id": 37,
-        final modelId = response.data['data']["model_id"];
-        final modelName = response.data['data']["model_name"];
-        final customerId = response.data['data']["customer_id"];
-        emit(state.copyWith(cartModel: CartModel(), deliveryAddressCart: ""));
+        PlaceOrderModel placeOrderModel =
+            PlaceOrderModel.fromJson(response.data);
+        final modelId = placeOrderModel.data?.modelId;
+        final modelName = placeOrderModel.data?.modelName;
+        final customerId = placeOrderModel.data?.customerId;
+        final senderModel = placeOrderModel.data?.messages?.last.senderModel;
+        final receiverModel =
+            placeOrderModel.data?.messages?.last.receiverModel;
+        final chatId = placeOrderModel.data?.messages?.last.chatId;
+        final userName = placeOrderModel.data?.messages?.last.name;
+
+        print(
+          "modelId: $modelId, modelName: $modelName, "
+          "customerId: $customerId, senderModel: $senderModel, "
+          "receiverModel: $receiverModel, chatId: $chatId, "
+          "userName: $userName",
+        );
+
+        emit(state.copyWith(
+            cartModel: CartModel(),
+            deliveryAddressCart: "",
+            placeOrderModel: placeOrderModel));
         if (mounted) {
           Navigator.pop(context);
           Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
               arguments: ChatOneToOne(
-                  isBlockedUser: false,
-                  customerId: customerId,
-                  modelId: modelId,
-                  modelName: modelName));
+                isBlockedUser: false,
+                customerId: customerId,
+                modelId: modelId,
+                modelName: modelName,
+                senderModel: senderModel,
+                receiverModel: receiverModel,
+                chatId: chatId,
+                userName: userName,
+              ));
         }
         EasyLoading.dismiss();
         return 1;

@@ -12,6 +12,7 @@ class ChatState {
   bool searchingChatBlocked;
   ChatMessagesModel? chatMessagesModel;
   bool chatMessagesLoading;
+  int? receiverId;
 
   ChatState(
       {this.chatAllUsersModel,
@@ -24,7 +25,8 @@ class ChatState {
       this.chatBlockedTempList,
       this.searchingChatBlocked = false,
       this.chatMessagesModel,
-      this.chatMessagesLoading = true});
+      this.chatMessagesLoading = true,
+      this.receiverId});
 
   ChatState copyWith(
       {UserModel? userModel,
@@ -37,7 +39,8 @@ class ChatState {
       bool? searchingChat,
       bool? searchingChatBlocked,
       ChatMessagesModel? chatMessagesModel,
-      bool? chatMessagesLoading}) {
+      bool? chatMessagesLoading,
+      int? receiverId}) {
     return ChatState(
         chatAllUsersModel: chatAllUsersModel ?? this.chatAllUsersModel,
         chatAllUsersLoading: chatAllUsersLoading ?? this.chatAllUsersLoading,
@@ -51,6 +54,7 @@ class ChatState {
         searchingChatBlocked: searchingChatBlocked ?? this.searchingChatBlocked,
         chatMessagesModel: chatMessagesModel ?? this.chatMessagesModel,
         chatMessagesLoading: chatMessagesLoading ?? this.chatMessagesLoading,
-        userModel: userModel ?? this.userModel);
+        userModel: userModel ?? this.userModel,
+        receiverId: receiverId ?? this.receiverId);
   }
 }

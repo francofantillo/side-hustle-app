@@ -9,10 +9,13 @@ class API {
 
   /////////////// SOCKET CHAT RESPONSE KEYS ////////////////
   static const String GET_MESSAGES_KEY = "get_messages";
-  static const String GET_MESSAGE_KEY = "get_message";
+  // static const String GET_MESSAGE_KEY = "get_message";
+  static const String GET_MESSAGE_KEY = "message";
+  static const String CONNECT_USER_KEY = "connect_user";
   /////////////// SOCKET CHAT EMIT EVENTS ////////////////
   static const String GET_MESSAGES_EVENT = "get_messages";
-  static const String SEND_MESSAGE_EVENT = "send_message";
+  static const String SEND_MESSAGE_EVENT = "message";
+  static const String CONNECT_EVENT = "connect_user";
 
   /// Auth
   static const String SIGNUP = "${BASE_URL}/auth/register";

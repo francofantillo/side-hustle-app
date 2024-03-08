@@ -5,6 +5,7 @@ import 'package:side_hustle/chat/widgets/chat_all_user_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/state_management/models/chat_model.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 
 class ChatAllUsersList extends StatefulWidget {
   final List? itemList;
@@ -49,13 +50,26 @@ class _ChatAllUsersListState extends State<ChatAllUsersList> {
           return Material(
             child: InkWell(
               onTap: () {
+                String? senderModel;
+                if (itemList?[index].senderModel == ChatModelEnum.Seller.name) {
+                  senderModel = ChatModelEnum.Seller.name;
+                } else {
+                  senderModel = ChatModelEnum.Buyer.name;
+                }
                 Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
                     arguments: ChatOneToOne(
-                        index: index,
-                        isBlockedUser: false,
-                        customerId: itemList?[index].senderId,
-                        modelId: itemList?[index].modelId,
-                        modelName: itemList?[index].modelName));
+                      index: index,
+                      isBlockedUser: false,
+                      customerId: itemList?[index].receiverId,
+                      modelId: itemList?[index].modelId,
+                      modelName: itemList?[index].modelName,
+                      chatId: itemList?[index].chatId,
+                      senderModel: senderModel,
+                      receiverModel: senderModel !=
+                              ChatModelEnum.Seller.name
+                          ? ChatModelEnum.Seller.name
+                          : ChatModelEnum.Buyer.name,
+                    ));
               },
               child: Padding(
                   padding: const EdgeInsets.only(right: 16.0, left: 8.0),

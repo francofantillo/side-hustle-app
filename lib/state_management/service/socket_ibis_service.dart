@@ -1,5 +1,9 @@
 import 'dart:developer';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:side_hustle/base_widget/base_widget.dart';
+import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
+import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/service/socket_navigation.dart';
 import 'package:side_hustle/utils/api_path.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -81,10 +85,39 @@ class SocketService {
     _socket?.emit(eventName, eventParameters);
   }
 
+  // void connectUser() async {
+  //   if (socket?.connected == true) {
+  //     final _bloc =
+  //     BlocProvider.of<ChatCubit>(BaseWidget.globalKey.currentContext!);
+  //     final UserModel? userModel = await _bloc.getUserData();
+  //     int? uId = userModel?.data?.id;
+  //     final json = {
+  //       "user_id": uId,
+  //       "user_model": "Seller", /// Seller or Buyer
+  //       "receiver_id": "",
+  //       "chat_id": ""
+  //     };
+  //
+  //     /// connect users
+  //     socket?.emit('connect_user', json);
+  //     socket?.on('connect_user', (data) {
+  //       print("LISTENING TO EVENT 'connect_user' $data");
+  //       // listenToMessage();
+  //     });
+  //   }
+  // }
+
   void socketResponseMethod() {
-    _socket?.on("response", (data) {
+    // _socket?.on("response", (data) {
+    //   SocketNavigationClass.instance?.socketResponseMethod(responseData: data);
+    // });
+    _socket?.on(API.GET_MESSAGE_KEY, (data) {
       SocketNavigationClass.instance?.socketResponseMethod(responseData: data);
     });
+
+    // _socket?.on(API.CONNECT_USER_KEY, (data) {
+    // SocketNavigationClass.instance?.socketResponseMethod(responseData: data);
+    // });
   }
 
   void dispose() {

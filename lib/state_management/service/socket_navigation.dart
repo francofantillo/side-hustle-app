@@ -18,11 +18,14 @@ class SocketNavigationClass {
   void socketResponseMethod(
       {dynamic responseData, Function(String? value)? onSuccess}) {
     // int? userId=Provider.of<UserProvider>(StaticData.navigatorKey.currentContext!,listen: false).getCurrentUser?.data!.id;
+    // print("respnseData: $responseData");
     log("responseData is " + responseData.toString());
 
     if (responseData != null) {
       final bloc =
           BlocProvider.of<ChatCubit>(BaseWidget.globalKey.currentContext!);
+
+      bloc.appendSingleMessage(singleMessage: responseData);
 
       if (responseData["object_type"] == API.GET_MESSAGES_KEY) {
         // bloc.setChatData(chatDataList: responseData);

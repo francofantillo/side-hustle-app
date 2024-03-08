@@ -8,6 +8,9 @@ import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
 import 'package:side_hustle/chat/widgets/message_options_bottomsheet.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
+import 'package:side_hustle/state_management/models/user_model.dart';
+import 'package:side_hustle/state_management/service/socket_ibis_service.dart';
+import 'package:side_hustle/utils/api_path.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
@@ -24,31 +27,44 @@ class ChatOneToOne extends StatefulWidget {
   final String? userName;
   final int? customerId;
   final int? modelId;
+  final int? chatId;
   final String? modelName;
+  final String? senderModel;
+  final String? receiverModel;
 
   const ChatOneToOne(
       {super.key,
       this.customerId,
       this.modelId,
       this.modelName,
+      this.senderModel,
       this.userName,
       this.index = 0,
       this.isBlockedUser = false,
       this.isOrderChat = false,
-      this.isOrderService = false});
+      this.isOrderService = false,
+      this.chatId,
+      this.receiverModel});
 
   @override
   State<ChatOneToOne> createState() => _ChatOneToOneState();
 }
 
 class _ChatOneToOneState extends State<ChatOneToOne> {
+  final TextEditingController chatController = TextEditingController();
   late final ChatCubit _bloc;
 
   @override
   void initState() {
     super.initState();
     _bloc = BlocProvider.of(context);
+    setReceiverId();
+    connectUser();
     getChatMessages();
+  }
+
+  setReceiverId() {
+    _bloc.setReceiverId(receiverId: widget.customerId);
   }
 
   getChatMessages() async {
@@ -58,6 +74,61 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         customerId: widget.customerId,
         modelId: widget.modelId,
         modelName: widget.modelName);
+  }
+
+  void sendMessage({int? messageType, String message = ""}) async {
+    final UserModel? userModel = await _bloc.getUserData();
+    int? uId = userModel?.data?.id;
+
+    /// Seller or Buyer
+
+    /// Send message json
+    /// message_type = 1 for text and 2 for image
+    final json = {
+      "message_type": messageType,
+      "sender_id": uId,
+      "receiver_id": widget.customerId,
+      "model_id": widget.modelId,
+      "chat_id": widget.chatId,
+      "sender_model": widget.senderModel,
+      "receiver_model": widget.receiverModel,
+      "created_at": DateTime.now().toIso8601String(),
+      "message": message,
+    };
+    // final json = {
+    //   "message_type": messageType,
+    //   "user_id": 38,
+    //   "receiver_id": 18,
+    //   "chat_id": 11,
+    //   "sender_model": "Seller",
+    //   "receiver_model": "Buyer",
+    //   "message": message,
+    // };
+
+    print("sendMessage: $json");
+
+    /// connect users
+    SocketService.instance?.socketEmitMethod(
+        eventName: API.SEND_MESSAGE_EVENT, eventParameters: json);
+
+    chatController.clear();
+  }
+
+  void connectUser() async {
+    final UserModel? userModel = await _bloc.getUserData();
+    int? uId = userModel?.data?.id;
+
+    /// Connect User
+    final json = {
+      "user_id": uId,
+      "user_model": widget.senderModel,
+    };
+
+    print("connectUser: $json");
+
+    /// connect users
+    SocketService.instance
+        ?.socketEmitMethod(eventName: API.CONNECT_EVENT, eventParameters: json);
   }
 
   double BUBBLE_RADIUS = 16;
@@ -209,8 +280,9 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                     height(0.03.sw),
                     Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                             child: CustomTextFieldChat(
+                          controller: chatController,
                           hintText: AppStrings.typeAMessage,
                         )),
                         Padding(
@@ -224,6 +296,11 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                             iconColor: AppColors.whiteColor,
                             onTap: () {
                               print("clicked minus");
+                              if (chatController.text.trim().isNotEmpty) {
+                                sendMessage(
+                                    messageType: 1,
+                                    message: chatController.text);
+                              }
                             },
                             iconPath: AssetsPath.send,
                           ),

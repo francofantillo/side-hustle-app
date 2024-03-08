@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/state_management/models/chat_messages_model.dart';
 import 'package:side_hustle/state_management/models/chat_model.dart';
+import 'package:side_hustle/state_management/models/place_order.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/chat/chat_provider.dart';
 import 'package:side_hustle/utils/app_utils.dart';
@@ -23,10 +24,49 @@ class ChatCubit extends Cubit<ChatState> {
   /**
    * Get user data
    */
-  Future getUserData() async {
+  Future<UserModel?> getUserData() async {
     final UserModel? userModel = await prefs.getUser();
     emit(state.copyWith(userModel: userModel));
+    return userModel;
   }
+
+  Future appendSingleMessage({dynamic singleMessage}) async {
+    final ChatMessages chatMessages = ChatMessages.fromJson(singleMessage);
+
+    if (state.receiverId == chatMessages.senderId ||
+        state.receiverId == chatMessages.receiverId) {
+      final chatMessagesModel = state.chatMessagesModel;
+      chatMessagesModel?.messagesData?.messages?.add(chatMessages);
+      emit(state.copyWith(chatMessagesModel: chatMessagesModel));
+    }
+  }
+
+  setReceiverId({int? receiverId}) {
+    emit(state.copyWith(receiverId: receiverId));
+  }
+
+/*
+  appendSingleMessage({dynamic singleMessage}) {
+    print("appendSingleMessage: $singleMessage");
+    final ChatModelData singleMessageData =
+    ChatModelData.fromJson(singleMessage['data']);
+    if (state.receiverID == singleMessageData.senderId?.sId ||
+        state.receiverID == singleMessageData.receiverId?.sId) {
+      print(
+          "receiverID: ${state.receiverID} singleMessageData sId: ${singleMessageData.senderId?.sId}, ${singleMessageData.receiverId?.sId}");
+      final reversedChatList = state.reversedChatList;
+
+      reversedChatList?.insert(0, singleMessageData);
+      print("last value: ${reversedChatList?.last.message}");
+      emit(state.copyWith(reversedChatList: reversedChatList));
+    } else {
+      print(
+          "receiverID: ${state.receiverID} singleMessageData sId: ${singleMessageData.senderId?.sId}, ${singleMessageData.receiverId?.sId}");
+    }
+
+    // print("chatModel: ${state.chatModel?.data?[0].sId}");
+  }
+*/
 
   /// Get all user chat
   Future getChatsCubit({

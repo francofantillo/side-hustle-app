@@ -1,46 +1,52 @@
-class ChatMessagesModel {
+class PlaceOrderModel {
   bool? status;
   String? message;
-  MessagesData? messagesData;
+  Data? data;
 
-  ChatMessagesModel({this.status, this.message, this.messagesData});
+  PlaceOrderModel({this.status, this.message, this.data});
 
-  ChatMessagesModel.fromJson(Map<String, dynamic> json) {
+  PlaceOrderModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    messagesData = json['data'] != null ? MessagesData.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['status'] = this.status;
     data['message'] = this.message;
-    if (this.messagesData != null) {
-      data['data'] = this.messagesData!.toJson();
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
 }
 
-class MessagesData {
-  int? chatId;
-  List<ChatMessages>? messages;
+class Data {
+  int? modelId;
+  String? modelName;
+  int? customerId;
+  List<Messages>? messages;
 
-  MessagesData({this.chatId, this.messages});
+  Data({this.modelId, this.modelName, this.customerId, this.messages});
 
-  MessagesData.fromJson(Map<String, dynamic> json) {
-    chatId = json['chat_id'];
+  Data.fromJson(Map<String, dynamic> json) {
+    modelId = json['model_id'];
+    modelName = json['model_name'];
+    customerId = json['customer_id'];
     if (json['messages'] != null) {
-      messages = <ChatMessages>[];
+      messages = <Messages>[];
       json['messages'].forEach((v) {
-        messages!.add(ChatMessages.fromJson(v));
+        messages!.add(new Messages.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['chat_id'] = this.chatId;
+    data['model_id'] = this.modelId;
+    data['model_name'] = this.modelName;
+    data['customer_id'] = this.customerId;
     if (this.messages != null) {
       data['messages'] = this.messages!.map((v) => v.toJson()).toList();
     }
@@ -48,7 +54,7 @@ class MessagesData {
   }
 }
 
-class ChatMessages {
+class Messages {
   int? id;
   int? chatId;
   int? senderId;
@@ -76,7 +82,7 @@ class ChatMessages {
   String? createdAt;
   String? updatedAt;
 
-  ChatMessages(
+  Messages(
       {this.id,
         this.chatId,
         this.senderId,
@@ -104,7 +110,7 @@ class ChatMessages {
         this.createdAt,
         this.updatedAt});
 
-  ChatMessages.fromJson(Map<String, dynamic> json) {
+  Messages.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     chatId = json['chat_id'];
     senderId = json['sender_id'];

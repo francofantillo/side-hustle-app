@@ -260,7 +260,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
     });
   }
 
-  Widget messagesList({List<Messages>? itemList, required int? currentUserId}) {
+  Widget messagesList(
+      {List<ChatMessages>? itemList, required int? currentUserId}) {
     final now = DateTime.now();
     return Expanded(
       child: ListView.builder(
@@ -348,43 +349,12 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
           if (itemList?[index].senderId == currentUserId) {
             return SenderWidget(
               message: itemList?[index].message,
-              time: itemList?[index].createdAt,
+              time: time,
             );
-            // } else if (itemList?[index].receiverId != currentUserId) {
-            /*
-
-             */
           } else {
             return ReceiverWidget(
                 message: itemList?[index].message, time: time, bottomWidth: 2);
           }
-
-          /*   /// if Ordered Service
-          if (itemList?[index].serviceDate != null) {
-            return orderServiceWidget();
-          }
-
-          /// if Ordered Product
-          else if (itemList?[index].serviceDate != null) {
-            return orderProductWidget();
-          } else if (itemList?[index].serviceDate != null) {
-            return ReceiverWidget(
-                message: itemList?[index].message,
-                time: itemList?[index].createdAt,
-                bottomWidth: 2);
-          } else if (itemList?[index].messageType == 1) {
-            return ReceiverWidget(
-                message: itemList?[index].message,
-                time: itemList?[index].createdAt,
-                bottomWidth: 2);
-          }
-
-          return itemList?[index].serviceDate != null
-              ? orderServiceWidget()
-              : ReceiverWidget(
-                  message: itemList?[index].message,
-                  time: itemList?[index].createdAt,
-                  bottomWidth: 2);*/
         },
       ),
     );

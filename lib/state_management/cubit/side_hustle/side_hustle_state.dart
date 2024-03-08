@@ -20,6 +20,7 @@ class SideHustleState {
   CartModel? cartModel;
   bool cartLoading;
   String? deliveryAddressCart;
+  PlaceOrderModel? placeOrderModel;
 
   SideHustleState(
       {this.images,
@@ -40,7 +41,8 @@ class SideHustleState {
       this.sideHustleDetailLoading = true,
       this.cartModel,
       this.cartLoading = false,
-      this.deliveryAddressCart});
+      this.deliveryAddressCart,
+      this.placeOrderModel});
 
   SideHustleState copyWith(
       {List<Images>? images,
@@ -61,7 +63,8 @@ class SideHustleState {
       bool? sideHustleDetailLoading,
       CartModel? cartModel,
       bool? cartLoading,
-      String? deliveryAddressCart}) {
+      String? deliveryAddressCart,
+      PlaceOrderModel? placeOrderModel}) {
     return SideHustleState(
         images: images ?? this.images,
         editProductLoading: editProductLoading ?? this.editProductLoading,
@@ -70,8 +73,8 @@ class SideHustleState {
         yourShopLoading: yourShopLoading ?? this.yourShopLoading,
         otherUserShopModel: otherUserShopModel ?? this.otherUserShopModel,
         otherUserShopLoading: otherUserShopLoading ?? this.otherUserShopLoading,
-        isProductOrServiceFromYourShop:
-            isProductOrServiceFromYourShop ?? this.isProductOrServiceFromYourShop,
+        isProductOrServiceFromYourShop: isProductOrServiceFromYourShop ??
+            this.isProductOrServiceFromYourShop,
         editSideHustleModel: editSideHustleModel ?? this.editSideHustleModel,
         editSideHustleLoading:
             editSideHustleLoading ?? this.editSideHustleLoading,
@@ -85,6 +88,7 @@ class SideHustleState {
             sideHustleDetailLoading ?? this.sideHustleDetailLoading,
         cartModel: cartModel ?? this.cartModel,
         cartLoading: cartLoading ?? this.cartLoading,
-        deliveryAddressCart: deliveryAddressCart ?? this.deliveryAddressCart);
+        deliveryAddressCart: deliveryAddressCart ?? this.deliveryAddressCart,
+        placeOrderModel: placeOrderModel ?? this.placeOrderModel);
   }
 }
