@@ -20,7 +20,7 @@ class CustomTextFieldChat extends StatefulWidget {
   final Widget? suffixIcon;
   final double? suffixIconScale;
   final int? maxLines;
-  final Function()? onTap;
+  final Function()? onTap, onTapEmoji, onTapCamera, onTapAttachment;
   final TextEditingController? controller;
 
   // final String? Function(String?)? validator;
@@ -43,6 +43,9 @@ class CustomTextFieldChat extends StatefulWidget {
     this.label,
     this.isPrefixIcon = false,
     this.isPasswordField = false,
+    this.onTapAttachment,
+    this.onTapCamera,
+    this.onTapEmoji,
     this.focusNode,
     this.prefixIconPath,
     this.prefixIconColor,
@@ -124,7 +127,6 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
               borderRadius:
                   BorderRadius.circular(AppDimensions.textFieldBorderRadius),
               border:
-
                   Border.all(color: widget.fillColor ?? AppColors.whiteColor),
               color: widget.fillColor ?? AppColors.greyColorChat,
             ),
@@ -137,7 +139,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Material(
                         child: InkWell(
-                          onTap: (){},
+                          onTap: widget.onTapEmoji,
                           child: const Icon(
                             Icons.emoji_emotions_outlined,
                             color: AppColors.greyColor,
@@ -154,7 +156,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
                       padding: const EdgeInsets.only(right: 6.0),
                       child: Material(
                         child: InkWell(
-                          onTap: (){},
+                          onTap: widget.onTapAttachment,
                           child: const Icon(
                             CustomIcon.attachment,
                             color: AppColors.greyColor,
@@ -169,7 +171,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
                       padding: const EdgeInsets.only(right: 12.0),
                       child: Material(
                         child: InkWell(
-                          onTap: (){},
+                          onTap: widget.onTapCamera,
                           child: const Icon(
                             Icons.camera_alt_sharp,
                             color: AppColors.greyColor,
@@ -188,7 +190,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
   }
 
   Widget textField() {
-    return  ConstrainedBox(
+    return ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: 1.sw,
         maxWidth: 1.sw,
@@ -207,10 +209,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
           decoration: const InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(
-                top: 2.0,
-                left: 13.0,
-                right: 13.0,
-                bottom: 12.0),
+                top: 2.0, left: 13.0, right: 13.0, bottom: 12.0),
             hintText: AppStrings.typeAMessage,
             hintStyle: TextStyle(
               color: AppColors.greyColor,
@@ -220,6 +219,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
       ),
     );
   }
+
   Widget textFormField() {
     return Expanded(
       child: Container(
@@ -256,8 +256,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
             ),
             hintText: widget.hintText,
             errorStyle: _errorTextStyle(),
-            hintStyle: const TextStyle(
-                color: AppColors.greyColor),
+            hintStyle: const TextStyle(color: AppColors.greyColor),
             errorMaxLines: 3,
             suffixIcon: widget.isPasswordField!
                 ? _passwordSuffixIconWidget()

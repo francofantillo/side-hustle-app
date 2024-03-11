@@ -126,6 +126,7 @@ class _YourResumeState extends State<YourResume> {
                             // image:
                             //     AlphaAppData.dpProfile,
                             image: state.resumeModel?.data?.profileImage,
+                            // image: "http://fastly.picsum.photos/id/39/200/300.jpg?hmac=CcUiRU6-82MldMqtiF9shpKCbwzwkILEWuRi90JsADs",
                             assetImage: AssetsPath.placeHolder,
                             boarderColor: AppColors.primaryColor,
                             imageHeight: 0.28.sw,

@@ -53,6 +53,8 @@ class ChatOneToOne extends StatefulWidget {
 class _ChatOneToOneState extends State<ChatOneToOne> {
   final TextEditingController chatController = TextEditingController();
   late final ChatCubit _bloc;
+  bool showEmoji = false;
+
 
   @override
   void initState() {
@@ -284,6 +286,12 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                             child: CustomTextFieldChat(
                           controller: chatController,
                           hintText: AppStrings.typeAMessage,
+                          onTapEmoji: () {
+                            print("clicked emoji");
+                            setState(() {
+                              showEmoji = !showEmoji;
+                            });
+                          },
                         )),
                         Padding(
                           padding: const EdgeInsets.only(left: 2),
@@ -307,6 +315,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                         ),
                       ],
                     ),
+
                     height(0.02.sw),
                   ],
                 ),

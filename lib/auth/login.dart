@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
+import 'package:side_hustle/state_management/service/socket_ibis_service.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -35,7 +36,15 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     _bloc = BlocProvider.of<AuthCubit>(context);
     _bloc.initControllers();
+    _connectSocket();
     super.initState();
+  }
+
+  void _connectSocket() {
+    print("called _connectSocket");
+    SocketService.instance?.initializeSocket();
+    SocketService.instance?.connectSocket();
+    SocketService.instance?.socketResponseMethod();
   }
 
   @override

@@ -9,7 +9,6 @@ import 'package:side_hustle/utils/api_path.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-
 class SocketService {
   static Socket? _socket;
 
@@ -34,19 +33,18 @@ class SocketService {
     _socket = IO.io(
         API.CHAT_SOCKET_API_BASE_URL,
         OptionBuilder()
-        // .setPath('/rt')
+            // .setPath('/rt')
             .setTransports(['websocket'])
             .disableAutoConnect()
             .enableReconnection()
             .setExtraHeaders({
-          'Connection': 'Upgrade',
-        })
+              'Connection': 'Upgrade',
+            })
             .enableForceNew()
             .build());
   }
 
   void connectSocket() {
-
     _socket?.connect();
 
     _socket?.on("connect", (data) {
@@ -76,11 +74,7 @@ class SocketService {
   void socketEmitMethod(
       {required String eventName, required dynamic eventParameters}) {
     /// Send Message
-    final data = {
-      "chat_id":3,
-      "receiver_id":4,
-      "sender_id":5
-    };
+    final data = {"chat_id": 3, "receiver_id": 4, "sender_id": 5};
 
     _socket?.emit(eventName, eventParameters);
   }

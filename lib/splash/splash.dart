@@ -8,6 +8,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/service/socket_ibis_service.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -29,9 +30,14 @@ class _SplashScreenState extends State<SplashScreen> {
     print("Splash Screen called");
     _bloc = BlocProvider.of<AuthCubit>(context);
     _visible = false;
+    getCurrentLocation();
     _connectSocket();
     _navigationTimer(seconds: 3);
     // _navigationTimerMilli(milliseconds: 300);
+  }
+
+  getCurrentLocation() async {
+    await AppUtils.getCurrentLocation();
   }
 
   _isLogin() async {
@@ -39,6 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _connectSocket() {
+    print("called _connectSocket");
     SocketService.instance?.initializeSocket();
     SocketService.instance?.connectSocket();
     SocketService.instance?.socketResponseMethod();

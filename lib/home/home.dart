@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     isProductSelected = true;
     getCurrentLocation();
     getDashboard();
+    getProfile();
     super.initState();
   }
 
@@ -51,6 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getCurrentLocation() async {
     await _bloc.getCurrentLocation();
+  }
+
+  getProfile() async {
+    await _bloc.getProfileCubit(context: context, mounted: mounted);
   }
 
   @override

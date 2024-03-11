@@ -35,6 +35,7 @@ class ChatOneToOneUsersList extends StatefulWidget {
 }
 
 class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
+
   List<bool> isSent = [false, true, false, true, false, true];
 
   String addTimeSpacing({required int textLength}) {
