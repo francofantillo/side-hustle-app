@@ -485,6 +485,7 @@ class AppStrings {
   static const String errorMessageProducts = "No Products Found";
   static const String errorMessageServices = "No Services Found";
   static const String errorMessageNoItemsFound = "No Items Found";
+  static const String errorMessageNoUserFound = "No user found";
   static const String errorMessage = "Something went wrong.";
   static const String errorCartDeliveryAddress = "Delivery address required";
   static const String errorMessageMultiImagesSelectedLimit = "5 images max";

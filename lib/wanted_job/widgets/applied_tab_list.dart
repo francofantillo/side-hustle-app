@@ -38,40 +38,46 @@ class _AppliedTabListState extends State<AppliedTabList> {
   }
 
   Widget appliedJobs({List<JobsData>? jobsItemList}) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 0.14.sh),
-        child: ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics()),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
-          itemCount: jobsItemList?.length ?? 0,
-          // Replace with your item count
-          itemBuilder: (context, index) {
-            // Replace with your horizontal list item
-            return Padding(
-              padding: const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
-              child: AppliedJobsWidget(
-                onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.applyForJobScreenRoute,
-                      arguments: ApplyForJob(
-                        jobId: jobsItemList?[index].jobId,
-                      ));
+    return jobsItemList?.isEmpty ?? true
+        ? const Expanded(
+            child: CustomErrorWidget(errorMessage: AppStrings.errorMessageJobs),
+          )
+        : Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 0.14.sh),
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics()),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
+                itemCount: jobsItemList?.length ?? 0,
+                // Replace with your item count
+                itemBuilder: (context, index) {
+                  // Replace with your horizontal list item
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(right: 16.0, left: 8.0, top: 8),
+                    child: AppliedJobsWidget(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, AppRoutes.applyForJobScreenRoute,
+                            arguments: ApplyForJob(
+                              jobId: jobsItemList?[index].jobId,
+                            ));
+                      },
+                      imageWidth: 1.sw,
+                      imageHeight: AppDimensions.listItemHeight,
+                      boarderColor: AppColors.itemBGColor,
+                      title: jobsItemList?[index].title,
+                      desc: jobsItemList?[index].description,
+                      imagePath: jobsItemList?[index].image,
+                      price: jobsItemList?[index].budget?.toStringAsFixed(2),
+                    ),
+                  );
                 },
-                imageWidth: 1.sw,
-                imageHeight: AppDimensions.listItemHeight,
-                boarderColor: AppColors.itemBGColor,
-                title: jobsItemList?[index].title,
-                desc: jobsItemList?[index].description,
-                imagePath: jobsItemList?[index].image,
-                price: jobsItemList?[index].budget?.toStringAsFixed(2),
               ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          );
   }
 }

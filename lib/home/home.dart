@@ -18,6 +18,7 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/buttons/primary_button.dart';
 import 'package:side_hustle/widgets/dialogue/post_your_side_hustle.dart';
 import 'package:side_hustle/widgets/image_slider/banner_slider.dart';
+import 'package:side_hustle/widgets/image_slider/image_slider_no_images_found.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
@@ -140,19 +141,27 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: AppDimensions.rootPadding,
-                                right: AppDimensions.rootPadding,
-                                top: AppDimensions.rootPadding - 8.w),
-                            child: BannerSlider(
-                              hideCameraIcon: true,
-                              indicatorLength:
-                                  state.dashboardModel?.data?.banners?.length,
-                              responseImages:
-                                  state.dashboardModel?.data?.banners,
-                            ),
-                          ),
+                          state.dashboardModel?.data?.banners?.isEmpty ?? true
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      left: AppDimensions.rootPadding,
+                                      right: AppDimensions.rootPadding,
+                                      top: AppDimensions.rootPadding - 8.w),
+                                  child: const NoImagesFoundWidget(),
+                                )
+                              : Padding(
+                                  padding: EdgeInsets.only(
+                                      left: AppDimensions.rootPadding,
+                                      right: AppDimensions.rootPadding,
+                                      top: AppDimensions.rootPadding - 8.w),
+                                  child: BannerSlider(
+                                    hideCameraIcon: true,
+                                    indicatorLength: state
+                                        .dashboardModel?.data?.banners?.length,
+                                    responseImages:
+                                        state.dashboardModel?.data?.banners,
+                                  ),
+                                ),
                           // Horizontal ListView
                           Padding(
                             padding: EdgeInsets.only(
@@ -163,9 +172,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               horizontalListSize:
                                   AppDimensions.homeFirstHorizontalListSize,
                               itemsList: AlphaAppData.homeFirstList,
-                              // onTapLabel: () {
-                              //   print("Clicked");
-                              // },
+                              onTapLabel: () {
+                                print("Clicked");
+                              },
                             ),
                           ),
                           Padding(

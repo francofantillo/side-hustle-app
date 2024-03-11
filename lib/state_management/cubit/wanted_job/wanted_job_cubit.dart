@@ -125,6 +125,13 @@ class JobsCubit extends Cubit<JobsState> {
     }
   }
 
+  /// Set Fav
+  Future setFave({required int index, required int isFavourite}) async {
+    final objJobs = state.jobsModel;
+    objJobs?.jobs?[index].isFavourite = isFavourite;
+    emit(state.copyWith(jobsModel: objJobs));
+  }
+
   /// Search Events
   searchWantedJobs({
     String? value,
@@ -224,8 +231,8 @@ class JobsCubit extends Cubit<JobsState> {
         // images: state.itemImagesFile,
         images: itemImagesFile,
         jobDate: dateTextController.text,
-          jobTime: DateTimeConversions.convertTo24HourFormat(
-              startTimeTextController.text),
+        jobTime: DateTimeConversions.convertTo24HourFormat(
+            startTimeTextController.text),
         endTime: DateTimeConversions.convertTo24HourFormat(
             endTimeTextController.text),
         description: descriptionTextController.text,
@@ -269,9 +276,7 @@ class JobsCubit extends Cubit<JobsState> {
 
   /// Edit a Job
   Future<int> editJobCubit(
-      {required BuildContext context,
-      required int planId,
-      required bool mounted}) async {
+      {required BuildContext context, required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
 
@@ -316,7 +321,6 @@ class JobsCubit extends Cubit<JobsState> {
         description: descriptionTextController.text,
         additionalInformation: additionalInfoTextController.text,
         budget: priceTextController.text,
-        planId: planId.toString(),
         areaCode: areaCodeTextController.text,
         totalHours: state.totalHours);
 
@@ -327,7 +331,7 @@ class JobsCubit extends Cubit<JobsState> {
       if (response.data["status"] == AppValidationMessages.success) {
         AppUtils.showToast(response.data["message"]);
         if (mounted) {
-          Navigator.pop(context);
+          // Navigator.pop(context);
           Navigator.pop(context);
           Navigator.pushReplacementNamed(context, AppRoutes.myJobsScreenRoute);
         }

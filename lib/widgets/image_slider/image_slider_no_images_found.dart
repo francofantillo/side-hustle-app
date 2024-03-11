@@ -4,6 +4,7 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';
+import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class NoImagesFoundWidget extends StatelessWidget {
   final bool showCameraAttachment;
@@ -39,6 +40,10 @@ class NoImagesFoundWidget extends StatelessWidget {
             ),
           ),
 
+          // Positioned(
+          //     top: 70.w,
+          //     left: 70.w,
+          //     child: Center(child: textWidget(text: "Coming Soon", fontSize: 22.sp, color: AppColors.whiteColor))),
           /// Hide Camera Icon login
           showCameraAttachment
               ? Positioned(

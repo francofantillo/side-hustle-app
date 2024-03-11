@@ -646,20 +646,16 @@ class _PostJobState extends State<PostJob> {
                           child: CustomMaterialButton(
                             borderRadius: 14,
                             onPressed: () async {
-                              // if (widget.isEdit) {
-                              //   FocusManager.instance.primaryFocus?.unfocus();
-                              //   if (_jobFormKey.currentState!.validate()) {
-                              //     await getCards(isEdit: widget.isEdit);
-                              //   }
-                              // } else {
-                              //   FocusManager.instance.primaryFocus?.unfocus();
-                              //   if (_jobFormKey.currentState!.validate()) {
-                              //     await getCards(isEdit: false);
-                              //   }
-                              // }
                               FocusManager.instance.primaryFocus?.unfocus();
                               if (_jobFormKey.currentState!.validate()) {
-                                await getCards(isEdit: widget.isEdit);
+                                if (widget.isEdit) {
+                                  await _bloc
+                                      .editJobCubit(
+                                          context: context, mounted: mounted)
+                                      .then((value) {});
+                                } else {
+                                  await getCards(isEdit: widget.isEdit);
+                                }
                               }
                             },
                             color: AppColors.primaryColor,

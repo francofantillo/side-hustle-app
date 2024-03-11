@@ -139,7 +139,6 @@ Future<Response?> editJobProvider(
     String? additionalInformation,
     String? budget,
     String? areaCode,
-    String? planId,
     String? apiToken}) async {
   late FormData formData;
 
@@ -171,7 +170,6 @@ Future<Response?> editJobProvider(
       "additional_information": additionalInformation,
       "area_code": areaCode,
       "budget": budget,
-      "plan_id": planId
     };
 
     print(
@@ -193,7 +191,6 @@ Future<Response?> editJobProvider(
       "additional_information": additionalInformation,
       "area_code": areaCode,
       "budget": budget,
-      "plan_id": planId
     };
 
     print(

@@ -39,7 +39,7 @@ class _JobRequestListState extends State<JobRequestList> {
           : state.jobRequestModel?.data?.isEmpty ?? true
               ? const Expanded(
                   child: CustomErrorWidget(
-                      errorMessage: AppStrings.errorMessageNoItemsFound),
+                      errorMessage: AppStrings.errorMessageNoUserFound),
                 )
               : Expanded(
                   child: ListView.builder(

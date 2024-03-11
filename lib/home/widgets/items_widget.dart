@@ -21,26 +21,29 @@ class WantedJobsItemWidget extends StatelessWidget {
       userRating,
       imagePath,
       commentIconPath;
+  final int isFavourite;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
   final bool isEvent;
-  final Function()? onTap;
+  final Function()? onTap, onTapFav;
 
   const WantedJobsItemWidget(
       {super.key,
-        this.title,
-        this.desc,
-        this.onTap,
-        this.price,
-        this.userProfile,
-        this.userName,
-        this.isEvent = false,
-        this.userRating,
-        this.imagePath,
-        this.commentIconPath,
-        this.imageHeight,
-        this.imageWidth,
-        this.boarderColor});
+      this.title,
+      this.desc,
+      this.onTap,
+      this.onTapFav,
+      this.isFavourite = 0,
+      this.price,
+      this.userProfile,
+      this.userName,
+      this.isEvent = false,
+      this.userRating,
+      this.imagePath,
+      this.commentIconPath,
+      this.imageHeight,
+      this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,7 @@ class WantedJobsItemWidget extends StatelessWidget {
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Material(
           elevation: AppDimensions.cardElevation,
@@ -61,7 +64,7 @@ class WantedJobsItemWidget extends StatelessWidget {
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: InkWell(
             onTap: onTap,
@@ -90,14 +93,14 @@ class WantedJobsItemWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: 0.03.sw),
-                                    child: textWidget(
-                                        text: title,
-                                        fontFamily: AppFont.gilroyBold,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: AppDimensions.textSizeSmall,
-                                        color: AppColors.textBlackColor),
-                                  )),
+                                padding: EdgeInsets.only(top: 0.03.sw),
+                                child: textWidget(
+                                    text: title,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: AppDimensions.textSizeSmall,
+                                    color: AppColors.textBlackColor),
+                              )),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -107,12 +110,12 @@ class WantedJobsItemWidget extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: AppDimensions.textSizeSmall,
                                       color: AppColors.textBlackColor),
-                                  textWidget(
-                                      text: isEvent
-                                          ? AppStrings.perHead
-                                          : AppStrings.perHour,
-                                      textAlign: TextAlign.end,
-                                      fontSize: AppDimensions.textSizeTiny),
+                                  // textWidget(
+                                  //     text: isEvent
+                                  //         ? AppStrings.perHead
+                                  //         : AppStrings.perHour,
+                                  //     textAlign: TextAlign.end,
+                                  //     fontSize: AppDimensions.textSizeTiny),
                                 ],
                               ),
                             ],
@@ -164,13 +167,16 @@ class WantedJobsItemWidget extends StatelessWidget {
                                   color: boarderColor,
                                   child: InkWell(
                                     onTap: () {
-                                      Navigator.pushNamed(context,
-                                          AppRoutes.otherUserProfileScreenRoute);
+                                      Navigator.pushNamed(
+                                          context,
+                                          AppRoutes
+                                              .otherUserProfileScreenRoute);
                                     },
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         // place RoundedImageWithBackgroundColor at end
                                         textWidget(
@@ -191,9 +197,9 @@ class WantedJobsItemWidget extends StatelessWidget {
                                             width(.01.sw),
                                             Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 textWidget(
                                                     text: userRating,
@@ -214,12 +220,10 @@ class WantedJobsItemWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   IconButtonWithBackground(
-                                    onTap: () {
-                                      Navigator.pushNamed(context,
-                                          AppRoutes.favouritesScreenRoute);
-                                      print("Clicked");
-                                    },
-                                    iconPath: AssetsPath.favUnfilled,
+                                    onTap: onTapFav,
+                                    iconPath: isFavourite == 1
+                                        ? AssetsPath.favourite
+                                        : AssetsPath.favUnfilled,
                                     height: imageHeight! * .2,
                                     width: imageHeight! * .2,
                                     backgroundColor: AppColors.primaryColor,
@@ -231,7 +235,7 @@ class WantedJobsItemWidget extends StatelessWidget {
                                       print("Clicked");
                                     },
                                     iconPath:
-                                    commentIconPath ?? AssetsPath.messages,
+                                        commentIconPath ?? AssetsPath.messages,
                                     height: imageHeight! * .2,
                                     width: imageHeight! * .2,
                                     backgroundColor: AppColors.primaryColor,

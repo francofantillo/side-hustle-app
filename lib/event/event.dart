@@ -31,6 +31,7 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   void initState() {
+    print("initState Events");
     _bloc = BlocProvider.of<EventsCubit>(context);
     isProductSelected = true;
     getEvents();
@@ -92,26 +93,6 @@ class _EventScreenState extends State<EventScreen> {
                               left: AppDimensions.rootPadding,
                               right: AppDimensions.rootPadding,
                               top: AppDimensions.rootPadding),
-                          // child: SearchTextField(
-                          //     hintText: AppStrings.searchEvent,
-                          //     contentPaddingBottom: 10,
-                          //     height: AppDimensions.searchTextFieldHeight,
-                          //     suffixIcon: Padding(
-                          //       padding:
-                          //           const EdgeInsets.only(right: 12.0, left: 0),
-                          //       child: Material(
-                          //           child: InkWell(
-                          //               onTap: () {
-                          //                 print("onClicked Filter");
-                          //               },
-                          //               child: ImageIcon(
-                          //                 const AssetImage(
-                          //                     AssetsPath.searchFilter),
-                          //                 size: AppDimensions
-                          //                     .imageIconSizeTextFormField,
-                          //               ))),
-                          //     ),
-                          //     onChanged: (search) {}),
                           child: SearchTextField(
                               // height: AppDimensions.searchTextFieldHeight,
                               contentPaddingBottom: 8,

@@ -36,38 +36,42 @@ class _CompletedTabListState extends State<CompletedTabList> {
   }
 
   Widget completedJobs({List<JobsData>? jobsItemList}) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 0.14.sh, top: 8),
-        child: ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics()),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: jobsItemList?.length ?? 0,
-          itemBuilder: (context, index) {
-            // Replace with your horizontal list item
-            print("rating: ${jobsItemList?[index].user?.rating}");
-            return Padding(
-              padding: const EdgeInsets.only(right: 16.0, left: 8.0),
-              child: CompletedJobsWidget(
-                imageWidth: 1.sw,
-                imageHeight: AppDimensions.listItemHeightJobCompleted,
-                boarderColor: AppColors.itemBGColor,
-                title: jobsItemList?[index].title,
-                subTitle: jobsItemList?[index].description,
-                imagePath: jobsItemList?[index].image,
-                price: jobsItemList?[index].budget?.toStringAsFixed(2),
-                userName: jobsItemList?[index].reviewName,
-                userRating: jobsItemList?[index].rating == 0.0
-                    ? "0"
-                    : jobsItemList?[index].rating?.toString(),
-                userProfile: jobsItemList?[index].reviewImage,
+    return jobsItemList?.isEmpty ?? true
+        ? const Expanded(
+            child: CustomErrorWidget(errorMessage: AppStrings.errorMessageJobs),
+          )
+        : Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 0.14.sh, top: 8),
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics()),
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                itemCount: jobsItemList?.length ?? 0,
+                itemBuilder: (context, index) {
+                  // Replace with your horizontal list item
+                  print("rating: ${jobsItemList?[index].user?.rating}");
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 16.0, left: 8.0),
+                    child: CompletedJobsWidget(
+                      imageWidth: 1.sw,
+                      imageHeight: AppDimensions.listItemHeightJobCompleted,
+                      boarderColor: AppColors.itemBGColor,
+                      title: jobsItemList?[index].title,
+                      subTitle: jobsItemList?[index].description,
+                      imagePath: jobsItemList?[index].image,
+                      price: jobsItemList?[index].budget?.toStringAsFixed(2),
+                      userName: jobsItemList?[index].reviewName,
+                      userRating: jobsItemList?[index].rating == 0.0
+                          ? "0"
+                          : jobsItemList?[index].rating?.toString(),
+                      userProfile: jobsItemList?[index].reviewImage,
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          );
   }
 }

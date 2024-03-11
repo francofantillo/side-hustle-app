@@ -38,14 +38,6 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
-      // appBarTitle: _selectedIndex == 0 ? null : getTitle(),
-      // showAppBar: _selectedIndex == 0 ? false : true,
-      // leading: Padding(
-      //   padding: const EdgeInsets.only(left: 8.0),
-      //   child: CircularImageWidget(
-      //       image: AssetsPath.drawer,
-      //       imageSize: AppDimensions.drawerIconSizeHome + 55.h),
-      // ),
       drawer: const AppDrawer(),
       bottomNavBar: BottomNav(
         currentIndex: _selectedIndex,

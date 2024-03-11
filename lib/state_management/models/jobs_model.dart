@@ -41,6 +41,7 @@ class JobsModel {
 
 class JobsData {
   int? jobId;
+  int? isFavourite;
   String? title;
   String? description;
   double? budget;
@@ -53,6 +54,7 @@ class JobsData {
   JobsData(
       {this.jobId,
       this.title,
+      this.isFavourite,
       this.description,
       this.budget,
       this.image,
@@ -64,6 +66,7 @@ class JobsData {
   JobsData.fromJson(Map<String, dynamic> json) {
     jobId = json['job_id'];
     title = json['title'];
+    isFavourite = json['is_favourite'];
     description = json['description'];
     budget = json['budget']?.toDouble();
     image = json['image'];
@@ -77,6 +80,7 @@ class JobsData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['job_id'] = this.jobId;
     data['title'] = this.title;
+    data['is_favourite'] = this.isFavourite;
     data['description'] = this.description;
     data['budget'] = this.budget;
     data['image'] = this.image;

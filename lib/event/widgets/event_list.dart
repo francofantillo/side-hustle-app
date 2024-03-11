@@ -46,185 +46,97 @@ class _EventListState extends State<EventList> {
                   itemList: state.searching
                       ? state.eventsTempList
                       : state.eventsModel?.events);
-      /*    : Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 0.14.sw),
-                    child: ListView.builder(
-                      physics: const AlwaysScrollableScrollPhysics(
-                          parent: BouncingScrollPhysics()),
-                      shrinkWrap: true,
-                      // reverse: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: state.eventsModel?.events?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        // Replace with your horizontal list item
-                        print(
-                            "isFavourite: ${state.eventsModel?.events?[index].isFavourite}");
-                        return Padding(
-                          padding:
-                              const EdgeInsets.only(right: 16.0, left: 8.0),
-                          child: EventItemsWidget(
-                            onTapFav: () async {
-                              print(
-                                  "Event Id: ${state.eventsModel?.events?[index].eventId}");
-                              if (state.eventsModel?.events?[index]
-                                      .isFavourite ==
-                                  0) {
-                                await _blocFav
-                                    .addToFavCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        type: Favourites.Event.name,
-                                        id: state.eventsModel?.events?[index]
-                                            .eventId)
-                                    .then((value) async {
-                                  if (value == 1) {
-                                    await _blocEvent.setFave(
-                                        index: index, isFavourite: value);
-                                  }
-                                });
-                              } else {
-                                await _blocFav
-                                    .removeFromFavCubit(
-                                        context: context,
-                                        mounted: mounted,
-                                        type: Favourites.Event.name,
-                                        id: state.eventsModel?.events?[index]
-                                            .eventId)
-                                    .then((value) async {
-                                  if (value == 1) {
-                                    await _blocEvent.setFave(
-                                        index: index, isFavourite: 0);
-
-                                    /// 0 to unFav
-                                  }
-                                });
-                              }
-                            },
-                            onTap: () {
-                              // Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
-                              Navigator.pushNamed(
-                                  context, AppRoutes.viewEventScreenRoute,
-                                  arguments: ViewEvent(
-                                    id: state.eventsModel?.events?[index]
-                                        .eventId, // make a separate class for selecting an image and user
-                                  ));
-                            },
-                            isFavourite:
-                                state.eventsModel?.events?[index].isFavourite ??
-                                    0,
-                            imageWidth: 1.sw,
-                            imageHeight: AppDimensions.listItemHeight,
-                            boarderColor: AppColors.itemBGColor,
-                            // title: AlphaAppData.eventsList[index].title,
-                            title: state.eventsModel?.events?[index].name,
-                            location:
-                                // AlphaAppData.eventsList[index].subTitle,
-                                state.eventsModel?.events?[index].location,
-                            // imagePath: AlphaAppData.eventsList[index].imagePath,
-                            imagePath: state.eventsModel?.events?[index].image,
-                            // price: AlphaAppData.eventsList[index].price,
-                            price: state.eventsModel?.events?[index].price,
-                            userName:
-                                // AlphaAppData.eventsList[index].userName,
-                                state.eventsModel?.events?[index]
-                                    .eventOwnerDetail?.name,
-                            // userRating: AlphaAppData.eventsList[index].userRating,
-                            userRating: state.eventsModel?.events?[index]
-                                .eventOwnerDetail?.rating,
-                            // userProfile: AlphaAppData.eventsList[index].userProfile,
-                            userProfile: state.eventsModel?.events?[index]
-                                .eventOwnerDetail?.image,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                );*/
     });
   }
 
   Widget eventsList({required List<EventsData>? itemList}) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 0.14.sw),
-        child: ListView.builder(
-          physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics()),
-          shrinkWrap: true,
-          // reverse: true,
-          scrollDirection: Axis.vertical,
-          itemCount: itemList?.length ?? 0,
-          itemBuilder: (context, index) {
-            // Replace with your horizontal list item
-            print("isFavourite: ${itemList?[index].isFavourite}");
-            return Padding(
-              padding: const EdgeInsets.only(right: 16.0, left: 8.0),
-              child: EventItemsWidget(
-                onTapFav: () async {
-                  print("Event Id: ${itemList?[index].eventId}");
-                  if (itemList?[index].isFavourite == 0) {
-                    await _blocFav
-                        .addToFavCubit(
-                            context: context,
-                            mounted: mounted,
-                            type: Favourites.Event.name,
-                            id: itemList?[index].eventId)
-                        .then((value) async {
-                      if (value == 1) {
-                        await _blocEvent.setFave(
-                            index: index, isFavourite: value);
-                      }
-                    });
-                  } else {
-                    await _blocFav
-                        .removeFromFavCubit(
-                            context: context,
-                            mounted: mounted,
-                            type: Favourites.Event.name,
-                            id: itemList?[index].eventId)
-                        .then((value) async {
-                      if (value == 1) {
-                        await _blocEvent.setFave(index: index, isFavourite: 0);
+    return itemList?.isEmpty ?? true
+        ? const Expanded(
+            child:
+                CustomErrorWidget(errorMessage: AppStrings.errorMessageEvent),
+          )
+        : Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 0.14.sw),
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(
+                    parent: BouncingScrollPhysics()),
+                shrinkWrap: true,
+                // reverse: true,
+                scrollDirection: Axis.vertical,
+                itemCount: itemList?.length ?? 0,
+                itemBuilder: (context, index) {
+                  // Replace with your horizontal list item
+                  print("isFavourite: ${itemList?[index].isFavourite}");
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 16.0, left: 8.0),
+                    child: EventItemsWidget(
+                      onTapFav: () async {
+                        print("Event Id: ${itemList?[index].eventId}");
+                        if (itemList?[index].isFavourite == 0) {
+                          await _blocFav
+                              .addToFavCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  type: Favourites.Event.name,
+                                  id: itemList?[index].eventId)
+                              .then((value) async {
+                            if (value == 1) {
+                              await _blocEvent.setFave(
+                                  index: index, isFavourite: value);
+                            }
+                          });
+                        } else {
+                          await _blocFav
+                              .removeFromFavCubit(
+                                  context: context,
+                                  mounted: mounted,
+                                  type: Favourites.Event.name,
+                                  id: itemList?[index].eventId)
+                              .then((value) async {
+                            if (value == 1) {
+                              await _blocEvent.setFave(
+                                  index: index, isFavourite: 0);
 
-                        /// 0 to unFav
-                      }
-                    });
-                  }
+                              /// 0 to unFav
+                            }
+                          });
+                        }
+                      },
+                      onTap: () {
+                        // Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
+                        Navigator.pushNamed(
+                            context, AppRoutes.viewEventScreenRoute,
+                            arguments: ViewEvent(
+                              id: itemList?[index]
+                                  .eventId, // make a separate class for selecting an image and user
+                            ));
+                      },
+                      isFavourite: itemList?[index].isFavourite ?? 0,
+                      imageWidth: 1.sw,
+                      imageHeight: AppDimensions.listItemHeight,
+                      boarderColor: AppColors.itemBGColor,
+                      // title: AlphaAppData.eventsList[index].title,
+                      title: itemList?[index].name,
+                      location:
+                          // AlphaAppData.eventsList[index].subTitle,
+                          itemList?[index].location,
+                      // imagePath: AlphaAppData.eventsList[index].imagePath,
+                      imagePath: itemList?[index].image,
+                      // price: AlphaAppData.eventsList[index].price,
+                      price: itemList?[index].price?.toStringAsFixed(2),
+                      userName:
+                          // AlphaAppData.eventsList[index].userName,
+                          itemList?[index].eventOwnerDetail?.name,
+                      // userRating: AlphaAppData.eventsList[index].userRating,
+                      userRating: itemList?[index].eventOwnerDetail?.rating,
+                      // userProfile: AlphaAppData.eventsList[index].userProfile,
+                      userProfile: itemList?[index].eventOwnerDetail?.image,
+                    ),
+                  );
                 },
-                onTap: () {
-                  // Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute);
-                  Navigator.pushNamed(context, AppRoutes.viewEventScreenRoute,
-                      arguments: ViewEvent(
-                        id: itemList?[index]
-                            .eventId, // make a separate class for selecting an image and user
-                      ));
-                },
-                isFavourite: itemList?[index].isFavourite ?? 0,
-                imageWidth: 1.sw,
-                imageHeight: AppDimensions.listItemHeight,
-                boarderColor: AppColors.itemBGColor,
-                // title: AlphaAppData.eventsList[index].title,
-                title: itemList?[index].name,
-                location:
-                    // AlphaAppData.eventsList[index].subTitle,
-                    itemList?[index].location,
-                // imagePath: AlphaAppData.eventsList[index].imagePath,
-                imagePath: itemList?[index].image,
-                // price: AlphaAppData.eventsList[index].price,
-                price: itemList?[index].price?.toStringAsFixed(2),
-                userName:
-                    // AlphaAppData.eventsList[index].userName,
-                    itemList?[index].eventOwnerDetail?.name,
-                // userRating: AlphaAppData.eventsList[index].userRating,
-                userRating: itemList?[index].eventOwnerDetail?.rating,
-                // userProfile: AlphaAppData.eventsList[index].userProfile,
-                userProfile: itemList?[index].eventOwnerDetail?.image,
               ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          );
   }
 }

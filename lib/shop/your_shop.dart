@@ -68,7 +68,9 @@ class _YourShopScreenState extends State<YourShopScreen> {
       return BackgroundWidget(
         showAppBar: true,
         // appBarTitle: isEdit ? AppStrings.editShop : AppStrings.shop,
-        appBarTitle: isEdit ? AppStrings.editShop : state.yourShopModel?.shopData?.shopDetail?.name,
+        appBarTitle: isEdit
+            ? AppStrings.editShop
+            : state.yourShopModel?.shopData?.shopDetail?.name,
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: backButton(
@@ -299,7 +301,6 @@ class _YourShopScreenState extends State<YourShopScreen> {
                           )
                         : const SizedBox.shrink(),
                     Padding(
-                      // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                       padding: EdgeInsets.only(
                           left: 16.w, right: 16.w, top: 0.02.sw),
                       child: CustomTabBarShop(

@@ -148,8 +148,9 @@ class _BannerSliderItemState extends State<BannerSliderItem> {
                 top: 100,
                 left: 20,
                 child: Material(
-                  elevation: 6,
+                  elevation: 8,
                   color: Colors.transparent,
+                  shadowColor: Colors.transparent,
                   child: textWidget(
                       // text: "70% Discount",
                       text: widget.name != null
@@ -164,8 +165,9 @@ class _BannerSliderItemState extends State<BannerSliderItem> {
                 top: 123,
                 left: 20,
                 child: Material(
-                  elevation: 6,
+                  elevation: 8,
                   color: Colors.transparent,
+                  shadowColor: Colors.transparent,
                   child: textWidget(
                       // text: "on all Products",
                       text: widget.description != null

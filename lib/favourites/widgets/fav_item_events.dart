@@ -17,6 +17,7 @@ class FavItemEventsWidget extends StatelessWidget {
       location,
       price,
       userProfile,
+      perHead,
       userName,
       userRating,
       imagePath;
@@ -27,6 +28,7 @@ class FavItemEventsWidget extends StatelessWidget {
   const FavItemEventsWidget(
       {super.key,
       this.title,
+      this.perHead,
       this.location,
       this.onTapFav,
       this.price,
@@ -92,7 +94,7 @@ class FavItemEventsWidget extends StatelessWidget {
                                   fontSize: AppDimensions.textSizeSmall,
                                   color: AppColors.textBlackColor),
                               textWidget(
-                                  text: AppStrings.perHead,
+                                  text: perHead ?? AppStrings.perHead,
                                   textAlign: TextAlign.end,
                                   fontSize: AppDimensions.textSizeTiny),
                             ],
@@ -140,38 +142,41 @@ class FavItemEventsWidget extends StatelessWidget {
                             imageWidth: imageHeight! * .2,
                           ),
                           width(.01.sw),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // place RoundedImageWithBackgroundColor at end
-                              textWidget(
-                                  text: userName,
-                                  fontFamily: AppFont.gilroyBold,
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textBlackColor),
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    AssetsPath.star,
-                                    height: imageHeight! * .08,
-                                    width: imageHeight! * .08,
-                                    color: AppColors.ratingColor,
-                                  ),
-                                  width(.01.sw),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      textWidget(
-                                          text: userRating, fontSize: 8.sp),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // place RoundedImageWithBackgroundColor at end
+                                textWidget(
+                                    text: userName,
+                                    fontFamily: AppFont.gilroyBold,
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.textBlackColor),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      AssetsPath.star,
+                                      height: imageHeight! * .08,
+                                      width: imageHeight! * .08,
+                                      color: AppColors.ratingColor,
+                                    ),
+                                    width(.01.sw),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        textWidget(
+                                            text: userRating, fontSize: 8.sp),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           const Spacer(),
                           Row(

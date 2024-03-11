@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/favourites/widgets/custom_tab_bar_fav.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_events.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_jobs.dart';
 import 'package:side_hustle/favourites/widgets/fav_list_shops.dart';
@@ -93,44 +94,20 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
           children: [
             // Here default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
             Padding(
-              padding:
-              EdgeInsets.only(left: 0.04.sw, right: 0.0425.sw, top: 8),
-              child: SizedBox(
-                width: 1.sw,
-                child: ToggleSwitch(
-                  customWidths: [.3.sw, .3.sw, .305.sw],
-                  animate: true,
-                  minHeight: AppDimensions.tabBarHeight,
-                  animationDuration: 200,
-                  isVertical: false,
-                  // minWidth: 90,
-                  cornerRadius: 18.0.w,
-                  changeOnTap: true,
-                  activeBgColors: const [
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor],
-                    [AppColors.primaryColor]
-                  ],
-                  activeFgColor: Colors.white,
-                  inactiveBgColor: AppColors.whiteColor,
-                  borderWidth: 1,
-                  borderColor: [AppColors.tabOutlineColor],
-                  inactiveFgColor: Colors.black,
-                  initialLabelIndex: _tabIndexBasicToggle.value,
-                  totalSwitches: 3,
-                  labels: const [
-                    AppStrings.events,
-                    AppStrings.jobs,
-                    AppStrings.shops,
-                  ],
-                  radiusStyle: true,
-                  onToggle: (index) {
-                    _tabIndexBasicToggle.value = index ?? 0;
-                    print('switched to: ${_tabIndexBasicToggle.value}');
-                    getFavourites();
-                    setState(() {});
-                  },
-                ),
+              padding: EdgeInsets.only(
+                  left: 16.w, right: 16.w, top: 0.02.sw),
+              child: CustomTabBarFav(
+                currentTabIndex: _tabIndexBasicToggle.value,
+                tabNames: const [
+                  AppStrings.events,
+                  AppStrings.jobs,
+                ],
+                onChanged: (index) {
+                  _tabIndexBasicToggle.value = index ?? 0;
+                  print('switched to: ${_tabIndexBasicToggle.value}');
+                  getFavourites();
+                  setState(() {});
+                },
               ),
             ),
             _tabIndexBasicToggle.value == 0
