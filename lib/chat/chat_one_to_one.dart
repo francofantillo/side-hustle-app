@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +55,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
   final TextEditingController chatController = TextEditingController();
   late final ChatCubit _bloc;
   bool showEmoji = false;
-
+  final emojiC = TextEditingController();
 
   @override
   void initState() {
@@ -156,6 +157,13 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
     );
   }
 
+  _onBackspacePressed() {
+    chatController
+      ..text = chatController.text.characters.toString()
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: chatController.text.length));
+  }
+
   String addTimeSpacing({required int textLength}) {
     String x = "     ";
     for (int i = 0; i < textLength; i++) {
@@ -244,6 +252,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         elevation: 0,
         child: Column(
           children: [
+            // _image(),
             ChatOneToOneUsersList(
                 isOrderChat: widget.isOrderChat,
                 isOrderService: widget.isOrderService),
@@ -288,10 +297,19 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                           hintText: AppStrings.typeAMessage,
                           onTapEmoji: () {
                             print("clicked emoji");
-                            setState(() {
-                              showEmoji = !showEmoji;
-                            });
+                            // if(showEmoji) {
+                            //   FocusManager.instance.primaryFocus!.unfocus();
+                            // }
+                            // setState(() {
+                            //   showEmoji = !showEmoji;
+                            // });
+                            _bloc.showEmoji();
                           },
+                          onTap: () {
+                            _bloc.hideEmoji();
+                          },
+                          onTapAttachment: () {},
+                          onTapCamera: () {},
                         )),
                         Padding(
                           padding: const EdgeInsets.only(left: 2),
@@ -315,12 +333,57 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                         ),
                       ],
                     ),
-
                     height(0.02.sw),
                   ],
                 ),
               ),
             ),
+            BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
+              return Offstage(
+                // offstage: showEmoji,
+                offstage: state.showEmoji,
+                child: SizedBox(
+                  height: 250,
+                  child: EmojiPicker(
+                    onEmojiSelected: (Category? category, Emoji? emoji) {
+                      print(" emoji!.emoji: ${emoji!.emoji}");
+                      emojiC.text = emoji.emoji;
+                      String temp = chatController.text + emojiC.text;
+                      chatController.text = temp;
+                    },
+                    onBackspacePressed: _onBackspacePressed(),
+                    textEditingController: emojiC,
+                    config: const Config(
+                      columns: 7,
+                      emojiSizeMax: 30,
+                      verticalSpacing: 0,
+                      horizontalSpacing: 0,
+                      gridPadding: EdgeInsets.zero,
+                      initCategory: Category.RECENT,
+                      bgColor: Colors.white,
+                      indicatorColor: Color(0xffAC61E7),
+                      iconColor: Colors.grey,
+                      iconColorSelected: Color(0xffAC61E7),
+                      backspaceColor: Color(0xffAC61E7),
+                      skinToneDialogBgColor: Colors.white,
+                      skinToneIndicatorColor: Colors.grey,
+                      enableSkinTones: true,
+                      recentTabBehavior: RecentTabBehavior.RECENT,
+                      recentsLimit: 28,
+                      noRecents: Text(
+                        'No Recent',
+                        style: TextStyle(fontSize: 20, color: Colors.black26),
+                        textAlign: TextAlign.center,
+                      ),
+                      loadingIndicator: SizedBox.shrink(),
+                      tabIndicatorAnimDuration: kTabScrollDuration,
+                      categoryIcons: CategoryIcons(),
+                      buttonMode: ButtonMode.MATERIAL,
+                    ),
+                  ),
+                ),
+              );
+            }),
           ],
         ),
       ),

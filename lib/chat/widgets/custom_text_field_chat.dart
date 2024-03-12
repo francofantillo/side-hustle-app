@@ -189,7 +189,8 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
     );
   }
 
-  Widget textField() {
+  /// with scroll bar
+/*  Widget textField() {
     return ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: 1.sw,
@@ -205,6 +206,7 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
           keyboardType: TextInputType.multiline,
           maxLines: null,
           controller: widget.controller,
+          onTap: widget.onTap,
           // _handleSubmitted : null,
           decoration: const InputDecoration(
             border: InputBorder.none,
@@ -214,6 +216,29 @@ class _CustomTextFieldChatState extends State<CustomTextFieldChat> {
             hintStyle: TextStyle(
               color: AppColors.greyColor,
             ),
+          ),
+        ),
+      ),
+    );
+  }*/
+
+  Widget textField() {
+    return Scrollbar(
+      child: TextField(
+        cursorColor: Colors.red,
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        controller: widget.controller,
+        onTap: widget.onTap,
+        // _handleSubmitted : null,
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          // contentPadding: EdgeInsets.only(
+          //     top: 2.0, left: 13.0, right: 13.0, bottom: 12.0),
+          contentPadding: EdgeInsets.only(left: 13.0, right: 13.0),
+          hintText: AppStrings.typeAMessage,
+          hintStyle: TextStyle(
+            color: AppColors.greyColor,
           ),
         ),
       ),

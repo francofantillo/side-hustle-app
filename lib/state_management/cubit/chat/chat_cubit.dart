@@ -30,6 +30,21 @@ class ChatCubit extends Cubit<ChatState> {
     return userModel;
   }
 
+  showEmoji() {
+    bool showEmoji = state.showEmoji;
+    if (showEmoji) {
+      FocusManager.instance.primaryFocus!.unfocus();
+    }
+    showEmoji = !showEmoji;
+    emit(state.copyWith(showEmoji: showEmoji));
+  }
+
+  hideEmoji() {
+    if (!(state.showEmoji)) {
+      emit(state.copyWith(showEmoji: true));
+    }
+  }
+
   Future appendSingleMessage({dynamic singleMessage}) async {
     final ChatMessages chatMessages = ChatMessages.fromJson(singleMessage);
 
