@@ -10,7 +10,8 @@ class StripeService {
     Stripe.publishableKey = publishableKey;
   }
 
-  static Future<String?> getCardToken({required CardDetails cardDetails}) async {
+  static Future<StripTokenModel?> getCardToken(
+      {required CardDetails cardDetails}) async {
     SocketManager.init();
     try {
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetails);
@@ -39,12 +40,23 @@ class StripeService {
       if (kDebugMode) {
         print('Card token: ${tokenData.toJson()}');
       }
-      return cardToken;
+      return StripTokenModel(status: 1, token: cardToken);
+      // return cardToken;
     } catch (error) {
+      StripeException stripeException = error as StripeException;
       if (kDebugMode) {
-        print('Error obtaining card token: $error');
+        print(
+            'Error obtaining card token: $error\n\n\nstripeException: ${stripeException.error.message}');
       }
-      return null;
+      return StripTokenModel(status: 0, message: stripeException.error.message);
     }
   }
+}
+
+class StripTokenModel {
+  final String? token;
+  final String? message;
+  final int status;
+
+  StripTokenModel({this.token, this.message, this.status = 0});
 }
