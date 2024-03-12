@@ -22,7 +22,6 @@ class ProfileItemsWidget extends StatefulWidget {
 }
 
 class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
-  var _isToggleOn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +33,7 @@ class _ProfileItemsWidgetState extends State<ProfileItemsWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppDimensions.defaultHorizontalPadding + 4),
+            padding: const EdgeInsets.only(top: 16.0),
             child: textWidget(
                 text: AppStrings.account.toUpperCase(),
                 // color: AppColors.primaryColor,

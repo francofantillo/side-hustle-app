@@ -58,12 +58,14 @@ class _ProductsCartListState extends State<ProductsCartList> {
                               int qty = state
                                   .cartModel!.data!.cartDetails![index].qty!;
                               if (qty > 1) {
+                                final decrementQty = qty - 1;
+
                                 await _bloc.updateQuantityCartCubit(
                                     context: context,
                                     mounted: mounted,
                                     cartDetailId: state.cartModel?.data
                                         ?.cartDetails?[index].id,
-                                    qty: qty--);
+                                    qty: decrementQty);
                               }
                             }
                           },
@@ -73,17 +75,20 @@ class _ProductsCartListState extends State<ProductsCartList> {
                                 null) {
                               int qty = state
                                   .cartModel!.data!.cartDetails![index].qty!;
+                              final incrementQty = qty + 1;
+                              print("incrementQty: $incrementQty");
                               await _bloc.updateQuantityCartCubit(
                                   context: context,
                                   mounted: mounted,
                                   cartDetailId: state
                                       .cartModel?.data?.cartDetails?[index].id,
-                                  qty: qty++);
+                                  qty: incrementQty);
                             }
                           },
                           imageWidth: 1.sw,
                           imageHeight: AppDimensions.cartItemProductHeight,
                           boarderColor: AppColors.itemBGColor,
+                          qty: state.cartModel?.data?.cartDetails?[index].qty,
                           title: state
                               .cartModel?.data?.cartDetails?[index].productName,
                           subTitle: state

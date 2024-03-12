@@ -14,6 +14,7 @@ class ProductCartItemWidget extends StatelessWidget {
   final Function()? onTap, onTapIncrement, onTapDecrement;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
+  final int? qty;
 
   const ProductCartItemWidget(
       {super.key,
@@ -25,6 +26,7 @@ class ProductCartItemWidget extends StatelessWidget {
       this.onTapDecrement,
       this.imagePath,
       this.imageHeight,
+        this.qty = 1,
       this.imageWidth,
       this.boarderColor});
 
@@ -118,7 +120,8 @@ class ProductCartItemWidget extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               child: textWidget(
-                                  text: "1",
+                                  // text: "1",
+                                  text: qty.toString(),
                                   fontFamily: AppFont.gilroyBold,
                                   fontSize: AppDimensions.textSizeSmall,
                                   fontWeight: FontWeight.bold,

@@ -353,4 +353,51 @@ class ChatCubit extends Cubit<ChatState> {
       emit(state.copyWith(chatMessagesLoading: false));
     }
   }
+
+  /// Upload Image
+  Future uploadImageCubit({
+    required BuildContext context,
+    required bool mounted,
+    int? senderId,
+    receiverId,
+    modelId,
+    chatId,
+    senderModel,
+    receiverModel,
+    fileType,
+    imageBase64,
+  }) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await uploadImageProvider(
+        senderId: senderId,
+        receiverId: receiverId,
+        modelId: modelId,
+        chatId: chatId,
+        senderModel: senderModel,
+        receiverModel: receiverModel,
+        fileType: fileType,
+        imageBase64: imageBase64,
+        apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    EasyLoading.dismiss();
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
 }

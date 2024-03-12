@@ -501,8 +501,27 @@ class _ViewProductState extends State<ViewProduct> {
                                         AppColors.backIconBackgroundColor,
                                     iconColor:
                                         AppColors.bottomNavUnSelectedColor,
-                                    onTap: () {
+                                    onTap: () async {
                                       print("clicked minus");
+                                      if (state.cartModel?.data
+                                              ?.cartDetails?[index].qty !=
+                                          null) {
+                                        int qty = state.cartModel!.data!
+                                            .cartDetails![index].qty!;
+                                        if (qty > 1) {
+                                          final decrementQty = qty - 1;
+
+                                          await _bloc.updateQuantityCartCubit(
+                                              context: context,
+                                              mounted: mounted,
+                                              cartDetailId: state
+                                                  .cartModel
+                                                  ?.data
+                                                  ?.cartDetails?[index]
+                                                  .id,
+                                              qty: decrementQty);
+                                        }
+                                      }
                                     },
                                     iconPath: AssetsPath.minus,
                                     iconSize: 16,
@@ -531,8 +550,22 @@ class _ViewProductState extends State<ViewProduct> {
                                     iconSize: 16,
                                     backgroundColor:
                                         AppColors.backIconBackgroundColor,
-                                    onTap: () {
+                                    onTap: () async {
                                       print("clicked add");
+                                      if (state.cartModel?.data
+                                              ?.cartDetails?[index].qty !=
+                                          null) {
+                                        int qty = state.cartModel!.data!
+                                            .cartDetails![index].qty!;
+                                        final incrementQty = qty + 1;
+                                        print("incrementQty: $incrementQty");
+                                        await _bloc.updateQuantityCartCubit(
+                                            context: context,
+                                            mounted: mounted,
+                                            cartDetailId: state.cartModel?.data
+                                                ?.cartDetails?[index].id,
+                                            qty: incrementQty);
+                                      }
                                     },
                                     iconPath: AssetsPath.add,
                                     iconColor:

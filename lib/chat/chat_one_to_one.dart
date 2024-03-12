@@ -1,13 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_one_to_one_list.dart';
-import 'package:side_hustle/chat/widgets/chat_options_bottomsheet.dart';
 import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
 import 'package:side_hustle/chat/widgets/message_options_bottomsheet.dart';
-import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/service/socket_ibis_service.dart';
@@ -16,10 +17,13 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
+import 'package:side_hustle/utils/service/image_picker_service.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
+
+import 'package:path/path.dart' as p;
 
 class ChatOneToOne extends StatefulWidget {
   final bool isBlockedUser;
@@ -44,7 +48,7 @@ class ChatOneToOne extends StatefulWidget {
       this.isBlockedUser = false,
       this.isOrderChat = false,
       this.isOrderService = false,
-      this.chatId,
+      this.chatId = 0,
       this.receiverModel});
 
   @override
@@ -98,15 +102,6 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
       "created_at": DateTime.now().toIso8601String(),
       "message": message,
     };
-    // final json = {
-    //   "message_type": messageType,
-    //   "user_id": 38,
-    //   "receiver_id": 18,
-    //   "chat_id": 11,
-    //   "sender_model": "Seller",
-    //   "receiver_model": "Buyer",
-    //   "message": message,
-    // };
 
     print("sendMessage: $json");
 
@@ -115,6 +110,59 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         eventName: API.SEND_MESSAGE_EVENT, eventParameters: json);
 
     chatController.clear();
+  }
+
+  dynamic attachImage({String? imagePath}) async {
+    if (imagePath != null) {
+      final UserModel? userModel = await _bloc.getUserData();
+      int? uId = userModel?.data?.id;
+
+      final bytes = File(imagePath).readAsBytesSync();
+      String img64 = base64Encode(bytes);
+      if (mounted) {
+        await _bloc.uploadImageCubit(
+          context: context,
+          mounted: mounted,
+          senderId: uId,
+          receiverId: widget.customerId,
+          modelId: widget.modelId,
+          chatId: widget.chatId,
+          senderModel: widget.senderModel,
+          receiverModel: widget.receiverModel,
+          fileType: p.extension(img64),
+          imageBase64: img64,
+        );
+      }
+    }
+  }
+
+  void sendImage({
+    required String imageBase64,
+  }) async {
+    final UserModel? userModel = await _bloc.getUserData();
+    int? uId = userModel?.data?.id;
+
+    /// Seller or Buyer
+
+    /// message_type = 1 for text and 2 for image
+    final json = {
+      "message_type": 2,
+      "sender_id": uId,
+      "receiver_id": widget.customerId,
+      "model_id": widget.modelId,
+      "chat_id": widget.chatId,
+      "sender_model": widget.senderModel,
+      "receiver_model": widget.receiverModel,
+      "created_at": DateTime.now().toIso8601String(),
+      "file_type": "",
+      "image": imageBase64,
+    };
+
+    print("sendMessage: $json");
+
+    /// send message
+    SocketService.instance?.socketEmitMethod(
+        eventName: API.SEND_MESSAGE_EVENT, eventParameters: json);
   }
 
   void connectUser() async {
@@ -297,19 +345,24 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                           hintText: AppStrings.typeAMessage,
                           onTapEmoji: () {
                             print("clicked emoji");
-                            // if(showEmoji) {
-                            //   FocusManager.instance.primaryFocus!.unfocus();
-                            // }
-                            // setState(() {
-                            //   showEmoji = !showEmoji;
-                            // });
                             _bloc.showEmoji();
                           },
                           onTap: () {
                             _bloc.hideEmoji();
                           },
-                          onTapAttachment: () {},
-                          onTapCamera: () {},
+                          onTapAttachment: () async {
+                            final image = await ImagePickerService
+                                .selectImageFromGallery();
+
+                            if (image != null) {
+                              await attachImage(imagePath: image.path);
+                            }
+                          },
+                          onTapCamera: () async {
+                            final image = await ImagePickerService.openCamera();
+
+                            if (image != null) {}
+                          },
                         )),
                         Padding(
                           padding: const EdgeInsets.only(left: 2),

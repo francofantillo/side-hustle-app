@@ -18,6 +18,20 @@ class ImagePickerService {
     }
   }
 
+  static Future<File?> openCamera() async {
+    try {
+      final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+      if (pickedFile != null) {
+        return File(pickedFile.path);
+      } else {
+        return null;
+      }
+    } on Exception catch (e, stackTrace) {
+      print('Error selecting multiple images: $e');
+      print('Stack Trace: $stackTrace');
+    }
+  }
+
 /*  static Future<List<File>?> selectMultipleImagesFromGallery() async {
     List<XFile>? pickedFiles = await _picker.pickMultiImage(
       maxWidth: 1920,

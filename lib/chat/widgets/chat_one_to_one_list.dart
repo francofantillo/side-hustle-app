@@ -35,7 +35,6 @@ class ChatOneToOneUsersList extends StatefulWidget {
 }
 
 class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
-
   List<bool> isSent = [false, true, false, true, false, true];
 
   String addTimeSpacing({required int textLength}) {
@@ -284,7 +283,10 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
               timestamp: itemList?[index].createdAt);
 
           if (itemList?[index].productType != null) {
+            print("productType: ${itemList?[index].productType}");
             if (itemList?[index].productType == OrderTypeEnum.Product.name) {
+              print("OrderTypeEnum: ${itemList?[index].productType}");
+
               return itemList?[index].deliveryType ==
                       DeliveryTypeEnum.Pickup.name
                   ? orderProductWidget(
@@ -324,6 +326,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     );
             } else if (itemList?[index].productType ==
                 OrderTypeEnum.Service.name) {
+              print("OrderTypeEnum: ${itemList?[index].productType}");
               return Column(
                 children: [
                   orderServiceWidget(
@@ -345,9 +348,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 ],
               );
             }
-          }
-
-          if (itemList?[index].senderId == currentUserId) {
+          } else if (itemList?[index].senderId == currentUserId) {
             return SenderWidget(
               message: itemList?[index].message,
               time: time,

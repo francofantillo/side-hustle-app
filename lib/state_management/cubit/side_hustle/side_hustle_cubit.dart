@@ -15,6 +15,7 @@ import 'package:side_hustle/state_management/models/side_hustle_detail_model.dar
 import 'package:side_hustle/state_management/models/side_hustle_model.dart';
 import 'package:side_hustle/state_management/models/your_shop_model.dart';
 import 'package:side_hustle/state_management/providers/side_hustle/side_hustle_provider.dart';
+import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
@@ -865,6 +866,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
   /// Update Delivery Address Cart
   Future updateDeliveryAddressCartCubit(
       {required BuildContext context, required bool mounted}) async {
+    EasyLoading.instance.indicatorColor = Colors.white;
     EasyLoading.show();
 
     final token = await prefs.getToken();
@@ -888,6 +890,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
     print("status code: ${response?.statusCode}");
 
     // EasyLoading.dismiss();
+    EasyLoading.instance.indicatorColor = AppColors.primaryColor;
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {

@@ -7,18 +7,16 @@ var dio = Dio();
 /// Get Chat List
 Future<Response?> getChatsListProvider({String? apiToken}) async {
   print(
-      "*****************\nurl: ${API
-          .GET_CHAT_LIST}\napiToken: $apiToken\n**************************");
+      "*****************\nurl: ${API.GET_CHAT_LIST}\napiToken: $apiToken\n**************************");
   final response =
-  await getRequestProvider(path: API.GET_CHAT_LIST, token: apiToken);
+      await getRequestProvider(path: API.GET_CHAT_LIST, token: apiToken);
   return response;
 }
 
 /// Blocked Users Chat List
 Future<Response?> getBlockedUsersChatListProvider({String? apiToken}) async {
   print(
-      "*****************\nurl: ${API
-          .BLOCKED_USERS_CHAT_LIST}\napiToken: $apiToken\n**************************");
+      "*****************\nurl: ${API.BLOCKED_USERS_CHAT_LIST}\napiToken: $apiToken\n**************************");
   final response = await getRequestProvider(
       path: API.BLOCKED_USERS_CHAT_LIST, token: apiToken);
   return response;
@@ -28,8 +26,7 @@ Future<Response?> getBlockedUsersChatListProvider({String? apiToken}) async {
 Future<Response?> blockUserProvider({int? chatId, String? apiToken}) async {
   final data = {"chat_id": chatId};
   print(
-      "*****************\nurl: ${API
-          .BLOCK_USER}\napiToken: $apiToken\n$data\n**************************");
+      "*****************\nurl: ${API.BLOCK_USER}\napiToken: $apiToken\n$data\n**************************");
   final response = await getRequestProvider(
       path: API.BLOCK_USER, queryParameter: data, token: apiToken);
   return response;
@@ -39,8 +36,7 @@ Future<Response?> blockUserProvider({int? chatId, String? apiToken}) async {
 Future<Response?> unBlockUserProvider({int? chatId, String? apiToken}) async {
   final data = {"chat_id": chatId};
   print(
-      "*****************\nurl: ${API
-          .UN_BLOCK_USER}\napiToken: $apiToken\n$data\n**************************");
+      "*****************\nurl: ${API.UN_BLOCK_USER}\napiToken: $apiToken\n$data\n**************************");
   final response = await getRequestProvider(
       path: API.UN_BLOCK_USER, queryParameter: data, token: apiToken);
   return response;
@@ -48,17 +44,48 @@ Future<Response?> unBlockUserProvider({int? chatId, String? apiToken}) async {
 
 /// Get Chats
 Future<Response?> getMessagesProvider(
-    {int? customerId, int? modelId, String? modelName, String? apiToken}) async {
+    {int? customerId,
+    int? modelId,
+    String? modelName,
+    String? apiToken}) async {
   final data = {
     "customer_id": customerId,
     "model_id": modelId,
     "model_name": modelName
   };
   print(
-      "*****************\nurl: ${API
-          .GET_MESSAGES}\napiToken: $apiToken\n$data\n**************************");
-  final response =
-  await getRequestProvider(
+      "*****************\nurl: ${API.GET_MESSAGES}\napiToken: $apiToken\n$data\n**************************");
+  final response = await getRequestProvider(
       path: API.GET_MESSAGES, queryParameter: data, token: apiToken);
+  return response;
+}
+
+/// Upload Image
+Future<Response?> uploadImageProvider(
+    {int? senderId,
+    receiverId,
+    modelId,
+    chatId,
+    senderModel,
+    receiverModel,
+    fileType,
+    imageBase64,
+    String? apiToken}) async {
+  final data = {
+    "message_type": 2,
+    "sender_id": senderId,
+    "receiver_id": receiverId,
+    "model_id": modelId,
+    "chat_id": chatId,
+    "sender_model": senderModel,
+    "receiver_model": receiverModel,
+    "file_type": fileType,
+    "image": imageBase64,
+  };
+  print(
+      "*****************\nurl: ${API.UPLOAD_IMAGE}\napiToken: $apiToken\n$data\n**************************");
+  final response = await postRequestProvider(
+      // path: API.UPLOAD_IMAGE, data: FormData.fromMap(data), token: apiToken);
+      path: API.UPLOAD_IMAGE, data: data, token: apiToken);
   return response;
 }

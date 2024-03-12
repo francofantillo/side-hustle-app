@@ -116,45 +116,48 @@ class _DeliveryAddressYourCartState extends State<DeliveryAddressYourCart> {
                         color: AppColors.whiteColor,
                       )
                     : const SizedBox.shrink(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          textWidget(
-                              text: AppStrings.estimatedTotal,
-                              color: AppColors.textWhiteColor,
-                              fontFamily: AppFont.gilroyBold,
-                              fontSize: AppDimensions.textSizeCartText,
-                              fontWeight: FontWeight.bold),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 4.0, top: 4),
-                            child: textWidget(
-                              text: AppStrings.estimatedTotalText,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFFFCFCFC),
-                              maxLines: 2,
-                              fontSize: AppDimensions.textSizeVerySmall,
-                            ),
-                          ),
-                        ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            textWidget(
+                                text: AppStrings.estimatedTotal,
+                                color: AppColors.textWhiteColor,
+                                fontFamily: AppFont.gilroyBold,
+                                fontSize: AppDimensions.textSizeCartText,
+                                fontWeight: FontWeight.bold),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(right: 4.0, top: 4),
+                            //   child: textWidget(
+                            //     text: AppStrings.estimatedTotalText,
+                            //     fontWeight: FontWeight.w500,
+                            //     color: const Color(0xFFFCFCFC),
+                            //     maxLines: 2,
+                            //     fontSize: AppDimensions.textSizeVerySmall,
+                            //   ),
+                            // ),
+                          ],
+                        ),
                       ),
-                    ),
-                    BlocBuilder<SideHustleCubit, SideHustleState>(
-                        builder: (context, state) {
-                      return textWidget(
-                          // text: "\$98.24",
-                          text:
-                              "\$${state.cartModel?.data?.subTotal?.toStringAsFixed(2)}",
-                          fontFamily: AppFont.gilroyBold,
-                          fontWeight: FontWeight.bold,
-                          fontSize: AppDimensions.textPriceSizeViewForms + 2.sp,
-                          color: AppColors.textWhiteColor);
-                    }),
-                  ],
+                      BlocBuilder<SideHustleCubit, SideHustleState>(
+                          builder: (context, state) {
+                        return textWidget(
+                            // text: "\$98.24",
+                            text:
+                                "\$${state.cartModel?.data?.subTotal?.toStringAsFixed(2)}",
+                            fontFamily: AppFont.gilroyBold,
+                            fontWeight: FontWeight.bold,
+                            fontSize: AppDimensions.textPriceSizeViewForms + 2.sp,
+                            color: AppColors.textWhiteColor);
+                      }),
+                    ],
+                  ),
                 ),
                 height(0.01.sw),
                 CustomMaterialButton(
