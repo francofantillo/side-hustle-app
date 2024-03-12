@@ -115,7 +115,7 @@ class AppDimensions {
   static double drawerHeadingSize = 22.sp;
   static double drawerItemIconSpacing = 15.w;
   static double drawerItemTextSize = 14.sp;
-  static double drawerProfileSpacingBetween = .04.sh;
+  static double drawerProfileSpacingBetween = .05.sw;
   static double drawerItemsVerticalSpacing = .04.sh;
   static double drawerBGCurve = 25.h;
 

@@ -62,27 +62,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(builder: (contextBuilder, state) {
       print('switched to: ${_tabIndexBasicToggle.value}');
-      return Scaffold(
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          physics: const AlwaysScrollableScrollPhysics(
-              parent: BouncingScrollPhysics()),
-          child: Column(
+      return SafeArea(
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: AppDimensions.rootPadding,
+                  right: AppDimensions.rootPadding,
+                  top: AppDimensions.rootPadding),
+              child: CustomHomeAppBarWidget(
+                contextBuilder: contextBuilder,
+                title: AppStrings.profileResumePage,
+                hideNotificationIcon: false,
+                hideEditProfileIcon: true,
+              ),
+            ),
+          ),
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: AppDimensions.rootPadding,
-                    right: AppDimensions.rootPadding,
-                    top: AppDimensions.rootPadding),
-                child: CustomHomeAppBarWidget(
-                  contextBuilder: contextBuilder,
-                  title: AppStrings.profileResumePage,
-                  hideNotificationIcon: false,
-                  hideEditProfileIcon: true,
-                ),
-              ),
-              height(0.02.sw),
+              // Padding(
+              //   padding: EdgeInsets.only(
+              //       left: AppDimensions.rootPadding,
+              //       right: AppDimensions.rootPadding,
+              //       top: AppDimensions.rootPadding),
+              //   child: CustomHomeAppBarWidget(
+              //     contextBuilder: contextBuilder,
+              //     title: AppStrings.profileResumePage,
+              //     hideNotificationIcon: false,
+              //     hideEditProfileIcon: true,
+              //   ),
+              // ),
+              // height(0.02.sw),
               Center(
                 child: CircularCacheImageWidget(
                   showLoading: true,
@@ -183,7 +195,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: ProfileJobsWidget(
                             name: AppStrings.jobsCompleted,
-                            myJobsCount: state.profileModel?.data?.completedJobs
+                            myJobsCount: state
+                                .profileModel?.data?.completedJobs
                                 ?.toString()),
                       ),
                     ),
@@ -215,21 +228,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               height(0.01.sw),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimensions.defaultHorizontalPadding + 4),
-                child: textWidget(
-                    text: AppStrings.account.toUpperCase(),
-                    // color: AppColors.primaryColor,
-                    color: const Color(0xFF3896EE),
-                    fontFamily: AppFont.gilroyBold,
-                    fontSize: AppDimensions.textSizeSmall,
-                    fontWeight: FontWeight.bold),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: AppDimensions.defaultHorizontalPadding),
-                child: ProfileItemsWidget(),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //       horizontal: AppDimensions.defaultHorizontalPadding + 4),
+              //   child: textWidget(
+              //       text: AppStrings.account.toUpperCase(),
+              //       // color: AppColors.primaryColor,
+              //       color: const Color(0xFF3896EE),
+              //       fontFamily: AppFont.gilroyBold,
+              //       fontSize: AppDimensions.textSizeSmall,
+              //       fontWeight: FontWeight.bold),
+              // ),
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppDimensions.defaultHorizontalPadding),
+                  child: ProfileItemsWidget(),
+                ),
               ),
               height(0.03.sw),
             ],

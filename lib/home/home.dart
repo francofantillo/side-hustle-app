@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/bottom_tabs/bottom_tabs.dart';
 import 'package:side_hustle/home/widgets/events_around_you_list.dart';
 import 'package:side_hustle/home/widgets/home_appbar.dart';
 import 'package:side_hustle/home/widgets/home_first_item_list.dart';
@@ -179,6 +180,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemsList: AlphaAppData.homeFirstList,
                               onTapLabel: () {
                                 print("Clicked");
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.bottomTabsScreenRoute,
+                                    (route) => false,
+                                    arguments: const BottomTabsScreen(
+                                      currentIndex: 3,
+                                    ));
                               },
                             ),
                           ),
@@ -192,6 +200,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               horizontalListSize: AppDimensions.listItemHeight,
                               itemsList: AlphaAppData
                                   .jobsAndEventsList[index].itemList,
+                              onTapLabel: () {
+                                print("Clicked");
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.bottomTabsScreenRoute,
+                                    (route) => false,
+                                    arguments: const BottomTabsScreen(
+                                      currentIndex: 1,
+                                    ));
+                              },
                             ),
                           ),
                           Padding(
@@ -204,6 +222,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               horizontalListSize: AppDimensions.listItemHeight,
                               itemsList: AlphaAppData
                                   .jobsAndEventsList[index].itemList,
+                              onTapLabel: () {
+                                print("Clicked");
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    AppRoutes.bottomTabsScreenRoute,
+                                    (route) => false,
+                                    arguments: const BottomTabsScreen(
+                                      currentIndex: 2,
+                                    ));
+                              },
                             ),
                           ),
                           height(100),
