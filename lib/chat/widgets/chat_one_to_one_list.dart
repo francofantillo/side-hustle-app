@@ -1,12 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
+import 'package:chat_bubbles/bubbles/bubble_normal_image.dart';
 import 'package:chat_bubbles/date_chips/date_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/chat/chat_send_widgets/receiver_widget.dart';
 import 'package:side_hustle/chat/chat_send_widgets/sender_widget.dart';
+import 'package:side_hustle/chat/order_detail.dart';
 import 'package:side_hustle/chat/widgets/order_product_item.dart';
 import 'package:side_hustle/chat/widgets/order_service_item.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/state_management/models/chat_messages_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -23,11 +28,13 @@ import 'package:intl/src/intl/date_format.dart';
 class ChatOneToOneUsersList extends StatefulWidget {
   final List? itemList;
   final bool isOrderChat, isOrderService;
+  final int? modelId;
 
   const ChatOneToOneUsersList(
       {super.key,
       this.itemList,
       this.isOrderChat = false,
+      this.modelId,
       this.isOrderService = false});
 
   @override
@@ -138,6 +145,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
   Widget orderProductWidget(
       {String? image,
       String? name,
+      int? orderId,
       String? subTitle,
       String? price,
       String? deliveryType,
@@ -174,6 +182,13 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     top: 8.0, left: 8.0, right: 8.0, bottom: 8),
                 child: OrderProductItemWidget(
                   // imageHeight: 0.21.sh,
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context, AppRoutes.orderDetailScreenRoute,
+                        arguments: OrderDetail(
+                          orderId: 1,
+                        ));
+                  },
                   productsQuantity: productsQuantity ?? 1,
                   imageHeight: AppDimensions.productOrderWidgetHeight,
                   imageWidth: 1.sw,
@@ -321,43 +336,119 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                             lng: itemList?[index].lng != null
                                 ? double.parse(itemList![index].lng!)
                                 : null,
-                            shopName: "ShopName Needed")
+                            shopName: itemList?[index].shopName)
                       ],
                     );
             } else if (itemList?[index].productType ==
                 OrderTypeEnum.Service.name) {
               print("OrderTypeEnum: ${itemList?[index].productType}");
-              return Column(
-                children: [
-                  orderServiceWidget(
-                      image: itemList?[index].image,
-                      name: itemList?[index].name,
-                      subTitle: itemList?[index].description,
-                      serviceDate: itemList?[index].serviceDate,
-                      serviceTime: "service time needed",
-                      location: itemList?[index].location,
-                      messageTime: time),
-                  getDirectionToMyLocation(
-                      lat: itemList?[index].lat != null
-                          ? double.parse(itemList![index].lat!)
-                          : null,
-                      lng: itemList?[index].lng != null
-                          ? double.parse(itemList![index].lng!)
-                          : null,
-                      shopName: "ShopName Needed")
-                ],
-              );
+              return int.parse(itemList?[index].productCount ?? "0") > 1
+                  ? Column(
+                      children: [
+                        orderProductWidget(
+                            image: itemList?[index].image,
+                            name: itemList?[index].name,
+                            subTitle: itemList?[index].description,
+                            productsQuantity:
+                                itemList?[index].productCount != null
+                                    ? int.parse(itemList![index].productCount!)
+                                    : null,
+                            orderId: itemList?[index].id,
+                            deliveryType: itemList?[index].deliveryType,
+                            location: itemList?[index].location,
+                            messageTime: time),
+                        getDirectionToMyLocation(
+                            lat: itemList?[index].lat != null
+                                ? double.parse(itemList![index].lat!)
+                                : null,
+                            lng: itemList?[index].lng != null
+                                ? double.parse(itemList![index].lng!)
+                                : null,
+                            shopName: itemList?[index].shopName)
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        orderServiceWidget(
+                            image: itemList?[index].image,
+                            name: itemList?[index].name,
+                            subTitle: itemList?[index].description,
+                            serviceDate: itemList?[index].serviceDate,
+                            serviceTime: "service time needed",
+                            location: itemList?[index].location,
+                            messageTime: time),
+                        getDirectionToMyLocation(
+                            lat: itemList?[index].lat != null
+                                ? double.parse(itemList![index].lat!)
+                                : null,
+                            lng: itemList?[index].lng != null
+                                ? double.parse(itemList![index].lng!)
+                                : null,
+                            shopName: itemList?[index].shopName)
+                      ],
+                    );
             }
           } else if (itemList?[index].senderId == currentUserId) {
-            return SenderWidget(
-              message: itemList?[index].message,
-              time: time,
-            );
+            if (itemList?[index].messageType == 2) {
+              return BubbleNormalImage(
+                // id: 'id001',
+                id: itemList?[index].id?.toString() ?? 'id001',
+                image: _image(image: itemList?[index].filePath),
+                isSender: true,
+                // color: AppColors.primaryColor,
+                color: Colors.transparent,
+                tail: false,
+              );
+            } else if (itemList?[index].messageType == 1) {
+              return SenderWidget(
+                message: itemList?[index].message,
+                time: time,
+              );
+            }
           } else {
-            return ReceiverWidget(
-                message: itemList?[index].message, time: time, bottomWidth: 2);
+            if (itemList?[index].messageType == 2) {
+              return BubbleNormalImage(
+                // id: 'id001',
+                id: itemList?[index].id?.toString() ?? 'id001',
+                image: _image(image: itemList?[index].filePath),
+                color: Colors.purpleAccent,
+                isSender: false,
+                tail: false,
+              );
+            } else if (itemList?[index].messageType == 1) {
+              return ReceiverWidget(
+                  message: itemList?[index].message,
+                  time: time,
+                  bottomWidth: 2);
+            }
           }
         },
+      ),
+    );
+  }
+
+  Widget _image({String? image}) {
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: 150.0.w,
+        minWidth: 150.0.w,
+      ),
+      child: CachedNetworkImage(
+        // imageUrl: 'https://i.ibb.co/JCyT1kT/Asset-1.png',
+        imageUrl: image ?? "https://",
+        // progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
+        //   height: 10,
+        //   width: 10,
+        //   child: CircularProgressIndicator(
+        //     value: downloadProgress.progress,
+        //   ),
+        // ),
+        // errorWidget: (context, url, error) => const Icon(Icons.error),
+        errorWidget: (context, url, error) => Image.asset(
+          AssetsPath.imageLoadError,
+          fit: BoxFit.cover,
+          height: 150.w,
+        ),
       ),
     );
   }

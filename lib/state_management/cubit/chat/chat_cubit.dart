@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/state_management/models/chat_messages_model.dart';
 import 'package:side_hustle/state_management/models/chat_model.dart';
+import 'package:side_hustle/state_management/models/order_detail_chat.dart';
 import 'package:side_hustle/state_management/models/place_order.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/chat/chat_provider.dart';
@@ -355,7 +356,7 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   /// Upload Image
-  Future uploadImageCubit({
+  Future<String?> uploadImageCubit({
     required BuildContext context,
     required bool mounted,
     int? senderId,
@@ -390,14 +391,61 @@ class ChatCubit extends Cubit<ChatState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
+        return response.data["data"]["file_path"];
       }
 
       /// Failed
       else {
         AppUtils.showToast(response.data["message"]);
+        return null;
       }
     } else {
       AppUtils.showToast(AppValidationMessages.failedMessage);
+      return null;
+    }
+  }
+
+  /// Get Order Detail
+  Future getOrderDetailCubit({
+    required BuildContext context,
+    required bool mounted,
+    int? orderId,
+  }) async {
+    emit(state.copyWith(
+        orderDetailLoading: true,
+        orderDetailChatModel: OrderDetailChatModel()));
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response =
+        await getOrderDetailChatProvider(apiToken: token, orderId: orderId);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        OrderDetailChatModel orderDetailChatModel =
+            OrderDetailChatModel.fromJson(response.data);
+        emit(state.copyWith(
+            orderDetailLoading: false,
+            orderDetailChatModel: orderDetailChatModel));
+        EasyLoading.dismiss();
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        emit(state.copyWith(orderDetailLoading: false));
+        EasyLoading.dismiss();
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(orderDetailLoading: false));
+      EasyLoading.dismiss();
     }
   }
 }

@@ -8,7 +8,8 @@ class ChatMessagesModel {
   ChatMessagesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    messagesData = json['data'] != null ? MessagesData.fromJson(json['data']) : null;
+    messagesData =
+        json['data'] != null ? MessagesData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -58,6 +59,7 @@ class ChatMessages {
   String? productCount;
   String? message;
   String? filePath;
+  String? shopName;
   int? type;
   int? messageType;
   int? isSeen;
@@ -78,31 +80,32 @@ class ChatMessages {
 
   ChatMessages(
       {this.id,
-        this.chatId,
-        this.senderId,
-        this.receiverId,
-        this.senderModel,
-        this.receiverModel,
-        this.productCount,
-        this.message,
-        this.filePath,
-        this.type,
-        this.messageType,
-        this.isSeen,
-        this.productType,
-        this.name,
-        this.price,
-        this.deliveryType,
-        this.serviceDate,
-        this.startTime,
-        this.endTime,
-        this.image,
-        this.location,
-        this.lat,
-        this.lng,
-        this.description,
-        this.createdAt,
-        this.updatedAt});
+      this.chatId,
+      this.senderId,
+      this.receiverId,
+      this.senderModel,
+      this.receiverModel,
+      this.productCount,
+      this.message,
+      this.filePath,
+      this.shopName,
+      this.type,
+      this.messageType,
+      this.isSeen,
+      this.productType,
+      this.name,
+      this.price,
+      this.deliveryType,
+      this.serviceDate,
+      this.startTime,
+      this.endTime,
+      this.image,
+      this.location,
+      this.lat,
+      this.lng,
+      this.description,
+      this.createdAt,
+      this.updatedAt});
 
   ChatMessages.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -114,6 +117,7 @@ class ChatMessages {
     productCount = json['product_count'];
     message = json['message'];
     filePath = json['file_path'];
+    shopName = json['shop_name'];
     type = json['type'];
     messageType = json['message_type'];
     isSeen = json['is_seen'];
@@ -144,6 +148,7 @@ class ChatMessages {
     data['product_count'] = this.productCount;
     data['message'] = this.message;
     data['file_path'] = this.filePath;
+    data['shop_name'] = this.shopName;
     data['type'] = this.type;
     data['message_type'] = this.messageType;
     data['is_seen'] = this.isSeen;

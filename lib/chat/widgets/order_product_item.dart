@@ -139,12 +139,13 @@ class OrderProductItemWidget extends StatelessWidget {
                     color: AppColors.backIconBackgroundColor,
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
                     child: InkWell(
-                      onTap: productsQuantity > 1
-                          ? () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.orderDetailScreenRoute);
-                            }
-                          : null,
+                      // onTap: productsQuantity > 1
+                      //     ? () {
+                      //         Navigator.pushNamed(
+                      //             context, AppRoutes.orderDetailScreenRoute);
+                      //       }
+                      //     : null,
+                      onTap: onTap,
                       child: Center(
                         child: textWidget(
                             text: productsQuantity == 1

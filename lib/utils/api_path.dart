@@ -99,4 +99,5 @@ class API {
   static const String UN_BLOCK_USER = "${BASE_URL}/unblock-user";
   static const String GET_MESSAGES = "${BASE_URL}/getChatMessages";
   static const String UPLOAD_IMAGE = "${BASE_URL}/chatFileUpload";
+  static const String ORDER_DETAIL_CAHT = "${BASE_URL}/order-detail";
 }

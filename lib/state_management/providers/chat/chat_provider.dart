@@ -71,14 +71,16 @@ Future<Response?> uploadImageProvider(
     fileType,
     imageBase64,
     String? apiToken}) async {
+  // "model_name": "Order",
   final data = {
-    "message_type": 2,
+    "type": 2,
     "sender_id": senderId,
     "receiver_id": receiverId,
     "model_id": modelId,
     "chat_id": chatId,
     "sender_model": senderModel,
     "receiver_model": receiverModel,
+    "model_name": "Order",
     "file_type": fileType,
     "image": imageBase64,
   };
@@ -86,6 +88,21 @@ Future<Response?> uploadImageProvider(
       "*****************\nurl: ${API.UPLOAD_IMAGE}\napiToken: $apiToken\n$data\n**************************");
   final response = await postRequestProvider(
       // path: API.UPLOAD_IMAGE, data: FormData.fromMap(data), token: apiToken);
-      path: API.UPLOAD_IMAGE, data: data, token: apiToken);
+      path: API.UPLOAD_IMAGE,
+      data: data,
+      token: apiToken);
+  return response;
+}
+
+/// Get Order Listing
+Future<Response?> getOrderDetailChatProvider(
+    {int? customerId, int? orderId, String? apiToken}) async {
+  final data = {
+    "order_id": orderId,
+  };
+  print(
+      "*****************\nurl: ${API.ORDER_DETAIL_CAHT}\napiToken: $apiToken\n$data\n**************************");
+  final response = await getRequestProvider(
+      path: API.ORDER_DETAIL_CAHT, queryParameter: data, token: apiToken);
   return response;
 }

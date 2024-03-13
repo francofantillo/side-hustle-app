@@ -83,7 +83,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
         modelName: widget.modelName);
   }
 
-  void sendMessage({int? messageType, String message = ""}) async {
+  void sendMessageSender({String message = ""}) async {
     final UserModel? userModel = await _bloc.getUserData();
     int? uId = userModel?.data?.id;
 
@@ -92,7 +92,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
     /// Send message json
     /// message_type = 1 for text and 2 for image
     final json = {
-      "message_type": messageType,
+      "message_type": 1,
       "sender_id": uId,
       "receiver_id": widget.customerId,
       "model_id": widget.modelId,
@@ -112,6 +112,64 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
     chatController.clear();
   }
 
+/*  void sendMessageReceiver({String message = ""}) async {
+    final UserModel? userModel = await _bloc.getUserData();
+    int? uId = userModel?.data?.id;
+
+    /// Seller or Buyer
+
+    /// Send message json
+    /// message_type = 1 for text and 2 for image
+    final json = {
+      "message_type": 1,
+      "sender_id": widget.customerId,
+      "receiver_id": uId,
+      "model_id": widget.modelId,
+      "chat_id": widget.chatId,
+      "sender_model": widget.receiverModel,
+      "receiver_model": widget.senderModel,
+      "created_at": DateTime.now().toIso8601String(),
+      "message": message,
+    };
+
+    print("sendMessage: $json");
+
+    /// connect users
+    SocketService.instance?.socketEmitMethod(
+        eventName: API.SEND_MESSAGE_EVENT, eventParameters: json);
+
+    chatController.clear();
+  }*/
+
+  void sendImageSocket({String? imagePath}) async {
+    final UserModel? userModel = await _bloc.getUserData();
+    int? uId = userModel?.data?.id;
+
+    /// Seller or Buyer
+
+    /// Send message json
+    /// message_type = 1 for text and 2 for image
+    final json = {
+      "message_type": 2,
+      "sender_id": uId,
+      "receiver_id": widget.customerId,
+      "model_id": widget.modelId,
+      "chat_id": widget.chatId,
+      "sender_model": widget.senderModel,
+      "file_path": imagePath,
+      "receiver_model": widget.receiverModel,
+      "created_at": DateTime.now().toIso8601String(),
+    };
+
+    print("sendMessage: $json");
+
+    /// connect users
+    SocketService.instance?.socketEmitMethod(
+        eventName: API.SEND_MESSAGE_EVENT, eventParameters: json);
+
+    chatController.clear();
+  }
+
   dynamic attachImage({String? imagePath}) async {
     if (imagePath != null) {
       final UserModel? userModel = await _bloc.getUserData();
@@ -120,18 +178,22 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
       final bytes = File(imagePath).readAsBytesSync();
       String img64 = base64Encode(bytes);
       if (mounted) {
-        await _bloc.uploadImageCubit(
-          context: context,
-          mounted: mounted,
-          senderId: uId,
-          receiverId: widget.customerId,
-          modelId: widget.modelId,
-          chatId: widget.chatId,
-          senderModel: widget.senderModel,
-          receiverModel: widget.receiverModel,
-          fileType: p.extension(img64),
-          imageBase64: img64,
-        );
+        await _bloc
+            .uploadImageCubit(
+              context: context,
+              mounted: mounted,
+              senderId: uId,
+              receiverId: widget.customerId,
+              modelId: widget.modelId,
+              chatId: widget.chatId,
+              senderModel: widget.senderModel,
+              receiverModel: widget.receiverModel,
+              fileType: p.extension(img64),
+              imageBase64: img64,
+            )
+            .then((value) => {
+                  if (value != null) {sendImageSocket(imagePath: value)}
+                });
       }
     }
   }
@@ -226,7 +288,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
     return BackgroundWidget(
       backgroundColor: Colors.white.withOpacity(0.01),
       showAppBar: true,
-      appBarTitle: widget.userName ?? AppStrings.chatUserName,
+      appBarTitle: widget.userName ?? "",
       leading: Padding(
         padding: const EdgeInsets.only(left: 8.0),
         child:
@@ -302,8 +364,10 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
           children: [
             // _image(),
             ChatOneToOneUsersList(
-                isOrderChat: widget.isOrderChat,
-                isOrderService: widget.isOrderService),
+              isOrderChat: widget.isOrderChat,
+              isOrderService: widget.isOrderService,
+              modelId: widget.modelId,
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -376,9 +440,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                             onTap: () {
                               print("clicked minus");
                               if (chatController.text.trim().isNotEmpty) {
-                                sendMessage(
-                                    messageType: 1,
-                                    message: chatController.text);
+                                sendMessageSender(message: chatController.text);
                               }
                             },
                             iconPath: AssetsPath.send,

@@ -153,7 +153,8 @@ class _DeliveryAddressYourCartState extends State<DeliveryAddressYourCart> {
                                 "\$${state.cartModel?.data?.subTotal?.toStringAsFixed(2)}",
                             fontFamily: AppFont.gilroyBold,
                             fontWeight: FontWeight.bold,
-                            fontSize: AppDimensions.textPriceSizeViewForms + 2.sp,
+                            fontSize:
+                                AppDimensions.textPriceSizeViewForms + 2.sp,
                             color: AppColors.textWhiteColor);
                       }),
                     ],

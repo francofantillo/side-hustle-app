@@ -61,12 +61,12 @@ class _ChatAllUsersListState extends State<ChatAllUsersList> {
                       index: index,
                       isBlockedUser: false,
                       customerId: itemList?[index].receiverId,
+                      userName: itemList?[index].userName,
                       modelId: itemList?[index].modelId,
                       modelName: itemList?[index].modelName,
                       chatId: itemList?[index].chatId,
                       senderModel: senderModel,
-                      receiverModel: senderModel !=
-                              ChatModelEnum.Seller.name
+                      receiverModel: senderModel != ChatModelEnum.Seller.name
                           ? ChatModelEnum.Seller.name
                           : ChatModelEnum.Buyer.name,
                     ));

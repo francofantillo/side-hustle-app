@@ -14,6 +14,8 @@ class ChatState {
   bool chatMessagesLoading;
   int? receiverId;
   bool showEmoji;
+  OrderDetailChatModel? orderDetailChatModel;
+  bool orderDetailLoading;
 
   ChatState(
       {this.chatAllUsersModel,
@@ -28,7 +30,9 @@ class ChatState {
       this.chatMessagesModel,
       this.chatMessagesLoading = true,
       this.showEmoji = true,
-      this.receiverId});
+      this.receiverId,
+      this.orderDetailChatModel,
+      this.orderDetailLoading = true});
 
   ChatState copyWith(
       {UserModel? userModel,
@@ -43,7 +47,9 @@ class ChatState {
       ChatMessagesModel? chatMessagesModel,
       bool? chatMessagesLoading,
       int? receiverId,
-      bool? showEmoji}) {
+      bool? showEmoji,
+      OrderDetailChatModel? orderDetailChatModel,
+      bool? orderDetailLoading}) {
     return ChatState(
         chatAllUsersModel: chatAllUsersModel ?? this.chatAllUsersModel,
         chatAllUsersLoading: chatAllUsersLoading ?? this.chatAllUsersLoading,
@@ -59,6 +65,8 @@ class ChatState {
         chatMessagesLoading: chatMessagesLoading ?? this.chatMessagesLoading,
         userModel: userModel ?? this.userModel,
         receiverId: receiverId ?? this.receiverId,
-        showEmoji: showEmoji ?? this.showEmoji);
+        showEmoji: showEmoji ?? this.showEmoji,
+        orderDetailChatModel: orderDetailChatModel ?? this.orderDetailChatModel,
+        orderDetailLoading: orderDetailLoading ?? this.orderDetailLoading);
   }
 }

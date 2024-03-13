@@ -44,14 +44,14 @@ class AppUtils {
         await MapLauncher.showMarker(
           mapType: MapType.google,
           coords: Coords(lat ?? 37.759392, lng ?? -122.5107336),
-          title: shopName ?? "",
+          title: shopName ?? "   ",
         );
         return;
       } else if (await MapLauncher.isMapAvailable(MapType.apple) ?? false) {
         await MapLauncher.showMarker(
           mapType: MapType.apple,
           coords: Coords(lat ?? 37.759392, lng ?? -122.5107336),
-          title: shopName ?? "",
+          title: shopName ?? "   ",
         );
       }
     } else {

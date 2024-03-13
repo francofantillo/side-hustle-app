@@ -295,7 +295,10 @@ class AppRouter {
             return const YourProductsCart();
 
           case AppRoutes.orderDetailScreenRoute:
-            return const OrderDetail();
+            final args = routeSettings.arguments as OrderDetail?;
+            return OrderDetail(
+              orderId: args?.orderId,
+            );
 
           case AppRoutes.postAddedScreenRoute:
             final args = routeSettings.arguments as PostAdded?;
