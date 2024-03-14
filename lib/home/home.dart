@@ -9,6 +9,7 @@ import 'package:side_hustle/home/widgets/home_location_widget.dart';
 import 'package:side_hustle/home/widgets/jobs_around_you_list.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
+import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
@@ -33,6 +34,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late final AuthCubit _bloc;
   late final SideHustleCubit _blocSideHustle;
+  late final FavouritesCubit _blocFav;
+
   var index = 0;
   bool isProductSelected = true;
 
@@ -40,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _bloc = BlocProvider.of(context);
     _blocSideHustle = BlocProvider.of<SideHustleCubit>(context);
+    _blocFav = BlocProvider.of<FavouritesCubit>(context);
     isProductSelected = true;
     getCurrentLocation();
     getDashboard();
@@ -196,6 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 right: AppDimensions.rootPadding,
                                 bottom: 6),
                             child: JobsAroundYouList(
+                              blocFav: _blocFav,
+                              blocAuth: _bloc,
                               title: "Jobs around you",
                               horizontalListSize: AppDimensions.listItemHeight,
                               itemsList: AlphaAppData
@@ -218,6 +224,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 right: AppDimensions.rootPadding,
                                 bottom: 6),
                             child: EventsAroundYouList(
+                              blocAuth: _bloc,
+                              blocFav: _blocFav,
                               title: "Events around you",
                               horizontalListSize: AppDimensions.listItemHeight,
                               itemsList: AlphaAppData

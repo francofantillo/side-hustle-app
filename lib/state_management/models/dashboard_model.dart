@@ -99,6 +99,7 @@ class Shops {
 
 class Jobs {
   int? jobId;
+  int? isFavourite;
   String? name;
   String? image;
   String? description;
@@ -107,14 +108,16 @@ class Jobs {
 
   Jobs(
       {this.jobId,
-        this.name,
-        this.image,
-        this.description,
-        this.price,
-        this.userDetail});
+      this.isFavourite,
+      this.name,
+      this.image,
+      this.description,
+      this.price,
+      this.userDetail});
 
   Jobs.fromJson(Map<String, dynamic> json) {
     jobId = json['job_id'];
+    isFavourite = json['is_favourite'];
     name = json['name'];
     image = json['image'];
     description = json['description'];
@@ -140,6 +143,7 @@ class Jobs {
 
 class Events {
   int? eventId;
+  int? isFavourite;
   String? name;
   String? image;
   String? purpose;
@@ -148,14 +152,16 @@ class Events {
 
   Events(
       {this.eventId,
-        this.name,
-        this.image,
-        this.purpose,
-        this.price,
-        this.userDetail});
+      this.isFavourite,
+      this.name,
+      this.image,
+      this.purpose,
+      this.price,
+      this.userDetail});
 
   Events.fromJson(Map<String, dynamic> json) {
     eventId = json['event_id'];
+    isFavourite = json['is_favourite'];
     name = json['name'];
     image = json['image'];
     purpose = json['purpose'];
@@ -188,7 +194,6 @@ class UserDetail {
   UserDetail({this.userid, this.name, this.image, this.rating});
 
   UserDetail.fromJson(Map<String, dynamic> json) {
-
     userid = json['userid'];
     name = json['name'];
     image = json['image'];
@@ -215,11 +220,11 @@ class Banners {
 
   Banners(
       {this.id,
-        this.name,
-        this.description,
-        this.image,
-        this.createdAt,
-        this.updatedAt});
+      this.name,
+      this.description,
+      this.image,
+      this.createdAt,
+      this.updatedAt});
 
   Banners.fromJson(Map<String, dynamic> json) {
     id = json['id'];

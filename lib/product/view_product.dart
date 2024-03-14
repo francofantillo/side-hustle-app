@@ -6,7 +6,6 @@ import 'package:side_hustle/product/post_product.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/shop/shop.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
-import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
@@ -21,7 +20,6 @@ import 'package:side_hustle/widgets/buttons/custom_button_with_icon.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider_no_images_found.dart';
 import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
@@ -381,11 +379,32 @@ class _ViewProductState extends State<ViewProduct> {
                                         borderRadius: 10,
                                         onTap: () {
                                           print("clicked message");
-                                          Navigator.pushNamed(context,
+                                          Navigator.pushReplacementNamed(
+                                              context,
                                               AppRoutes.chatOneToOneScreenRoute,
-                                              arguments: const ChatOneToOne(
-                                                userName: AppStrings
-                                                    .userNameViewProduct,
+                                              arguments: ChatOneToOne(
+                                                index: index,
+                                                isBlockedUser: false,
+                                                customerId: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.productOwner
+                                                    ?.userid,
+                                                userName: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.productOwner
+                                                    ?.name,
+                                                modelId: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.productId,
+                                                modelName: ChatEnum.Shop.name,
+                                                chatId: 0,
+                                                senderModel:
+                                                    ChatModelEnum.Buyer.name,
+                                                receiverModel:
+                                                    ChatModelEnum.Seller.name,
                                               ));
                                         },
                                         iconPath: AssetsPath.message,
@@ -395,7 +414,7 @@ class _ViewProductState extends State<ViewProduct> {
                                     ],
                                   ),
                                 ),
-                      isAddToCart ? const SizedBox.shrink() : height(0.02.sh),
+                      isAddToCart ? const SizedBox.shrink() : height(0.03.sw),
                       isAddToCart
                           ? const SizedBox.shrink()
                           : Padding(

@@ -177,7 +177,11 @@ class EventOwnerDetail {
 
   EventOwnerDetail.fromJson(Map<String, dynamic> json) {
     isOwner = json['is_owner'];
-    id = json['id'];
+    if (json['id'] != null) {
+      id = json['id'];
+    } else if (json['user_id'] != null) {
+      id = json['user_id'];
+    }
     name = json['name'];
     rating =
         json['rating'] != null ? json['rating'].toString() : json['rating'];

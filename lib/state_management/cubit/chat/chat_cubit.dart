@@ -233,7 +233,6 @@ class ChatCubit extends Cubit<ChatState> {
   Future<int> blockUserChatCubit(
       {required BuildContext context,
       required bool mounted,
-      required int? chatId,
       required int index}) async {
     EasyLoading.show();
 
@@ -241,7 +240,8 @@ class ChatCubit extends Cubit<ChatState> {
 
     print("token: $token");
 
-    final response = await blockUserProvider(chatId: chatId, apiToken: token);
+    final response = await blockUserProvider(
+        chatId: state.chatMessagesModel?.messagesData?.chatId, apiToken: token);
 
     print("status code: ${response?.statusCode}");
 
@@ -273,7 +273,6 @@ class ChatCubit extends Cubit<ChatState> {
   Future<int> unBlockUserChatCubit(
       {required BuildContext context,
       required bool mounted,
-      required int? chatId,
       required int index}) async {
     EasyLoading.show();
 
@@ -281,7 +280,8 @@ class ChatCubit extends Cubit<ChatState> {
 
     print("token: $token");
 
-    final response = await unBlockUserProvider(chatId: chatId, apiToken: token);
+    final response = await unBlockUserProvider(
+        chatId: state.chatMessagesModel?.messagesData?.chatId, apiToken: token);
 
     print("status code: ${response?.statusCode}");
 
@@ -293,6 +293,42 @@ class ChatCubit extends Cubit<ChatState> {
             ?.insert(0, state.chatBlockedUsersModel!.chatList![index]);
         emit(state.copyWith(chatAllUsersModel: chatModel));
         AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      EasyLoading.dismiss();
+      return 0;
+    }
+  }
+
+  /// UnBlock All user
+  Future<int> unBlockAllUsersChatCubit({
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    EasyLoading.show();
+
+    final token = await prefs.getToken();
+
+    print("token: $token");
+
+    final response = await getUnBlockAllUsersChatProvider(apiToken: token);
+
+    print("status code: ${response?.statusCode}");
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        // AppUtils.showToast(response.data["message"]);
         EasyLoading.dismiss();
         return 1;
       }

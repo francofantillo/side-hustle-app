@@ -5,7 +5,6 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/wanted_job/widgets/applied_tab_list.dart';
 import 'package:side_hustle/wanted_job/widgets/booked_job_list.dart';
 import 'package:side_hustle/wanted_job/widgets/completed_job_list.dart';

@@ -38,3 +38,5 @@ enum SideHustleTypeEnum { Product, Service }
 enum OrderTypeEnum { Product, Service }
 
 enum ChatModelEnum { Seller, Buyer }
+
+enum ChatEnum {Shop, Job, Event}

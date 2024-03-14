@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/event/view_event.dart';
 import 'package:side_hustle/home/widgets/home_items_widget.dart';
 import 'package:side_hustle/job/apply_job.dart';
@@ -22,12 +23,16 @@ class EventsAroundYouList extends StatefulWidget {
   final List<ItemList>? itemsList;
   final double horizontalListSize;
   final Function()? onTapLabel;
+  final FavouritesCubit blocFav;
+  final AuthCubit blocAuth;
 
   const EventsAroundYouList(
       {super.key,
       this.title,
       this.itemsList,
       this.onTapLabel,
+      required this.blocFav,
+      required this.blocAuth,
       required this.horizontalListSize});
 
   @override
@@ -35,13 +40,13 @@ class EventsAroundYouList extends StatefulWidget {
 }
 
 class _EventsAroundYouListState extends State<EventsAroundYouList> {
-  late final FavouritesCubit _blocFav;
-  late final AuthCubit _blocAuth;
+  late final FavouritesCubit blocFav;
+  late final AuthCubit blocAuth;
 
   @override
   void initState() {
-    _blocFav = BlocProvider.of<FavouritesCubit>(context);
-    _blocAuth = BlocProvider.of<AuthCubit>(context);
+    blocFav = BlocProvider.of<FavouritesCubit>(context);
+    blocAuth = BlocProvider.of<AuthCubit>(context);
     super.initState();
   }
 
@@ -94,40 +99,46 @@ class _EventsAroundYouListState extends State<EventsAroundYouList> {
                           return Padding(
                             padding: const EdgeInsets.only(left: 2.0),
                             child: HomeItemsWidget(
-                              perHead: AppStrings.perHead,
-                              // isFav: itemList?[index].isFavourite ?? 0,
-                              onTapFav: () async {
+                              onTapMessage: () {
                                 print(
-                                    "Event Id: ${state.dashboardModel?.data?.events?[index].eventId}");
-                                // if (itemList?[index].isFavourite == 0) {
-                                if (true) {
-                                  await _blocFav
+                                    "clicked chat, id receiver: ${state.dashboardModel?.data?.events?[index].userDetail?.userid}");
+                                Navigator.pushNamed(
+                                    context, AppRoutes.chatOneToOneScreenRoute,
+                                    arguments: ChatOneToOne(
+                                      // index: index,
+                                      isBlockedUser: false,
+                                      customerId: state.dashboardModel?.data
+                                          ?.events?[index].userDetail?.userid,
+                                      userName: state.dashboardModel?.data
+                                          ?.events?[index].userDetail?.name,
+                                      modelId: state.dashboardModel?.data
+                                          ?.events?[index].eventId,
+                                      modelName: ChatEnum.Event.name,
+                                      chatId: 0,
+                                      senderModel: ChatModelEnum.Buyer.name,
+                                      receiverModel: ChatModelEnum.Seller.name,
+                                    ));
+                              },
+                              perHead: AppStrings.perHead,
+                              isFav: state.dashboardModel?.data?.events?[index]
+                                      .isFavourite ??
+                                  0,
+                              onTapFav: () async {
+
+                                if (state.dashboardModel?.data?.events?[index]
+                                        .isFavourite ==
+                                    0) {
+                                  await blocFav
                                       .addToFavCubit(
                                           context: context,
-                                          mounted: mounted,
+                                          mounted: true,
                                           type: Favourites.Event.name,
                                           id: state.dashboardModel?.data
                                               ?.events?[index].eventId)
                                       .then((value) async {
                                     if (value == 1) {
-                                      // await _blocEvent.setFave(
-                                      //     index: index, isFavourite: value);
-                                    }
-                                  });
-                                } else {
-                                  await _blocFav
-                                      .removeFromFavCubit(
-                                          context: context,
-                                          mounted: mounted,
-                                          type: Favourites.Event.name,
-                                          id: state.dashboardModel?.data
-                                              ?.events?[index].eventId)
-                                      .then((value) async {
-                                    if (value == 1) {
-                                      // await _blocEvent.setFave(
-                                      //     index: index, isFavourite: 0);
-
-                                      /// 0 to unFav
+                                      await blocAuth.setFavEvents(
+                                          index: index, isFavourite: value);
                                     }
                                   });
                                 }

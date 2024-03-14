@@ -25,7 +25,7 @@ class WantedJobsItemWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
   final bool isEvent;
-  final Function()? onTap, onTapFav;
+  final Function()? onTap, onTapFav, onTapChat;
 
   const WantedJobsItemWidget(
       {super.key,
@@ -33,6 +33,7 @@ class WantedJobsItemWidget extends StatelessWidget {
       this.desc,
       this.onTap,
       this.onTapFav,
+      this.onTapChat,
       this.isFavourite = 0,
       this.price,
       this.userProfile,
@@ -231,9 +232,7 @@ class WantedJobsItemWidget extends StatelessWidget {
                                   ),
                                   width(0.025.sw),
                                   IconButtonWithBackground(
-                                    onTap: () {
-                                      print("Clicked");
-                                    },
+                                    onTap: onTapChat,
                                     iconPath:
                                         commentIconPath ?? AssetsPath.messages,
                                     height: imageHeight! * .2,

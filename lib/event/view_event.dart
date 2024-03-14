@@ -326,10 +326,27 @@ class _ViewEventState extends State<ViewEvent> {
                                 ),
                                 IconButtonWithBackground(
                                   onTap: () {
-                                    Navigator.pushNamed(context,
+                                    Navigator.pushReplacementNamed(context,
                                         AppRoutes.chatOneToOneScreenRoute,
-                                        arguments: const ChatOneToOne(
-                                          userName: AppStrings.leoLubin,
+                                        arguments: ChatOneToOne(
+                                          // index: index,
+                                          isBlockedUser: false,
+                                          customerId: state
+                                              .eventsDetailModel
+                                              ?.eventDetails
+                                              ?.eventOwnerDetail
+                                              ?.id,
+                                          userName: state
+                                              .eventsDetailModel
+                                              ?.eventDetails
+                                              ?.eventOwnerDetail
+                                              ?.name,
+                                          modelId: widget.id,
+                                          modelName: ChatEnum.Event.name,
+                                          chatId: 0,
+                                          senderModel: ChatModelEnum.Buyer.name,
+                                          receiverModel:
+                                              ChatModelEnum.Seller.name,
                                         ));
                                   },
                                   iconPath: AssetsPath.message,

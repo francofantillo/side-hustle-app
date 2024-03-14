@@ -25,7 +25,7 @@ class HomeItemsWidget extends StatelessWidget {
       commentIconPath;
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
-  final double isFav;
+  final int isFav;
   final Function()? onTap, onTapFav, onTapMessage;
 
   const HomeItemsWidget(

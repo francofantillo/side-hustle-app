@@ -299,11 +299,29 @@ class _ViewServiceState extends State<ViewService> {
                                         borderRadius: 10,
                                         onTap: () {
                                           print("clicked message");
-                                          Navigator.pushNamed(context,
+                                          Navigator.pushReplacementNamed(
+                                              context,
                                               AppRoutes.chatOneToOneScreenRoute,
-                                              arguments: const ChatOneToOne(
-                                                userName: AppStrings
-                                                    .userNameViewProduct,
+                                              arguments: ChatOneToOne(
+                                                // index: index,
+                                                isBlockedUser: false,
+                                                customerId: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.productOwner
+                                                    ?.userid,
+                                                userName: state
+                                                    .sideHustleDetailModel
+                                                    ?.data
+                                                    ?.productOwner
+                                                    ?.name,
+                                                modelId: widget.id,
+                                                modelName: ChatEnum.Shop.name,
+                                                chatId: 0,
+                                                senderModel:
+                                                    ChatModelEnum.Buyer.name,
+                                                receiverModel:
+                                                    ChatModelEnum.Seller.name,
                                               ));
                                         },
                                         iconPath: AssetsPath.message,

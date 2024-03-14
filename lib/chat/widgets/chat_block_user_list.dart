@@ -5,7 +5,10 @@ import 'package:side_hustle/chat/widgets/chat_all_user_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/state_management/models/chat_model.dart';
+import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/utils/alpha_app_data.dart';
+import 'package:side_hustle/utils/app_enums.dart';
+import 'package:side_hustle/utils/date_time_conversions.dart';
 
 class ChatBlockUsersList extends StatefulWidget {
   final List? itemList;
@@ -17,6 +20,14 @@ class ChatBlockUsersList extends StatefulWidget {
 }
 
 class _ChatBlockUsersListState extends State<ChatBlockUsersList> {
+  late final ChatCubit _bloc;
+
+  @override
+  void initState() {
+    _bloc = BlocProvider.of(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
@@ -49,18 +60,51 @@ class _ChatBlockUsersListState extends State<ChatBlockUsersList> {
           // Replace with your horizontal list item
           return Material(
             child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
-                    arguments: ChatOneToOne(
-                      index: index,
-                      isBlockedUser: true,
-                    ));
+              onTap: () async {
+                final UserModel? userModel = await _bloc.getUserData();
+                int? uId = userModel?.data?.id;
+
+                /// sender and receiver ids are same check this
+                String? senderModel;
+                if (itemList?[index].senderModel == ChatModelEnum.Seller.name) {
+                  senderModel = ChatModelEnum.Seller.name;
+                } else {
+                  senderModel = ChatModelEnum.Buyer.name;
+                }
+                print(
+                    "cUId: ${userModel?.data?.id}, senderId: ${itemList?[index].senderId}, receiverId: ${itemList?[index].receiverId}");
+                int? receiverId;
+                if (uId == itemList![index].senderId) {
+                  receiverId = itemList[index].receiverId;
+                  print("true: receiverId: $receiverId");
+                } else {
+                  receiverId = itemList[index].senderId;
+                  print("false: receiverId: $receiverId");
+                }
+                if (mounted) {
+                  Navigator.pushNamed(
+                      context, AppRoutes.chatOneToOneScreenRoute,
+                      arguments: ChatOneToOne(
+                        index: index,
+                        isBlockedUser: true,
+                        customerId: receiverId,
+                        userName: itemList[index].userName,
+                        modelId: itemList[index].modelId,
+                        modelName: itemList[index].modelName,
+                        chatId: itemList[index].chatId,
+                        senderModel: senderModel,
+                        receiverModel: senderModel != ChatModelEnum.Seller.name
+                            ? ChatModelEnum.Seller.name
+                            : ChatModelEnum.Buyer.name,
+                      ));
+                }
               },
               child: Padding(
                   padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                   child: ChatAllUsersItem(
                     image: itemList?[index].userImage,
-                    time: itemList?[index].createdAt,
+                    time: DateTimeConversions.formatDateString(
+                        date: itemList?[index].createdAt),
                     name: itemList?[index].userName,
                     message: itemList?[index].message,
                   )),

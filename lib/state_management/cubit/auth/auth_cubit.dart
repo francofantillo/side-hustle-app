@@ -98,18 +98,18 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   /// Set Fav Events
-  // Future setFavEvents({required int index, required int isFavourite}) async {
-  //   final objEvent = state.dashboardModel;
-  //   objEvent?.events?[index].isFavourite = isFavourite;
-  //   emit(state.copyWith(eventsModel: objEvent));
-  // }
+  Future setFavEvents({required int index, required int isFavourite}) async {
+    final objEvent = state.dashboardModel;
+    objEvent?.data?.events?[index].isFavourite = isFavourite;
+    emit(state.copyWith(dashboardModel: objEvent));
+  }
 
   /// Set Fav Jobs
-  // Future setFavEvents({required int index, required int isFavourite}) async {
-  //   final objEvent = state.dashboardModel;
-  //   objEvent?.events?[index].isFavourite = isFavourite;
-  //   emit(state.copyWith(eventsModel: objEvent));
-  // }
+  Future setFavJobs({required int index, required int isFavourite}) async {
+    final objJob = state.dashboardModel;
+    objJob?.data?.jobs?[index].isFavourite = isFavourite;
+    emit(state.copyWith(dashboardModel: objJob));
+  }
 
   setResumeController() {
     actualNameController.text = state.resumeModel?.data?.actualName ?? "";

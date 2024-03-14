@@ -35,6 +35,7 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
   getUserData() async {
     await _bloc.getUserData();
   }
+
   getChats() async {
     await _bloc.getChatsCubit(context: context, mounted: mounted);
   }
@@ -102,7 +103,7 @@ class _ChatAllUsersState extends State<ChatAllUsers> {
                         }),
                   ),
                   const ChatAllUsersList(),
-                  height(0.02.sh)
+                  height(0.03.sw)
                 ],
               );
       }),

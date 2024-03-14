@@ -106,3 +106,12 @@ Future<Response?> getOrderDetailChatProvider(
       path: API.ORDER_DETAIL_CAHT, queryParameter: data, token: apiToken);
   return response;
 }
+
+/// Blocked Users Chat List
+Future<Response?> getUnBlockAllUsersChatProvider({String? apiToken}) async {
+  print(
+      "*****************\nurl: ${API.UN_BLOCK_ALL_CAHT}\napiToken: $apiToken\n**************************");
+  final response =
+      await getRequestProvider(path: API.UN_BLOCK_ALL_CAHT, token: apiToken);
+  return response;
+}

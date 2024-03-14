@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,14 +59,33 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
   late final ChatCubit _bloc;
   bool showEmoji = false;
   final emojiC = TextEditingController();
+  late final bool isBlockedUser;
 
   @override
   void initState() {
     super.initState();
     _bloc = BlocProvider.of(context);
+    isBlockedUser = widget.isBlockedUser;
+    printData();
     setReceiverId();
     connectUser();
     getChatMessages();
+  }
+
+  printData() {
+    /*index: index,
+    isBlockedUser: false,
+    customerId: itemList?[index].receiverId,
+    userName: itemList?[index].userName,
+    modelId: itemList?[index].modelId,
+    modelName: itemList?[index].modelName,
+    chatId: itemList?[index].chatId,
+    senderModel: senderModel,
+    receiverModel: senderModel != ChatModelEnum.Seller.name
+    ? ChatModelEnum.Seller.name
+        : ChatModelEnum.Buyer.name,*/
+    print(
+        "index: ${widget.index}, isBlocked: ${widget.isBlockedUser}, customerId: ${widget.customerId} ");
   }
 
   setReceiverId() {
@@ -99,7 +117,7 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
       "chat_id": widget.chatId,
       "sender_model": widget.senderModel,
       "receiver_model": widget.receiverModel,
-      "created_at": DateTime.now().toIso8601String(),
+      "created_at": DateTime.now().toUtc().toIso8601String(),
       "message": message,
     };
 
@@ -111,35 +129,6 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
 
     chatController.clear();
   }
-
-/*  void sendMessageReceiver({String message = ""}) async {
-    final UserModel? userModel = await _bloc.getUserData();
-    int? uId = userModel?.data?.id;
-
-    /// Seller or Buyer
-
-    /// Send message json
-    /// message_type = 1 for text and 2 for image
-    final json = {
-      "message_type": 1,
-      "sender_id": widget.customerId,
-      "receiver_id": uId,
-      "model_id": widget.modelId,
-      "chat_id": widget.chatId,
-      "sender_model": widget.receiverModel,
-      "receiver_model": widget.senderModel,
-      "created_at": DateTime.now().toIso8601String(),
-      "message": message,
-    };
-
-    print("sendMessage: $json");
-
-    /// connect users
-    SocketService.instance?.socketEmitMethod(
-        eventName: API.SEND_MESSAGE_EVENT, eventParameters: json);
-
-    chatController.clear();
-  }*/
 
   void sendImageSocket({String? imagePath}) async {
     final UserModel? userModel = await _bloc.getUserData();
@@ -252,21 +241,6 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
   bool isLoading = false;
   bool isPause = false;
 
-  Widget _image() {
-    return Container(
-      constraints: const BoxConstraints(
-        minHeight: 20.0,
-        minWidth: 20.0,
-      ),
-      child: CachedNetworkImage(
-        imageUrl: 'https://i.ibb.co/JCyT1kT/Asset-1.png',
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            CircularProgressIndicator(value: downloadProgress.progress),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-      ),
-    );
-  }
-
   _onBackspacePressed() {
     chatController
       ..text = chatController.text.characters.toString()
@@ -317,12 +291,12 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                     widget: MessageOptionsBottomSheet(
                       onTap: () async {
                         print("clicked");
-                        if (widget.isBlockedUser) {
+                        // if (widget.isBlockedUser) {
+                        if (isBlockedUser) {
                           await _bloc
                               .unBlockUserChatCubit(
                                   context: context,
                                   mounted: mounted,
-                                  chatId: 8,
                                   index: widget.index)
                               .then((value) {
                             if (value == 1) {
@@ -336,7 +310,6 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                               .blockUserChatCubit(
                                   context: context,
                                   mounted: mounted,
-                                  chatId: 8,
                                   index: widget.index)
                               .then((value) {
                             if (value == 1) {
@@ -345,10 +318,9 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                             }
                           });
                         }
-                        // Navigator.pushNamed(
-                        //     context, AppRoutes.chatBlockUsersScreenRoute);
                       },
-                      textBlockedUserOrUnBlockedUser: widget.isBlockedUser
+                      // textBlockedUserOrUnBlockedUser: widget.isBlockedUser
+                      textBlockedUserOrUnBlockedUser: isBlockedUser
                           ? AppStrings.unBlockUser
                           : AppStrings.blockUser,
                     ));
@@ -376,32 +348,34 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    widget.isBlockedUser
-                        ? Center(
-                            child: Material(
-                              child: InkWell(
-                                onTap: () {
-                                  print("clicked");
-                                },
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(6)),
-                                    color: Color(0xFFE8E8EE),
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(5.0),
-                                    child: Text(
-                                      AppStrings.unblockUserMessage,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
+                    // widget.isBlockedUser
+                    //     ? Center(
+                    //         child: Material(
+                    //           child: InkWell(
+                    //             onTap: () {
+                    //               print("clicked");
+                    //             },
+                    //             child: Container(
+                    //               decoration: const BoxDecoration(
+                    //                 borderRadius:
+                    //                     BorderRadius.all(Radius.circular(6)),
+                    //                 color: Color(0xFFE8E8EE),
+                    //               ),
+                    //               child: const Padding(
+                    //                 padding: EdgeInsets.all(5.0),
+                    //                 child: Text(
+                    //                   AppStrings.unblockUserMessage,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       )
+                    //     : const SizedBox.shrink(),
                     height(0.03.sw),
-                    Row(
+                    isBlockedUser
+                    ? const SizedBox.shrink()
+                    : Row(
                       children: [
                         Expanded(
                             child: CustomTextFieldChat(
@@ -425,7 +399,9 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                           onTapCamera: () async {
                             final image = await ImagePickerService.openCamera();
 
-                            if (image != null) {}
+                            if (image != null) {
+                              await attachImage(imagePath: image.path);
+                            }
                           },
                         )),
                         Padding(

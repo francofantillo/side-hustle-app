@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/chat_block_user_list.dart';
+import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -42,15 +43,32 @@ class _ChatBlockUsersState extends State<ChatBlockUsers> {
         child:
             backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
       ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(
-          left: AppDimensions.rootPadding + 8,
-          right: AppDimensions.rootPadding + 8,
-          bottom: AppDimensions.rootPadding + 8,
-        ),
-        child: CustomMaterialButton(
-            onPressed: () {}, borderRadius: 16, name: AppStrings.unblockAll),
-      ),
+      floatingActionButton:
+          BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
+        return state.chatBlockedUsersModel?.chatList?.isEmpty ?? true
+            ? const SizedBox.shrink()
+            : Padding(
+                padding: EdgeInsets.only(
+                  left: AppDimensions.rootPadding + 8,
+                  right: AppDimensions.rootPadding + 8,
+                  bottom: AppDimensions.rootPadding + 8,
+                ),
+                child: CustomMaterialButton(
+                    onPressed: () async {
+                      await _bloc
+                          .unBlockAllUsersChatCubit(
+                              context: context, mounted: mounted)
+                          .then((value) {
+                        if (value == 1) {
+                          Navigator.pushReplacementNamed(
+                              context, AppRoutes.chatAllUsersScreenRoute);
+                        }
+                      });
+                    },
+                    borderRadius: 16,
+                    name: AppStrings.unblockAll),
+              );
+      }),
       body: BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
         return state.chatBlockedUsersLoading
             ? const SizedBox.shrink()

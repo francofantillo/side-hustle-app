@@ -157,9 +157,6 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       alignment: Alignment.centerRight,
       child: Container(
         width: 1.sw,
-        // height: 0.67.sw,
-        // height: 0.79.sw,
-        // height: 0.77.sw,
         constraints: BoxConstraints(maxWidth: .95.sw),
         padding: const EdgeInsets.only(
           right: 8.0,
@@ -186,7 +183,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                     Navigator.pushNamed(
                         context, AppRoutes.orderDetailScreenRoute,
                         arguments: OrderDetail(
-                          orderId: 1,
+                          orderId: widget.modelId,
                         ));
                   },
                   productsQuantity: productsQuantity ?? 1,
@@ -277,7 +274,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
 
   Widget messagesList(
       {List<ChatMessages>? itemList, required int? currentUserId}) {
-    final now = DateTime.now();
+    // final now = DateTime.now();
     return Expanded(
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(
@@ -288,14 +285,26 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
         scrollDirection: Axis.vertical,
         itemCount: itemList?.length ?? 0,
         itemBuilder: (context, index) {
-          final timeSpacing =
-              addTimeSpacing(textLength: AppStrings.messageReceiveOne.length);
+          // final timeSpacing =
+          //     addTimeSpacing(textLength: AppStrings.messageReceiveOne.length);
 
-          print(
-              "currentUserId: $currentUserId, senderId: ${itemList?[index].senderId} receiverId: ${itemList?[index].receiverId}");
+          // print(
+          //     "currentUserId: $currentUserId, senderId: ${itemList?[index].senderId} receiverId: ${itemList?[index].receiverId}");
+
+          print("createdAt: ${itemList?[index].createdAt}");
+
+          String? createdAt = itemList?[index].createdAt;
+
+          if(createdAt != null) {
+            String dateTimeString = "2024-03-14 07:45:53";
+            dateTimeString = dateTimeString.replaceFirst(' ', 'T');
+            print("dateTimeString: $dateTimeString"); // Output: 2024-03-14T07:45:53
+            createdAt = dateTimeString;
+          }
+
 
           final time = DateTimeConversions.convertTo12HourFormatChat(
-              timestamp: itemList?[index].createdAt);
+              timestamp: createdAt ?? itemList?[index].createdAt);
 
           if (itemList?[index].productType != null) {
             print("productType: ${itemList?[index].productType}");
@@ -411,7 +420,7 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
                 // id: 'id001',
                 id: itemList?[index].id?.toString() ?? 'id001',
                 image: _image(image: itemList?[index].filePath),
-                color: Colors.purpleAccent,
+                color: Colors.transparent,
                 isSender: false,
                 tail: false,
               );
@@ -436,13 +445,13 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
       child: CachedNetworkImage(
         // imageUrl: 'https://i.ibb.co/JCyT1kT/Asset-1.png',
         imageUrl: image ?? "https://",
-        // progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
-        //   height: 10,
-        //   width: 10,
-        //   child: CircularProgressIndicator(
-        //     value: downloadProgress.progress,
-        //   ),
-        // ),
+        progressIndicatorBuilder: (context, url, downloadProgress) => SizedBox(
+          height: 10,
+          width: 10,
+          child: CircularProgressIndicator(
+            value: downloadProgress.progress,
+          ),
+        ),
         // errorWidget: (context, url, error) => const Icon(Icons.error),
         errorWidget: (context, url, error) => Image.asset(
           AssetsPath.imageLoadError,

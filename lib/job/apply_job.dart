@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dialogues.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
+import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
@@ -278,8 +280,28 @@ class _ApplyForJobState extends State<ApplyForJob> {
                                 ),
                                 IconButtonWithBackground(
                                   onTap: () {
-                                    Navigator.pushNamed(context,
-                                        AppRoutes.chatOneToOneScreenRoute);
+                                    Navigator.pushReplacementNamed(context,
+                                        AppRoutes.chatOneToOneScreenRoute,
+                                        arguments: ChatOneToOne(
+                                          // index: index,
+                                          isBlockedUser: false,
+                                          customerId: state
+                                              .jobsDetailModel
+                                              ?.jobsDetailData
+                                              ?.userDetail
+                                              ?.userid,
+                                          userName: state
+                                              .jobsDetailModel
+                                              ?.jobsDetailData
+                                              ?.userDetail
+                                              ?.name,
+                                          modelId: widget.jobId,
+                                          modelName: ChatEnum.Job.name,
+                                          chatId: 0,
+                                          senderModel: ChatModelEnum.Buyer.name,
+                                          receiverModel:
+                                              ChatModelEnum.Seller.name,
+                                        ));
                                   },
                                   iconPath: AssetsPath.message,
                                   height: 0.12.sw,
@@ -363,7 +385,7 @@ class _ApplyForJobState extends State<ApplyForJob> {
                                       // height: AppDimensions.defaultMaterialButtonHeightHome,
                                       borderRadius: AppDimensions
                                           .defaultMaterialButtonRadiusHome,
-                                      onPressed: (){},
+                                      onPressed: () {},
                                       name: AppStrings.applied))
                               : Padding(
                                   padding: const EdgeInsets.symmetric(

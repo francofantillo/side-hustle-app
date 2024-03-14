@@ -172,4 +172,16 @@ class DateTimeConversions {
     }
     return null;
   }
+
+  static String? formatDateString({String? date}) {
+    if (date != null) {
+      String dateTimeString = "2024-03-14 08:07:33";
+      DateTime dateTime = DateTime.parse(dateTimeString);
+      String formattedDate = DateFormat('dd MMM, y').format(dateTime);
+      print(formattedDate);
+      return formattedDate;
+    }
+    return null;
+// Output: 03/14/2024
+  }
 }

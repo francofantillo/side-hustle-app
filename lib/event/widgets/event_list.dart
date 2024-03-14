@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/event/view_event.dart';
 import 'package:side_hustle/event/widgets/event_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';
@@ -71,6 +72,23 @@ class _EventListState extends State<EventList> {
                   return Padding(
                     padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                     child: EventItemsWidget(
+                      onTapChat: () {
+                        print(
+                            "clicked chat, id receiver: ${itemList?[index].eventOwnerDetail?.id}");
+                        Navigator.pushNamed(
+                            context, AppRoutes.chatOneToOneScreenRoute,
+                            arguments: ChatOneToOne(
+                              // index: index,
+                              isBlockedUser: false,
+                              customerId: itemList?[index].eventOwnerDetail?.id,
+                              userName: itemList?[index].eventOwnerDetail?.name,
+                              modelId: itemList?[index].eventId,
+                              modelName: ChatEnum.Event.name,
+                              chatId: 0,
+                              senderModel: ChatModelEnum.Buyer.name,
+                              receiverModel: ChatModelEnum.Seller.name,
+                            ));
+                      },
                       onTapFav: () async {
                         print("Event Id: ${itemList?[index].eventId}");
                         if (itemList?[index].isFavourite == 0) {

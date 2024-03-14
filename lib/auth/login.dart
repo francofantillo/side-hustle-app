@@ -36,16 +36,16 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     _bloc = BlocProvider.of<AuthCubit>(context);
     _bloc.initControllers();
-    _connectSocket();
+    // _connectSocket();
     super.initState();
   }
 
-  void _connectSocket() {
-    print("called _connectSocket");
-    SocketService.instance?.initializeSocket();
-    SocketService.instance?.connectSocket();
-    SocketService.instance?.socketResponseMethod();
-  }
+  // void _connectSocket() {
+  //   print("called _connectSocket");
+  //   SocketService.instance?.initializeSocket();
+  //   SocketService.instance?.connectSocket();
+  //   SocketService.instance?.socketResponseMethod();
+  // }
 
   @override
   Widget build(BuildContext context) {
