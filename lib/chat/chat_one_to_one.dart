@@ -258,227 +258,232 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-    return BackgroundWidget(
-      backgroundColor: Colors.white.withOpacity(0.01),
-      showAppBar: true,
-      appBarTitle: widget.userName ?? "",
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 8.0),
-        child:
-            backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Container(
-            width: 0.09.sw, // Adjust as needed
-            height: 0.09.sw, // Adjust as needed
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.backIconBackgroundColor,
-            ),
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              icon: Icon(
-                Icons.more_vert_sharp,
-                size: 0.055.sw,
-                color: AppColors.primaryColor,
-              ),
-              onPressed: () {
-                AppUtils.showBottomModalSheet(
-                    context: context,
-                    widget: MessageOptionsBottomSheet(
-                      onTap: () async {
-                        print("clicked");
-                        // if (widget.isBlockedUser) {
-                        if (isBlockedUser) {
-                          await _bloc
-                              .unBlockUserChatCubit(
-                                  context: context,
-                                  mounted: mounted,
-                                  index: widget.index)
-                              .then((value) {
-                            if (value == 1) {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            }
-                          });
-                        } else {
-                          await _bloc
-                              .blockUserChatCubit(
-                                  context: context,
-                                  mounted: mounted,
-                                  index: widget.index)
-                              .then((value) {
-                            if (value == 1) {
-                              Navigator.pop(context);
-                              Navigator.pop(context);
-                            }
-                          });
-                        }
-                      },
-                      // textBlockedUserOrUnBlockedUser: widget.isBlockedUser
-                      textBlockedUserOrUnBlockedUser: isBlockedUser
-                          ? AppStrings.unBlockUser
-                          : AppStrings.blockUser,
-                    ));
-                // AppUtils.showBottomModalSheet(context: context, widget: const BottomModalSheetDeliveryAddress());
-              },
-            ),
+    return Builder(
+      builder: (context) {
+        return BackgroundWidget(
+          backgroundColor: Colors.white.withOpacity(0.01),
+          showAppBar: true,
+          appBarTitle: widget.userName ?? "",
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child:
+                backButton(onPressed: () => Navigator.pop(context), iconSize: 16),
           ),
-        )
-      ],
-      body: Material(
-        elevation: 0,
-        child: Column(
-          children: [
-            // _image(),
-            ChatOneToOneUsersList(
-              isOrderChat: widget.isOrderChat,
-              isOrderService: widget.isOrderService,
-              modelId: widget.modelId,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 4),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    // widget.isBlockedUser
-                    //     ? Center(
-                    //         child: Material(
-                    //           child: InkWell(
-                    //             onTap: () {
-                    //               print("clicked");
-                    //             },
-                    //             child: Container(
-                    //               decoration: const BoxDecoration(
-                    //                 borderRadius:
-                    //                     BorderRadius.all(Radius.circular(6)),
-                    //                 color: Color(0xFFE8E8EE),
-                    //               ),
-                    //               child: const Padding(
-                    //                 padding: EdgeInsets.all(5.0),
-                    //                 child: Text(
-                    //                   AppStrings.unblockUserMessage,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       )
-                    //     : const SizedBox.shrink(),
-                    height(0.03.sw),
-                    isBlockedUser
-                    ? const SizedBox.shrink()
-                    : Row(
-                      children: [
-                        Expanded(
-                            child: CustomTextFieldChat(
-                          controller: chatController,
-                          hintText: AppStrings.typeAMessage,
-                          onTapEmoji: () {
-                            print("clicked emoji");
-                            _bloc.showEmoji();
-                          },
-                          onTap: () {
-                            _bloc.hideEmoji();
-                          },
-                          onTapAttachment: () async {
-                            final image = await ImagePickerService
-                                .selectImageFromGallery();
-
-                            if (image != null) {
-                              await attachImage(imagePath: image.path);
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
+                width: 0.09.sw, // Adjust as needed
+                height: 0.09.sw, // Adjust as needed
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.backIconBackgroundColor,
+                ),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: Icon(
+                    Icons.more_vert_sharp,
+                    size: 0.055.sw,
+                    color: AppColors.primaryColor,
+                  ),
+                  onPressed: () {
+                    AppUtils.showBottomModalSheet(
+                        context: context,
+                        widget: MessageOptionsBottomSheet(
+                          onTap: () async {
+                            print("clicked");
+                            // if (widget.isBlockedUser) {
+                            if (isBlockedUser) {
+                              await _bloc
+                                  .unBlockUserChatCubit(
+                                      context: context,
+                                      mounted: mounted,
+                                      index: widget.index)
+                                  .then((value) {
+                                if (value == 1) {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                }
+                              });
+                            } else {
+                              await _bloc
+                                  .blockUserChatCubit(
+                                      context: context,
+                                      mounted: mounted,
+                                      index: widget.index)
+                                  .then((value) {
+                                if (value == 1) {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                }
+                              });
                             }
                           },
-                          onTapCamera: () async {
-                            final image = await ImagePickerService.openCamera();
-
-                            if (image != null) {
-                              await attachImage(imagePath: image.path);
-                            }
-                          },
-                        )),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 2),
-                          child: IconButtonWithBackground(
-                            height: .15.sw,
-                            width: .15.sw,
-                            borderRadius: 30,
-                            iconSize: 18,
-                            backgroundColor: AppColors.primaryColor,
-                            iconColor: AppColors.whiteColor,
-                            onTap: () {
-                              print("clicked minus");
-                              if (chatController.text.trim().isNotEmpty) {
-                                sendMessageSender(message: chatController.text);
-                              }
-                            },
-                            iconPath: AssetsPath.send,
-                          ),
-                        ),
-                      ],
-                    ),
-                    height(0.02.sw),
-                  ],
+                          // textBlockedUserOrUnBlockedUser: widget.isBlockedUser
+                          textBlockedUserOrUnBlockedUser: isBlockedUser
+                              ? AppStrings.unBlockUser
+                              : AppStrings.blockUser,
+                        ));
+                    // AppUtils.showBottomModalSheet(context: context, widget: const BottomModalSheetDeliveryAddress());
+                  },
                 ),
               ),
-            ),
-            BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
-              return Offstage(
-                // offstage: showEmoji,
-                offstage: state.showEmoji,
-                child: SizedBox(
-                  height: 250,
-                  child: EmojiPicker(
-                    onEmojiSelected: (Category? category, Emoji? emoji) {
-                      print(" emoji!.emoji: ${emoji!.emoji}");
-                      emojiC.text = emoji.emoji;
-                      String temp = chatController.text + emojiC.text;
-                      chatController.text = temp;
-                    },
-                    onBackspacePressed: _onBackspacePressed(),
-                    textEditingController: emojiC,
-                    config: const Config(
-                      columns: 7,
-                      emojiSizeMax: 30,
-                      verticalSpacing: 0,
-                      horizontalSpacing: 0,
-                      gridPadding: EdgeInsets.zero,
-                      initCategory: Category.RECENT,
-                      bgColor: Colors.white,
-                      indicatorColor: Color(0xffAC61E7),
-                      iconColor: Colors.grey,
-                      iconColorSelected: Color(0xffAC61E7),
-                      backspaceColor: Color(0xffAC61E7),
-                      skinToneDialogBgColor: Colors.white,
-                      skinToneIndicatorColor: Colors.grey,
-                      enableSkinTones: true,
-                      recentTabBehavior: RecentTabBehavior.RECENT,
-                      recentsLimit: 28,
-                      noRecents: Text(
-                        'No Recent',
-                        style: TextStyle(fontSize: 20, color: Colors.black26),
-                        textAlign: TextAlign.center,
-                      ),
-                      loadingIndicator: SizedBox.shrink(),
-                      tabIndicatorAnimDuration: kTabScrollDuration,
-                      categoryIcons: CategoryIcons(),
-                      buttonMode: ButtonMode.MATERIAL,
+            )
+          ],
+          body: Material(
+            elevation: 0,
+            child: Column(
+              children: [
+                // _image(),
+                ChatOneToOneUsersList(
+                  isOrderChat: widget.isOrderChat,
+                  isOrderService: widget.isOrderService,
+                  modelId: widget.modelId,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 4),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // widget.isBlockedUser
+                        //     ? Center(
+                        //         child: Material(
+                        //           child: InkWell(
+                        //             onTap: () {
+                        //               print("clicked");
+                        //             },
+                        //             child: Container(
+                        //               decoration: const BoxDecoration(
+                        //                 borderRadius:
+                        //                     BorderRadius.all(Radius.circular(6)),
+                        //                 color: Color(0xFFE8E8EE),
+                        //               ),
+                        //               child: const Padding(
+                        //                 padding: EdgeInsets.all(5.0),
+                        //                 child: Text(
+                        //                   AppStrings.unblockUserMessage,
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       )
+                        //     : const SizedBox.shrink(),
+                        height(0.03.sw),
+                        isBlockedUser
+                            ? const SizedBox.shrink()
+                            : Row(
+                                children: [
+                                  Expanded(
+                                      child: CustomTextFieldChat(
+                                    controller: chatController,
+                                    hintText: AppStrings.typeAMessage,
+                                    onTapEmoji: () {
+                                      print("clicked emoji");
+                                      _bloc.showEmoji();
+                                    },
+                                    onTap: () {
+                                      _bloc.hideEmoji();
+                                    },
+                                    onTapAttachment: () async {
+                                      final image = await ImagePickerService
+                                          .selectImageFromGallery();
+
+                                      if (image != null) {
+                                        await attachImage(imagePath: image.path);
+                                      }
+                                    },
+                                    onTapCamera: () async {
+                                      final image =
+                                          await ImagePickerService.openCamera();
+
+                                      if (image != null) {
+                                        await attachImage(imagePath: image.path);
+                                      }
+                                    },
+                                  )),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 2),
+                                    child: IconButtonWithBackground(
+                                      height: .15.sw,
+                                      width: .15.sw,
+                                      borderRadius: 30,
+                                      iconSize: 18,
+                                      backgroundColor: AppColors.primaryColor,
+                                      iconColor: AppColors.whiteColor,
+                                      onTap: () {
+                                        print("clicked minus");
+                                        if (chatController.text.trim().isNotEmpty) {
+                                          sendMessageSender(
+                                              message: chatController.text);
+                                        }
+                                      },
+                                      iconPath: AssetsPath.send,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                        height(0.02.sw),
+                      ],
                     ),
                   ),
                 ),
-              );
-            }),
-          ],
-        ),
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
+                BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
+                  return Offstage(
+                    // offstage: showEmoji,
+                    offstage: state.showEmoji,
+                    child: SizedBox(
+                      height: 250,
+                      child: EmojiPicker(
+                        onEmojiSelected: (Category? category, Emoji? emoji) {
+                          print(" emoji!.emoji: ${emoji!.emoji}");
+                          emojiC.text = emoji.emoji;
+                          String temp = chatController.text + emojiC.text;
+                          chatController.text = temp;
+                        },
+                        onBackspacePressed: _onBackspacePressed(),
+                        textEditingController: emojiC,
+                        config: const Config(
+                          columns: 7,
+                          emojiSizeMax: 30,
+                          verticalSpacing: 0,
+                          horizontalSpacing: 0,
+                          gridPadding: EdgeInsets.zero,
+                          initCategory: Category.RECENT,
+                          bgColor: Colors.white,
+                          indicatorColor: Color(0xffAC61E7),
+                          iconColor: Colors.grey,
+                          iconColorSelected: Color(0xffAC61E7),
+                          backspaceColor: Color(0xffAC61E7),
+                          skinToneDialogBgColor: Colors.white,
+                          skinToneIndicatorColor: Colors.grey,
+                          enableSkinTones: true,
+                          recentTabBehavior: RecentTabBehavior.RECENT,
+                          recentsLimit: 28,
+                          noRecents: Text(
+                            'No Recent',
+                            style: TextStyle(fontSize: 20, color: Colors.black26),
+                            textAlign: TextAlign.center,
+                          ),
+                          loadingIndicator: SizedBox.shrink(),
+                          tabIndicatorAnimDuration: kTabScrollDuration,
+                          categoryIcons: CategoryIcons(),
+                          buttonMode: ButtonMode.MATERIAL,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ),
+          // This trailing comma makes auto-formatting nicer for build methods.
+        );
+      }
     );
   }
 }

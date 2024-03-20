@@ -10,6 +10,7 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
+import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
@@ -70,8 +71,7 @@ class _ShopScreenState extends State<ShopScreen> {
       return BackgroundWidget(
         showAppBar: true,
         // appBarTitle: AppStrings.shop,
-        appBarTitle: state.otherUserShopModel?.shopData
-            ?.shopDetail?.name,
+        appBarTitle: state.otherUserShopModel?.shopData?.shopDetail?.name,
         leading: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child:
@@ -168,7 +168,18 @@ class _ShopScreenState extends State<ShopScreen> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                       child: CustomMaterialButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          /// Need shop name
+                          await AppUtils.launchMap(
+                              shopName: state.otherUserShopModel?.shopData
+                                  ?.shopDetail?.name,
+                              lat: double.parse(state.otherUserShopModel
+                                      ?.shopData?.shopDetail?.lat ??
+                                  "37.759392"),
+                              lng: double.parse(state.otherUserShopModel
+                                      ?.shopData?.shopDetail?.lng ??
+                                  "-122.5107336"));
+                        },
                         name: AppStrings.getDirections,
                         color: AppColors.greenColor,
                         borderRadius: 16,

@@ -123,7 +123,7 @@ class ChatMessages {
     isSeen = json['is_seen'];
     productType = json['product_type'];
     name = json['name'];
-    price = json['price'];
+    price = json['price']?.toDouble();
     deliveryType = json['delivery_type'];
     serviceDate = json['service_date'];
     startTime = json['start_time'];

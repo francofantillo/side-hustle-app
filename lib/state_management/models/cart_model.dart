@@ -63,7 +63,7 @@ class DataCart {
     userId = json['user_id'];
     ownerId = json['owner_id'];
     shopId = json['shop_id'];
-    subTotal = json['sub_total'];
+    subTotal = json['sub_total']?.toDouble();
     totalItems = json['total_items'];
     status = json['status'];
     isAddress = json['is_address'];
