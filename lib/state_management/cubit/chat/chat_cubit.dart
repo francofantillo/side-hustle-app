@@ -288,10 +288,10 @@ class ChatCubit extends Cubit<ChatState> {
     if (response != null) {
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
-        final ChatModel? chatModel = state.chatAllUsersModel;
-        chatModel?.chatList
-            ?.insert(0, state.chatBlockedUsersModel!.chatList![index]);
-        emit(state.copyWith(chatAllUsersModel: chatModel));
+        // final ChatModel? chatModel = state.chatAllUsersModel;
+        // chatModel?.chatList
+        //     ?.insert(0, state.chatBlockedUsersModel!.chatList![index]);
+        // emit(state.copyWith(chatAllUsersModel: chatModel));
         AppUtils.showToast(response.data["message"]);
         EasyLoading.dismiss();
         return 1;

@@ -60,6 +60,7 @@ class _ChatBlockUsersState extends State<ChatBlockUsers> {
                               context: context, mounted: mounted)
                           .then((value) {
                         if (value == 1) {
+                          Navigator.pop(context);
                           Navigator.pushReplacementNamed(
                               context, AppRoutes.chatAllUsersScreenRoute);
                         }

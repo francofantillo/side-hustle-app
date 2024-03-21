@@ -334,7 +334,7 @@ Future<Response?> editYourShopProvider(
   final data = FormData.fromMap(dataShop);
 
   print(
-      "*****************\nurl: ${API.EDIT_YOUR_SHOP}\n$data\n**************************");
+      "*****************\nurl: ${API.EDIT_YOUR_SHOP}\n$dataShop\n**************************");
   final response = await postRequestProvider(
       path: API.EDIT_YOUR_SHOP, data: data, token: apiToken);
   return response;

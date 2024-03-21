@@ -72,15 +72,15 @@ class _ChatBlockUsersListState extends State<ChatBlockUsersList> {
                   senderModel = ChatModelEnum.Buyer.name;
                 }
                 print(
-                    "cUId: ${userModel?.data?.id}, senderId: ${itemList?[index].senderId}, receiverId: ${itemList?[index].receiverId}");
-                int? receiverId;
-                if (uId == itemList![index].senderId) {
-                  receiverId = itemList[index].receiverId;
-                  print("true: receiverId: $receiverId");
-                } else {
-                  receiverId = itemList[index].senderId;
-                  print("false: receiverId: $receiverId");
-                }
+                    "cUId: ${userModel?.data?.id}, senderId: ${itemList?[index].userId}, receiverId: ${itemList?[index].userId}");
+                int? receiverId = itemList?[index].userId;
+                // if (uId == itemList![index].userId) {
+                //   receiverId = itemList[index].receiverId;
+                //   print("true: receiverId: $receiverId");
+                // } else {
+                //   receiverId = itemList[index].userId;
+                //   print("false: receiverId: $receiverId");
+                // }
                 if (mounted) {
                   Navigator.pushNamed(
                       context, AppRoutes.chatOneToOneScreenRoute,
@@ -88,10 +88,10 @@ class _ChatBlockUsersListState extends State<ChatBlockUsersList> {
                         index: index,
                         isBlockedUser: true,
                         customerId: receiverId,
-                        userName: itemList[index].userName,
-                        modelId: itemList[index].modelId,
-                        modelName: itemList[index].modelName,
-                        chatId: itemList[index].chatId,
+                        userName: itemList?[index].userName,
+                        modelId: itemList?[index].modelId,
+                        modelName: itemList?[index].modelName,
+                        chatId: itemList?[index].chatId,
                         senderModel: senderModel,
                         receiverModel: senderModel != ChatModelEnum.Seller.name
                             ? ChatModelEnum.Seller.name

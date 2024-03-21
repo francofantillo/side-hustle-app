@@ -1034,7 +1034,7 @@ class SideHustleCubit extends Cubit<SideHustleState> {
             placeOrderModel: placeOrderModel));
         if (mounted) {
           Navigator.pop(context);
-          Navigator.pop(context); /// added pop here
+          // Navigator.pop(context); /// added pop here
           Navigator.pushNamed(context, AppRoutes.chatOneToOneScreenRoute,
               arguments: ChatOneToOne(
                 isBlockedUser: false,
