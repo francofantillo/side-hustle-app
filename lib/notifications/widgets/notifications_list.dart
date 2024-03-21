@@ -92,19 +92,6 @@ class _NotificationsListState extends State<NotificationsList> {
                           message: state
                               .notificationsModel?.data?[index].notification,
                         )),
-                    index == 2
-                        ? Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                            ),
-                            child: textWidget(
-                                text: "Older",
-                                color: AppColors.blackColor,
-                                fontFamily: AppFont.gilroyBold,
-                                fontSize: AppDimensions.textSizeNormal,
-                                fontWeight: FontWeight.bold),
-                          )
-                        : const SizedBox.shrink()
                   ],
                 ),
               ),

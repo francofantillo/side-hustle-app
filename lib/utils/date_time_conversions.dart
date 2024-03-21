@@ -20,7 +20,9 @@ class DateTimeConversions {
 
       print('UTC Time Stamp: $utcTime');
       print('Local Time Stamp: $localTime');
-      final time = convertTo12HourFormat(localTime.toIso8601String());
+      // Extract the time component
+      String getTime = "${localTime.hour}:${localTime.minute}:${localTime.second}";
+      final time = convertTo12HourFormat(getTime);
       print('Local Time: $time');
       return time;
     } else {
@@ -54,6 +56,7 @@ class DateTimeConversions {
     // Replace this timestamp with your actual timestamp
     if (timeStamp != null) {
       DateTime utcTime = DateFormat(timeStampFormat).parse(timeStamp, true);
+      // DateTime utcTime = DateTime.parse(timeStampFormat);
       DateTime localTime = utcTime.toLocal();
 
       // String timestampString = timeStamp;

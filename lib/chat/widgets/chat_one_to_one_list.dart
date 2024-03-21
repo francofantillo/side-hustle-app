@@ -296,7 +296,8 @@ class _ChatOneToOneUsersListState extends State<ChatOneToOneUsersList> {
           String? createdAt = itemList?[index].createdAt;
 
           if(createdAt != null) {
-            String dateTimeString = "2024-03-14 07:45:53";
+            // String dateTimeString = "2024-03-14 07:45:53";
+            String dateTimeString = createdAt;
             dateTimeString = dateTimeString.replaceFirst(' ', 'T');
             print("dateTimeString: $dateTimeString"); // Output: 2024-03-14T07:45:53
             createdAt = dateTimeString;
