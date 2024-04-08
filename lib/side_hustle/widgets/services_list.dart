@@ -6,10 +6,8 @@ import 'package:side_hustle/service/view_service.dart';
 import 'package:side_hustle/service/widgets/service_item.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/state_management/models/side_hustle_model.dart';
-import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/widgets/error/error_widget.dart';
 

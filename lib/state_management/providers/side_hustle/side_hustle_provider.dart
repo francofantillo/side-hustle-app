@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:path/path.dart' as getImagePath;
 import 'package:side_hustle/state_management/providers/base_api_provider.dart';
 import 'package:side_hustle/utils/api_path.dart';
 import 'package:side_hustle/utils/app_enums.dart';
-import 'package:path/path.dart' as getImagePath;
 
 var dio = Dio();
 

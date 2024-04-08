@@ -6,8 +6,6 @@ import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/image_slider/banner_item_alpha.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider_item_alpha.dart';
-import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BannerSliderAlpha extends StatefulWidget {

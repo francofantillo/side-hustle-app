@@ -99,7 +99,7 @@ class _BaseWidgetState extends State<BaseWidget> {
                 }),
                 title: AppStrings.APP_TITLE,
                 debugShowCheckedModeBanner: false,
-                // initialRoute: AppRoutes.splashScreenRoute,
+                initialRoute: AppRoutes.chatOneToOneScreenRoute,
                 // initialRoute: AppRoutes.postEventScreenRoute,
                 onGenerateRoute: AppRouter().onGenerateRoute,
               );

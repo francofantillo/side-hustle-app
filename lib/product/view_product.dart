@@ -25,9 +25,6 @@ import 'package:side_hustle/widgets/images/circular_cache_image.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
-import 'dart:io';
-import 'package:map_launcher/map_launcher.dart';
-
 class ViewProduct extends StatefulWidget {
   final bool isMyProduct,
       isViewingProductFromOthersShop,

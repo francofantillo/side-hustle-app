@@ -1,11 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal_image.dart';
-import 'package:chat_bubbles/date_chips/date_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/chat/chat_send_widgets/receiver_widget.dart';
 import 'package:side_hustle/chat/chat_send_widgets/sender_widget.dart';
 import 'package:side_hustle/chat/order_detail.dart';
@@ -23,7 +20,6 @@ import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
-import 'package:intl/src/intl/date_format.dart';
 
 class ChatOneToOneUsersList extends StatefulWidget {
   final List? itemList;

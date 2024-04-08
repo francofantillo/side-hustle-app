@@ -4,7 +4,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/state_management/models/chat_messages_model.dart';
 import 'package:side_hustle/state_management/models/chat_model.dart';
 import 'package:side_hustle/state_management/models/order_detail_chat.dart';
-import 'package:side_hustle/state_management/models/place_order.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/chat/chat_provider.dart';
 import 'package:side_hustle/utils/app_utils.dart';

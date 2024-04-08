@@ -1,15 +1,12 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:side_hustle/state_management/models/attendees_model.dart';
-import 'package:side_hustle/state_management/models/edit_event_model.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/providers/events/events_provider.dart';
-import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';

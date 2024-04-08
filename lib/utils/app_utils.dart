@@ -7,6 +7,7 @@ import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.da
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_api_headers/google_api_headers.dart';
 import 'package:intl/intl.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:side_hustle/base_widget/base_widget.dart';
@@ -17,7 +18,6 @@ import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:google_api_headers/google_api_headers.dart';
 
 class AppUtils {
   /// Easy Loading Config

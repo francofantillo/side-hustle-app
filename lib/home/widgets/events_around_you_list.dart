@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/chat_one_to_one.dart';
 import 'package:side_hustle/event/view_event.dart';
 import 'package:side_hustle/home/widgets/home_items_widget.dart';
-import 'package:side_hustle/job/apply_job.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
@@ -15,7 +14,6 @@ import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
-import 'package:side_hustle/widgets/error/error_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class EventsAroundYouList extends StatefulWidget {

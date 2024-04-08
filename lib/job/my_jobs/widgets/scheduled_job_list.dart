@@ -6,7 +6,6 @@ import 'package:side_hustle/job/my_jobs/view_job.dart';
 import 'package:side_hustle/job/my_jobs/widgets/scheduled_job_item.dart';
 import 'package:side_hustle/job/post_job.dart';
 import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
-import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';

@@ -5,6 +5,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path/path.dart' as p;
 import 'package:side_hustle/chat/widgets/chat_one_to_one_list.dart';
 import 'package:side_hustle/chat/widgets/custom_text_field_chat.dart';
 import 'package:side_hustle/chat/widgets/message_options_bottomsheet.dart';
@@ -22,8 +23,6 @@ import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
-
-import 'package:path/path.dart' as p;
 
 class ChatOneToOne extends StatefulWidget {
   final bool isBlockedUser;

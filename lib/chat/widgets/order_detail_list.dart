@@ -3,11 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/chat/widgets/order_detail_item.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
-import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
-import 'package:side_hustle/utils/app_strings.dart';
-import 'package:side_hustle/utils/assets_path.dart';
 
 class OrderDetailList extends StatefulWidget {
   const OrderDetailList({super.key});

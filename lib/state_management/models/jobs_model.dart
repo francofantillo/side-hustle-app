@@ -1,4 +1,3 @@
-import 'package:side_hustle/state_management/models/edit_event_model.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
 
 class JobsModel {

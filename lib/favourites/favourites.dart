@@ -8,7 +8,6 @@ import 'package:side_hustle/favourites/widgets/fav_list_shops.dart';
 import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/favourites/favourites_cubit.dart';
 import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/assets_path.dart';
@@ -16,7 +15,6 @@ import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/icon_button_with_background.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class FavouritesScreen extends StatefulWidget {
   final bool isFromDrawer;

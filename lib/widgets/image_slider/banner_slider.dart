@@ -3,14 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/state_management/models/dashboard_model.dart';
-import 'package:side_hustle/state_management/models/events_model.dart';
 import 'package:side_hustle/utils/api_path.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/image_slider/banner_item.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BannerSlider extends StatefulWidget {

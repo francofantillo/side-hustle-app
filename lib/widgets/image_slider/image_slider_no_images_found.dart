@@ -4,7 +4,6 @@ import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/widgets/image_slider/camera_button.dart';
-import 'package:side_hustle/widgets/text/text_widget.dart';
 
 class NoImagesFoundWidget extends StatelessWidget {
   final bool showCameraAttachment;

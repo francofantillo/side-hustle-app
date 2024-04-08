@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/drawer/widgets/logout_widget.dart';
 import 'package:side_hustle/profile/widgets/profile_list_item.dart';
 import 'package:side_hustle/router/app_route_named.dart';

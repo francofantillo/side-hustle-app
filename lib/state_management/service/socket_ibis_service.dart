@@ -1,9 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:side_hustle/base_widget/base_widget.dart';
-import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
-import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/service/socket_navigation.dart';
 import 'package:side_hustle/utils/api_path.dart';
 import 'package:socket_io_client/socket_io_client.dart';

@@ -6,7 +6,6 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/chat/chat_cubit.dart';
 import 'package:side_hustle/state_management/models/chat_model.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
-import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_enums.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
 

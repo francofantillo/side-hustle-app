@@ -7,7 +7,6 @@ import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
-import 'package:side_hustle/utils/alpha_app_data.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -21,10 +20,8 @@ import 'package:side_hustle/widgets/background_widget.dart';
 import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider.dart';
-import 'package:side_hustle/widgets/image_slider/image_slider_alpha.dart';
 import 'package:side_hustle/widgets/image_slider/image_slider_no_images_found.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
-import 'package:side_hustle/widgets/text/checkbox.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
 import 'package:side_hustle/widgets/text_field/textField.dart';
 

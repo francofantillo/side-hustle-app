@@ -17,7 +17,6 @@ import 'package:side_hustle/state_management/models/select_location_model.dart';
 import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/state_management/providers/auth/auth_provider.dart';
 import 'package:side_hustle/utils/app_colors.dart';
-import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/app_validation_messages.dart';
 import 'package:side_hustle/utils/service/firebase_service.dart';
