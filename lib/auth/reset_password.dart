@@ -33,7 +33,6 @@ class _ResetPasswordState extends State<ResetPassword> {
     _bloc = BlocProvider.of<AuthCubit>(context);
     _bloc.passwordControllerSignup = TextEditingController();
     _bloc.confirmPasswordControllerSignup = TextEditingController();
-    // _bloc.initControllers();
     super.initState();
   }
 
@@ -85,12 +84,12 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 height(AppDimensions.fieldsVerticalSpacingBetween),
                 CustomTextFormField(
-                    controller: _bloc.passwordControllerSignup,
-                    fieldValidator: (value) => value?.validatePassword,
-                    isShowShadow: true,
-                    isShowBoarder: false,
-                    label: AppStrings.newPassword,
-                    isPasswordField: true,
+                  isShowShadow: true,
+                  fieldValidator: (value) => value?.validatePassword,
+                  isShowBoarder: false,
+                  label: AppStrings.newPassword,
+                  isPasswordField: true,
+                  controller: _bloc.passwordControllerSignup,
                   inputFormatter: [
                     LengthLimitingTextInputFormatter(Constants.passwordFieldCharacterLength),
                   ],

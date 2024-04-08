@@ -96,15 +96,22 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           print('Button Pressed');
                           FocusManager.instance.primaryFocus?.unfocus();
                           if (_forgotPasswordFormKey.currentState!.validate()) {
-                            await _bloc.forgotPasswordCubit(
+                            await _bloc
+                                .forgotPasswordCubit(
                               context: context,
                               mounted: mounted,
-                            ).then((value) {
+                            )
+                                .then((value) {
                               if (value == 1) {
                                 setState(() {
                                   initialValue = null;
-                                  Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
-                                      arguments: const OtpVerificationScreen(isForgotPassword: true));
+                                  Navigator.pushNamed(context,
+                                      AppRoutes.otpVerificationScreenRoute,
+                                      arguments: OtpVerificationScreen(
+                                        isForgotPassword: true,
+                                        phone:
+                                            "${_bloc.phoneNumber?.countryCode}${_bloc.phoneNumber?.number}",
+                                      ));
                                 });
                                 // Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
                                 //     arguments: const OtpVerificationScreen(isForgotPassword: true));

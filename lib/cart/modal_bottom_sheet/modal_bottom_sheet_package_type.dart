@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:side_hustle/common_screens/post_added.dart';
 import 'package:side_hustle/event/widgets/select_payment_type_dropdown.dart';
 import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
@@ -57,6 +58,7 @@ enum SingingCharacter { package1, package2, package3 }
 
 class _ModalBottomSheetPackageTypePostState
     extends State<ModalBottomSheetPackageTypePost> {
+  late final AuthCubit _bloc;
   late final CardCubit _blocCard;
   late final EventsCubit _blocEvent;
   late final JobsCubit _blocJobs;
@@ -98,6 +100,7 @@ class _ModalBottomSheetPackageTypePostState
   void initState() {
     // setDefaultCardList();
     _blocCard = BlocProvider.of<CardCubit>(context);
+    _bloc = BlocProvider.of<AuthCubit>(context);
     _blocEvent = BlocProvider.of<EventsCubit>(context);
     _blocJobs = BlocProvider.of<JobsCubit>(context);
     _blocSideHustle = BlocProvider.of<SideHustleCubit>(context);
@@ -108,7 +111,12 @@ class _ModalBottomSheetPackageTypePostState
         "isEventPost: ${widget.isEventPost}, isEventEdit: ${widget.isEventEdit}");
     print(
         "ModalBottomSheetPackageType isJobFromMyJobs: ${widget.isJobFromMyJobs}");
+    getPlans();
     super.initState();
+  }
+
+  getPlans() async {
+    await _bloc.getPlansCubit();
   }
 
   // setDefaultCardList() {
@@ -176,141 +184,152 @@ class _ModalBottomSheetPackageTypePostState
                       fontSize: AppDimensions.textSize10),
                 ),
                 // height(0.06.sw),
-                Padding(
-                  padding:
-                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(18)),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          textWidget(
-                              text:
-                                  "\$${packages["packages"]?[0]["packagePrice"].toStringAsFixed(2) ?? ""}",
-                              color: AppColors.textBlackColor,
-                              fontFamily: AppFont.gilroyBold,
-                              fontSize: AppDimensions.textSizeNormal,
-                              fontWeight: FontWeight.bold),
-                          width(0.03.sw),
-                          Expanded(
-                            child: textWidget(
-                                text: packages["packages"]?[0]["packageType"],
+                BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+                  return Padding(
+                    padding:
+                        EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(18)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16.0, top: 0, bottom: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            textWidget(
+                                text:
+                                    // "\$${packages["packages"]?[0]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                                    "\$${state.plansModel?.data?[0].price?.toStringAsFixed(2)}",
                                 color: AppColors.textBlackColor,
                                 fontFamily: AppFont.gilroyBold,
                                 fontSize: AppDimensions.textSizeNormal,
                                 fontWeight: FontWeight.bold),
-                          ),
-                          // const Spacer(),
-                          Radio(
-                              value: SingingCharacter.package1,
-                              groupValue: _character,
-                              onChanged: (SingingCharacter? v) {
-                                if (v! == SingingCharacter.package1) {
-                                  _character = SingingCharacter.package1;
-                                }
-                                setState(() {});
-                              })
-                        ],
+                            width(0.03.sw),
+                            Expanded(
+                              child: textWidget(
+                                  text: state.plansModel?.data?[0].name,
+                                  color: AppColors.textBlackColor,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textSizeNormal,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            // const Spacer(),
+                            Radio(
+                                value: SingingCharacter.package1,
+                                groupValue: _character,
+                                onChanged: (SingingCharacter? v) {
+                                  if (v! == SingingCharacter.package1) {
+                                    _character = SingingCharacter.package1;
+                                  }
+                                  setState(() {});
+                                })
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(18)),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          textWidget(
-                              text:
-                                  "\$${packages["packages"]?[1]["packagePrice"].toStringAsFixed(2) ?? ""}",
-                              color: AppColors.textBlackColor,
-                              fontFamily: AppFont.gilroyBold,
-                              fontSize: AppDimensions.textSizeNormal,
-                              fontWeight: FontWeight.bold),
-                          width(0.03.sw),
-                          Expanded(
-                            child: textWidget(
-                                text: packages["packages"]?[1]["packageType"],
+                  );
+                }),
+                BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+                  return Padding(
+                    padding:
+                        EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(18)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16.0, top: 0, bottom: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            textWidget(
+                                text:
+                                    // "\$${packages["packages"]?[1]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                                    "\$${state.plansModel?.data?[1].price?.toStringAsFixed(2)}",
                                 color: AppColors.textBlackColor,
                                 fontFamily: AppFont.gilroyBold,
                                 fontSize: AppDimensions.textSizeNormal,
                                 fontWeight: FontWeight.bold),
-                          ),
-                          // const Spacer(),
-                          Radio(
-                              value: SingingCharacter.package2,
-                              groupValue: _character,
-                              onChanged: (SingingCharacter? v) {
-                                if (v! == SingingCharacter.package2) {
-                                  _character = SingingCharacter.package2;
-                                }
-                                setState(() {});
-                              })
-                        ],
+                            width(0.03.sw),
+                            Expanded(
+                              child: textWidget(
+                                  // text: packages["packages"]?[1]["packageType"],
+                                  text: state.plansModel?.data?[1].name,
+                                  color: AppColors.textBlackColor,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textSizeNormal,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            // const Spacer(),
+                            Radio(
+                                value: SingingCharacter.package2,
+                                groupValue: _character,
+                                onChanged: (SingingCharacter? v) {
+                                  if (v! == SingingCharacter.package2) {
+                                    _character = SingingCharacter.package2;
+                                  }
+                                  setState(() {});
+                                })
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(18)),
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          textWidget(
-                              text:
-                                  "\$${packages["packages"]?[2]["packagePrice"].toStringAsFixed(2) ?? ""}",
-                              color: AppColors.textBlackColor,
-                              fontFamily: AppFont.gilroyBold,
-                              fontSize: AppDimensions.textSizeNormal,
-                              fontWeight: FontWeight.bold),
-                          width(0.03.sw),
-                          Expanded(
-                            child: textWidget(
-                                text: packages["packages"]?[2]["packageType"],
+                  );
+                }),
+                BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+                  return Padding(
+                    padding:
+                        EdgeInsets.only(right: 16.0, left: 16.0, bottom: 10.w),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(18)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16.0, top: 0, bottom: 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            textWidget(
+                                text:
+                                    // "\$${packages["packages"]?[2]["packagePrice"].toStringAsFixed(2) ?? ""}",
+                                    "\$${state.plansModel?.data?[2].price?.toStringAsFixed(2)}",
                                 color: AppColors.textBlackColor,
                                 fontFamily: AppFont.gilroyBold,
                                 fontSize: AppDimensions.textSizeNormal,
                                 fontWeight: FontWeight.bold),
-                          ),
-                          // const Spacer(),
-                          Radio(
-                              value: SingingCharacter.package3,
-                              groupValue: _character,
-                              onChanged: (SingingCharacter? v) {
-                                if (v! == SingingCharacter.package3) {
-                                  _character = SingingCharacter.package3;
-                                }
-                                setState(() {});
-                              })
-                        ],
+                            width(0.03.sw),
+                            Expanded(
+                              child: textWidget(
+                                  // text: packages["packages"]?[2]["packageType"],
+                                  text: state.plansModel?.data?[2].name,
+                                  color: AppColors.textBlackColor,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textSizeNormal,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            // const Spacer(),
+                            Radio(
+                                value: SingingCharacter.package3,
+                                groupValue: _character,
+                                onChanged: (SingingCharacter? v) {
+                                  if (v! == SingingCharacter.package3) {
+                                    _character = SingingCharacter.package3;
+                                  }
+                                  setState(() {});
+                                })
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 // const ProductsCartList(),
                 // const EventPostPackagesList(),
                 // height(0.02.sw),

@@ -10,6 +10,7 @@ import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/state_management/cubit/reset_bloc.dart';
 import 'package:side_hustle/state_management/models/dashboard_model.dart';
 import 'package:side_hustle/state_management/models/notifications_model.dart';
+import 'package:side_hustle/state_management/models/plans_model.dart';
 import 'package:side_hustle/state_management/models/profile_model.dart';
 import 'package:side_hustle/state_management/models/resume_model.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
@@ -209,7 +210,10 @@ class AuthCubit extends Cubit<AuthState> {
         // AppUtils.showToast(userModel.message);
         if (mounted) {
           Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
-              arguments: const OtpVerificationScreen(isSignUp: true));
+              arguments: OtpVerificationScreen(
+                isSignUp: true,
+                phone: "${phoneNumber?.countryCode}${phoneNumber?.number}",
+              ));
         }
       }
 
@@ -338,7 +342,8 @@ class AuthCubit extends Cubit<AuthState> {
           } else {
             EasyLoading.dismiss();
             Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
-                arguments: const OtpVerificationScreen(isLogin: true));
+                arguments: OtpVerificationScreen(isLogin: true,
+                  phone: userModel.data?.phone,));
           }
         }
       }
@@ -840,7 +845,6 @@ class AuthCubit extends Cubit<AuthState> {
         apiToken: state.userModel?.data?.apiToken);
 
     if (response != null) {
-
       /// Success
       if (response.data["status"] == AppValidationMessages.success) {
         final NotificationsModel notificationsModel =
@@ -904,6 +908,40 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(getResumeLoading: false));
       EasyLoading.dismiss();
       AppUtils.showToast(AppValidationMessages.failedMessage);
+    }
+  }
+
+  /// Get Plans
+  Future<int> getPlansCubit() async {
+    EasyLoading.show();
+
+    emit(state.copyWith(plansLoading: true, plansModel: PlansModel()));
+
+    final response =
+        await getPlansProvider(apiToken: state.userModel?.data?.apiToken);
+
+    if (response != null) {
+      /// Success
+      if (response.data["status"] == AppValidationMessages.success) {
+        final PlansModel plansModel = PlansModel.fromJson(response.data);
+        emit(state.copyWith(plansLoading: false, plansModel: plansModel));
+        EasyLoading.dismiss();
+        return 1;
+      }
+
+      /// Failed
+      else {
+        emit(state.copyWith(plansLoading: false));
+        AppUtils.showToast(response.data["message"]);
+        EasyLoading.dismiss();
+
+        return 0;
+      }
+    } else {
+      AppUtils.showToast(AppValidationMessages.failedMessage);
+      emit(state.copyWith(plansLoading: false));
+      EasyLoading.dismiss();
+      return 0;
     }
   }
 }

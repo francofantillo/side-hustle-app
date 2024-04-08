@@ -331,3 +331,11 @@ Future<Response?> logoutProvider({String? apiToken}) async {
       await postRequestProvider(path: API.LOGOUT, data: null, token: apiToken);
   return response;
 }
+
+/// Get Plans
+Future<Response?> getPlansProvider({String? apiToken}) async {
+  print("*****************\nurl: ${API.GET_Plans}\n**************************");
+  final response =
+  await getRequestProvider(path: API.GET_Plans, token: apiToken);
+  return response;
+}

@@ -91,8 +91,10 @@ class AppStrings {
 
   /// OTP Verification
   static const String otpVerification = "OTP Verification";
+  // static const String otpTextBody =
+  //     "Please enter 6-digit code we have sent you on your phone +123 456789";
   static const String otpTextBody =
-      "Please enter 6-digit code we have sent you on your phone +123 456789";
+      "Please enter 6-digit code we have sent you on your phone ";
   static const String reSendOtp = "Resend in 00:48";
   static const String reSend = "Resend";
 

@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         }),
                   ),
-                  height(AppDimensions.loginButtonVerticalSpacingBetween),
+          /*        height(AppDimensions.loginButtonVerticalSpacingBetween),
                   Padding(
                       padding: EdgeInsets.only(
                           right: AppDimensions.orContinueWithPadding,
@@ -194,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         imageWidth: AppDimensions.socialButtonImageSize,
                       ),
                     ],
-                  ),
+                  ),*/
                   height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
                   RichText(
                     textAlign: TextAlign.center,

@@ -20,12 +20,14 @@ import 'package:side_hustle/widgets/text_field/custom_pin_code_textField.dart';
 class OtpVerificationScreen extends StatefulWidget {
   final bool isSocial;
   final bool isSignUp, isLogin, isForgotPassword;
+  final String? phone;
 
   const OtpVerificationScreen(
       {super.key,
       this.isSocial = false,
       this.isSignUp = false,
       this.isLogin = false,
+      this.phone,
       this.isForgotPassword = false});
 
   @override
@@ -119,7 +121,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 52.0),
               child: textWidget(
-                  text: AppStrings.otpTextBody,
+                  text: "${AppStrings.otpTextBody}${widget.phone ?? ""}",
                   color: AppColors.backIconBackgroundColor.withOpacity(0.9),
                   fontSize: AppDimensions.textSizeSmall,
                   textAlign: TextAlign.center,

@@ -87,6 +87,7 @@ class AppRouter {
               isSocial: args?.isSocial ?? false,
               isSignUp: args?.isSignUp ?? false,
               isLogin: args?.isLogin ?? false,
+              phone: args?.phone,
               isForgotPassword: args?.isForgotPassword ?? false,
             );
 

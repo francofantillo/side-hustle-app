@@ -2,12 +2,12 @@
 class API {
 
   /// Base Url
-  // static const String BASE_URL = "https://side-hustle.trangotech.dev/api"; /// Staging
-  static const String BASE_URL = "https://backend.sidehustleapp.net/api"; /// Live
-  // static const String BASE_URL_IMAGE = "https://side-hustle.trangotech.dev/"; /// Staging
-  static const String BASE_URL_IMAGE = "https://backend.sidehustleapp.net/"; /// Live
-  // static const String CHAT_SOCKET_API_BASE_URL = "http://socketside-hustle.trangotech.dev:3023"; /// Staging
-  static const String CHAT_SOCKET_API_BASE_URL = "http://socket.sidehustleapp.net:3023"; /// Live
+  static const String BASE_URL = "https://side-hustle.trangotech.dev/api"; /// Staging
+  // static const String BASE_URL = "https://backend.sidehustleapp.net/api"; /// Live
+  static const String BASE_URL_IMAGE = "https://side-hustle.trangotech.dev/"; /// Staging
+  // static const String BASE_URL_IMAGE = "https://backend.sidehustleapp.net/"; /// Live
+  static const String CHAT_SOCKET_API_BASE_URL = "http://socketside-hustle.trangotech.dev:3023"; /// Staging
+  // static const String CHAT_SOCKET_API_BASE_URL = "http://socket.sidehustleapp.net:3023"; /// Live
 
   /////////////// SOCKET CHAT RESPONSE KEYS ////////////////
   static const String GET_MESSAGES_KEY = "get_messages";
@@ -37,6 +37,7 @@ class API {
   static const String ALLOW_PUSH = "${BASE_URL}/is-notification";
   static const String GET_DASHBOARD = "${BASE_URL}/dashboard";
   static const String GET_Notifications = "${BASE_URL}/notifications";
+  static const String GET_Plans = "${BASE_URL}/plans";
 
   /// Card
   static const String ADD_CARD = "${BASE_URL}/add-card";
