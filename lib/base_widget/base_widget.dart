@@ -1,10 +1,10 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:side_hustle/router/app_route_named.dart';
 import 'package:side_hustle/router/app_router.dart';
 import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
@@ -40,8 +40,10 @@ class _BaseWidgetState extends State<BaseWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print(
-        "ScreenDesignSize sh: ${ScreenDesignSize.sh}, ScreenDesignSize sw: ${ScreenDesignSize.sw}");
+    if (kDebugMode) {
+      print(
+          "ScreenDesignSize sh: ${ScreenDesignSize.sh}, ScreenDesignSize sw: ${ScreenDesignSize.sw}");
+    }
     ScreenDesignSize.setDesignSize(context: context);
   }
 
@@ -50,7 +52,9 @@ class _BaseWidgetState extends State<BaseWidget> {
     FirebaseMessagingService().foregroundNotification();
     FirebaseMessagingService().backgroundTapNotification();
     final String? deviceToken = await FirebaseMessagingService().getToken();
-    print("Firebase Token: $deviceToken");
+    if (kDebugMode) {
+      print("Firebase Token: $deviceToken");
+    }
   }
 
   @override
@@ -99,7 +103,7 @@ class _BaseWidgetState extends State<BaseWidget> {
                 }),
                 title: AppStrings.APP_TITLE,
                 debugShowCheckedModeBanner: false,
-                initialRoute: AppRoutes.chatOneToOneScreenRoute,
+                // initialRoute: AppRoutes.splashScreenRoute,
                 // initialRoute: AppRoutes.postEventScreenRoute,
                 onGenerateRoute: AppRouter().onGenerateRoute,
               );

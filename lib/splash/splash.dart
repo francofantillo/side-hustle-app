@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:entry/entry.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,10 +28,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    print("Splash Screen called");
+    if (kDebugMode) {
+      print("Splash Screen called");
+    }
     _bloc = BlocProvider.of<AuthCubit>(context);
     _visible = false;
-    getCurrentLocation();
+    // getCurrentLocation();
     _connectSocket();
     _navigationTimer(seconds: 3);
     // _navigationTimerMilli(milliseconds: 300);
@@ -45,7 +48,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _connectSocket() {
-    print("called _connectSocket");
+    if (kDebugMode) {
+      print("called _connectSocket");
+    }
     SocketService.instance?.initializeSocket();
     SocketService.instance?.connectSocket();
     SocketService.instance?.socketResponseMethod();
@@ -66,10 +71,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: CustomMaterialButton(
                     name: AppStrings.GET_STARTED,
                     // borderRadius: 20,
-                    onPressed: () {
-                      print('Button Pressed');
+                    onPressed: () async {
+                      if (kDebugMode) {
+                        print('Button Pressed');
+                      }
                       Navigator.pushNamedAndRemoveUntil(context,
                           AppRoutes.loginScreenRoute, (route) => false);
+                      AppUtils.getCurrentLocation();
                     }))
             : const SizedBox.shrink(),
       ),

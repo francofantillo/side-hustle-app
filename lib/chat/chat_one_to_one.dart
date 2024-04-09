@@ -57,7 +57,9 @@ class ChatOneToOne extends StatefulWidget {
 class _ChatOneToOneState extends State<ChatOneToOne> {
   final TextEditingController chatController = TextEditingController();
   late final ChatCubit _bloc;
-  bool showEmoji = false;
+
+  // bool showEmoji = false;
+  bool showEmoji = true;
   final emojiC = TextEditingController();
   late final bool isBlockedUser;
 
@@ -386,10 +388,21 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                                   hintText: AppStrings.typeAMessage,
                                   onTapEmoji: () {
                                     print("clicked emoji");
-                                    _bloc.showEmoji();
+                                    // _bloc.showEmoji();
+                                    if (showEmoji) {
+                                      FocusManager.instance.primaryFocus!
+                                          .unfocus();
+                                    }
+                                    showEmoji = !showEmoji;
+                                    setState(() {});
                                   },
                                   onTap: () {
                                     _bloc.hideEmoji();
+                                    if (!(showEmoji)) {
+                                      // emit(state.copyWith(showEmoji: true));
+                                      showEmoji = true;
+                                      setState(() {});
+                                    }
                                   },
                                   onTapAttachment: () async {
                                     final image = await ImagePickerService
@@ -436,52 +449,50 @@ class _ChatOneToOneState extends State<ChatOneToOne> {
                   ),
                 ),
               ),
-              BlocBuilder<ChatCubit, ChatState>(builder: (context, state) {
-                return Offstage(
-                  // offstage: showEmoji,
-                  offstage: state.showEmoji,
-                  child: SizedBox(
-                    height: 250,
-                    child: EmojiPicker(
-                      onEmojiSelected: (Category? category, Emoji? emoji) {
-                        print(" emoji!.emoji: ${emoji!.emoji}");
-                        emojiC.text = emoji.emoji;
-                        String temp = chatController.text + emojiC.text;
-                        chatController.text = temp;
-                      },
-                      onBackspacePressed: _onBackspacePressed(),
-                      textEditingController: emojiC,
-                      config: const Config(
-                        columns: 7,
-                        emojiSizeMax: 30,
-                        verticalSpacing: 0,
-                        horizontalSpacing: 0,
-                        gridPadding: EdgeInsets.zero,
-                        initCategory: Category.RECENT,
-                        bgColor: Colors.white,
-                        indicatorColor: Color(0xffAC61E7),
-                        iconColor: Colors.grey,
-                        iconColorSelected: Color(0xffAC61E7),
-                        backspaceColor: Color(0xffAC61E7),
-                        skinToneDialogBgColor: Colors.white,
-                        skinToneIndicatorColor: Colors.grey,
-                        enableSkinTones: true,
-                        recentTabBehavior: RecentTabBehavior.RECENT,
-                        recentsLimit: 28,
-                        noRecents: Text(
-                          'No Recent',
-                          style: TextStyle(fontSize: 20, color: Colors.black26),
-                          textAlign: TextAlign.center,
-                        ),
-                        loadingIndicator: SizedBox.shrink(),
-                        tabIndicatorAnimDuration: kTabScrollDuration,
-                        categoryIcons: CategoryIcons(),
-                        buttonMode: ButtonMode.MATERIAL,
+              Offstage(
+                offstage: showEmoji,
+                // offstage: state.showEmoji,
+                child: SizedBox(
+                  height: 250,
+                  child: EmojiPicker(
+                    onEmojiSelected: (Category? category, Emoji? emoji) {
+                      print(" emoji!.emoji: ${emoji!.emoji}");
+                      emojiC.text = emoji.emoji;
+                      String temp = chatController.text + emojiC.text;
+                      chatController.text = temp;
+                    },
+                    onBackspacePressed: _onBackspacePressed(),
+                    textEditingController: emojiC,
+                    config: const Config(
+                      columns: 7,
+                      emojiSizeMax: 30,
+                      verticalSpacing: 0,
+                      horizontalSpacing: 0,
+                      gridPadding: EdgeInsets.zero,
+                      initCategory: Category.RECENT,
+                      bgColor: Colors.white,
+                      indicatorColor: Color(0xffAC61E7),
+                      iconColor: Colors.grey,
+                      iconColorSelected: Color(0xffAC61E7),
+                      backspaceColor: Color(0xffAC61E7),
+                      skinToneDialogBgColor: Colors.white,
+                      skinToneIndicatorColor: Colors.grey,
+                      enableSkinTones: true,
+                      recentTabBehavior: RecentTabBehavior.RECENT,
+                      recentsLimit: 28,
+                      noRecents: Text(
+                        'No Recent',
+                        style: TextStyle(fontSize: 20, color: Colors.black26),
+                        textAlign: TextAlign.center,
                       ),
+                      loadingIndicator: SizedBox.shrink(),
+                      tabIndicatorAnimDuration: kTabScrollDuration,
+                      categoryIcons: CategoryIcons(),
+                      buttonMode: ButtonMode.MATERIAL,
                     ),
                   ),
-                );
-              }),
+                ),
+              ),
             ],
           ),
         ),
