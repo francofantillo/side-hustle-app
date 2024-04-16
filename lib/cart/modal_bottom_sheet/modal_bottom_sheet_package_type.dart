@@ -29,12 +29,14 @@ class ModalBottomSheetPackageTypePost extends StatefulWidget {
       isEditService,
       isJob,
       isJobFromMyJobs,
-      isJobEdit;
+      isJobEdit,
+      isTestACLive;
   final int? defaultCardId;
 
   const ModalBottomSheetPackageTypePost(
       {super.key,
       this.isEventPost = false,
+      this.isTestACLive = false,
       this.isEventEdit = false,
       this.isEventEditFromPostAdded = false,
       this.isProduct = false,
@@ -99,18 +101,20 @@ class _ModalBottomSheetPackageTypePostState
     _blocEvent = BlocProvider.of<EventsCubit>(context);
     _blocJobs = BlocProvider.of<JobsCubit>(context);
     _blocSideHustle = BlocProvider.of<SideHustleCubit>(context);
-    cardId = _blocCard.state.cardModel?.data?[0].id;
+    if (_blocCard.state.cardModel?.data?.isNotEmpty != null) {
+      cardId = _blocCard.state.cardModel?.data?[0].id;
+    }
     defaultCard = widget.defaultCardId;
     if (kDebugMode) {
       print("ModalBottomSheetPackageTypePost cardId: $cardId");
     }
     if (kDebugMode) {
       print(
-        "isEventPost: ${widget.isEventPost}, isEventEdit: ${widget.isEventEdit}");
+          "isEventPost: ${widget.isEventPost}, isEventEdit: ${widget.isEventEdit}");
     }
     if (kDebugMode) {
       print(
-        "ModalBottomSheetPackageType isJobFromMyJobs: ${widget.isJobFromMyJobs}");
+          "ModalBottomSheetPackageType isJobFromMyJobs: ${widget.isJobFromMyJobs}");
     }
     getPlans();
     super.initState();
@@ -380,7 +384,7 @@ class _ModalBottomSheetPackageTypePostState
                                 late final int planId;
                                 if (kDebugMode) {
                                   print(
-                                    "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                                      "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
                                 }
                                 // if (_character?.name ==
                                 //     SingingCharacter.package1.name) {
@@ -463,7 +467,7 @@ class _ModalBottomSheetPackageTypePostState
                                 late final int planId;
                                 if (kDebugMode) {
                                   print(
-                                    "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                                      "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
                                 }
                                 // if (_character?.name ==
                                 //     SingingCharacter.package1.name) {
@@ -565,7 +569,7 @@ class _ModalBottomSheetPackageTypePostState
                                 late final int planId;
                                 if (kDebugMode) {
                                   print(
-                                    "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                                      "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
                                 }
                                 // if (_character?.name ==
                                 //     SingingCharacter.package1.name) {
@@ -639,7 +643,7 @@ class _ModalBottomSheetPackageTypePostState
                                 late final int planId;
                                 if (kDebugMode) {
                                   print(
-                                    "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                                      "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
                                 }
                                 // if (_character?.name ==
                                 //     SingingCharacter.package1.name) {
@@ -655,53 +659,10 @@ class _ModalBottomSheetPackageTypePostState
                                 if (kDebugMode) {
                                   print("planId: $planId");
                                 }
-                                if (cardId != defaultCard) {
-                                  await _blocCard
-                                      .defaultCardCubit(
-                                          context: context,
-                                          mounted: mounted,
-                                          hideLoader: true,
-                                          cardId: cardId)
-                                      .then((value) async {
-                                    if (value == 1) {
-                                      defaultCard = cardId;
-                                      await _blocEvent
-                                          .postAnEventCubit(
-                                              context: context,
-                                              mounted: mounted,
-                                              planId: planId)
-                                          .then((value) {
-                                        if (value != 0) {
-                                          EasyLoading.instance.indicatorColor =
-                                              AppColors.primaryColor;
-                                          // Navigator.pop(context);
-                                          // Navigator.pop(context);
-                                          if (kDebugMode) {
-                                            print("value: $value");
-                                          }
-                                          Navigator.pushReplacementNamed(
-                                              context,
-                                              AppRoutes.postAddedScreenRoute,
-                                              arguments: PostAdded(
-                                                id: value,
-                                                isEvent: true,
-                                                title: AppStrings.eventPosted,
-                                                subTitle: AppStrings
-                                                    .sideHustlePostedSubTitle,
-                                                buttonName:
-                                                    AppStrings.viewEvent,
-                                              ));
-                                        } else {
-                                          EasyLoading.instance.indicatorColor =
-                                              AppColors.primaryColor;
-                                        }
-                                      });
-                                    } else {
-                                      EasyLoading.instance.indicatorColor =
-                                          AppColors.primaryColor;
-                                    }
-                                  });
-                                } else {
+                                print("isTestACLive: ${widget.isTestACLive}");
+                                if (widget.isTestACLive) {
+                                  EasyLoading.instance.indicatorColor =
+                                      AppColors.whiteColor;
                                   await _blocEvent
                                       .postAnEventCubit(
                                           context: context,
@@ -709,11 +670,13 @@ class _ModalBottomSheetPackageTypePostState
                                           planId: planId)
                                       .then((value) {
                                     if (value != 0) {
+                                      EasyLoading.instance.indicatorColor =
+                                          AppColors.primaryColor;
+                                      // Navigator.pop(context);
+                                      // Navigator.pop(context);
                                       if (kDebugMode) {
                                         print("value: $value");
                                       }
-                                      EasyLoading.instance.indicatorColor =
-                                          AppColors.primaryColor;
                                       Navigator.pushReplacementNamed(context,
                                           AppRoutes.postAddedScreenRoute,
                                           arguments: PostAdded(
@@ -729,6 +692,84 @@ class _ModalBottomSheetPackageTypePostState
                                           AppColors.primaryColor;
                                     }
                                   });
+                                } else {
+                                  if (cardId != defaultCard) {
+                                    await _blocCard
+                                        .defaultCardCubit(
+                                            context: context,
+                                            mounted: mounted,
+                                            hideLoader: true,
+                                            cardId: cardId)
+                                        .then((value) async {
+                                      if (value == 1) {
+                                        defaultCard = cardId;
+                                        await _blocEvent
+                                            .postAnEventCubit(
+                                                context: context,
+                                                mounted: mounted,
+                                                planId: planId)
+                                            .then((value) {
+                                          if (value != 0) {
+                                            EasyLoading
+                                                    .instance.indicatorColor =
+                                                AppColors.primaryColor;
+                                            // Navigator.pop(context);
+                                            // Navigator.pop(context);
+                                            if (kDebugMode) {
+                                              print("value: $value");
+                                            }
+                                            Navigator.pushReplacementNamed(
+                                                context,
+                                                AppRoutes.postAddedScreenRoute,
+                                                arguments: PostAdded(
+                                                  id: value,
+                                                  isEvent: true,
+                                                  title: AppStrings.eventPosted,
+                                                  subTitle: AppStrings
+                                                      .sideHustlePostedSubTitle,
+                                                  buttonName:
+                                                      AppStrings.viewEvent,
+                                                ));
+                                          } else {
+                                            EasyLoading
+                                                    .instance.indicatorColor =
+                                                AppColors.primaryColor;
+                                          }
+                                        });
+                                      } else {
+                                        EasyLoading.instance.indicatorColor =
+                                            AppColors.primaryColor;
+                                      }
+                                    });
+                                  } else {
+                                    await _blocEvent
+                                        .postAnEventCubit(
+                                            context: context,
+                                            mounted: mounted,
+                                            planId: planId)
+                                        .then((value) {
+                                      if (value != 0) {
+                                        if (kDebugMode) {
+                                          print("value: $value");
+                                        }
+                                        EasyLoading.instance.indicatorColor =
+                                            AppColors.primaryColor;
+                                        Navigator.pushReplacementNamed(context,
+                                            AppRoutes.postAddedScreenRoute,
+                                            arguments: PostAdded(
+                                              id: value,
+                                              isEvent: true,
+                                              title: AppStrings.eventPosted,
+                                              subTitle: AppStrings
+                                                  .sideHustlePostedSubTitle,
+                                              buttonName: AppStrings.viewEvent,
+                                            ));
+                                      } else {
+                                        EasyLoading.instance.indicatorColor =
+                                            AppColors.primaryColor;
+                                      }
+                                    });
+                                  }
                                 }
 
                                 return;
@@ -750,14 +791,14 @@ class _ModalBottomSheetPackageTypePostState
                               onPressed: () async {
                                 if (kDebugMode) {
                                   print(
-                                    "isEventEditFromPostAdded: ${widget.isEventEditFromPostAdded}");
+                                      "isEventEditFromPostAdded: ${widget.isEventEditFromPostAdded}");
                                 }
                                 EasyLoading.instance.indicatorColor =
                                     AppColors.whiteColor;
                                 late final int planId;
                                 if (kDebugMode) {
                                   print(
-                                    "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
+                                      "_character: ${_character?.name} SingingCharacter ${SingingCharacter.package1.name}");
                                 }
                                 // if (_character?.name ==
                                 //     SingingCharacter.package1.name) {
@@ -787,9 +828,10 @@ class _ModalBottomSheetPackageTypePostState
                                       defaultCard = cardId;
                                       await _blocEvent
                                           .editAnEventCubit(
-                                              context: context,
-                                              mounted: mounted,
-                                              planId: planId)
+                                        context: context,
+                                        mounted: mounted,
+                                      )
+                                          // planId: planId)
                                           .then((value) {
                                         if (value != 0) {
                                           if (widget.isEventEditFromPostAdded) {
@@ -830,9 +872,10 @@ class _ModalBottomSheetPackageTypePostState
                                 } else {
                                   await _blocEvent
                                       .editAnEventCubit(
-                                          context: context,
-                                          mounted: mounted,
-                                          planId: planId)
+                                    context: context,
+                                    mounted: mounted,
+                                  )
+                                      // planId: planId)
                                       .then((value) {
                                     if (value != 0) {
                                       if (widget.isEventEditFromPostAdded) {

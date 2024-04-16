@@ -52,9 +52,9 @@ class _BaseWidgetState extends State<BaseWidget> {
     FirebaseMessagingService().foregroundNotification();
     FirebaseMessagingService().backgroundTapNotification();
     final String? deviceToken = await FirebaseMessagingService().getToken();
-    if (kDebugMode) {
-      print("Firebase Token: $deviceToken");
-    }
+    // if (kDebugMode) {
+    print("Firebase Token: $deviceToken");
+    // }
   }
 
   @override

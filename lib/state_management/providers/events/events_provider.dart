@@ -165,6 +165,8 @@ Future<Response?> editAnEventProvider(
     print(
         "images length: ${images.length}, Images Multipart Length: ${imageList.length}");
 
+    // "plan_id": planId
+
     final Map<String, dynamic> data = {
       "event_id": eventId,
       "name": name,
@@ -179,7 +181,6 @@ Future<Response?> editAnEventProvider(
       "theme": theme,
       "price": price,
       "payment_type": paymentType,
-      "plan_id": planId
     };
 
     if (vendorsListString.trim() != "") {
@@ -192,6 +193,8 @@ Future<Response?> editAnEventProvider(
 
     formData = FormData.fromMap(data);
   } else {
+    // "plan_id": planId
+
     final Map<String, dynamic> data = {
       "event_id": eventId,
       "name": name,
@@ -205,7 +208,6 @@ Future<Response?> editAnEventProvider(
       "theme": theme,
       "price": price,
       "payment_type": paymentType,
-      "plan_id": planId
     };
 
     // if (vendorsListString.isNotEmpty) {

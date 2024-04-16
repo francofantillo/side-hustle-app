@@ -1,14 +1,19 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:side_hustle/cart/modal_bottom_sheet/modal_bottom_sheet_package_type.dart';
+import 'package:side_hustle/router/app_route_named.dart';
+import 'package:side_hustle/state_management/cubit/auth/auth_cubit.dart';
 import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/events/events_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/state_management/models/events_model.dart';
+import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -19,6 +24,7 @@ import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/custom_icon_icons.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
+import 'package:side_hustle/utils/sharedprefrences.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/utils/validation/regular_expressions.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -52,10 +58,14 @@ class _PostEventState extends State<PostEvent> {
   late final EventsCubit _bloc;
   late final CardCubit _blocCard;
 
+  int? userId;
+  final prefs = SharedPreferencesHelper.instance;
+
   final List<String> items = [
     PaymentTypeEnum.Cash.name,
     PaymentTypeEnum.Card.name,
   ];
+
 
   @override
   void initState() {
@@ -65,11 +75,20 @@ class _PostEventState extends State<PostEvent> {
     _blocCard = BlocProvider.of(context);
     _bloc.initPostEventControllers();
     print("PostEvent id: ${widget.id}");
+    getUserId();
     widget.id != null
         ? getEvent()
         // : _bloc.state.eventsDetailModel = EventsModel();
         : _bloc.state.editEventModel = EventsModel();
     super.initState();
+  }
+
+  Future getUserId() async {
+    final UserModel? userModel = await prefs.getUser();
+    userId = userModel?.data?.id;
+    if (kDebugMode) {
+      print("userId: $userId");
+    }
   }
 
   Future getEvent() async {
@@ -129,39 +148,47 @@ class _PostEventState extends State<PostEvent> {
     });
   }
 
-  Future getCards({required bool isEdit}) async {
-    await _blocCard
-        .getCardsCubit(context: context, mounted: mounted)
-        .then((value) {
-      if (value != null && value.isEmpty) {
-        AppUtils.showToast(AppStrings.cardNotAddedError);
-      } else if (value != null) {
-        int? cardId;
-        DataCard? dataCard;
-        for (int i = 0;
-            i < (_blocCard.state.cardModel?.data?.length ?? 0);
-            i++) {
-          if (_blocCard.state.cardModel?.data?[i].isDefault == 1) {
-            cardId = _blocCard.state.cardModel?.data?[i].id;
-            dataCard = _blocCard.state.cardModel?.data?[i];
+  Future getCards({required bool isEdit, required bool isTestLive}) async {
+    if (isTestLive) {
+      AppUtils.showBottomModalSheet(
+          context: context,
+          widget: const ModalBottomSheetPackageTypePost(
+            isEventPost: true,
+          ));
+    } else {
+      await _blocCard
+          .getCardsCubit(context: context, mounted: mounted)
+          .then((value) {
+        if (value != null && value.isEmpty) {
+          AppUtils.showToast(AppStrings.cardNotAddedError);
+        } else if (value != null) {
+          int? cardId;
+          DataCard? dataCard;
+          for (int i = 0;
+              i < (_blocCard.state.cardModel?.data?.length ?? 0);
+              i++) {
+            if (_blocCard.state.cardModel?.data?[i].isDefault == 1) {
+              cardId = _blocCard.state.cardModel?.data?[i].id;
+              dataCard = _blocCard.state.cardModel?.data?[i];
+            }
+          }
+          print("cardId: $cardId isDefault: ${dataCard?.isDefault}");
+          if (isEdit) {
+            AppUtils.showBottomModalSheet(
+                context: context,
+                widget: ModalBottomSheetPackageTypePost(
+                    isEventEdit: true,
+                    isEventEditFromPostAdded: widget.isEventEditFromPostAdded,
+                    defaultCardId: cardId));
+          } else {
+            AppUtils.showBottomModalSheet(
+                context: context,
+                widget: ModalBottomSheetPackageTypePost(
+                    isEventPost: true, defaultCardId: cardId));
           }
         }
-        print("cardId: $cardId isDefault: ${dataCard?.isDefault}");
-        if (isEdit) {
-          AppUtils.showBottomModalSheet(
-              context: context,
-              widget: ModalBottomSheetPackageTypePost(
-                  isEventEdit: true,
-                  isEventEditFromPostAdded: widget.isEventEditFromPostAdded,
-                  defaultCardId: cardId));
-        } else {
-          AppUtils.showBottomModalSheet(
-              context: context,
-              widget: ModalBottomSheetPackageTypePost(
-                  isEventPost: true, defaultCardId: cardId));
-        }
-      }
-    });
+      });
+    }
   }
 
   @override
@@ -792,9 +819,7 @@ class _PostEventState extends State<PostEvent> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: CustomMaterialButton(
                               onPressed: () async {
-                                // await getCards(isEdit: true);
                                 if (widget.isEdit) {
-                                  // Navigator.pop(context);
                                   FocusManager.instance.primaryFocus?.unfocus();
                                   if (_eventFormKey.currentState!.validate()) {
                                     await _bloc
@@ -802,7 +827,39 @@ class _PostEventState extends State<PostEvent> {
                                             vendorList: vendorList,
                                             availableAttraction:
                                                 availableAttractionsList);
-                                    await getCards(isEdit: true);
+                                    if (mounted) {
+                                      await _bloc
+                                          .editAnEventCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                      )
+                                          .then((value) {
+                                        if (value != 0) {
+                                          if (widget.isEventEditFromPostAdded) {
+                                            EasyLoading
+                                                    .instance.indicatorColor =
+                                                AppColors.primaryColor;
+                                            Navigator.pop(context);
+                                            Navigator.pushReplacementNamed(
+                                                context,
+                                                AppRoutes.myEventsScreenRoute);
+                                          } else {
+                                            EasyLoading
+                                                    .instance.indicatorColor =
+                                                AppColors.primaryColor;
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                            Navigator.pushReplacementNamed(
+                                                context,
+                                                AppRoutes.myEventsScreenRoute);
+                                          }
+                                          print("value: $value");
+                                        } else {
+                                          EasyLoading.instance.indicatorColor =
+                                              AppColors.primaryColor;
+                                        }
+                                      });
+                                    }
                                   }
                                 } else {
                                   FocusManager.instance.primaryFocus?.unfocus();
@@ -812,7 +869,13 @@ class _PostEventState extends State<PostEvent> {
                                             vendorList: vendorList,
                                             availableAttraction:
                                                 availableAttractionsList);
-                                    await getCards(isEdit: false);
+                                    await getCards(
+                                        isEdit: false,
+                                        isTestLive:
+                                            userId == Constants.johnId ||
+                                                    userId == Constants.mikeId
+                                                ? true
+                                                : false);
                                   }
                                 }
                               },

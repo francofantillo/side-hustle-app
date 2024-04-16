@@ -380,7 +380,7 @@ class EventsCubit extends Cubit<EventsState> {
   /// Edit an Event
   Future<int> editAnEventCubit(
       {required BuildContext context,
-      required int planId,
+      // required int planId,
       required bool mounted}) async {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
@@ -484,7 +484,7 @@ class EventsCubit extends Cubit<EventsState> {
       // availableAttractionsString: eventAvailableTextController.text,
       availableAttractionsString: availableAttractionListString,
       // planId: "1",
-      planId: planId.toString(),
+      // planId: planId.toString(),
     );
 
     EasyLoading.dismiss();

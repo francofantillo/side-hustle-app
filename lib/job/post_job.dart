@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/wanted_job/wanted_job_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/state_management/models/jobs_model.dart';
+import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_font.dart';
@@ -15,6 +17,7 @@ import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/assets_path.dart';
 import 'package:side_hustle/utils/constants.dart';
 import 'package:side_hustle/utils/date_time_conversions.dart';
+import 'package:side_hustle/utils/sharedprefrences.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/utils/validation/regular_expressions.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -47,6 +50,9 @@ class _PostJobState extends State<PostJob> {
   TextEditingController secondTimeTextController = TextEditingController();
   String? formattedDate;
 
+  int? userId;
+  final prefs = SharedPreferencesHelper.instance;
+
   @override
   void initState() {
     AppUtils.firstSelectedTime = null;
@@ -54,6 +60,7 @@ class _PostJobState extends State<PostJob> {
     _bloc = BlocProvider.of(context);
     _blocCard = BlocProvider.of(context);
     _bloc.initPostJobControllers();
+    getUserId();
     print("Job id: ${widget.id}");
     print("isEdit: ${widget.isEdit}");
     print("isJobFromMyJobs: ${widget.isJobFromMyJobs}");
@@ -62,6 +69,14 @@ class _PostJobState extends State<PostJob> {
         : _bloc.state.jobsModel?.jobsDetailData = JobsDetail();
     // : null;
     super.initState();
+  }
+
+  Future getUserId() async {
+    final UserModel? userModel = await prefs.getUser();
+    userId = userModel?.data?.id;
+    if (kDebugMode) {
+      print("userId: $userId");
+    }
   }
 
   Future getJob() async {
@@ -109,39 +124,47 @@ class _PostJobState extends State<PostJob> {
     });
   }
 
-  Future getCards({required bool isEdit}) async {
+  Future getCards({required bool isEdit, required bool isTestLive}) async {
     print("getCards: $isEdit");
-    await _blocCard
-        .getCardsCubit(context: context, mounted: mounted)
-        .then((value) {
-      if (value != null && value.isEmpty) {
-        AppUtils.showToast(AppStrings.cardNotAddedError);
-      } else if (value != null) {
-        int? cardId;
-        DataCard? dataCard;
-        for (int i = 0;
-            i < (_blocCard.state.cardModel?.data?.length ?? 0);
-            i++) {
-          if (_blocCard.state.cardModel?.data?[i].isDefault == 1) {
-            cardId = _blocCard.state.cardModel?.data?[i].id;
-            dataCard = _blocCard.state.cardModel?.data?[i];
+    if (isTestLive) {
+      AppUtils.showBottomModalSheet(
+          context: context,
+          widget: ModalBottomSheetPackageTypePost(
+              isJobFromMyJobs: widget.isJobFromMyJobs,
+              isJob: true));
+    } else {
+      await _blocCard
+          .getCardsCubit(context: context, mounted: mounted)
+          .then((value) {
+        if (value != null && value.isEmpty) {
+          AppUtils.showToast(AppStrings.cardNotAddedError);
+        } else if (value != null) {
+          int? cardId;
+          DataCard? dataCard;
+          for (int i = 0;
+              i < (_blocCard.state.cardModel?.data?.length ?? 0);
+              i++) {
+            if (_blocCard.state.cardModel?.data?[i].isDefault == 1) {
+              cardId = _blocCard.state.cardModel?.data?[i].id;
+              dataCard = _blocCard.state.cardModel?.data?[i];
+            }
+          }
+          if (isEdit) {
+            AppUtils.showBottomModalSheet(
+                context: context,
+                widget: ModalBottomSheetPackageTypePost(
+                    isJobEdit: true, defaultCardId: cardId));
+          } else {
+            AppUtils.showBottomModalSheet(
+                context: context,
+                widget: ModalBottomSheetPackageTypePost(
+                    isJobFromMyJobs: widget.isJobFromMyJobs,
+                    isJob: true,
+                    defaultCardId: cardId));
           }
         }
-        if (isEdit) {
-          AppUtils.showBottomModalSheet(
-              context: context,
-              widget: ModalBottomSheetPackageTypePost(
-                  isJobEdit: true, defaultCardId: cardId));
-        } else {
-          AppUtils.showBottomModalSheet(
-              context: context,
-              widget: ModalBottomSheetPackageTypePost(
-                  isJobFromMyJobs: widget.isJobFromMyJobs,
-                  isJob: true,
-                  defaultCardId: cardId));
-        }
-      }
-    });
+      });
+    }
   }
 
   @override
@@ -652,7 +675,12 @@ class _PostJobState extends State<PostJob> {
                                           context: context, mounted: mounted)
                                       .then((value) {});
                                 } else {
-                                  await getCards(isEdit: widget.isEdit);
+                                  await getCards(
+                                      isEdit: widget.isEdit,
+                                      isTestLive: userId == Constants.johnId ||
+                                              userId == Constants.mikeId
+                                          ? true
+                                          : false);
                                 }
                               }
                             },

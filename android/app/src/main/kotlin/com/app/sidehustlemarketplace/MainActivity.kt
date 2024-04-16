@@ -1,4 +1,4 @@
-package com.app.sidehustle
+package com.app.sidehustlemarketplace
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.app.sidehustle"
+    namespace "com.app.sidehustlemarketplace"
 //    compileSdkVersion flutter.compileSdkVersion
 //    ndkVersion flutter.ndkVersion
     ndkVersion "25.1.8937393"
@@ -51,7 +51,7 @@ android {
     defaultConfig {
         multiDexEnabled true
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.app.sidehustle"
+        applicationId "com.app.sidehustlemarketplace"
         compileSdk 34
         minSdkVersion 23
         targetSdkVersion 33

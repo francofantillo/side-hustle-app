@@ -8,6 +8,7 @@ import 'package:side_hustle/state_management/cubit/card/card_cubit.dart';
 import 'package:side_hustle/state_management/cubit/side_hustle/side_hustle_cubit.dart';
 import 'package:side_hustle/state_management/models/card_model.dart';
 import 'package:side_hustle/state_management/models/get_edit_side_hustle_model.dart';
+import 'package:side_hustle/state_management/models/user_model.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_enums.dart';
@@ -15,6 +16,7 @@ import 'package:side_hustle/utils/app_font.dart';
 import 'package:side_hustle/utils/app_strings.dart';
 import 'package:side_hustle/utils/app_utils.dart';
 import 'package:side_hustle/utils/constants.dart';
+import 'package:side_hustle/utils/sharedprefrences.dart';
 import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 import 'package:side_hustle/utils/validation/regular_expressions.dart';
 import 'package:side_hustle/widgets/background_widget.dart';
@@ -45,6 +47,9 @@ class _PostProductState extends State<PostProduct> {
   String? dropdownValue;
   final _productsFormKey = GlobalKey<FormState>();
 
+  int? userId;
+  final prefs = SharedPreferencesHelper.instance;
+
   @override
   void initState() {
     _bloc = BlocProvider.of<SideHustleCubit>(context);
@@ -55,7 +60,16 @@ class _PostProductState extends State<PostProduct> {
     widget.id != null
         ? getProduct()
         : _bloc.state.editSideHustleModel = GetEditSideHustleModel();
+    getUserId();
     super.initState();
+  }
+
+  Future getUserId() async {
+    final UserModel? userModel = await prefs.getUser();
+    userId = userModel?.data?.id;
+    if (kDebugMode) {
+      print("userId: $userId");
+    }
   }
 
   Future getProduct() async {
@@ -94,37 +108,43 @@ class _PostProductState extends State<PostProduct> {
     });
   }
 
-  Future getCards({required bool isEdit}) async {
+  Future getCards({required bool isEdit, required bool isTestLive}) async {
     print("getCards: $isEdit");
-    await _blocCard
-        .getCardsCubit(context: context, mounted: mounted)
-        .then((value) {
-      if (value != null && value.isEmpty) {
-        AppUtils.showToast(AppStrings.cardNotAddedError);
-      } else if (value != null) {
-        int? cardId;
-        DataCard? dataCard;
-        for (int i = 0;
-            i < (_blocCard.state.cardModel?.data?.length ?? 0);
-            i++) {
-          if (_blocCard.state.cardModel?.data?[i].isDefault == 1) {
-            cardId = _blocCard.state.cardModel?.data?[i].id;
-            dataCard = _blocCard.state.cardModel?.data?[i];
+    if (isTestLive) {
+      AppUtils.showBottomModalSheet(
+          context: context,
+          widget: const ModalBottomSheetPackageTypePost(isProduct: true));
+    } else {
+      await _blocCard
+          .getCardsCubit(context: context, mounted: mounted)
+          .then((value) {
+        if (value != null && value.isEmpty) {
+          AppUtils.showToast(AppStrings.cardNotAddedError);
+        } else if (value != null) {
+          int? cardId;
+          DataCard? dataCard;
+          for (int i = 0;
+              i < (_blocCard.state.cardModel?.data?.length ?? 0);
+              i++) {
+            if (_blocCard.state.cardModel?.data?[i].isDefault == 1) {
+              cardId = _blocCard.state.cardModel?.data?[i].id;
+              dataCard = _blocCard.state.cardModel?.data?[i];
+            }
+          }
+          if (isEdit) {
+            AppUtils.showBottomModalSheet(
+                context: context,
+                widget: ModalBottomSheetPackageTypePost(
+                    isProduct: true, defaultCardId: cardId));
+          } else {
+            AppUtils.showBottomModalSheet(
+                context: context,
+                widget: ModalBottomSheetPackageTypePost(
+                    isProduct: true, defaultCardId: cardId));
           }
         }
-        if (isEdit) {
-          AppUtils.showBottomModalSheet(
-              context: context,
-              widget: ModalBottomSheetPackageTypePost(
-                  isProduct: true, defaultCardId: cardId));
-        } else {
-          AppUtils.showBottomModalSheet(
-              context: context,
-              widget: ModalBottomSheetPackageTypePost(
-                  isProduct: true, defaultCardId: cardId));
-        }
-      }
-    });
+      });
+    }
   }
 
   @override
@@ -452,7 +472,12 @@ class _PostProductState extends State<PostProduct> {
                                     isEditFromShop: widget.isEditFromShop);
                               } else {
                                 if (_productsFormKey.currentState!.validate()) {
-                                  await getCards(isEdit: widget.isEdit);
+                                  await getCards(
+                                      isEdit: widget.isEdit,
+                                      isTestLive: userId == Constants.johnId ||
+                                              userId == Constants.mikeId
+                                          ? true
+                                          : false);
                                 }
                               }
                             },

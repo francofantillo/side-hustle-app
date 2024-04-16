@@ -27,4 +27,10 @@ class Constants {
   static const String LOCAL_NOTIFICATION_TITLE = "Title";
   static const String LOCAL_NOTIFICATION_DESCRIPTION = "Description";
 
+  /// Test Accounts Id
+  static const int johnId = 9;
+  static const int mikeId = 10;
+
+  static const String deleteAccount = "https://backend.sidehustleapp.net/delete-account-request";
+
 }

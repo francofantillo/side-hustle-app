@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDBkaEG8tYOtFK1-NLwzLjHduPtCY8DlJ8',
-    appId: '1:158889797902:android:749427c2ecca6d3c970f5f',
+    appId: '1:158889797902:android:b1c36097a79757f0970f5f',
     messagingSenderId: '158889797902',
     projectId: 'side-hustle-app-f1cb7',
     storageBucket: 'side-hustle-app-f1cb7.appspot.com',
