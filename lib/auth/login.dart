@@ -197,64 +197,62 @@ class _LoginScreenState extends State<LoginScreen> {
                   // height(AppDimensions.loginButtonVerticalSpacingBetween - 4),
                   SizedBox(
                     height: 0.3.sw,
-                    child: Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: DefaultTextStyle.of(context).style,
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: AppStrings.continueWithGoogle,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize:
-                                        AppDimensions.textSizeTermsAndConditions,
-                                    fontFamily: AppFont.gilroyRegular,
-                                    color: AppColors.blackColor),
-                              ),
-                              TextSpan(
-                                text: AppStrings.termsAndConditions,
-                                style: TextStyle(
-                                    fontWeight: AppDimensions.headingFontWeight,
-                                    fontSize:
-                                        AppDimensions.textSizeTermsAndConditions,
-                                    fontFamily: AppFont.gilroySemiBold,
-                                    color: AppColors.blackColor),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushNamed(context,
-                                        AppRoutes.termsAndConditionsScreenRoute);
-                                    print("Clicked");
-                                  },
-                              ),
-                              TextSpan(
-                                text: ' & ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize:
-                                        AppDimensions.textSizeTermsAndConditions,
-                                    fontFamily: AppFont.gilroyRegular,
-                                    color: AppColors.blackColor),
-                              ),
-                              TextSpan(
-                                text: AppStrings.privacyPolicy,
-                                style: TextStyle(
-                                    fontWeight: AppDimensions.headingFontWeight,
-                                    fontSize:
-                                        AppDimensions.textSizeTermsAndConditions,
-                                    fontFamily: AppFont.gilroySemiBold,
-                                    color: AppColors.blackColor),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushNamed(context,
-                                        AppRoutes.privacyPolicyScreenRoute);
-                                    print("Clicked");
-                                  },
-                              ),
-                            ],
-                          ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: DefaultTextStyle.of(context).style,
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: AppStrings.continueWithGoogle,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize:
+                                      AppDimensions.textSizeTermsAndConditions,
+                                  fontFamily: AppFont.gilroyRegular,
+                                  color: AppColors.blackColor),
+                            ),
+                            TextSpan(
+                              text: AppStrings.termsAndConditions,
+                              style: TextStyle(
+                                  fontWeight: AppDimensions.headingFontWeight,
+                                  fontSize:
+                                      AppDimensions.textSizeTermsAndConditions,
+                                  fontFamily: AppFont.gilroySemiBold,
+                                  color: AppColors.blackColor),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context,
+                                      AppRoutes.termsAndConditionsScreenRoute);
+                                  print("Clicked");
+                                },
+                            ),
+                            TextSpan(
+                              text: ' & ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize:
+                                      AppDimensions.textSizeTermsAndConditions,
+                                  fontFamily: AppFont.gilroyRegular,
+                                  color: AppColors.blackColor),
+                            ),
+                            TextSpan(
+                              text: AppStrings.privacyPolicy,
+                              style: TextStyle(
+                                  fontWeight: AppDimensions.headingFontWeight,
+                                  fontSize:
+                                      AppDimensions.textSizeTermsAndConditions,
+                                  fontFamily: AppFont.gilroySemiBold,
+                                  color: AppColors.blackColor),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context,
+                                      AppRoutes.privacyPolicyScreenRoute);
+                                  print("Clicked");
+                                },
+                            ),
+                          ],
                         ),
                       ),
                     ),
