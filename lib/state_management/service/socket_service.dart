@@ -7,10 +7,11 @@ class SocketManager {
 
   static late IO.Socket _socket;
 
-  static const String socketPort = '3014';
+  // static const String socketPort = '3014';
+  static const String socketPort = '3017'; /// Live
   static const String socketURL =
-      // "http://your_server_address:$socketPort";
-      "https://socketside-hustle.trangotech.dev";
+      // "https://socketside-hustle.trangotech.dev"; /// Staging
+      "https://socket.sidehustleapp.net"; /// Live
 
   static void init() {
     // Initialize the Socket.IO connection
