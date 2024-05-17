@@ -5,7 +5,9 @@ import 'package:side_hustle/state_management/service/socket_service.dart';
 class StripeService {
   static String publishableKey =
       // "pk_test_51KP3c7DBTVUYOnmbqwLQZNSYuY6i3Lg57A71uPRtDvwPPSnIQqPlN4fvK4xLIWJ60ev4NkNomniMOf5ORSQtaAVx009gK7gzm5"; /// Staging
-      "pk_live_51OmkzJI5A9nxu5SNJHCkEVwwGXCRLwX2rsULajaZOcme6wpxnnkoQtrwZty62Bu8dKUNWBz94H3oH5t2VDuQHeEg001woy9r0p"; /// Live
+      "pk_live_51OmkzJI5A9nxu5SNJHCkEVwwGXCRLwX2rsULajaZOcme6wpxnnkoQtrwZty62Bu8dKUNWBz94H3oH5t2VDuQHeEg001woy9r0p";
+
+  /// Live
 
   static void init() {
     Stripe.publishableKey = publishableKey;
@@ -13,7 +15,7 @@ class StripeService {
 
   static Future<StripTokenModel?> getCardToken(
       {required CardDetails cardDetails}) async {
-    SocketManager.init();
+    // SocketManager.init();
     try {
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetails);
 

@@ -58,11 +58,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyChh5QLtXx9owwkGkLrtYqZk3lPvXdcjtA',
-    appId: '1:35016346526:ios:e51e61854b684cdbb1a48f',
-    messagingSenderId: '35016346526',
-    projectId: 'side-hustle-763af',
-    storageBucket: 'side-hustle-763af.appspot.com',
-    iosBundleId: 'com.app.sidehustle',
+    apiKey: 'AIzaSyC2BFFx2ZwoyQBNasGTDWK4L76HZyqA7CE',
+    appId: '1:158889797902:ios:1acdad797930acb8970f5f',
+    messagingSenderId: '158889797902',
+    projectId: 'side-hustle-app-f1cb7',
+    storageBucket: 'side-hustle-app-f1cb7.appspot.com',
+    iosBundleId: 'com.app.sidehustleMarketPlace',
   );
 }
