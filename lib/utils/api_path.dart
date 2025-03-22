@@ -3,11 +3,17 @@ class API {
 
   /// Base Url
   // static const String BASE_URL = "https://side-hustle.trangotech.dev/api"; /// Staging
-  static const String BASE_URL = "https://backend.sidehustleapp.net/api"; /// Live
+  //static const String BASE_URL = "https://backend.sidehustleapp.net/api"; /// Live
   // static const String BASE_URL_IMAGE = "https://side-hustle.trangotech.dev/"; /// Staging
-  static const String BASE_URL_IMAGE = "https://backend.sidehustleapp.net/"; /// Live
+  //static const String BASE_URL_IMAGE = "https://backend.sidehustleapp.net/"; /// Live
   // static const String CHAT_SOCKET_API_BASE_URL = "http://socketside-hustle.trangotech.dev:3023"; /// Staging
-  static const String CHAT_SOCKET_API_BASE_URL = "http://socket.sidehustleapp.net:3023"; /// Live
+  //static const String CHAT_SOCKET_API_BASE_URL = "http://socket.sidehustleapp.net:3023"; /// Live
+
+  // static const String BASE_URL = "http://10.0.2.2:8000/api"; /// Android Emulator
+  static const String BASE_URL = "http://localhost:8000/api"; /// iOS Simulator
+  // static const String BASE_URL_IMAGE = "http://10.0.2.2:8000/"; /// Android Emulator
+  static const String BASE_URL_IMAGE = "http://localhost:8000/"; /// iOS Simulator
+  static const String CHAT_SOCKET_API_BASE_URL = "http://10.0.2.2:3023"; /// For local socket server
 
   /////////////// SOCKET CHAT RESPONSE KEYS ////////////////
   static const String GET_MESSAGES_KEY = "get_messages";

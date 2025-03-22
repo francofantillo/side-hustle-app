@@ -3,7 +3,6 @@ class Constants {
   static int passwordFieldLength = 12;
 
   static const String googlePlacesApiKey =
-      // "AIzaSyDO1KMqg08gyZPAIWiIOY2hRtv2_EBuEB4"; /// Development Key
       "AIzaSyCZ7cxxXivimP-k25BzBW1uU2Re5ex_3R4"; /// client key
 
   /// Characters Length
