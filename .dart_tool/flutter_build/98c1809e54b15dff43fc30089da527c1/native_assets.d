@@ -1,1 +1,0 @@
- /Users/francofantillo/Documents/Swiftech\ Solutions\ Inc/customers/side-hustle-app/.dart_tool/flutter_build/98c1809e54b15dff43fc30089da527c1/native_assets.yaml: 
