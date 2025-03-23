@@ -1,40 +1,21 @@
 {
   "project_info": {
-    "project_number": "158889797902",
-    "project_id": "side-hustle-app-f1cb7",
-    "storage_bucket": "side-hustle-app-f1cb7.appspot.com"
+    "project_number": "733873661282",
+    "project_id": "side-hustle-11c42",
+    "storage_bucket": "side-hustle-11c42.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:158889797902:android:749427c2ecca6d3c970f5f",
+        "mobilesdk_app_id": "1:733873661282:android:ec214e76a3773cea85f83b",
         "android_client_info": {
-          "package_name": "com.app.sidehustle"
+          "package_name": "com.swiftech.sidehustle"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDBkaEG8tYOtFK1-NLwzLjHduPtCY8DlJ8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:158889797902:android:b1c36097a79757f0970f5f",
-        "android_client_info": {
-          "package_name": "com.app.sidehustlemarketplace"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDBkaEG8tYOtFK1-NLwzLjHduPtCY8DlJ8"
+          "current_key": "AIzaSyDcQwkAzm0OzeO4FDyPXRuOm3HckQ4gcdM"
         }
       ],
       "services": {

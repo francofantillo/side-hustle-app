@@ -1,0 +1,12 @@
+version: '3'
+services:
+  firebase-tools:
+    build: .
+    volumes:
+      - .:/app
+      - firebase-config:/root/.config/configstore
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/firebase-credentials.json
+
+volumes:
+  firebase-config:

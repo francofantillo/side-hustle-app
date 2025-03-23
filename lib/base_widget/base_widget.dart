@@ -1,4 +1,6 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +21,7 @@ import 'package:side_hustle/utils/my_behaviour.dart';
 import 'package:side_hustle/utils/screen_design_size.dart';
 import 'package:side_hustle/utils/service/firebase_service.dart';
 
+import '../firebase_options.dart';
 import '../utils/app_font.dart';
 
 class BaseWidget extends StatefulWidget {
@@ -48,6 +51,15 @@ class _BaseWidgetState extends State<BaseWidget> {
   }
 
   void _setNotifications() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    // final apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+    // final fcmToken = await FirebaseMessaging.instance.getToken();
+    // print(apnsToken);
+    // print(fcmToken);
+
     await FirebaseMessagingService().initializeNotificationSettings();
     FirebaseMessagingService().foregroundNotification();
     FirebaseMessagingService().backgroundTapNotification();

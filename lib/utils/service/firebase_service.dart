@@ -14,16 +14,16 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage? message) async {
     print("Handling a background message");
     print("_messaging onBackgroundMessage: ${message?.data}");
   }
-  if (message != null) {
-    if (kDebugMode) {
-      print("message is not null");
-    }
-    if (BaseWidget.globalKey.currentContext != null) {
-      print("context is not null");
-    } else {
-      print("context is null");
+  try {
+    if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp();
     }
+
+    if (message != null) {
+      print("Background message data: ${message.data}");
+    }
+  } catch (e) {
+    print("Error handling background message: $e");
   }
 }
 
@@ -58,9 +58,46 @@ class FirebaseMessagingService {
     return _firebaseMessaging ??= FirebaseMessaging.instance;
   }
 
-  Future<String?> getToken() {
-    return _firebaseMessaging!.getToken();
+Future<String?> getToken() async {
+  try {
+
+    // Check if messaging instance exists
+    _firebaseMessaging ??= FirebaseMessaging.instance;
+
+    // Get token for both platforms
+    final apnsToken = await _firebaseMessaging!.getAPNSToken();
+    final token = await _firebaseMessaging?.getToken();
+    if (kDebugMode) {
+      print('FCM Token: $token');
+    }
+    return token;
   }
+    // Get the token on iOS
+    // if (Platform.isIOS) {
+    //   final apnsToken = await _firebaseMessaging!.getAPNSToken();
+    //   if (apnsToken != null) {
+    //     final token = await _firebaseMessaging!.getToken();
+    //     if (kDebugMode) {
+    //       print('FCM Token: $token');
+    //     }
+    //     return token;
+    //   }
+    // }
+    // else {
+    //   // Get the token on Android
+    //   final token = await _firebaseMessaging!.getToken();
+    //   if (kDebugMode) {
+    //     print('FCM Token: $token');
+    //   }
+    //   return token;
+
+   catch (e) {
+    //if (kDebugMode) {
+      print('Error getting FCM token: $e');
+    //}
+    return null;
+  }
+}
 
   Future initializeNotificationSettings() async {
     NotificationSettings? settings =
