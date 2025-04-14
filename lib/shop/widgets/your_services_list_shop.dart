@@ -47,16 +47,10 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                         parent: BouncingScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
                     itemCount:
                         state.yourShopModel?.shopData?.services?.length ?? 0,
-                    // Replace with your item count
                     itemBuilder: (context, index) {
-                      // Replace with your horizontal list item
-                      print(
-                          "Service Price: ${state.yourShopModel?.shopData?.services?[index].price}");
                       return Padding(
-                        // padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                         padding: EdgeInsets.only(
                             right: 16.0.w, left: 16.0.w, top: 8),
                         child: InkWell(
@@ -70,7 +64,6 @@ class _YourServicesListShopState extends State<YourServicesListShop> {
                                   isEditFromShop: true,
                                 ));
                           },
-                          // I need 2 horizontal Listview builders inside a vertical scrollview flutter
                           child: YourServiceItemWidget(
                             imageWidth: 1.sw,
                             isDelete: widget.isEdit,

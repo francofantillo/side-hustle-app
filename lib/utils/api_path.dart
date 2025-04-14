@@ -10,11 +10,11 @@ class API {
   //static const String CHAT_SOCKET_API_BASE_URL = "http://socket.sidehustleapp.net:3023"; /// Live
 
   // static const String BASE_URL = "http://10.0.2.2:8000/api"; /// Android Emulator
-  // static const String BASE_URL = "http://localhost:8000/api"; /// iOS Simulator
-  static const String BASE_URL = "http://10.0.0.242:8000/api"; /// iOS Device
+   static const String BASE_URL = "http://localhost:8000/api"; /// iOS Simulator
+  // static const String BASE_URL = "http://10.0.0.242:8000/api"; /// iOS Device
   // static const String BASE_URL_IMAGE = "http://10.0.2.2:8000/"; /// Android Emulator
-  //static const String BASE_URL_IMAGE = "http://localhost:8000/"; /// iOS Simulator
-  static const String BASE_URL_IMAGE = "http://10.0.0.242:8000/"; /// iOS Device
+   static const String BASE_URL_IMAGE = "http://localhost:8000/"; /// iOS Simulator
+  // static const String BASE_URL_IMAGE = "http://10.0.0.242:8000/"; /// iOS Device
   static const String CHAT_SOCKET_API_BASE_URL = "http://10.0.2.242:3023"; /// For local socket server
 
   /////////////// SOCKET CHAT RESPONSE KEYS ////////////////

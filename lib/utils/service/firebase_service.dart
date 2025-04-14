@@ -31,7 +31,7 @@ class FirebaseMessagingService {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  IOSInitializationSettings? _initializationSettingsIOS;
+  DarwinInitializationSettings? _initializationSettingsIOS;
   AndroidInitializationSettings? _initializationSettingsAndroid;
   AndroidNotificationDetails? _androidLocalNotificationDetails;
   AndroidNotificationChannel? androidNotificationChannel;
@@ -161,7 +161,7 @@ Future<String?> getToken() async {
   }
 
   Future<void> _initializeIosLocalNotificationSettings() async {
-    _initializationSettingsIOS = const IOSInitializationSettings(
+    _initializationSettingsIOS = const DarwinInitializationSettings(
         requestAlertPermission: false,
         requestBadgePermission: false,
         requestSoundPermission: false);
@@ -170,8 +170,12 @@ Future<String?> getToken() async {
 
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-    await _flutterLocalNotificationsPlugin.initialize(_initializationSettings!,
-        onSelectNotification: onTapLocalNotification);
+    await _flutterLocalNotificationsPlugin.initialize(
+      _initializationSettings!,
+      onDidReceiveNotificationResponse: (NotificationResponse details) async {
+        onTapLocalNotification(details.payload);
+      },
+    );
   }
 
   Future<void> _initializeAndroidLocalNotificationSettings() async {
@@ -189,8 +193,12 @@ Future<String?> getToken() async {
     _androidNotificationDetails =
         NotificationDetails(android: _androidLocalNotificationDetails);
 
-    await _flutterLocalNotificationsPlugin.initialize(_initializationSettings!,
-        onSelectNotification: onTapLocalNotification);
+    await _flutterLocalNotificationsPlugin.initialize(
+      _initializationSettings!,
+      onDidReceiveNotificationResponse: (NotificationResponse details) async {
+        onTapLocalNotification(details.payload);
+      },
+    );
   }
 
   //on tap local notification

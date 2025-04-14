@@ -21,8 +21,9 @@ import 'package:side_hustle/utils/my_behaviour.dart';
 import 'package:side_hustle/utils/screen_design_size.dart';
 import 'package:side_hustle/utils/service/firebase_service.dart';
 
-import '../firebase_options.dart';
+//import '..utils/service/firebase_options.dart';
 import '../utils/app_font.dart';
+import '../utils/service/firebase_options.dart';
 
 class BaseWidget extends StatefulWidget {
   static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();

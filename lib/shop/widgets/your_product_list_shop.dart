@@ -47,14 +47,10 @@ class _YourProductsListShopState extends State<YourProductsListShop> {
                         parent: BouncingScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
                     itemCount:
                         state.yourShopModel?.shopData?.products?.length ?? 0,
-                    // Replace with your item count
                     itemBuilder: (context, index) {
-                      // Replace with your horizontal list item
                       return Padding(
-                        // padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                         padding: EdgeInsets.only(
                             right: 16.0.w, left: 16.0.w, top: 8),
                         child: InkWell(

@@ -31,16 +31,19 @@ class YourProductsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: imageHeight,
+    return Container(
       width: imageWidth,
+      constraints: BoxConstraints(
+        minHeight: AppDimensions.sideHustleItemHeight,
+        maxHeight: double.infinity,
+      ),
       child: Card(
         shadowColor: Colors.transparent,
         elevation: AppDimensions.cardElevation,
         color: boarderColor,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+              BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
         ),
         child: Material(
           shadowColor: Colors.transparent,
@@ -48,15 +51,16 @@ class YourProductsItemWidget extends StatelessWidget {
           color: boarderColor,
           shape: RoundedRectangleBorder(
             borderRadius:
-            BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
+                BorderRadius.circular(AppDimensions.listItemImageRoundedBorder),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 6.0, bottom: 6.0, left: 6.0),
+            padding: const EdgeInsets.all(6.0),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 RoundedCornersImage(
-                  imageHeight: imageHeight,
+                  imageHeight: AppDimensions.sideHustleItemHeight * 0.8,
                   imageWidth: AppDimensions.sideHustleItemWidth,
                   image: imagePath,
                   assetImage: AssetsPath.imageLoadError,
@@ -64,8 +68,7 @@ class YourProductsItemWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding:
-                    const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+                    padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -85,13 +88,13 @@ class YourProductsItemWidget extends StatelessWidget {
                                   child: textWidget(
                                       text: desc,
                                       maxLines: 2,
-                                      fontSize:
-                                      AppDimensions.textSize10)),
+                                      fontSize: AppDimensions.textSize10)),
                               width(imageWidth! * .01),
                               IconButtonWithBackground(
                                 onTap: onTap,
-                                iconPath:
-                                isDelete ? AssetsPath.delete : AssetsPath.edit,
+                                iconPath: isDelete
+                                    ? AssetsPath.delete
+                                    : AssetsPath.edit,
                                 width: imageHeight! * .28,
                                 height: imageHeight! * .28,
                                 backgroundColor: isDelete

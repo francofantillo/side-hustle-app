@@ -44,15 +44,11 @@ class _ProductsListShopState extends State<ProductsListShop> {
                         parent: BouncingScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
                     itemCount:
                         state.otherUserShopModel?.shopData?.products?.length ??
                             0,
-                    // Replace with your item count
                     itemBuilder: (context, index) {
-                      // Replace with your horizontal list item
                       return Padding(
-                        // padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                         padding: EdgeInsets.only(
                             right: 16.0.w, left: 16.0.w, top: 8),
                         child: ProductsItemsWidget(
@@ -65,51 +61,11 @@ class _ProductsListShopState extends State<ProductsListShop> {
                                       ?.products?[index].id,
                                 ));
                           },
-                          onTapAdd: () async {
-                            _bloc
-                                .checkIsOtherShop(
-                                    shopId: state.otherUserShopModel?.shopData
-                                        ?.shopDetail?.id)
-                                .then((value) async {
-                              if (value == 1) {
-                                /// Show Cart Clear Dialog
-                                AppDialogues.showCartClearInfo(
-                                    context: context,
-                                    onPressedOk: () async {
-                                      /// Clear Cart
-                                      await _bloc.addToCartCubit(
-                                          context: context,
-                                          mounted: mounted,
-                                          shopId: state.otherUserShopModel
-                                              ?.shopData?.shopDetail?.id,
-                                          productId: state.otherUserShopModel
-                                              ?.shopData?.products?[index].id);
-                                    }).show();
-                              } else {
-                                /// Add Product
-                                await _bloc.addToCartCubit(
-                                    context: context,
-                                    mounted: mounted,
-                                    shopId: state.otherUserShopModel?.shopData
-                                        ?.shopDetail?.id,
-                                    productId: state.otherUserShopModel
-                                        ?.shopData?.products?[index].id);
-                              }
-                            });
-                          },
                           imageWidth: 1.sw,
                           imageHeight: AppDimensions.sideHustleItemHeight,
                           boarderColor: AppColors.itemBGColor,
                           title: state.otherUserShopModel?.shopData
                               ?.products?[index].name,
-                          subTitle: state.otherUserShopModel?.shopData
-                              ?.products?[index].description,
-                          deliveryType: AppStrings.pickUpViewProduct,
-                          imagePath: state.otherUserShopModel?.shopData
-                              ?.products?[index].image,
-                          price: state.otherUserShopModel?.shopData
-                              ?.products?[index].price
-                              ?.toStringAsFixed(2),
                         ),
                       );
                     },

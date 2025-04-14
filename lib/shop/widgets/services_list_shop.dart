@@ -43,66 +43,66 @@ class _ServicesListShopState extends State<ServicesListShop> {
                         parent: BouncingScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    // itemCount: AlphaAppData.jobsAndEventsList[0].itemList?.length ?? 0, // Replace with your item count
                     itemCount:
                         state.otherUserShopModel?.shopData?.services?.length ??
                             0,
-                    // Replace with your item count
                     itemBuilder: (context, index) {
-                      // Replace with your horizontal list item
                       return Padding(
-                        // padding: const EdgeInsets.only(right: 16.0, left: 8.0),
                         padding: const EdgeInsets.only(
                             right: 16.0, left: 8.0, top: 8),
-                        child: ServiceItemsWidget(
-                          imageWidth: 1.sw,
-                          imageHeight: AppDimensions.sideHustleItemHeight,
-                          boarderColor: AppColors.itemBGColor,
-                          title: state.otherUserShopModel?.shopData
-                              ?.services?[index].name,
-                          subTitle: state.otherUserShopModel?.shopData
-                              ?.services?[index].description,
-                          serviceType: AppStrings.pickUpViewProduct,
-                          imagePath: state.otherUserShopModel?.shopData
-                              ?.services?[index].image,
-                          price:
-                          state.otherUserShopModel?.shopData
-                              ?.services?[index].price?.toStringAsFixed(2),
-                          onTapAdd: () async {
-                            _bloc
-                                .checkIsOtherShop(
-                                    shopId: state.otherUserShopModel?.shopData
-                                        ?.shopDetail?.id)
-                                .then((value) async {
-                              if (value == 1) {
-                                /// Show Cart Clear Dialog
-                                await _bloc.addToCartCubit(
-                                    context: context,
-                                    mounted: mounted,
-                                    shopId: state.otherUserShopModel?.shopData
-                                        ?.shopDetail?.id,
-                                    productId: state.otherUserShopModel
-                                        ?.shopData?.services?[index].id);
-                              } else {
-                                /// Add Product
-                                await _bloc.addToCartCubit(
-                                    context: context,
-                                    mounted: mounted,
-                                    shopId: state.otherUserShopModel?.shopData
-                                        ?.shopDetail?.id,
-                                    productId: state.otherUserShopModel
-                                        ?.shopData?.services?[index].id);
-                              }
-                            });
-                          },
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.viewServiceScreenRoute,
-                                arguments: ViewService(
-                                  isViewingServiceFromOthersShop: true,
-                                  id: state.otherUserShopModel?.shopData
-                                      ?.services?[index].id,
-                                ));
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            return ServiceItemsWidget(
+                              imageWidth: 1.sw,
+                              imageHeight: AppDimensions.sideHustleItemHeight,
+                              boarderColor: AppColors.itemBGColor,
+                              title: state.otherUserShopModel?.shopData
+                                  ?.services?[index].name,
+                              subTitle: state.otherUserShopModel?.shopData
+                                  ?.services?[index].description,
+                              serviceType: AppStrings.pickUpViewProduct,
+                              imagePath: state.otherUserShopModel?.shopData
+                                  ?.services?[index].image,
+                              price: state.otherUserShopModel?.shopData
+                                  ?.services?[index].price
+                                  ?.toStringAsFixed(2),
+                              onTapAdd: () async {
+                                _bloc
+                                    .checkIsOtherShop(
+                                        shopId: state.otherUserShopModel
+                                            ?.shopData?.shopDetail?.id)
+                                    .then((value) async {
+                                  if (value == 1) {
+                                    /// Show Cart Clear Dialog
+                                    await _bloc.addToCartCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        shopId: state.otherUserShopModel
+                                            ?.shopData?.shopDetail?.id,
+                                        productId: state.otherUserShopModel
+                                            ?.shopData?.services?[index].id);
+                                  } else {
+                                    /// Add Product
+                                    await _bloc.addToCartCubit(
+                                        context: context,
+                                        mounted: mounted,
+                                        shopId: state.otherUserShopModel
+                                            ?.shopData?.shopDetail?.id,
+                                        productId: state.otherUserShopModel
+                                            ?.shopData?.services?[index].id);
+                                  }
+                                });
+                              },
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.viewServiceScreenRoute,
+                                    arguments: ViewService(
+                                      isViewingServiceFromOthersShop: true,
+                                      id: state.otherUserShopModel?.shopData
+                                          ?.services?[index].id,
+                                    ));
+                              },
+                            );
                           },
                         ),
                       );
