@@ -78,7 +78,9 @@ class Data {
     zipCode = json['zip_code'];
     country = json['country'];
     image = json['image'];
-    rating = json['rating']?.toDouble();
+    rating = json['rating'] is String
+        ? double.tryParse(json['rating']) ?? 0.0
+        : json['rating']?.toDouble();
     apiToken = json['api_token'];
     fcmToken = json['fcm_token'];
     accessToken = json['access_token'];

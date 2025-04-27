@@ -1,21 +1,32 @@
-
 class API {
-
   /// Base Url
-  // static const String BASE_URL = "https://side-hustle.trangotech.dev/api"; /// Staging
-  //static const String BASE_URL = "https://backend.sidehustleapp.net/api"; /// Live
-  // static const String BASE_URL_IMAGE = "https://side-hustle.trangotech.dev/"; /// Staging
-  //static const String BASE_URL_IMAGE = "https://backend.sidehustleapp.net/"; /// Live
-  // static const String CHAT_SOCKET_API_BASE_URL = "http://socketside-hustle.trangotech.dev:3023"; /// Staging
-  //static const String CHAT_SOCKET_API_BASE_URL = "http://socket.sidehustleapp.net:3023"; /// Live
+  static const String BASE_URL =
+      "https://side-hustle-app-992c4e84180d.herokuapp.com/api";
 
+  /// Heroku
+  // static const String BASE_URL = "https://side-hustle.trangotech.dev/api"; /// Staging
+  // static const String BASE_URL = "https://backend.sidehustleapp.net/api"; /// Live
   // static const String BASE_URL = "http://10.0.2.2:8000/api"; /// Android Emulator
-   static const String BASE_URL = "http://localhost:8000/api"; /// iOS Simulator
+  // static const String BASE_URL = "http://localhost:8000/api"; /// iOS Simulator
   // static const String BASE_URL = "http://10.0.0.242:8000/api"; /// iOS Device
+
+  static const String BASE_URL_IMAGE =
+      "https://side-hustle-app-992c4e84180d.herokuapp.com/";
+
+  /// Heroku
+  // static const String BASE_URL_IMAGE = "https://side-hustle.trangotech.dev/"; /// Staging
+  // static const String BASE_URL_IMAGE = "https://backend.sidehustleapp.net/"; /// Live
   // static const String BASE_URL_IMAGE = "http://10.0.2.2:8000/"; /// Android Emulator
-   static const String BASE_URL_IMAGE = "http://localhost:8000/"; /// iOS Simulator
+  // static const String BASE_URL_IMAGE = "http://localhost:8000/"; /// iOS Simulator
   // static const String BASE_URL_IMAGE = "http://10.0.0.242:8000/"; /// iOS Device
-  static const String CHAT_SOCKET_API_BASE_URL = "http://10.0.2.242:3023"; /// For local socket server
+
+  static const String CHAT_SOCKET_API_BASE_URL =
+      "https://side-hustle-app-992c4e84180d.herokuapp.com:3023";
+
+  /// Heroku
+  // static const String CHAT_SOCKET_API_BASE_URL = "http://socketside-hustle.trangotech.dev:3023"; /// Staging
+  // static const String CHAT_SOCKET_API_BASE_URL = "http://socket.sidehustleapp.net:3023"; /// Live
+  // static const String CHAT_SOCKET_API_BASE_URL = "http://10.0.2.242:3023"; /// For local socket server
 
   /////////////// SOCKET CHAT RESPONSE KEYS ////////////////
   static const String GET_MESSAGES_KEY = "get_messages";
@@ -61,12 +72,14 @@ class API {
   static const String GET_EDIT_EVENT = "${BASE_URL}/edit-event";
   static const String GET_MY_EVENTS = "${BASE_URL}/my-events";
   static const String GET_ATTENDEES = "${BASE_URL}/attendees";
-  static const String UPDATE_ATTENDEES_STATUS = "${BASE_URL}/update-attendees-status";
+  static const String UPDATE_ATTENDEES_STATUS =
+      "${BASE_URL}/update-attendees-status";
 
   /// Favourites
   static const String GET_FAVOURITES = "${BASE_URL}/view-favourite";
   static const String ADD_TO_FAVOURITES = "${BASE_URL}/add-to-favourite";
-  static const String REMOVE_FROM_FAVOURITES = "${BASE_URL}/remove-from-favourite";
+  static const String REMOVE_FROM_FAVOURITES =
+      "${BASE_URL}/remove-from-favourite";
 
   /// Resume
   static const String UPDATE_RESUME = "${BASE_URL}/update-resume";
@@ -82,7 +95,8 @@ class API {
   static const String APPLYFOR_JOB = "${BASE_URL}/apply-for-job";
   static const String GET_MY_JOBS = "${BASE_URL}/my-jobs";
   static const String GET_JOB_REQUESTS = "${BASE_URL}/job-requests";
-  static const String UPDATE_JOB_REQUESTS = "${BASE_URL}/update-job-request-status";
+  static const String UPDATE_JOB_REQUESTS =
+      "${BASE_URL}/update-job-request-status";
   static const String UPDATE_JOB_STATUS = "${BASE_URL}/update-job-status";
   static const String ADD_JOB_REVIEW = "${BASE_URL}/add-review";
 
@@ -96,6 +110,7 @@ class API {
   static const String GET_DELETE_SIDEHUSTLE = "${BASE_URL}/delete-product";
   static const String GET_SIDEHUSTLE = "${BASE_URL}/products";
   static const String GET_SIDEHUSTLE_DETAIL = "${BASE_URL}/product-detail";
+
   /// Side Hustle Cart
   static const String ADD_TO_CART = "${BASE_URL}/add-cart";
   static const String UPDATE_CART = "${BASE_URL}/update-cart";
