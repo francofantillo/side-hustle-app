@@ -95,8 +95,8 @@ class EventsData {
     lat = json['lat'];
     lng = json['lng'];
     eventName = json['event_name'];
-    // price = json['price'] != null ? json['price'].toString() : json['price'];
-    price = json['price']?.toDouble();
+    // Replace direct toDouble() call with a safe parsing method
+    price = _parseDoubleValue(json['price']);
     location = json['location'];
     startDate = json['start_date'];
     startTime = json['start_time'];
@@ -112,6 +112,15 @@ class EventsData {
     }
     paymentType = json['payment_type'];
     isInterested = json['is_interested'];
+  }
+
+  // Helper method to safely parse double values from various types
+  static double? _parseDoubleValue(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 
   Map<String, dynamic> toJson() {

@@ -16,17 +16,18 @@ class ScheduledJobItemWidget extends StatelessWidget {
   final Color? boarderColor;
   final double? imageHeight, imageWidth;
 
-  const ScheduledJobItemWidget({super.key,
-    this.title,
-    this.desc,
-    this.onTap,
-    this.onTapViewRequest,
-    this.onTapEditJob,
-    this.price,
-    this.imagePath,
-    this.imageHeight,
-    this.imageWidth,
-    this.boarderColor});
+  const ScheduledJobItemWidget(
+      {super.key,
+      this.title,
+      this.desc,
+      this.onTap,
+      this.onTapViewRequest,
+      this.onTapEditJob,
+      this.price,
+      this.imagePath,
+      this.imageHeight,
+      this.imageWidth,
+      this.boarderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -64,60 +65,73 @@ class ScheduledJobItemWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      // padding: const EdgeInsets.all(8.0),
                       padding:
-                      const EdgeInsets.only(top: 8.0, left: 8, right: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                  child: textWidget(
-                                      text: title,
-                                      fontFamily: AppFont.gilroyBold,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: AppDimensions.textSizeSmall,
-                                      color: AppColors.textBlackColor)),
-                            ],
-                          ),
-                          height(imageHeight! * .01),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                  child: textWidget(
-                                      text: desc,
-                                      maxLines: 2,
-                                      fontSize: AppDimensions.textSize10)),
-                              width(0.02.sw),
-                              IconButtonWithBackground(
-                                onTap: onTapEditJob,
-                                iconPath: AssetsPath.edit,
-                                height: imageHeight! * .20,
-                                width: imageHeight! * .20,
-                                backgroundColor: AppColors.primaryColor,
-                                iconColor: AppColors.whiteColor,
+                          const EdgeInsets.only(top: 8.0, left: 8, right: 8),
+                      // Wrap Column in ConstrainedBox to prevent overflow
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight:
+                              (imageHeight ?? 0) - 16, // Account for padding
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize:
+                              MainAxisSize.min, // Use minimum space needed
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                    child: textWidget(
+                                        text: title,
+                                        maxLines: 1,
+                                        textOverflow: TextOverflow.ellipsis,
+                                        fontFamily: AppFont.gilroyBold,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: AppDimensions.textSizeSmall,
+                                        color: AppColors.textBlackColor)),
+                              ],
+                            ),
+                            SizedBox(height: imageHeight! * .01),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                    child: textWidget(
+                                        text: desc,
+                                        maxLines:
+                                            1, // Limit to 1 line to save space
+                                        textOverflow: TextOverflow.ellipsis,
+                                        fontSize: AppDimensions.textSize10)),
+                                SizedBox(width: 0.02.sw),
+                                IconButtonWithBackground(
+                                  onTap: onTapEditJob,
+                                  iconPath: AssetsPath.edit,
+                                  height: imageHeight! * .20,
+                                  width: imageHeight! * .20,
+                                  backgroundColor: AppColors.primaryColor,
+                                  iconColor: AppColors.whiteColor,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                                height: imageHeight! * .02), // Reduced spacing
+                            textWidget(
+                                text: price != null ? "\$$price" : "",
+                                fontFamily: AppFont.gilroyBold,
+                                fontWeight: FontWeight.bold,
+                                fontSize: AppDimensions.textSizeSmall,
+                                color: AppColors.textBlackColor),
+                            const Spacer(), // This will take remaining space
+                            Container(
+                              margin: EdgeInsets.only(
+                                  bottom: 2), // Added small bottom margin
+                              padding: EdgeInsets.symmetric(
+                                vertical: 0.02.sw, // Reduced vertical padding
+                                horizontal: 0.03.sw,
                               ),
-                            ],
-                          ),
-                          height(imageHeight! * .04),
-                          textWidget(
-                              text: price != null ? "\$$price" : "",
-                              fontFamily: AppFont.gilroyBold,
-                              fontWeight: FontWeight.bold,
-                              fontSize: AppDimensions.textSizeSmall,
-                              color: AppColors.textBlackColor),
-                          const Spacer(),
-                          height(0.01.sw),
-                          InkWell(
-                            onTap: onTapViewRequest,
-                            child: Container(
-                              margin: EdgeInsets.zero,
-                              padding: EdgeInsets.all(0.03.sw),
                               decoration: BoxDecoration(
                                 color: AppColors.greenColor,
                                 borderRadius: BorderRadius.circular(12),
@@ -126,20 +140,23 @@ class ScheduledJobItemWidget extends StatelessWidget {
                                 color: AppColors.greenColor,
                                 borderRadius: BorderRadius.circular(
                                     AppDimensions.bookedJobRoundedBorder),
-                                child: Center(
-                                  child: textWidget(
-                                    text: AppStrings.viewRequest,
-                                    color: AppColors.textWhiteColor,
-                                    fontFamily: AppFont.gilroyBold,
-                                    fontSize: AppDimensions.textSize10,
-                                    fontWeight: FontWeight.bold,
-                                    textAlign: TextAlign.center,
+                                child: InkWell(
+                                  onTap: onTapViewRequest,
+                                  child: Center(
+                                    child: textWidget(
+                                      text: AppStrings.viewRequest,
+                                      color: AppColors.textWhiteColor,
+                                      fontFamily: AppFont.gilroyBold,
+                                      fontSize: AppDimensions.textSize10,
+                                      fontWeight: FontWeight.bold,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   )

@@ -32,27 +32,35 @@ class Data {
   String? productId;
   String? name;
   int? price;
-  Null? status;
+  Null status;
   String? createdAt;
   String? updatedAt;
 
   Data(
       {this.id,
-        this.productId,
-        this.name,
-        this.price,
-        this.status,
-        this.createdAt,
-        this.updatedAt});
+      this.productId,
+      this.name,
+      this.price,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
 
   Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = _parseIntValue(json['id']);
     productId = json['product_id'];
     name = json['name'];
-    price = json['price'];
+    price = _parseIntValue(json['price']);
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+  }
+
+  // Helper method to parse values that could be int or String
+  static int? _parseIntValue(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    return null;
   }
 
   Map<String, dynamic> toJson() {

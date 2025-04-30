@@ -1,5 +1,14 @@
 import 'package:side_hustle/state_management/models/events_model.dart';
 
+// Helper method to safely parse double values from various types
+double? _parseDoubleValue(dynamic value) {
+  if (value == null) return null;
+  if (value is double) return value;
+  if (value is int) return value.toDouble();
+  if (value is String) return double.tryParse(value);
+  return null;
+}
+
 class JobsModel {
   bool? status;
   String? message;
@@ -67,11 +76,11 @@ class JobsData {
     title = json['title'];
     isFavourite = json['is_favourite'];
     description = json['description'];
-    budget = json['budget']?.toDouble();
+    budget = _parseDoubleValue(json['budget']);
     image = json['image'];
     reviewImage = json['review_image'];
     reviewName = json['review_name'];
-    rating = json['rating']?.toDouble();
+    rating = _parseDoubleValue(json['rating']);
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
@@ -105,7 +114,7 @@ class User {
     userid = json['userid'];
     name = json['name'];
     image = json['image'];
-    rating = json['rating']?.toDouble();
+    rating = _parseDoubleValue(json['rating']);
   }
 
   Map<String, dynamic> toJson() {
@@ -166,7 +175,7 @@ class JobsDetail {
     id = json['id']?.toString();
     userId = json['user_id']?.toString();
     assignedUserId = json['assigned_user_id'];
-    budget = json['budget']?.toDouble();
+    budget = _parseDoubleValue(json['budget']);
     areaCode = json['area_code'];
     jobDate = json['job_date'];
     jobTime = json['job_time'];

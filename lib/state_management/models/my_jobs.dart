@@ -51,10 +51,19 @@ class MyJobsData {
     image = json['image'];
     title = json['title'];
     description = json['description'];
-    budget = json['budget']?.toDouble();
+    budget = _parseDoubleValue(json['budget']);
     userDetail = json['user_detail'] != null
         ? new UserDetail.fromJson(json['user_detail'])
         : null;
+  }
+
+  // Helper method to safely parse double values from various types
+  static double? _parseDoubleValue(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
   }
 
   Map<String, dynamic> toJson() {

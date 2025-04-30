@@ -47,7 +47,6 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
               RoundedCornersImage(
                 imageHeight: imageHeight,
                 imageWidth: AppDimensions.listItemWidth,
-                // assetImage: imagePath,
                 assetImage: AssetsPath.imageLoadError,
                 image: imagePath,
                 boarderColor: boarderColor,
@@ -55,98 +54,115 @@ class MyEventsScheduledItemsWidget extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0, left: 8, right: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
+                  // Wrapping Column in a ConstrainedBox to ensure it fits available height
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: (imageHeight ?? 0) - 16, // Account for padding
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize:
+                          MainAxisSize.min, // Use minimum space needed
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
                               child: Padding(
-                            padding: EdgeInsets.only(top: 0.02.sw),
-                            child: textWidget(
-                                text: title,
-                                fontFamily: AppFont.gilroyBold,
-                                fontWeight: FontWeight.bold,
-                                fontSize: AppDimensions.textSizeSmall,
-                                color: AppColors.textBlackColor),
-                          )),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              textWidget(
-                                  // text: price,
+                                padding: EdgeInsets.only(top: 0.02.sw),
+                                child: textWidget(
+                                  text: title,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: AppDimensions.textSizeSmall,
+                                  color: AppColors.textBlackColor,
+                                  maxLines: 1,
+                                  textOverflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                textWidget(
                                   text: price != null ? "\$$price" : "",
                                   fontFamily: AppFont.gilroyBold,
                                   fontWeight: FontWeight.bold,
                                   fontSize: AppDimensions.textSizeSmall,
-                                  color: AppColors.textBlackColor),
-                              textWidget(
+                                  color: AppColors.textBlackColor,
+                                ),
+                                textWidget(
                                   text: AppStrings.perHead,
                                   textAlign: TextAlign.end,
-                                  fontSize: AppDimensions.textSizeTiny),
-                            ],
-                          ),
-                        ],
-                      ),
-                      height(imageHeight! * .02),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 3.0),
-                            child: ImageIcon(
-                              const AssetImage(AssetsPath.location),
-                              size: AppDimensions.eventWidgetIconSize,
-                              color: AppColors.greyColorNoOpacity,
+                                  fontSize: AppDimensions.textSizeTiny,
+                                ),
+                              ],
                             ),
-                          ),
-                          width(0.02.sw),
-                          Expanded(
-                              child: textWidget(
-                                  text: location,
-                                  maxLines: 2,
-                                  fontSize: AppDimensions.textSize10)),
-                        ],
-                      ),
-                      height(imageHeight! * .04),
-                      Divider(
-                        height: 1,
-                        color: Colors.grey.withOpacity(0.8),
-                      ),
-                      // height(imageHeight! * .03),
-                      // const Spacer(),
-                      // width(0.05.sw),
-                      const Spacer(),
-                      height(0.01.sw),
-                      Container(
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.all(0.03.sw),
-                        decoration: BoxDecoration(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(12),
+                          ],
                         ),
-                        child: Material(
-                          color: AppColors.greenColor,
-                          borderRadius: BorderRadius.circular(
-                              AppDimensions.bookedJobRoundedBorder),
-                          child: InkWell(
-                            onTap: onTap,
-                            child: Center(
+                        SizedBox(height: imageHeight! * .02),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 3.0),
+                              child: ImageIcon(
+                                const AssetImage(AssetsPath.location),
+                                size: AppDimensions.eventWidgetIconSize,
+                                color: AppColors.greyColorNoOpacity,
+                              ),
+                            ),
+                            SizedBox(width: 0.02.sw),
+                            Expanded(
                               child: textWidget(
-                                text: AppStrings.viewEvent,
-                                color: AppColors.textWhiteColor,
-                                fontFamily: AppFont.gilroyBold,
+                                text: location,
+                                maxLines: 1, // Limit to 1 line to save space
+                                textOverflow: TextOverflow.ellipsis,
                                 fontSize: AppDimensions.textSize10,
-                                fontWeight: FontWeight.bold,
-                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: imageHeight! * .02), // Reduced spacing
+                        Divider(
+                          height: 1,
+                          color: Colors.grey.withOpacity(0.8),
+                        ),
+                        const Spacer(), // This will take up remaining space
+                        Container(
+                          margin:
+                              EdgeInsets.only(bottom: 4), // Added bottom margin
+                          padding: EdgeInsets.symmetric(
+                            vertical: 0.02.sw, // Reduced vertical padding
+                            horizontal: 0.03.sw,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Material(
+                            color: AppColors.greenColor,
+                            borderRadius: BorderRadius.circular(
+                                AppDimensions.bookedJobRoundedBorder),
+                            child: InkWell(
+                              onTap: onTap,
+                              child: Center(
+                                child: textWidget(
+                                  text: AppStrings.viewEvent,
+                                  color: AppColors.textWhiteColor,
+                                  fontFamily: AppFont.gilroyBold,
+                                  fontSize: AppDimensions.textSize10,
+                                  fontWeight: FontWeight.bold,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               )
