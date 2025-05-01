@@ -133,10 +133,10 @@ class AppStrings {
 
   /// Bottom Nav Items
   static const String home = "Home";
-  static const String wantedJob = "Wanted Job";
+  static const String wantedJob = "Job Board";
   static const String events = "Events";
   static const String sideHustle = "Side Hustle";
-  static const String profile = "Profile";
+  static const String profile = "Brofile";
 
   /// Dialogue
   static const String product = "Product";
@@ -292,7 +292,7 @@ class AppStrings {
       "Child Care, Bounce House, Full Bar, Swimming Pool, Musical Chair, Stand Up Comedy, Music";
   static const String viewEvent = "View Event";
   static const String view = "View";
-  static const String viewProfile = "View Profile";
+  static const String viewProfile = "View Brofile";
   static const String attendees = "Attendees";
   static const String viewEventMusical = "Musical Event";
   static const String viewAttendees = "View Attendees";
@@ -364,7 +364,7 @@ class AppStrings {
   static const String editResume = "Edit Resume";
 
   /// Profile
-  static const String profileResumePage = "Profile Resume Page";
+  static const String profileResumePage = "Brofile";
   static const String myJobs = "My Jobs       ";
   static const String shopOverview = "Shop Overview";
   static const String jobsCompleted = "Jobs Completed";
