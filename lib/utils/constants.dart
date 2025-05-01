@@ -1,9 +1,5 @@
-
 class Constants {
   static int passwordFieldLength = 12;
-
-  static const String googlePlacesApiKey =
-      "AIzaSyAFXaeTQnVMBjnHpAfzuvgAs-dgZDXPRw4"; /// client key
 
   /// Characters Length
   static const int singleFieldCharacterLength = 70;
@@ -30,6 +26,6 @@ class Constants {
   static const int johnId = 9;
   static const int mikeId = 10;
 
-  static const String deleteAccount = "https://backend.sidehustleapp.net/delete-account-request";
-
+  static const String deleteAccount =
+      "https://backend.sidehustleapp.net/delete-account-request";
 }

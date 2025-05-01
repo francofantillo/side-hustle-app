@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:side_hustle/base_widget/base_widget.dart';
 import 'package:side_hustle/state_management/models/select_location_model.dart';
+import 'package:side_hustle/utils/api_keys.dart';
 import 'package:side_hustle/utils/app_colors.dart';
 import 'package:side_hustle/utils/app_dimen.dart';
 import 'package:side_hustle/utils/app_strings.dart';
@@ -315,7 +316,7 @@ class AppUtils {
     // then get the Prediction selected
     final p = await PlacesAutocomplete.show(
       context: context,
-      apiKey: Constants.googlePlacesApiKey,
+      apiKey: ApiKeys.googlePlacesApiKey,
       onError: onError,
       mode: Mode.overlay,
       language: 'en',
@@ -351,7 +352,7 @@ class AppUtils {
 
     // get detail (lat/lng)
     final _places = GoogleMapsPlaces(
-      apiKey: Constants.googlePlacesApiKey,
+      apiKey: ApiKeys.googlePlacesApiKey,
       apiHeaders: await const GoogleApiHeaders().getHeaders(),
     );
 

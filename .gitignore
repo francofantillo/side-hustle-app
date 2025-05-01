@@ -52,3 +52,43 @@ Thumbs.db
 *.mov
 *.wmv
 
+# API keys and sensitive information
+lib/utils/api_keys.dart
+
+# Flutter/Dart specific
+*.lock
+*.flutter-plugins
+*.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+.symbol_store.v3
+.env
+
+# iOS related
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Generated.xcconfig
+**/ios/.symlinks/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/ephemeral
+**/ios/Runner/GeneratedPluginRegistrant.*
+
+# Android related
+**/android/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+**/android/app/release/
+
+# Coverage
+coverage/
+
