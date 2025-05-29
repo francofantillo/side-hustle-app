@@ -87,10 +87,10 @@ Future<Response?> loginProvider({
 
 /// Forgot Password
 Future<Response?> forgotPasswordProvider({
-  String? phone,
+  String? email,
 }) async {
-  // final data = {"phone": "+15555555510"};
-  final data = {"phone": phone};
+  // final data = {"email": "user@example.com"};
+  final data = {"email": email};
 
   print(
       "*****************\nurl: ${API.FORGOT_PASSWORD}\ndata: $data\n**************************");
@@ -335,6 +335,6 @@ Future<Response?> logoutProvider({String? apiToken}) async {
 Future<Response?> getPlansProvider({String? apiToken}) async {
   print("*****************\nurl: ${API.GET_Plans}\n**************************");
   final response =
-  await getRequestProvider(path: API.GET_Plans, token: apiToken);
+      await getRequestProvider(path: API.GET_Plans, token: apiToken);
   return response;
 }

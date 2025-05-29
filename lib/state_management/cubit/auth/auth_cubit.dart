@@ -212,6 +212,7 @@ class AuthCubit extends Cubit<AuthState> {
               arguments: OtpVerificationScreen(
                 isSignUp: true,
                 phone: "${phoneNumber?.countryCode}${phoneNumber?.number}",
+                email: emailControllerSignup.text,
               ));
         }
       }
@@ -341,8 +342,11 @@ class AuthCubit extends Cubit<AuthState> {
           } else {
             EasyLoading.dismiss();
             Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
-                arguments: OtpVerificationScreen(isLogin: true,
-                  phone: userModel.data?.phone,));
+                arguments: OtpVerificationScreen(
+                  isLogin: true,
+                  phone: userModel.data?.phone,
+                  email: userModel.data?.email,
+                ));
           }
         }
       }
@@ -366,8 +370,8 @@ class AuthCubit extends Cubit<AuthState> {
     // EasyLoading.show(status: AppStrings.PLEASE_WAIT);
     EasyLoading.show();
 
-    final response = await forgotPasswordProvider(
-        phone: "${phoneNumber?.countryCode}${phoneNumber?.number}");
+    final response =
+        await forgotPasswordProvider(email: emailControllerSignup.text);
 
     if (response != null) {
       EasyLoading.dismiss();

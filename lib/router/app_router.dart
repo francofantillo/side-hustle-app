@@ -80,7 +80,6 @@ class AppRouter {
 
           case AppRoutes.resetPasswordScreenRoute:
             return const ResetPassword();
-
           case AppRoutes.otpVerificationScreenRoute:
             final args = routeSettings.arguments as OtpVerificationScreen?;
             return OtpVerificationScreen(
@@ -88,6 +87,7 @@ class AppRouter {
               isSignUp: args?.isSignUp ?? false,
               isLogin: args?.isLogin ?? false,
               phone: args?.phone,
+              email: args?.email,
               isForgotPassword: args?.isForgotPassword ?? false,
             );
 

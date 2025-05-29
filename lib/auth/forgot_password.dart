@@ -12,7 +12,8 @@ import 'package:side_hustle/widgets/buttons/back_button.dart';
 import 'package:side_hustle/widgets/buttons/custom_material_button.dart';
 import 'package:side_hustle/widgets/size_widget.dart';
 import 'package:side_hustle/widgets/text/text_widget.dart';
-import 'package:side_hustle/widgets/text_field/phone_textField.dart';
+import 'package:side_hustle/widgets/text_field/textField.dart';
+import 'package:side_hustle/utils/validation/extensions/field_validator.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -24,7 +25,6 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _forgotPasswordFormKey = GlobalKey<FormState>();
   late final AuthCubit _bloc;
-  String? initialValue;
   FocusNode focusNode = FocusNode();
 
   @override
@@ -71,19 +71,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       maxLines: 2,
                       fontSize: AppDimensions.textSizeSmall),
                   height(AppDimensions.welcomeBackSpacingBetween),
-                  PhoneNumberTextField(
-                    initialValue: initialValue,
+                  CustomTextFormField(
+                    controller: _bloc.emailControllerSignup,
+                    hintText: "Enter your email address",
+                    keyboardType: TextInputType.emailAddress,
                     isShowShadow: true,
-                    onChanged: (phone) {
-                      _bloc.phoneNumber = phone;
-                      print("$phone");
-                      print(
-                          "countryISOCode: ${phone?.countryISOCode}, countryCode: ${phone?.countryCode}, number: ${phone?.number}");
-                      // print("${phoneNumber?.countryCode}${phoneNumber?.number}");
+                    fieldValidator: (value) {
+                      return value?.validateEmail;
                     },
-                    onCountryChanged: (country) {
-                      print(
-                          "countryName: ${country?.name}, dialCode: ${country?.dialCode}, code: ${country?.code}");
+                    onChanged: (value) {
+                      print("Email: $value");
                     },
                   ),
                   height(AppDimensions.loginButtonVerticalSpacingBetween),
@@ -103,16 +100,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             )
                                 .then((value) {
                               if (value == 1) {
-                                setState(() {
-                                  initialValue = null;
-                                  Navigator.pushNamed(context,
-                                      AppRoutes.otpVerificationScreenRoute,
-                                      arguments: OtpVerificationScreen(
-                                        isForgotPassword: true,
-                                        phone:
-                                            "${_bloc.phoneNumber?.countryCode}${_bloc.phoneNumber?.number}",
-                                      ));
-                                });
+                                Navigator.pushNamed(context,
+                                    AppRoutes.otpVerificationScreenRoute,
+                                    arguments: OtpVerificationScreen(
+                                      isForgotPassword: true,
+                                      email: _bloc.emailControllerSignup.text,
+                                    ));
                                 // Navigator.pushNamed(context, AppRoutes.otpVerificationScreenRoute,
                                 //     arguments: const OtpVerificationScreen(isForgotPassword: true));
                               }

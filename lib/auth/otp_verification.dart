@@ -21,6 +21,7 @@ class OtpVerificationScreen extends StatefulWidget {
   final bool isSocial;
   final bool isSignUp, isLogin, isForgotPassword;
   final String? phone;
+  final String? email;
 
   const OtpVerificationScreen(
       {super.key,
@@ -28,6 +29,7 @@ class OtpVerificationScreen extends StatefulWidget {
       this.isSignUp = false,
       this.isLogin = false,
       this.phone,
+      this.email,
       this.isForgotPassword = false});
 
   @override
@@ -121,7 +123,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 52.0),
               child: textWidget(
-                  text: "${AppStrings.otpTextBody}${widget.phone ?? ""}",
+                  text: widget.isForgotPassword && widget.email != null
+                      ? "Please enter 6-digit code we have sent you on your email ${widget.email}"
+                      : "${AppStrings.otpTextBody}${widget.phone ?? ""}",
                   color: AppColors.backIconBackgroundColor.withOpacity(0.9),
                   fontSize: AppDimensions.textSizeSmall,
                   textAlign: TextAlign.center,

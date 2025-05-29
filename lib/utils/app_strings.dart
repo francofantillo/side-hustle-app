@@ -7,7 +7,8 @@ class AppStrings {
   static const String aboutUs = "About Us";
   static const String howToHustler = "How to be a Hustler";
   static const String howToHustlerPdf = "How to be a Hustler.pdf";
-  static const String howToHustlerSubText = "Download this book to get a better idea about side huslte";
+  static const String howToHustlerSubText =
+      "Download this book to get a better idea about side huslte";
   static const String flyerUnderCapitalism = "Flyer Under Capitalism";
   static const String flyerUnderCapitalismTextOne =
       "At 22 years old, freshly separated from the military, I found myself on vacation in San Francisco, California. During a memorable weekend, I visited a Leonardo da Vinci exhibit showcasing scaled-down models of his inventions, from parachutes to ball bearings. Amidst my awe for these remarkable creations, I stumbled upon a model of a small city, prompting a profound question: "
@@ -45,7 +46,8 @@ class AppStrings {
       "Continue with Google, Apple or Facebook, you agree to Side Hustle ";
   static const String termsAndConditions = "Terms and Conditions";
   static const String unitedCapitalism = "United Capitalism";
-  static const String unitedCapitalismSubText = "Reinventing Local Economies through Community Support";
+  static const String unitedCapitalismSubText =
+      "Reinventing Local Economies through Community Support";
   static const String privacyPolicy = "Privacy Policy";
   static const String notAMember = "Not a member? ";
   static const String notifications = "Notifications";
@@ -69,7 +71,7 @@ class AppStrings {
   /// Forgot Password
   static const String forgotPassword = "Forgot Password";
   static const String inOrderTo =
-      "In order to reset your password you need to enter your registered phone number.";
+      "In order to reset your password you need to enter your registered email address.";
 
   /// Reset Password
   static const String setNewPassword = "Set New Password";
@@ -117,13 +119,16 @@ class AppStrings {
 
   /// Rating and Review
   static const String howIsYourService = "How is your Service?";
-  static const String howIsYourServiceHint = "Your feedback will help improve our experience";
+  static const String howIsYourServiceHint =
+      "Your feedback will help improve our experience";
   static const String brandonLubin = "Brandon Lubin";
 
   /// Home
   static const String searchHintText = "Search Product, Services or event";
-  static const String searchSideHustleServicesHintText = "Search Side Hustle Service";
-  static const String searchSideHustleProductsHintText = "Search Side Hustle Products";
+  static const String searchSideHustleServicesHintText =
+      "Search Side Hustle Service";
+  static const String searchSideHustleProductsHintText =
+      "Search Side Hustle Products";
   static const String blessTheseBusinesses = "Let's Bless These Businesses";
   static const String productsAndServices = "Product and Services around you";
   static const String jobsAroundYou = "Jobs around you";
@@ -144,11 +149,9 @@ class AppStrings {
   static const String productDesc =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
-
   /// Delivery Options
   static const String deliveryOptionPickup = "Pickup";
   static const String deliveryOptionCOD = "Deliver to Address (COD)";
-
 
   /// Post Product
   static const String postYourSideHustle = "Post Your Side Hustle Product";
@@ -338,8 +341,7 @@ class AppStrings {
   static const String viewCartText = "View Cart (1)";
   static const String viewCart = "View Cart";
   static const String deliveryAddress = "Delivery Address";
-  static const String deliveryAddressHint =
-      "Please enter the delivery address";
+  static const String deliveryAddressHint = "Please enter the delivery address";
   static const String deliveryAddressServiceHint =
       "Please enter the delivery address and other information to the service Provider. ";
   static const String enterCompleteAddress = "Enter your complete address";
@@ -421,7 +423,8 @@ class AppStrings {
       "Hey Brandon, I’m interested in to get this service from you. please reached at me at the time i have mentioned. Also please confirm me, if you are availbale for this service in the above timings. ";
   static const String orderMessageChatTextProduct =
       "Thank you for showing your interest, I’ll prepare your order and will deliver it in 24-48 Hours.";
-  static const String orderMessageChatTextService = "Thank you for showing your interest, I’ll let you know in few minutes.";
+  static const String orderMessageChatTextService =
+      "Thank you for showing your interest, I’ll let you know in few minutes.";
   static const String talanCalzoniChat = "Talan Calzoni";
   static const String chatUserHint = "You: Hey! How are you doing?";
   static const String chatUserTime = "18 Aug, 2023";
@@ -497,5 +500,4 @@ class AppStrings {
   static const cardNameRequired = 'Card Name is required';
   static const cardNumberValidation = 'Card Number is incorrect';
   static const cardNumberRequired = 'Card Number is required';
-
 }
